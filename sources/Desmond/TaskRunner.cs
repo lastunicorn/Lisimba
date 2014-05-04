@@ -1,0 +1,137 @@
+﻿using System;
+using System.Threading;
+
+namespace DustInTheWind.Desmond
+{
+    internal class TaskRunner
+    {
+        /// <summary>
+        /// Time in miliseconds to wait for the working thread to stop by itself before abort it.
+        /// </summary>
+        private const int THREAD_STOP_TIMEOUT = 1000;
+
+        /// <summary>
+        /// Flag used to announce the working thread that it is requested to close itself.
+        /// </summary>
+        protected volatile bool stopRequested = false;
+
+        /// <summary>
+        /// The background thread that is executing the task.
+        /// </summary>
+        private Thread workingThread;
+
+        /// <summary>
+        /// Object used to lock the access of the state field.
+        /// </summary>
+        private object lockState = new object();
+
+        /// <summary>
+        /// The state of the current instance.
+        /// </summary>
+        private volatile RunnerState state = RunnerState.Stopped;
+
+        /// <summary>
+        /// Gets the state of the current instance.
+        /// </summary>
+        public RunnerState State
+        {
+            get { return state; }
+        }
+
+        /// <summary>
+        /// The last error thrown by the working thread.
+        /// </summary>
+        private volatile Exception error;
+
+        /// <summary>
+        /// The task that has to be run.
+        /// </summary>
+        protected TaskMethod task;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskRunner"/> class.
+        /// </summary>
+        protected TaskRunner()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TaskRunner"/> class with
+        /// the task that has to be run.
+        /// </summary>
+        /// <param name="task">The task that has to be run.</param>
+        public TaskRunner(TaskMethod task)
+        {
+            if (task == null)
+                throw new ArgumentNullException("task");
+
+            this.task = task;
+        }
+
+        /// <summary>
+        /// Starts the working thread.
+        /// </summary>
+        public void Start()
+        {
+            lock (this.lockState)
+            {
+                if (this.task == null)
+                    throw new Exception("Cannot start because the task was not set yet.");
+
+                if (this.state == RunnerState.Stopped)
+                {
+                    this.stopRequested = false;
+                    this.error = null;
+
+                    this.workingThread = new Thread(new ThreadStart(this.Run));
+                    workingThread.Start();
+
+                    this.state = RunnerState.Running;
+                }
+                else
+                {
+                    throw new Exception("Cannot start because the state is different then Stopped.");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Stops the working thread.
+        /// </summary>
+        public void Stop()
+        {
+            lock (this.lockState)
+            {
+                if (this.state != RunnerState.Stopped)
+                {
+                    this.stopRequested = true;
+                    if (this.workingThread != null && this.workingThread.IsAlive && !this.workingThread.Join(THREAD_STOP_TIMEOUT))
+                    {
+                        this.workingThread.Abort();
+                    }
+
+                    this.state = RunnerState.Stopped;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The method run by the working thread,
+        /// </summary>
+        private void Run()
+        {
+            try
+            {
+                while (!stopRequested)
+                {
+                    this.task();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.error = ex;
+                throw;
+            }
+        }
+    }
+}

@@ -1,0 +1,361 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Reflection;
+
+namespace DustInTheWind.Lisimba.Utils
+{
+    /// <summary>
+    /// Class used to write log information to a file.
+    /// </summary>
+    public class Log : IDisposable
+    {
+        public static Log Global = new Log(Log.DefaultFileName);
+
+        private object lockWrite = new object();
+
+        private int indentIndex = 0;
+
+        private string fileName = string.Empty;
+        private StreamWriter sw;
+
+        private bool disposed = false;
+
+        private string newLine = "\r\n";
+        public string NewLine
+        {
+            get { return newLine; }
+            set { newLine = value; }
+        }
+
+        private bool enable = true;
+        public bool Enable
+        {
+            get { return enable; }
+            set { enable = value; }
+        }
+
+
+        enum ErrorLevel
+        {
+            Message,
+            Warning,
+            Error
+        }
+
+        public Log()
+        {
+        }
+
+        public Log(string fileName)
+        {
+            this.fileName = fileName;
+        }
+
+        ~Log()
+        {
+            Dispose(false);
+        }
+
+        public string FileName
+        {
+            get 
+            {
+                return fileName;
+            }
+            //set
+            //{
+            //    if (string.IsNullOrEmpty(value))
+            //    {
+            //        fileName = DefaultFileName; //System.Reflection.Assembly.GetExecutingAssembly().
+            //    }
+            //    else
+            //    {
+            //        fileName = value;
+            //    }
+            //}
+        }
+
+        private static string defaultLocation;
+        public static string DefaultLocation
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(defaultLocation))
+                {
+                    Assembly a = null;
+
+                    a = Assembly.GetEntryAssembly();
+                    if (a == null)
+                        a = Assembly.GetCallingAssembly();
+                    if (a == null)
+                        a = Assembly.GetExecutingAssembly();
+
+                    defaultLocation = Path.GetDirectoryName(a.Location);
+                }
+
+                return defaultLocation;
+            }
+        }
+
+        public static string DefaultFileName
+        {
+            get
+            {
+                //return Directory.GetCurrentDirectory() + "\\logfile.log";
+                return DefaultLocation + "\\logfile.log";
+            }
+        }
+
+        public bool OpenFile()
+        {
+            try
+            {
+                if (fileName.Length == 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    string dir = Path.GetDirectoryName(fileName);
+                    if (!Directory.Exists(dir))
+                    {
+                        Directory.CreateDirectory(dir);
+                    }
+
+                    sw = new StreamWriter(fileName, true);
+                    sw.AutoFlush = true;
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+
+        }
+
+        public bool OpenFile(string fileName)
+        {
+            this.fileName = fileName;
+            return OpenFile();
+        }
+
+        public void CloseFile()
+        {
+            if (sw != null)
+            {
+                sw.Close();
+            }
+        }
+
+        /// <summary>
+        /// Change the indentation.
+        /// </summary>
+        /// <param name="value">If true, increase the indentation. If false, decrease the indentation</param>
+        public void Indent(bool value)
+        {
+            if (value)
+                indentIndex++;
+            else
+                indentIndex--;
+        }
+
+        public void ResetIndent()
+        {
+           indentIndex = 0;
+        }
+
+        /// <summary>
+        /// Write the specified text to the file. No additional text.
+        /// </summary>
+        /// <param name="text">The text to be written to the file.</param>
+        /// <returns>True if success.</returns>
+        public bool Write(string text)
+        {
+            return WriteLog(text, false, ErrorLevel.Message, false);
+        }
+
+        /// <summary>
+        /// Write the specified text to the file. The time stamp is added if requested by caller.
+        /// </summary>
+        /// <param name="text">The text to be written to the file.</param>
+        /// <param name="writeTimeStamp">If true, a time stamp is added.</param>
+        /// <returns>True if success.</returns>
+        public bool Write(string text, bool writeTimeStamp)
+        {
+            return WriteLog(text, writeTimeStamp, ErrorLevel.Message, false);
+        }
+
+        /// <summary>
+        /// Write the specified text to the file. A time stamp and the newLine string are added.
+        /// </summary>
+        /// <param name="text">The text to be written to the file.</param>
+        /// <returns>True if success.</returns>
+        public bool WriteLine(string text)
+        {
+            return WriteLog(text, true, ErrorLevel.Message, true);
+        }
+
+        /// <summary>
+        /// Write the specified text to the file. The time stamp is added if requested by caller. The newLine string is added automatically.
+        /// </summary>
+        /// <param name="text">The text to be written to the file.</param>
+        /// <param name="writeTimeStamp">If true, a time stamp is added.</param>
+        /// <returns>True if success.</returns>
+        public bool WriteLine(string text, bool writeTimeStamp)
+        {
+            return WriteLog(text, writeTimeStamp, ErrorLevel.Message, true);
+        }
+
+        public bool WriteStart(string text)
+        {
+            bool b = WriteLog("[->] " + text, true, ErrorLevel.Message, true);
+            if (b) indentIndex++;
+            return b;
+        }
+
+        public bool WriteEnd(string text)
+        {
+            indentIndex--;
+            bool b = WriteLog("[<-] " + text, true, ErrorLevel.Message, true);
+            if (!b) indentIndex++;
+            return b;
+        }
+
+        /// <summary>
+        /// Write a warning text to the file. A time stamp and the newLine string are added automatically.
+        /// </summary>
+        /// <param name="text">The warning text to be written to the file.</param>
+        /// <returns>True if success.</returns>
+        public bool WriteWarning(string text)
+        {
+            return WriteLog(text, true, ErrorLevel.Warning, true);
+        }
+
+        /// <summary>
+        /// Write a error text to the file. A time stamp and the newLine string are added automatically.
+        /// </summary>
+        /// <param name="text">The error text to be written to the file.</param>
+        /// <returns>True if success.</returns>
+        public bool WriteError(string text)
+        {
+            return WriteLog(text, true, ErrorLevel.Error, true);
+        }
+        public bool WriteError(string text, Exception ex)
+        {
+            Exception e = ex;
+
+            //if (text == null)
+            //    text = string.Empty;
+
+            while (e != null)
+            {
+                text += (string.IsNullOrEmpty(text) ? string.Empty : "\r\n") +
+                    e.GetType().Name + ": " + e.Message + "\r\nStackTrace: " + e.StackTrace;
+                e = e.InnerException;
+            }
+            return WriteLog(text, true, ErrorLevel.Error, true);
+
+            //return WriteLog(text + "\r\nException: " + ex.Message + "\r\nStackTrace: " + ex.StackTrace, true, ErrorLevel.Error, true);
+        }
+        public bool WriteError(Exception ex)
+        {
+            return WriteError(string.Empty, ex);
+
+            //return WriteLog("Exception: " + ex.Message + "\r\nStackTrace: " + ex.StackTrace, true, ErrorLevel.Error, true);
+        }
+
+        /// <summary>
+        /// Private function used to write text to the log file.
+        /// </summary>
+        /// <param name="text">The text to be written to the file.</param>
+        /// <param name="writeTimeStamp">If true, a time stamp is added.</param>
+        /// <param name="errorLevel">The error level.</param>
+        /// <param name="writeNewLine">If true, the newLine string is added at the end of the text.</param>
+        /// <returns></returns>
+        private bool WriteLog(string text, bool writeTimeStamp, ErrorLevel errorLevel, bool writeNewLine)
+        {
+            if (!enable)
+                return false;
+
+            string temp;
+ 
+            // time stamp
+            temp = (writeTimeStamp ? "[" + DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + "]" : "");
+
+            // identation
+            if (temp.Length > 0)
+                temp += " - ";
+
+            for (int i = 0; i < indentIndex; i++)
+            {
+                temp += "    ";
+            }
+
+            // error level
+            switch (errorLevel)
+            {
+                case ErrorLevel.Message:
+                    break;
+                case ErrorLevel.Warning:
+                    //temp += (temp.Length > 0 ? " - " : "") + "[ Warning ]";
+                    temp += "[ Warning ] ";
+                    break;
+                case ErrorLevel.Error:
+                    //temp += (temp.Length > 0 ? " - " : "") + "[  Error  ]";
+                    temp += "[  Error  ] ";
+                    break;
+            }
+
+            // the text
+            temp += text;
+
+            // new line
+            if (writeNewLine) temp += newLine;
+
+            try
+            {
+                lock (lockWrite)
+                {
+                    sw.Write(temp);
+                }
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        #region IDisposable Members
+
+        private void Dispose(bool disposing)
+        {
+            // If dispose was already called, return.
+            if (disposed)
+                return;
+
+            if (disposing)
+            {
+                // Dispose managed resources.
+                if (sw != null)
+                {
+                    sw.Close();
+                }
+
+                // Dispose unmanaged resources.
+                // .-= Nothing to dispose =-.
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        #endregion
+    }
+}

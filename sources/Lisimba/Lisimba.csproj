@@ -1,0 +1,379 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DustInTheWind.Lisimba</RootNamespace>
+    <AssemblyName>Lisimba</AssemblyName>
+    <ApplicationIcon>Lion.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <PublishUrl>http://localhost/Lisimba/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BiorhythmControls, Version=1.0.3019.26335, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>ref\BiorhythmControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Comparers\TreeNodeByNicknameOrNameComparer.cs" />
+    <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
+    <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
+    <Compile Include="Config\SortByConfigElement.cs" />
+    <Compile Include="ctrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctrl.Designer.cs">
+      <DependentUpon>ctrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Exceptions\LisimbaException.cs" />
+    <Compile Include="Forms\FormBiorythm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormBiorythm.Designer.cs">
+      <DependentUpon>FormBiorythm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Config\RecentFilesConfigElement.cs" />
+    <Compile Include="Config\LisimbaConfigSection.cs" />
+    <Compile Include="CmdLineArgs.cs" />
+    <Compile Include="Comparers\TreeNodeByBirthdateComparer.cs" />
+    <Compile Include="Comparers\TreeNodeByBirthdayComparer.cs" />
+    <Compile Include="Comparers\TreeNodeByFirstNameComparer.cs" />
+    <Compile Include="Comparers\TreeNodeByLastNameComparer.cs" />
+    <Compile Include="Comparers\TreeNodeByNicknameComparer.cs" />
+    <Compile Include="Forms\FormEditBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEditBase.Designer.cs">
+      <DependentUpon>FormEditBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormEmailEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormEmailEdit.Designer.cs">
+      <DependentUpon>FormEmailEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormPhoneEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormPhoneEdit.Designer.cs">
+      <DependentUpon>FormPhoneEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormWebSiteEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormWebSiteEdit.Designer.cs">
+      <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Biorythm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Biorythm.Designer.cs">
+      <DependentUpon>Biorythm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ContactListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ContactListView.Designer.cs">
+      <DependentUpon>ContactListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\WebSiteListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\WebSiteListView.Designer.cs">
+      <DependentUpon>WebSiteListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DateListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DateListView.Designer.cs">
+      <DependentUpon>DateListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\EmailListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\EmailListView.Designer.cs">
+      <DependentUpon>EmailListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddContact.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddContact.Designer.cs">
+      <DependentUpon>FormAddContact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAddressEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAddressEdit.Designer.cs">
+      <DependentUpon>FormAddressEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormAgendaProperties.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormAgendaProperties.Designer.cs">
+      <DependentUpon>FormAgendaProperties.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormDateEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormDateEdit.Designer.cs">
+      <DependentUpon>FormDateEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FormLisimba.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormLisimba.Designer.cs">
+      <DependentUpon>FormLisimba.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ContactView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ContactView.Designer.cs">
+      <DependentUpon>ContactView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MessengerIdListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MessengerIdListView.Designer.cs">
+      <DependentUpon>MessengerIdListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\PhoneListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\PhoneListView.Designer.cs">
+      <DependentUpon>PhoneListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="ProgramArguments.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ctrl.resx">
+      <DependentUpon>ctrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormBiorythm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormBiorythm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEditBase.resx">
+      <DependentUpon>FormEditBase.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormEmailEdit.resx">
+      <DependentUpon>FormEmailEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormPhoneEdit.resx">
+      <DependentUpon>FormPhoneEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormWebSiteEdit.resx">
+      <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Biorythm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Biorythm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ContactListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ContactListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\WebSiteListView.resx">
+      <DependentUpon>WebSiteListView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DateListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>DateListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\EmailListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>EmailListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAbout.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddContact.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAddContact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAddressEdit.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAddressEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormAgendaProperties.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormAgendaProperties.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormDateEdit.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormDateEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormLisimba.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FormLisimba.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ContactView.resx">
+      <DependentUpon>ContactView.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MessengerIdListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MessengerIdListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\PhoneListView.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>PhoneListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\home.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\mail.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\phone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Images\agenda_ico.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\date.gif" />
+    <Content Include="Images\export.gif" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\ico_new.png" />
+    <Content Include="Images\import.gif" />
+    <Content Include="Images\information.png" />
+    <Content Include="Images\lion.gif" />
+    <Content Include="Images\notes.gif" />
+    <Content Include="Images\open.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\sort.gif" />
+    <Content Include="Images\yahoo_icon.gif" />
+    <None Include="Images\zodiac\mic_balanta.gif" />
+    <None Include="Images\zodiac\mic_berbec.gif" />
+    <None Include="Images\zodiac\mic_capricorn.gif" />
+    <None Include="Images\zodiac\mic_fecioara.gif" />
+    <None Include="Images\zodiac\mic_gemeni.gif" />
+    <None Include="Images\zodiac\mic_leu.gif" />
+    <None Include="Images\zodiac\mic_pesti.gif" />
+    <None Include="Images\zodiac\mic_rac.gif" />
+    <None Include="Images\zodiac\mic_sagetator.gif" />
+    <None Include="Images\zodiac\mic_scorpion.gif" />
+    <None Include="Images\zodiac\mic_taur.gif" />
+    <None Include="Images\zodiac\mic_varsator.gif" />
+    <Content Include="Lion.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Egg\Egg.csproj">
+      <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
+      <Name>Egg</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

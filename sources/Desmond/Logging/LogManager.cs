@@ -1,0 +1,127 @@
+using System;
+using System.Text;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
+
+namespace DustInTheWind.Lisimba.Utils
+{
+    /// <summary>
+    /// Helper class that opens the log files.
+    /// </summary>
+    public class LogManager
+    {
+        private const string LOG_DIR = "";
+        private const string LOG_FILE = "Desmond - [DATE].log";
+
+        private static string ConfigLogDir
+        {
+            get
+            {
+                string logDir = ConfigurationSettings.AppSettings["logDir"];
+                if (logDir == null)
+                {
+                    return LOG_DIR;
+                }
+                else
+                {
+                    return logDir;
+                }
+            }
+        }
+
+        private static string ConfigLogFile
+        {
+            get
+            {
+                string logFile = ConfigurationSettings.AppSettings["logFile"];
+                if (logFile == null || logFile.Length == 0)
+                {
+                    return LOG_FILE;
+                }
+                else
+                {
+                    return logFile;
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// Returns the global log file name prepended with the log folder. Both read from config file.
+        /// </summary>
+        /// <returns>The global log file name.</returns>
+        public static string GetLogFileFullName()
+        {
+            string logFile = ConfigLogFile.Replace("[DATE]", DateTime.Now.ToString("yyyy MM dd"));
+            return GetLogFileFullName(logFile);
+        }
+
+        /// <summary>
+        /// Prepends the specified log file name with the log folder read from config file.
+        /// </summary>
+        /// <param name="fileShortName">The log short file name.</param>
+        /// <returns>The log file name.</returns>
+        public static string GetLogFileFullName(string fileShortName)
+        {
+            string logDir = ConfigLogDir;
+            string logFile = fileShortName;
+
+            if (logFile == null || logFile.Length == 0)
+            {
+                logFile = ConfigLogFile.Replace("[DATE]", DateTime.Now.ToString("yyyy MM dd"));
+            }
+
+            return Path.Combine(logDir, logFile);
+        }
+
+        /// <summary>
+        /// Opens the global log file.
+        /// </summary>
+        /// <returns>A reference to the global log file.</returns>
+        public static Log OpenGlobalLogFile()
+        {
+            string logFullFileName = GetLogFileFullName();
+
+            Log.Instance.OpenFile(logFullFileName);
+
+            return Log.Instance;
+        }
+
+        /// <summary>
+        /// Opens the global log file.
+        /// </summary>
+        /// <returns>A reference to the global log file.</returns>
+        public static Log OpenGlobalLogFile(string fileName)
+        {
+            Log.Instance.OpenFile(fileName);
+
+            return Log.Instance;
+        }
+
+        /// <summary>
+        /// Opens a log file. The log file will be created in the log folder specified in config file.
+        /// </summary>
+        /// <param name="fileShortName">The name of the log file.</param>
+        /// <returns>A reference to the log file opened.</returns>
+        public static Log OpenLogFile(string fileShortName)
+        {
+            string logFullFileName = GetLogFileFullName(fileShortName);
+
+            Log log = new Log(logFullFileName);
+            log.OpenFile();
+
+            return log;
+        }
+
+        public static Log OpenLogFile(string fileShortName, bool enabled)
+        {
+            string logFullFileName = GetLogFileFullName(fileShortName);
+
+            Log log = new Log(logFullFileName, enabled);
+            log.OpenFile();
+
+            return log;
+        }
+    }
+}

@@ -1,0 +1,30 @@
+Lisimba - 12:13 06.08.2007
+==========================
+
+An agenda with contacts. Similar to the one in yahoo or google or any other else. (But is made by me :D )
+
+Features:
+	- Can import the yahoo agenda. (Yahoo agenda has to be exported as .csv file from the yahoo page and then Lisimba can import that file.)
+	- Display biorythm graphic.
+	- Birthday reminder (in progress).
+	- Save agenda in a web location to use it. (in progress).
+
+Projects:
+	1) Egg
+	2) Lisimba
+	3) Desmond
+
+	
+I) Egg Project
+--------------
+Contains the entity classes(Ex: Agenda, Address, Email, Date, etc.) used to store the informations.
+
+
+II) Lisimba
+-----------
+This one is an Win application that provides an interface to open, modify and save an agenda.
+
+
+III) Desmond
+------------
+Desmond is an Win service. Is not functional yet. In the future it will be able to pop up a window remainding you about the friends birthdays.

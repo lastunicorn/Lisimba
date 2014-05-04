@@ -1,0 +1,34 @@
+Lisimba
+=======
+
+- icons for the menu items.
+
+- import rules
+- GNU GPL.
+
+- open from http.
+
+
+Desmond
+=======
+
+- Open address book from a file.
+- If the file was modified, reload the address book.
+
+- Open address book from database.
+- If the database was updated, reload the address book.
+
+- Open address from a web service.
+- If the address book was changed, reload the address book.
+
+- Announce the next birthday if less then n days.
+
+- Display a NotifyIcon.
+
+Spider
+======
+
+- mysql database
+- 2 pages (something like a web service)
+	- read book
+	- write book
