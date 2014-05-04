@@ -3,6 +3,8 @@ using System.IO;
 using System.Reflection;
 using DustInTheWind.Desmond.Config;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Utils;
 using System.Threading;
 

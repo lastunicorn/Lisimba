@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Phone")]
@@ -22,16 +20,16 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Number")]
         public string Number
         {
-            get { return this.number; }
-            set { this.number = value; this.OnNumberChanged(new NumberChangedEventArgs(value)); }
+            get { return number; }
+            set { number = value; OnNumberChanged(new NumberChangedEventArgs(value)); }
         }
 
         //[XmlElement("Description")]
         [XmlAttribute("Description")]
         public string Description
         {
-            get { return this.description; }
-            set { this.description = value; this.OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
+            get { return description; }
+            set { description = value; OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
         }
 
         #endregion Properties
@@ -121,7 +119,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public Phone(Phone phone)
         {
-            this.CopyFrom(phone);
+            CopyFrom(phone);
         }
 
         #endregion Constructors
@@ -130,8 +128,8 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(Phone phone)
         {
-            this.number = phone.number;
-            this.description = phone.description;
+            number = phone.number;
+            description = phone.description;
         }
 
         #endregion
@@ -151,8 +149,8 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void Clear()
         {
-            this.number = "";
-            this.description = "";
+            number = "";
+            description = "";
         }
 
         #endregion
@@ -177,7 +175,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public override string ToString()
         {
-            return this.number + (this.description.Length > 0 ? (" - " + this.description) : string.Empty);
+            return number + (description.Length > 0 ? (" - " + description) : string.Empty);
         }
 
         #endregion

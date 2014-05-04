@@ -1,9 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
+using DustInTheWind.Lisimba.Egg.Comparers;
+using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class ContactCollection : CollectionBase
@@ -44,38 +44,38 @@ namespace DustInTheWind.Lisimba.Egg
             switch (sortField)
             {
                 case ContactsSortingType.Birthday:
-                    this.InnerList.Sort(new CompareContactByBirthdayComparer());
+                    InnerList.Sort(new CompareContactByBirthdayComparer());
                     break;
 
                 case ContactsSortingType.BirthDate:
-                    this.InnerList.Sort(new CompareContactsByBirthdateComparer());
+                    InnerList.Sort(new CompareContactsByBirthdateComparer());
                     break;
 
                 case ContactsSortingType.FirstName:
-                    this.InnerList.Sort(new CompareContactByFirstNameComparer());
+                    InnerList.Sort(new CompareContactByFirstNameComparer());
                     break;
 
                 case ContactsSortingType.LastName:
-                    this.InnerList.Sort(new CompareContactByLastNameComparer());
+                    InnerList.Sort(new CompareContactByLastNameComparer());
                     break;
 
                 case ContactsSortingType.Nickname:
-                    this.InnerList.Sort(new CompareContactByNicknameComparer());
+                    InnerList.Sort(new CompareContactByNicknameComparer());
                     break;
             }
 
             if (sortDirection == SortDirection.Descending)
             {
-                this.InnerList.Reverse();
+                InnerList.Reverse();
             }
         }
 
         public void CopyFrom(ContactCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new Contact(values[i]));
+                Add(new Contact(values[i]));
             }
         }
     }

@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Date")]
@@ -24,24 +22,24 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Day")]
         public int Day
         {
-            get { return this.day; }
+            get { return day; }
             set
             {
                 if (value < 0)
-                    this.day = 0;
+                    day = 0;
                 else
                 {
-                    if (this.month > 0)
+                    if (month > 0)
                     {
-                        int maxDay = this.year == 0 ? 31 : DateTime.DaysInMonth(this.year, this.month);
+                        int maxDay = year == 0 ? 31 : DateTime.DaysInMonth(year, month);
                         if (Day > maxDay)
-                            this.day = maxDay;
+                            day = maxDay;
                         else
-                            this.day = value;
+                            day = value;
                     }
                     else
                     {
-                        this.day = value;
+                        day = value;
                     }
                 }
             }
@@ -51,17 +49,17 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Month")]
         public int Month
         {
-            get { return this.month; }
+            get { return month; }
             set
             {
                 if (value < 0)
-                    this.month = 0;
+                    month = 0;
                 else if (value > 12)
-                    this.month = 12;
+                    month = 12;
                 else
-                    this.month = value;
+                    month = value;
 
-                this.Day = this.day;
+                Day = day;
             }
         }
 
@@ -69,15 +67,15 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Year")]
         public int Year
         {
-            get { return this.year; }
+            get { return year; }
             set
             {
                 if (value <= 0)
-                    this.year = 0;
+                    year = 0;
                 else
-                    this.year = value;
+                    year = value;
 
-                this.Day = this.day;
+                Day = day;
             }
         }
 
@@ -85,13 +83,13 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Description")]
         public string Description
         {
-            get { return this.description; }
-            set { this.description = value; }
+            get { return description; }
+            set { description = value; }
         }
 
         public bool IsCompleteDate
         {
-            get { return this.day > 0 && this.month > 0 && this.year > 0; }
+            get { return day > 0 && month > 0 && year > 0; }
         }
 
         #endregion
@@ -134,18 +132,18 @@ namespace DustInTheWind.Lisimba.Egg
             this.description = description;
 
             // Month
-            this.Month = month;
+            Month = month;
 
             // Year
-            this.Year = year;
+            Year = year;
 
             // Day
-            this.Day = day;
+            Day = day;
         }
 
         public Date(Date date)
         {
-            this.CopyFrom(date);
+            CopyFrom(date);
         }
 
         #endregion
@@ -155,13 +153,13 @@ namespace DustInTheWind.Lisimba.Egg
         public void SetValues(int day, int month, int year)
         {
             // Month
-            this.Month = month;
+            Month = month;
 
             // Year
-            this.Year = year;
+            Year = year;
 
             // Day
-            this.Day = day;
+            Day = day;
         }
 
         #endregion
@@ -174,13 +172,13 @@ namespace DustInTheWind.Lisimba.Egg
             this.description = description;
 
             // Month
-            this.Month = month;
+            Month = month;
 
             // Year
-            this.Year = year;
+            Year = year;
 
             // Day
-            this.Day = day;
+            Day = day;
         }
 
         #endregion
@@ -189,10 +187,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void Clear()
         {
-            this.day = 0;
-            this.month = 0;
-            this.year = 0;
-            this.description = string.Empty;
+            day = 0;
+            month = 0;
+            year = 0;
+            description = string.Empty;
         }
 
         #endregion
@@ -201,9 +199,9 @@ namespace DustInTheWind.Lisimba.Egg
 
         public bool IsNull()
         {
-            if (this.Year == 0 &&
-                this.Month == 0 &&
-                this.Day == 0)
+            if (Year == 0 &&
+                Month == 0 &&
+                Day == 0)
                 return true;
             else
                 return false;
@@ -347,9 +345,9 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(Date d)
         {
-            this.day = d.day;
-            this.month = d.month;
-            this.year = d.year;
+            day = d.day;
+            month = d.month;
+            year = d.year;
         }
 
         #endregion
@@ -379,9 +377,9 @@ namespace DustInTheWind.Lisimba.Egg
             string[] v = value.Split('/');
             try
             {
-                this.Day = int.Parse(v[1]);
-                this.Month = int.Parse(v[0]);
-                this.Year = int.Parse(v[2]);
+                Day = int.Parse(v[1]);
+                Month = int.Parse(v[0]);
+                Year = int.Parse(v[2]);
             }
             catch { }
 
@@ -442,14 +440,14 @@ namespace DustInTheWind.Lisimba.Egg
 
         public override string ToString()
         {
-            return (this.year == 0 ? "0000" : this.year.ToString()) + " " + (this.month < 10 ? "0" : "") + this.month + " " + (this.day < 10 ? "0" : "") + this.day;
+            return (year == 0 ? "0000" : year.ToString()) + " " + (month < 10 ? "0" : "") + month + " " + (day < 10 ? "0" : "") + day;
         }
 
         public DateTime ToDateTime()
         {
-            if (this.IsCompleteDate)
+            if (IsCompleteDate)
             {
-                return new DateTime(this.year, this.month, this.day);
+                return new DateTime(year, month, day);
             }
             else
             {

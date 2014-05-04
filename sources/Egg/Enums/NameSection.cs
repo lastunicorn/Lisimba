@@ -1,4 +1,4 @@
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Enums
 {
     public enum NameSection
     {

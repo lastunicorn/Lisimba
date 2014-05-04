@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba
 {

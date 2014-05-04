@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
+using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Comparers
 {
     /// <summary>
     /// Compares two contacts by birthdate (year, month and day).

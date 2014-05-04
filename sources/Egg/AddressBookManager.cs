@@ -1,12 +1,14 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
-using System.Xml;
-using System.Reflection;
-using zcsv;
 using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Egg.Exceptions;
 using ICSharpCode.SharpZipLib.Zip;
+using zcsv;
 
 namespace DustInTheWind.Lisimba.Egg
 {
@@ -201,16 +203,16 @@ namespace DustInTheWind.Lisimba.Egg
             // Create unzipper.
             using (ZipInputStream zs = new ZipInputStream(File.OpenRead(fileName)))
             {
-                ZipEntry zentry;
+                ZipEntry zipEntry;
 
                 // Search for the "file.xml" file
                 do
                 {
-                    zentry = zs.GetNextEntry();
-                    if (zentry == null)
+                    zipEntry = zs.GetNextEntry();
+                    if (zipEntry == null)
                         throw new EggException("Incorrect file. The archive does not contains the \"file.xml\" file.");
                 }
-                while (!zentry.Name.Equals("file.xml"));
+                while (!zipEntry.Name.Equals("file.xml"));
 
                 // Unzip the "file.xml" file into memory.
                 using (MemoryStream ms = new MemoryStream())
@@ -234,7 +236,7 @@ namespace DustInTheWind.Lisimba.Egg
                     ms.Position = 0;
 
                     // Read lsb version
-                    lsbVersion = this.ReadLsbVersion(ms);
+                    lsbVersion = ReadLsbVersion(ms);
 
                     // Compare versions
                     if (lsbVersion == null)
@@ -280,7 +282,7 @@ namespace DustInTheWind.Lisimba.Egg
             switch (fileFormat)
             {
                 case FileFormat.Egg:
-                    AddressBook book = this.LoadFromFile(fileName);
+                    AddressBook book = LoadFromFile(fileName);
                     return book.Contacts;
 
                 case FileFormat.CsvYahoo:
@@ -487,7 +489,7 @@ namespace DustInTheWind.Lisimba.Egg
 
             if (addressBook.FileName.Length > 0)
             {
-                returnValue = this.SaveToFile(addressBook, addressBook.FileName);
+                returnValue = SaveToFile(addressBook, addressBook.FileName);
             }
 
             return returnValue;

@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     public class ImportRule
     {
@@ -29,7 +27,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public ImportRule(ImportRule record)
         {
-            this.CopyFrom(record);
+            CopyFrom(record);
         }
 
         public ImportRule(Contact newContact)
@@ -52,9 +50,9 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(ImportRule record)
         {
-            this.newContact = record.newContact;
-            this.importType = record.importType;
-            this.originalContact = record.originalContact;
+            newContact = record.newContact;
+            importType = record.importType;
+            originalContact = record.originalContact;
         }
     }
 }

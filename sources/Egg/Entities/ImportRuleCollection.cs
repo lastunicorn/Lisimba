@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
-using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class ImportRuleCollection : CollectionBase
@@ -68,10 +65,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(ImportRuleCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new ImportRule(values[i]));
+                Add(new ImportRule(values[i]));
             }
         }
 

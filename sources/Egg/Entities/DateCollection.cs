@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class DateCollection : CollectionBase
@@ -68,10 +66,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(DateCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new Date(values[i]));
+                Add(new Date(values[i]));
             }
         }
 

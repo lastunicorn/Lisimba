@@ -7,6 +7,8 @@ using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg;
 using System.Collections;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba
 {

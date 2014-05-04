@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class PhoneCollection : CollectionBase
@@ -68,10 +66,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(PhoneCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new Phone(values[i]));
+                Add(new Phone(values[i]));
             }
         }
 

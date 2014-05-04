@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class WebSiteCollection : CollectionBase
@@ -68,10 +66,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(WebSiteCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new WebSite(values[i]));
+                Add(new WebSite(values[i]));
             }
         }
 

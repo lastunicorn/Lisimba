@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Name")]
@@ -14,10 +12,10 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("First")]
         public string FirstName
         {
-            get { return this.firstName; }
+            get { return firstName; }
             set
             {
-                this.firstName = value;
+                firstName = value;
             }
         }
 
@@ -26,10 +24,10 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Middle")]
         public string MiddleName
         {
-            get { return this.middleName; }
+            get { return middleName; }
             set
             {
-                this.middleName = value;
+                middleName = value;
             }
         }
 
@@ -38,10 +36,10 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Last")]
         public string LastName
         {
-            get { return this.lastName; }
+            get { return lastName; }
             set
             {
-                this.lastName = value;
+                lastName = value;
             }
         }
 
@@ -50,10 +48,10 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Nickname")]
         public string Nickname
         {
-            get { return this.nickname; }
+            get { return nickname; }
             set
             {
-                this.nickname = value;
+                nickname = value;
             }
         }
 
@@ -85,10 +83,10 @@ namespace DustInTheWind.Lisimba.Egg
         /// </summary>
         public void Clear()
         {
-            this.firstName = string.Empty;
-            this.middleName = string.Empty;
-            this.lastName = string.Empty;
-            this.nickname = string.Empty;
+            firstName = string.Empty;
+            middleName = string.Empty;
+            lastName = string.Empty;
+            nickname = string.Empty;
         }
 
         /// <summary>
@@ -97,18 +95,18 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="contact">The PersonName object to be copied.</param>
         public void CopyFrom(PersonName name)
         {
-            this.firstName = name.firstName;
-            this.middleName = name.middleName;
-            this.lastName = name.lastName;
-            this.nickname = name.nickname;
+            firstName = name.firstName;
+            middleName = name.middleName;
+            lastName = name.lastName;
+            nickname = name.nickname;
         }
 
         public bool IsEmpty()
         {
-            if (this.firstName.Length == 0 &&
-                this.middleName.Length == 0 &&
-                this.lastName.Length == 0 &&
-                this.nickname.Length == 0)
+            if (firstName.Length == 0 &&
+                middleName.Length == 0 &&
+                lastName.Length == 0 &&
+                nickname.Length == 0)
             {
                 return true;
             }
@@ -178,10 +176,10 @@ namespace DustInTheWind.Lisimba.Egg
             if (obj is PersonName)
             {
                 PersonName pn = (PersonName)obj;
-                if (this.firstName.Equals(pn.firstName) &&
-                    this.middleName.Equals(pn.middleName) &&
-                    this.lastName.Equals(pn.lastName) &&
-                    this.nickname.Equals(pn.nickname))
+                if (firstName.Equals(pn.firstName) &&
+                    middleName.Equals(pn.middleName) &&
+                    lastName.Equals(pn.lastName) &&
+                    nickname.Equals(pn.nickname))
                 {
                     return true;
                 }
@@ -202,12 +200,12 @@ namespace DustInTheWind.Lisimba.Egg
             string str = string.Empty;
             string name = string.Empty;
 
-            name = (this.firstName.Length > 0 ? this.firstName : string.Empty);
-            name += (this.middleName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + this.middleName : string.Empty);
-            name += (this.lastName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + this.lastName : string.Empty);
+            name = (firstName.Length > 0 ? firstName : string.Empty);
+            name += (middleName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + middleName : string.Empty);
+            name += (lastName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + lastName : string.Empty);
 
-            if (this.nickname.Length > 0)
-                str += this.nickname + " (" + name + ")";
+            if (nickname.Length > 0)
+                str += nickname + " (" + name + ")";
             else
                 str += name;
 

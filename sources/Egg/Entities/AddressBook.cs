@@ -1,48 +1,29 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
-using System.IO;
-using zcsv;
-using System.Collections;
-using System.Xml;
-using DustInTheWind.Lisimba.Egg;
 using System.Reflection;
-using System.Xml.XPath;
+using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [XmlRoot("Book")]
     [Serializable()]
     public class AddressBook
     {
-        #region Properties and Fields
-
-        private string version = string.Empty;
         // Version
         /// <summary>
         /// The version of the application that created this address book.
         /// </summary>
         [XmlElement("Version")]
-        public string Version
-        {
-            get { return this.version; }
-            set { this.version = value; }
-        }
+        public string Version { get; set; }
 
-        private string name = "New Address Book";
         // Name
         /// <summary>
         /// Gets or sets the name of the address book.
         /// </summary>
         [XmlElement("Name")]
-        public string Name
-        {
-            get { return this.name; }
-            set { this.name = value; }
-        }
+        public string Name { get; set; }
 
-        private ContactCollection contacts = new ContactCollection();
+        private ContactCollection contacts;
         //Contacts
         /// <summary>
         /// Gets a collection of Contact.
@@ -50,22 +31,15 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("Contacts"), XmlArrayItem("Contact")]
         public ContactCollection Contacts
         {
-            get { return this.contacts; }
+            get { return contacts; }
         }
 
-        private string fileName = string.Empty;
         // FileName
         /// <summary>
         /// Gets the full file name of the address book or empty string if is a new one.
         /// </summary>
         [XmlIgnore()]
-        public string FileName
-        {
-            get { return this.fileName; }
-            set { this.fileName = value; }
-        }
-
-        #endregion
+        public string FileName { get; set; }
 
         #region Events
 
@@ -125,49 +99,42 @@ namespace DustInTheWind.Lisimba.Egg
 
         #endregion
 
-        #region Constructors
-
         public AddressBook()
         {
-            //Assembly a = Assembly.GetEntryAssembly();
-            //if (a == null)
-            //    a = Assembly.GetCallingAssembly();
-            //if (a == null)
-            //    a = Assembly.GetExecutingAssembly();
+            Name = "New Address Book";
+            contacts = new ContactCollection();
+            FileName = string.Empty;
 
-            Assembly a = Assembly.GetExecutingAssembly();
-            AssemblyName name = a.GetName();
-
-            this.version = name.Version.ToString();
+            Version = GetCurrentAssemblyVersion();
         }
 
-        #endregion
+        private static string GetCurrentAssemblyVersion()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = assembly.GetName();
 
-        #region Methods
-
-        #region Add Remove
+            return assemblyName.Version.ToString();
+        }
 
         public int Add(Contact contact)
         {
-            bool allowAdd = true;
-            
-            for (int i = 0; i < this.contacts.Count; i++)
+            bool allowAdd = IsAllowToAdd(contact);
+
+            if (!allowAdd)
+                return -1;
+
+            return Contacts.Add(contact);
+        }
+
+        private bool IsAllowToAdd(Contact contact)
+        {
+            for (int i = 0; i < Contacts.Count; i++)
             {
-                if (PersonName.Compare(this.contacts[i].Name, contact.Name) == 0)
-                {
-                    allowAdd = false;
-                    break;
-                }
+                if (PersonName.Compare(Contacts[i].Name, contact.Name) == 0)
+                    return false;
             }
 
-            if (allowAdd)
-            {
-                return this.contacts.Add(contact);
-            }
-            else
-            {
-                return -1;
-            }
+            return true;
         }
 
         public int AddRange(ContactCollection contacts, ImportRuleCollection importRules)
@@ -183,7 +150,7 @@ namespace DustInTheWind.Lisimba.Egg
                     switch (rule.ImportType)
                     {
                         case ImportType.AddAsNew:
-                            this.Add(contacts[i]);
+                            Add(contacts[i]);
                             countAdded++;
                             break;
 
@@ -201,9 +168,6 @@ namespace DustInTheWind.Lisimba.Egg
 
                         case ImportType.DoNotAdd:
                             break;
-
-                        default:
-                            break;
                     }
 
                 }
@@ -214,43 +178,35 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void Remove(Contact contact)
         {
-            this.contacts.Remove(contact);
+            Contacts.Remove(contact);
         }
 
         public void RemoveAt(int index)
         {
-            this.contacts.RemoveAt(index);
+            Contacts.RemoveAt(index);
         }
-
-        #endregion
 
         public int Count
         {
-            get { return this.contacts.Count; }
+            get { return Contacts.Count; }
         }
 
         public Contact this[int index]
         {
-            get { return this.contacts[index]; }
-            set { this.contacts[index] = value; }
+            get { return Contacts[index]; }
+            set { Contacts[index] = value; }
         }
-
-        #region Sort
 
         public void Sort(ContactsSortingType sortType, SortDirection sortDirection)
         {
-            this.contacts.Sort(sortType, sortDirection);
+            Contacts.Sort(sortType, sortDirection);
         }
-
-        #endregion
 
         public void CopyFrom(AddressBook addressBook)
         {
-            this.version = addressBook.version;
-            this.name = addressBook.name;
-            this.contacts.CopyFrom(addressBook.contacts);
+            Version = addressBook.Version;
+            Name = addressBook.Name;
+            Contacts.CopyFrom(addressBook.Contacts);
         }
-
-        #endregion
     }
 }

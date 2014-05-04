@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     /// <summary>
     /// Class containing information about an e-mail
@@ -28,8 +26,8 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Address")]
         public string Address
         {
-            get { return this.address; }
-            set { this.address = value; this.OnAddressChanged(new AddressChangedEventArgs(value)); }
+            get { return address; }
+            set { address = value; OnAddressChanged(new AddressChangedEventArgs(value)); }
         }
 
         //[XmlElement("Description")]
@@ -40,8 +38,8 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Description")]
         public string Description
         {
-            get { return this.description; }
-            set { this.description = value; this.OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
+            get { return description; }
+            set { description = value; OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
         }
 
         #endregion Properties
@@ -146,7 +144,7 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="email"></param>
         public WebSite(WebSite webSite)
         {
-            this.CopyFrom(webSite);
+            CopyFrom(webSite);
         }
 
         #endregion Constructors
@@ -158,8 +156,8 @@ namespace DustInTheWind.Lisimba.Egg
         /// </summary>
         public void Clear()
         {
-            this.address = string.Empty;
-            this.description = string.Empty;
+            address = string.Empty;
+            description = string.Empty;
         }
 
         #endregion
@@ -172,8 +170,8 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="email"></param>
         public void CopyFrom(WebSite webSite)
         {
-            this.address = webSite.address;
-            this.description = webSite.description;
+            address = webSite.address;
+            description = webSite.description;
         }
 
         #endregion
@@ -198,7 +196,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public override string ToString()
         {
-            return this.address + (this.description.Length > 0 ? " - " + this.description : string.Empty);
+            return address + (description.Length > 0 ? " - " + description : string.Empty);
         }
 
         #endregion

@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba

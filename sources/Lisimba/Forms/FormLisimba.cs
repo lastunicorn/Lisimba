@@ -11,6 +11,9 @@ using DustInTheWind.Lisimba.Egg;
 using System.Reflection;
 using System.Configuration;
 using DustInTheWind.Lisimba.Config;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Egg.Exceptions;
 
 namespace DustInTheWind.Lisimba
 {

@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     public class AddressCollection : CollectionBase
@@ -69,10 +67,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(AddressCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new Address(values[i]));
+                Add(new Address(values[i]));
             }
         }
 

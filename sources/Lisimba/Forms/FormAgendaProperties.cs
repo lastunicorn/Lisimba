@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg;
 using System.IO;
+using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba
 {

@@ -1,79 +1,44 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
 	[XmlRoot("Address")]
 	public class Address
 	{
 		#region Fields
-		
-		private string street;
-		private string city;
-		private string state;
-		private string postalCode;
-		private string country;
-		private string description;
 
-		#endregion
+        #endregion
 
 		#region Properties
 		
 		// Address
         [XmlAttribute("Street")]
-		public string Street
-		{
-			get { return this.street; }
-			set { this.street = value; }
-		}
+        public string Street { get; set; }
 
-		// City
+        // City
         [XmlAttribute("City")]
-		public string City
-		{
-			get { return this.city; }
-			set { this.city = value; }
-		}
+        public string City { get; set; }
 
-		// State
+        // State
         [XmlAttribute("State")]
-		public string State
-		{
-			get { return this.state; }
-			set { this.state = value; }
-		}
+        public string State { get; set; }
 
-		// ZIP
+        // ZIP
         [XmlAttribute("PostalCode")]
-		public string PostalCode
-		{
-			get { return this.postalCode; }
-			set { this.postalCode = value; }
-		}
+        public string PostalCode { get; set; }
 
-		// Country
+        // Country
         [XmlAttribute("Country")]
-		public string Country
-		{
-			get { return this.country; }
-			set { this.country = value; }
-		}
+        public string Country { get; set; }
 
-		// Description
+        // Description
         [XmlAttribute("Description")]
-		public string Description
-		{
-			get { return this.description; }
-			set { this.description = value; }
-		}
+        public string Description { get; set; }
 
-		#endregion
+        #endregion
 
-		#region Constructors
-		
 		public Address()
             : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
 		{
@@ -86,71 +51,65 @@ namespace DustInTheWind.Lisimba.Egg
 
         public Address(string address, string city, string state, string postalCode, string country, string description)
 		{
-			this.street = address;
-			this.city = city;
-			this.state = state;
-			this.postalCode = postalCode;
-			this.country = country;
-			this.description = description;
+			Street = address;
+			City = city;
+			State = state;
+			PostalCode = postalCode;
+			Country = country;
+			Description = description;
 		}
 
-		public Address(Address a)
+		public Address(Address address)
 		{
-			this.CopyFrom(a);
+			CopyFrom(address);
 		}
 
-		#endregion
-
-		#region Copy
-		
-		public void CopyFrom(Address a)
+		public void CopyFrom(Address address)
 		{
-			this.street = a.street;
-			this.city = a.city;
-			this.state = a.state;
-			this.postalCode = a.postalCode;
-			this.country = a.country;
-			this.description = a.description;
+			Street = address.Street;
+			City = address.City;
+			State = address.State;
+			PostalCode = address.PostalCode;
+			Country = address.Country;
+			Description = address.Description;
 		}
 
 		public Address GetCopy()
 		{
-			return new Address(this.street, this.city, this.state, this.postalCode, this.country, this.description);
+			return new Address(Street, City, State, PostalCode, Country, Description);
 		}
-
-		#endregion
 
         public override string ToString()
         {
             string tempString = string.Empty;
 
-            if (street.Length > 0)
+            if (Street.Length > 0)
             {
-                tempString += street;
+                tempString += Street;
             }
 
-            if (city.Length > 0)
-            {
-                if (tempString.Length > 0) tempString += " ";
-                tempString += city;
-            }
-
-            if (postalCode.Length > 0)
+            if (City.Length > 0)
             {
                 if (tempString.Length > 0) tempString += " ";
-                tempString += postalCode;
+                tempString += City;
             }
 
-            if (state.Length > 0)
+            if (PostalCode.Length > 0)
             {
                 if (tempString.Length > 0) tempString += " ";
-                tempString += state;
+                tempString += PostalCode;
             }
 
-            if (country.Length > 0)
+            if (State.Length > 0)
+            {
+                if (tempString.Length > 0) tempString += " ";
+                tempString += State;
+            }
+
+            if (Country.Length > 0)
             {
                 if (tempString.Length > 0) tempString += ", ";
-                tempString += country;
+                tempString += Country;
             }
 
             return tempString;
@@ -162,12 +121,12 @@ namespace DustInTheWind.Lisimba.Egg
 
             Address address = (Address)obj;
 
-            if (!street.Equals(address.street)) return false;
-            if (!city.Equals(address.city)) return false;
-            if (!state.Equals(address.state)) return false;
-            if (!postalCode.Equals(address.postalCode)) return false;
-            if (!country.Equals(address.country)) return false;
-            if (!description.Equals(address.description)) return false;
+            if (!Street.Equals(address.Street)) return false;
+            if (!City.Equals(address.City)) return false;
+            if (!State.Equals(address.State)) return false;
+            if (!PostalCode.Equals(address.PostalCode)) return false;
+            if (!Country.Equals(address.Country)) return false;
+            if (!Description.Equals(address.Description)) return false;
 
             return true;
         }

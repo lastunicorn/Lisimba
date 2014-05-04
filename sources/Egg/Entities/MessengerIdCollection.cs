@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Data;
 using System.Collections;
+using System.Data;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     public class MessengerIdCollection : CollectionBase
     {
@@ -67,10 +64,10 @@ namespace DustInTheWind.Lisimba.Egg
 
         public void CopyFrom(MessengerIdCollection values)
         {
-            this.Clear();
+            Clear();
             for (int i = 0; i < values.Count; i++)
             {
-                this.Add(new MessengerId(values[i]));
+                Add(new MessengerId(values[i]));
             }
         }
 

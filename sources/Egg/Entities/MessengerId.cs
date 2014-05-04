@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     /// <summary>
     /// Class containing information about a messenger id.
@@ -27,8 +25,8 @@ namespace DustInTheWind.Lisimba.Egg
 		[XmlAttribute("Id")]
 		public string Id
 		{
-			get { return this.id; }
-            set { this.id = value; this.OnIdChanged(new IdChangedEventArgs(value)); }
+			get { return id; }
+            set { id = value; OnIdChanged(new IdChangedEventArgs(value)); }
 		}
 
         /// <summary>
@@ -37,8 +35,8 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlAttribute("Description")]
 		public string Description
 		{
-			get { return this.description; }
-            set { this.description = value; this.OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
+			get { return description; }
+            set { description = value; OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
 		}
 
 		#endregion Properties
@@ -143,7 +141,7 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="email"></param>
         public MessengerId(MessengerId messenger)
 		{
-			this.CopyFrom(messenger);
+			CopyFrom(messenger);
 		}
 
 		#endregion Constructors
@@ -155,8 +153,8 @@ namespace DustInTheWind.Lisimba.Egg
         /// </summary>
 		public void Clear()
 		{
-            this.id = string.Empty;
-            this.description = string.Empty;
+            id = string.Empty;
+            description = string.Empty;
         }
 
         #endregion
@@ -169,8 +167,8 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="email"></param>
         public void CopyFrom(MessengerId messenger)
 		{
-			this.id = messenger.id;
-			this.description = messenger.description;
+			id = messenger.id;
+			description = messenger.description;
 		}
 
         #endregion
@@ -195,7 +193,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public override string ToString()
         {
-            return this.Id + (this.description.Length > 0 ? " - " + this.description : string.Empty);
+            return Id + (description.Length > 0 ? " - " + description : string.Empty);
         }
 
         #endregion

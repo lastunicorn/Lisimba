@@ -1,3 +1,5 @@
+using DustInTheWind.Lisimba.Egg.Enums;
+
 namespace DustInTheWind.Lisimba
 {
     partial class FormLisimba
@@ -98,7 +100,7 @@ namespace DustInTheWind.Lisimba
             this.contactListView1.Name = "contactListView1";
             this.contactListView1.SearchText = "";
             this.contactListView1.Size = new System.Drawing.Size(191, 407);
-            this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.ContactsSortingType.NicknameOrName;
+            this.contactListView1.SortField = ContactsSortingType.NicknameOrName;
             this.contactListView1.TabIndex = 9;
             this.contactListView1.ContactListChanged += new DustInTheWind.Lisimba.ContactListView.ContactListChangedHandler(this.contactListView1_ContactListChanged);
             this.contactListView1.SelectedContactChanged += new DustInTheWind.Lisimba.ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);

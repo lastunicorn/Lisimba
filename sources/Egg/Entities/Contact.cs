@@ -1,11 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
 using System.Xml.Serialization;
-using System.Data;
+using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Contact")]
@@ -20,40 +17,40 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlElement("Name")]
         public PersonName Name
         {
-            get { return this.name; }
-            set { if (value != null) this.name = value; }
+            get { return name; }
+            set { if (value != null) name = value; }
         }
 
         // FirstName
         [XmlIgnore()]
         public string FirstName
         {
-            get { return this.name.FirstName; }
-            set { this.name.FirstName = value; }
+            get { return name.FirstName; }
+            set { name.FirstName = value; }
         }
 
         // MiddleName
         [XmlIgnore()]
         public string MiddleName
         {
-            get { return this.name.MiddleName; }
-            set { this.name.MiddleName = value; }
+            get { return name.MiddleName; }
+            set { name.MiddleName = value; }
         }
 
         // LastName
         [XmlIgnore()]
         public string LastName
         {
-            get { return this.name.LastName; }
-            set { this.name.LastName = value; }
+            get { return name.LastName; }
+            set { name.LastName = value; }
         }
 
         // Nickname
         [XmlIgnore()]
         public string Nickname
         {
-            get { return this.name.Nickname; }
-            set { this.name.Nickname = value; }
+            get { return name.Nickname; }
+            set { name.Nickname = value; }
         }
 
         #endregion
@@ -65,8 +62,8 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlElement("Birthday")]
         public Date Birthday
         {
-            get { return this.birthday; }
-            set { this.birthday = value; }
+            get { return birthday; }
+            set { birthday = value; }
         }
 
         #endregion
@@ -106,7 +103,7 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("Phones"), XmlArrayItem("Phone")]
         public PhoneCollection Phones
         {
-            get { return this.phones; }
+            get { return phones; }
         }
 
         private EmailCollection emails = new EmailCollection();
@@ -114,7 +111,7 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("Emails"), XmlArrayItem("Email")]
         public EmailCollection Emails
         {
-            get { return this.emails; }
+            get { return emails; }
         }
 
         private WebSiteCollection webSites = new WebSiteCollection();
@@ -122,7 +119,7 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("WebSites"), XmlArrayItem("WebSite")]
         public WebSiteCollection WebSites
         {
-            get { return this.webSites; }
+            get { return webSites; }
         }
 
         private AddressCollection addresses = new AddressCollection();
@@ -130,7 +127,7 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("Addresses"), XmlArrayItem("Address")]
         public AddressCollection Addresses
         {
-            get { return this.addresses; }
+            get { return addresses; }
         }
 
         private DateCollection dates = new DateCollection();
@@ -138,7 +135,7 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlArray("Dates"), XmlArrayItem("Date")]
         public DateCollection Dates
         {
-            get { return this.dates; }
+            get { return dates; }
         }
 
         private MessengerIdCollection messengerIds = new MessengerIdCollection();
@@ -147,7 +144,7 @@ namespace DustInTheWind.Lisimba.Egg
         //[XmlIgnore()]
         public MessengerIdCollection MessengerIds
         {
-            get { return this.messengerIds; }
+            get { return messengerIds; }
         }
 
         #endregion
@@ -159,8 +156,8 @@ namespace DustInTheWind.Lisimba.Egg
         [XmlElement("Notes")]
         public string Notes
         {
-            get { return this.notes; }
-            set { this.notes = value; }
+            get { return notes; }
+            set { notes = value; }
         }
 
         #endregion
@@ -178,7 +175,7 @@ namespace DustInTheWind.Lisimba.Egg
             : this()
         {
             if (contact != null)
-                this.CopyFrom(contact);
+                CopyFrom(contact);
         }
 
         #endregion Constructors
@@ -190,15 +187,15 @@ namespace DustInTheWind.Lisimba.Egg
         /// </summary>
         public void Clear()
         {
-            this.name.Clear();
-            this.birthday.Clear();
-            this.phones.Clear();
-            this.emails.Clear();
-            this.webSites.Clear();
-            this.addresses.Clear();
-            this.dates.Clear();
-            this.messengerIds.Clear();
-            this.notes = string.Empty;
+            name.Clear();
+            birthday.Clear();
+            phones.Clear();
+            emails.Clear();
+            webSites.Clear();
+            addresses.Clear();
+            dates.Clear();
+            messengerIds.Clear();
+            notes = string.Empty;
         }
 
         /// <summary>
@@ -207,18 +204,18 @@ namespace DustInTheWind.Lisimba.Egg
         /// <param name="contact">The Contact object to be copied.</param>
         public void CopyFrom(Contact contact)
         {
-            this.name.CopyFrom(contact.name);
+            name.CopyFrom(contact.name);
 
-            this.birthday.CopyFrom(contact.birthday);
+            birthday.CopyFrom(contact.birthday);
 
-            this.phones.CopyFrom(contact.phones);
-            this.emails.CopyFrom(contact.emails);
-            this.webSites.CopyFrom(contact.webSites);
-            this.addresses.CopyFrom(contact.addresses);
-            this.dates.CopyFrom(contact.dates);
-            this.messengerIds.CopyFrom(contact.messengerIds);
+            phones.CopyFrom(contact.phones);
+            emails.CopyFrom(contact.emails);
+            webSites.CopyFrom(contact.webSites);
+            addresses.CopyFrom(contact.addresses);
+            dates.CopyFrom(contact.dates);
+            messengerIds.CopyFrom(contact.messengerIds);
 
-            this.notes = contact.notes;
+            notes = contact.notes;
         }
 
         /// <summary>
@@ -249,79 +246,79 @@ namespace DustInTheWind.Lisimba.Egg
         {
             get
             {
-                if (this.birthday.Month == 0 || this.birthday.Day == 0)
+                if (birthday.Month == 0 || birthday.Day == 0)
                     return ZodiacSign.NotSpecified;
 
-                switch (this.birthday.Month)
+                switch (birthday.Month)
                 {
                     case 1:
-                        if (this.birthday.Day <= 19)
+                        if (birthday.Day <= 19)
                             return ZodiacSign.Capricorn;
                         else
                             return ZodiacSign.Aquarius;
 
                     case 2:
-                        if (this.birthday.Day <= 18)
+                        if (birthday.Day <= 18)
                             return ZodiacSign.Aquarius;
                         else
                             return ZodiacSign.Pisces;
 
                     case 3:
-                        if (this.birthday.Day <= 20)
+                        if (birthday.Day <= 20)
                             return ZodiacSign.Pisces;
                         else
                             return ZodiacSign.Aries;
 
                     case 4:
-                        if (this.birthday.Day <= 19)
+                        if (birthday.Day <= 19)
                             return ZodiacSign.Aries;
                         else
                             return ZodiacSign.Taurus;
 
                     case 5:
-                        if (this.birthday.Day <= 20)
+                        if (birthday.Day <= 20)
                             return ZodiacSign.Taurus;
                         else
                             return ZodiacSign.Gemini;
 
                     case 6:
-                        if (this.birthday.Day <= 20)
+                        if (birthday.Day <= 20)
                             return ZodiacSign.Gemini;
                         else
                             return ZodiacSign.Cancer;
 
                     case 7:
-                        if (this.birthday.Day <= 22)
+                        if (birthday.Day <= 22)
                             return ZodiacSign.Cancer;
                         else
                             return ZodiacSign.Leo;
 
                     case 8:
-                        if (this.birthday.Day <= 22)
+                        if (birthday.Day <= 22)
                             return ZodiacSign.Leo;
                         else
                             return ZodiacSign.Virgo;
 
                     case 9:
-                        if (this.birthday.Day <= 22)
+                        if (birthday.Day <= 22)
                             return ZodiacSign.Virgo;
                         else
                             return ZodiacSign.Libra;
 
                     case 10:
-                        if (this.birthday.Day <= 22)
+                        if (birthday.Day <= 22)
                             return ZodiacSign.Libra;
                         else
                             return ZodiacSign.Scorpio;
 
                     case 11:
-                        if (this.birthday.Day <= 21)
+                        if (birthday.Day <= 21)
                             return ZodiacSign.Scorpio;
                         else
                             return ZodiacSign.Sagittarius;
 
                     case 12:
-                        if (this.birthday.Day <= 21)
+                        if (birthday.Day <= 21)
                             return ZodiacSign.Sagittarius;
                         else
                             return ZodiacSign.Capricorn;
@@ -344,9 +341,9 @@ namespace DustInTheWind.Lisimba.Egg
         {
             Phone p;
 
-            for (int i = 0; i < this.phones.Count; i++)
+            for (int i = 0; i < phones.Count; i++)
             {
-                p = this.phones[i];
+                p = phones[i];
 
                 switch (searchMode)
                 {
@@ -385,9 +382,9 @@ namespace DustInTheWind.Lisimba.Egg
         {
             Email e;
 
-            for (int i = 0; i < this.emails.Count; i++)
+            for (int i = 0; i < emails.Count; i++)
             {
-                e = this.emails[i];
+                e = emails[i];
 
                 switch (searchMode)
                 {
@@ -426,9 +423,9 @@ namespace DustInTheWind.Lisimba.Egg
         {
             WebSite w;
 
-            for (int i = 0; i < this.webSites.Count; i++)
+            for (int i = 0; i < webSites.Count; i++)
             {
-                w = this.webSites[i];
+                w = webSites[i];
 
                 switch (searchMode)
                 {
@@ -467,9 +464,9 @@ namespace DustInTheWind.Lisimba.Egg
         {
             Address a;
 
-            for (int i = 0; i < this.addresses.Count; i++)
+            for (int i = 0; i < addresses.Count; i++)
             {
-                a = this.addresses[i];
+                a = addresses[i];
 
                 switch (searchMode)
                 {
@@ -508,9 +505,9 @@ namespace DustInTheWind.Lisimba.Egg
         {
             MessengerId id;
 
-            for (int i = 0; i < this.messengerIds.Count; i++)
+            for (int i = 0; i < messengerIds.Count; i++)
             {
-                id = this.messengerIds[i];
+                id = messengerIds[i];
 
                 switch (searchMode)
                 {
@@ -550,13 +547,13 @@ namespace DustInTheWind.Lisimba.Egg
                 Contact contact = (Contact)obj;
                 int returnValue = 0;
 
-                if ((returnValue = this.name.Nickname.CompareTo(contact.name.Nickname)) == 0)
+                if ((returnValue = name.Nickname.CompareTo(contact.name.Nickname)) == 0)
                 {
-                    if ((returnValue = this.name.FirstName.CompareTo(contact.name.FirstName)) == 0)
+                    if ((returnValue = name.FirstName.CompareTo(contact.name.FirstName)) == 0)
                     {
-                        if ((returnValue = this.name.MiddleName.CompareTo(contact.name.MiddleName)) == 0)
+                        if ((returnValue = name.MiddleName.CompareTo(contact.name.MiddleName)) == 0)
                         {
-                            returnValue = this.name.LastName.CompareTo(contact.name.LastName);
+                            returnValue = name.LastName.CompareTo(contact.name.LastName);
                         }
                     }
                 }
@@ -574,18 +571,18 @@ namespace DustInTheWind.Lisimba.Egg
 
             Contact contact = (Contact)obj;
 
-            if (!this.name.Equals(contact.name)) return false;
+            if (!name.Equals(contact.name)) return false;
 
-            if (!this.birthday.Equals(contact.birthday)) return false;
+            if (!birthday.Equals(contact.birthday)) return false;
 
-            if (!this.phones.Equals(contact.phones)) return false;
-            if (!this.emails.Equals(contact.emails)) return false;
-            if (!this.webSites.Equals(contact.webSites)) return false;
-            if (!this.addresses.Equals(contact.addresses)) return false;
-            if (!this.dates.Equals(contact.dates)) return false;
-            if (!this.messengerIds.Equals(contact.messengerIds)) return false;
+            if (!phones.Equals(contact.phones)) return false;
+            if (!emails.Equals(contact.emails)) return false;
+            if (!webSites.Equals(contact.webSites)) return false;
+            if (!addresses.Equals(contact.addresses)) return false;
+            if (!dates.Equals(contact.dates)) return false;
+            if (!messengerIds.Equals(contact.messengerIds)) return false;
 
-            if (!this.notes.Equals(contact.notes)) return false;
+            if (!notes.Equals(contact.notes)) return false;
 
             return true;
         }
