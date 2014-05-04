@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormAddContact : Form
     {
@@ -17,7 +11,7 @@ namespace DustInTheWind.Lisimba
         {
             get
             {
-                return this.contact;
+                return contact;
             }
         }
 
@@ -38,21 +32,21 @@ namespace DustInTheWind.Lisimba
             InitializeComponent();
 
             this.contacts = contacts;
-            this.contactView1.Contact = new Contact();
-            this.contactView1.CheckMandatoryFields = false;
+            contactView1.Contact = new Contact();
+            contactView1.CheckMandatoryFields = false;
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            Contact p = this.contactView1.Contact;
-            if (this.ValidateContact(p))
+            Contact p = contactView1.Contact;
+            if (ValidateContact(p))
             {
-                this.contact = p;
+                contact = p;
             }
             else
             {
                 MessageBox.Show("Please enter at least one of the fields marked with \"*\".", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                this.DialogResult = DialogResult.None;
+                DialogResult = DialogResult.None;
             }
         }
 
@@ -66,12 +60,12 @@ namespace DustInTheWind.Lisimba
                 return false;
             }
 
-            if (this.contacts != null)
+            if (contacts != null)
             {
                 Contact p = null;
-                for (int i = 0; i < this.contacts.Count; i++)
+                for (int i = 0; i < contacts.Count; i++)
                 {
-                    p = this.contacts[i];
+                    p = contacts[i];
                     if (p.Name.FirstName.Equals(contact.Name.FirstName) &&
                         p.Name.MiddleName.Equals(contact.Name.MiddleName) &&
                         p.Name.LastName.Equals(contact.Name.LastName) &&

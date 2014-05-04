@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormWebSiteEdit : FormEditBase
     {
         private WebSite webSite = null;
         public WebSite WebSite
         {
-            get { return this.webSite; }
+            get { return webSite; }
             set
             {
-                this.webSite = value;
+                webSite = value;
 
-                this.textBoxAddress.Text = value.Address;
-                this.textBoxComments.Text = value.Description;
+                textBoxAddress.Text = value.Address;
+                textBoxComments.Text = value.Description;
             }
         }
 
@@ -47,7 +41,7 @@ namespace DustInTheWind.Lisimba
             private WebSite webSite = null;
             public WebSite WebSite
             {
-                get { return this.webSite; }
+                get { return webSite; }
             }
 
             public WebSiteUpdatedEventArgs(WebSite webSite)
@@ -74,19 +68,19 @@ namespace DustInTheWind.Lisimba
         {
             InitializeComponent();
 
-            this.textBoxAddress.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
-            this.textBoxComments.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
+            textBoxAddress.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            textBoxComments.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
         }
 
         protected override void UpdateData()
         {
-            if (!this.webSite.Address.Equals(this.textBoxAddress.Text) ||
-                !this.webSite.Description.Equals(this.textBoxComments.Text))
+            if (!webSite.Address.Equals(textBoxAddress.Text) ||
+                !webSite.Description.Equals(textBoxComments.Text))
             {
-                this.webSite.Address = this.textBoxAddress.Text;
-                this.webSite.Description = this.textBoxComments.Text;
+                webSite.Address = textBoxAddress.Text;
+                webSite.Description = textBoxComments.Text;
 
-                this.OnWebSiteUpdated(new WebSiteUpdatedEventArgs(this.webSite));
+                OnWebSiteUpdated(new WebSiteUpdatedEventArgs(webSite));
             }
         }
     }

@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Forms;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     public partial class DateListView : UserControl
     {
@@ -108,14 +104,14 @@ namespace DustInTheWind.Lisimba
 
         public void Clear()
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
         }
 
         public void RefreshData()
         {
-            this.dataGridView1.DataSource = this.dates.ToDataTable();
+            dataGridView1.DataSource = dates.ToDataTable();
 
-            foreach (DataGridViewColumn column in this.dataGridView1.Columns)
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
@@ -124,7 +120,7 @@ namespace DustInTheWind.Lisimba
         public void Populate(DateCollection dates)
         {
             this.dates = dates;
-            this.RefreshData();
+            RefreshData();
         }
 
         private void dataGridView1_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
@@ -134,8 +130,8 @@ namespace DustInTheWind.Lisimba
                 FormDateEdit formDateEdit = new FormDateEdit();
                 Rectangle rect;
 
-                if (e.RowIndex >= 0 && e.RowIndex < this.dates.Count)
-                    formDateEdit.Date = this.dates[e.RowIndex];
+                if (e.RowIndex >= 0 && e.RowIndex < dates.Count)
+                    formDateEdit.Date = dates[e.RowIndex];
 
                 rect = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
 
@@ -150,13 +146,13 @@ namespace DustInTheWind.Lisimba
 
         void formDataEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnDateChanged(new DateChangedEventArgs(e.Date));
+            RefreshData();
+            OnDateChanged(new DateChangedEventArgs(e.Date));
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            Date date = this.dates[e.RowIndex];
+            Date date = dates[e.RowIndex];
 
             if (date != null)
             {
@@ -166,7 +162,7 @@ namespace DustInTheWind.Lisimba
                     if (!date.Description.Equals(newDescription))
                     {
                         date.Description = newDescription;
-                        this.OnDateChanged(new DateChangedEventArgs(date));
+                        OnDateChanged(new DateChangedEventArgs(date));
                     }
                 }
             }
@@ -176,54 +172,54 @@ namespace DustInTheWind.Lisimba
         {
             if (e.KeyCode == Keys.Insert)
             {
-                this.dates.Add(new Date());
-                this.RefreshData();
+                dates.Add(new Date());
+                RefreshData();
             }
         }
 
         private void dataGridView1_MouseUp(object sender, MouseEventArgs e)
         {
             // Get info about the location where the user clicked.
-            System.Windows.Forms.DataGridView.HitTestInfo info = this.dataGridView1.HitTest(e.X, e.Y);
+            System.Windows.Forms.DataGridView.HitTestInfo info = dataGridView1.HitTest(e.X, e.Y);
 
             // Select the row that the user clicked.
             if (info.RowIndex >= 0)
-                this.dataGridView1.Rows[info.RowIndex].Selected = true;
+                dataGridView1.Rows[info.RowIndex].Selected = true;
             else
-                if (this.dataGridView1.SelectedRows.Count > 0)
-                    this.dataGridView1.SelectedRows[0].Selected = false;
+                if (dataGridView1.SelectedRows.Count > 0)
+                    dataGridView1.SelectedRows[0].Selected = false;
 
             if (e.Button == MouseButtons.Right)
             {
                 // Refresh the context menu.
-                this.deleteDateToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
+                deleteDateToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
 
                 // Display the context menu.
-                this.contextMenuStrip1.Show(this.dataGridView1, e.Location);
+                contextMenuStrip1.Show(dataGridView1, e.Location);
             }
         }
 
         private void addDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Date date = new Date();
-            this.dates.Add(date);
-            this.RefreshData();
-            this.OnDateAdded(new DateAddedEventArgs(date));
+            dates.Add(date);
+            RefreshData();
+            OnDateAdded(new DateAddedEventArgs(date));
         }
 
         private void deleteDateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow r in this.dataGridView1.SelectedRows)
+                foreach (DataGridViewRow r in dataGridView1.SelectedRows)
                 {
-                    int index = this.dataGridView1.Rows.IndexOf(r);
-                    Date date = this.dates[index];
-                    this.dates.RemoveAt(index);
-                    this.OnDateDeleted(new DateDeletedEventArgs(date));
+                    int index = dataGridView1.Rows.IndexOf(r);
+                    Date date = dates[index];
+                    dates.RemoveAt(index);
+                    OnDateDeleted(new DateDeletedEventArgs(date));
                 }
 
-                this.RefreshData();
+                RefreshData();
             }
         }
     }

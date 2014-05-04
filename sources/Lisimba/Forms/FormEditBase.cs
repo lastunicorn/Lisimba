@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormEditBase : Form
     {
         private bool allowClose = false;
         public bool AllowClose
         {
-            get { return this.allowClose; }
-            set { this.allowClose = value; }
+            get { return allowClose; }
+            set { allowClose = value; }
         }
 
         public FormEditBase()
@@ -28,14 +24,14 @@ namespace DustInTheWind.Lisimba
 
         protected void AcceptChanges()
         {
-            this.DialogResult = DialogResult.OK;
-            this.UpdateData();
-            this.Hide();
+            DialogResult = DialogResult.OK;
+            UpdateData();
+            Hide();
         }
 
         private void FormEditBase_Activated(object sender, EventArgs e)
         {
-            this.DialogResult = DialogResult.None;
+            DialogResult = DialogResult.None;
 
             // Correct the position on the screen.
 
@@ -43,26 +39,26 @@ namespace DustInTheWind.Lisimba
 
             // the screen
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
-            screen.Width -= this.Width + margin;
-            screen.Height -= this.Height + margin;
+            screen.Width -= Width + margin;
+            screen.Height -= Height + margin;
 
             // new position
-            Point p = this.Location;
+            Point p = Location;
             int x = Math.Min(screen.Width, p.X);
             x = Math.Max(margin, x);
             int y = Math.Min(screen.Height, p.Y);
             y = Math.Max(margin, y);
 
-            this.Location = new Point(x, y);
+            Location = new Point(x, y);
         }
 
         private void FormEditBase_Deactivate(object sender, EventArgs e)
         {
-            if (this.DialogResult == DialogResult.None)
+            if (DialogResult == DialogResult.None)
             {
-                this.DialogResult = DialogResult.OK;
-                this.UpdateData();
-                this.Hide();
+                DialogResult = DialogResult.OK;
+                UpdateData();
+                Hide();
             }
         }
 
@@ -70,26 +66,26 @@ namespace DustInTheWind.Lisimba
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.AcceptChanges();
+                AcceptChanges();
             }
 
             if (e.KeyCode == Keys.Escape)
             {
-                this.Close();
+                Close();
             }
         }
 
         private void FormEditBase_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (this.DialogResult == DialogResult.None)
+            if (DialogResult == DialogResult.None)
             {
-                this.DialogResult = DialogResult.Cancel;
+                DialogResult = DialogResult.Cancel;
             }
 
-            if (!this.allowClose)
+            if (!allowClose)
             {
                 e.Cancel = true;
-                this.Hide();
+                Hide();
             }
         }
     }

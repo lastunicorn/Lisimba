@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Exceptions
 {
     class LisimbaException : ApplicationException
     {

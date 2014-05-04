@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormPhoneEdit : FormEditBase
     {
         private Phone phone = null;
         public Phone Phone
         {
-            get { return this.phone; }
+            get { return phone; }
             set
             {
-                this.phone = value;
+                phone = value;
 
-                this.textBoxPhone.Text = value.Number;
-                this.textBoxComments.Text = value.Description;
+                textBoxPhone.Text = value.Number;
+                textBoxComments.Text = value.Description;
             }
         }
 
@@ -47,7 +41,7 @@ namespace DustInTheWind.Lisimba
             private Phone phone = null;
             public Phone Phone
             {
-                get { return this.phone; }
+                get { return phone; }
             }
 
             public PhoneUpdatedEventArgs(Phone phone)
@@ -74,19 +68,19 @@ namespace DustInTheWind.Lisimba
         {
             InitializeComponent();
 
-            this.textBoxPhone.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
-            this.textBoxComments.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
+            textBoxPhone.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            textBoxComments.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
         }
 
         protected override void UpdateData()
         {
-            if (!this.phone.Number.Equals(this.textBoxPhone.Text) ||
-                !this.phone.Description.Equals(this.textBoxComments.Text))
+            if (!phone.Number.Equals(textBoxPhone.Text) ||
+                !phone.Description.Equals(textBoxComments.Text))
             {
-                this.phone.Number = this.textBoxPhone.Text;
-                this.phone.Description = this.textBoxComments.Text;
+                phone.Number = textBoxPhone.Text;
+                phone.Description = textBoxComments.Text;
 
-                this.OnPhoneUpdated(new PhoneUpdatedEventArgs(this.phone));
+                OnPhoneUpdated(new PhoneUpdatedEventArgs(phone));
             }
         }
     }

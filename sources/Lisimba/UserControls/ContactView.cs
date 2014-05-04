@@ -1,15 +1,12 @@
 using System;
-using System.Collections;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     /// <summary>
     /// Control to display and edit a contact.
@@ -46,42 +43,42 @@ namespace DustInTheWind.Lisimba
         {
             InitializeComponent();
 
-            this.phonesNode = this.treeView1.Nodes["Phones"];
-            this.emailsNode = this.treeView1.Nodes["Emails"];
-            this.webSitesNode = this.treeView1.Nodes["WebSites"];
-            this.addressesNode = this.treeView1.Nodes["Addresses"];
-            this.datesNode = this.treeView1.Nodes["Dates"];
-            this.messengerIdsNode = this.treeView1.Nodes["MessengerIds"];
+            phonesNode = treeView1.Nodes["Phones"];
+            emailsNode = treeView1.Nodes["Emails"];
+            webSitesNode = treeView1.Nodes["WebSites"];
+            addressesNode = treeView1.Nodes["Addresses"];
+            datesNode = treeView1.Nodes["Dates"];
+            messengerIdsNode = treeView1.Nodes["MessengerIds"];
 
-            this.formBirthdayEdit = new FormDateEdit();
-            this.formBirthdayEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formBirthdayEdit_DateUpdated);
+            formBirthdayEdit = new FormDateEdit();
+            formBirthdayEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formBirthdayEdit_DateUpdated);
 
-            this.formPhoneEdit = new FormPhoneEdit();
-            this.formPhoneEdit.PhoneUpdated += new FormPhoneEdit.PhoneUpdatedHandler(formPhoneEdit_PhoneUpdated);
+            formPhoneEdit = new FormPhoneEdit();
+            formPhoneEdit.PhoneUpdated += new FormPhoneEdit.PhoneUpdatedHandler(formPhoneEdit_PhoneUpdated);
 
-            this.formEmailEdit = new FormEmailEdit();
-            this.formEmailEdit.EmailUpdated += new FormEmailEdit.EmailUpdatedHandler(formEmailEdit_EmailUpdated);
+            formEmailEdit = new FormEmailEdit();
+            formEmailEdit.EmailUpdated += new FormEmailEdit.EmailUpdatedHandler(formEmailEdit_EmailUpdated);
 
-            this.formWebSiteEdit = new FormWebSiteEdit();
-            this.formWebSiteEdit.WebSiteUpdated += new FormWebSiteEdit.WebSiteUpdatedHandler(formWebSiteEdit_WebSiteUpdated);
+            formWebSiteEdit = new FormWebSiteEdit();
+            formWebSiteEdit.WebSiteUpdated += new FormWebSiteEdit.WebSiteUpdatedHandler(formWebSiteEdit_WebSiteUpdated);
 
-            this.formAddressEdit = new FormAddressEdit();
-            this.formAddressEdit.AddressUpdated += new FormAddressEdit.AddressUpdatedHandler(formAddressEdit_AddressUpdated);
+            formAddressEdit = new FormAddressEdit();
+            formAddressEdit.AddressUpdated += new FormAddressEdit.AddressUpdatedHandler(formAddressEdit_AddressUpdated);
 
-            this.formDateEdit = new FormDateEdit();
-            this.formDateEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formDateEdit_DateUpdated);
+            formDateEdit = new FormDateEdit();
+            formDateEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formDateEdit_DateUpdated);
         }
 
         public Contact Contact
         {
             get
             {
-                return this.contact;
+                return contact;
             }
             set
             {
-                this.contact = value;
-                this.RefreshData();
+                contact = value;
+                RefreshData();
             }
         }
 
@@ -89,73 +86,73 @@ namespace DustInTheWind.Lisimba
 
         private void ClearData()
         {
-            this.textBoxFirstName.Text = string.Empty;
-            this.textBoxMiddleName.Text = string.Empty;
-            this.textBoxLastName.Text = string.Empty;
-            this.textBoxNickname.Text = string.Empty;
+            textBoxFirstName.Text = string.Empty;
+            textBoxMiddleName.Text = string.Empty;
+            textBoxLastName.Text = string.Empty;
+            textBoxNickname.Text = string.Empty;
 
-            this.labelBirthday.Text = string.Empty;
-            this.pictureBoxZodiacSign.Image = null;
-            this.labelZodiacSign.Text = string.Empty;
+            labelBirthday.Text = string.Empty;
+            pictureBoxZodiacSign.Image = null;
+            labelZodiacSign.Text = string.Empty;
 
-            this.textBoxNotes.Text = string.Empty;
+            textBoxNotes.Text = string.Empty;
 
-            this.phonesNode.Nodes.Clear();
-            this.emailsNode.Nodes.Clear();
-            this.webSitesNode.Nodes.Clear();
-            this.addressesNode.Nodes.Clear();
-            this.datesNode.Nodes.Clear();
-            this.messengerIdsNode.Nodes.Clear();
+            phonesNode.Nodes.Clear();
+            emailsNode.Nodes.Clear();
+            webSitesNode.Nodes.Clear();
+            addressesNode.Nodes.Clear();
+            datesNode.Nodes.Clear();
+            messengerIdsNode.Nodes.Clear();
         }
 
         #endregion
 
         private void RefreshData()
         {
-            this.isFillMode = true;
+            isFillMode = true;
 
-            this.ClearData();
+            ClearData();
 
-            if (this.contact != null)
+            if (contact != null)
             {
-                this.textBoxFirstName.Text = this.contact.Name.FirstName;
-                this.textBoxMiddleName.Text = this.contact.Name.MiddleName;
-                this.textBoxLastName.Text = this.contact.Name.LastName;
-                this.textBoxNickname.Text = this.contact.Name.Nickname;
+                textBoxFirstName.Text = contact.Name.FirstName;
+                textBoxMiddleName.Text = contact.Name.MiddleName;
+                textBoxLastName.Text = contact.Name.LastName;
+                textBoxNickname.Text = contact.Name.Nickname;
 
-                this.labelBirthday.Text = this.contact.Birthday.ToString();
+                labelBirthday.Text = contact.Birthday.ToString();
 
-                this.pictureBoxZodiacSign.Image = GetZodiacImage(this.contact.ZogiacSign);
-                this.toolTip1.SetToolTip(this.pictureBoxZodiacSign, this.contact.ZogiacSign.ToString());
-                this.labelZodiacSign.Text = this.contact.ZogiacSign.ToString();
+                pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
+                toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
+                labelZodiacSign.Text = contact.ZogiacSign.ToString();
 
-                this.textBoxNotes.Text = this.contact.Notes;
+                textBoxNotes.Text = contact.Notes;
 
 
                 // Phones
-                foreach (Phone phone in this.contact.Phones)
+                foreach (Phone phone in contact.Phones)
                 {
                     TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
                     phoneNode.Tag = phone;
-                    this.phonesNode.Nodes.Add(phoneNode);
+                    phonesNode.Nodes.Add(phoneNode);
                     phoneNode.ImageIndex = -2;
                     phoneNode.SelectedImageIndex = -2;
                 }
                 phonesNode.Expand();
 
                 // Emails
-                foreach (Email email in this.contact.Emails)
+                foreach (Email email in contact.Emails)
                 {
                     TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
                     emailNode.Tag = email;
-                    this.emailsNode.Nodes.Add(emailNode);
+                    emailsNode.Nodes.Add(emailNode);
                     emailNode.ImageIndex = -2;
                     emailNode.SelectedImageIndex = -2;
                 }
                 emailsNode.Expand();
 
                 // WebSites
-                foreach (WebSite webSite in this.contact.WebSites)
+                foreach (WebSite webSite in contact.WebSites)
                 {
                     TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
                     webSiteNode.Tag = webSite;
@@ -166,7 +163,7 @@ namespace DustInTheWind.Lisimba
                 webSitesNode.Expand();
 
                 // Addresses
-                foreach (Address address in this.contact.Addresses)
+                foreach (Address address in contact.Addresses)
                 {
                     TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
                     addressNode.Tag = address;
@@ -177,7 +174,7 @@ namespace DustInTheWind.Lisimba
                 addressesNode.Expand();
 
                 // Dates
-                foreach (Date date in this.contact.Dates)
+                foreach (Date date in contact.Dates)
                 {
                     TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
                     dateNode.Tag = date;
@@ -188,7 +185,7 @@ namespace DustInTheWind.Lisimba
                 datesNode.Expand();
 
                 // Messenger Ids
-                foreach (MessengerId messengerId in this.contact.MessengerIds)
+                foreach (MessengerId messengerId in contact.MessengerIds)
                 {
                     TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
                     messengerIdNode.Tag = messengerId;
@@ -199,7 +196,7 @@ namespace DustInTheWind.Lisimba
                 messengerIdsNode.Expand();
             }
 
-            this.isFillMode = false;
+            isFillMode = false;
         }
 
         #region private Image GetZodiacImage(ZodiacSign sign)
@@ -322,71 +319,71 @@ namespace DustInTheWind.Lisimba
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
-            if (!this.isFillMode)
+            if (!isFillMode)
             {
-                this.contact.Name.FirstName = this.textBoxFirstName.Text;
-                this.OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
-                this.OnContactChanged(new ContactChangedEventArgs());
+                contact.Name.FirstName = textBoxFirstName.Text;
+                OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
+                OnContactChanged(new ContactChangedEventArgs());
             }
         }
 
         private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
         {
-            if (!this.isFillMode)
+            if (!isFillMode)
             {
-                this.contact.Name.MiddleName = this.textBoxMiddleName.Text;
-                this.OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
-                this.OnContactChanged(new ContactChangedEventArgs());
+                contact.Name.MiddleName = textBoxMiddleName.Text;
+                OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
+                OnContactChanged(new ContactChangedEventArgs());
             }
         }
 
         private void textBoxLastName_TextChanged(object sender, EventArgs e)
         {
-            if (!this.isFillMode)
+            if (!isFillMode)
             {
-                this.contact.Name.LastName = this.textBoxLastName.Text;
-                this.OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
-                this.OnContactChanged(new ContactChangedEventArgs());
+                contact.Name.LastName = textBoxLastName.Text;
+                OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
+                OnContactChanged(new ContactChangedEventArgs());
             }
         }
 
         private void textBoxNickname_TextChanged(object sender, EventArgs e)
         {
-            if (!this.isFillMode)
+            if (!isFillMode)
             {
-                this.contact.Name.Nickname = this.textBoxNickname.Text;
-                this.OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
-                this.OnContactChanged(new ContactChangedEventArgs());
+                contact.Name.Nickname = textBoxNickname.Text;
+                OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
+                OnContactChanged(new ContactChangedEventArgs());
             }
         }
 
         private void textBoxNotes_TextChanged(object sender, EventArgs e)
         {
-            if (!this.isFillMode)
+            if (!isFillMode)
             {
-                this.contact.Notes = this.textBoxNotes.Text;
-                this.OnContactChanged(new ContactChangedEventArgs());
+                contact.Notes = textBoxNotes.Text;
+                OnContactChanged(new ContactChangedEventArgs());
             }
         }
 
         private void textBoxBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.EditBirthday();
+            EditBirthday();
         }
 
         private void EditBirthday()
         {
             // client position 
-            int cx = this.labelBirthday.Location.X;
-            int cy = this.labelBirthday.Location.Y + this.labelBirthday.Height;
+            int cx = labelBirthday.Location.X;
+            int cy = labelBirthday.Location.Y + labelBirthday.Height;
             Point cp = new Point(cx, cy);
 
             // screen position
-            Point sp = this.PointToScreen(cp);
+            Point sp = PointToScreen(cp);
 
             // initialize form
             formBirthdayEdit.Location = sp;
-            formBirthdayEdit.Date = this.contact.Birthday;
+            formBirthdayEdit.Date = contact.Birthday;
 
             // show form
             formBirthdayEdit.Show();
@@ -395,28 +392,28 @@ namespace DustInTheWind.Lisimba
 
         void formBirthdayEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
         {
-            this.labelBirthday.Text = e.Date.ToString();
-            this.pictureBoxZodiacSign.Image = GetZodiacImage(this.contact.ZogiacSign);
-            this.labelZodiacSign.Text = this.contact.ZogiacSign.ToString();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            labelBirthday.Text = e.Date.ToString();
+            pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
+            labelZodiacSign.Text = contact.ZogiacSign.ToString();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         private void textBoxBirthday_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
             {
-                this.EditBirthday();
+                EditBirthday();
             }
         }
 
         private void textBoxName_Leave(object sender, EventArgs e)
         {
-            if (this.checkMandatoryFields)
+            if (checkMandatoryFields)
             {
-                if (this.textBoxFirstName.Text.Length == 0 &&
-                    this.textBoxMiddleName.Text.Length == 0 &&
-                    this.textBoxLastName.Text.Length == 0 &&
-                    this.textBoxNickname.Text.Length == 0)
+                if (textBoxFirstName.Text.Length == 0 &&
+                    textBoxMiddleName.Text.Length == 0 &&
+                    textBoxLastName.Text.Length == 0 &&
+                    textBoxNickname.Text.Length == 0)
                 {
                     MessageBox.Show("At least one of the fields marked with \"*\" must be filled.", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                     ((TextBox)sender).Focus();
@@ -426,12 +423,12 @@ namespace DustInTheWind.Lisimba
 
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            TreeNode selectedNode = this.treeView1.SelectedNode;
+            TreeNode selectedNode = treeView1.SelectedNode;
 
             if (selectedNode == null || selectedNode.Tag == null)
                 return;
 
-            if (selectedNode != this.treeView1.GetNodeAt(e.Location))
+            if (selectedNode != treeView1.GetNodeAt(e.Location))
                 return;
 
             if (selectedNode.Tag is Phone)
@@ -473,7 +470,7 @@ namespace DustInTheWind.Lisimba
             if (selectedNode.Tag is Date)
             {
                 formDateEdit.Date = (Date)selectedNode.Tag;
-                formDateEdit.Location = this.treeView1.PointToScreen(e.Location);
+                formDateEdit.Location = treeView1.PointToScreen(e.Location);
                 formDateEdit.Show();
                 formDateEdit.Focus();
                 return;
@@ -487,44 +484,44 @@ namespace DustInTheWind.Lisimba
 
         void formPhoneEdit_PhoneUpdated(object sender, FormPhoneEdit.PhoneUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            RefreshData();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         void formEmailEdit_EmailUpdated(object sender, FormEmailEdit.EmailUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            RefreshData();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         void formWebSiteEdit_WebSiteUpdated(object sender, FormWebSiteEdit.WebSiteUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            RefreshData();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         void formAddressEdit_AddressUpdated(object sender, FormAddressEdit.AddressUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            RefreshData();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         void formDateEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
         {
-            this.RefreshData();
-            this.OnContactChanged(new ContactChangedEventArgs());
+            RefreshData();
+            OnContactChanged(new ContactChangedEventArgs());
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            this.EditBirthday();
+            EditBirthday();
         }
 
         private void labelBirthday_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
             {
-                this.EditBirthday();
+                EditBirthday();
             }
         }
     }

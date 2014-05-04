@@ -1,15 +1,16 @@
 ﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Lisimba")]
+[assembly: AssemblyTitle("Lisimba.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dust in the Wind")]
-[assembly: AssemblyProduct("Lisimba")]
-[assembly: AssemblyCopyright("Copyright © Dust in the Wind 2007, 2008")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Lisimba.Tests")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9e7b2dac-6a93-4dc2-9638-93e6913f0d40")]
+[assembly: Guid("9605d2f1-5a19-414c-8b62-99a74fa3130a")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -28,5 +29,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.0.*")]
-//[assembly: AssemblyFileVersion("1.0.0.0")]
+// You can specify all the values or you can default the Build and Revision Numbers 
+// by using the '*' as shown below:
+// [assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

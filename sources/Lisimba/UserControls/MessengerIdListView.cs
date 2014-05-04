@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     public partial class MessengerIdListView : UserControl
     {
@@ -111,14 +105,14 @@ namespace DustInTheWind.Lisimba
 
         public void Clear()
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
         }
 
         public void RefreshData()
         {
-            this.dataGridView1.DataSource = this.messengerIds.ToDataTable();
+            dataGridView1.DataSource = messengerIds.ToDataTable();
 
-            foreach (DataGridViewColumn column in this.dataGridView1.Columns)
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
@@ -127,12 +121,12 @@ namespace DustInTheWind.Lisimba
         public void Populate(MessengerIdCollection messengerIds)
         {
             this.messengerIds = messengerIds;
-            this.RefreshData();
+            RefreshData();
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            MessengerId messengerId = this.messengerIds[e.RowIndex];
+            MessengerId messengerId = messengerIds[e.RowIndex];
 
             if (messengerId != null)
             {
@@ -142,7 +136,7 @@ namespace DustInTheWind.Lisimba
                     if (!messengerId.Id.Equals(newId))
                     {
                         messengerId.Id = newId;
-                        this.OnMessengerIdChanged(new MessengerIdChangedEventArgs(messengerId));
+                        OnMessengerIdChanged(new MessengerIdChangedEventArgs(messengerId));
                     }
                 }
                 else if (e.ColumnIndex == 1)
@@ -151,7 +145,7 @@ namespace DustInTheWind.Lisimba
                     if (!messengerId.Description.Equals(newDescription))
                     {
                         messengerId.Description = newDescription;
-                        this.OnMessengerIdChanged(new MessengerIdChangedEventArgs(messengerId));
+                        OnMessengerIdChanged(new MessengerIdChangedEventArgs(messengerId));
                     }
                 }
             }
@@ -161,54 +155,54 @@ namespace DustInTheWind.Lisimba
         {
             if (e.KeyCode == Keys.Insert)
             {
-                this.messengerIds.Add(new MessengerId());
-                this.RefreshData();
+                messengerIds.Add(new MessengerId());
+                RefreshData();
             }
         }
 
         private void dataGridView1_MouseUp(object sender, MouseEventArgs e)
         {
             // Get info about the location where the user clicked.
-            System.Windows.Forms.DataGridView.HitTestInfo info = this.dataGridView1.HitTest(e.X, e.Y);
+            System.Windows.Forms.DataGridView.HitTestInfo info = dataGridView1.HitTest(e.X, e.Y);
 
             // Select the row that the user clicked.
             if (info.RowIndex >= 0)
-                this.dataGridView1.Rows[info.RowIndex].Selected = true;
+                dataGridView1.Rows[info.RowIndex].Selected = true;
             else
-                if (this.dataGridView1.SelectedRows.Count > 0)
-                    this.dataGridView1.SelectedRows[0].Selected = false;
+                if (dataGridView1.SelectedRows.Count > 0)
+                    dataGridView1.SelectedRows[0].Selected = false;
 
             if (e.Button == MouseButtons.Right)
             {
                 // Refresh the context menu.
-                this.deleteMessengerIdToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
+                deleteMessengerIdToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
 
                 // Display the context menu.
-                this.contextMenuStrip1.Show(this.dataGridView1, e.Location);
+                contextMenuStrip1.Show(dataGridView1, e.Location);
             }
         }
 
         private void addMessengerIdToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessengerId messengerId = new MessengerId();
-            this.messengerIds.Add(messengerId);
-            this.RefreshData();
-            this.OnMessengerIdAdded(new MessengerIdAddedEventArgs(messengerId));
+            messengerIds.Add(messengerId);
+            RefreshData();
+            OnMessengerIdAdded(new MessengerIdAddedEventArgs(messengerId));
         }
 
         private void deleteMessengerIdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow r in this.dataGridView1.SelectedRows)
+                foreach (DataGridViewRow r in dataGridView1.SelectedRows)
                 {
-                    int index = this.dataGridView1.Rows.IndexOf(r);
-                    MessengerId messengerId = this.messengerIds[index];
-                    this.messengerIds.RemoveAt(index);
-                    this.OnMessengerIdDeleted(new MessengerIdDeletedEventArgs(messengerId));
+                    int index = dataGridView1.Rows.IndexOf(r);
+                    MessengerId messengerId = messengerIds[index];
+                    messengerIds.RemoveAt(index);
+                    OnMessengerIdDeleted(new MessengerIdDeletedEventArgs(messengerId));
                 }
 
-                this.RefreshData();
+                RefreshData();
             }
         }
     }

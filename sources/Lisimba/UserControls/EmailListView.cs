@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     public partial class EmailListView : UserControl
     {
@@ -108,14 +102,14 @@ namespace DustInTheWind.Lisimba
 
         public void Clear()
         {
-            this.dataGridView1.DataSource = null;
+            dataGridView1.DataSource = null;
         }
 
         public void RefreshData()
         {
-            this.dataGridView1.DataSource = this.emails.ToDataTable();
+            dataGridView1.DataSource = emails.ToDataTable();
 
-            foreach (DataGridViewColumn column in this.dataGridView1.Columns)
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
             {
                 column.SortMode = DataGridViewColumnSortMode.NotSortable;
             }
@@ -124,12 +118,12 @@ namespace DustInTheWind.Lisimba
         public void Populate(EmailCollection emails)
         {
             this.emails = emails;
-            this.RefreshData();
+            RefreshData();
         }
 
         private void dataGridView1_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            Email email = this.emails[e.RowIndex];
+            Email email = emails[e.RowIndex];
 
             if (email != null)
             {
@@ -139,7 +133,7 @@ namespace DustInTheWind.Lisimba
                     if (!email.Address.Equals(newAddress))
                     {
                         email.Address = newAddress;
-                        this.OnEmailChanged(new EmailChangedEventArgs(email));
+                        OnEmailChanged(new EmailChangedEventArgs(email));
                     }
                 }
                 else if (e.ColumnIndex == 1)
@@ -148,7 +142,7 @@ namespace DustInTheWind.Lisimba
                     if (!email.Description.Equals(newDescription))
                     {
                         email.Description = newDescription;
-                        this.OnEmailChanged(new EmailChangedEventArgs(email));
+                        OnEmailChanged(new EmailChangedEventArgs(email));
                     }
                 }
             }
@@ -158,54 +152,54 @@ namespace DustInTheWind.Lisimba
         {
             if (e.KeyCode == Keys.Insert)
             {
-                this.emails.Add(new Email());
-                this.RefreshData();
+                emails.Add(new Email());
+                RefreshData();
             }
         }
 
         private void dataGridView1_MouseUp(object sender, MouseEventArgs e)
         {
             // Get info about the location where the user clicked.
-            System.Windows.Forms.DataGridView.HitTestInfo info = this.dataGridView1.HitTest(e.X, e.Y);
+            System.Windows.Forms.DataGridView.HitTestInfo info = dataGridView1.HitTest(e.X, e.Y);
 
             // Select the row that the user clicked.
             if (info.RowIndex >= 0)
-                this.dataGridView1.Rows[info.RowIndex].Selected = true;
+                dataGridView1.Rows[info.RowIndex].Selected = true;
             else
-                if (this.dataGridView1.SelectedRows.Count > 0)
-                    this.dataGridView1.SelectedRows[0].Selected = false;
+                if (dataGridView1.SelectedRows.Count > 0)
+                    dataGridView1.SelectedRows[0].Selected = false;
 
             if (e.Button == MouseButtons.Right)
             {
                 // Refresh the context menu.
-                this.deleteEmailToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
+                deleteEmailToolStripMenuItem.Enabled = (info.RowIndex >= 0 && info.ColumnIndex >= 0);
 
                 // Display the context menu.
-                this.contextMenuStrip1.Show(this.dataGridView1, e.Location);
+                contextMenuStrip1.Show(dataGridView1, e.Location);
             }
         }
 
         private void addEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Email email = new Email();
-            this.emails.Add(email);
-            this.RefreshData();
-            this.OnEmailAdded(new EmailAddedEventArgs(email));
+            emails.Add(email);
+            RefreshData();
+            OnEmailAdded(new EmailAddedEventArgs(email));
         }
 
         private void deleteEmailToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.dataGridView1.SelectedRows.Count > 0)
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow r in this.dataGridView1.SelectedRows)
+                foreach (DataGridViewRow r in dataGridView1.SelectedRows)
                 {
-                    int index = this.dataGridView1.Rows.IndexOf(r);
-                    Email email = this.emails[index];
-                    this.emails.RemoveAt(index);
-                    this.OnEmailDeleted(new EmailDeletedEventArgs(email));
+                    int index = dataGridView1.Rows.IndexOf(r);
+                    Email email = emails[index];
+                    emails.RemoveAt(index);
+                    OnEmailDeleted(new EmailDeletedEventArgs(email));
                 }
 
-                this.RefreshData();
+                RefreshData();
             }
         }
     }

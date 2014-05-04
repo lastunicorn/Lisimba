@@ -1,16 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
-using System.Collections;
+using DustInTheWind.Lisimba.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Forms;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     public partial class ContactListView : UserControl
     {
@@ -31,7 +30,7 @@ namespace DustInTheWind.Lisimba
             set
             {
                 allowSort = value;
-                this.treeView1.Sort();
+                treeView1.Sort();
             }
         }
 
@@ -47,33 +46,33 @@ namespace DustInTheWind.Lisimba
             get { return sortField; }
             set
             {
-                if (!this.allowSort) return;
+                if (!allowSort) return;
 
                 sortField = value;
                 switch (value)
                 {
                     case ContactsSortingType.Birthday:
-                        this.comboBoxSortBy.SelectedIndex = 0;
+                        comboBoxSortBy.SelectedIndex = 0;
                         break;
 
                     case ContactsSortingType.BirthDate:
-                        this.comboBoxSortBy.SelectedIndex = 1;
+                        comboBoxSortBy.SelectedIndex = 1;
                         break;
 
                     case ContactsSortingType.FirstName:
-                        this.comboBoxSortBy.SelectedIndex = 2;
+                        comboBoxSortBy.SelectedIndex = 2;
                         break;
 
                     case ContactsSortingType.LastName:
-                        this.comboBoxSortBy.SelectedIndex = 3;
+                        comboBoxSortBy.SelectedIndex = 3;
                         break;
 
                     case ContactsSortingType.Nickname:
-                        this.comboBoxSortBy.SelectedIndex = 4;
+                        comboBoxSortBy.SelectedIndex = 4;
                         break;
 
                     case ContactsSortingType.NicknameOrName:
-                        this.comboBoxSortBy.SelectedIndex = 5;
+                        comboBoxSortBy.SelectedIndex = 5;
                         break;
 
                     default:
@@ -86,32 +85,32 @@ namespace DustInTheWind.Lisimba
         [Browsable(false)]
         public ContactCollection Contacts
         {
-            get { return this.contacts; }
+            get { return contacts; }
             set
             {
-                this.contacts = value;
+                contacts = value;
 
-                this.modifiedContacts.Clear();
-                this.treeNodes.Clear();
+                modifiedContacts.Clear();
+                treeNodes.Clear();
 
                 //this.textBoxSearch.Text = string.Empty;
 
-                if (this.contacts == null)
+                if (contacts == null)
                     return;
 
                 Contact c = null;
                 TreeNode treeNode = null;
 
-                for (int i = 0; i < this.contacts.Count; i++)
+                for (int i = 0; i < contacts.Count; i++)
                 {
-                    c = this.contacts[i];
-                    this.modifiedContacts.Add(c, false);
+                    c = contacts[i];
+                    modifiedContacts.Add(c, false);
                     treeNode = new TreeNode(c.ToString());
                     treeNode.Tag = c;
-                    this.treeNodes.Add(c, treeNode);
+                    treeNodes.Add(c, treeNode);
                 }
 
-                this.PopulateTreeView();
+                PopulateTreeView();
             }
         }
 
@@ -120,7 +119,7 @@ namespace DustInTheWind.Lisimba
         {
             get
             {
-                TreeNode selectedNode = this.treeView1.SelectedNode;
+                TreeNode selectedNode = treeView1.SelectedNode;
                 if (selectedNode != null)
                     return (Contact)selectedNode.Tag;
                 else
@@ -135,14 +134,14 @@ namespace DustInTheWind.Lisimba
         ]
         public string SearchText
         {
-            get { return this.textBoxSearch.Text; }
-            set { this.textBoxSearch.Text = value; }
+            get { return textBoxSearch.Text; }
+            set { textBoxSearch.Text = value; }
         }
 
         public ContactListView()
         {
             InitializeComponent();
-            this.treeView1.TreeViewNodeSorter = new TreeNodeByNicknameComparer();
+            treeView1.TreeViewNodeSorter = new TreeNodeByNicknameComparer();
         }
 
         //public bool IsModified(Contact c)
@@ -209,10 +208,10 @@ namespace DustInTheWind.Lisimba
 
         public void Clear()
         {
-            this.contacts = new ContactCollection();
+            contacts = new ContactCollection();
 
-            this.modifiedContacts.Clear();
-            this.treeNodes.Clear();
+            modifiedContacts.Clear();
+            treeNodes.Clear();
         }
 
         public void AddRange(ContactCollection contacts)
@@ -226,13 +225,13 @@ namespace DustInTheWind.Lisimba
             for (int i = 0; i < this.contacts.Count; i++)
             {
                 c = this.contacts[i];
-                this.modifiedContacts.Add(c, false);
+                modifiedContacts.Add(c, false);
                 treeNode = new TreeNode(c.ToString());
                 treeNode.Tag = c;
-                this.treeNodes.Add(c, treeNode);
+                treeNodes.Add(c, treeNode);
             }
 
-            this.PopulateTreeView();
+            PopulateTreeView();
         }
 
         public void ResetModifiedFlags()
@@ -254,26 +253,26 @@ namespace DustInTheWind.Lisimba
             List<TreeNode> nodeList = new List<TreeNode>();
             bool inserted = false;
 
-            IComparer comparer = this.treeView1.TreeViewNodeSorter;
+            IComparer comparer = treeView1.TreeViewNodeSorter;
 
             //if (this.treeView1.SelectedNode != null)
-            selectedNode = this.treeView1.SelectedNode;
+            selectedNode = treeView1.SelectedNode;
 
-            this.treeView1.Nodes.Clear();
+            treeView1.Nodes.Clear();
 
-            for (int i = 0; i < this.contacts.Count; i++)
+            for (int i = 0; i < contacts.Count; i++)
             {
-                contact = this.contacts[i];
+                contact = contacts[i];
 
-                if (this.textBoxSearch.Text.Length == 0 ||
-                    contact.Name.FirstName.IndexOf(this.textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                    contact.Name.MiddleName.IndexOf(this.textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                    contact.Name.LastName.IndexOf(this.textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
-                    contact.Name.Nickname.IndexOf(this.textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
+                if (textBoxSearch.Text.Length == 0 ||
+                    contact.Name.FirstName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    contact.Name.MiddleName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    contact.Name.LastName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
+                    contact.Name.Nickname.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 {
-                    treeNode = this.treeNodes[contact];
+                    treeNode = treeNodes[contact];
 
-                    if (this.allowSort)
+                    if (allowSort)
                     {
                         inserted = false;
 
@@ -312,7 +311,7 @@ namespace DustInTheWind.Lisimba
                 }
             }
 
-            this.treeView1.Nodes.AddRange(nodeList.ToArray());
+            treeView1.Nodes.AddRange(nodeList.ToArray());
 
             //this.treeView1.SelectedNode = selectedNode;
             //if (this.treeView1.SelectedNode != selectedNode)
@@ -325,35 +324,35 @@ namespace DustInTheWind.Lisimba
 
         private void textBoxSearch_TextChanged(object sender, EventArgs e)
         {
-            this.PopulateTreeView();
+            PopulateTreeView();
         }
 
         private void treeView1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                TreeNode node = this.treeView1.GetNodeAt(e.Location);
+                TreeNode node = treeView1.GetNodeAt(e.Location);
                 Contact contact = null;
 
                 if (node != null)
                 {
                     // Select the item
-                    this.treeView1.SelectedNode = node;
+                    treeView1.SelectedNode = node;
                     //this.OnSelectedContactChanged(new SelectedContactChangedEventArgs((Contact)node.Tag));
                     contact = (Contact)node.Tag;
                 }
 
                 // Display the menu
-                this.toolStripMenuItem_List_Delete.Enabled = (node != null);
-                this.toolStripMenuItem_List_ViewBiorythm.Enabled = (contact != null && contact.Birthday.IsCompleteDate);
-                this.contextMenuStripListBox.Show(this.treeView1, e.Location);
+                toolStripMenuItem_List_Delete.Enabled = (node != null);
+                toolStripMenuItem_List_ViewBiorythm.Enabled = (contact != null && contact.Birthday.IsCompleteDate);
+                contextMenuStripListBox.Show(treeView1, e.Location);
             }
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = this.treeView1.SelectedNode;
-            this.OnSelectedContactChanged(new SelectedContactChangedEventArgs(selectedNode != null ? (Contact)selectedNode.Tag : null));
+            TreeNode selectedNode = treeView1.SelectedNode;
+            OnSelectedContactChanged(new SelectedContactChangedEventArgs(selectedNode != null ? (Contact)selectedNode.Tag : null));
         }
 
         private void HighlightTreeNode(TreeNode treeNode, bool value)
@@ -374,12 +373,12 @@ namespace DustInTheWind.Lisimba
         {
             if (c == null) return;
 
-            TreeNode node = this.treeNodes[c];
+            TreeNode node = treeNodes[c];
             if (node == null) return;
 
-            if (value != this.modifiedContacts[c])
+            if (value != modifiedContacts[c])
             {
-                this.modifiedContacts[c] = value;
+                modifiedContacts[c] = value;
                 HighlightTreeNode(node, value);
             }
 
@@ -388,49 +387,49 @@ namespace DustInTheWind.Lisimba
 
         public void Add(Contact c)
         {
-            this.contacts.Add(c);
+            contacts.Add(c);
             TreeNode newTreeNode = new TreeNode(c.ToString());
             newTreeNode.Tag = c;
             bool inserted = false;
 
-            if (this.allowSort)
+            if (allowSort)
             {
-                IComparer comparer = this.treeView1.TreeViewNodeSorter;
+                IComparer comparer = treeView1.TreeViewNodeSorter;
 
-                for (int i = 0; i < this.treeView1.Nodes.Count; i++)
+                for (int i = 0; i < treeView1.Nodes.Count; i++)
                 {
-                    if (comparer.Compare(newTreeNode, this.treeView1.Nodes[i]) < 0)
+                    if (comparer.Compare(newTreeNode, treeView1.Nodes[i]) < 0)
                     {
-                        this.treeView1.Nodes.Insert(i, newTreeNode);
+                        treeView1.Nodes.Insert(i, newTreeNode);
                         inserted = true;
                         break;
                     }
                 }
 
                 if (!inserted)
-                    this.treeView1.Nodes.Add(newTreeNode);
+                    treeView1.Nodes.Add(newTreeNode);
             }
             else
             {
-                this.treeView1.Nodes.Add(newTreeNode);
+                treeView1.Nodes.Add(newTreeNode);
             }
 
-            this.treeNodes.Add(c, newTreeNode);
-            this.modifiedContacts.Add(c, true);
+            treeNodes.Add(c, newTreeNode);
+            modifiedContacts.Add(c, true);
             HighlightTreeNode(newTreeNode, true);
 
-            this.treeView1.SelectedNode = newTreeNode;
+            treeView1.SelectedNode = newTreeNode;
 
-            this.OnContactListChanged(new ContactListChangedEventArgs());
+            OnContactListChanged(new ContactListChangedEventArgs());
         }
 
         private void toolStripMenuItem_List_Add_Click(object sender, EventArgs e)
         {
-            FormAddContact formAddContact = new FormAddContact(this.contacts);
+            FormAddContact formAddContact = new FormAddContact(contacts);
 
             if (formAddContact.ShowDialog() == DialogResult.OK)
             {
-                this.Add(formAddContact.Contact);
+                Add(formAddContact.Contact);
             }
         }
 
@@ -439,31 +438,31 @@ namespace DustInTheWind.Lisimba
             TreeNode node = null;
             TreeNode nodeToSelect = null;
 
-            if (contact != null && this.contacts.Contains(contact))
+            if (contact != null && contacts.Contains(contact))
             {
-                node = this.treeNodes[contact];
+                node = treeNodes[contact];
                 nodeToSelect = node.NextNode;
 
-                this.contacts.Remove(contact);
-                this.modifiedContacts.Remove(contact);
-                this.treeNodes.Remove(contact);
+                contacts.Remove(contact);
+                modifiedContacts.Remove(contact);
+                treeNodes.Remove(contact);
 
-                this.treeView1.Nodes.Remove(node);
-                if (this.treeView1.Nodes.Count > 0)
+                treeView1.Nodes.Remove(node);
+                if (treeView1.Nodes.Count > 0)
                 {
                     if (nodeToSelect != null)
-                        this.treeView1.SelectedNode = nodeToSelect;
+                        treeView1.SelectedNode = nodeToSelect;
                     else
-                        this.treeView1.SelectedNode = this.treeView1.Nodes[0].LastNode;
+                        treeView1.SelectedNode = treeView1.Nodes[0].LastNode;
                 }
 
-                this.OnContactListChanged(new ContactListChangedEventArgs());
+                OnContactListChanged(new ContactListChangedEventArgs());
             }
         }
 
         private void toolStripMenuItem_List_Delete_Click(object sender, EventArgs e)
         {
-            TreeNode node = this.treeView1.SelectedNode;
+            TreeNode node = treeView1.SelectedNode;
             Contact contact = null;
 
             if (node != null)
@@ -471,14 +470,14 @@ namespace DustInTheWind.Lisimba
                 contact = (Contact)node.Tag;
                 if (MessageBox.Show("Are you sure you wanna delete the contact " + contact.ToString() + " ?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
-                    this.RemoveContact(contact);
+                    RemoveContact(contact);
                 }
             }
         }
 
         private void toolStripMenuItem_List_ViewBiorythm_Click(object sender, EventArgs e)
         {
-            TreeNode node = this.treeView1.SelectedNode;
+            TreeNode node = treeView1.SelectedNode;
             Contact contact = null;
 
             if (node != null)
@@ -496,44 +495,44 @@ namespace DustInTheWind.Lisimba
 
         private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!this.allowSort) return;
+            if (!allowSort) return;
 
-            switch (this.comboBoxSortBy.SelectedIndex)
+            switch (comboBoxSortBy.SelectedIndex)
             {
                 case 0:
-                    this.SortField = ContactsSortingType.Birthday;
+                    SortField = ContactsSortingType.Birthday;
                     treeView1.TreeViewNodeSorter = new TreeNodeByBirthdayComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
                 case 1:
-                    this.SortField = ContactsSortingType.BirthDate;
+                    SortField = ContactsSortingType.BirthDate;
                     treeView1.TreeViewNodeSorter = new TreeNodeByBirthDateComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
                 case 2:
-                    this.SortField = ContactsSortingType.FirstName;
+                    SortField = ContactsSortingType.FirstName;
                     treeView1.TreeViewNodeSorter = new TreeNodeByFirstNameComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
                 case 3:
-                    this.SortField = ContactsSortingType.LastName;
+                    SortField = ContactsSortingType.LastName;
                     treeView1.TreeViewNodeSorter = new TreeNodeByLastNameComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
                 case 4:
-                    this.SortField = ContactsSortingType.Nickname;
+                    SortField = ContactsSortingType.Nickname;
                     treeView1.TreeViewNodeSorter = new TreeNodeByNicknameComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
                 case 5:
-                    this.SortField = ContactsSortingType.NicknameOrName;
+                    SortField = ContactsSortingType.NicknameOrName;
                     treeView1.TreeViewNodeSorter = new TreeNodeByNicknameOrNameComparer();
-                    this.treeView1.Sort();
+                    treeView1.Sort();
                     break;
 
             }

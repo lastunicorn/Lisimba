@@ -1,12 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Comparers
 {
     /// <summary>
     /// Compares two contaCTs by nickname.

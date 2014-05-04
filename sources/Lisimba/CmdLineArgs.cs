@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DustInTheWind.Lisimba
 {
@@ -19,13 +18,13 @@ namespace DustInTheWind.Lisimba
 
         public CmdLineArgs(string[] args)
         {
-            this.Parse(args);
+            Parse(args);
         }
 
         public void Add(string key, string value)
         {
-            this.keys.Add(key);
-            this.values.Add(value);
+            keys.Add(key);
+            values.Add(value);
         }
 
         public int Count
@@ -82,7 +81,7 @@ namespace DustInTheWind.Lisimba
                 }
                 else
                 {
-                    if (this.acceptEmptyKeys)
+                    if (acceptEmptyKeys)
                     {
                         key = string.Empty;
                         value = s;
@@ -93,7 +92,7 @@ namespace DustInTheWind.Lisimba
                     }
                 }
 
-                this.Add(key, value);
+                Add(key, value);
             }
         }
     }

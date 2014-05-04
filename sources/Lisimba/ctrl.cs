@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba
@@ -14,7 +11,7 @@ namespace DustInTheWind.Lisimba
         public Contact Value
         {
             get { return value; }
-            set { this.value = value; this.Invalidate(); }
+            set { this.value = value; Invalidate(); }
         }
 
         //private int padding = 10;
@@ -26,9 +23,9 @@ namespace DustInTheWind.Lisimba
 
         public ctrl()
         {
-            this.Padding = new Padding(10);
+            Padding = new Padding(10);
 
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private Rectangle nameRect = Rectangle.Empty;
@@ -39,20 +36,20 @@ namespace DustInTheWind.Lisimba
             base.OnPaint(e);
 
             Graphics g = e.Graphics;
-            Pen basePen = new Pen(this.ForeColor);
-            SolidBrush baseBrush = new SolidBrush(this.ForeColor);
+            Pen basePen = new Pen(ForeColor);
+            SolidBrush baseBrush = new SolidBrush(ForeColor);
             Size size;
             Point location;
             SizeF sizeF;
 
             string text = string.Empty;
-            int lineSpace = this.Font.Height;
+            int lineSpace = Font.Height;
 
             // --------------------------------------------------------------------------------
             // Draw border
             // --------------------------------------------------------------------------------
 
-             g.DrawRectangle(basePen, new Rectangle(new Point(0, 0), new Size(this.Size.Width - 1, this.Size.Height - 1)));
+             g.DrawRectangle(basePen, new Rectangle(new Point(0, 0), new Size(Size.Width - 1, Size.Height - 1)));
             
             // --------------------------------------------------------------------------------
             // Draw the name
@@ -63,13 +60,13 @@ namespace DustInTheWind.Lisimba
             else
                 text = "Name:";
 
-            location = new Point(this.Padding.Left, this.Padding.Top);
-            sizeF = g.MeasureString(text, this.Font);
+            location = new Point(Padding.Left, Padding.Top);
+            sizeF = g.MeasureString(text, Font);
             size = new Size((int)Math.Ceiling(sizeF.Width), (int)Math.Ceiling(sizeF.Height));
 
             nameRect = new Rectangle(location, size);
 
-            g.DrawString(text, this.Font, baseBrush, location);
+            g.DrawString(text, Font, baseBrush, location);
 
             // --------------------------------------------------------------------------------
             // Draw the phone list
@@ -80,24 +77,24 @@ namespace DustInTheWind.Lisimba
                 text = "Phones";
                 int phonesIndent = 20;
 
-                location = new Point(this.Padding.Left, nameRect.Top + nameRect.Height + lineSpace);
-                sizeF = g.MeasureString(text, this.Font);
-                size = g.MeasureString(text, this.Font).ToSize();
+                location = new Point(Padding.Left, nameRect.Top + nameRect.Height + lineSpace);
+                sizeF = g.MeasureString(text, Font);
+                size = g.MeasureString(text, Font).ToSize();
 
                 phonesRect = new Rectangle(location, size);
 
-                g.DrawString(text, this.Font, baseBrush, location);
+                g.DrawString(text, Font, baseBrush, location);
 
-                for (int i = 0; i < this.value.Phones.Count; i++)
+                for (int i = 0; i < value.Phones.Count; i++)
                 {
-                    text = this.value.Phones[i].ToString();
+                    text = value.Phones[i].ToString();
 
                     location = new Point(phonesRect.Left + phonesIndent, phonesRect.Top + phonesRect.Height + lineSpace);
-                    size = g.MeasureString(text, this.Font).ToSize();
+                    size = g.MeasureString(text, Font).ToSize();
 
                     phonesRect.Height += location.Y + size.Height - phonesRect.Top;
 
-                    g.DrawString(text, this.Font, baseBrush, location);
+                    g.DrawString(text, Font, baseBrush, location);
                 }
             }
 
@@ -112,9 +109,9 @@ namespace DustInTheWind.Lisimba
 
             if (nameRect.Contains(e.Location))
             {
-                this.textBoxEdit.Font = this.Font;
-                this.textBoxEdit.Location = nameRect.Location;
-                this.textBoxEdit.Visible = true;
+                textBoxEdit.Font = Font;
+                textBoxEdit.Location = nameRect.Location;
+                textBoxEdit.Visible = true;
             }
         }
 

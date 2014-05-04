@@ -1,36 +1,30 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormDateEdit : FormEditBase
     {
         private bool isModified = false;
         public bool IsModified
         {
-            get { return this.isModified; }
+            get { return isModified; }
         }
 
         private Date date = null;
         public Date Date
         {
-            get { return this.date; }
+            get { return date; }
             set
             {
-                this.date = value;
+                date = value;
 
-                this.comboBoxDay.SelectedIndex = value.Day;
-                this.comboBoxMonth.SelectedIndex = value.Month;
-                this.textBoxYear.Text = (value.Year != 0 ? value.Year.ToString() : string.Empty);
+                comboBoxDay.SelectedIndex = value.Day;
+                comboBoxMonth.SelectedIndex = value.Month;
+                textBoxYear.Text = (value.Year != 0 ? value.Year.ToString() : string.Empty);
 
-                this.isModified = false;
+                isModified = false;
             }
         }
 
@@ -38,17 +32,17 @@ namespace DustInTheWind.Lisimba
         {
             InitializeComponent();
 
-            this.comboBoxDay.Items.Add("-");
+            comboBoxDay.Items.Add("-");
             for (int i = 1; i < 32; i++)
-                this.comboBoxDay.Items.Add(i);
+                comboBoxDay.Items.Add(i);
 
-            this.comboBoxMonth.Items.Add("-");
+            comboBoxMonth.Items.Add("-");
             //this.comboBoxMonth.Items.AddRange(this.GetMonthList());
-            this.comboBoxMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
+            comboBoxMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
 
-            this.comboBoxDay.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
-            this.comboBoxMonth.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
-            this.textBoxYear.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
+            comboBoxDay.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            comboBoxMonth.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            textBoxYear.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
         }
 
         //private string[] GetMonthList()
@@ -105,18 +99,18 @@ namespace DustInTheWind.Lisimba
             int month = 0;
             int year = 0;
 
-            day = this.comboBoxDay.SelectedIndex;
-            month = this.comboBoxMonth.SelectedIndex;
-            int.TryParse(this.textBoxYear.Text, out year);
+            day = comboBoxDay.SelectedIndex;
+            month = comboBoxMonth.SelectedIndex;
+            int.TryParse(textBoxYear.Text, out year);
 
-            if (this.date.Day != day ||
-                this.date.Month != month ||
-                this.date.Year != year)
+            if (date.Day != day ||
+                date.Month != month ||
+                date.Year != year)
             {
-                this.date.SetValues(day, month, year);
-                this.isModified = true;
+                date.SetValues(day, month, year);
+                isModified = true;
 
-                this.OnDateUpdated(new DateUpdatedEventArgs(this.date));
+                OnDateUpdated(new DateUpdatedEventArgs(date));
             }
         }
     }

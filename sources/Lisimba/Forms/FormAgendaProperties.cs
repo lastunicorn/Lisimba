@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using System.IO;
+using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormBookProperties : Form
     {
@@ -18,17 +12,17 @@ namespace DustInTheWind.Lisimba
 
         public AddressBook Book
         {
-            get { return this.book; }
+            get { return book; }
             set
             {
-                this.book = value;
-                this.IsModified = false;
+                book = value;
+                IsModified = false;
 
                 if (value != null)
                 {
-                    this.textBoxBookName.Text = value.Name;
-                    this.textBoxFileLocation.Text = value.FileName.Length == 0 ? "<Address book is not saved yet.>" : Path.GetFullPath(value.FileName);
-                    this.textBoxContactsCount.Text = value.Count.ToString();
+                    textBoxBookName.Text = value.Name;
+                    textBoxFileLocation.Text = value.FileName.Length == 0 ? "<Address book is not saved yet.>" : Path.GetFullPath(value.FileName);
+                    textBoxContactsCount.Text = value.Count.ToString();
                 }
             }
         }
@@ -40,19 +34,19 @@ namespace DustInTheWind.Lisimba
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            if (this.book != null)
+            if (book != null)
             {
-                if (!this.book.Name.Equals(this.textBoxBookName.Text))
+                if (!book.Name.Equals(textBoxBookName.Text))
                 {
-                    this.book.Name = this.textBoxBookName.Text;
-                    this.IsModified = true;
+                    book.Name = textBoxBookName.Text;
+                    IsModified = true;
                 }
             }
         }
 
         private void FormBookProperties_Shown(object sender, EventArgs e)
         {
-            this.textBoxBookName.Focus();
+            textBoxBookName.Focus();
         }
     }
 }

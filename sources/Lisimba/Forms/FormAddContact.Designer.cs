@@ -1,4 +1,6 @@
-namespace DustInTheWind.Lisimba
+using DustInTheWind.Lisimba.UserControls;
+
+namespace DustInTheWind.Lisimba.Forms
 {
     partial class FormAddContact
     {
@@ -31,7 +33,7 @@ namespace DustInTheWind.Lisimba
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddContact));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
-            this.contactView1 = new DustInTheWind.Lisimba.ContactView();
+            this.contactView1 = new ContactView();
             this.SuspendLayout();
             // 
             // buttonCancel

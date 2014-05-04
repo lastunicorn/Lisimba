@@ -1,4 +1,4 @@
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.UserControls
 {
     partial class ContactView
     {

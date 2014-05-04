@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormBiorythm : Form
     {
@@ -24,13 +18,13 @@ namespace DustInTheWind.Lisimba
             if (contact == null)
             {
                 biorythm1.Birthday = new DateTime(0);
-                this.Text = "The biorythm";
+                Text = "The biorythm";
                 biorythm1.Enabled = false;
             }
             else
             {
                 biorythm1.Birthday = contact.Birthday.ToDateTime();
-                this.Text = "The biorythm for " + contact.Name.ToString();
+                Text = "The biorythm for " + contact.Name.ToString();
                 biorythm1.Enabled = true;
             }
         }
@@ -43,7 +37,7 @@ namespace DustInTheWind.Lisimba
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

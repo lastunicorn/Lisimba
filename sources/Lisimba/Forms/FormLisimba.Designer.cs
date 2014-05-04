@@ -1,6 +1,7 @@
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.UserControls;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     partial class FormLisimba
     {
@@ -32,8 +33,8 @@ namespace DustInTheWind.Lisimba
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.contactListView1 = new DustInTheWind.Lisimba.ContactListView();
-            this.contactView1 = new DustInTheWind.Lisimba.ContactView();
+            this.contactListView1 = new ContactListView();
+            this.contactView1 = new ContactView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem_File = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_File_New = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,8 +103,8 @@ namespace DustInTheWind.Lisimba
             this.contactListView1.Size = new System.Drawing.Size(191, 407);
             this.contactListView1.SortField = ContactsSortingType.NicknameOrName;
             this.contactListView1.TabIndex = 9;
-            this.contactListView1.ContactListChanged += new DustInTheWind.Lisimba.ContactListView.ContactListChangedHandler(this.contactListView1_ContactListChanged);
-            this.contactListView1.SelectedContactChanged += new DustInTheWind.Lisimba.ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);
+            this.contactListView1.ContactListChanged += new ContactListView.ContactListChangedHandler(this.contactListView1_ContactListChanged);
+            this.contactListView1.SelectedContactChanged += new ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);
             // 
             // contactView1
             // 
@@ -120,7 +121,7 @@ namespace DustInTheWind.Lisimba
             this.contactView1.Name = "contactView1";
             this.contactView1.Size = new System.Drawing.Size(514, 407);
             this.contactView1.TabIndex = 5;
-            this.contactView1.ContactChanged += new DustInTheWind.Lisimba.ContactView.ContactChangedHandler(this.contactView1_ContactChanged);
+            this.contactView1.ContactChanged += new ContactView.ContactChangedHandler(this.contactView1_ContactChanged);
             // 
             // menuStrip1
             // 

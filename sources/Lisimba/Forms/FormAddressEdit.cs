@@ -1,14 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormAddressEdit : FormEditBase
     {
@@ -17,17 +11,17 @@ namespace DustInTheWind.Lisimba
         {
             get
             {
-                return this.address;
+                return address;
             }
             set
             {
-                this.address = value;
+                address = value;
 
-                this.textBoxAddress.Text = value.Street;
-                this.textBoxCity.Text = value.City;
-                this.textBoxZip.Text = value.PostalCode;
-                this.textBoxState.Text = value.State;
-                this.textBoxCountry.Text = value.Country;
+                textBoxAddress.Text = value.Street;
+                textBoxCity.Text = value.City;
+                textBoxZip.Text = value.PostalCode;
+                textBoxState.Text = value.State;
+                textBoxCountry.Text = value.Country;
             }
         }
 
@@ -83,19 +77,19 @@ namespace DustInTheWind.Lisimba
 
         protected override void UpdateData()
         {
-            if (!this.address.Street.Equals(this.textBoxAddress.Text) ||
-                !this.address.City.Equals(this.textBoxCity.Text) ||
-                !this.address.PostalCode.Equals(this.textBoxZip.Text) ||
-                !this.address.State.Equals(this.textBoxState.Text) ||
-                !this.address.Country.Equals(this.textBoxCountry.Text))
+            if (!address.Street.Equals(textBoxAddress.Text) ||
+                !address.City.Equals(textBoxCity.Text) ||
+                !address.PostalCode.Equals(textBoxZip.Text) ||
+                !address.State.Equals(textBoxState.Text) ||
+                !address.Country.Equals(textBoxCountry.Text))
             {
-                this.address.Street = this.textBoxAddress.Text;
-                this.address.City = this.textBoxCity.Text;
-                this.address.PostalCode = this.textBoxZip.Text;
-                this.address.State = this.textBoxState.Text;
-                this.address.Country = this.textBoxCountry.Text;
+                address.Street = textBoxAddress.Text;
+                address.City = textBoxCity.Text;
+                address.PostalCode = textBoxZip.Text;
+                address.State = textBoxState.Text;
+                address.Country = textBoxCountry.Text;
 
-                this.OnAddressUpdated(new AddressUpdatedEventArgs(this.address));
+                OnAddressUpdated(new AddressUpdatedEventArgs(address));
             }
         }
 
@@ -124,7 +118,7 @@ namespace DustInTheWind.Lisimba
         {
             if (e.KeyCode == Keys.Enter)
             {
-                this.AcceptChanges();
+                AcceptChanges();
             }
         }
     }

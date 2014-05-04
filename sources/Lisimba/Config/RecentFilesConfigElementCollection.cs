@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
 
 namespace DustInTheWind.Lisimba.Config
@@ -19,11 +16,11 @@ namespace DustInTheWind.Lisimba.Config
         public void AddNewRecentFile(string fileName)
         {
             int i = 0;
-            while (i < this.Count)
+            while (i < Count)
             {
                 if (((RecentFilesConfigElement)this[i]).FileName.Equals(fileName))
                 {
-                    this.BaseRemoveAt(i);
+                    BaseRemoveAt(i);
                 }
                 else
                 {
@@ -31,10 +28,10 @@ namespace DustInTheWind.Lisimba.Config
                 }
             }
 
-            RecentFilesConfigElement element = this.CreateNewElement() as RecentFilesConfigElement;
+            RecentFilesConfigElement element = CreateNewElement() as RecentFilesConfigElement;
             element.FileName = fileName;
 
-            this.BaseAdd(0, element);
+            BaseAdd(0, element);
         }
 
         protected override ConfigurationElement CreateNewElement()

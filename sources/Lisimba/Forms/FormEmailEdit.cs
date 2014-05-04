@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormEmailEdit : FormEditBase
     {
         private Email email = null;
         public Email Email
         {
-            get { return this.email; }
+            get { return email; }
             set
             {
-                this.email = value;
+                email = value;
 
-                this.textBoxEmail.Text = value.Address;
-                this.textBoxComments.Text = value.Description;
+                textBoxEmail.Text = value.Address;
+                textBoxComments.Text = value.Description;
             }
         }
 
@@ -47,7 +41,7 @@ namespace DustInTheWind.Lisimba
             private Email email;
             public Email Email
             {
-                get { return this.email; }
+                get { return email; }
             }
 
             public EmailUpdatedEventArgs(Email email)
@@ -74,19 +68,19 @@ namespace DustInTheWind.Lisimba
         {
             InitializeComponent();
 
-            this.textBoxEmail.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
-            this.textBoxComments.KeyDown += new KeyEventHandler(this.FormEditBase_KeyDown);
+            textBoxEmail.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            textBoxComments.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
         }
 
         protected override void UpdateData()
         {
-            if (!this.email.Address.Equals(this.textBoxEmail.Text) ||
-                !this.email.Description.Equals(this.textBoxComments.Text))
+            if (!email.Address.Equals(textBoxEmail.Text) ||
+                !email.Description.Equals(textBoxComments.Text))
             {
-                this.email.Address = this.textBoxEmail.Text;
-                this.email.Description = this.textBoxComments.Text;
+                email.Address = textBoxEmail.Text;
+                email.Description = textBoxComments.Text;
 
-                this.OnEmailUpdated(new EmailUpdatedEventArgs(this.email));
+                OnEmailUpdated(new EmailUpdatedEventArgs(email));
             }
         }
     }
