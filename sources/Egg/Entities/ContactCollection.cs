@@ -65,14 +65,13 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
 
             if (sortDirection == SortDirection.Descending)
-            {
                 InnerList.Reverse();
-            }
         }
 
         public void CopyFrom(ContactCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new Contact(values[i]));

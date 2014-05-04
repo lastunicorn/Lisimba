@@ -8,75 +8,40 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     public class PersonName
     {
         private string firstName = string.Empty;
-        // FirstName
+
         [XmlAttribute("First")]
         public string FirstName
         {
             get { return firstName; }
-            set
-            {
-                firstName = value;
-            }
+            set { firstName = value; }
         }
 
         private string middleName = string.Empty;
-        // MiddleName
+
         [XmlAttribute("Middle")]
         public string MiddleName
         {
             get { return middleName; }
-            set
-            {
-                middleName = value;
-            }
+            set { middleName = value; }
         }
 
         private string lastName = string.Empty;
-        // LastName
+
         [XmlAttribute("Last")]
         public string LastName
         {
             get { return lastName; }
-            set
-            {
-                lastName = value;
-            }
+            set { lastName = value; }
         }
 
         private string nickname = string.Empty;
-        // Nickname
+
         [XmlAttribute("Nickname")]
         public string Nickname
         {
             get { return nickname; }
-            set
-            {
-                nickname = value;
-            }
+            set { nickname = value; }
         }
-
-        #region Constructors
-
-        public PersonName()
-        {
-        }
-
-        public PersonName(string firstName, string middleName, string lastName)
-        {
-            this.firstName = firstName;
-            this.middleName = middleName;
-            this.lastName = lastName;
-        }
-
-        public PersonName(string firstName, string middleName, string lastName, string nickname)
-        {
-            this.firstName = firstName;
-            this.middleName = middleName;
-            this.lastName = lastName;
-            this.nickname = nickname;
-        }
-
-        #endregion
 
         /// <summary>
         /// Remove all the information from the current instance.
@@ -90,9 +55,9 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         }
 
         /// <summary>
-        /// Copy all the informations from the specified PersonName object to the current instance. All the existing data will be lost.
+        /// Copy all the informations from the specified <see cref="PersonName"/> object to the current instance. All the existing data will be lost.
         /// </summary>
-        /// <param name="contact">The PersonName object to be copied.</param>
+        /// <param name="name">The <see cref="PersonName"/> object to be copied.</param>
         public void CopyFrom(PersonName name)
         {
             firstName = name.firstName;
@@ -103,22 +68,16 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public bool IsEmpty()
         {
-            if (firstName.Length == 0 &&
-                middleName.Length == 0 &&
-                lastName.Length == 0 &&
-                nickname.Length == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return string.IsNullOrEmpty(firstName) &&
+                   string.IsNullOrEmpty(middleName) &&
+                   string.IsNullOrEmpty(lastName) &&
+                   string.IsNullOrEmpty(nickname);
         }
 
         public static int Compare(PersonName n1, PersonName n2)
         {
             int response = 0;
+
             // -1 = different. At least one of the name components are different.
             // 0 = equals
             // 1 = almost equals. Some name components are missing (empty string) in one of the names.
@@ -173,30 +132,24 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            if (obj is PersonName)
-            {
-                PersonName pn = (PersonName)obj;
-                if (firstName.Equals(pn.firstName) &&
-                    middleName.Equals(pn.middleName) &&
-                    lastName.Equals(pn.lastName) &&
-                    nickname.Equals(pn.nickname))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
+            PersonName personName = obj as PersonName;
+
+            if (personName == null)
                 return false;
+
+            if (firstName.Equals(personName.firstName) &&
+                middleName.Equals(personName.middleName) &&
+                lastName.Equals(personName.lastName) &&
+                nickname.Equals(personName.nickname))
+            {
+                return true;
             }
+                
+            return false;
         }
 
         public override string ToString()
         {
-
             string str = string.Empty;
             string name = string.Empty;
 

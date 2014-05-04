@@ -35,8 +35,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         #endregion Properties
 
 
-        #region Events
-
         #region Event NumberChanged
 
         public event NumberChangedHandler NumberChanged;
@@ -97,10 +95,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #endregion Event DescriptionChanged
 
-        #endregion
-
-        #region Constructors
-
         public Phone()
             : this("", "")
         {
@@ -122,19 +116,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             CopyFrom(phone);
         }
 
-        #endregion Constructors
-
-        #region public void CopyFrom(Phone phone)
-
         public void CopyFrom(Phone phone)
         {
             number = phone.number;
             description = phone.description;
         }
-
-        #endregion
-
-        #region public Phone GetCopy()
 
         public Phone GetCopy()
         {
@@ -143,19 +129,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             return p;
         }
 
-        #endregion
-
-        #region public void Clear()
-
         public void Clear()
         {
             number = "";
             description = "";
         }
-
-        #endregion
-
-        #region public override bool Equals(object obj)
 
         public override bool Equals(object obj)
         {
@@ -169,15 +147,9 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             return true;
         }
 
-        #endregion
-
-        #region public override string ToString()
-
         public override string ToString()
         {
             return number + (description.Length > 0 ? (" - " + description) : string.Empty);
         }
-
-        #endregion
     }
 }
