@@ -113,6 +113,7 @@
     <Compile Include="Forms\FormWebSiteEdit.Designer.cs">
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\StatusService.cs" />
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>
     </Compile>
