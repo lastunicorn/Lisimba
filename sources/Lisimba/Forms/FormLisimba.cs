@@ -31,7 +31,6 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormLisimba : Form
     {
-        //private AddressBook addressBook = null;
         private bool isModified = false;
         private string statusText = string.Empty;
         private string programTitle = string.Empty;
