@@ -1,3 +1,19 @@
+// Lisimba
+// Copyright (C) 2014 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
 using System.IO;
 using System.Reflection;
@@ -16,58 +32,20 @@ namespace DustInTheWind.Lisimba.Egg
     {
         #region Event IncorrectXmlVersion
 
-        public event IncorrectXmlVersionHandler IncorrectXmlVersion;
-        public delegate void IncorrectXmlVersionHandler(object sender, IncorrectXmlVersionEventArgs e);
-
-        public class IncorrectXmlVersionEventArgs
-        {
-            private Version eggVersion = null;
-            public Version EggVersion
-            {
-                get { return eggVersion; }
-            }
-
-            private Version xmlVersion = null;
-            public Version XmlVersion
-            {
-                get { return xmlVersion; }
-            }
-
-            private string fileName = string.Empty;
-            public string FileName
-            {
-                get { return fileName; }
-            }
-
-            private bool continueParsing = false;
-            public bool ContinueParsing
-            {
-                get { return continueParsing; }
-                set { continueParsing = value; }
-            }
-
-
-            public IncorrectXmlVersionEventArgs(Version eggVersion, Version xmlVersion, string fileName)
-            {
-                this.eggVersion = eggVersion;
-                this.xmlVersion = xmlVersion;
-                this.fileName = fileName;
-            }
-        }
+        public event EventHandler<IncorrectXmlVersionEventArgs> IncorrectXmlVersion;
 
         protected virtual void OnIncorrectXmlVersion(IncorrectXmlVersionEventArgs e)
         {
-            if (IncorrectXmlVersion != null)
-            {
-                IncorrectXmlVersion(null, e);
-                if (!e.ContinueParsing)
-                {
-                    throw new EggIncorrectVersionException();
-                }
-            }
+            if (IncorrectXmlVersion == null)
+                return;
+
+            IncorrectXmlVersion(null, e);
+
+            if (!e.ContinueParsing)
+                throw new EggIncorrectVersionException();
         }
 
-        #endregion Event IncorrectXmlVersion
+        #endregion
 
         public ImportRuleCollection CreateImportRules(ContactCollection newContacts)
         {
@@ -81,56 +59,25 @@ namespace DustInTheWind.Lisimba.Egg
             return rules;
         }
 
-        private Version ReadLsbVersion(string fileName)
-        {
-            Version ver = null;
-
-            using (XmlTextReader xr = new XmlTextReader(File.OpenRead(fileName)))
-            {
-                xr.WhitespaceHandling = WhitespaceHandling.None;
-                xr.MoveToContent();
-
-                while (xr.Read())
-                {
-                    if (xr.Name.Equals("Version") && xr.NodeType == XmlNodeType.Element)
-                    {
-                        if (xr.IsEmptyElement)
-                            break;
-
-                        if (xr.Read() && xr.NodeType == XmlNodeType.Text)
-                        {
-                            ver = new Version(xr.Value);
-                        }
-
-                        break;
-                    }
-                }
-            }
-
-            return ver;
-        }
-
         private Version ReadLsbVersion(Stream stream)
         {
             Version ver = null;
-            XmlTextReader xr = new XmlTextReader(stream);
-            xr.WhitespaceHandling = WhitespaceHandling.None;
-            xr.MoveToContent();
+            XmlTextReader xmlTextReader = new XmlTextReader(stream);
+            xmlTextReader.WhitespaceHandling = WhitespaceHandling.None;
+            xmlTextReader.MoveToContent();
 
-            while (xr.Read())
+            while (xmlTextReader.Read())
             {
-                if (xr.Name.Equals("Version") && xr.NodeType == XmlNodeType.Element)
-                {
-                    if (xr.IsEmptyElement)
-                        break;
+                if (!xmlTextReader.Name.Equals("Version") || xmlTextReader.NodeType != XmlNodeType.Element)
+                    continue;
 
-                    if (xr.Read() && xr.NodeType == XmlNodeType.Text)
-                    {
-                        ver = new Version(xr.Value);
-                    }
-
+                if (xmlTextReader.IsEmptyElement)
                     break;
-                }
+
+                if (xmlTextReader.Read() && xmlTextReader.NodeType == XmlNodeType.Text)
+                    ver = new Version(xmlTextReader.Value);
+
+                break;
             }
 
             return ver;
@@ -355,10 +302,10 @@ namespace DustInTheWind.Lisimba.Egg
 
                         // Personal Website
                         if (csv[i][18].Length > 0) contact.WebSites.Add(new WebSite(csv[i][18], "Personal Website"));
-                        
+
                         // Business Website
                         if (csv[i][19].Length > 0) contact.WebSites.Add(new WebSite(csv[i][19], "Business Website"));
-                        
+
 
                         // Title
                         if (csv[i][20].Length > 0) contact.Notes += "Title: " + csv[i][20] + "\r\n";
@@ -411,7 +358,7 @@ namespace DustInTheWind.Lisimba.Egg
 
                         // Custom 3
                         if (csv[i][36].Length > 0) contact.Notes += csv[i][36] + "\r\n";
-                        
+
                         // Custom 4
                         if (csv[i][37].Length > 0) contact.Notes += csv[i][37] + "\r\n";
 

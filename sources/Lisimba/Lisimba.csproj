@@ -16,7 +16,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <PublishUrl>http://localhost/Lisimba/</PublishUrl>
     <Install>true</Install>
@@ -32,6 +32,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,6 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CurrentAddressBook.cs" />
     <Compile Include="Comparers\TreeNodeByNicknameOrNameComparer.cs" />
     <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
     <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
@@ -113,6 +115,8 @@
     <Compile Include="Forms\FormWebSiteEdit.Designer.cs">
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\RecentFilesService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>

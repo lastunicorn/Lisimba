@@ -34,7 +34,7 @@ namespace DustInTheWind.Desmond
                 throw new ApplicationException("The configuration file does not specify an address book to load.");
 
             this.addressBookManager = new AddressBookManager();
-            this.addressBookManager.IncorrectXmlVersion += new AddressBookManager.IncorrectXmlVersionHandler(addressBookLoader_IncorrectXmlVersion);
+            this.addressBookManager.IncorrectXmlVersion += addressBookLoader_IncorrectXmlVersion;
         }
 
         private void timer_TimerElapsed(object o)
@@ -42,7 +42,7 @@ namespace DustInTheWind.Desmond
             System.Windows.Forms.MessageBox.Show(this.nextContact.ToString());
         }
 
-        void addressBookLoader_IncorrectXmlVersion(object sender, AddressBookManager.IncorrectXmlVersionEventArgs e)
+        void addressBookLoader_IncorrectXmlVersion(object sender, IncorrectXmlVersionEventArgs e)
         {
             e.ContinueParsing = true;
         }

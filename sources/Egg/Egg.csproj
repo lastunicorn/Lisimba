@@ -75,6 +75,7 @@
     <Compile Include="Enums\FileFormat.cs" />
     <Compile Include="Entities\ImportRule.cs" />
     <Compile Include="Exceptions\EggIncorrectVersionException.cs" />
+    <Compile Include="IncorrectXmlVersionEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ContactCollection.cs" />
     <Compile Include="Enums\SearchMode.cs" />

@@ -1,33 +1,49 @@
-using System;
-using System.Configuration;
-using System.IO;
-using System.Reflection;
-using System.Windows.Forms;
+// Lisimba
+// Copyright (C) 2014 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Config;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Egg.Exceptions;
+using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormLisimba : Form
     {
-        private AddressBook addressBook = null;
-        private bool isNew = true;
+        //private AddressBook addressBook = null;
         private bool isModified = false;
         private string statusText = string.Empty;
         private string programTitle = string.Empty;
-        private Configuration config;
-        private LisimbaConfigSection lisimbaConfigSection;
 
         private string fileNameToOpenAtLoad = string.Empty;
-        private AddressBookManager addressBookLoader = new AddressBookManager();
+
+        private readonly StatusService statusService;
+        private readonly ConfigurationService configurationService;
+        private readonly CurrentAddressBook currentAddressBook;
+        private readonly RecentFilesService recentFilesService;
 
         // Lisimba - male name meaning "lion" in Zulu language.
-
-        #region Constructors
 
         public FormLisimba()
             : this(string.Empty)
@@ -36,14 +52,27 @@ namespace DustInTheWind.Lisimba.Forms
 
         public FormLisimba(string fileName)
         {
+            configurationService = new ConfigurationService();
+
+            statusService = new StatusService();
+            statusService.StatusTextChanged += HandleStatusServiceOnStatusTextChanged;
+
+            recentFilesService = new RecentFilesService(configurationService);
+            recentFilesService.FileNameAdded += HandleRecentFilesServiceOnFileNameAdded;
+
+            currentAddressBook = new CurrentAddressBook(statusService, recentFilesService);
+            currentAddressBook.AskToOpenLsbFile = AskToOpenLsbFile;
+            currentAddressBook.AskToSaveLsbFile = AskToSaveLsbFile;
+            currentAddressBook.AddressBookChanged += HandleCurrentAddressBookOnAddressBookChanged;
+            currentAddressBook.AddressBookSaved += HandleCurrentAddressBookOnAddressBookSaved;
+            currentAddressBook.AskToOpenYahooCsvFile = AskToOpenYahooCsvFile;
+            currentAddressBook.AskToSaveYahooCsvFile = AskToSaveYahooCsvFile;
+            currentAddressBook.HandleIncorrectXmlVersion = addressBookLoader_IncorrectXmlVersion;
+
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             programTitle = Application.ProductName + " " + version.Major + "." + version.Minor;
 
             InitializeComponent();
-
-            addressBookLoader.IncorrectXmlVersion += new AddressBookManager.IncorrectXmlVersionHandler(addressBookLoader_IncorrectXmlVersion);
-
-            ReadLisimbaConfigSection();
 
             RefreshRecentFilesMenu();
 
@@ -55,23 +84,17 @@ namespace DustInTheWind.Lisimba.Forms
             }
             else
             {
-                switch (lisimbaConfigSection.LoadFileAtStart.Type)
+                switch (configurationService.LisimbaConfigSection.LoadFileAtStart.Type)
                 {
                     case "new":
                         break;
 
                     case "last":
-                        if (lisimbaConfigSection.RecentFilesList.Count > 0)
-                        {
-                            fileNameToOpenAtLoad = lisimbaConfigSection.RecentFilesList[0].FileName;
-                        }
+                        fileNameToOpenAtLoad = recentFilesService.GetMostRecentFileName();
                         break;
 
                     case "specified":
-                        fileNameToOpenAtLoad = lisimbaConfigSection.LoadFileAtStart.FileName;
-                        break;
-
-                    default:
+                        fileNameToOpenAtLoad = configurationService.LisimbaConfigSection.LoadFileAtStart.FileName;
                         break;
                 }
 
@@ -80,7 +103,7 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripStatusLabel1.Text = statusText;
 
             // Set the initial sort method
-            switch (lisimbaConfigSection.SortBy.Value)
+            switch (configurationService.LisimbaConfigSection.SortBy.Value)
             {
                 case "Birthday":
                     contactListView1.SortField = ContactsSortingType.Birthday;
@@ -105,9 +128,6 @@ namespace DustInTheWind.Lisimba.Forms
                 case "NicknameOrName":
                     contactListView1.SortField = ContactsSortingType.NicknameOrName;
                     break;
-
-                default:
-                    break;
             }
 
             //// todo: for test
@@ -118,53 +138,103 @@ namespace DustInTheWind.Lisimba.Forms
             //this.ctrl1.Value = c;
         }
 
-        #endregion
-
-        void addressBookLoader_IncorrectXmlVersion(object sender, AddressBookManager.IncorrectXmlVersionEventArgs e)
+        private string AskToSaveYahooCsvFile()
         {
-            if (e.XmlVersion == null)
-            {
-                DialogResult r = MessageBox.Show(this, "The version of the file \"" + e.FileName + "\" could not be determined.\n\nDo you still wanna try to open the file?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                if (r == DialogResult.Yes)
-                {
-                    e.ContinueParsing = true;
-                }
-                return;
-            }
-            else
-            {
-                if (MessageBox.Show(this, "The file \"" + e.FileName + "\" is created with another version of the Egg.\n\nCurrent Egg version = " + e.EggVersion.Major + "." + e.EggVersion.Minor + "\nFile created by Egg version = " + e.XmlVersion.Major + "." + e.XmlVersion.Minor + "\n\nDo you still wanna try to open the file?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                {
-                    e.ContinueParsing = true;
-                    return;
-                }
-            }
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFileDialog1.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+            openFileDialog1.DefaultExt = "csv";
+            saveFileDialog1.FileName = string.Empty;
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return null;
+
+            return saveFileDialog1.FileName;
+        }
+
+        private string AskToOpenYahooCsvFile()
+        {
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            openFileDialog1.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+            openFileDialog1.DefaultExt = "csv";
+            openFileDialog1.FileName = string.Empty;
+
+            if (openFileDialog1.ShowDialog() != DialogResult.OK)
+                return null;
+
+            return openFileDialog1.FileName;
+        }
+
+        private string AskToSaveLsbFile()
+        {
+            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            saveFileDialog1.Filter = "Lis Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+            saveFileDialog1.DefaultExt = "lsb";
+
+            if (saveFileDialog1.ShowDialog() != DialogResult.OK)
+                return null;
+
+            return saveFileDialog1.FileName;
+        }
+
+        private void HandleCurrentAddressBookOnAddressBookSaved(object sender, EventArgs e)
+        {
+            contactListView1.ResetModifiedFlags();
+
+            RefreshFormTitle();
+        }
+
+        private void HandleCurrentAddressBookOnAddressBookChanged(object sender, EventArgs e)
+        {
+            // Populate the list control
+            contactListView1.Contacts = currentAddressBook.AddressBook.Contacts;
+
+            // Disable the contact view control
+            contactView1.Contact = null;
+            contactView1.Enabled = false;
+
+            // Clear the "Find" textbox.
+            contactListView1.SearchText = string.Empty;
+
+            // Refresh the form title
+            RefreshFormTitle();
+        }
+
+        private void HandleRecentFilesServiceOnFileNameAdded(object sender, EventArgs e)
+        {
+            RefreshRecentFilesMenu();
+        }
+
+        private string AskToOpenLsbFile()
+        {
+            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
+            openFileDialog1.Filter = "Lis Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+            openFileDialog1.DefaultExt = "lsb";
+
+            DialogResult dialogResult = openFileDialog1.ShowDialog();
+
+            if (dialogResult != DialogResult.OK)
+                return null;
+
+            return openFileDialog1.FileName;
+        }
+
+        private void HandleStatusServiceOnStatusTextChanged(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = statusService.StatusText;
+        }
+
+        void addressBookLoader_IncorrectXmlVersion(object sender, IncorrectXmlVersionEventArgs e)
+        {
+            string text = e.XmlVersion == null
+                ? string.Format("The version of the file \"{0}\" could not be determined.\n\nDo you still wanna try to open the file?", e.FileName)
+                : string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}.{2}\nFile created by Egg version = {3}.{4}\n\nDo you still wanna try to open the file?", e.FileName, e.EggVersion.Major, e.EggVersion.Minor, e.XmlVersion.Major, e.XmlVersion.Minor);
+
+            DialogResult dialogResult = MessageBox.Show(this, text, "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Yes)
+                e.ContinueParsing = true;
         }
 
         #region Recent Files
-
-        private void ReadLisimbaConfigSection()
-        {
-            try
-            {
-                // Read the config file
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-                // Read lisimba section
-                lisimbaConfigSection = config.GetSection("lisimba") as LisimbaConfigSection;
-                if (lisimbaConfigSection == null)
-                {
-                    lisimbaConfigSection = new LisimbaConfigSection();
-                    config.Sections.Add("lisimba", lisimbaConfigSection);
-                    lisimbaConfigSection.SectionInformation.ForceSave = true;
-                    config.Save(ConfigurationSaveMode.Full);
-                }
-            }
-            catch
-            {
-                lisimbaConfigSection = new LisimbaConfigSection();
-            }
-        }
 
         private void RefreshRecentFilesMenu()
         {
@@ -172,7 +242,8 @@ namespace DustInTheWind.Lisimba.Forms
             ToolStripItemCollection menuItems = toolStripMenuItem_File_RecentFiles.DropDownItems;
             int j = 0; // index for the list of menu items (this.recentFilesMenuItems)
 
-            RecentFilesConfigElementCollection recentFiles = lisimbaConfigSection.RecentFilesList;
+            //RecentFilesConfigElementCollection recentFiles = configurationService.LisimbaConfigSection.RecentFilesList;
+            RecentFilesConfigElementCollection recentFiles = recentFilesService.GetAllFiles();
 
             for (int i = 0; i < recentFiles.Count; i++)
             {
@@ -207,18 +278,15 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void toolStripMenuItem_RecentFile_Click(object sender, EventArgs e)
         {
-            if (AskToSave())
-            {
-                string fileName = ((ToolStripMenuItem)sender).Tag.ToString();
-                BookOpen(fileName);
-            }
-        }
+            bool allowToContinue = AskToSave();
 
-        private void AddRecentFile(string fileName)
-        {
-            lisimbaConfigSection.RecentFilesList.AddNewRecentFile(Path.GetFullPath(fileName));
-            RefreshRecentFilesMenu();
-            config.Save(ConfigurationSaveMode.Full);
+            if (!allowToContinue)
+                return;
+
+            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            string fileName = menuItem.Tag.ToString();
+
+            BookOpen(fileName);
         }
 
         #endregion
@@ -227,19 +295,16 @@ namespace DustInTheWind.Lisimba.Forms
 
         private bool AskToSave()
         {
-            if (isModified)
-            {
-                DialogResult r = MessageBox.Show("Current address book is not saved.\nDo you wanna save it before proceedeing?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            if (!currentAddressBook.IsModified)
+                return true;
 
-                if (r == DialogResult.Cancel)
-                {
-                    return false;
-                }
-                else if (r == DialogResult.Yes)
-                {
-                    BookSave();
-                }
-            }
+            DialogResult dialogResult = MessageBox.Show("Current address book is not saved.\nDo you wanna save it before proceedeing?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Cancel)
+                return false;
+
+            if (dialogResult == DialogResult.Yes)
+                BookSave();
 
             return true;
         }
@@ -249,23 +314,23 @@ namespace DustInTheWind.Lisimba.Forms
             string text = string.Empty;
 
             // Book name or file path
-            if (!isNew || isModified)
+            if (!currentAddressBook.IsNew || currentAddressBook.IsModified)
             {
-                if (addressBook.Name.Length == 0)
+                if (currentAddressBook.AddressBook.Name.Length == 0)
                 {
-                    if (addressBook.FileName.Length == 0)
+                    if (currentAddressBook.AddressBook.FileName.Length == 0)
                         text += "< Unnamed >";
                     else
-                        text += addressBook.FileName;
+                        text += currentAddressBook.AddressBook.FileName;
                 }
                 else
                 {
-                    text += addressBook.Name;
+                    text += currentAddressBook.AddressBook.Name;
                 }
             }
 
             // Is modified (*)
-            if (isModified)
+            if (currentAddressBook.IsModified)
                 text += " *";
 
             // -
@@ -318,7 +383,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         void contactListView1_ContactListChanged(object sender, ContactListView.ContactListChangedEventArgs e)
         {
-            isModified = true;
+            currentAddressBook.IsModified = true;
 
             // Refresh form title
             RefreshFormTitle();
@@ -336,9 +401,9 @@ namespace DustInTheWind.Lisimba.Forms
 
         void contactView1_ContactChanged(object sender, ContactView.ContactChangedEventArgs e)
         {
-            if (!isModified)
+            if (!currentAddressBook.IsModified)
             {
-                isModified = true;
+                currentAddressBook.IsModified = true;
 
                 // Refresh form title
                 RefreshFormTitle();
@@ -354,25 +419,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void BookNew()
         {
-            addressBook = new AddressBook();
-            isNew = true;
-            isModified = false;
-
-            // Populate the list control
-            contactListView1.Contacts = addressBook.Contacts;
-
-            // Disable the contact view control
-            contactView1.Contact = null;
-            contactView1.Enabled = false;
-
-            // Display a status text
-            toolStripStatusLabel1.Text = "A new address book was created.";
-
-            // Clear the "Find" textbox.
-            contactListView1.SearchText = string.Empty;
-
-            // Refresh the form title
-            RefreshFormTitle();
+            currentAddressBook.New();
         }
 
         private void BookOpen()
@@ -382,49 +429,9 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void BookOpen(string fileName)
         {
-            // If no file name is specified, display an OpenFileDialog window.
-            if (string.IsNullOrEmpty(fileName))
-            {
-                openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
-                openFileDialog1.Filter = "Lis Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-                openFileDialog1.DefaultExt = "lsb";
-                if (openFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    fileName = openFileDialog1.FileName;
-                }
-                else
-                {
-                    return;
-                }
-            }
-
             try
             {
-                // Check the version of the file that will be open.
-                //if (!this.CheckLsbVersion(fileName))
-                //    return;
-
-                // Open the file
-                addressBook = addressBookLoader.LoadFromFile(fileName);
-
-                isNew = false;
-                isModified = false;
-
-                // Populate the list control
-                contactListView1.Contacts = addressBook.Contacts;
-
-                // Disable the contact view control
-                contactView1.Contact = null;
-                contactView1.Enabled = false;
-
-                // Display a status text
-                toolStripStatusLabel1.Text = addressBook.Count + " contacts oppened.";
-
-                // Clear the "Find" textbox.
-                contactListView1.SearchText = string.Empty;
-
-                // Update the RecentFiles list.
-                AddRecentFile(fileName);
+                currentAddressBook.Open(fileName);
             }
             catch (EggIncorrectVersionException)
             {
@@ -433,66 +440,30 @@ namespace DustInTheWind.Lisimba.Forms
             {
                 MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Refresh the form title
-            RefreshFormTitle();
         }
 
         private void BookSave()
         {
-            if (addressBook.FileName.Length == 0)
+            try
             {
-                BookSaveAs();
+                currentAddressBook.Save();
             }
-            else
+            catch (Exception ex)
             {
-                try
-                {
-                    addressBookLoader.SaveToFile(addressBook);
-                    isNew = false;
-                    isModified = false;
-                    contactListView1.ResetModifiedFlags();
-
-                    // Display a status text
-                    toolStripStatusLabel1.Text = "Address book saved. (" + addressBook.Count + " contacts)";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            RefreshFormTitle();
         }
 
         private void BookSaveAs()
         {
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
-            saveFileDialog1.Filter = "Lis Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-            saveFileDialog1.DefaultExt = "lsb";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    string fileName = saveFileDialog1.FileName;
-                    addressBookLoader.SaveToFile(addressBook, fileName);
-                    isNew = false;
-                    isModified = false;
-                    contactListView1.ResetModifiedFlags();
-
-                    // Display a status text
-                    toolStripStatusLabel1.Text = "Address book saved. (" + addressBook.Count + " contacts)";
-
-                    // Update the RecentFiles list.
-                    AddRecentFile(fileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                currentAddressBook.SaveAs();
             }
-
-            RefreshFormTitle();
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion
@@ -501,69 +472,31 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void BookImportFromYahooCsv()
         {
-            openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
-            openFileDialog1.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-            openFileDialog1.DefaultExt = "csv";
-            openFileDialog1.FileName = string.Empty;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    ContactCollection newContacts = addressBookLoader.ImportFromFile(openFileDialog1.FileName, FileFormat.CsvYahoo);
-
-                    ImportRuleCollection importRules = addressBookLoader.CreateImportRules(newContacts);
-
-                    int countImport = addressBook.AddRange(newContacts, importRules);
-                    //this.contactListView1.addr
-
-                    //this.isNew = false;
-                    isModified = true;
-
-                    // Populate the list control
-                    contactListView1.Contacts = addressBook.Contacts;
-
-                    // Disable the contact view control
-                    contactView1.Contact = null;
-                    contactView1.Enabled = false;
-
-                    // Refresh the form title
-                    RefreshFormTitle();
-
-                    // Display a status text
-                    toolStripStatusLabel1.Text = countImport + " contacts imported from " + newContacts.Count + " contacts in .csv file.";
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                currentAddressBook.ImportFromYahooCsv();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void BookExportToYahooCsv()
         {
-            saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();
-            saveFileDialog1.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-            openFileDialog1.DefaultExt = "csv";
-            saveFileDialog1.FileName = string.Empty;
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            try
             {
-                try
-                {
-                    addressBookLoader.ExportToFile(addressBook, saveFileDialog1.FileName, FileFormat.CsvYahoo);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                currentAddressBook.ExportToYahooCsv();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         #endregion
 
-        #region Menu OnClick
-
-        #region File Menu
+        #region Menu OnClick - File Menu
 
         private void toolStripMenuItem_File_New_Click(object sender, EventArgs e)
         {
@@ -613,17 +546,17 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #region Address Book Menu
+        #region Menu OnClick - Address Book Menu
 
         private void toolStripMenuItem_Agenda_AddContact_Click(object sender, EventArgs e)
         {
-            FormAddContact formAddContact = new FormAddContact(addressBook.Contacts);
+            FormAddContact formAddContact = new FormAddContact(currentAddressBook.AddressBook.Contacts);
 
             if (formAddContact.ShowDialog() == DialogResult.OK)
             {
                 contactListView1.Add(formAddContact.Contact);
 
-                isModified = true;
+                currentAddressBook.IsModified = true;
                 RefreshFormTitle();
             }
         }
@@ -649,18 +582,18 @@ namespace DustInTheWind.Lisimba.Forms
         private void toolStripMenuItem_Agenda_Properties_Click(object sender, EventArgs e)
         {
             FormBookProperties formBookProperties = new FormBookProperties();
-            formBookProperties.Book = addressBook;
+            formBookProperties.Book = currentAddressBook.AddressBook;
             formBookProperties.ShowDialog();
             if (formBookProperties.IsModified)
             {
-                isModified = true;
+                currentAddressBook.IsModified = true;
                 RefreshFormTitle();
             }
         }
 
         #endregion
 
-        #region Help Menu
+        #region Menu OnClick - Help Menu
 
         private void toolStripMenuItem_Help_About_Click(object sender, EventArgs e)
         {
@@ -671,11 +604,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #endregion Menu OnClick
-
-        #region Mouse Over Meniu
-
-        #region File Menu
+        #region Mouse Over Meniu - File Menu
 
         private void toolStripMenuItem_File_New_MouseEnter(object sender, EventArgs e)
         {
@@ -749,7 +678,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #region Address Book Menu
+        #region Mouse Over Meniu - Address Book Menu
 
         private void toolStripMenuItem_Agenda_AddContact_MouseEnter(object sender, EventArgs e)
         {
@@ -783,7 +712,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #region Help
+        #region Mouse Over Meniu - Help
 
         private void toolStripMenuItem_Help_About_MouseEnter(object sender, EventArgs e)
         {
@@ -797,13 +726,11 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #endregion Mouse Over Meniu
-
         #region Form
 
         private void FormLisimba_Shown(object sender, EventArgs e)
         {
-            if (fileNameToOpenAtLoad.Length > 0)
+            if (!string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
                 BookOpen(fileNameToOpenAtLoad);
         }
 
