@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Diagnostics;
 using System.Threading;
 
 namespace DustInTheWind.Lisimba.Services
@@ -26,7 +25,6 @@ namespace DustInTheWind.Lisimba.Services
         private string defaultStatusText;
         private readonly Timer timer;
         private bool disposed;
-        private Stopwatch stopwatch;
 
         public string StatusText
         {
@@ -35,9 +33,6 @@ namespace DustInTheWind.Lisimba.Services
             {
                 if (value == statusText)
                     return;
-
-                Console.WriteLine(DateTime.Now + " - Set StatusText = " + value + " - " + ResetTimeout.ToString());
-                stopwatch = Stopwatch.StartNew();
 
                 statusText = value;
                 timer.Change(ResetTimeout, new TimeSpan(-1));
@@ -79,8 +74,23 @@ namespace DustInTheWind.Lisimba.Services
 
         private void HandleTimerElapsed(object state)
         {
-            Console.WriteLine("asd");
-            Console.WriteLine(stopwatch.ElapsedMilliseconds);
+            statusText = defaultStatusText;
+            OnStatusTextChanged(EventArgs.Empty);
+        }
+
+        public void SetPermanentStatusText(string text)
+        {
+            if (text == statusText)
+                return;
+
+            statusText = text;
+            OnStatusTextChanged(EventArgs.Empty);
+        }
+
+        public void Reset()
+        {
+            if (statusText == defaultStatusText)
+                return;
 
             statusText = defaultStatusText;
             OnStatusTextChanged(EventArgs.Empty);

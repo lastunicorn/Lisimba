@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
+﻿using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Egg.Exceptions;
 using DustInTheWind.Lisimba.Services;
+using System;
+using System.IO;
+using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Commands
 {
@@ -100,16 +97,12 @@ namespace DustInTheWind.Lisimba.Commands
                     return;
             }
 
-            // Open the file
             AddressBook = addressBookLoader.LoadFromFile(fileName);
 
             IsNew = false;
             IsModified = false;
 
-            // Display a status text
-            statusService.StatusText = AddressBook.Count + " contacts oppened.";
-
-            // Update the RecentFiles list.
+            statusService.StatusText = string.Format("{0} contacts oppened.", AddressBook.Count);
             recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
 
             OnAddressBookChanged(EventArgs.Empty);
@@ -124,11 +117,11 @@ namespace DustInTheWind.Lisimba.Commands
             }
 
             addressBookLoader.SaveToFile(AddressBook);
+
             IsNew = false;
             IsModified = false;
 
-            // Display a status text
-            statusService.StatusText = "Address book saved. (" + AddressBook.Count + " contacts)";
+            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Count);
 
             OnAddressBookSaved(EventArgs.Empty);
         }
@@ -137,20 +130,18 @@ namespace DustInTheWind.Lisimba.Commands
         {
             string fileName = AskToSaveLsbFile();
 
-            if (fileName != null)
-            {
-                addressBookLoader.SaveToFile(AddressBook, fileName);
-                IsNew = false;
-                IsModified = false;
+            if (fileName == null)
+                return;
 
-                // Display a status text
-                statusService.StatusText = "Address book saved. (" + AddressBook.Count + " contacts)";
+            addressBookLoader.SaveToFile(AddressBook, fileName);
 
-                // Update the RecentFiles list.
-                recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
+            IsNew = false;
+            IsModified = false;
 
-                OnAddressBookSaved(EventArgs.Empty);
-            }
+            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Count);
+            recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
+
+            OnAddressBookSaved(EventArgs.Empty);
         }
 
         public void ImportFromYahooCsv()
@@ -168,7 +159,7 @@ namespace DustInTheWind.Lisimba.Commands
 
                 IsModified = true;
 
-                statusService.StatusText = countImport + " contacts imported from " + newContacts.Count + " contacts in .csv file.";
+                statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, newContacts.Count);
 
                 OnAddressBookChanged(EventArgs.Empty);
             }

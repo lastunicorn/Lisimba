@@ -17,13 +17,11 @@ namespace DustInTheWind.Lisimba.UserControls
         private Dictionary<Contact, bool> modifiedContacts = new Dictionary<Contact, bool>();
         private Dictionary<Contact, TreeNode> treeNodes = new Dictionary<Contact, TreeNode>();
 
-        private bool allowSort = false;
+        private bool allowSort;
 
-        [
-        Browsable(true),
-        Category("Behavior"),
-        Description("Indicates if the Contacts will be shown sorted or not.")
-        ]
+        [Browsable(true)]
+        [Category("Behavior")]
+        [Description("Indicates if the Contacts will be shown sorted or not.")]
         public bool AllowSort
         {
             get { return allowSort; }
@@ -36,11 +34,9 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private ContactsSortingType sortField = ContactsSortingType.NicknameOrName;
 
-        [
-        Browsable(true),
-        Category("Behavior"),
-        Description("Specifies the field of the Contact used to sort them. Available only if AllowSort is true.")
-        ]
+        [Browsable(true)]
+        [Category("Behavior")]
+        [Description("Specifies the field of the Contact used to sort them. Available only if AllowSort is true.")]
         public ContactsSortingType SortField
         {
             get { return sortField; }
@@ -127,11 +123,9 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        [
-        Browsable(true),
-        Category("Data"),
-        Description("Specifies the initial text of the search filter.")
-        ]
+        [Browsable(true)]
+        [Category("Data")]
+        [Description("Specifies the initial text of the search filter.")]
         public string SearchText
         {
             get { return textBoxSearch.Text; }
@@ -182,29 +176,19 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        #endregion Event SelectedContactChanged
+        #endregion
 
         #region Event ContactListChanged
 
-        public event ContactListChangedHandler ContactListChanged;
-        public delegate void ContactListChangedHandler(object sender, ContactListChangedEventArgs e);
+        public event EventHandler ContactListChanged;
 
-        public class ContactListChangedEventArgs : EventArgs
-        {
-            public ContactListChangedEventArgs()
-            {
-            }
-        }
-
-        protected virtual void OnContactListChanged(ContactListChangedEventArgs e)
+        protected virtual void OnContactListChanged(EventArgs e)
         {
             if (ContactListChanged != null)
-            {
                 ContactListChanged(this, e);
-            }
         }
 
-        #endregion Event ContactListChanged
+        #endregion
 
         public void Clear()
         {
@@ -420,7 +404,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
             treeView1.SelectedNode = newTreeNode;
 
-            OnContactListChanged(new ContactListChangedEventArgs());
+            OnContactListChanged(EventArgs.Empty);
         }
 
         private void toolStripMenuItem_List_Add_Click(object sender, EventArgs e)
@@ -435,8 +419,8 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public void RemoveContact(Contact contact)
         {
-            TreeNode node = null;
-            TreeNode nodeToSelect = null;
+            TreeNode node;
+            TreeNode nodeToSelect;
 
             if (contact != null && contacts.Contains(contact))
             {
@@ -456,7 +440,7 @@ namespace DustInTheWind.Lisimba.UserControls
                         treeView1.SelectedNode = treeView1.Nodes[0].LastNode;
                 }
 
-                OnContactListChanged(new ContactListChangedEventArgs());
+                OnContactListChanged(EventArgs.Empty);
             }
         }
 

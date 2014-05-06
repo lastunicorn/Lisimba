@@ -22,7 +22,7 @@ using NUnit.Framework;
 namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
 {
     [TestFixture]
-    public class PropertiesTests
+    public class StatusTextTests
     {
         private StatusService statusService;
 
@@ -32,8 +32,14 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
             statusService = new StatusService();
         }
 
+        [TearDown]
+        public void TearDown()
+        {
+            statusService.Dispose();
+        }
+
         [Test]
-        public void StatusText_raises_StatusTextChanged_event_when_value_is_changed()
+        public void raises_StatusTextChanged_event_when_value_is_changed()
         {
             bool eventWasRaised = false;
             statusService.StatusTextChanged += (sender, e) =>
@@ -47,7 +53,7 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         }
 
         [Test]
-        public void StatusText_does_not_raise_event_if_it_is_set_to_same_value()
+        public void does_not_raise_event_if_it_is_set_to_same_value()
         {
             bool eventWasRaised = false;
             const string statusText = "some text";
@@ -63,16 +69,7 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         }
 
         [Test]
-        public void when_DefaultStatusText_is_set_StatusText_is_set_to_same_value()
-        {
-            const string statusText = "some value";
-            statusService.DefaultStatusText = statusText;
-
-            Assert.That(statusService.StatusText, Is.EqualTo(statusText));
-        }
-
-        [Test]
-        public void StatusText_reverts_to_DefaultStatusText_value_after_ResetTimeout_time()
+        public void reverts_to_DefaultStatusText_value_after_ResetTimeout_time()
         {
             const string defaultStatusText = "default status text";
             const string statusText = "some status";

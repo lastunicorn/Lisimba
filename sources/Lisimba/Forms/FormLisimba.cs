@@ -29,37 +29,34 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormLisimba : Form
+    internal partial class FormLisimba : Form
     {
-        private bool isModified = false;
-        private string statusText = string.Empty;
         private string programTitle = string.Empty;
-
         private string fileNameToOpenAtLoad = string.Empty;
 
         private readonly StatusService statusService;
-        private readonly ConfigurationService configurationService;
         private readonly CurrentAddressBook currentAddressBook;
         private readonly RecentFilesService recentFilesService;
 
         // Lisimba - male name meaning "lion" in Zulu language.
 
-        public FormLisimba()
-            : this(string.Empty)
+        public FormLisimba(ProgramArguments programArguments, ConfigurationService configurationService, StatusService statusService,
+            RecentFilesService recentFilesService, CurrentAddressBook currentAddressBook)
         {
-        }
+            if (programArguments == null) throw new ArgumentNullException("programArguments");
+            if (configurationService == null) throw new ArgumentNullException("configurationService");
+            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
+            if (currentAddressBook == null) throw new ArgumentNullException("currentAddressBook");
 
-        public FormLisimba(string fileName)
-        {
-            configurationService = new ConfigurationService();
-
-            statusService = new StatusService();
+            this.statusService = statusService;
+            statusService.DefaultStatusText = "Ready";
             statusService.StatusTextChanged += HandleStatusServiceOnStatusTextChanged;
 
-            recentFilesService = new RecentFilesService(configurationService);
+            this.recentFilesService = recentFilesService;
             recentFilesService.FileNameAdded += HandleRecentFilesServiceOnFileNameAdded;
 
-            currentAddressBook = new CurrentAddressBook(statusService, recentFilesService);
+            this.currentAddressBook = currentAddressBook;
             currentAddressBook.AskToOpenLsbFile = AskToOpenLsbFile;
             currentAddressBook.AskToSaveLsbFile = AskToSaveLsbFile;
             currentAddressBook.AddressBookChanged += HandleCurrentAddressBookOnAddressBookChanged;
@@ -68,18 +65,41 @@ namespace DustInTheWind.Lisimba.Forms
             currentAddressBook.AskToSaveYahooCsvFile = AskToSaveYahooCsvFile;
             currentAddressBook.HandleIncorrectXmlVersion = addressBookLoader_IncorrectXmlVersion;
 
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            programTitle = Application.ProductName + " " + version.Major + "." + version.Minor;
-
             InitializeComponent();
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            programTitle = string.Format("{0} {1}", Application.ProductName, version.ToString(2));
+
+            toolStripMenuItem_File_New.StatusService = statusService;
+            toolStripMenuItem_File_New.ShortDescription = "Create a new address book.";
+            toolStripMenuItem_File_Open.StatusService = statusService;
+            toolStripMenuItem_File_Open.ShortDescription = "Open address book from file.";
+            toolStripMenuItem_File_Save.StatusService = statusService;
+            toolStripMenuItem_File_Save.ShortDescription = "Save current opened address book.";
+            toolStripMenuItem_File_SaveAs.StatusService = statusService;
+            toolStripMenuItem_File_SaveAs.ShortDescription = "Save current opened address book with another name.";
+            toolStripMenuItem_File_Export.StatusService = statusService;
+            toolStripMenuItem_File_Export.ShortDescription = "Export current opened address book in another format.";
+            toolStripMenuItem_File_Import.StatusService = statusService;
+            toolStripMenuItem_File_Import.ShortDescription = "Import address book from another format.";
+            toolStripMenuItem_File_Exit.StatusService = statusService;
+            toolStripMenuItem_File_Exit.ShortDescription = "Exit the program.";
+            toolStripMenuItem_Agenda_AddContact.StatusService = statusService;
+            toolStripMenuItem_Agenda_AddContact.ShortDescription = "Add a new contact.";
+            toolStripMenuItem_Agenda_DeleteContact.StatusService = statusService;
+            toolStripMenuItem_Agenda_DeleteContact.ShortDescription = "Delete the selected contact.";
+            toolStripMenuItem_Agenda_Properties.StatusService = statusService;
+            toolStripMenuItem_Agenda_Properties.ShortDescription = "Display the address book properties.";
+            toolStripMenuItem_Help_About.StatusService = statusService;
+            toolStripMenuItem_Help_About.ShortDescription = "Info about the program.";
 
             RefreshRecentFilesMenu();
 
-            BookNew();
+            currentAddressBook.New();
 
-            if (!string.IsNullOrEmpty(fileName))
+            if (!string.IsNullOrEmpty(programArguments.FileName))
             {
-                fileNameToOpenAtLoad = fileName;
+                fileNameToOpenAtLoad = programArguments.FileName;
             }
             else
             {
@@ -98,8 +118,6 @@ namespace DustInTheWind.Lisimba.Forms
                 }
 
             }
-
-            toolStripStatusLabel1.Text = statusText;
 
             // Set the initial sort method
             switch (configurationService.LisimbaConfigSection.SortBy.Value)
@@ -128,13 +146,6 @@ namespace DustInTheWind.Lisimba.Forms
                     contactListView1.SortField = ContactsSortingType.NicknameOrName;
                     break;
             }
-
-            //// todo: for test
-            //Contact c = new Contact();
-            //c.Name = new PersonName("Alex", "Nicolae", "Iuga", "Alez");
-            //c.Phones.Add(new Phone("123456789", "Test"));
-
-            //this.ctrl1.Value = c;
         }
 
         private string AskToSaveYahooCsvFile()
@@ -380,11 +391,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         #region ContactListView
 
-        void contactListView1_ContactListChanged(object sender, ContactListView.ContactListChangedEventArgs e)
+        void contactListView1_ContactListChanged(object sender, EventArgs e)
         {
             currentAddressBook.IsModified = true;
 
-            // Refresh form title
             RefreshFormTitle();
         }
 
@@ -404,7 +414,6 @@ namespace DustInTheWind.Lisimba.Forms
             {
                 currentAddressBook.IsModified = true;
 
-                // Refresh form title
                 RefreshFormTitle();
             }
 
@@ -415,16 +424,6 @@ namespace DustInTheWind.Lisimba.Forms
         #endregion
 
         #region New Open Save Close
-
-        private void BookNew()
-        {
-            currentAddressBook.New();
-        }
-
-        private void BookOpen()
-        {
-            BookOpen(string.Empty);
-        }
 
         private void BookOpen(string fileName)
         {
@@ -499,18 +498,17 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void toolStripMenuItem_File_New_Click(object sender, EventArgs e)
         {
-            if (AskToSave())
-            {
-                BookNew();
-            }
+
         }
 
         private void toolStripMenuItem_File_Open_Click(object sender, EventArgs e)
         {
-            if (AskToSave())
-            {
-                BookOpen();
-            }
+            bool allowToContinue = AskToSave();
+
+            if (!allowToContinue)
+                return;
+
+            BookOpen(string.Empty);
         }
 
         private void toolStripMenuItem_File_Save_Click(object sender, EventArgs e)
@@ -526,11 +524,13 @@ namespace DustInTheWind.Lisimba.Forms
         private void toolStripMenuItem_ImportFromYahooCSV_Click(object sender, EventArgs e)
         {
             // Ask to save because temporarlly the import is done only in a new address book.
-            if (AskToSave())
-            {
-                BookNew();
-                BookImportFromYahooCsv();
-            }
+            bool allowToContinue = AskToSave();
+
+            if (!allowToContinue)
+                return;
+
+            currentAddressBook.New();
+            BookImportFromYahooCsv();
         }
 
         private void toolStripMenuItem_ExportToYahooCSV_Click(object sender, EventArgs e)
@@ -564,13 +564,14 @@ namespace DustInTheWind.Lisimba.Forms
         {
             Contact contact = contactListView1.SelectedContact;
 
-            if (contact != null)
-            {
-                if (MessageBox.Show("Are you sure you wanna delete the contact " + contact.ToString() + " ?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                {
-                    contactListView1.RemoveContact(contact);
-                }
-            }
+            if (contact == null)
+                return;
+
+            string text = string.Format("Are you sure you wanna delete the contact {0} ?", contact);
+            DialogResult dialogResult = MessageBox.Show(text, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Yes)
+                contactListView1.RemoveContact(contact);
         }
 
         private void toolStripMenuItem_Agenda_DropDownOpening(object sender, EventArgs e)
@@ -603,142 +604,22 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        #region Mouse Over Meniu - File Menu
-
-        private void toolStripMenuItem_File_New_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Create a new address book.";
-        }
-
-        private void toolStripMenuItem_File_New_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_Open_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Open address book from file.";
-        }
-
-        private void toolStripMenuItem_File_Open_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_Save_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Save current opened address book.";
-        }
-
-        private void toolStripMenuItem_File_Save_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_SaveAs_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Save current opened address book with another name.";
-        }
-
-        private void toolStripMenuItem_File_SaveAs_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_Export_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Export current opened address book in another format.";
-        }
-
-        private void toolStripMenuItem_File_Export_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_Import_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Import address book from another format.";
-        }
-
-        private void toolStripMenuItem_File_Import_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_File_Exit_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Exit the program.";
-        }
-
-        private void toolStripMenuItem_File_Exit_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        #endregion
-
-        #region Mouse Over Meniu - Address Book Menu
-
-        private void toolStripMenuItem_Agenda_AddContact_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Add a new contact.";
-        }
-
-        private void toolStripMenuItem_Agenda_AddContact_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_Agenda_DeleteContact_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Delete the selected contact.";
-        }
-
-        private void toolStripMenuItem_Agenda_DeleteContact_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        private void toolStripMenuItem_Agenda_Properties_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Display the address book properties.";
-        }
-
-        private void toolStripMenuItem_Agenda_Properties_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        #endregion
-
-        #region Mouse Over Meniu - Help
-
-        private void toolStripMenuItem_Help_About_MouseEnter(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = "Info about the program.";
-        }
-
-        private void toolStripMenuItem_Help_About_MouseLeave(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = statusText;
-        }
-
-        #endregion
-
         #region Form
 
         private void FormLisimba_Shown(object sender, EventArgs e)
         {
+            toolStripStatusLabel1.Text = statusService.StatusText;
+
             if (!string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
                 BookOpen(fileNameToOpenAtLoad);
         }
 
         private void FormLisimba_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!AskToSave())
-            {
+            bool allowToContinue = AskToSave();
+
+            if (!allowToContinue)
                 e.Cancel = true;
-            }
         }
 
         #endregion

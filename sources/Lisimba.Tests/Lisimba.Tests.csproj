@@ -46,8 +46,10 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\StatusServiceTests\ConstructorTests.cs" />
-    <Compile Include="Services\StatusServiceTests\SetStatusTextTests.cs" />
-    <Compile Include="Services\StatusServiceTests\PropertiesTests.cs" />
+    <Compile Include="Services\StatusServiceTests\ResetTests.cs" />
+    <Compile Include="Services\StatusServiceTests\DefaultStatusTextTests.cs" />
+    <Compile Include="Services\StatusServiceTests\SetPermanentStatusTextTests.cs" />
+    <Compile Include="Services\StatusServiceTests\StatusTextTests.cs" />
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>

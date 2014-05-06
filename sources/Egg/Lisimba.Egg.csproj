@@ -15,7 +15,8 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -75,12 +76,14 @@
     <Compile Include="Enums\FileFormat.cs" />
     <Compile Include="Entities\ImportRule.cs" />
     <Compile Include="Exceptions\EggIncorrectVersionException.cs" />
+    <Compile Include="Gating\EggXmlGate.cs" />
     <Compile Include="IncorrectXmlVersionEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entities\ContactCollection.cs" />
     <Compile Include="Enums\SearchMode.cs" />
     <Compile Include="Enums\SortDirection.cs" />
     <Compile Include="Enums\ContactsSortingType.cs" />
+    <Compile Include="Gating\YahooCsvGate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ref\ICSharpCode.SharpZipLib.dll" />

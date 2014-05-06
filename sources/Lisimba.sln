@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba", "Lisimba\Lisimba.csproj", "{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Egg", "Egg\Egg.csproj", "{9381D002-2DD0-41B5-B676-3B0358B6EFF0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Egg", "Egg\Lisimba.Egg.csproj", "{9381D002-2DD0-41B5-B676-3B0358B6EFF0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desmond", "Desmond\Desmond.csproj", "{D38A5822-F1C6-40BD-B49B-980FA7B1D557}"
 EndProject

@@ -14,10 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Tests
+using DustInTheWind.Lisimba.Services;
+using System;
+
+namespace DustInTheWind.Lisimba.UserControls
 {
-    public class TestConstants
+    class CustomMenuItem : System.Windows.Forms.ToolStripMenuItem
     {
-        public const int AcceptedTimeError = 500;
+        public StatusService StatusService { get; set; }
+
+        public string ShortDescription { get; set; }
+
+        protected override void OnMouseEnter(EventArgs e)
+        {
+            if (StatusService != null)
+                StatusService.SetPermanentStatusText(ShortDescription);
+
+            base.OnMouseEnter(e);
+        }
+
+        protected override void OnMouseLeave(EventArgs e)
+        {
+            if (StatusService != null)
+                StatusService.Reset();
+
+            base.OnMouseLeave(e);
+        }
     }
 }
