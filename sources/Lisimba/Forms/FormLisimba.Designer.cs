@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_File_Import = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_ImportFromYahooCSV = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_File_RecentFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem_File_RecentFiles = new DustInTheWind.Lisimba.UserControls.MenuItemWithChildren();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_File_Exit = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_Agenda = new System.Windows.Forms.ToolStripMenuItem();
@@ -427,7 +427,7 @@ namespace DustInTheWind.Lisimba.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private DustInTheWind.Lisimba.UserControls.CustomMenuItem toolStripMenuItem_Agenda_Properties;
         private ContactListView contactListView1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_File_RecentFiles;
+        private DustInTheWind.Lisimba.UserControls.MenuItemWithChildren toolStripMenuItem_File_RecentFiles;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

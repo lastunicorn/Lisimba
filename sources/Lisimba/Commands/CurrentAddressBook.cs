@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.IO;
+using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Services;
-using System;
-using System.IO;
-using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Commands
 {

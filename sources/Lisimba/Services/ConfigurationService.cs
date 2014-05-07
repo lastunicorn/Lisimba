@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Config;
 using System.Configuration;
+using DustInTheWind.Lisimba.Config;
 
 namespace DustInTheWind.Lisimba.Services
 {

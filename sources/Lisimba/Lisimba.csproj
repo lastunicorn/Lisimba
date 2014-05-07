@@ -133,6 +133,10 @@
     <Compile Include="UserControls\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserControls\MenuItemWithChildren.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
     <Compile Include="UserControls\WebSiteListView.cs">
       <SubType>UserControl</SubType>
     </Compile>

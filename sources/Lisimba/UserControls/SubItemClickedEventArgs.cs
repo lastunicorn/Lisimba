@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2014 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,29 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba
+using System;
+using System.Windows.Forms;
+
+namespace DustInTheWind.Lisimba.UserControls
 {
-    class ProgramArguments
+    class SubItemClickedEventArgs : EventArgs
     {
-        private readonly string fileName = string.Empty;
+        public ToolStripMenuItem MenuItem { get; private set; }
 
-        public string FileName
+        public SubItemClickedEventArgs(ToolStripMenuItem menuItem)
         {
-            get { return fileName; }
-        }
+            if (menuItem == null) throw new ArgumentNullException("menuItem");
 
-        public ProgramArguments(string[] args)
-        {
-            CmdLineArgs argList = new CmdLineArgs(args);
-
-            if (argList.Count > 0)
-                fileName = argList[0];
-
-            //if (argList.ContainsKey("f"))
-            //    fileName = argList["f"];
-
-            //if (argList.ContainsKey("filename"))
-            //    fileName = argList["filename"];
+            MenuItem = menuItem;
         }
     }
 }
