@@ -24,18 +24,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     /// </summary>
     [Serializable()]
     [XmlRoot("Email")]
-    public class Email
+    public class Email : IObservableEntity
     {
-        #region Fields
-
         private string address;
         private string description;
 
-        #endregion Fields
-
-        #region Properties
-
-        //[XmlElement("Address")]
         /// <summary>
         /// The e-mail address.
         /// </summary>
@@ -46,11 +39,10 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 address = value;
-                OnAddressChanged(new AddressChangedEventArgs(value));
+                OnChanged();
             }
         }
 
-        //[XmlElement("Description")]
         /// <summary>
         /// A short description of the e-mail address.
         /// </summary>
@@ -62,70 +54,29 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 description = value;
-                OnDescriptionChanged(new DescriptionChangedEventArgs(value));
+                OnChanged();
             }
         }
 
-        #endregion Properties
+        #region Event Changed
 
-        #region Event AddressChanged
+        public event EventHandler Changed;
 
-        public event EventHandler<AddressChangedEventArgs> AddressChanged;
-
-        public class AddressChangedEventArgs : EventArgs
+        protected virtual void OnChanged()
         {
-            public string NewValue { get; private set; }
+            EventHandler handler = Changed;
 
-            public AddressChangedEventArgs(string newValue)
-            {
-                NewValue = newValue;
-            }
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
-        protected void OnAddressChanged(AddressChangedEventArgs e)
-        {
-            if (AddressChanged != null)
-                AddressChanged(this, e);
-        }
-
-        #endregion Event AddressChanged
-
-        #region Event DescriptionChanged
-
-        public event EventHandler<DescriptionChangedEventArgs> DescriptionChanged;
-
-        public class DescriptionChangedEventArgs : EventArgs
-        {
-            public string NewValue { get; private set; }
-
-            public DescriptionChangedEventArgs(string newValue)
-            {
-                NewValue = newValue;
-            }
-        }
-
-        protected void OnDescriptionChanged(DescriptionChangedEventArgs e)
-        {
-            if (DescriptionChanged != null)
-                DescriptionChanged(this, e);
-        }
-
-        #endregion Event DescriptionChanged
+        #endregion
 
         /// <summary>
         /// Creates a new empty Email object.
         /// </summary>
         public Email()
             : this(string.Empty, string.Empty)
-        {
-        }
-
-        /// <summary>
-        /// Creates a new Email object with the address specified. The description text is an empty string.
-        /// </summary>
-        /// <param name="address"></param>
-        public Email(string address)
-            : this(address, string.Empty)
         {
         }
 
@@ -150,19 +101,10 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         }
 
         /// <summary>
-        /// Removes the data from all the fields
-        /// </summary>
-        public void Clear()
-        {
-            address = string.Empty;
-            description = string.Empty;
-        }
-
-        /// <summary>
         /// Copy the data from the Email object passed as parameter into the current object.
         /// </summary>
         /// <param name="email"></param>
-        public void CopyFrom(Email email)
+        private void CopyFrom(Email email)
         {
             address = email.address;
             description = email.description;
@@ -170,9 +112,15 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Email)) return false;
+            Email email = obj as Email;
 
-            Email email = (Email)obj;
+            return Equals(email);
+        }
+
+        private bool Equals(Email email)
+        {
+            if (email == null)
+                return false;
 
             if (!address.Equals(email.address)) return false;
             if (!description.Equals(email.description)) return false;

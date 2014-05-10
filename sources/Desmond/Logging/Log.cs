@@ -18,7 +18,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Desmond.Logging
 {
     /// <summary>
     /// Class used to write log information to a file.

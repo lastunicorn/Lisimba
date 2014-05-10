@@ -17,6 +17,8 @@
 using System;
 using System.ServiceProcess;
 using System.Windows.Forms;
+using DustInTheWind.Desmond.UI;
+using DustInTheWind.Desmond.WinService;
 
 namespace DustInTheWind.Desmond
 {

@@ -21,103 +21,50 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Phone")]
-    public class Phone
+    public class Phone : IObservableEntity
     {
-        #region Fields
-
         private string number;
         private string description;
 
-        #endregion Fields
-
-        #region Properties
-
-        //[XmlElement("Number")]
         [XmlAttribute("Number")]
         public string Number
         {
             get { return number; }
-            set { number = value; OnNumberChanged(new NumberChangedEventArgs(value)); }
+            set
+            {
+                number = value;
+                OnChanged();
+            }
         }
 
-        //[XmlElement("Description")]
         [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }
-            set { description = value; OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
+            set
+            {
+                description = value;
+                OnChanged();
+            }
         }
 
-        #endregion Properties
 
+        #region Event Changed
 
-        #region Event NumberChanged
+        public event EventHandler Changed;
 
-        public event NumberChangedHandler NumberChanged;
-        public delegate void NumberChangedHandler(object sender, NumberChangedEventArgs e);
-
-        public class NumberChangedEventArgs : EventArgs
+        protected virtual void OnChanged()
         {
-            private string newValue;
+            EventHandler handler = Changed;
 
-            public string NewValue
-            {
-                get { return newValue; }
-            }
-
-            public NumberChangedEventArgs(string newValue)
-            {
-                this.newValue = newValue;
-            }
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
-        private void OnNumberChanged(NumberChangedEventArgs e)
-        {
-            if (NumberChanged != null)
-            {
-                NumberChanged(this, e);
-            }
-        }
-
-        #endregion Event NumberChanged
-
-        #region Event DescriptionChanged
-
-        public event DescriptionChangedHandler DescriptionChanged;
-        public delegate void DescriptionChangedHandler(object sender, DescriptionChangedEventArgs e);
-
-        public class DescriptionChangedEventArgs : EventArgs
-        {
-            private string newValue;
-
-            public string NewValue
-            {
-                get { return newValue; }
-            }
-
-            public DescriptionChangedEventArgs(string newValue)
-            {
-                this.newValue = newValue;
-            }
-        }
-
-        protected void OnDescriptionChanged(DescriptionChangedEventArgs e)
-        {
-            if (DescriptionChanged != null)
-            {
-                DescriptionChanged(this, e);
-            }
-        }
-
-        #endregion Event DescriptionChanged
+        #endregion
 
         public Phone()
             : this("", "")
-        {
-        }
-
-        public Phone(string number)
-            : this(number, "")
         {
         }
 

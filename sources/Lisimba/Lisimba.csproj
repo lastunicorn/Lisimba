@@ -65,7 +65,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CurrentAddressBook.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\ShowAddressBookPropertiesCommand.cs" />
+    <Compile Include="Commands\CreateNewAddressBookCommand.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommand1.cs" />
+    <Compile Include="Commands\ShowAboutCommand.cs" />
+    <Compile Include="Commands\ExportYahooCsvCommand.cs" />
+    <Compile Include="Commands\SaveAsAddressBookCommand.cs" />
+    <Compile Include="Commands\ImportYahooCsvCommand.cs" />
+    <Compile Include="Services\CurrentData.cs" />
+    <Compile Include="Commands\OpenAddressBookCommand.cs" />
+    <Compile Include="Commands\SaveAddressBookCommand.cs" />
     <Compile Include="Comparers\TreeNodeByNicknameOrNameComparer.cs" />
     <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
     <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
@@ -77,6 +88,7 @@
       <DependentUpon>ctrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\LisimbaException.cs" />
+    <Compile Include="Forms\DateUpdatedEventArgs.cs" />
     <Compile Include="Forms\FormBiorythm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,9 +128,10 @@
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\CurrentData.cs" />
     <Compile Include="Services\RecentFilesService.cs" />
     <Compile Include="Services\StatusService.cs" />
+    <Compile Include="Services\UIService.cs" />
+    <Compile Include="Services\ZodiacService.cs" />
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -131,7 +144,7 @@
     <Compile Include="UserControls\ContactListView.Designer.cs">
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ContactViewPresenter.cs" />
+    <Compile Include="Presenters\ContactViewPresenter.cs" />
     <Compile Include="UserControls\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -139,7 +152,7 @@
     <Compile Include="UserControls\MenuItemWithChildren.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControls\NameChangedEventArgs.cs" />
+    <Compile Include="Presenters\NameChangedEventArgs.cs" />
     <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
     <Compile Include="UserControls\WebSiteListView.cs">
       <SubType>UserControl</SubType>

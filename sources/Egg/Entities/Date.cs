@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
     [XmlRoot("Date")]
-    public class Date
+    public class Date : IObservableEntity
     {
         #region Fields
 
@@ -34,78 +34,67 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #region Properties
 
-        //[XmlElement("Day", typeof(int))]
         [XmlAttribute("Day")]
         public int Day
         {
             get { return day; }
             set
             {
-                if (value < 0)
-                    day = 0;
-                else
-                {
-                    if (month > 0)
-                    {
-                        int maxDay = year == 0 ? 31 : DateTime.DaysInMonth(year, month);
-                        if (Day > maxDay)
-                            day = maxDay;
-                        else
-                            day = value;
-                    }
-                    else
-                    {
-                        day = value;
-                    }
-                }
+                SetDayInternal(value);
+                OnChanged();
             }
         }
 
-        //[XmlElement("Month", typeof(int))]
         [XmlAttribute("Month")]
         public int Month
         {
             get { return month; }
             set
             {
-                if (value < 0)
-                    month = 0;
-                else if (value > 12)
-                    month = 12;
-                else
-                    month = value;
-
-                Day = day;
+                SetMonthInternal(value);
+                OnChanged();
             }
         }
 
-        //[XmlElement("Year", typeof(int))]
         [XmlAttribute("Year")]
         public int Year
         {
             get { return year; }
             set
             {
-                if (value <= 0)
-                    year = 0;
-                else
-                    year = value;
-
-                Day = day;
+                SetYearInternal(value);
+                OnChanged();
             }
         }
 
-        // Description
         [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }
-            set { description = value; }
+            set
+            {
+                description = value;
+                OnChanged();
+            }
         }
 
         public bool IsCompleteDate
         {
             get { return day > 0 && month > 0 && year > 0; }
+        }
+
+        #endregion
+
+        #region Event Changed
+
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
+        {
+            EventHandler handler = Changed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         #endregion
@@ -127,33 +116,12 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         {
         }
 
-        public Date(int day, int month)
-            : this(day, month, 0, string.Empty)
-        {
-        }
-
-        public Date(int day, int month, string description)
-            : this(day, month, 0, description)
-        {
-        }
-
-        public Date(int day, int month, int year)
-            : this(day, month, year, "")
-        {
-        }
-
         public Date(int day, int month, int year, string description)
         {
-            // Description
             this.description = description;
 
-            // Month
             Month = month;
-
-            // Year
             Year = year;
-
-            // Day
             Day = day;
         }
 
@@ -168,17 +136,63 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public void SetValues(int day, int month, int year)
         {
-            // Month
             Month = month;
-
-            // Year
             Year = year;
-
-            // Day
             Day = day;
         }
 
         #endregion
+
+        private void SetDayInternal(int value)
+        {
+            if (value < 0)
+            {
+                // todo: throw exception instead
+
+                day = 0;
+                return;
+            }
+
+            if (month == 0)
+            {
+                // todo: throw exception if greater then 31
+
+                day = value;
+                return;
+            }
+
+            int maxDay = year == 0
+                ? 31
+                : DateTime.DaysInMonth(year, month);
+
+            // todo: throw exception if value is greater then maxDay.
+            day = (Day > maxDay) ? maxDay : value;
+        }
+
+        private void SetMonthInternal(int value)
+        {
+            if (value < 0)
+            {
+                month = 0;
+                return;
+            }
+
+            // todo: throw exception if day does not permit the month that is about to be set.
+
+            month = (value > 12) ? 12 : value;
+
+            Day = day;
+        }
+
+        private void SetYearInternal(int value)
+        {
+            // todo: throw exception if value is less then 0
+            year = (value <= 0) ? 0 : value;
+
+            // todo: throw exception if day does not permit the year that is about to be set.
+
+            Day = day;
+        }
 
         #region public void SetValues(int day, int month, int year, string description)
 
@@ -456,19 +470,18 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override string ToString()
         {
-            return (year == 0 ? "0000" : year.ToString()) + " " + (month < 10 ? "0" : "") + month + " " + (day < 10 ? "0" : "") + day;
+            string yearAsString = year == 0 ? "0000" : year.ToString();
+            string monthAsString = (month < 10 ? "0" : "") + month;
+            string dayAsString = (day < 10 ? "0" : "") + day;
+
+            return string.Format("{0} {1} {2}", yearAsString, monthAsString, dayAsString);
         }
 
         public DateTime ToDateTime()
         {
-            if (IsCompleteDate)
-            {
-                return new DateTime(year, month, day);
-            }
-            else
-            {
-                return new DateTime(0);
-            }
+            return IsCompleteDate
+                ? new DateTime(year, month, day)
+                : new DateTime(0);
         }
 
         //public string ToLongString()

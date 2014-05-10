@@ -16,7 +16,7 @@
 
 using System.ServiceProcess;
 
-namespace DustInTheWind.Desmond
+namespace DustInTheWind.Desmond.WinService
 {
     /// <summary>
     /// <para>

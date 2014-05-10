@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Drawing;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
@@ -24,13 +25,20 @@ namespace DustInTheWind.Lisimba.UserControls
         string MiddleName { get; set; }
         string LastName { get; set; }
         string Nickname { get; set; }
+
         string Birthday { get; set; }
+        Image ZodiacSignImage { set; }
+        string ZodiacSignText { set; }
+
         string Notes { get; set; }
-        PhoneCollection Phones { get; set; }
-        EmailCollection Emails { get; set; }
-        WebSiteCollection WebSites { get; set; }
-        AddressCollection Addresses { get; set; }
-        DateCollection Dates { get; set; }
-        MessengerIdCollection MessengerIds { get; set; }
+
+        PhoneCollection Phones { set; }
+        EmailCollection Emails { set; }
+        WebSiteCollection WebSites { set; }
+        AddressCollection Addresses { set; }
+        DateCollection Dates { set; }
+        MessengerIdCollection MessengerIds { set; }
+
+        void EditBirthday(Date birthday);
     }
 }

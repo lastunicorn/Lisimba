@@ -18,22 +18,20 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Presenters;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
     /// <summary>
     /// Control to display and edit a contact.
     /// </summary>
-    public partial class ContactView : System.Windows.Forms.UserControl
+    public partial class ContactView : UserControl, IContactView
     {
-        private ContactViewPresenter presenter;
+        private readonly ContactViewPresenter presenter;
 
-        private Contact contact;
-        private bool isInitializationMode;
+        //private Contact contact;
+        //private bool isInitializationMode;
 
         readonly FormDateEdit formBirthdayEdit;
 
@@ -56,8 +54,10 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             InitializeComponent();
 
-            CurrentData currentData = new CurrentData();
-            presenter = new ContactViewPresenter(currentData);
+            presenter = new ContactViewPresenter();
+            presenter.View = this;
+            presenter.ContactChanged += (sender, args) => OnContactChanged();
+            presenter.NameChanged += (sender, args) => OnNameChanged(args);
 
             CheckMandatoryFields = true;
 
@@ -89,188 +89,188 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public Contact Contact
         {
-            get { return contact; }
+            get { return presenter.Contact; }
             set
             {
-                contact = value;
-                RefreshData();
+                presenter.Contact = value;
+                //RefreshData();
             }
         }
 
-        #region private void ClearData()
+        //#region private void ClearData()
 
-        private void ClearData()
-        {
-            textBoxFirstName.Text = string.Empty;
-            textBoxMiddleName.Text = string.Empty;
-            textBoxLastName.Text = string.Empty;
-            textBoxNickname.Text = string.Empty;
+        //private void ClearData()
+        //{
+        //    textBoxFirstName.Text = string.Empty;
+        //    textBoxMiddleName.Text = string.Empty;
+        //    textBoxLastName.Text = string.Empty;
+        //    textBoxNickname.Text = string.Empty;
 
-            labelBirthday.Text = string.Empty;
-            pictureBoxZodiacSign.Image = null;
-            labelZodiacSign.Text = string.Empty;
+        //    labelBirthday.Text = string.Empty;
+        //    pictureBoxZodiacSign.Image = null;
+        //    labelZodiacSign.Text = string.Empty;
 
-            textBoxNotes.Text = string.Empty;
+        //    textBoxNotes.Text = string.Empty;
 
-            phonesNode.Nodes.Clear();
-            emailsNode.Nodes.Clear();
-            webSitesNode.Nodes.Clear();
-            addressesNode.Nodes.Clear();
-            datesNode.Nodes.Clear();
-            messengerIdsNode.Nodes.Clear();
-        }
+        //    phonesNode.Nodes.Clear();
+        //    emailsNode.Nodes.Clear();
+        //    webSitesNode.Nodes.Clear();
+        //    addressesNode.Nodes.Clear();
+        //    datesNode.Nodes.Clear();
+        //    messengerIdsNode.Nodes.Clear();
+        //}
 
-        #endregion
+        //#endregion
 
         private void RefreshData()
         {
-            isInitializationMode = true;
+            //isInitializationMode = true;
 
-            ClearData();
+            //ClearData();
 
-            if (contact != null)
-            {
-                textBoxFirstName.Text = contact.Name.FirstName;
-                textBoxMiddleName.Text = contact.Name.MiddleName;
-                textBoxLastName.Text = contact.Name.LastName;
-                textBoxNickname.Text = contact.Name.Nickname;
+            //if (contact != null)
+            //{
+            //    textBoxFirstName.Text = contact.Name.FirstName;
+            //    textBoxMiddleName.Text = contact.Name.MiddleName;
+            //    textBoxLastName.Text = contact.Name.LastName;
+            //    textBoxNickname.Text = contact.Name.Nickname;
 
-                labelBirthday.Text = contact.Birthday.ToString();
+            //    labelBirthday.Text = contact.Birthday.ToString();
 
-                pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
-                toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
-                labelZodiacSign.Text = contact.ZogiacSign.ToString();
+            //    pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
+            //    toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
+            //    labelZodiacSign.Text = contact.ZogiacSign.ToString();
 
-                textBoxNotes.Text = contact.Notes;
+            //    textBoxNotes.Text = contact.Notes;
 
 
-                // Phones
-                foreach (Phone phone in contact.Phones)
-                {
-                    TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
-                    phoneNode.Tag = phone;
-                    phonesNode.Nodes.Add(phoneNode);
-                    phoneNode.ImageIndex = -2;
-                    phoneNode.SelectedImageIndex = -2;
-                }
-                phonesNode.Expand();
+            //    // Phones
+            //    foreach (Phone phone in contact.Phones)
+            //    {
+            //        TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
+            //        phoneNode.Tag = phone;
+            //        phonesNode.Nodes.Add(phoneNode);
+            //        phoneNode.ImageIndex = -2;
+            //        phoneNode.SelectedImageIndex = -2;
+            //    }
+            //    phonesNode.Expand();
 
-                // Emails
-                foreach (Email email in contact.Emails)
-                {
-                    TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
-                    emailNode.Tag = email;
-                    emailsNode.Nodes.Add(emailNode);
-                    emailNode.ImageIndex = -2;
-                    emailNode.SelectedImageIndex = -2;
-                }
-                emailsNode.Expand();
+            //    // Emails
+            //    foreach (Email email in contact.Emails)
+            //    {
+            //        TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
+            //        emailNode.Tag = email;
+            //        emailsNode.Nodes.Add(emailNode);
+            //        emailNode.ImageIndex = -2;
+            //        emailNode.SelectedImageIndex = -2;
+            //    }
+            //    emailsNode.Expand();
 
-                // WebSites
-                foreach (WebSite webSite in contact.WebSites)
-                {
-                    TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
-                    webSiteNode.Tag = webSite;
-                    webSitesNode.Nodes.Add(webSiteNode);
-                    webSiteNode.ImageIndex = -2;
-                    webSiteNode.SelectedImageIndex = -2;
-                }
-                webSitesNode.Expand();
+            //    // WebSites
+            //    foreach (WebSite webSite in contact.WebSites)
+            //    {
+            //        TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
+            //        webSiteNode.Tag = webSite;
+            //        webSitesNode.Nodes.Add(webSiteNode);
+            //        webSiteNode.ImageIndex = -2;
+            //        webSiteNode.SelectedImageIndex = -2;
+            //    }
+            //    webSitesNode.Expand();
 
-                // Addresses
-                foreach (Address address in contact.Addresses)
-                {
-                    TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
-                    addressNode.Tag = address;
-                    addressesNode.Nodes.Add(addressNode);
-                    addressNode.ImageIndex = -2;
-                    addressNode.SelectedImageIndex = -2;
-                }
-                addressesNode.Expand();
+            //    // Addresses
+            //    foreach (Address address in contact.Addresses)
+            //    {
+            //        TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
+            //        addressNode.Tag = address;
+            //        addressesNode.Nodes.Add(addressNode);
+            //        addressNode.ImageIndex = -2;
+            //        addressNode.SelectedImageIndex = -2;
+            //    }
+            //    addressesNode.Expand();
 
-                // Dates
-                foreach (Date date in contact.Dates)
-                {
-                    TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
-                    dateNode.Tag = date;
-                    datesNode.Nodes.Add(dateNode);
-                    dateNode.ImageIndex = -2;
-                    dateNode.SelectedImageIndex = -2;
-                }
-                datesNode.Expand();
+            //    // Dates
+            //    foreach (Date date in contact.Dates)
+            //    {
+            //        TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
+            //        dateNode.Tag = date;
+            //        datesNode.Nodes.Add(dateNode);
+            //        dateNode.ImageIndex = -2;
+            //        dateNode.SelectedImageIndex = -2;
+            //    }
+            //    datesNode.Expand();
 
-                // Messenger Ids
-                foreach (MessengerId messengerId in contact.MessengerIds)
-                {
-                    TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
-                    messengerIdNode.Tag = messengerId;
-                    messengerIdsNode.Nodes.Add(messengerIdNode);
-                    messengerIdNode.ImageIndex = -2;
-                    messengerIdNode.SelectedImageIndex = -2;
-                }
-                messengerIdsNode.Expand();
-            }
+            //    // Messenger Ids
+            //    foreach (MessengerId messengerId in contact.MessengerIds)
+            //    {
+            //        TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
+            //        messengerIdNode.Tag = messengerId;
+            //        messengerIdsNode.Nodes.Add(messengerIdNode);
+            //        messengerIdNode.ImageIndex = -2;
+            //        messengerIdNode.SelectedImageIndex = -2;
+            //    }
+            //    messengerIdsNode.Expand();
+            //}
 
-            isInitializationMode = false;
+            //isInitializationMode = false;
         }
 
-        private Image GetZodiacImage(ZodiacSign sign)
-        {
-            Image img = null;
+        //private Image GetZodiacImage(ZodiacSign sign)
+        //{
+        //    Image img = null;
 
-            switch (sign)
-            {
-                case ZodiacSign.Aquarius:
-                    img = Resources.Aquarius;
-                    break;
+        //    switch (sign)
+        //    {
+        //        case ZodiacSign.Aquarius:
+        //            img = Resources.Aquarius;
+        //            break;
 
-                case ZodiacSign.Pisces:
-                    img = Resources.Pisces;
-                    break;
+        //        case ZodiacSign.Pisces:
+        //            img = Resources.Pisces;
+        //            break;
 
-                case ZodiacSign.Aries:
-                    img = Resources.Aries;
-                    break;
+        //        case ZodiacSign.Aries:
+        //            img = Resources.Aries;
+        //            break;
 
-                case ZodiacSign.Taurus:
-                    img = Resources.Taurus;
-                    break;
+        //        case ZodiacSign.Taurus:
+        //            img = Resources.Taurus;
+        //            break;
 
-                case ZodiacSign.Gemini:
-                    img = Resources.Gemini;
-                    break;
+        //        case ZodiacSign.Gemini:
+        //            img = Resources.Gemini;
+        //            break;
 
-                case ZodiacSign.Cancer:
-                    img = Resources.Cancer;
-                    break;
+        //        case ZodiacSign.Cancer:
+        //            img = Resources.Cancer;
+        //            break;
 
-                case ZodiacSign.Leo:
-                    img = Resources.Leo;
-                    break;
+        //        case ZodiacSign.Leo:
+        //            img = Resources.Leo;
+        //            break;
 
-                case ZodiacSign.Virgo:
-                    img = Resources.Virgo;
-                    break;
+        //        case ZodiacSign.Virgo:
+        //            img = Resources.Virgo;
+        //            break;
 
-                case ZodiacSign.Libra:
-                    img = Resources.Libra;
-                    break;
+        //        case ZodiacSign.Libra:
+        //            img = Resources.Libra;
+        //            break;
 
-                case ZodiacSign.Scorpio:
-                    img = Resources.Scorpio;
-                    break;
+        //        case ZodiacSign.Scorpio:
+        //            img = Resources.Scorpio;
+        //            break;
 
-                case ZodiacSign.Sagittarius:
-                    img = Resources.Sagittarius;
-                    break;
+        //        case ZodiacSign.Sagittarius:
+        //            img = Resources.Sagittarius;
+        //            break;
 
-                case ZodiacSign.Capricorn:
-                    img = Resources.Capricorn;
-                    break;
-            }
+        //        case ZodiacSign.Capricorn:
+        //            img = Resources.Capricorn;
+        //            break;
+        //    }
 
-            return img;
-        }
+        //    return img;
+        //}
 
         #region Event NameChanged
 
@@ -302,59 +302,30 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.FirstName = textBoxFirstName.Text;
-            OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
-            OnContactChanged();
+            presenter.FirstNameWasChanged();
         }
 
         private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
         {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.MiddleName = textBoxMiddleName.Text;
-            OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
-            OnContactChanged();
+            presenter.MiddleNameWasChanged();
         }
 
         private void textBoxLastName_TextChanged(object sender, EventArgs e)
         {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.LastName = textBoxLastName.Text;
-            OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
-            OnContactChanged();
+            presenter.LastNameWasChanged();
         }
 
         private void textBoxNickname_TextChanged(object sender, EventArgs e)
         {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.Nickname = textBoxNickname.Text;
-            OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
-            OnContactChanged();
+            presenter.NicknameWasChanged();
         }
 
         private void textBoxNotes_TextChanged(object sender, EventArgs e)
         {
-            if (isInitializationMode)
-                return;
-
-            contact.Notes = textBoxNotes.Text;
-            OnContactChanged();
+            presenter.NotesWasChanged();
         }
 
-        private void textBoxBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            EditBirthday();
-        }
-
-        private void EditBirthday()
+        public void EditBirthday(Date birthday)
         {
             // client position 
             int cx = labelBirthday.Location.X;
@@ -366,41 +337,41 @@ namespace DustInTheWind.Lisimba.UserControls
 
             // initialize form
             formBirthdayEdit.Location = sp;
-            formBirthdayEdit.Date = contact.Birthday;
+            formBirthdayEdit.Date = birthday;
 
             // show form
             formBirthdayEdit.Show();
             formBirthdayEdit.Focus();
         }
 
-        void formBirthdayEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
+        private void formBirthdayEdit_DateUpdated(object sender, DateUpdatedEventArgs e)
         {
-            labelBirthday.Text = e.Date.ToString();
-            pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
-            labelZodiacSign.Text = contact.ZogiacSign.ToString();
-            OnContactChanged();
+            //labelBirthday.Text = e.Date.ToString();
+            //pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
+            //labelZodiacSign.Text = contact.ZogiacSign.ToString();
+            //OnContactChanged();
         }
 
         private void textBoxBirthday_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
-            {
-                EditBirthday();
-            }
+                presenter.BirthdayEditWasRequested();
         }
 
         private void textBoxName_Leave(object sender, EventArgs e)
         {
-            if (CheckMandatoryFields)
+            if (!CheckMandatoryFields)
+                return;
+
+            bool isAnyFilled = textBoxFirstName.Text.Length != 0 || 
+                    textBoxMiddleName.Text.Length != 0 ||
+                    textBoxLastName.Text.Length != 0 ||
+                    textBoxNickname.Text.Length != 0;
+
+            if (!isAnyFilled)
             {
-                if (textBoxFirstName.Text.Length == 0 &&
-                    textBoxMiddleName.Text.Length == 0 &&
-                    textBoxLastName.Text.Length == 0 &&
-                    textBoxNickname.Text.Length == 0)
-                {
-                    MessageBox.Show("At least one of the fields marked with \"*\" must be filled.", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                    ((TextBox)sender).Focus();
-                }
+                MessageBox.Show("At least one of the fields marked with \"*\" must be filled.", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                ((TextBox)sender).Focus();
             }
         }
 
@@ -409,10 +380,7 @@ namespace DustInTheWind.Lisimba.UserControls
             TreeNode selectedNode = treeView1.SelectedNode;
 
             if (selectedNode == null || selectedNode.Tag == null)
-            {
-                contact.Addresses.Add(new Address());
                 return;
-            }
 
             if (selectedNode != treeView1.GetNodeAt(e.Location))
                 return;
@@ -490,7 +458,7 @@ namespace DustInTheWind.Lisimba.UserControls
             OnContactChanged();
         }
 
-        void formDateEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
+        void formDateEdit_DateUpdated(object sender, DateUpdatedEventArgs e)
         {
             RefreshData();
             OnContactChanged();
@@ -498,14 +466,192 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            EditBirthday();
+            presenter.BirthdayEditWasRequested();
         }
 
         private void labelBirthday_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
+                presenter.BirthdayEditWasRequested();
+        }
+
+        // -------------------------------------------------------------------
+
+        public string FirstName
+        {
+            get { return textBoxFirstName.Text; }
+            set { textBoxFirstName.Text = value; }
+        }
+
+        public string MiddleName
+        {
+            get { return textBoxMiddleName.Text; }
+            set { textBoxMiddleName.Text = value; }
+        }
+
+        public string LastName
+        {
+            get { return textBoxLastName.Text; }
+            set { textBoxLastName.Text = value; }
+        }
+
+        public string Nickname
+        {
+            get { return textBoxNickname.Text; }
+            set { textBoxNickname.Text = value; }
+        }
+
+        public string Birthday
+        {
+            get { return labelBirthday.Text; }
+            set { labelBirthday.Text = value; }
+        }
+
+        public Image ZodiacSignImage
+        {
+            set { pictureBoxZodiacSign.Image = value; }
+        }
+
+        public string ZodiacSignText
+        {
+            set { labelZodiacSign.Text = value; }
+        }
+
+        public string Notes
+        {
+            get { return textBoxNotes.Text; }
+            set { textBoxNotes.Text = value; }
+        }
+
+        public PhoneCollection Phones
+        {
+            set
             {
-                EditBirthday();
+                phonesNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (Phone phone in value)
+                {
+                    TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
+                    phoneNode.Tag = phone;
+                    phonesNode.Nodes.Add(phoneNode);
+                    phoneNode.ImageIndex = -2;
+                    phoneNode.SelectedImageIndex = -2;
+                }
+
+                phonesNode.Expand();
+            }
+        }
+
+        public EmailCollection Emails
+        {
+            set
+            {
+                emailsNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (Email email in value)
+                {
+                    TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
+                    emailNode.Tag = email;
+                    emailsNode.Nodes.Add(emailNode);
+                    emailNode.ImageIndex = -2;
+                    emailNode.SelectedImageIndex = -2;
+                }
+
+                emailsNode.Expand();
+            }
+        }
+
+        public WebSiteCollection WebSites
+        {
+            set
+            {
+                webSitesNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (WebSite webSite in value)
+                {
+                    TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
+                    webSiteNode.Tag = webSite;
+                    webSitesNode.Nodes.Add(webSiteNode);
+                    webSiteNode.ImageIndex = -2;
+                    webSiteNode.SelectedImageIndex = -2;
+                }
+
+                webSitesNode.Expand();
+            }
+        }
+
+        public AddressCollection Addresses
+        {
+            set
+            {
+                addressesNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (Address address in value)
+                {
+                    TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
+                    addressNode.Tag = address;
+                    addressesNode.Nodes.Add(addressNode);
+                    addressNode.ImageIndex = -2;
+                    addressNode.SelectedImageIndex = -2;
+                }
+
+                addressesNode.Expand();
+            }
+        }
+
+        public DateCollection Dates
+        {
+            set
+            {
+                datesNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (Date date in value)
+                {
+                    TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
+                    dateNode.Tag = date;
+                    datesNode.Nodes.Add(dateNode);
+                    dateNode.ImageIndex = -2;
+                    dateNode.SelectedImageIndex = -2;
+                }
+
+                datesNode.Expand();
+            }
+        }
+
+        public MessengerIdCollection MessengerIds
+        {
+            set
+            {
+                messengerIdsNode.Nodes.Clear();
+
+                if (value == null)
+                    return;
+
+                foreach (MessengerId messengerId in value)
+                {
+                    TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
+                    messengerIdNode.Tag = messengerId;
+                    messengerIdsNode.Nodes.Add(messengerIdNode);
+                    messengerIdNode.ImageIndex = -2;
+                    messengerIdNode.SelectedImageIndex = -2;
+                }
+
+                messengerIdsNode.Expand();
             }
         }
     }

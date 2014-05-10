@@ -18,7 +18,7 @@ using System;
 using System.Configuration;
 using System.IO;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Desmond.Logging
 {
     /// <summary>
     /// Helper class that opens the log files.

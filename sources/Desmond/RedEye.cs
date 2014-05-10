@@ -18,17 +18,17 @@ using System;
 using System.IO;
 using System.Threading;
 using DustInTheWind.Desmond.Config;
+using DustInTheWind.Desmond.Logging;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.Egg.Gating;
 
 namespace DustInTheWind.Desmond
 {
     internal class RedEye : TaskRunner
     {
         private Timer timer;
-        private AddressBookManager addressBookManager;
         private AddressBook addressBook;
         private object lastContact;
         private Contact nextContact;
@@ -47,9 +47,6 @@ namespace DustInTheWind.Desmond
 
             if (string.IsNullOrEmpty(config.AddressBook.File))
                 throw new ApplicationException("The configuration file does not specify an address book to load.");
-
-            addressBookManager = new AddressBookManager();
-            addressBookManager.IncorrectXmlVersion += addressBookLoader_IncorrectXmlVersion;
         }
 
         private void timer_TimerElapsed(object o)
@@ -82,7 +79,9 @@ namespace DustInTheWind.Desmond
             }
 
             string addressBookFileName = config.AddressBook.File;
-            addressBook = addressBookManager.LoadFromFile(addressBookFileName);
+
+            ZipXmlGate gate = new ZipXmlGate();
+            addressBook = gate.Load(addressBookFileName);
 
             // Sort by birthday
             addressBook.Contacts.Sort(ContactsSortingType.Birthday, SortDirection.Ascending);

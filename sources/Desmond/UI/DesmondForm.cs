@@ -19,7 +19,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Desmond
+namespace DustInTheWind.Desmond.UI
 {
     /// <summary>
     /// <para>

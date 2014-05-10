@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Specialized;
 using System.Reflection;
 using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Egg.Enums;
@@ -25,22 +26,39 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     [Serializable()]
     public class AddressBook
     {
-        // Version
+
+        private string version;
+        private string name;
+        private ContactCollection contacts;
+
         /// <summary>
         /// The version of the application that created this address book.
         /// </summary>
         [XmlElement("Version")]
-        public string Version { get; set; }
+        public string Version
+        {
+            get { return version; }
+            set
+            {
+                version = value;
+                OnChanged();
+            }
+        }
 
-        // Name
         /// <summary>
         /// Gets or sets the name of the address book.
         /// </summary>
         [XmlElement("Name")]
-        public string Name { get; set; }
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnChanged();
+            }
+        }
 
-        private ContactCollection contacts;
-        //Contacts
         /// <summary>
         /// Gets a collection of Contact.
         /// </summary>
@@ -50,7 +68,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             get { return contacts; }
         }
 
-        // FileName
         /// <summary>
         /// Gets the full file name of the address book or empty string if is a new one.
         /// </summary>
@@ -115,13 +132,40 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #endregion
 
+        #region Event Changed
+
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
+        {
+            EventHandler handler = Changed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        #endregion
+
         public AddressBook()
         {
             Name = "New Address Book";
             contacts = new ContactCollection();
+            contacts.CollectionChanged += HandleContactsCollectionChanged;
+            contacts.ItemChanged += HandleContactChanged;
+
             FileName = string.Empty;
 
             Version = GetCurrentAssemblyVersion();
+        }
+
+        private void HandleContactChanged(object sender, ItemChangedEventArgs<Contact> itemChangedEventArgs)
+        {
+            OnChanged();
+        }
+
+        private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        {
+            OnChanged();
         }
 
         private static string GetCurrentAssemblyVersion()
@@ -132,14 +176,14 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             return assemblyName.Version.ToString();
         }
 
-        public int Add(Contact contact)
+        public void Add(Contact contact)
         {
             bool allowAdd = IsAllowToAdd(contact);
 
             if (!allowAdd)
-                return -1;
+                return;
 
-            return Contacts.Add(contact);
+            Contacts.Add(contact);
         }
 
         private bool IsAllowToAdd(Contact contact)

@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     /// </summary>
     [Serializable()]
     [XmlRoot("WebSite")]
-    public class WebSite
+    public class WebSite : IObservableEntity
     {
         private string address;
         private string description;
@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 address = value;
-                OnAddressChanged(new AddressChangedEventArgs(value));
+                OnChanged();
             }
         }
 
@@ -53,53 +53,23 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 description = value;
-                OnDescriptionChanged(new DescriptionChangedEventArgs(value));
+                OnChanged();
             }
         }
 
-        #region Event AddressChanged
+        #region Event Changed
 
-        public event EventHandler<AddressChangedEventArgs> AddressChanged;
+        public event EventHandler Changed;
 
-        public class AddressChangedEventArgs : EventArgs
+        protected virtual void OnChanged()
         {
-            public string NewValue { get; private set; }
+            EventHandler handler = Changed;
 
-            public AddressChangedEventArgs(string newValue)
-            {
-                NewValue = newValue;
-            }
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
-        protected void OnAddressChanged(AddressChangedEventArgs e)
-        {
-            if (AddressChanged != null)
-                AddressChanged(this, e);
-        }
-
-        #endregion Event AddressChanged
-
-        #region Event DescriptionChanged
-
-        public event EventHandler<DescriptionChangedEventArgs> DescriptionChanged;
-
-        public class DescriptionChangedEventArgs : EventArgs
-        {
-            public string NewValue { get; private set; }
-
-            public DescriptionChangedEventArgs(string newValue)
-            {
-                NewValue = newValue;
-            }
-        }
-
-        protected void OnDescriptionChanged(DescriptionChangedEventArgs e)
-        {
-            if (DescriptionChanged != null)
-                DescriptionChanged(this, e);
-        }
-
-        #endregion Event DescriptionChanged
+        #endregion
 
         /// <summary>
         /// Creates a new empty WebSite object.

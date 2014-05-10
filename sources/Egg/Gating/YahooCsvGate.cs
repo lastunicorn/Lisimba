@@ -20,7 +20,7 @@ using zcsv;
 
 namespace DustInTheWind.Lisimba.Egg.Gating
 {
-    class YahooCsvGate
+    public class YahooCsvGate
     {
         public AddressBook Load(string fileName)
         {

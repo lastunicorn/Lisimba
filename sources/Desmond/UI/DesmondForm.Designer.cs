@@ -1,4 +1,4 @@
-namespace DustInTheWind.Desmond
+namespace DustInTheWind.Desmond.UI
 {
     partial class DesmondForm
     {

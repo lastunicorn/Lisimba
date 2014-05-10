@@ -23,23 +23,35 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormBookProperties : Form
     {
-        private AddressBook book;
-        public bool IsModified = false;
+        private AddressBook addressBook;
 
-        public AddressBook Book
+        public AddressBook AddressBook
         {
-            get { return book; }
+            get { return addressBook; }
             set
             {
-                book = value;
-                IsModified = false;
+                addressBook = value;
+                PopulateView();
+            }
+        }
 
-                if (value != null)
-                {
-                    textBoxBookName.Text = value.Name;
-                    textBoxFileLocation.Text = value.FileName.Length == 0 ? "<Address book is not saved yet.>" : Path.GetFullPath(value.FileName);
-                    textBoxContactsCount.Text = value.Count.ToString();
-                }
+        private void PopulateView()
+        {
+            if (addressBook == null)
+            {
+                textBoxBookName.Text = string.Empty;
+                textBoxFileLocation.Text = string.Empty;
+                textBoxContactsCount.Text = "0";
+            }
+            else
+            {
+                textBoxBookName.Text = addressBook.Name;
+
+                textBoxFileLocation.Text = addressBook.FileName.Length == 0
+                    ? "<Address book is not saved yet.>"
+                    : Path.GetFullPath(addressBook.FileName);
+
+                textBoxContactsCount.Text = addressBook.Count.ToString();
             }
         }
 
@@ -50,14 +62,13 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            if (book != null)
-            {
-                if (!book.Name.Equals(textBoxBookName.Text))
-                {
-                    book.Name = textBoxBookName.Text;
-                    IsModified = true;
-                }
-            }
+            if (addressBook == null)
+                return;
+
+            bool nameIsChanged = !addressBook.Name.Equals(textBoxBookName.Text);
+
+            if (nameIsChanged)
+                addressBook.Name = textBoxBookName.Text;
         }
 
         private void FormBookProperties_Shown(object sender, EventArgs e)

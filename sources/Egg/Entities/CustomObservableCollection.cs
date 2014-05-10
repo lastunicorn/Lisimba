@@ -22,8 +22,41 @@ using System.Collections.Specialized;
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
     public class CustomObservableCollection<T> : ObservableCollection<T>
+        where T : class, IObservableEntity
     {
         private bool suppressCollectionChangedEvent;
+
+        #region Event ItemChanged
+
+        public event EventHandler<ItemChangedEventArgs<T>> ItemChanged;
+
+        protected virtual void OnItemChanged(ItemChangedEventArgs<T> e)
+        {
+            EventHandler<ItemChangedEventArgs<T>> handler = ItemChanged;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        #endregion
+
+        protected override void InsertItem(int index, T item)
+        {
+            base.InsertItem(index, item);
+            item.Changed += HandleItemChanged;
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            T itemToRemove = Items[index];
+            base.RemoveItem(index);
+            itemToRemove.Changed -= HandleItemChanged;
+        }
+
+        private void HandleItemChanged(object sender, EventArgs e)
+        {
+            OnItemChanged(new ItemChangedEventArgs<T>(sender as T));
+        }
 
         protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
         {
@@ -50,7 +83,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 suppressCollectionChangedEvent = false;
             }
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, items));
         }
     }
 }

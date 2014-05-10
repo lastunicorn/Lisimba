@@ -15,17 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    public class NameChangedEventArgs : EventArgs
+    public interface IObservableEntity
     {
-        public NameSection NameSection { get; private set; }
-
-        public NameChangedEventArgs(NameSection nameSection)
-        {
-            NameSection = nameSection;
-        }
+        event EventHandler Changed;
     }
 }

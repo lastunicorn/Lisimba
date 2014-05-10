@@ -15,20 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormDateEdit : FormEditBase
     {
-        private bool isModified = false;
-        public bool IsModified
-        {
-            get { return isModified; }
-        }
-
-        private Date date = null;
+        private Date date;
         public Date Date
         {
             get { return date; }
@@ -39,8 +32,6 @@ namespace DustInTheWind.Lisimba.Forms
                 comboBoxDay.SelectedIndex = value.Day;
                 comboBoxMonth.SelectedIndex = value.Month;
                 textBoxYear.Text = (value.Year != 0 ? value.Year.ToString() : string.Empty);
-
-                isModified = false;
             }
         }
 
@@ -50,84 +41,48 @@ namespace DustInTheWind.Lisimba.Forms
 
             comboBoxDay.Items.Add("-");
             for (int i = 1; i < 32; i++)
+            {
                 comboBoxDay.Items.Add(i);
+            }
 
             comboBoxMonth.Items.Add("-");
-            //this.comboBoxMonth.Items.AddRange(this.GetMonthList());
             comboBoxMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
 
-            comboBoxDay.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
-            comboBoxMonth.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
-            textBoxYear.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            comboBoxDay.KeyDown += FormEditBase_KeyDown;
+            comboBoxMonth.KeyDown += FormEditBase_KeyDown;
+            textBoxYear.KeyDown += FormEditBase_KeyDown;
         }
-
-        //private string[] GetMonthList()
-        //{
-        //    return new string[12]
-        //        {
-        //            "January",
-        //            "February",
-        //            "March",
-        //            "Apryl",
-        //            "May",
-        //            "June",
-        //            "July",
-        //            "August",
-        //            "September",
-        //            "October",
-        //            "November",
-        //            "December"
-        //        };
-        //}
 
         #region Event DateUpdated
 
-        public event DateUpdatedHandler DateUpdated;
-        public delegate void DateUpdatedHandler(object sender, DateUpdatedEventArgs e);
-
-        public class DateUpdatedEventArgs : EventArgs
-        {
-            private Date date;
-            public Date Date
-            {
-                get { return date; }
-            }
-
-            public DateUpdatedEventArgs(Date date)
-            {
-                this.date = date;
-            }
-        }
+        public event EventHandler<DateUpdatedEventArgs> DateUpdated;
 
         protected virtual void OnDateUpdated(DateUpdatedEventArgs e)
         {
-            if (DateUpdated != null)
-            {
-                DateUpdated(this, e);
-            }
+            EventHandler<DateUpdatedEventArgs> handler = DateUpdated;
+
+            if (handler != null)
+                handler(this, e);
         }
 
         #endregion
 
         protected override void UpdateData()
         {
-            int day = 0;
-            int month = 0;
-            int year = 0;
+            int day = comboBoxDay.SelectedIndex;
+            int month = comboBoxMonth.SelectedIndex;
 
-            day = comboBoxDay.SelectedIndex;
-            month = comboBoxMonth.SelectedIndex;
+            int year;
             int.TryParse(textBoxYear.Text, out year);
 
-            if (date.Day != day ||
-                date.Month != month ||
-                date.Year != year)
-            {
-                date.SetValues(day, month, year);
-                isModified = true;
+            var dataWasChanged = date.Day != day || date.Month != month || date.Year != year;
 
-                OnDateUpdated(new DateUpdatedEventArgs(date));
-            }
+            if (!dataWasChanged)
+                return;
+
+            date.SetValues(day, month, year);
+
+            OnDateUpdated(new DateUpdatedEventArgs(date));
         }
     }
 }

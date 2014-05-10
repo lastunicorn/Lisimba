@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
@@ -24,6 +25,12 @@ namespace DustInTheWind.Lisimba.UserControls
         public StatusService StatusService { get; set; }
 
         public string ShortDescription { get; set; }
+
+        public ICommand Command { get; set; }
+
+        public object CommandParameter { get; set; }
+
+        public Func<object> CommandParameterProvider { get; set; }
 
         protected override void OnMouseEnter(EventArgs e)
         {
@@ -39,6 +46,23 @@ namespace DustInTheWind.Lisimba.UserControls
                 StatusService.Reset();
 
             base.OnMouseLeave(e);
+        }
+
+        protected override void OnClick(EventArgs e)
+        {
+            if (Command != null)
+            {
+                object commandParameter = CommandParameterProvider != null
+                    ? CommandParameterProvider()
+                    : CommandParameter;
+
+                if (commandParameter == null)
+                    Command.Execute();
+                else
+                    Command.Execute(commandParameter);
+            }
+
+            base.OnClick(e);
         }
     }
 }

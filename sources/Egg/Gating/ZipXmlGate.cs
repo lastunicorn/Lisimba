@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -26,28 +27,27 @@ using ICSharpCode.SharpZipLib.Zip;
 
 namespace DustInTheWind.Lisimba.Egg.Gating
 {
-    class EggXmlGate
+    public class ZipXmlGate
     {
-        #region Event IncorrectXmlVersion
+        private readonly List<Exception> warnings;
 
-        public event EventHandler<IncorrectXmlVersionEventArgs> IncorrectVersion;
-
-        protected virtual void OnIncorrectVersion(IncorrectXmlVersionEventArgs e)
+        public IEnumerable<Exception> Warnings
         {
-            if (IncorrectVersion == null)
-                return;
-
-            IncorrectVersion(null, e);
+            get { return warnings; }
         }
 
-        #endregion
+        public ZipXmlGate()
+        {
+            warnings = new List<Exception>();
+        }
 
         public AddressBook Load(string fileName)
         {
-            AddressBook book = null;
+            warnings.Clear();
+
+            AddressBook book;
 
             Version eggVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            Version lsbVersion = null;
 
             //System.Runtime.Serialization.IFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             //Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -56,19 +56,19 @@ namespace DustInTheWind.Lisimba.Egg.Gating
 
             //return book;
 
-
             // Create serializer
             XmlSerializer serializer = new XmlSerializer(typeof(AddressBook));
 
             // Create unzipper.
-            using (ZipInputStream zs = new ZipInputStream(File.OpenRead(fileName)))
+            using (ZipInputStream zipInputStream = new ZipInputStream(File.OpenRead(fileName)))
             {
                 ZipEntry zipEntry;
 
                 // Search for the "file.xml" file
                 do
                 {
-                    zipEntry = zs.GetNextEntry();
+                    zipEntry = zipInputStream.GetNextEntry();
+
                     if (zipEntry == null)
                         throw new EggException("Incorrect file. The archive does not contains the \"file.xml\" file.");
                 }
@@ -77,60 +77,35 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 // Unzip the "file.xml" file into memory.
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    int size = 0;
                     byte[] buffer = new byte[10240];
+
                     while (true)
                     {
-                        size = zs.Read(buffer, 0, buffer.Length);
-                        if (size > 0)
-                        {
-                            ms.Write(buffer, 0, size);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
+                        int size = zipInputStream.Read(buffer, 0, buffer.Length);
 
+                        if (size > 0)
+                            ms.Write(buffer, 0, size);
+                        else
+                            break;
+                    }
 
                     ms.Position = 0;
 
                     // Read lsb version
-                    lsbVersion = ReadLsbVersion(ms);
+                    Version lsbVersion = ReadLsbVersion(ms);
 
                     // Compare versions
                     if (lsbVersion == null)
                     {
-                        IncorrectXmlVersionEventArgs e = new IncorrectXmlVersionEventArgs(eggVersion, lsbVersion, fileName);
-                        OnIncorrectVersion(e);
-
-                        if (!e.ContinueParsing)
-                            throw new EggIncorrectVersionException();
+                        string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
+                        EggIncorrectVersionException warning = new EggIncorrectVersionException(warningText);
+                        warnings.Add(warning);
                     }
-                    else
+                    else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
                     {
-                        int verCmp = 0;
-                        verCmp = eggVersion.Major.CompareTo(lsbVersion.Major);
-                        if (verCmp != 0)
-                        {
-                            IncorrectXmlVersionEventArgs e = new IncorrectXmlVersionEventArgs(eggVersion, lsbVersion, fileName);
-                            OnIncorrectVersion(e);
-
-                            if (!e.ContinueParsing)
-                                throw new EggIncorrectVersionException();
-                        }
-                        else
-                        {
-                            verCmp = eggVersion.Minor.CompareTo(lsbVersion.Minor);
-                            if (verCmp != 0)
-                            {
-                                IncorrectXmlVersionEventArgs e = new IncorrectXmlVersionEventArgs(eggVersion, lsbVersion, fileName);
-                                OnIncorrectVersion(e);
-
-                                if (!e.ContinueParsing)
-                                    throw new EggIncorrectVersionException();
-                            }
-                        }
+                        string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileName, eggVersion.ToString(2), lsbVersion.ToString(2));
+                        EggIncorrectVersionException warning = new EggIncorrectVersionException(warningText);
+                        warnings.Add(warning);
                     }
 
                     ms.Position = 0;

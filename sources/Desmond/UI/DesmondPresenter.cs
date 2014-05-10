@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Desmond
+namespace DustInTheWind.Desmond.UI
 {
     internal class DesmondPresenter
     {

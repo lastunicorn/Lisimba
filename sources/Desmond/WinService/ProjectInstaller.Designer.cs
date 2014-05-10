@@ -1,4 +1,4 @@
-namespace DustInTheWind.Desmond
+namespace DustInTheWind.Desmond.WinService
 {
     partial class ProjectInstaller
     {

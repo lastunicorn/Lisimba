@@ -52,23 +52,25 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBirthday = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -288,9 +290,9 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -325,61 +327,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.splitContainer2.SplitterDistance = 252;
             this.splitContainer2.TabIndex = 0;
             // 
-            // labelBirthday
-            // 
-            this.labelBirthday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBirthday.Location = new System.Drawing.Point(102, 79);
-            this.labelBirthday.Margin = new System.Windows.Forms.Padding(3);
-            this.labelBirthday.Name = "labelBirthday";
-            this.labelBirthday.Size = new System.Drawing.Size(147, 13);
-            this.labelBirthday.TabIndex = 13;
-            this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelBirthday.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.labelBirthday_PreviewKeyDown);
-            this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.treeView1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(258, 212);
-            this.groupBox1.TabIndex = 12;
-            this.groupBox1.TabStop = false;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.ImageIndex = 1;
-            this.label4.ImageList = this.imageList1;
-            this.label4.Location = new System.Drawing.Point(3, 3);
-            this.label4.Margin = new System.Windows.Forms.Padding(3);
-            this.label4.MinimumSize = new System.Drawing.Size(0, 14);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 14);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "     Notes:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // textBoxNotes
-            // 
-            this.textBoxNotes.AcceptsReturn = true;
-            this.textBoxNotes.AcceptsTab = true;
-            this.textBoxNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxNotes.BackColor = System.Drawing.Color.Ivory;
-            this.textBoxNotes.Location = new System.Drawing.Point(3, 23);
-            this.textBoxNotes.Multiline = true;
-            this.textBoxNotes.Name = "textBoxNotes";
-            this.textBoxNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxNotes.Size = new System.Drawing.Size(508, 133);
-            this.textBoxNotes.TabIndex = 5;
-            this.textBoxNotes.WordWrap = false;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -411,6 +358,18 @@ namespace DustInTheWind.Lisimba.UserControls
             this.tableLayoutPanel1.Size = new System.Drawing.Size(252, 212);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
+            // labelBirthday
+            // 
+            this.labelBirthday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBirthday.Location = new System.Drawing.Point(102, 79);
+            this.labelBirthday.Margin = new System.Windows.Forms.Padding(3);
+            this.labelBirthday.Name = "labelBirthday";
+            this.labelBirthday.Size = new System.Drawing.Size(147, 13);
+            this.labelBirthday.TabIndex = 13;
+            this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
+            this.labelBirthday.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.labelBirthday_PreviewKeyDown);
+            // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -424,6 +383,17 @@ namespace DustInTheWind.Lisimba.UserControls
             this.flowLayoutPanel1.Size = new System.Drawing.Size(67, 58);
             this.flowLayoutPanel1.TabIndex = 14;
             this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(258, 212);
+            this.groupBox1.TabIndex = 12;
+            this.groupBox1.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
@@ -440,6 +410,39 @@ namespace DustInTheWind.Lisimba.UserControls
             this.tableLayoutPanel2.Size = new System.Drawing.Size(514, 159);
             this.tableLayoutPanel2.TabIndex = 9;
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label4.ImageIndex = 1;
+            this.label4.ImageList = this.imageList1;
+            this.label4.Location = new System.Drawing.Point(3, 3);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.MinimumSize = new System.Drawing.Size(0, 14);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 14);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "     Notes:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // textBoxNotes
+            // 
+            this.textBoxNotes.AcceptsReturn = true;
+            this.textBoxNotes.AcceptsTab = true;
+            this.textBoxNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxNotes.BackColor = System.Drawing.Color.Ivory;
+            this.textBoxNotes.Location = new System.Drawing.Point(3, 23);
+            this.textBoxNotes.Multiline = true;
+            this.textBoxNotes.Name = "textBoxNotes";
+            this.textBoxNotes.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxNotes.Size = new System.Drawing.Size(508, 133);
+            this.textBoxNotes.TabIndex = 5;
+            this.textBoxNotes.WordWrap = false;
+            this.textBoxNotes.TextChanged += new System.EventHandler(this.textBoxNotes_TextChanged);
+            // 
             // ContactView
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
@@ -450,15 +453,17 @@ namespace DustInTheWind.Lisimba.UserControls
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);

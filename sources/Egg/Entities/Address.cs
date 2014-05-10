@@ -20,80 +20,135 @@ using System.Xml.Serialization;
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
-	[XmlRoot("Address")]
-	public class Address
-	{
-		#region Fields
+    [XmlRoot("Address")]
+    public class Address : IObservableEntity
+    {
+        private string street;
+        private string city;
+        private string state;
+        private string postalCode;
+        private string country;
+        private string description;
 
-        #endregion
-
-		#region Properties
-		
-		// Address
         [XmlAttribute("Street")]
-        public string Street { get; set; }
+        public string Street
+        {
+            get { return street; }
+            set
+            {
+                street = value;
+                OnChanged();
+            }
+        }
 
-        // City
         [XmlAttribute("City")]
-        public string City { get; set; }
+        public string City
+        {
+            get { return city; }
+            set
+            {
+                city = value;
+                OnChanged();
+            }
+        }
 
-        // State
         [XmlAttribute("State")]
-        public string State { get; set; }
+        public string State
+        {
+            get { return state; }
+            set
+            {
+                state = value;
+                OnChanged();
+            }
+        }
 
-        // ZIP
         [XmlAttribute("PostalCode")]
-        public string PostalCode { get; set; }
+        public string PostalCode
+        {
+            get { return postalCode; }
+            set
+            {
+                postalCode = value;
+                OnChanged();
+            }
+        }
 
-        // Country
         [XmlAttribute("Country")]
-        public string Country { get; set; }
+        public string Country
+        {
+            get { return country; }
+            set
+            {
+                country = value;
+                OnChanged();
+            }
+        }
 
-        // Description
         [XmlAttribute("Description")]
-        public string Description { get; set; }
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnChanged();
+            }
+        }
+
+        #region Event Changed
+
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
+        {
+            EventHandler handler = Changed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
 
         #endregion
 
-		public Address()
+        public Address()
             : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
-		{
-		}
+        {
+        }
 
-		public Address(string address, string city, string state, string postalCode, string country)
+        public Address(string address, string city, string state, string postalCode, string country)
             : this(address, city, state, postalCode, country, "")
-		{
-		}
+        {
+        }
 
         public Address(string address, string city, string state, string postalCode, string country, string description)
-		{
-			Street = address;
-			City = city;
-			State = state;
-			PostalCode = postalCode;
-			Country = country;
-			Description = description;
-		}
+        {
+            Street = address;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+            Country = country;
+            Description = description;
+        }
 
-		public Address(Address address)
-		{
-			CopyFrom(address);
-		}
+        public Address(Address address)
+        {
+            CopyFrom(address);
+        }
 
-		public void CopyFrom(Address address)
-		{
-			Street = address.Street;
-			City = address.City;
-			State = address.State;
-			PostalCode = address.PostalCode;
-			Country = address.Country;
-			Description = address.Description;
-		}
+        public void CopyFrom(Address address)
+        {
+            Street = address.Street;
+            City = address.City;
+            State = address.State;
+            PostalCode = address.PostalCode;
+            Country = address.Country;
+            Description = address.Description;
+        }
 
-		public Address GetCopy()
-		{
-			return new Address(Street, City, State, PostalCode, Country, Description);
-		}
+        public Address GetCopy()
+        {
+            return new Address(Street, City, State, PostalCode, Country, Description);
+        }
 
         public override string ToString()
         {
@@ -146,5 +201,5 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             return true;
         }
-	}
+    }
 }

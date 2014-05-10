@@ -24,172 +24,95 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     /// </summary>
     [Serializable()]
     [XmlRoot("MessengerId")]
-    public class MessengerId
+    public class MessengerId : IObservableEntity
     {
-        #region Fields
+        private string id;
+        private string description;
 
-		private string id;
-		private string description;
-
-		#endregion Fields
-
-		#region Properties
-
-		/// <summary>
+        /// <summary>
         /// The messenger id.
         /// </summary>
-		[XmlAttribute("Id")]
-		public string Id
-		{
-			get { return id; }
-            set { id = value; OnIdChanged(new IdChangedEventArgs(value)); }
-		}
+        [XmlAttribute("Id")]
+        public string Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnChanged();
+            }
+        }
 
         /// <summary>
         /// A short description of the e-mail address.
         /// </summary>
         [XmlAttribute("Description")]
-		public string Description
-		{
-			get { return description; }
-            set { description = value; OnDescriptionChanged(new DescriptionChangedEventArgs(value)); }
-		}
-
-		#endregion Properties
-
-        #region Events
-
-        #region Event IdChanged
-
-        public event IdChangedHandler IdChanged;
-        public delegate void IdChangedHandler(object sender, IdChangedEventArgs e);
-
-        public class IdChangedEventArgs : EventArgs
+        public string Description
         {
-            private string newValue;
-
-            public string NewValue
+            get { return description; }
+            set
             {
-                get { return newValue; }
-            }
-	
-            public IdChangedEventArgs(string newValue)
-            {
-                this.newValue = newValue;
+                description = value;
+                OnChanged();
             }
         }
 
-        protected void OnIdChanged(IdChangedEventArgs e)
+        #region Event Changed
+
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
         {
-            if (IdChanged != null)
-            {
-                IdChanged(this, e);
-            }
+            EventHandler handler = Changed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
-
-        #endregion Event IdChanged
-
-        #region Event DescriptionChanged
-
-        public event DescriptionChangedHandler DescriptionChanged;
-        public delegate void DescriptionChangedHandler(object sender, DescriptionChangedEventArgs e);
-
-        public class DescriptionChangedEventArgs : EventArgs
-        {
-            private string newValue;
-
-            public string NewValue
-            {
-                get { return newValue; }
-            }
-
-            public DescriptionChangedEventArgs(string newValue)
-            {
-                this.newValue = newValue;
-            }
-        }
-
-        protected void OnDescriptionChanged(DescriptionChangedEventArgs e)
-        {
-            if (DescriptionChanged != null)
-            {
-                DescriptionChanged(this, e);
-            }
-        }
-
-        #endregion Event DescriptionChanged
 
         #endregion
-
-        #region Constructors
 
         /// <summary>
         /// Creates a new empty MessengerId object.
         /// </summary>
-		public MessengerId()
+        public MessengerId()
             : this(string.Empty, string.Empty)
-		{
-		}
-
-        /// <summary>
-        /// Creates a new MessengerId object with the id specified. The description text is an empty string.
-        /// </summary>
-        /// <param name="address"></param>
-		public MessengerId(string id)
-			:this(id, string.Empty)
-		{
-		}
+        {
+        }
 
         /// <summary>
         /// Creates a new MessengerId object with the id and description specified.
         /// </summary>
-        /// <param name="address">The e-mail address</param>
-        /// <param name="description">A short description of the email address.</param>
-		public MessengerId(string id, string description)
-		{
-			this.id = id;
-			this.description = description;
-		}
+        public MessengerId(string id, string description)
+        {
+            this.id = id;
+            this.description = description;
+        }
 
         /// <summary>
         /// Creates a new MessengerId object with the data copied from the one passed as parameter.
         /// </summary>
-        /// <param name="email"></param>
         public MessengerId(MessengerId messenger)
-		{
-			CopyFrom(messenger);
-		}
-
-		#endregion Constructors
-
-        #region public void Clear()
+        {
+            CopyFrom(messenger);
+        }
 
         /// <summary>
         /// Removes the data from all the fields
         /// </summary>
-		public void Clear()
-		{
+        public void Clear()
+        {
             id = string.Empty;
             description = string.Empty;
         }
 
-        #endregion
-
-        #region public void CopyFrom(MessengerId messenger)
-
         /// <summary>
         /// Copy the data from the MessengerId object passed as parameter into the current object.
         /// </summary>
-        /// <param name="email"></param>
         public void CopyFrom(MessengerId messenger)
-		{
-			id = messenger.id;
-			description = messenger.description;
-		}
-
-        #endregion
-
-        #region public override bool Equals(object obj)
+        {
+            id = messenger.id;
+            description = messenger.description;
+        }
 
         public override bool Equals(object obj)
         {
@@ -203,15 +126,9 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             return true;
         }
 
-        #endregion
-
-        #region public override string ToString()
-
         public override string ToString()
         {
             return Id + (description.Length > 0 ? " - " + description : string.Empty);
         }
-
-        #endregion
     }
 }

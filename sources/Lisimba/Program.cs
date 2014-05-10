@@ -44,12 +44,12 @@ namespace DustInTheWind.Lisimba
             ConfigurationService configurationService = new ConfigurationService();
             StatusService statusService = new StatusService { DefaultStatusText = "Ready" };
             RecentFilesService recentFilesService = new RecentFilesService(configurationService);
-            CurrentAddressBook currentAddressBook = new CurrentAddressBook(statusService, recentFilesService);
+            CurrentData currentData = new CurrentData(statusService, recentFilesService);
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            FormLisimba formLisimba = new FormLisimba(arguments, configurationService, statusService, recentFilesService, currentAddressBook);
+            FormLisimba formLisimba = new FormLisimba(arguments, configurationService, statusService, recentFilesService, currentData);
             Application.Run(formLisimba);
         }
     }

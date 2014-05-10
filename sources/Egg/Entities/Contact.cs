@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Specialized;
 using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Egg.Enums;
 
@@ -23,7 +22,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable]
     [XmlRoot("Contact")]
-    public class Contact : IComparable
+    public class Contact : IComparable, IObservableEntity
     {
         private PersonName name = new PersonName();
 
@@ -50,7 +49,14 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             get { return birthday; }
             set
             {
+                if (birthday != null)
+                    birthday.Changed -= HandleBirthdayChanged;
+
                 birthday = value;
+
+                if (birthday != null)
+                    birthday.Changed += HandleBirthdayChanged;
+
                 OnChanged();
             }
         }
@@ -196,12 +202,23 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public Contact()
         {
-            phones.CollectionChanged += HandlePhonesCollectionChanged;
-            emails.CollectionChanged += HandleEmailsCollectionChanged;
-            webSites.CollectionChanged += HandleWebSitesCollectionChanged;
-            addresses.CollectionChanged += HandleAddressesCollectionChanged;
-            dates.CollectionChanged += HandleDatesCollectionChanged;
-            messengerIds.CollectionChanged += HandleMessengerIdsCollectionChanged;
+            phones.CollectionChanged += (sender, e) => OnChanged();
+            phones.ItemChanged += (sender, e) => OnChanged();
+
+            emails.CollectionChanged += (sender, e) => OnChanged();
+            emails.ItemChanged += (sender, e) => OnChanged();
+
+            webSites.CollectionChanged += (sender, e) => OnChanged();
+            webSites.ItemChanged += (sender, e) => OnChanged();
+
+            addresses.CollectionChanged += (sender, e) => OnChanged();
+            addresses.ItemChanged += (sender, e) => OnChanged();
+
+            dates.CollectionChanged += (sender, e) => OnChanged();
+            dates.ItemChanged += (sender, e) => OnChanged();
+
+            messengerIds.CollectionChanged += (sender, e) => OnChanged();
+            messengerIds.ItemChanged += (sender, e) => OnChanged();
         }
 
         private void HandleNameChanged(object sender, EventArgs e)
@@ -209,32 +226,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             OnChanged();
         }
 
-        private void HandlePhonesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnChanged();
-        }
-
-        private void HandleEmailsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnChanged();
-        }
-
-        private void HandleWebSitesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnChanged();
-        }
-
-        private void HandleAddressesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnChanged();
-        }
-
-        private void HandleDatesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            OnChanged();
-        }
-
-        private void HandleMessengerIdsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void HandleBirthdayChanged(object sender, EventArgs e)
         {
             OnChanged();
         }

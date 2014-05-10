@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.UserControls
             {
                 get { return date; }
             }
-	
+
             public DateAddedEventArgs(Date date)
             {
                 this.date = date;
@@ -72,7 +72,7 @@ namespace DustInTheWind.Lisimba.UserControls
             {
                 get { return date; }
             }
-	
+
             public DateChangedEventArgs(Date date)
             {
                 this.date = date;
@@ -152,7 +152,7 @@ namespace DustInTheWind.Lisimba.UserControls
                 rect = dataGridView1.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
 
                 formDateEdit.Location = dataGridView1.PointToScreen(new Point(rect.Left, rect.Top + rect.Height - 1));
-                formDateEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formDataEdit_DateUpdated);
+                formDateEdit.DateUpdated += formDataEdit_DateUpdated;
                 formDateEdit.Show();
                 formDateEdit.Focus();
 
@@ -160,7 +160,7 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        void formDataEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
+        void formDataEdit_DateUpdated(object sender, DateUpdatedEventArgs e)
         {
             RefreshData();
             OnDateChanged(new DateChangedEventArgs(e.Date));
