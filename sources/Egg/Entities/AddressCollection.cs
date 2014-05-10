@@ -15,54 +15,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    public class AddressCollection : CollectionBase
+    [Serializable]
+    public class AddressCollection : CustomObservableCollection<Address>
     {
-
-        public Address this[int index]
-        {
-            get { return ((Address)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(Address value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(Address value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, Address value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(Address value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(Address value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (Address address in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = address;
                 dr[1] = address.Description;
                 dt.Rows.Add(dr);
@@ -84,41 +53,76 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void CopyFrom(AddressCollection values)
         {
             Clear();
-            for (int i = 0; i < values.Count; i++)
+
+            IEnumerable<Address> newAddresses = values.Select(address => new Address(address));
+
+            foreach (Address newAddress in newAddresses)
             {
-                Add(new Address(values[i]));
+                Add(newAddress);
             }
+        }
+
+        /// <summary>
+        /// Returns the <see cref="Address"/> object that match the description.
+        /// </summary>
+        /// <param name="text">The text to search in the description field.</param>
+        /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
+        /// <returns>The <see cref="Address"/> object that match or <c>null</c>.</returns>
+        public Address SearchByDescription(string text, SearchMode searchMode)
+        {
+            foreach (Address address in Items)
+            {
+                switch (searchMode)
+                {
+                    case SearchMode.Exact:
+                        if (address.Description.CompareTo(text) == 0)
+                            return address;
+                        break;
+
+                    case SearchMode.StartingWith:
+                        if (address.Description.StartsWith(text))
+                            return address;
+                        break;
+
+                    case SearchMode.EndingWith:
+                        if (address.Description.EndsWith(text))
+                            return address;
+                        break;
+
+                    case SearchMode.Containing:
+                        if (address.Description.IndexOf(text) > 0)
+                            return address;
+                        break;
+                }
+            }
+
+            return null;
         }
 
         public override bool Equals(object obj)
         {
-            if (!(obj is AddressCollection))
+            AddressCollection addresses = obj as AddressCollection;
+
+            return Equals(addresses);
+        }
+
+        public bool Equals(AddressCollection addresses)
+        {
+            if (addresses == null)
                 return false;
 
-            AddressCollection addresses = (AddressCollection)obj;
+            if (addresses.Count != Count)
+                return false;
 
-            bool b1 = true;
-            bool b2;
-
-            for (int i = 0; i < addresses.Count; i++)
+            foreach (Address address in addresses)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
-                {
-                    if (addresses[i].Equals(List[j]))
-                    {
-                        b2 = true;
-                        break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
-                }
+                bool exists = Enumerable.Contains(Items, address);
+
+                if (!exists)
+                    return false;
             }
 
-            return b1;
+            return true;
         }
     }
 }

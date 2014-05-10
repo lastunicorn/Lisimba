@@ -36,7 +36,7 @@ namespace DustInTheWind.Desmond
                 throw new ArgumentNullException("view");
 
             this.view = view;
-            this.redEye = new RedEye();
+            redEye = new RedEye();
         }
 
         #endregion
@@ -47,14 +47,14 @@ namespace DustInTheWind.Desmond
         {
             try
             {
-                this.DisplayStarting();
-                this.redEye.Start();
-                this.DisplayStarted();
+                DisplayStarting();
+                redEye.Start();
+                DisplayStarted();
             }
             catch (Exception ex)
             {
-                this.DisplayStopped();
-                this.view.DisplayError(ex);
+                DisplayStopped();
+                view.DisplayError(ex);
             }
         }
 
@@ -66,14 +66,14 @@ namespace DustInTheWind.Desmond
         {
             try
             {
-                this.DisplayStopping();
-                this.redEye.Stop();
-                this.DisplayStopped();
+                DisplayStopping();
+                redEye.Stop();
+                DisplayStopped();
             }
             catch (Exception ex)
             {
-                this.DisplayStarted();
-                this.view.DisplayError(ex);
+                DisplayStarted();
+                view.DisplayError(ex);
             }
         }
 
@@ -83,10 +83,10 @@ namespace DustInTheWind.Desmond
 
         public void DisplayStarting()
         {
-            this.view.ButtonStartEnabled = false;
-            this.view.ButtonStopEnabled = false;
-            this.view.LedState = LedState.Yellow;
-            this.view.StatusText = "Starting...";
+            view.ButtonStartEnabled = false;
+            view.ButtonStopEnabled = false;
+            view.LedState = LedState.Yellow;
+            view.StatusText = "Starting...";
         }
 
         #endregion
@@ -95,10 +95,10 @@ namespace DustInTheWind.Desmond
 
         public void DisplayStarted()
         {
-            this.view.ButtonStartEnabled = false;
-            this.view.ButtonStopEnabled = true;
-            this.view.LedState = LedState.Green;
-            this.view.StatusText = "Started";
+            view.ButtonStartEnabled = false;
+            view.ButtonStopEnabled = true;
+            view.LedState = LedState.Green;
+            view.StatusText = "Started";
         }
 
         #endregion
@@ -107,10 +107,10 @@ namespace DustInTheWind.Desmond
 
         public void DisplayStopping()
         {
-            this.view.ButtonStartEnabled = false;
-            this.view.ButtonStopEnabled = false;
-            this.view.LedState = LedState.Yellow;
-            this.view.StatusText = "Stopping...";
+            view.ButtonStartEnabled = false;
+            view.ButtonStopEnabled = false;
+            view.LedState = LedState.Yellow;
+            view.StatusText = "Stopping...";
         }
 
         #endregion
@@ -119,10 +119,10 @@ namespace DustInTheWind.Desmond
 
         public void DisplayStopped()
         {
-            this.view.ButtonStartEnabled = true;
-            this.view.ButtonStopEnabled = false;
-            this.view.LedState = LedState.Red;
-            this.view.StatusText = "Stopped";
+            view.ButtonStartEnabled = true;
+            view.ButtonStopEnabled = false;
+            view.LedState = LedState.Red;
+            view.StatusText = "Stopped";
         }
 
         #endregion

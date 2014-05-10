@@ -116,6 +116,7 @@
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\CurrentData.cs" />
     <Compile Include="Services\RecentFilesService.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="UserControls\Biorythm.cs">
@@ -130,12 +131,15 @@
     <Compile Include="UserControls\ContactListView.Designer.cs">
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\ContactViewPresenter.cs" />
     <Compile Include="UserControls\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserControls\IContactView.cs" />
     <Compile Include="UserControls\MenuItemWithChildren.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserControls\NameChangedEventArgs.cs" />
     <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
     <Compile Include="UserControls\WebSiteListView.cs">
       <SubType>UserControl</SubType>

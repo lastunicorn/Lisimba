@@ -14,52 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections;
+using System;
 using System.Data;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    public class MessengerIdCollection : CollectionBase
+    [Serializable]
+    public class MessengerIdCollection : CustomObservableCollection<MessengerId>
     {
-        public MessengerId this[int index]
-        {
-            get { return ((MessengerId)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(MessengerId value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(MessengerId value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, MessengerId value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(MessengerId value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(MessengerId value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (MessengerId messenger in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = messenger.Id;
                 dr[1] = messenger.Description;
                 dt.Rows.Add(dr);
@@ -81,41 +52,74 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void CopyFrom(MessengerIdCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new MessengerId(values[i]));
             }
         }
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Returns the <see cref="MessengerId"/> object that match the description.
+        /// </summary>
+        /// <param name="text">The text to search in the description field.</param>
+        /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
+        /// <returns>The <see cref="MessengerId"/> object that match or <c>null</c>.</returns>
+        public MessengerId SearchByDescription(string text, SearchMode searchMode)
         {
-            if (!(obj is MessengerIdCollection))
-                return false;
-
-            MessengerIdCollection messengerIds = (MessengerIdCollection)obj;
-
-            bool b1 = true;
-            bool b2;
-
-            for (int i = 0; i < messengerIds.Count; i++)
+            foreach (MessengerId messengerId in Items)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
+                switch (searchMode)
                 {
-                    if (messengerIds[i].Equals(List[j]))
-                    {
-                        b2 = true;
+                    case SearchMode.Exact:
+                        if (messengerId.Description.CompareTo(text) == 0)
+                            return messengerId;
                         break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
+
+                    case SearchMode.StartingWith:
+                        if (messengerId.Description.StartsWith(text))
+                            return messengerId;
+                        break;
+
+                    case SearchMode.EndingWith:
+                        if (messengerId.Description.EndsWith(text))
+                            return messengerId;
+                        break;
+
+                    case SearchMode.Containing:
+                        if (messengerId.Description.IndexOf(text) > 0)
+                            return messengerId;
+                        break;
                 }
             }
 
-            return b1;
+            return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            MessengerIdCollection messengerIds = obj as MessengerIdCollection;
+
+            return Equals(messengerIds);
+        }
+
+        public bool Equals(MessengerIdCollection messengerIds)
+        {
+            if (messengerIds == null)
+                return false;
+
+            if (messengerIds.Count != Count)
+                return false;
+
+            for (int i = 0; i < messengerIds.Count; i++)
+            {
+                bool exists = Enumerable.Contains(Items, messengerIds[i]);
+
+                if (!exists)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

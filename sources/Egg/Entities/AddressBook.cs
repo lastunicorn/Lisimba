@@ -217,12 +217,5 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         {
             Contacts.Sort(sortType, sortDirection);
         }
-
-        public void CopyFrom(AddressBook addressBook)
-        {
-            Version = addressBook.Version;
-            Name = addressBook.Name;
-            Contacts.CopyFrom(addressBook.Contacts);
-        }
     }
 }

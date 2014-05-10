@@ -89,20 +89,20 @@ namespace DustInTheWind.Desmond
         /// </summary>
         public void Start()
         {
-            lock (this.lockState)
+            lock (lockState)
             {
-                if (this.task == null)
+                if (task == null)
                     throw new Exception("Cannot start because the task was not set yet.");
 
-                if (this.state == RunnerState.Stopped)
+                if (state == RunnerState.Stopped)
                 {
-                    this.stopRequested = false;
-                    this.error = null;
+                    stopRequested = false;
+                    error = null;
 
-                    this.workingThread = new Thread(new ThreadStart(this.Run));
+                    workingThread = new Thread(new ThreadStart(Run));
                     workingThread.Start();
 
-                    this.state = RunnerState.Running;
+                    state = RunnerState.Running;
                 }
                 else
                 {
@@ -116,17 +116,17 @@ namespace DustInTheWind.Desmond
         /// </summary>
         public void Stop()
         {
-            lock (this.lockState)
+            lock (lockState)
             {
-                if (this.state != RunnerState.Stopped)
+                if (state != RunnerState.Stopped)
                 {
-                    this.stopRequested = true;
-                    if (this.workingThread != null && this.workingThread.IsAlive && !this.workingThread.Join(THREAD_STOP_TIMEOUT))
+                    stopRequested = true;
+                    if (workingThread != null && workingThread.IsAlive && !workingThread.Join(THREAD_STOP_TIMEOUT))
                     {
-                        this.workingThread.Abort();
+                        workingThread.Abort();
                     }
 
-                    this.state = RunnerState.Stopped;
+                    state = RunnerState.Stopped;
                 }
             }
         }
@@ -140,12 +140,12 @@ namespace DustInTheWind.Desmond
             {
                 while (!stopRequested)
                 {
-                    this.task();
+                    task();
                 }
             }
             catch (Exception ex)
             {
-                this.error = ex;
+                error = ex;
                 throw;
             }
         }

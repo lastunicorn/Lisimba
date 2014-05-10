@@ -15,53 +15,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Data;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    public class DateCollection : CollectionBase
+    [Serializable]
+    public class DateCollection : CustomObservableCollection<Date>
     {
-        public Date this[int index]
-        {
-            get { return ((Date)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(Date value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(Date value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, Date value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(Date value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(Date value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (Date date in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = date;
                 dr[1] = date.Description;
                 dt.Rows.Add(dr);
@@ -91,33 +59,28 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            if (!(obj is DateCollection))
+            DateCollection dates = obj as DateCollection;
+
+            return Equals(dates);
+        }
+
+        public bool Equals(DateCollection dates)
+        {
+            if (dates == null)
                 return false;
 
-            DateCollection dates = (DateCollection)obj;
-
-            bool b1 = true;
-            bool b2;
+            if (dates.Count != Count)
+                return false;
 
             for (int i = 0; i < dates.Count; i++)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
-                {
-                    if (dates[i].Equals(List[j]))
-                    {
-                        b2 = true;
-                        break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
-                }
+                bool exists = Enumerable.Contains(Items, dates[i]);
+
+                if (!exists)
+                    return false;
             }
 
-            return b1;
+            return true;
         }
     }
 }

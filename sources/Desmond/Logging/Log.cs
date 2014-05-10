@@ -15,10 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Text;
 using System.IO;
 using System.Reflection;
-using System.Configuration;
 
 namespace DustInTheWind.Lisimba.Utils
 {
@@ -201,7 +199,7 @@ namespace DustInTheWind.Lisimba.Utils
         /// <returns>True if the file could be oppened.</returns>
         public bool OpenFile()
         {
-            if (!this.enabled || this.disposed)
+            if (!enabled || disposed)
                 return false;
 
             try
@@ -241,7 +239,7 @@ namespace DustInTheWind.Lisimba.Utils
         /// <returns>True if the file could be oppened.</returns>
         public bool OpenFile(string fileName)
         {
-            if (!this.enabled || this.disposed)
+            if (!enabled || disposed)
                 return false;
 
             this.fileName = fileName;
@@ -253,7 +251,7 @@ namespace DustInTheWind.Lisimba.Utils
         /// </summary>
         public void CloseFile()
         {
-            if (sw != null && !this.disposed)
+            if (sw != null && !disposed)
             {
                 try
                 {
@@ -406,7 +404,7 @@ namespace DustInTheWind.Lisimba.Utils
             {
                 try
                 {
-                    if (!this.enabled || this.disposed)
+                    if (!enabled || disposed)
                         return false;
 
                     string temp = string.Empty;
@@ -414,7 +412,7 @@ namespace DustInTheWind.Lisimba.Utils
                     // time stamp
                     if (this.writeTimeStamp && writeTimeStamp)
                     {
-                        temp = DateTime.Now.ToString(this.timeStampFormat) + " - ";
+                        temp = DateTime.Now.ToString(timeStampFormat) + " - ";
                     }
 
                     // identation
@@ -422,7 +420,7 @@ namespace DustInTheWind.Lisimba.Utils
                     {
                         for (int i = 0; i < indentIndex; i++)
                         {
-                            temp += this.indentString;
+                            temp += indentString;
                         }
                     }
 
@@ -445,7 +443,7 @@ namespace DustInTheWind.Lisimba.Utils
                     temp += text;
 
                     // new line
-                    if (writeNewLine) temp += this.newLine;
+                    if (writeNewLine) temp += newLine;
 
 
                     sw.Write(temp);
@@ -453,7 +451,7 @@ namespace DustInTheWind.Lisimba.Utils
                 }
                 catch (Exception ex)
                 {
-                    this.lastException = ex;
+                    lastException = ex;
                     return false;
                 }
             }
@@ -474,7 +472,7 @@ namespace DustInTheWind.Lisimba.Utils
         private void Dispose(bool disposing)
         {
             // Check to see if Dispose has already been called.
-            if (!this.disposed)
+            if (!disposed)
             {
                 //this.logLock = false;
 
@@ -482,7 +480,7 @@ namespace DustInTheWind.Lisimba.Utils
                 if (disposing)
                 {
                     // Dispose managed resources.
-                    this.CloseFile();
+                    CloseFile();
                     //if (sw != null)
                     //{
                     //    sw.Close();

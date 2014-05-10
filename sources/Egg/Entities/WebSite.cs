@@ -110,15 +110,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         }
 
         /// <summary>
-        /// Creates a new WebSite object with the address specified. The description text is an empty string.
-        /// </summary>
-        /// <param name="address"></param>
-        public WebSite(string address)
-            : this(address, string.Empty)
-        {
-        }
-
-        /// <summary>
         /// Creates a new WebSite object with the address and description specified.
         /// </summary>
         /// <param name="address">The web site address</param>

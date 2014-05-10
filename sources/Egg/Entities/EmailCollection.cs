@@ -15,53 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Data;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    public class EmailCollection : CollectionBase
+    [Serializable]
+    public class EmailCollection : CustomObservableCollection<Email>
     {
-        public Email this[int index]
-        {
-            get { return ((Email)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(Email value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(Email value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, Email value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(Email value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(Email value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (Email email in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = email.Address;
                 dr[1] = email.Description;
                 dt.Rows.Add(dr);
@@ -83,41 +52,74 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void CopyFrom(EmailCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new Email(values[i]));
             }
         }
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Returns the <see cref="Email"/> object that match the description.
+        /// </summary>
+        /// <param name="text">The text to search in the description field.</param>
+        /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
+        /// <returns>The <see cref="Email"/> object that match or <c>null</c>.</returns>
+        public Email SearchByDescription(string text, SearchMode searchMode)
         {
-            if (!(obj is EmailCollection))
-                return false;
-
-            EmailCollection emails = (EmailCollection)obj;
-
-            bool b1 = true;
-            bool b2;
-
-            for (int i = 0; i < emails.Count; i++)
+            foreach (Email email in Items)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
+                switch (searchMode)
                 {
-                    if (emails[i].Equals(List[j]))
-                    {
-                        b2 = true;
+                    case SearchMode.Exact:
+                        if (email.Description.CompareTo(text) == 0)
+                            return email;
                         break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
+
+                    case SearchMode.StartingWith:
+                        if (email.Description.StartsWith(text))
+                            return email;
+                        break;
+
+                    case SearchMode.EndingWith:
+                        if (email.Description.EndsWith(text))
+                            return email;
+                        break;
+
+                    case SearchMode.Containing:
+                        if (email.Description.IndexOf(text) > 0)
+                            return email;
+                        break;
                 }
             }
 
-            return b1;
+            return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            EmailCollection emails = obj as EmailCollection;
+
+            return Equals(emails);
+        }
+
+        public bool Equals(EmailCollection emails)
+        {
+            if (emails == null)
+                return false;
+
+            if (emails.Count != Count)
+                return false;
+
+            for (int i = 0; i < emails.Count; i++)
+            {
+                bool exists = Enumerable.Contains(Items, emails[i]);
+
+                if (!exists)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

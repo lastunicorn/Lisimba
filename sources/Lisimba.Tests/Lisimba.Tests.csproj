@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1402.2112\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -44,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presenters\ContactViewPresenterTests\ConstructorTests.cs" />
+    <Compile Include="Presenters\ContactViewPresenterTests\ContactChangedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\StatusServiceTests\ConstructorTests.cs" />
     <Compile Include="Services\StatusServiceTests\ResetTests.cs" />
@@ -56,6 +61,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Egg\Lisimba.Egg.csproj">
+      <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
+      <Name>Lisimba.Egg</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba\Lisimba.csproj">
       <Project>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</Project>
       <Name>Lisimba</Name>

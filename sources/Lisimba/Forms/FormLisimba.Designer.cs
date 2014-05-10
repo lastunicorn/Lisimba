@@ -72,8 +72,8 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainer1.Location = new System.Drawing.Point(12, 36);
@@ -94,8 +94,8 @@ namespace DustInTheWind.Lisimba.Forms
             // contactListView1
             // 
             this.contactListView1.AllowSort = true;
-            this.contactListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.contactListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.contactListView1.Contacts = null;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
@@ -109,8 +109,8 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // contactView1
             // 
-            this.contactView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.contactView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.contactView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
             this.contactView1.CheckMandatoryFields = true;
@@ -122,7 +122,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactView1.Name = "contactView1";
             this.contactView1.Size = new System.Drawing.Size(514, 407);
             this.contactView1.TabIndex = 5;
-            this.contactView1.ContactChanged += new DustInTheWind.Lisimba.UserControls.ContactView.ContactChangedHandler(this.contactView1_ContactChanged);
+            this.contactView1.ContactChanged += new System.EventHandler(this.contactView1_ContactChanged);
             // 
             // menuStrip1
             // 

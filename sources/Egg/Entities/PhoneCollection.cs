@@ -15,53 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Data;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    public class PhoneCollection : CollectionBase
+    [Serializable]
+    public class PhoneCollection : CustomObservableCollection<Phone>
     {
-        public Phone this[int index]
-        {
-            get { return ((Phone)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(Phone value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(Phone value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, Phone value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(Phone value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(Phone value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (Phone phone in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = phone.Number;
                 dr[1] = phone.Description;
                 dt.Rows.Add(dr);
@@ -83,41 +52,74 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void CopyFrom(PhoneCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new Phone(values[i]));
             }
         }
 
+        /// <summary>
+        /// Returns the <see cref="Phone"/> object that match the description.
+        /// </summary>
+        /// <param name="text">The text to search in the description field.</param>
+        /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
+        /// <returns>The <see cref="Phone"/> object that match or <c>null</c>.</returns>
+        public Phone SearchByDescription(string text, SearchMode searchMode)
+        {
+            foreach (Phone phone in Items)
+            {
+                switch (searchMode)
+                {
+                    case SearchMode.Exact:
+                        if (phone.Description.CompareTo(text) == 0)
+                            return phone;
+                        break;
+
+                    case SearchMode.StartingWith:
+                        if (phone.Description.StartsWith(text))
+                            return phone;
+                        break;
+
+                    case SearchMode.EndingWith:
+                        if (phone.Description.EndsWith(text))
+                            return phone;
+                        break;
+
+                    case SearchMode.Containing:
+                        if (phone.Description.IndexOf(text) > 0)
+                            return phone;
+                        break;
+                }
+            }
+
+            return null;
+        }
+
         public override bool Equals(object obj)
         {
-            if (!(obj is PhoneCollection))
+            PhoneCollection phones = obj as PhoneCollection;
+
+            return Equals(phones);
+        }
+
+        public bool Equals(PhoneCollection phones)
+        {
+            if (phones == null)
                 return false;
 
-            PhoneCollection phones = (PhoneCollection)obj;
-
-            bool b1 = true;
-            bool b2;
+            if (phones.Count != Count)
+                return false;
 
             for (int i = 0; i < phones.Count; i++)
-			{
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
-                {
-                    if (phones[i].Equals(List[j]))
-                    {
-                        b2 = true;
-                        break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
-                }
-			}
+            {
+                bool exists = Enumerable.Contains(Items, phones[i]);
 
-            return b1;
+                if (!exists)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

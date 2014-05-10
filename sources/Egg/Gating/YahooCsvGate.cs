@@ -375,7 +375,7 @@ namespace DustInTheWind.Lisimba.Egg.Gating
 
 
                 // Email
-                email = contact.SearchEmailByDescription("Email", SearchMode.Exact);
+                email = contact.Emails.SearchByDescription("Email", SearchMode.Exact);
                 if (email != null)
                     csvRecord.Add(email.Address);
                 else
@@ -388,56 +388,56 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 csvRecord.Add("");
 
                 // Messenger ID
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Home
-                phone = contact.SearchPhoneByDescription("Home", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Home", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Work
-                phone = contact.SearchPhoneByDescription("Work", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Work", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Pager
-                phone = contact.SearchPhoneByDescription("Pager", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Pager", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Fax
-                phone = contact.SearchPhoneByDescription("Fax", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Fax", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Mobile
-                phone = contact.SearchPhoneByDescription("Mobile", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Mobile", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Other
-                phone = contact.SearchPhoneByDescription("Other", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Other", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
                     csvRecord.Add("");
 
                 // Yahoo! Phone
-                phone = contact.SearchPhoneByDescription("Yahoo! Phone", SearchMode.Exact);
+                phone = contact.Phones.SearchByDescription("Yahoo! Phone", SearchMode.Exact);
                 if (phone != null)
                     csvRecord.Add(phone.Number);
                 else
@@ -446,14 +446,14 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 csvRecord.Add(""); // Primary
 
                 // Alternate Email 1
-                email = contact.SearchEmailByDescription("Alternate Email 1", SearchMode.Exact);
+                email = contact.Emails.SearchByDescription("Alternate Email 1", SearchMode.Exact);
                 if (email != null)
                     csvRecord.Add(email.Address);
                 else
                     csvRecord.Add("");
 
                 // Alternate Email 2
-                email = contact.SearchEmailByDescription("Alternate Email 2", SearchMode.Exact);
+                email = contact.Emails.SearchByDescription("Alternate Email 2", SearchMode.Exact);
                 if (email != null)
                     csvRecord.Add(email.Address);
                 else
@@ -468,7 +468,7 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 csvRecord.Add("");
 
                 // Work Address
-                address = contact.SearchAddressByDescription("Work Address", SearchMode.Exact);
+                address = contact.Addresses.SearchByDescription("Work Address", SearchMode.Exact);
                 if (address != null)
                 {
                     csvRecord.Add(address.Street); // Work Address
@@ -487,7 +487,7 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 }
 
                 // Home Address
-                address = contact.SearchAddressByDescription("Home Address", SearchMode.Exact);
+                address = contact.Addresses.SearchByDescription("Home Address", SearchMode.Exact);
                 if (address != null)
                 {
                     csvRecord.Add(address.Street); // Home Address
@@ -531,112 +531,112 @@ namespace DustInTheWind.Lisimba.Egg.Gating
                 csvRecord.Add(contact.Notes);
 
                 // Messenger ID1
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID1", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID1", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID2
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID2", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID2", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID3
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID3", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID3", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID4
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID4", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID4", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID5
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID5", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID5", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID6
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID6", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID6", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID7
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID7", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID7", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID8
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID8", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID8", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Messenger ID9
-                messengerId = contact.SearchMessengeIdByDescription("Messenger ID9", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Messenger ID9", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Skype ID
-                messengerId = contact.SearchMessengeIdByDescription("Skype ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Skype ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // IRC ID
-                messengerId = contact.SearchMessengeIdByDescription("IRC ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("IRC ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // ICQ ID
-                messengerId = contact.SearchMessengeIdByDescription("ICQ ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("ICQ ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // Google ID
-                messengerId = contact.SearchMessengeIdByDescription("Google ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("Google ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // MSN ID
-                messengerId = contact.SearchMessengeIdByDescription("MSN ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("MSN ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // AIM ID
-                messengerId = contact.SearchMessengeIdByDescription("AIM ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("AIM ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else
                     csvRecord.Add("");
 
                 // QQ ID
-                messengerId = contact.SearchMessengeIdByDescription("QQ ID", SearchMode.Exact);
+                messengerId = contact.MessengerIds.SearchByDescription("QQ ID", SearchMode.Exact);
                 if (messengerId != null)
                     csvRecord.Add(messengerId.Id);
                 else

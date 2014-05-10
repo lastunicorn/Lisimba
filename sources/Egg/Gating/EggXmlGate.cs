@@ -14,15 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Exceptions;
-using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Exceptions;
+using ICSharpCode.SharpZipLib.Zip;
 
 namespace DustInTheWind.Lisimba.Egg.Gating
 {

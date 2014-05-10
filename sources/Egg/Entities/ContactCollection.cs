@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
+    [Serializable]
     public class ContactCollection : CollectionBase
     {
         public Contact this[int index]
@@ -82,16 +82,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             if (sortDirection == SortDirection.Descending)
                 InnerList.Reverse();
-        }
-
-        public void CopyFrom(ContactCollection values)
-        {
-            Clear();
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Add(new Contact(values[i]));
-            }
         }
     }
 }

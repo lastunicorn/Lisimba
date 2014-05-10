@@ -15,8 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DustInTheWind.Desmond
 {
@@ -28,7 +26,7 @@ namespace DustInTheWind.Desmond
 
         public Checker()
         {
-            TaskRunner taskRunner = new TaskRunner(new TaskMethod(this.Check));
+            TaskRunner taskRunner = new TaskRunner(new TaskMethod(Check));
             taskRunner.Start();
         }
 

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBookManager.cs" />
+    <Compile Include="Entities\CustomObservableCollection.cs" />
     <Compile Include="Entities\WebSiteCollection.cs" />
     <Compile Include="Entities\WebSite.cs" />
     <Compile Include="Entities\ImportRuleCollection.cs" />

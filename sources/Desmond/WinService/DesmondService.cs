@@ -14,13 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.ServiceProcess;
-using System.Text;
 
 namespace DustInTheWind.Desmond
 {
@@ -41,17 +35,17 @@ namespace DustInTheWind.Desmond
         {
             InitializeComponent();
 
-            this.redEye = new RedEye();
+            redEye = new RedEye();
         }
 
         protected override void OnStart(string[] args)
         {
-            this.redEye.Start();
+            redEye.Start();
         }
 
         protected override void OnStop()
         {
-            this.redEye.Stop();
+            redEye.Stop();
         }
     }
 }

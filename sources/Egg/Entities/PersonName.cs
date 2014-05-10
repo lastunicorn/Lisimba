@@ -15,11 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Text;
 using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
+    [Serializable]
     [XmlRoot("Name")]
     public class PersonName
     {
@@ -29,7 +30,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public string FirstName
         {
             get { return firstName; }
-            set { firstName = value; }
+            set
+            {
+                firstName = value;
+                OnChanged();
+            }
         }
 
         private string middleName = string.Empty;
@@ -38,7 +43,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public string MiddleName
         {
             get { return middleName; }
-            set { middleName = value; }
+            set
+            {
+                middleName = value;
+                OnChanged();
+            }
         }
 
         private string lastName = string.Empty;
@@ -47,7 +56,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public string LastName
         {
             get { return lastName; }
-            set { lastName = value; }
+            set
+            {
+                lastName = value;
+                OnChanged();
+            }
         }
 
         private string nickname = string.Empty;
@@ -56,8 +69,27 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public string Nickname
         {
             get { return nickname; }
-            set { nickname = value; }
+            set
+            {
+                nickname = value;
+                OnChanged();
+            }
         }
+
+        #region Event Changed
+
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
+        {
+            EventHandler handler = Changed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        #endregion
+
 
         /// <summary>
         /// Remove all the information from the current instance.
@@ -68,6 +100,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             middleName = string.Empty;
             lastName = string.Empty;
             nickname = string.Empty;
+
+            OnChanged();
         }
 
         /// <summary>
@@ -80,6 +114,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             middleName = name.middleName;
             lastName = name.lastName;
             nickname = name.nickname;
+
+            OnChanged();
         }
 
         public bool IsEmpty()
@@ -153,35 +189,65 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             if (personName == null)
                 return false;
 
-            if (firstName.Equals(personName.firstName) &&
-                middleName.Equals(personName.middleName) &&
-                lastName.Equals(personName.lastName) &&
-                nickname.Equals(personName.nickname))
-            {
-                return true;
-            }
-                
-            return false;
+            return firstName == personName.firstName &&
+                   middleName == personName.middleName &&
+                   lastName == personName.lastName &&
+                   nickname == personName.nickname;
         }
 
         public override string ToString()
         {
-            string str = string.Empty;
-            string name = string.Empty;
-
-            name = (firstName.Length > 0 ? firstName : string.Empty);
-            name += (middleName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + middleName : string.Empty);
-            name += (lastName.Length > 0 ? (name.Length > 0 ? " " : string.Empty) + lastName : string.Empty);
+            string fullName = GetFullNameWithoutNickname();
 
             if (nickname.Length > 0)
-                str += nickname + " (" + name + ")";
-            else
-                str += name;
+                return string.Format("{0} ({1})", nickname, fullName);
 
-            if (str.Length == 0)
-                str = "< NA >";
-
-            return str;
+            return fullName.Length == 0 ? "< NA >" : fullName;
         }
+
+        private string GetFullNameWithoutNickname()
+        {
+            StringBuilder fullName = new StringBuilder();
+
+            bool firstNameExists = !string.IsNullOrWhiteSpace(firstName);
+            bool middleNameExists = !string.IsNullOrWhiteSpace(middleName);
+            bool lastNameExists = !string.IsNullOrWhiteSpace(lastName);
+
+            if (firstNameExists)
+                fullName.Append(firstName);
+
+
+            if (middleNameExists)
+            {
+                if (fullName.Length > 0)
+                    fullName.Append(" ");
+
+                fullName.Append(middleName);
+            }
+
+            if (lastNameExists)
+            {
+                if (fullName.Length > 0)
+                    fullName.Append(" ");
+
+                fullName.Append(lastName);
+            }
+
+            return fullName.ToString();
+        }
+
+        //public static PersonName Clone(PersonName original)
+        //{
+        //    if (original == null)
+        //        throw new ArgumentNullException("original");
+
+        //    return new PersonName
+        //    {
+        //        firstName = original.firstName,
+        //        middleName = original.middleName,
+        //        lastName = original.lastName,
+        //        nickname = original.nickname
+        //    };
+        //}
     }
 }

@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration.Install;
 using System.ServiceProcess;
@@ -37,7 +36,7 @@ namespace DustInTheWind.Desmond
 
             try
             {
-                ServiceController serviceController = new ServiceController(this.serviceInstaller1.ServiceName);
+                ServiceController serviceController = new ServiceController(serviceInstaller1.ServiceName);
                 serviceController.Start();
             }
             catch(Exception ex)

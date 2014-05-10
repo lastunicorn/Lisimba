@@ -15,53 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Data;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    public class WebSiteCollection : CollectionBase
+    [Serializable]
+    public class WebSiteCollection : CustomObservableCollection<WebSite>
     {
-        public WebSite this[int index]
-        {
-            get { return ((WebSite)List[index]); }
-            set { List[index] = value; }
-        }
-
-        public int Add(WebSite value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(WebSite value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, WebSite value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(WebSite value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(WebSite value)
-        {
-            return (List.Contains(value));
-        }
-
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
-            DataRow dr;
 
             foreach (WebSite webSite in this)
             {
-                dr = dt.NewRow();
+                DataRow dr = dt.NewRow();
                 dr[0] = webSite.Address;
                 dr[1] = webSite.Description;
                 dt.Rows.Add(dr);
@@ -83,41 +52,74 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void CopyFrom(WebSiteCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new WebSite(values[i]));
             }
         }
 
-        public override bool Equals(object obj)
+        /// <summary>
+        /// Returns the <see cref="WebSite"/> object that match the description.
+        /// </summary>
+        /// <param name="text">The text to search in the description field.</param>
+        /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
+        /// <returns>The <see cref="WebSite"/> object that match or <c>null</c>.</returns>
+        public WebSite SearchByDescription(string text, SearchMode searchMode)
         {
-            if (!(obj is WebSiteCollection))
-                return false;
-
-            WebSiteCollection webSites = (WebSiteCollection)obj;
-
-            bool b1 = true;
-            bool b2;
-
-            for (int i = 0; i < webSites.Count; i++)
+            foreach (WebSite webSite in Items)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
+                switch (searchMode)
                 {
-                    if (webSites[i].Equals(List[j]))
-                    {
-                        b2 = true;
+                    case SearchMode.Exact:
+                        if (webSite.Description.CompareTo(text) == 0)
+                            return webSite;
                         break;
-                    }
-                }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
+
+                    case SearchMode.StartingWith:
+                        if (webSite.Description.StartsWith(text))
+                            return webSite;
+                        break;
+
+                    case SearchMode.EndingWith:
+                        if (webSite.Description.EndsWith(text))
+                            return webSite;
+                        break;
+
+                    case SearchMode.Containing:
+                        if (webSite.Description.IndexOf(text) > 0)
+                            return webSite;
+                        break;
                 }
             }
 
-            return b1;
+            return null;
+        }
+
+        public override bool Equals(object obj)
+        {
+            WebSiteCollection webSites = obj as WebSiteCollection;
+
+            return Equals(webSites);
+        }
+
+        public bool Equals(WebSiteCollection webSites)
+        {
+            if (webSites == null)
+                return false;
+
+            if (webSites.Count != Count)
+                return false;
+
+            for (int i = 0; i < webSites.Count; i++)
+            {
+                bool exists = Enumerable.Contains(Items, webSites[i]);
+
+                if (!exists)
+                    return false;
+            }
+
+            return true;
         }
     }
 }

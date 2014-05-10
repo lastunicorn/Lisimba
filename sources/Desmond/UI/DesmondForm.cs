@@ -44,7 +44,7 @@ namespace DustInTheWind.Desmond
         {
             InitializeComponent();
 
-            this.presenter = new DesmondPresenter(this);
+            presenter = new DesmondPresenter(this);
         }
 
         #endregion
@@ -60,9 +60,9 @@ namespace DustInTheWind.Desmond
         /// <param name="ex">The <see cref="Exception"/> instance containing data about the error.</param>
         public void DisplayError(Exception ex)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new DisplayErrorDelegate(this.DisplayError), new object[] { ex });
+                Invoke(new DisplayErrorDelegate(DisplayError), new object[] { ex });
             }
             else
             {
@@ -82,9 +82,9 @@ namespace DustInTheWind.Desmond
         /// <param name="ex">The message text to be displayed.</param>
         public void DisplayErrorMessage(string message)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new DisplayErrorMessageDelegate(this.DisplayErrorMessage), new object[] { message });
+                Invoke(new DisplayErrorMessageDelegate(DisplayErrorMessage), new object[] { message });
             }
             else
             {
@@ -104,9 +104,9 @@ namespace DustInTheWind.Desmond
         /// <param name="message">The message text to be displayed.</param>
         public void DisplayMessage(string message)
         {
-            if (this.InvokeRequired)
+            if (InvokeRequired)
             {
-                this.Invoke(new DisplayMessageDelegate(this.DisplayMessage), new object[] { message });
+                Invoke(new DisplayMessageDelegate(DisplayMessage), new object[] { message });
             }
             else
             {
@@ -120,7 +120,7 @@ namespace DustInTheWind.Desmond
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            this.presenter.StartClicked();
+            presenter.StartClicked();
         }
 
         #endregion
@@ -129,24 +129,24 @@ namespace DustInTheWind.Desmond
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            this.presenter.StopClicked();
+            presenter.StopClicked();
         }
 
         #endregion
 
         public bool ButtonStartEnabled
         {
-            set { this.buttonStart.Enabled = value; }
+            set { buttonStart.Enabled = value; }
         }
 
         public bool ButtonStopEnabled
         {
-            set { this.buttonStop.Enabled = value; }
+            set { buttonStop.Enabled = value; }
         }
 
         public string StatusText
         {
-            set { this.toolStripStatusLabelStartedInfo.Text = value; }
+            set { toolStripStatusLabelStartedInfo.Text = value; }
         }
 
         public LedState LedState
@@ -169,7 +169,7 @@ namespace DustInTheWind.Desmond
                         color = Color.Gray;
                         break;
                 }
-                this.toolStripStatusLabelStartedLed.BackColor = color;
+                toolStripStatusLabelStartedLed.BackColor = color;
             }
         }
 
@@ -177,7 +177,7 @@ namespace DustInTheWind.Desmond
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            this.presenter.StopClicked();
+            presenter.StopClicked();
             base.OnClosing(e);
         }
 

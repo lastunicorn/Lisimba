@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
@@ -29,35 +30,36 @@ namespace DustInTheWind.Lisimba.UserControls
     /// </summary>
     public partial class ContactView : System.Windows.Forms.UserControl
     {
-        private Contact contact = null;
-        private bool isFillMode = false;
+        private ContactViewPresenter presenter;
 
-        FormDateEdit formBirthdayEdit;
+        private Contact contact;
+        private bool isInitializationMode;
 
-        FormPhoneEdit formPhoneEdit;
-        FormEmailEdit formEmailEdit;
-        FormWebSiteEdit formWebSiteEdit;
-        FormAddressEdit formAddressEdit;
-        FormDateEdit formDateEdit;
+        readonly FormDateEdit formBirthdayEdit;
 
-        private bool checkMandatoryFields = true;
-        public bool CheckMandatoryFields
-        {
-            get { return checkMandatoryFields; }
-            set { checkMandatoryFields = value; }
-        }
+        readonly FormPhoneEdit formPhoneEdit;
+        readonly FormEmailEdit formEmailEdit;
+        readonly FormWebSiteEdit formWebSiteEdit;
+        readonly FormAddressEdit formAddressEdit;
+        readonly FormDateEdit formDateEdit;
 
+        public bool CheckMandatoryFields { get; set; }
 
-        private TreeNode phonesNode;
-        private TreeNode emailsNode;
-        private TreeNode webSitesNode;
-        private TreeNode addressesNode;
-        private TreeNode datesNode;
-        private TreeNode messengerIdsNode;
+        private readonly TreeNode phonesNode;
+        private readonly TreeNode emailsNode;
+        private readonly TreeNode webSitesNode;
+        private readonly TreeNode addressesNode;
+        private readonly TreeNode datesNode;
+        private readonly TreeNode messengerIdsNode;
 
         public ContactView()
         {
             InitializeComponent();
+
+            CurrentData currentData = new CurrentData();
+            presenter = new ContactViewPresenter(currentData);
+
+            CheckMandatoryFields = true;
 
             phonesNode = treeView1.Nodes["Phones"];
             emailsNode = treeView1.Nodes["Emails"];
@@ -67,30 +69,27 @@ namespace DustInTheWind.Lisimba.UserControls
             messengerIdsNode = treeView1.Nodes["MessengerIds"];
 
             formBirthdayEdit = new FormDateEdit();
-            formBirthdayEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formBirthdayEdit_DateUpdated);
+            formBirthdayEdit.DateUpdated += formBirthdayEdit_DateUpdated;
 
             formPhoneEdit = new FormPhoneEdit();
-            formPhoneEdit.PhoneUpdated += new FormPhoneEdit.PhoneUpdatedHandler(formPhoneEdit_PhoneUpdated);
+            formPhoneEdit.PhoneUpdated += formPhoneEdit_PhoneUpdated;
 
             formEmailEdit = new FormEmailEdit();
-            formEmailEdit.EmailUpdated += new FormEmailEdit.EmailUpdatedHandler(formEmailEdit_EmailUpdated);
+            formEmailEdit.EmailUpdated += formEmailEdit_EmailUpdated;
 
             formWebSiteEdit = new FormWebSiteEdit();
-            formWebSiteEdit.WebSiteUpdated += new FormWebSiteEdit.WebSiteUpdatedHandler(formWebSiteEdit_WebSiteUpdated);
+            formWebSiteEdit.WebSiteUpdated += formWebSiteEdit_WebSiteUpdated;
 
             formAddressEdit = new FormAddressEdit();
-            formAddressEdit.AddressUpdated += new FormAddressEdit.AddressUpdatedHandler(formAddressEdit_AddressUpdated);
+            formAddressEdit.AddressUpdated += formAddressEdit_AddressUpdated;
 
             formDateEdit = new FormDateEdit();
-            formDateEdit.DateUpdated += new FormDateEdit.DateUpdatedHandler(formDateEdit_DateUpdated);
+            formDateEdit.DateUpdated += formDateEdit_DateUpdated;
         }
 
         public Contact Contact
         {
-            get
-            {
-                return contact;
-            }
+            get { return contact; }
             set
             {
                 contact = value;
@@ -125,7 +124,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void RefreshData()
         {
-            isFillMode = true;
+            isInitializationMode = true;
 
             ClearData();
 
@@ -212,10 +211,8 @@ namespace DustInTheWind.Lisimba.UserControls
                 messengerIdsNode.Expand();
             }
 
-            isFillMode = false;
+            isInitializationMode = false;
         }
-
-        #region private Image GetZodiacImage(ZodiacSign sign)
 
         private Image GetZodiacImage(ZodiacSign sign)
         {
@@ -275,111 +272,81 @@ namespace DustInTheWind.Lisimba.UserControls
             return img;
         }
 
-        #endregion
-
-        #region Events
-
         #region Event NameChanged
 
-        public event NameChangedHandler NameChanged;
-        public delegate void NameChangedHandler(object sender, NameChangedEventArgs e);
-
-        public class NameChangedEventArgs : EventArgs
-        {
-            private NameSection nameSection;
-
-            public NameSection NameSection
-            {
-                get { return nameSection; }
-            }
-
-            public NameChangedEventArgs(NameSection nameSection)
-            {
-                this.nameSection = nameSection;
-            }
-        }
+        public event EventHandler<NameChangedEventArgs> NameChanged;
 
         protected virtual void OnNameChanged(NameChangedEventArgs e)
         {
-            if (NameChanged != null)
-            {
-                NameChanged(this, e);
-            }
+            EventHandler<NameChangedEventArgs> handler = NameChanged;
+
+            if (handler != null)
+                handler(this, e);
         }
 
         #endregion Event NameChanged
 
         #region Event ContactChanged
 
-        public event ContactChangedHandler ContactChanged;
-        public delegate void ContactChangedHandler(object sender, ContactChangedEventArgs e);
+        public event EventHandler ContactChanged;
 
-        public class ContactChangedEventArgs : EventArgs
+        protected virtual void OnContactChanged()
         {
-            public ContactChangedEventArgs()
-            {
-            }
-        }
+            EventHandler handler = ContactChanged;
 
-        protected virtual void OnContactChanged(ContactChangedEventArgs e)
-        {
-            if (ContactChanged != null)
-            {
-                ContactChanged(this, e);
-            }
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         #endregion Event ContactChanged
 
-        #endregion
-
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
-            if (!isFillMode)
-            {
-                contact.Name.FirstName = textBoxFirstName.Text;
-                OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
-                OnContactChanged(new ContactChangedEventArgs());
-            }
+            if (isInitializationMode)
+                return;
+
+            contact.Name.FirstName = textBoxFirstName.Text;
+            OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
+            OnContactChanged();
         }
 
         private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
         {
-            if (!isFillMode)
-            {
-                contact.Name.MiddleName = textBoxMiddleName.Text;
-                OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
-                OnContactChanged(new ContactChangedEventArgs());
-            }
+            if (isInitializationMode)
+                return;
+
+            contact.Name.MiddleName = textBoxMiddleName.Text;
+            OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
+            OnContactChanged();
         }
 
         private void textBoxLastName_TextChanged(object sender, EventArgs e)
         {
-            if (!isFillMode)
-            {
-                contact.Name.LastName = textBoxLastName.Text;
-                OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
-                OnContactChanged(new ContactChangedEventArgs());
-            }
+            if (isInitializationMode)
+                return;
+
+            contact.Name.LastName = textBoxLastName.Text;
+            OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
+            OnContactChanged();
         }
 
         private void textBoxNickname_TextChanged(object sender, EventArgs e)
         {
-            if (!isFillMode)
-            {
-                contact.Name.Nickname = textBoxNickname.Text;
-                OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
-                OnContactChanged(new ContactChangedEventArgs());
-            }
+            if (isInitializationMode)
+                return;
+
+            contact.Name.Nickname = textBoxNickname.Text;
+            OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
+            OnContactChanged();
         }
 
         private void textBoxNotes_TextChanged(object sender, EventArgs e)
         {
-            if (!isFillMode)
-            {
-                contact.Notes = textBoxNotes.Text;
-                OnContactChanged(new ContactChangedEventArgs());
-            }
+            if (isInitializationMode)
+                return;
+
+            contact.Notes = textBoxNotes.Text;
+            OnContactChanged();
         }
 
         private void textBoxBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -411,7 +378,7 @@ namespace DustInTheWind.Lisimba.UserControls
             labelBirthday.Text = e.Date.ToString();
             pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
             labelZodiacSign.Text = contact.ZogiacSign.ToString();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         private void textBoxBirthday_KeyDown(object sender, KeyEventArgs e)
@@ -424,7 +391,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void textBoxName_Leave(object sender, EventArgs e)
         {
-            if (checkMandatoryFields)
+            if (CheckMandatoryFields)
             {
                 if (textBoxFirstName.Text.Length == 0 &&
                     textBoxMiddleName.Text.Length == 0 &&
@@ -442,7 +409,10 @@ namespace DustInTheWind.Lisimba.UserControls
             TreeNode selectedNode = treeView1.SelectedNode;
 
             if (selectedNode == null || selectedNode.Tag == null)
+            {
+                contact.Addresses.Add(new Address());
                 return;
+            }
 
             if (selectedNode != treeView1.GetNodeAt(e.Location))
                 return;
@@ -493,39 +463,37 @@ namespace DustInTheWind.Lisimba.UserControls
             }
 
             if (selectedNode.Tag is MessengerId)
-            {
                 return;
-            }
         }
 
         void formPhoneEdit_PhoneUpdated(object sender, FormPhoneEdit.PhoneUpdatedEventArgs e)
         {
             RefreshData();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         void formEmailEdit_EmailUpdated(object sender, FormEmailEdit.EmailUpdatedEventArgs e)
         {
             RefreshData();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         void formWebSiteEdit_WebSiteUpdated(object sender, FormWebSiteEdit.WebSiteUpdatedEventArgs e)
         {
             RefreshData();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         void formAddressEdit_AddressUpdated(object sender, FormAddressEdit.AddressUpdatedEventArgs e)
         {
             RefreshData();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         void formDateEdit_DateUpdated(object sender, FormDateEdit.DateUpdatedEventArgs e)
         {
             RefreshData();
-            OnContactChanged(new ContactChangedEventArgs());
+            OnContactChanged();
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)

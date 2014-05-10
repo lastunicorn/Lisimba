@@ -16,13 +16,12 @@
 
 using System;
 using System.IO;
-using System.Reflection;
+using System.Threading;
 using DustInTheWind.Desmond.Config;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Utils;
-using System.Threading;
 
 namespace DustInTheWind.Desmond
 {
@@ -40,22 +39,22 @@ namespace DustInTheWind.Desmond
         public RedEye()
             : base()
         {
-            this.timer = new Timer(new TimerCallback(this.timer_TimerElapsed), null, Timeout.Infinite, Timeout.Infinite);
+            timer = new Timer(new TimerCallback(timer_TimerElapsed), null, Timeout.Infinite, Timeout.Infinite);
 
-            this.task = new TaskMethod(this.Check);
+            task = new TaskMethod(Check);
 
-            this.config = DesmondConfigurationSection.GetSection();
+            config = DesmondConfigurationSection.GetSection();
 
-            if (string.IsNullOrEmpty(this.config.AddressBook.File))
+            if (string.IsNullOrEmpty(config.AddressBook.File))
                 throw new ApplicationException("The configuration file does not specify an address book to load.");
 
-            this.addressBookManager = new AddressBookManager();
-            this.addressBookManager.IncorrectXmlVersion += addressBookLoader_IncorrectXmlVersion;
+            addressBookManager = new AddressBookManager();
+            addressBookManager.IncorrectXmlVersion += addressBookLoader_IncorrectXmlVersion;
         }
 
         private void timer_TimerElapsed(object o)
         {
-            System.Windows.Forms.MessageBox.Show(this.nextContact.ToString());
+            System.Windows.Forms.MessageBox.Show(nextContact.ToString());
         }
 
         void addressBookLoader_IncorrectXmlVersion(object sender, IncorrectXmlVersionEventArgs e)
@@ -65,7 +64,7 @@ namespace DustInTheWind.Desmond
 
         private DateTime GetFileModifiedDate()
         {
-            string addressBookFileName = this.config.AddressBook.File;
+            string addressBookFileName = config.AddressBook.File;
             FileInfo info = new FileInfo(addressBookFileName);
             return info.LastWriteTime;
         }
@@ -74,7 +73,7 @@ namespace DustInTheWind.Desmond
         {
             if (!force)
             {
-                DateTime fileModifiedDate = this.GetFileModifiedDate();
+                DateTime fileModifiedDate = GetFileModifiedDate();
 
                 if (this.fileModifiedDate < fileModifiedDate)
                     this.fileModifiedDate = fileModifiedDate;
@@ -82,24 +81,24 @@ namespace DustInTheWind.Desmond
                     return;
             }
 
-            string addressBookFileName = this.config.AddressBook.File;
-            this.addressBook = this.addressBookManager.LoadFromFile(addressBookFileName);
+            string addressBookFileName = config.AddressBook.File;
+            addressBook = addressBookManager.LoadFromFile(addressBookFileName);
 
             // Sort by birthday
-            this.addressBook.Contacts.Sort(ContactsSortingType.Birthday, SortDirection.Ascending);
+            addressBook.Contacts.Sort(ContactsSortingType.Birthday, SortDirection.Ascending);
         }
 
         private void Check()
         {
-            this.LoadAddressBook(false);
+            LoadAddressBook(false);
 
-            if (this.addressBook == null)
+            if (addressBook == null)
             {
                 Log.Instance.WriteLine("The address book file does not exist.");
                 Thread.Sleep(1000);
                 return;
             }
-            else if (this.addressBook.Contacts.Count == 0)
+            else if (addressBook.Contacts.Count == 0)
             {
                 Log.Instance.WriteLine("The address book does not contain any contacts.");
                 Thread.Sleep(1000);
@@ -109,14 +108,14 @@ namespace DustInTheWind.Desmond
             {
                 DateTime today = DateTime.Today;
 
-                this.nextContact = this.GetNextContact(this.addressBook, today);
-                this.nextBirthday = new DateTime(today.Year, this.nextContact.Birthday.Month, this.nextContact.Birthday.Day);
-                if (this.nextBirthday < today)
-                    this.nextBirthday = this.nextBirthday.AddYears(1);
+                nextContact = GetNextContact(addressBook, today);
+                nextBirthday = new DateTime(today.Year, nextContact.Birthday.Month, nextContact.Birthday.Day);
+                if (nextBirthday < today)
+                    nextBirthday = nextBirthday.AddYears(1);
 
-                TimeSpan dueTime = this.nextBirthday - today;
+                TimeSpan dueTime = nextBirthday - today;
                 TimeSpan period = TimeSpan.FromMilliseconds(-1);
-                this.timer.Change(dueTime, period);
+                timer.Change(dueTime, period);
             }
         }
 

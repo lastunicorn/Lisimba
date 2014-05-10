@@ -371,12 +371,11 @@ namespace DustInTheWind.Lisimba.Forms
 
         #region ContactView
 
-        void contactView1_ContactChanged(object sender, ContactView.ContactChangedEventArgs e)
+        void contactView1_ContactChanged(object sender, EventArgs e)
         {
             if (!currentAddressBook.IsModified)
             {
                 currentAddressBook.IsModified = true;
-
                 RefreshFormTitle();
             }
 

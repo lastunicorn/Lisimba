@@ -14,9 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Collections.Specialized;
 using System.Text.RegularExpressions;
 
@@ -33,7 +30,7 @@ namespace DustInTheWind.Desmond
 
         public Arguments(string[] args)
         {
-            this.parameters = new StringDictionary();
+            parameters = new StringDictionary();
             Regex spliter = new Regex(@"^-{1,2}|^/|=|:",
                 RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
@@ -131,7 +128,7 @@ namespace DustInTheWind.Desmond
         {
             get
             {
-                return (this.parameters[paramName]);
+                return (parameters[paramName]);
             }
         }
     }
