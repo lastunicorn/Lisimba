@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormEditBase : Form
     {
-        private bool allowClose = false;
+        private bool allowClose;
         public bool AllowClose
         {
             get { return allowClose; }

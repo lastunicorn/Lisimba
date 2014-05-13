@@ -18,9 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Egg.Gating;
 
 namespace DustInTheWind.Lisimba.Services
@@ -90,7 +88,7 @@ namespace DustInTheWind.Lisimba.Services
 
         #endregion
 
-        #region Event AddressBookChanged
+        #region Event AddressBookContentChanged
 
         public event EventHandler AddressBookContentChanged;
 

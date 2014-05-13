@@ -14,15 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormWebSiteEdit : FormEditBase
     {
-        private WebSite webSite = null;
+        private WebSite webSite;
         public WebSite WebSite
         {
             get { return webSite; }
@@ -30,74 +28,39 @@ namespace DustInTheWind.Lisimba.Forms
             {
                 webSite = value;
 
-                textBoxAddress.Text = value.Address;
-                textBoxComments.Text = value.Description;
+                DisplayDataInView();
             }
         }
-
-        #region Event WebSiteUpdated
-
-        /// <summary>
-        /// Event raised when ... Well, is raised when it should be raised. Ok?
-        /// </summary>
-        public event WebSiteUpdatedHandler WebSiteUpdated;
-
-        /// <summary>
-        /// Represents the method that will handle the WebSiteUpdated event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">Object providing data about the event.</param>
-        public delegate void WebSiteUpdatedHandler(object sender, WebSiteUpdatedEventArgs e);
-
-        /// <summary>
-        /// Provides data for WebSiteUpdated event.
-        /// </summary>
-        public class WebSiteUpdatedEventArgs : EventArgs
-        {
-            private WebSite webSite = null;
-            public WebSite WebSite
-            {
-                get { return webSite; }
-            }
-
-            public WebSiteUpdatedEventArgs(WebSite webSite)
-            {
-                this.webSite = webSite;
-            }
-        }
-
-        /// <summary>
-        /// Raises the WebSiteUpdated event.
-        /// </summary>
-        /// <param name="e">An WebSiteUpdatedEventArgs that contains the event data.</param>
-        protected virtual void OnWebSiteUpdated(WebSiteUpdatedEventArgs e)
-        {
-            if (WebSiteUpdated != null)
-            {
-                WebSiteUpdated(this, e);
-            }
-        }
-
-        #endregion
 
         public FormWebSiteEdit()
         {
             InitializeComponent();
 
-            textBoxAddress.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
-            textBoxComments.KeyDown += new KeyEventHandler(FormEditBase_KeyDown);
+            textBoxAddress.KeyDown += FormEditBase_KeyDown;
+            textBoxComments.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
         {
-            if (!webSite.Address.Equals(textBoxAddress.Text) ||
-                !webSite.Description.Equals(textBoxComments.Text))
-            {
-                webSite.Address = textBoxAddress.Text;
-                webSite.Description = textBoxComments.Text;
+            bool isAnyDataChanged = !webSite.Address.Equals(textBoxAddress.Text) ||
+                                    !webSite.Description.Equals(textBoxComments.Text);
 
-                OnWebSiteUpdated(new WebSiteUpdatedEventArgs(webSite));
-            }
+            if (!isAnyDataChanged)
+                return;
+
+            ReadDataFromView();
+        }
+
+        private void DisplayDataInView()
+        {
+            textBoxAddress.Text = webSite.Address;
+            textBoxComments.Text = webSite.Description;
+        }
+
+        private void ReadDataFromView()
+        {
+            webSite.Address = textBoxAddress.Text;
+            webSite.Description = textBoxComments.Text;
         }
     }
 }

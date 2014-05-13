@@ -30,6 +30,11 @@ namespace DustInTheWind.Lisimba.UserControls
     {
         private readonly ContactViewPresenter presenter;
 
+        public ContactViewPresenter Presenter
+        {
+            get { return presenter; }
+        }
+
         //private Contact contact;
         //private bool isInitializationMode;
 
@@ -56,8 +61,6 @@ namespace DustInTheWind.Lisimba.UserControls
 
             presenter = new ContactViewPresenter();
             presenter.View = this;
-            presenter.ContactChanged += (sender, args) => OnContactChanged();
-            presenter.NameChanged += (sender, args) => OnNameChanged(args);
 
             CheckMandatoryFields = true;
 
@@ -69,32 +72,17 @@ namespace DustInTheWind.Lisimba.UserControls
             messengerIdsNode = treeView1.Nodes["MessengerIds"];
 
             formBirthdayEdit = new FormDateEdit();
-            formBirthdayEdit.DateUpdated += formBirthdayEdit_DateUpdated;
-
             formPhoneEdit = new FormPhoneEdit();
-            formPhoneEdit.PhoneUpdated += formPhoneEdit_PhoneUpdated;
-
             formEmailEdit = new FormEmailEdit();
-            formEmailEdit.EmailUpdated += formEmailEdit_EmailUpdated;
-
             formWebSiteEdit = new FormWebSiteEdit();
-            formWebSiteEdit.WebSiteUpdated += formWebSiteEdit_WebSiteUpdated;
-
             formAddressEdit = new FormAddressEdit();
-            formAddressEdit.AddressUpdated += formAddressEdit_AddressUpdated;
-
             formDateEdit = new FormDateEdit();
-            formDateEdit.DateUpdated += formDateEdit_DateUpdated;
         }
 
         public Contact Contact
         {
             get { return presenter.Contact; }
-            set
-            {
-                presenter.Contact = value;
-                //RefreshData();
-            }
+            set { presenter.Contact = value; }
         }
 
         //#region private void ClearData()
@@ -214,166 +202,33 @@ namespace DustInTheWind.Lisimba.UserControls
             //isInitializationMode = false;
         }
 
-        //private Image GetZodiacImage(ZodiacSign sign)
+        //#region Event NameChanged
+
+        //public event EventHandler<NameChangedEventArgs> NameChanged;
+
+        //protected virtual void OnNameChanged(NameChangedEventArgs e)
         //{
-        //    Image img = null;
+        //    EventHandler<NameChangedEventArgs> handler = NameChanged;
 
-        //    switch (sign)
-        //    {
-        //        case ZodiacSign.Aquarius:
-        //            img = Resources.Aquarius;
-        //            break;
-
-        //        case ZodiacSign.Pisces:
-        //            img = Resources.Pisces;
-        //            break;
-
-        //        case ZodiacSign.Aries:
-        //            img = Resources.Aries;
-        //            break;
-
-        //        case ZodiacSign.Taurus:
-        //            img = Resources.Taurus;
-        //            break;
-
-        //        case ZodiacSign.Gemini:
-        //            img = Resources.Gemini;
-        //            break;
-
-        //        case ZodiacSign.Cancer:
-        //            img = Resources.Cancer;
-        //            break;
-
-        //        case ZodiacSign.Leo:
-        //            img = Resources.Leo;
-        //            break;
-
-        //        case ZodiacSign.Virgo:
-        //            img = Resources.Virgo;
-        //            break;
-
-        //        case ZodiacSign.Libra:
-        //            img = Resources.Libra;
-        //            break;
-
-        //        case ZodiacSign.Scorpio:
-        //            img = Resources.Scorpio;
-        //            break;
-
-        //        case ZodiacSign.Sagittarius:
-        //            img = Resources.Sagittarius;
-        //            break;
-
-        //        case ZodiacSign.Capricorn:
-        //            img = Resources.Capricorn;
-        //            break;
-        //    }
-
-        //    return img;
+        //    if (handler != null)
+        //        handler(this, e);
         //}
 
-        #region Event NameChanged
+        //#endregion Event NameChanged
 
-        public event EventHandler<NameChangedEventArgs> NameChanged;
+        //#region Event ContactChanged
 
-        protected virtual void OnNameChanged(NameChangedEventArgs e)
-        {
-            EventHandler<NameChangedEventArgs> handler = NameChanged;
+        //public event EventHandler ContactChanged;
 
-            if (handler != null)
-                handler(this, e);
-        }
+        //protected virtual void OnContactChanged()
+        //{
+        //    EventHandler handler = ContactChanged;
 
-        #endregion Event NameChanged
+        //    if (handler != null)
+        //        handler(this, EventArgs.Empty);
+        //}
 
-        #region Event ContactChanged
-
-        public event EventHandler ContactChanged;
-
-        protected virtual void OnContactChanged()
-        {
-            EventHandler handler = ContactChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        #endregion Event ContactChanged
-
-        private void textBoxFirstName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.FirstNameWasChanged();
-        }
-
-        private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.MiddleNameWasChanged();
-        }
-
-        private void textBoxLastName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.LastNameWasChanged();
-        }
-
-        private void textBoxNickname_TextChanged(object sender, EventArgs e)
-        {
-            presenter.NicknameWasChanged();
-        }
-
-        private void textBoxNotes_TextChanged(object sender, EventArgs e)
-        {
-            presenter.NotesWasChanged();
-        }
-
-        public void EditBirthday(Date birthday)
-        {
-            // client position 
-            int cx = labelBirthday.Location.X;
-            int cy = labelBirthday.Location.Y + labelBirthday.Height;
-            Point cp = new Point(cx, cy);
-
-            // screen position
-            Point sp = PointToScreen(cp);
-
-            // initialize form
-            formBirthdayEdit.Location = sp;
-            formBirthdayEdit.Date = birthday;
-
-            // show form
-            formBirthdayEdit.Show();
-            formBirthdayEdit.Focus();
-        }
-
-        private void formBirthdayEdit_DateUpdated(object sender, DateUpdatedEventArgs e)
-        {
-            //labelBirthday.Text = e.Date.ToString();
-            //pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
-            //labelZodiacSign.Text = contact.ZogiacSign.ToString();
-            //OnContactChanged();
-        }
-
-        private void textBoxBirthday_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space)
-                presenter.BirthdayEditWasRequested();
-        }
-
-        private void textBoxName_Leave(object sender, EventArgs e)
-        {
-            if (!CheckMandatoryFields)
-                return;
-
-            bool isAnyFilled = textBoxFirstName.Text.Length != 0 || 
-                    textBoxMiddleName.Text.Length != 0 ||
-                    textBoxLastName.Text.Length != 0 ||
-                    textBoxNickname.Text.Length != 0;
-
-            if (!isAnyFilled)
-            {
-                MessageBox.Show("At least one of the fields marked with \"*\" must be filled.", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                ((TextBox)sender).Focus();
-            }
-        }
+        //#endregion
 
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -434,34 +289,26 @@ namespace DustInTheWind.Lisimba.UserControls
                 return;
         }
 
-        void formPhoneEdit_PhoneUpdated(object sender, FormPhoneEdit.PhoneUpdatedEventArgs e)
+        // -------------------------------------------------------------------
+
+        private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
-            RefreshData();
-            OnContactChanged();
+            presenter.FirstNameWasChanged();
         }
 
-        void formEmailEdit_EmailUpdated(object sender, FormEmailEdit.EmailUpdatedEventArgs e)
+        private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
         {
-            RefreshData();
-            OnContactChanged();
+            presenter.MiddleNameWasChanged();
         }
 
-        void formWebSiteEdit_WebSiteUpdated(object sender, FormWebSiteEdit.WebSiteUpdatedEventArgs e)
+        private void textBoxLastName_TextChanged(object sender, EventArgs e)
         {
-            RefreshData();
-            OnContactChanged();
+            presenter.LastNameWasChanged();
         }
 
-        void formAddressEdit_AddressUpdated(object sender, FormAddressEdit.AddressUpdatedEventArgs e)
+        private void textBoxNickname_TextChanged(object sender, EventArgs e)
         {
-            RefreshData();
-            OnContactChanged();
-        }
-
-        void formDateEdit_DateUpdated(object sender, DateUpdatedEventArgs e)
-        {
-            RefreshData();
-            OnContactChanged();
+            presenter.NicknameWasChanged();
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -469,13 +316,10 @@ namespace DustInTheWind.Lisimba.UserControls
             presenter.BirthdayEditWasRequested();
         }
 
-        private void labelBirthday_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        private void textBoxNotes_TextChanged(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.Space)
-                presenter.BirthdayEditWasRequested();
+            presenter.NotesWasChanged();
         }
-
-        // -------------------------------------------------------------------
 
         public string FirstName
         {
@@ -653,6 +497,25 @@ namespace DustInTheWind.Lisimba.UserControls
 
                 messengerIdsNode.Expand();
             }
+        }
+
+        public void EditBirthday(Date birthday)
+        {
+            // client position 
+            int clientX = labelBirthday.Location.X;
+            int clientY = labelBirthday.Location.Y + labelBirthday.Height;
+            Point clientPoint = new Point(clientX, clientY);
+
+            // screen position
+            Point screenPoint = PointToScreen(clientPoint);
+
+            // initialize form
+            formBirthdayEdit.Location = screenPoint;
+            formBirthdayEdit.Date = birthday;
+
+            // show form
+            formBirthdayEdit.Show();
+            formBirthdayEdit.Focus();
         }
     }
 }

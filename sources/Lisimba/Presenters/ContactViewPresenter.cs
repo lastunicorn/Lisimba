@@ -22,9 +22,9 @@ using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    class ContactViewPresenter
+    public class ContactViewPresenter
     {
-        private ZodiacService zodiacService;
+        private readonly ZodiacService zodiacService;
 
         private Contact contact;
         private bool isInitializationMode;

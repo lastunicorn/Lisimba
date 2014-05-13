@@ -29,12 +29,12 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactView));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Phones", 4, 4);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Emails", 3, 3);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("WebSites", 6, 6);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Addresses", 2, 2);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dates", 0, 0);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("MessengerIds", 5, 5);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Phones", 4, 4);
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Emails", 3, 3);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("WebSites", 6, 6);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Addresses", 2, 2);
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Dates", 0, 0);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("MessengerIds", 5, 5);
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxMiddleName = new System.Windows.Forms.TextBox();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -97,7 +97,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxMiddleName.Size = new System.Drawing.Size(147, 13);
             this.textBoxMiddleName.TabIndex = 1;
             this.textBoxMiddleName.TextChanged += new System.EventHandler(this.textBoxMiddleName_TextChanged);
-            this.textBoxMiddleName.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
             // textBoxFirstName
             // 
@@ -110,7 +109,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxFirstName.Size = new System.Drawing.Size(147, 13);
             this.textBoxFirstName.TabIndex = 0;
             this.textBoxFirstName.TextChanged += new System.EventHandler(this.textBoxFirstName_TextChanged);
-            this.textBoxFirstName.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
             // label2
             // 
@@ -147,7 +145,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxNickname.Size = new System.Drawing.Size(147, 13);
             this.textBoxNickname.TabIndex = 3;
             this.textBoxNickname.TextChanged += new System.EventHandler(this.textBoxNickname_TextChanged);
-            this.textBoxNickname.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
             // imageList1
             // 
@@ -184,7 +181,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxLastName.Size = new System.Drawing.Size(147, 13);
             this.textBoxLastName.TabIndex = 2;
             this.textBoxLastName.TextChanged += new System.EventHandler(this.textBoxLastName_TextChanged);
-            this.textBoxLastName.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
             // label7
             // 
@@ -249,37 +245,37 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(4, 17);
             this.treeView1.Name = "treeView1";
-            treeNode1.ImageIndex = 4;
-            treeNode1.Name = "Phones";
-            treeNode1.SelectedImageIndex = 4;
-            treeNode1.Text = "Phones";
-            treeNode2.ImageIndex = 3;
-            treeNode2.Name = "Emails";
-            treeNode2.SelectedImageIndex = 3;
-            treeNode2.Text = "Emails";
-            treeNode3.ImageIndex = 6;
-            treeNode3.Name = "WebSites";
-            treeNode3.SelectedImageIndex = 6;
-            treeNode3.Text = "WebSites";
-            treeNode4.ImageIndex = 2;
-            treeNode4.Name = "Addresses";
-            treeNode4.SelectedImageIndex = 2;
-            treeNode4.Text = "Addresses";
-            treeNode5.ImageIndex = 0;
-            treeNode5.Name = "Dates";
-            treeNode5.SelectedImageIndex = 0;
-            treeNode5.Text = "Dates";
-            treeNode6.ImageIndex = 5;
-            treeNode6.Name = "MessengerIds";
-            treeNode6.SelectedImageIndex = 5;
-            treeNode6.Text = "MessengerIds";
+            treeNode7.ImageIndex = 4;
+            treeNode7.Name = "Phones";
+            treeNode7.SelectedImageIndex = 4;
+            treeNode7.Text = "Phones";
+            treeNode8.ImageIndex = 3;
+            treeNode8.Name = "Emails";
+            treeNode8.SelectedImageIndex = 3;
+            treeNode8.Text = "Emails";
+            treeNode9.ImageIndex = 6;
+            treeNode9.Name = "WebSites";
+            treeNode9.SelectedImageIndex = 6;
+            treeNode9.Text = "WebSites";
+            treeNode10.ImageIndex = 2;
+            treeNode10.Name = "Addresses";
+            treeNode10.SelectedImageIndex = 2;
+            treeNode10.Text = "Addresses";
+            treeNode11.ImageIndex = 0;
+            treeNode11.Name = "Dates";
+            treeNode11.SelectedImageIndex = 0;
+            treeNode11.Text = "Dates";
+            treeNode12.ImageIndex = 5;
+            treeNode12.Name = "MessengerIds";
+            treeNode12.SelectedImageIndex = 5;
+            treeNode12.Text = "MessengerIds";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
@@ -368,7 +364,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.labelBirthday.TabIndex = 13;
             this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
-            this.labelBirthday.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.labelBirthday_PreviewKeyDown);
             // 
             // flowLayoutPanel1
             // 

@@ -83,6 +83,8 @@ namespace DustInTheWind.Lisimba.Forms
 
             InitializeComponent();
 
+            contactView1.Presenter.ContactChanged += contactView1_ContactChanged;
+
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             programTitle = string.Format("{0} {1}", Application.ProductName, version.ToString(2));
 

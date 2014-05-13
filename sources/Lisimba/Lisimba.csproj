@@ -160,12 +160,6 @@
     <Compile Include="UserControls\WebSiteListView.Designer.cs">
       <DependentUpon>WebSiteListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\DateListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\DateListView.Designer.cs">
-      <DependentUpon>DateListView.cs</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\EmailListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -264,10 +258,6 @@
     <EmbeddedResource Include="UserControls\WebSiteListView.resx">
       <DependentUpon>WebSiteListView.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\DateListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DateListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\EmailListView.resx">
       <SubType>Designer</SubType>

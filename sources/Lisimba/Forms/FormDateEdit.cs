@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -28,10 +27,7 @@ namespace DustInTheWind.Lisimba.Forms
             set
             {
                 date = value;
-
-                comboBoxDay.SelectedIndex = value.Day;
-                comboBoxMonth.SelectedIndex = value.Month;
-                textBoxYear.Text = (value.Year != 0 ? value.Year.ToString() : string.Empty);
+                DisplayDataInView();
             }
         }
 
@@ -53,20 +49,6 @@ namespace DustInTheWind.Lisimba.Forms
             textBoxYear.KeyDown += FormEditBase_KeyDown;
         }
 
-        #region Event DateUpdated
-
-        public event EventHandler<DateUpdatedEventArgs> DateUpdated;
-
-        protected virtual void OnDateUpdated(DateUpdatedEventArgs e)
-        {
-            EventHandler<DateUpdatedEventArgs> handler = DateUpdated;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        #endregion
-
         protected override void UpdateData()
         {
             int day = comboBoxDay.SelectedIndex;
@@ -81,8 +63,13 @@ namespace DustInTheWind.Lisimba.Forms
                 return;
 
             date.SetValues(day, month, year);
+        }
 
-            OnDateUpdated(new DateUpdatedEventArgs(date));
+        private void DisplayDataInView()
+        {
+            comboBoxDay.SelectedIndex = date.Day;
+            comboBoxMonth.SelectedIndex = date.Month;
+            textBoxYear.Text = (date.Year != 0 ? date.Year.ToString() : string.Empty);
         }
     }
 }

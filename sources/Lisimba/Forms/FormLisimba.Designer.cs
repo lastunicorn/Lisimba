@@ -127,7 +127,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactView1.Notes = "";
             this.contactView1.Size = new System.Drawing.Size(494, 407);
             this.contactView1.TabIndex = 5;
-            this.contactView1.ContactChanged += new System.EventHandler(this.contactView1_ContactChanged);
             // 
             // menuStrip1
             // 
