@@ -33,9 +33,16 @@ namespace DustInTheWind.Lisimba.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem_Agenda = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
             this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem_File = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_File_New = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_File_Open = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
@@ -50,33 +57,26 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_File_RecentFiles = new DustInTheWind.Lisimba.UserControls.MenuItemWithChildren();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_File_Exit = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
-            this.toolStripMenuItem_Agenda = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Agenda_AddContact = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_Agenda_DeleteContact = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_Agenda_Properties = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_Options = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_Help = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
             this.toolStripMenuItem_Help_About = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(12, 36);
+            this.splitContainer1.Location = new System.Drawing.Point(8, 8);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -86,47 +86,10 @@ namespace DustInTheWind.Lisimba.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.contactView1);
-            this.splitContainer1.Size = new System.Drawing.Size(719, 407);
+            this.splitContainer1.Size = new System.Drawing.Size(727, 415);
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 4;
-            // 
-            // contactListView1
-            // 
-            this.contactListView1.AllowSort = true;
-            this.contactListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.contactListView1.Contacts = null;
-            this.contactListView1.Location = new System.Drawing.Point(0, 0);
-            this.contactListView1.Name = "contactListView1";
-            this.contactListView1.SearchText = "";
-            this.contactListView1.Size = new System.Drawing.Size(191, 407);
-            this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.Enums.ContactsSortingType.NicknameOrName;
-            this.contactListView1.TabIndex = 9;
-            this.contactListView1.SelectedContactChanged += new DustInTheWind.Lisimba.UserControls.ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);
-            // 
-            // contactView1
-            // 
-            this.contactView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.contactView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
-            this.contactView1.Birthday = "";
-            this.contactView1.CheckMandatoryFields = true;
-            this.contactView1.Contact = null;
-            this.contactView1.Enabled = false;
-            this.contactView1.FirstName = "";
-            this.contactView1.ForeColor = System.Drawing.Color.Black;
-            this.contactView1.LastName = "";
-            this.contactView1.Location = new System.Drawing.Point(3, 0);
-            this.contactView1.MiddleName = "";
-            this.contactView1.MinimumSize = new System.Drawing.Size(400, 300);
-            this.contactView1.Name = "contactView1";
-            this.contactView1.Nickname = "";
-            this.contactView1.Notes = "";
-            this.contactView1.Size = new System.Drawing.Size(494, 407);
-            this.contactView1.TabIndex = 5;
             // 
             // menuStrip1
             // 
@@ -140,6 +103,91 @@ namespace DustInTheWind.Lisimba.Forms
             this.menuStrip1.Size = new System.Drawing.Size(743, 24);
             this.menuStrip1.TabIndex = 7;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // toolStripMenuItem_Agenda
+            // 
+            this.toolStripMenuItem_Agenda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem_Agenda_AddContact,
+            this.toolStripMenuItem_Agenda_DeleteContact,
+            this.toolStripMenuItem4,
+            this.toolStripMenuItem_Agenda_Properties});
+            this.toolStripMenuItem_Agenda.Name = "toolStripMenuItem_Agenda";
+            this.toolStripMenuItem_Agenda.Size = new System.Drawing.Size(91, 20);
+            this.toolStripMenuItem_Agenda.Text = "&Address Book";
+            this.toolStripMenuItem_Agenda.DropDownOpening += new System.EventHandler(this.toolStripMenuItem_Agenda_DropDownOpening);
+            // 
+            // toolStripMenuItem4
+            // 
+            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(205, 6);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 455);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(743, 22);
+            this.statusStrip1.TabIndex = 8;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "lsb";
+            this.saveFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.splitContainer1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Name = "panel1";
+            this.panel1.Padding = new System.Windows.Forms.Padding(8);
+            this.panel1.Size = new System.Drawing.Size(743, 431);
+            this.panel1.TabIndex = 9;
+            // 
+            // contactListView1
+            // 
+            this.contactListView1.AllowSort = true;
+            this.contactListView1.Contacts = null;
+            this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactListView1.Location = new System.Drawing.Point(0, 0);
+            this.contactListView1.Name = "contactListView1";
+            this.contactListView1.SearchText = "";
+            this.contactListView1.Size = new System.Drawing.Size(194, 415);
+            this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.Enums.ContactsSortingType.NicknameOrName;
+            this.contactListView1.TabIndex = 9;
+            this.contactListView1.SelectedContactChanged += new DustInTheWind.Lisimba.UserControls.ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);
+            // 
+            // contactView1
+            // 
+            this.contactView1.Birthday = "";
+            this.contactView1.CheckMandatoryFields = true;
+            this.contactView1.Contact = null;
+            this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactView1.Enabled = false;
+            this.contactView1.FirstName = "";
+            this.contactView1.ForeColor = System.Drawing.Color.Black;
+            this.contactView1.LastName = "";
+            this.contactView1.Location = new System.Drawing.Point(0, 0);
+            this.contactView1.MiddleName = "";
+            this.contactView1.MinimumSize = new System.Drawing.Size(400, 300);
+            this.contactView1.Name = "contactView1";
+            this.contactView1.Nickname = "";
+            this.contactView1.Notes = "";
+            this.contactView1.Size = new System.Drawing.Size(525, 415);
+            this.contactView1.TabIndex = 5;
             // 
             // toolStripMenuItem_File
             // 
@@ -304,18 +352,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_File_Exit.Text = "E&xit";
             this.toolStripMenuItem_File_Exit.Click += new System.EventHandler(this.toolStripMenuItem_File_Exit_Click);
             // 
-            // toolStripMenuItem_Agenda
-            // 
-            this.toolStripMenuItem_Agenda.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Agenda_AddContact,
-            this.toolStripMenuItem_Agenda_DeleteContact,
-            this.toolStripMenuItem4,
-            this.toolStripMenuItem_Agenda_Properties});
-            this.toolStripMenuItem_Agenda.Name = "toolStripMenuItem_Agenda";
-            this.toolStripMenuItem_Agenda.Size = new System.Drawing.Size(91, 20);
-            this.toolStripMenuItem_Agenda.Text = "&Address Book";
-            this.toolStripMenuItem_Agenda.DropDownOpening += new System.EventHandler(this.toolStripMenuItem_Agenda_DropDownOpening);
-            // 
             // toolStripMenuItem_Agenda_AddContact
             // 
             this.toolStripMenuItem_Agenda_AddContact.Command = null;
@@ -341,11 +377,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_Agenda_DeleteContact.StatusService = null;
             this.toolStripMenuItem_Agenda_DeleteContact.Text = "Delete Contact";
             this.toolStripMenuItem_Agenda_DeleteContact.Click += new System.EventHandler(this.toolStripMenuItem_Agenda_DeleteContact_Click);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(205, 6);
             // 
             // toolStripMenuItem_Agenda_Properties
             // 
@@ -396,40 +427,14 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_Help_About.StatusService = null;
             this.toolStripMenuItem_Help_About.Text = "&About";
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 455);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(743, 22);
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
-            // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "lsb";
-            this.saveFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-            // 
             // FormLisimba
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 477);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.splitContainer1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormLisimba";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -444,6 +449,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -481,5 +487,6 @@ namespace DustInTheWind.Lisimba.Forms
         private ContactListView contactListView1;
         private DustInTheWind.Lisimba.UserControls.MenuItemWithChildren toolStripMenuItem_File_RecentFiles;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.Panel panel1;
     }
 }

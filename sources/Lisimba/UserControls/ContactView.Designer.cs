@@ -440,7 +440,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // ContactView
             // 
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(233)))), ((int)(((byte)(216)))));
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.splitContainer1);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "ContactView";
