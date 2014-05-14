@@ -46,8 +46,6 @@ namespace DustInTheWind.Lisimba.UserControls
         readonly FormAddressEdit formAddressEdit;
         readonly FormDateEdit formDateEdit;
 
-        public bool CheckMandatoryFields { get; set; }
-
         private readonly TreeNode phonesNode;
         private readonly TreeNode emailsNode;
         private readonly TreeNode webSitesNode;
@@ -61,8 +59,6 @@ namespace DustInTheWind.Lisimba.UserControls
 
             presenter = new ContactViewPresenter();
             presenter.View = this;
-
-            CheckMandatoryFields = true;
 
             phonesNode = treeView1.Nodes["Phones"];
             emailsNode = treeView1.Nodes["Emails"];

@@ -22,74 +22,60 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormAddContact : Form
     {
-        private Contact contact = null;
-        public Contact Contact
-        {
-            get
-            {
-                return contact;
-            }
-        }
+        private readonly ContactCollection contacts;
 
-        private ContactCollection contacts = null;
-        public ContactCollection Contacts
-        {
-            get { return contacts; }
-            set { contacts = value; }
-        }
-
-        public FormAddContact()
-            : this(null)
-        {
-        }
+        public Contact Contact { get; private set; }
 
         public FormAddContact(ContactCollection contacts)
         {
             InitializeComponent();
 
             this.contacts = contacts;
+
             contactView1.Contact = new Contact();
-            contactView1.CheckMandatoryFields = false;
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            Contact p = contactView1.Contact;
-            if (ValidateContact(p))
+            Contact editedContact = contactView1.Contact;
+
+            bool isContactValid = ValidateContact(editedContact);
+
+            if (!isContactValid)
             {
-                contact = p;
-            }
-            else
-            {
-                MessageBox.Show("Please enter at least one of the fields marked with \"*\".", "Insufficient data.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                MessageBox.Show("Please enter at least one of the fields marked with \"*\".", "Insufficient data.",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 DialogResult = DialogResult.None;
+                return;
             }
+
+            Contact = editedContact;
         }
 
-        private bool ValidateContact(Contact contact)
+        private bool ValidateContact(Contact contactToValidate)
         {
-            if (contact.Name.FirstName.Length == 0 &&
-                contact.Name.MiddleName.Length == 0 &&
-                contact.Name.LastName.Length == 0 &&
-                contact.Name.Nickname.Length == 0)
-            {
-                return false;
-            }
+            bool doesContactContainsName =
+                contactToValidate.Name.FirstName.Length != 0 ||
+                contactToValidate.Name.MiddleName.Length != 0 ||
+                contactToValidate.Name.LastName.Length != 0 ||
+                contactToValidate.Name.Nickname.Length != 0;
 
-            if (contacts != null)
+            if (!doesContactContainsName)
+                return false;
+
+            if (contacts == null)
+                return true;
+
+            foreach (Contact c in contacts)
             {
-                Contact p = null;
-                for (int i = 0; i < contacts.Count; i++)
-                {
-                    p = contacts[i];
-                    if (p.Name.FirstName.Equals(contact.Name.FirstName) &&
-                        p.Name.MiddleName.Equals(contact.Name.MiddleName) &&
-                        p.Name.LastName.Equals(contact.Name.LastName) &&
-                        p.Name.Nickname.Equals(contact.Name.Nickname))
-                    {
-                        return false;
-                    }
-                }
+                bool contactAlreadyExists =
+                         c.Name.FirstName.Equals(contactToValidate.Name.FirstName) &&
+                         c.Name.MiddleName.Equals(contactToValidate.Name.MiddleName) &&
+                         c.Name.LastName.Equals(contactToValidate.Name.LastName) &&
+                         c.Name.Nickname.Equals(contactToValidate.Name.Nickname);
+
+                if (contactAlreadyExists)
+                    return false;
             }
 
             return true;

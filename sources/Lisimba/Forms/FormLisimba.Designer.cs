@@ -173,7 +173,6 @@ namespace DustInTheWind.Lisimba.Forms
             // contactView1
             // 
             this.contactView1.Birthday = "";
-            this.contactView1.CheckMandatoryFields = true;
             this.contactView1.Contact = null;
             this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactView1.Enabled = false;

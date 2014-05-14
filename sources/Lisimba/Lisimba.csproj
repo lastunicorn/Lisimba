@@ -88,7 +88,6 @@
       <DependentUpon>ctrl.cs</DependentUpon>
     </Compile>
     <Compile Include="Exceptions\LisimbaException.cs" />
-    <Compile Include="Forms\DateUpdatedEventArgs.cs" />
     <Compile Include="Forms\FormBiorythm.cs">
       <SubType>Form</SubType>
     </Compile>
