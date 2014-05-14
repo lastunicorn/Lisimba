@@ -47,15 +47,20 @@ namespace DustInTheWind.Lisimba.Services
         public AddressBook AddressBook
         {
             get { return addressBook; }
-            private set
+            set
             {
                 if (addressBook != null)
                     addressBook.Changed -= HandleAddressBookContentChanged;
 
                 addressBook = value;
 
+                IsNew = addressBook.FileName == null;
+                IsModified = false;
+
                 if (addressBook != null)
                     addressBook.Changed += HandleAddressBookContentChanged;
+
+                OnAddressBookChanged(EventArgs.Empty);
             }
         }
 
@@ -154,20 +159,6 @@ namespace DustInTheWind.Lisimba.Services
             OnAddressBookContentChanged(EventArgs.Empty);
         }
 
-        public void New()
-        {
-            warnings.Clear();
-
-            AddressBook = new AddressBook();
-
-            IsNew = true;
-            IsModified = false;
-
-            statusService.StatusText = "A new address book was created.";
-
-            OnAddressBookChanged(EventArgs.Empty);
-        }
-
         public void Open(string fileName)
         {
             warnings.Clear();
@@ -181,17 +172,14 @@ namespace DustInTheWind.Lisimba.Services
             }
 
             ZipXmlGate gate = new ZipXmlGate();
-            AddressBook = gate.Load(fileName);
+            AddressBook openedAddressBook = gate.Load(fileName);
 
             warnings.AddRange(gate.Warnings);
 
-            IsNew = false;
-            IsModified = false;
+            AddressBook = openedAddressBook;
 
-            statusService.StatusText = string.Format("{0} contacts oppened.", AddressBook.Count);
+            statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Count);
             recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
-
-            OnAddressBookChanged(EventArgs.Empty);
         }
 
         public void Save()
@@ -241,11 +229,6 @@ namespace DustInTheWind.Lisimba.Services
         {
             warnings.Clear();
 
-            AddressBook = new AddressBook();
-
-            IsNew = true;
-            IsModified = false;
-
             string fileName = AskToOpenYahooCsvFile();
 
             if (fileName == null)
@@ -254,17 +237,19 @@ namespace DustInTheWind.Lisimba.Services
             try
             {
                 YahooCsvGate yahooCsvGate = new YahooCsvGate();
-                AddressBook newAddressBook = yahooCsvGate.Load(fileName);
+                AddressBook yahooAddressBook = yahooCsvGate.Load(fileName);
 
-                ContactCollection newContacts = newAddressBook.Contacts;
-                ImportRuleCollection importRules = CreateImportRules(newContacts);
-                int countImport = AddressBook.AddRange(newContacts, importRules);
+                ContactCollection yahooContacts = yahooAddressBook.Contacts;
+                ImportRuleCollection importRules = CreateImportRules(yahooContacts);
+
+                AddressBook = new AddressBook();
+                int countImport = AddressBook.AddRange(yahooContacts, importRules);
 
                 IsModified = true;
 
-                statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, newContacts.Count);
+                statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
 
-                OnAddressBookChanged(EventArgs.Empty);
+                OnAddressBookContentChanged(EventArgs.Empty);
             }
             catch (Exception ex)
             {

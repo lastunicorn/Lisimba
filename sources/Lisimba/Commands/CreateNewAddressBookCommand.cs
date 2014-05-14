@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -23,13 +24,14 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UIService uiService;
+        private readonly StatusService statusService;
 
         public override string ShortDescription
         {
             get { return "Create a new address book."; }
         }
 
-        public CreateNewAddressBookCommand(CurrentData currentData, UIService uiService)
+        public CreateNewAddressBookCommand(CurrentData currentData, UIService uiService, StatusService statusService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -37,15 +39,20 @@ namespace DustInTheWind.Lisimba.Commands
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
+            if (statusService == null)
+                throw new ArgumentNullException("statusService");
+
             this.currentData = currentData;
             this.uiService = uiService;
+            this.statusService = statusService;
         }
 
         protected override void DoExecute(string fileName)
         {
             try
             {
-                currentData.New();
+                currentData.AddressBook = new AddressBook();
+                statusService.StatusText = "A new address book was created.";
             }
             catch (Exception ex)
             {

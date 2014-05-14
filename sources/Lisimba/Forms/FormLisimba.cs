@@ -72,7 +72,7 @@ namespace DustInTheWind.Lisimba.Forms
 
             uiService = new UIService(this);
 
-            createNewAddressBookCommand = new CreateNewAddressBookCommand(currentData, uiService);
+            createNewAddressBookCommand = new CreateNewAddressBookCommand(currentData, uiService, statusService);
             openAddressBookCommand = new OpenAddressBookCommand(currentData, uiService);
             saveAddressBookCommand = new SaveAddressBookCommand(currentData, uiService);
             saveAsAddressBookCommand = new SaveAsAddressBookCommand(currentData, uiService);
@@ -127,7 +127,7 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripMenuItem_File_RecentFiles.RecentFilesService = recentFilesService;
             toolStripMenuItem_File_RecentFiles.RefreshRecentFilesMenu();
 
-            currentData.New();
+            createNewAddressBookCommand.Execute();
 
             CalculateFileNameToInitiallyOpen(programArguments, configurationService, recentFilesService);
 
