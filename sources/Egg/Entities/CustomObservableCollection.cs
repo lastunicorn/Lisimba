@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
@@ -83,7 +84,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 suppressCollectionChangedEvent = false;
             }
 
-            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset, items));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
         }
     }
 }

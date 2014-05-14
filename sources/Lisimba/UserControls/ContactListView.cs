@@ -24,10 +24,11 @@ using DustInTheWind.Lisimba.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    public partial class ContactListView : UserControl
+    partial class ContactListView : UserControl
     {
         private ContactCollection contacts;
         private Dictionary<Contact, bool> modifiedContacts = new Dictionary<Contact, bool>();
@@ -49,7 +50,7 @@ namespace DustInTheWind.Lisimba.UserControls
         }
 
         private ContactsSortingType sortField = ContactsSortingType.NicknameOrName;
-
+        
         [Browsable(true)]
         [Category("Behavior")]
         [Description("Specifies the field of the Contact used to sort them. Available only if AllowSort is true.")]
@@ -147,6 +148,8 @@ namespace DustInTheWind.Lisimba.UserControls
             get { return textBoxSearch.Text; }
             set { textBoxSearch.Text = value; }
         }
+
+        public CurrentData CurrentData { get; set; }
 
         public ContactListView()
         {
@@ -425,7 +428,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void toolStripMenuItem_List_Add_Click(object sender, EventArgs e)
         {
-            FormAddContact formAddContact = new FormAddContact(contacts);
+            FormAddContact formAddContact = new FormAddContact(CurrentData);
 
             if (formAddContact.ShowDialog() == DialogResult.OK)
             {

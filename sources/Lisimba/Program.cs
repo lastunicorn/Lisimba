@@ -16,9 +16,9 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
+using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba
 {
@@ -30,26 +30,33 @@ namespace DustInTheWind.Lisimba
         [STAThread]
         static void Main(string[] args)
         {
-            ProgramArguments arguments = null;
+            UnityContainer unityContainer = new UnityContainer();
+
+            unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<StatusService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<RecentFilesService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<CurrentData>(new ContainerControlledLifetimeManager());
 
             try
             {
-                arguments = new ProgramArguments(args);
+                ProgramArguments programArguments = new ProgramArguments(args);
+                unityContainer.RegisterInstance(programArguments, new ContainerControlledLifetimeManager());
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            ConfigurationService configurationService = new ConfigurationService();
-            StatusService statusService = new StatusService { DefaultStatusText = "Ready" };
-            RecentFilesService recentFilesService = new RecentFilesService(configurationService);
-            CurrentData currentData = new CurrentData(statusService, recentFilesService);
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            FormLisimba formLisimba = new FormLisimba(arguments, configurationService, statusService, recentFilesService, currentData);
+            unityContainer.Resolve<StatusService>().DefaultStatusText = "Ready";
+
+            FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
+
+            UIService uiService = new UIService(formLisimba);
+            unityContainer.RegisterInstance(uiService, new ContainerControlledLifetimeManager());
+
             Application.Run(formLisimba);
         }
     }

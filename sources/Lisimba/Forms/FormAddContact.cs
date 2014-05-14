@@ -17,20 +17,24 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormAddContact : Form
+    partial class FormAddContact : Form
     {
-        private readonly ContactCollection contacts;
+        private readonly CurrentData currentData;
 
         public Contact Contact { get; private set; }
 
-        public FormAddContact(ContactCollection contacts)
+        public FormAddContact(CurrentData currentData)
         {
-            InitializeComponent();
+            if (currentData == null)
+                throw new ArgumentNullException("currentData");
 
-            this.contacts = contacts;
+            this.currentData = currentData;
+
+            InitializeComponent();
 
             contactView1.Contact = new Contact();
         }
@@ -54,19 +58,19 @@ namespace DustInTheWind.Lisimba.Forms
 
         private bool ValidateContact(Contact contactToValidate)
         {
-            bool doesContactContainsName =
+            bool isNameFilled =
                 contactToValidate.Name.FirstName.Length != 0 ||
                 contactToValidate.Name.MiddleName.Length != 0 ||
                 contactToValidate.Name.LastName.Length != 0 ||
                 contactToValidate.Name.Nickname.Length != 0;
 
-            if (!doesContactContainsName)
+            if (!isNameFilled)
                 return false;
 
-            if (contacts == null)
+            if (currentData.AddressBook == null)
                 return true;
 
-            foreach (Contact c in contacts)
+            foreach (Contact c in currentData.AddressBook.Contacts)
             {
                 bool contactAlreadyExists =
                          c.Name.FirstName.Equals(contactToValidate.Name.FirstName) &&
