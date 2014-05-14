@@ -35,9 +35,23 @@ namespace DustInTheWind.Lisimba.UserControls
         protected override void OnMouseEnter(EventArgs e)
         {
             if (StatusService != null)
-                StatusService.SetPermanentStatusText(ShortDescription);
+            {
+                string description = CalculateTextToDisplayAsStatus();
+                StatusService.SetPermanentStatusText(description);
+            }
 
             base.OnMouseEnter(e);
+        }
+
+        private string CalculateTextToDisplayAsStatus()
+        {
+            if (ShortDescription != null)
+                return ShortDescription;
+
+            if (Command != null && Command.ShortDescription != null)
+                return Command.ShortDescription;
+
+            return null;
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -52,9 +66,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             if (Command != null)
             {
-                object commandParameter = CommandParameterProvider != null
-                    ? CommandParameterProvider()
-                    : CommandParameter;
+                object commandParameter = CalculateParameterToUseWithCommand();
 
                 if (commandParameter == null)
                     Command.Execute();
@@ -63,6 +75,13 @@ namespace DustInTheWind.Lisimba.UserControls
             }
 
             base.OnClick(e);
+        }
+
+        private object CalculateParameterToUseWithCommand()
+        {
+            return CommandParameterProvider != null
+                ? CommandParameterProvider()
+                : CommandParameter;
         }
     }
 }

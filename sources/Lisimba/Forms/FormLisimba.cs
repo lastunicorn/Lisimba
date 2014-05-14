@@ -89,18 +89,15 @@ namespace DustInTheWind.Lisimba.Forms
             programTitle = string.Format("{0} {1}", Application.ProductName, version.ToString(2));
 
             toolStripMenuItem_File_New.StatusService = statusService;
-            toolStripMenuItem_File_New.ShortDescription = "Create a new address book.";
             toolStripMenuItem_File_New.Command = createNewAddressBookCommand;
 
             toolStripMenuItem_File_Open.StatusService = statusService;
             toolStripMenuItem_File_Open.ShortDescription = "Open address book from file.";
 
             toolStripMenuItem_File_Save.StatusService = statusService;
-            toolStripMenuItem_File_Save.ShortDescription = "Save current opened address book.";
             toolStripMenuItem_File_Save.Command = saveAddressBookCommand;
 
             toolStripMenuItem_File_SaveAs.StatusService = statusService;
-            toolStripMenuItem_File_SaveAs.ShortDescription = "Save current opened address book with another name.";
             toolStripMenuItem_File_SaveAs.Command = saveAsAddressBookCommand;
 
             toolStripMenuItem_File_Export.StatusService = statusService;
@@ -121,11 +118,9 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripMenuItem_Agenda_DeleteContact.ShortDescription = "Delete the selected contact.";
 
             toolStripMenuItem_Agenda_Properties.StatusService = statusService;
-            toolStripMenuItem_Agenda_Properties.ShortDescription = "Display the address book properties.";
             toolStripMenuItem_Agenda_Properties.Command = showAddressBookPropertiesCommand;
 
             toolStripMenuItem_Help_About.StatusService = statusService;
-            toolStripMenuItem_Help_About.ShortDescription = "Info about the program.";
             toolStripMenuItem_Help_About.Command = showAboutCommand;
 
             toolStripMenuItem_File_RecentFiles.SubItemClicked += HandleRecentMenuItemClick;

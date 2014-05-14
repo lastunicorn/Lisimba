@@ -18,6 +18,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     internal interface ICommand
     {
+        string ShortDescription { get; }
         void Execute();
         void Execute(object parameter);
     }

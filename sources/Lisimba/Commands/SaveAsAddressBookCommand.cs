@@ -24,6 +24,11 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UIService uiService;
 
+        public override string ShortDescription
+        {
+            get { return "Save current opened address book with another name."; }
+        }
+
         public SaveAsAddressBookCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)

@@ -25,6 +25,11 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UIService uiService;
 
+        public override string ShortDescription
+        {
+            get { return "Displays info about Lisimba."; }
+        }
+
         public ShowAboutCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)

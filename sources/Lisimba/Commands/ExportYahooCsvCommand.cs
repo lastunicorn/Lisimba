@@ -24,6 +24,11 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UIService uiService;
 
+        public override string ShortDescription
+        {
+            get { return "Export current opened address book in Yahoo! csv format."; }
+        }
+
         public ExportYahooCsvCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)

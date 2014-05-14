@@ -24,6 +24,11 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UIService uiService;
 
+        public override string ShortDescription
+        {
+            get { return "Import address book from Yahoo! csv format."; }
+        }
+
         public ImportYahooCsvCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)

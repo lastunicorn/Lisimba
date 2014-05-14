@@ -22,12 +22,7 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class FormEditBase : Form
     {
-        private bool allowClose;
-        public bool AllowClose
-        {
-            get { return allowClose; }
-            set { allowClose = value; }
-        }
+        public bool AllowClose { get; set; }
 
         public FormEditBase()
         {
@@ -51,7 +46,7 @@ namespace DustInTheWind.Lisimba.Forms
 
             // Correct the position on the screen.
 
-            int margin = 10;
+            const int margin = 10;
 
             // the screen
             Rectangle screen = Screen.PrimaryScreen.WorkingArea;
@@ -60,8 +55,10 @@ namespace DustInTheWind.Lisimba.Forms
 
             // new position
             Point p = Location;
+            
             int x = Math.Min(screen.Width, p.X);
             x = Math.Max(margin, x);
+            
             int y = Math.Min(screen.Height, p.Y);
             y = Math.Max(margin, y);
 
@@ -81,24 +78,18 @@ namespace DustInTheWind.Lisimba.Forms
         public void FormEditBase_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            {
                 AcceptChanges();
-            }
 
             if (e.KeyCode == Keys.Escape)
-            {
                 Close();
-            }
         }
 
         private void FormEditBase_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.None)
-            {
                 DialogResult = DialogResult.Cancel;
-            }
 
-            if (!allowClose)
+            if (!AllowClose)
             {
                 e.Cancel = true;
                 Hide();

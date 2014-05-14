@@ -26,6 +26,11 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UIService uiService;
 
+        public override string ShortDescription
+        {
+            get { return "Open address book from file."; }
+        }
+
         public OpenAddressBookCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)

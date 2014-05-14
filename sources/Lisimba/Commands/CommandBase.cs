@@ -22,6 +22,8 @@ namespace DustInTheWind.Lisimba.Commands
     {
         public bool IsEnabled { get; set; }
 
+        public abstract string ShortDescription { get; }
+
         protected CommandBase()
         {
             IsEnabled = true;
