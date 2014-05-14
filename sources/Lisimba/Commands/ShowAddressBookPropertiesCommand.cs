@@ -23,23 +23,18 @@ namespace DustInTheWind.Lisimba.Commands
     class ShowAddressBookPropertiesCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
 
         public override string ShortDescription
         {
             get { return "Display the address book properties."; }
         }
 
-        public ShowAddressBookPropertiesCommand(CurrentData currentData, UIService uiService)
+        public ShowAddressBookPropertiesCommand(CurrentData currentData)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
 
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
-
             this.currentData = currentData;
-            this.uiService = uiService;
         }
 
         protected override void DoExecute(object parameter)

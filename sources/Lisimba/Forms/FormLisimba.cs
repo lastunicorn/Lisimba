@@ -78,8 +78,8 @@ namespace DustInTheWind.Lisimba.Forms
             saveAsAddressBookCommand = new SaveAsAddressBookCommand(currentData, uiService);
             importYahooCsvCommand = new ImportYahooCsvCommand(currentData, uiService);
             exportYahooCsvCommand = new ExportYahooCsvCommand(currentData, uiService);
-            showAboutCommand = new ShowAboutCommand(currentData, uiService);
-            showAddressBookPropertiesCommand = new ShowAddressBookPropertiesCommand(currentData, uiService);
+            showAboutCommand = new ShowAboutCommand();
+            showAddressBookPropertiesCommand = new ShowAddressBookPropertiesCommand(currentData);
 
             InitializeComponent();
 

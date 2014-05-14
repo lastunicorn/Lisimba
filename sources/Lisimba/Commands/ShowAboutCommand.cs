@@ -14,32 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
 {
     class ShowAboutCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
-        private readonly UIService uiService;
-
         public override string ShortDescription
         {
             get { return "Displays info about Lisimba."; }
-        }
-
-        public ShowAboutCommand(CurrentData currentData, UIService uiService)
-        {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
-
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
-
-            this.currentData = currentData;
-            this.uiService = uiService;
         }
 
         protected override void DoExecute(object parameter)
