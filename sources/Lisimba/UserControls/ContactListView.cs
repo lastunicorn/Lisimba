@@ -19,6 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
@@ -31,8 +32,10 @@ namespace DustInTheWind.Lisimba.UserControls
     partial class ContactListView : UserControl
     {
         private ContactCollection contacts;
-        private Dictionary<Contact, bool> modifiedContacts = new Dictionary<Contact, bool>();
-        private Dictionary<Contact, TreeNode> treeNodes = new Dictionary<Contact, TreeNode>();
+        private readonly Dictionary<Contact, bool> modifiedContacts = new Dictionary<Contact, bool>();
+        private readonly Dictionary<Contact, TreeNode> treeNodesByContact = new Dictionary<Contact, TreeNode>();
+
+        private bool ignoreCurrentContactChange;
 
         private bool allowSort;
 
@@ -50,7 +53,9 @@ namespace DustInTheWind.Lisimba.UserControls
         }
 
         private ContactsSortingType sortField = ContactsSortingType.NicknameOrName;
-        
+        private CurrentData currentData;
+        private ConfigurationService configurationService;
+
         [Browsable(true)]
         [Category("Behavior")]
         [Description("Specifies the field of the Contact used to sort them. Available only if AllowSort is true.")]
@@ -87,43 +92,7 @@ namespace DustInTheWind.Lisimba.UserControls
                     case ContactsSortingType.NicknameOrName:
                         comboBoxSortBy.SelectedIndex = 5;
                         break;
-
-                    default:
-                        break;
                 }
-            }
-        }
-
-
-        [Browsable(false)]
-        public ContactCollection Contacts
-        {
-            get { return contacts; }
-            set
-            {
-                contacts = value;
-
-                modifiedContacts.Clear();
-                treeNodes.Clear();
-
-                //this.textBoxSearch.Text = string.Empty;
-
-                if (contacts == null)
-                    return;
-
-                Contact c = null;
-                TreeNode treeNode = null;
-
-                for (int i = 0; i < contacts.Count; i++)
-                {
-                    c = contacts[i];
-                    modifiedContacts.Add(c, false);
-                    treeNode = new TreeNode(c.ToString());
-                    treeNode.Tag = c;
-                    treeNodes.Add(c, treeNode);
-                }
-
-                PopulateTreeView();
             }
         }
 
@@ -149,12 +118,107 @@ namespace DustInTheWind.Lisimba.UserControls
             set { textBoxSearch.Text = value; }
         }
 
-        public CurrentData CurrentData { get; set; }
+        public CurrentData CurrentData
+        {
+            get { return currentData; }
+            set
+            {
+                if (currentData != null)
+                {
+                    currentData.AddressBookChanged -= HandleCurrentAddressBookChanged;
+                    currentData.AddressBookContentChanged -= HandleCurrentAddressBookContentChanged;
+                    currentData.AddressBookSaved -= HandleCurrentAddressBookSaved;
+                    currentData.ContactChanged -= HandleCurrentContactChanged;
+                }
+
+                currentData = value;
+
+                if (currentData != null)
+                {
+                    currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+                    currentData.AddressBookContentChanged += HandleCurrentAddressBookContentChanged;
+                    currentData.ContactChanged += HandleCurrentContactChanged;
+                }
+
+                PopulateFromCurrentAddressBook();
+            }
+        }
+
+        private void HandleCurrentAddressBookSaved(object sender, EventArgs eventArgs)
+        {
+            ResetModifiedFlags();
+        }
+
+        public CommandPool CommandPool
+        {
+            set
+            {
+                toolStripMenuItem_List_Add.Command = value.CreateNewContactCommand;
+                toolStripMenuItem_List_Delete.Command = value.DeleteCurrentContactCommand;
+            }
+        }
+
+        public ConfigurationService ConfigurationService
+        {
+            get { return configurationService; }
+            set
+            {
+                configurationService = value;
+                RefreshSortMethod();
+            }
+        }
+
+        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
+        {
+            PopulateFromCurrentAddressBook();
+        }
+
+        private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
+        {
+            SearchText = string.Empty;
+            PopulateFromCurrentAddressBook();
+        }
+
+        private void PopulateFromCurrentAddressBook()
+        {
+            Clear();
+
+            if (currentData.AddressBook == null || currentData.AddressBook.Contacts == null)
+            {
+                contacts = null;
+            }
+            else
+            {
+                contacts = currentData.AddressBook.Contacts;
+
+                foreach (Contact contact in contacts)
+                {
+                    modifiedContacts.Add(contact, false);
+
+                    TreeNode treeNode = new TreeNode(contact.ToString()) { Tag = contact };
+                    treeNodesByContact.Add(contact, treeNode);
+                }
+            }
+
+            PopulateTreeView();
+        }
+
+        public StatusService StatusService
+        {
+            set
+            {
+                toolStripMenuItem_List_Add.StatusService = value;
+                toolStripMenuItem_List_Delete.StatusService = value;
+                toolStripMenuItem_List_ViewBiorythm.StatusService = value;
+            }
+        }
 
         public ContactListView()
         {
             InitializeComponent();
             treeView1.TreeViewNodeSorter = new TreeNodeByNicknameComparer();
+
+            toolStripMenuItem_List_ViewBiorythm.ShortDescription = "Display the biorhythm of the selected person.";
         }
 
         //public bool IsModified(Contact c)
@@ -167,94 +231,56 @@ namespace DustInTheWind.Lisimba.UserControls
         //    return this.treeNodes[c];
         //}
 
-        #region Event SelectedContactChanged
+        //#region Event ContactListChanged
 
-        public event SelectedContactChangedHandler SelectedContactChanged;
-        public delegate void SelectedContactChangedHandler(object sender, SelectedContactChangedEventArgs e);
+        //public event EventHandler ContactListChanged;
 
-        public class SelectedContactChangedEventArgs : EventArgs
+        //protected virtual void OnContactListChanged(EventArgs e)
+        //{
+        //    if (ContactListChanged != null)
+        //        ContactListChanged(this, e);
+        //}
+
+        //#endregion
+
+        private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
-            private Contact selectedContact;
+            if (ignoreCurrentContactChange)
+                return;
 
-            public Contact SelectedContact
-            {
-                get { return selectedContact; }
-            }
+            Contact contactToSelect = currentData.Contact;
 
-            public SelectedContactChangedEventArgs(Contact selectedContact)
-            {
-                this.selectedContact = selectedContact;
-            }
+            TreeNode treeNodeToSelect = (contactToSelect == null || !treeNodesByContact.ContainsKey(contactToSelect))
+                ? null
+                : treeNodesByContact[contactToSelect];
+
+            treeView1.SelectedNode = treeNodeToSelect;
         }
-
-        protected virtual void OnSelectedContactChanged(SelectedContactChangedEventArgs e)
-        {
-            if (SelectedContactChanged != null)
-            {
-                SelectedContactChanged(this, e);
-            }
-        }
-
-        #endregion
-
-        #region Event ContactListChanged
-
-        public event EventHandler ContactListChanged;
-
-        protected virtual void OnContactListChanged(EventArgs e)
-        {
-            if (ContactListChanged != null)
-                ContactListChanged(this, e);
-        }
-
-        #endregion
 
         public void Clear()
         {
             contacts = new ContactCollection();
 
             modifiedContacts.Clear();
-            treeNodes.Clear();
+            treeNodesByContact.Clear();
         }
 
-        public void AddRange(ContactCollection contacts)
+        private void ResetModifiedFlags()
         {
-            if (this.contacts == null)
-                return;
+            IEnumerable<Contact> modified = contacts.Where(contact => modifiedContacts[contact]);
 
-            Contact c = null;
-            TreeNode treeNode = null;
-
-            for (int i = 0; i < this.contacts.Count; i++)
+            foreach (Contact contact in modified)
             {
-                c = this.contacts[i];
-                modifiedContacts.Add(c, false);
-                treeNode = new TreeNode(c.ToString());
-                treeNode.Tag = c;
-                treeNodes.Add(c, treeNode);
-            }
-
-            PopulateTreeView();
-        }
-
-        public void ResetModifiedFlags()
-        {
-            for (int i = 0; i < contacts.Count; i++)
-            {
-                if (modifiedContacts[contacts[i]] == true)
-                    SetContactChangedFlag(contacts[i], false);
+                SetContactChangedFlag(contact, false);
             }
         }
 
         private void PopulateTreeView()
         {
-            Contact contact = null;
             //TreeNode node = null;
             //Contact selectedContact = null;
             TreeNode selectedNode = null;
-            TreeNode treeNode = null;
             List<TreeNode> nodeList = new List<TreeNode>();
-            bool inserted = false;
 
             IComparer comparer = treeView1.TreeViewNodeSorter;
 
@@ -263,9 +289,12 @@ namespace DustInTheWind.Lisimba.UserControls
 
             treeView1.Nodes.Clear();
 
+            if (contacts == null)
+                return;
+
             for (int i = 0; i < contacts.Count; i++)
             {
-                contact = contacts[i];
+                Contact contact = contacts[i];
 
                 if (textBoxSearch.Text.Length == 0 ||
                     contact.Name.FirstName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
@@ -273,11 +302,11 @@ namespace DustInTheWind.Lisimba.UserControls
                     contact.Name.LastName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
                     contact.Name.Nickname.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 {
-                    treeNode = treeNodes[contact];
+                    TreeNode treeNode = treeNodesByContact[contact];
 
                     if (allowSort)
                     {
-                        inserted = false;
+                        bool inserted = false;
 
                         //for (int j = 0; j < this.treeView1.Nodes.Count; j++)
                         //{
@@ -332,30 +361,35 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void treeView1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                TreeNode node = treeView1.GetNodeAt(e.Location);
-                Contact contact = null;
+            if (e.Button != MouseButtons.Right)
+                return;
 
-                if (node != null)
-                {
-                    // Select the item
-                    treeView1.SelectedNode = node;
-                    //this.OnSelectedContactChanged(new SelectedContactChangedEventArgs((Contact)node.Tag));
-                    contact = (Contact)node.Tag;
-                }
+            TreeNode node = treeView1.GetNodeAt(e.Location);
 
-                // Display the menu
-                toolStripMenuItem_List_Delete.Enabled = (node != null);
-                toolStripMenuItem_List_ViewBiorythm.Enabled = (contact != null && contact.Birthday.IsCompleteDate);
-                contextMenuStripListBox.Show(treeView1, e.Location);
-            }
+            if (node != null)
+                treeView1.SelectedNode = node;
+
+            // Display the menu
+            Contact selectedContact = currentData.Contact;
+            toolStripMenuItem_List_ViewBiorythm.Enabled = (selectedContact != null && selectedContact.Birthday.IsCompleteDate);
+            contextMenuStripListBox.Show(treeView1, e.Location);
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            TreeNode selectedNode = treeView1.SelectedNode;
-            OnSelectedContactChanged(new SelectedContactChangedEventArgs(selectedNode != null ? (Contact)selectedNode.Tag : null));
+            ignoreCurrentContactChange = true;
+
+            try
+            {
+                TreeNode selectedNode = treeView1.SelectedNode;
+                Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
+
+                CurrentData.Contact = selectedContact;
+            }
+            finally
+            {
+                ignoreCurrentContactChange = false;
+            }
         }
 
         private void HighlightTreeNode(TreeNode treeNode, bool value)
@@ -376,7 +410,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             if (c == null) return;
 
-            TreeNode node = treeNodes[c];
+            TreeNode node = treeNodesByContact[c];
             if (node == null) return;
 
             if (value != modifiedContacts[c])
@@ -388,28 +422,28 @@ namespace DustInTheWind.Lisimba.UserControls
             node.Text = node.Tag.ToString();
         }
 
-        public void Add(Contact c)
+        private void Add(Contact contact)
         {
-            contacts.Add(c);
-            TreeNode newTreeNode = new TreeNode(c.ToString());
-            newTreeNode.Tag = c;
-            bool inserted = false;
+            // todo: when contact is added, add only the corresponding tree node instead of refreshing the whole tree.
+
+            TreeNode newTreeNode = new TreeNode(contact.ToString()) { Tag = contact };
 
             if (allowSort)
             {
                 IComparer comparer = treeView1.TreeViewNodeSorter;
+                bool isInserted = false;
 
                 for (int i = 0; i < treeView1.Nodes.Count; i++)
                 {
-                    if (comparer.Compare(newTreeNode, treeView1.Nodes[i]) < 0)
-                    {
-                        treeView1.Nodes.Insert(i, newTreeNode);
-                        inserted = true;
-                        break;
-                    }
+                    if (comparer.Compare(newTreeNode, treeView1.Nodes[i]) >= 0)
+                        continue;
+
+                    treeView1.Nodes.Insert(i, newTreeNode);
+                    isInserted = true;
+                    break;
                 }
 
-                if (!inserted)
+                if (!isInserted)
                     treeView1.Nodes.Add(newTreeNode);
             }
             else
@@ -417,82 +451,46 @@ namespace DustInTheWind.Lisimba.UserControls
                 treeView1.Nodes.Add(newTreeNode);
             }
 
-            treeNodes.Add(c, newTreeNode);
-            modifiedContacts.Add(c, true);
+            treeNodesByContact.Add(contact, newTreeNode);
+            modifiedContacts.Add(contact, true);
             HighlightTreeNode(newTreeNode, true);
 
             treeView1.SelectedNode = newTreeNode;
-
-            OnContactListChanged(EventArgs.Empty);
         }
 
-        private void toolStripMenuItem_List_Add_Click(object sender, EventArgs e)
+        private void RemoveContact(Contact contact)
         {
-            FormAddContact formAddContact = new FormAddContact(CurrentData);
+            // todo: when contact is deleted, remove only the corresponding tree node instead of refreshing the whole tree.
 
-            if (formAddContact.ShowDialog() == DialogResult.OK)
-            {
-                Add(formAddContact.Contact);
-            }
-        }
+            if (contact == null || !treeNodesByContact.ContainsKey(contact))
+                return;
 
-        public void RemoveContact(Contact contact)
-        {
-            TreeNode node;
-            TreeNode nodeToSelect;
+            TreeNode nodeToRemove = treeNodesByContact[contact];
+            TreeNode nodeToSelect = nodeToRemove.NextNode;
 
-            if (contact != null && contacts.Contains(contact))
-            {
-                node = treeNodes[contact];
-                nodeToSelect = node.NextNode;
+            modifiedContacts.Remove(contact);
+            treeNodesByContact.Remove(contact);
 
-                contacts.Remove(contact);
-                modifiedContacts.Remove(contact);
-                treeNodes.Remove(contact);
+            treeView1.Nodes.Remove(nodeToRemove);
 
-                treeView1.Nodes.Remove(node);
-                if (treeView1.Nodes.Count > 0)
-                {
-                    if (nodeToSelect != null)
-                        treeView1.SelectedNode = nodeToSelect;
-                    else
-                        treeView1.SelectedNode = treeView1.Nodes[0].LastNode;
-                }
-
-                OnContactListChanged(EventArgs.Empty);
-            }
-        }
-
-        private void toolStripMenuItem_List_Delete_Click(object sender, EventArgs e)
-        {
-            TreeNode node = treeView1.SelectedNode;
-            Contact contact = null;
-
-            if (node != null)
-            {
-                contact = (Contact)node.Tag;
-                if (MessageBox.Show("Are you sure you wanna delete the contact " + contact.ToString() + " ?", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
-                {
-                    RemoveContact(contact);
-                }
-            }
+            if (treeView1.Nodes.Count > 0)
+                treeView1.SelectedNode = nodeToSelect ?? treeView1.Nodes[0].LastNode;
         }
 
         private void toolStripMenuItem_List_ViewBiorythm_Click(object sender, EventArgs e)
         {
             TreeNode node = treeView1.SelectedNode;
-            Contact contact = null;
 
-            if (node != null)
+            if (node == null)
+                return;
+
+            Contact contact = (Contact)node.Tag;
+
+            if (contact.Birthday.IsCompleteDate)
             {
-                contact = (Contact)node.Tag;
-
-                if (contact.Birthday.IsCompleteDate)
-                {
-                    FormBiorythm formBiorythm = new FormBiorythm();
-                    formBiorythm.Contact = contact;
-                    formBiorythm.ShowDialog(this);
-                }
+                FormBiorythm formBiorythm = new FormBiorythm();
+                formBiorythm.Contact = contact;
+                formBiorythm.ShowDialog(this);
             }
         }
 
@@ -538,6 +536,45 @@ namespace DustInTheWind.Lisimba.UserControls
                     treeView1.Sort();
                     break;
 
+            }
+        }
+
+        private void ContactListView_Load(object sender, EventArgs e)
+        {
+            RefreshSortMethod();
+            PopulateFromCurrentAddressBook();
+        }
+
+        private void RefreshSortMethod()
+        {
+            if (ConfigurationService == null)
+                return;
+
+            switch (ConfigurationService.LisimbaConfigSection.SortBy.Value)
+            {
+                case "Birthday":
+                    SortField = ContactsSortingType.Birthday;
+                    break;
+
+                case "BirthDate":
+                    SortField = ContactsSortingType.BirthDate;
+                    break;
+
+                case "FirstName":
+                    SortField = ContactsSortingType.FirstName;
+                    break;
+
+                case "LastName":
+                    SortField = ContactsSortingType.LastName;
+                    break;
+
+                case "Nickname":
+                    SortField = ContactsSortingType.Nickname;
+                    break;
+
+                case "NicknameOrName":
+                    SortField = ContactsSortingType.NicknameOrName;
+                    break;
             }
         }
     }

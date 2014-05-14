@@ -60,6 +60,8 @@ namespace DustInTheWind.Lisimba.Services
                 if (addressBook != null)
                     addressBook.Changed += HandleAddressBookContentChanged;
 
+                Contact = null;
+
                 OnAddressBookChanged(EventArgs.Empty);
             }
         }

@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 using Moq;
 using NUnit.Framework;
@@ -32,7 +33,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         [SetUp]
         public void SetUp()
         {
-            contactViewPresenter = new ContactViewPresenter();
+            contactViewPresenter = new ContactViewPresenter(new ZodiacService());
             view = new Mock<IContactView>();
         }
 

@@ -38,6 +38,7 @@ namespace DustInTheWind.Lisimba.UserControls
         AddressCollection Addresses { set; }
         DateCollection Dates { set; }
         MessengerIdCollection MessengerIds { set; }
+        bool Enabled { set; }
 
         void EditBirthday(Date birthday);
     }

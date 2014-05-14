@@ -20,13 +20,14 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
     /// <summary>
     /// Control to display and edit a contact.
     /// </summary>
-    public partial class ContactView : UserControl, IContactView
+    partial class ContactView : UserControl, IContactView
     {
         private readonly ContactViewPresenter presenter;
 
@@ -34,9 +35,6 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             get { return presenter; }
         }
-
-        //private Contact contact;
-        //private bool isInitializationMode;
 
         readonly FormDateEdit formBirthdayEdit;
 
@@ -46,26 +44,11 @@ namespace DustInTheWind.Lisimba.UserControls
         readonly FormAddressEdit formAddressEdit;
         readonly FormDateEdit formDateEdit;
 
-        private readonly TreeNode phonesNode;
-        private readonly TreeNode emailsNode;
-        private readonly TreeNode webSitesNode;
-        private readonly TreeNode addressesNode;
-        private readonly TreeNode datesNode;
-        private readonly TreeNode messengerIdsNode;
-
         public ContactView()
         {
             InitializeComponent();
 
-            presenter = new ContactViewPresenter();
-            presenter.View = this;
-
-            phonesNode = treeView1.Nodes["Phones"];
-            emailsNode = treeView1.Nodes["Emails"];
-            webSitesNode = treeView1.Nodes["WebSites"];
-            addressesNode = treeView1.Nodes["Addresses"];
-            datesNode = treeView1.Nodes["Dates"];
-            messengerIdsNode = treeView1.Nodes["MessengerIds"];
+            presenter = new ContactViewPresenter(new ZodiacService()) { View = this };
 
             formBirthdayEdit = new FormDateEdit();
             formPhoneEdit = new FormPhoneEdit();
@@ -74,157 +57,6 @@ namespace DustInTheWind.Lisimba.UserControls
             formAddressEdit = new FormAddressEdit();
             formDateEdit = new FormDateEdit();
         }
-
-        public Contact Contact
-        {
-            get { return presenter.Contact; }
-            set { presenter.Contact = value; }
-        }
-
-        //#region private void ClearData()
-
-        //private void ClearData()
-        //{
-        //    textBoxFirstName.Text = string.Empty;
-        //    textBoxMiddleName.Text = string.Empty;
-        //    textBoxLastName.Text = string.Empty;
-        //    textBoxNickname.Text = string.Empty;
-
-        //    labelBirthday.Text = string.Empty;
-        //    pictureBoxZodiacSign.Image = null;
-        //    labelZodiacSign.Text = string.Empty;
-
-        //    textBoxNotes.Text = string.Empty;
-
-        //    phonesNode.Nodes.Clear();
-        //    emailsNode.Nodes.Clear();
-        //    webSitesNode.Nodes.Clear();
-        //    addressesNode.Nodes.Clear();
-        //    datesNode.Nodes.Clear();
-        //    messengerIdsNode.Nodes.Clear();
-        //}
-
-        //#endregion
-
-        private void RefreshData()
-        {
-            //isInitializationMode = true;
-
-            //ClearData();
-
-            //if (contact != null)
-            //{
-            //    textBoxFirstName.Text = contact.Name.FirstName;
-            //    textBoxMiddleName.Text = contact.Name.MiddleName;
-            //    textBoxLastName.Text = contact.Name.LastName;
-            //    textBoxNickname.Text = contact.Name.Nickname;
-
-            //    labelBirthday.Text = contact.Birthday.ToString();
-
-            //    pictureBoxZodiacSign.Image = GetZodiacImage(contact.ZogiacSign);
-            //    toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
-            //    labelZodiacSign.Text = contact.ZogiacSign.ToString();
-
-            //    textBoxNotes.Text = contact.Notes;
-
-
-            //    // Phones
-            //    foreach (Phone phone in contact.Phones)
-            //    {
-            //        TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
-            //        phoneNode.Tag = phone;
-            //        phonesNode.Nodes.Add(phoneNode);
-            //        phoneNode.ImageIndex = -2;
-            //        phoneNode.SelectedImageIndex = -2;
-            //    }
-            //    phonesNode.Expand();
-
-            //    // Emails
-            //    foreach (Email email in contact.Emails)
-            //    {
-            //        TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
-            //        emailNode.Tag = email;
-            //        emailsNode.Nodes.Add(emailNode);
-            //        emailNode.ImageIndex = -2;
-            //        emailNode.SelectedImageIndex = -2;
-            //    }
-            //    emailsNode.Expand();
-
-            //    // WebSites
-            //    foreach (WebSite webSite in contact.WebSites)
-            //    {
-            //        TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
-            //        webSiteNode.Tag = webSite;
-            //        webSitesNode.Nodes.Add(webSiteNode);
-            //        webSiteNode.ImageIndex = -2;
-            //        webSiteNode.SelectedImageIndex = -2;
-            //    }
-            //    webSitesNode.Expand();
-
-            //    // Addresses
-            //    foreach (Address address in contact.Addresses)
-            //    {
-            //        TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
-            //        addressNode.Tag = address;
-            //        addressesNode.Nodes.Add(addressNode);
-            //        addressNode.ImageIndex = -2;
-            //        addressNode.SelectedImageIndex = -2;
-            //    }
-            //    addressesNode.Expand();
-
-            //    // Dates
-            //    foreach (Date date in contact.Dates)
-            //    {
-            //        TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
-            //        dateNode.Tag = date;
-            //        datesNode.Nodes.Add(dateNode);
-            //        dateNode.ImageIndex = -2;
-            //        dateNode.SelectedImageIndex = -2;
-            //    }
-            //    datesNode.Expand();
-
-            //    // Messenger Ids
-            //    foreach (MessengerId messengerId in contact.MessengerIds)
-            //    {
-            //        TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
-            //        messengerIdNode.Tag = messengerId;
-            //        messengerIdsNode.Nodes.Add(messengerIdNode);
-            //        messengerIdNode.ImageIndex = -2;
-            //        messengerIdNode.SelectedImageIndex = -2;
-            //    }
-            //    messengerIdsNode.Expand();
-            //}
-
-            //isInitializationMode = false;
-        }
-
-        //#region Event NameChanged
-
-        //public event EventHandler<NameChangedEventArgs> NameChanged;
-
-        //protected virtual void OnNameChanged(NameChangedEventArgs e)
-        //{
-        //    EventHandler<NameChangedEventArgs> handler = NameChanged;
-
-        //    if (handler != null)
-        //        handler(this, e);
-        //}
-
-        //#endregion Event NameChanged
-
-        //#region Event ContactChanged
-
-        //public event EventHandler ContactChanged;
-
-        //protected virtual void OnContactChanged()
-        //{
-        //    EventHandler handler = ContactChanged;
-
-        //    if (handler != null)
-        //        handler(this, EventArgs.Empty);
-        //}
-
-        //#endregion
 
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
@@ -367,6 +199,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode phonesNode = treeView1.Nodes["Phones"];
                 phonesNode.Nodes.Clear();
 
                 if (value == null)
@@ -389,6 +222,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode emailsNode = treeView1.Nodes["Emails"];
                 emailsNode.Nodes.Clear();
 
                 if (value == null)
@@ -411,6 +245,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode webSitesNode = treeView1.Nodes["WebSites"];
                 webSitesNode.Nodes.Clear();
 
                 if (value == null)
@@ -433,6 +268,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode addressesNode = treeView1.Nodes["Addresses"];
                 addressesNode.Nodes.Clear();
 
                 if (value == null)
@@ -455,6 +291,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode datesNode = treeView1.Nodes["Dates"];
                 datesNode.Nodes.Clear();
 
                 if (value == null)
@@ -477,6 +314,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                TreeNode messengerIdsNode = treeView1.Nodes["MessengerIds"];
                 messengerIdsNode.Nodes.Clear();
 
                 if (value == null)

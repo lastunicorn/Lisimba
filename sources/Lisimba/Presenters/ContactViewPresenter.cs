@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    public class ContactViewPresenter
+    class ContactViewPresenter
     {
         private readonly ZodiacService zodiacService;
 
@@ -76,9 +76,12 @@ namespace DustInTheWind.Lisimba.Presenters
 
         #endregion Event ContactChanged
 
-        public ContactViewPresenter()
+        public ContactViewPresenter(ZodiacService zodiacService)
         {
-            zodiacService = new ZodiacService();
+            if (zodiacService == null)
+                throw new ArgumentNullException("zodiacService");
+
+            this.zodiacService = zodiacService;
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
@@ -112,6 +115,8 @@ namespace DustInTheWind.Lisimba.Presenters
                     View.Addresses = null;
                     View.Dates = null;
                     View.MessengerIds = null;
+
+                    View.Enabled = false;
                 }
                 else
                 {
@@ -134,6 +139,8 @@ namespace DustInTheWind.Lisimba.Presenters
                     View.Addresses = contact.Addresses;
                     View.Dates = contact.Dates;
                     View.MessengerIds = contact.MessengerIds;
+
+                    View.Enabled = true;
                 }
             }
             finally

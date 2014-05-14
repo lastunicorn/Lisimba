@@ -22,11 +22,32 @@ namespace DustInTheWind.Lisimba.UserControls
 {
     class CustomMenuItem : System.Windows.Forms.ToolStripMenuItem
     {
+        private ICommand command;
         public StatusService StatusService { get; set; }
 
         public string ShortDescription { get; set; }
 
-        public ICommand Command { get; set; }
+        public ICommand Command
+        {
+            get { return command; }
+            set
+            {
+                if (command != null)
+                    command.IsEnabledChanged -= HandleCommandEnabledChanged;
+
+                command = value;
+
+                if (command != null)
+                    command.IsEnabledChanged += HandleCommandEnabledChanged;
+
+                Enabled = command == null || command.IsEnabled;
+            }
+        }
+
+        private void HandleCommandEnabledChanged(object sender, EventArgs eventArgs)
+        {
+            Enabled = command.IsEnabled;
+        }
 
         public object CommandParameter { get; set; }
 

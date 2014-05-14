@@ -36,12 +36,12 @@ namespace DustInTheWind.Lisimba.Forms
 
             InitializeComponent();
 
-            contactView1.Contact = new Contact();
+            contactView1.Presenter.Contact = new Contact();
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            Contact editedContact = contactView1.Contact;
+            Contact editedContact = contactView1.Presenter.Contact;
 
             bool isContactValid = ValidateContact(editedContact);
 

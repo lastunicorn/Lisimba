@@ -64,6 +64,15 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<ImportYahooCsvCommand>(); }
         }
 
+        public DeleteCurrentContactCommand DeleteCurrentContactCommand
+        {
+            get { return servicePrvider.Resolve<DeleteCurrentContactCommand>(); }
+        }
+
+        public CreateNewContactCommand CreateNewContactCommand
+        {
+            get { return servicePrvider.Resolve<CreateNewContactCommand>(); }
+        }
 
         public CommandPool(IUnityContainer servicePrvider)
         {

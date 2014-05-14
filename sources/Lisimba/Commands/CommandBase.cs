@@ -20,18 +20,46 @@ namespace DustInTheWind.Lisimba.Commands
 {
     abstract class CommandBase<T> : ICommand<T>, ICommand
     {
-        public bool IsEnabled { get; set; }
+        private bool isEnabled;
+
+        public bool IsEnabled
+        {
+            get { return isEnabled; }
+            protected set
+            {
+                bool isChanged = isEnabled != value;
+
+                isEnabled = value;
+
+                if (isChanged)
+                    OnIsEnabledChanged();
+            }
+        }
 
         public abstract string ShortDescription { get; }
 
+        #region Event IsEnabledChanged
+
+        public event EventHandler IsEnabledChanged;
+
+        protected virtual void OnIsEnabledChanged()
+        {
+            EventHandler handler = IsEnabledChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        #endregion
+
         protected CommandBase()
         {
-            IsEnabled = true;
+            isEnabled = true;
         }
 
         public void Execute()
         {
-            if (!IsEnabled)
+            if (!isEnabled)
                 return;
 
             DoExecute(default(T));
@@ -50,7 +78,7 @@ namespace DustInTheWind.Lisimba.Commands
 
         public void Execute(T parameter)
         {
-            if (!IsEnabled)
+            if (!isEnabled)
                 return;
 
             DoExecute(parameter);

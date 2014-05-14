@@ -60,6 +60,7 @@ namespace DustInTheWind.Lisimba.Forms
 
             this.currentData = currentData;
             currentData.AddressBookContentChanged += HandleCurrentAddressBookContentChanged;
+            currentData.ContactChanged += HandleCurrentContactChanged;
             currentData.AskToOpenLsbFile = AskToOpenLsbFile;
             currentData.AskToSaveLsbFile = AskToSaveLsbFile;
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
@@ -72,7 +73,11 @@ namespace DustInTheWind.Lisimba.Forms
             InitializeComponent();
 
             contactView1.Presenter.ContactChanged += contactView1_ContactChanged;
+
             contactListView1.CurrentData = currentData;
+            contactListView1.CommandPool = commandPool;
+            contactListView1.StatusService = statusService;
+            contactListView1.ConfigurationService = configurationService;
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             programTitle = string.Format("{0} {1}", Application.ProductName, version.ToString(2));
@@ -101,10 +106,10 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripMenuItem_File_Exit.ShortDescription = "Exit the program.";
 
             toolStripMenuItem_Agenda_AddContact.StatusService = statusService;
-            toolStripMenuItem_Agenda_AddContact.ShortDescription = "Add a new contact.";
+            toolStripMenuItem_Agenda_AddContact.Command = commandPool.CreateNewContactCommand;
 
             toolStripMenuItem_Agenda_DeleteContact.StatusService = statusService;
-            toolStripMenuItem_Agenda_DeleteContact.ShortDescription = "Delete the selected contact.";
+            toolStripMenuItem_Agenda_DeleteContact.Command = commandPool.DeleteCurrentContactCommand;
 
             toolStripMenuItem_Agenda_Properties.StatusService = statusService;
             toolStripMenuItem_Agenda_Properties.Command = commandPool.ShowAddressBookPropertiesCommand;
@@ -119,8 +124,11 @@ namespace DustInTheWind.Lisimba.Forms
             commandPool.CreateNewAddressBookCommand.Execute();
 
             fileNameToOpenAtLoad = CalculateFileNameToInitiallyOpen();
+        }
 
-            RefreshSortMethod();
+        private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
+        {
+            contactView1.Presenter.Contact = currentData.Contact;
         }
 
         private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
@@ -146,36 +154,6 @@ namespace DustInTheWind.Lisimba.Forms
 
                 default:
                     return null;
-            }
-        }
-
-        private void RefreshSortMethod()
-        {
-            switch (configurationService.LisimbaConfigSection.SortBy.Value)
-            {
-                case "Birthday":
-                    contactListView1.SortField = ContactsSortingType.Birthday;
-                    break;
-
-                case "BirthDate":
-                    contactListView1.SortField = ContactsSortingType.BirthDate;
-                    break;
-
-                case "FirstName":
-                    contactListView1.SortField = ContactsSortingType.FirstName;
-                    break;
-
-                case "LastName":
-                    contactListView1.SortField = ContactsSortingType.LastName;
-                    break;
-
-                case "Nickname":
-                    contactListView1.SortField = ContactsSortingType.Nickname;
-                    break;
-
-                case "NicknameOrName":
-                    contactListView1.SortField = ContactsSortingType.NicknameOrName;
-                    break;
             }
         }
 
@@ -230,24 +208,11 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleCurrentAddressBookSaved(object sender, EventArgs e)
         {
-            contactListView1.ResetModifiedFlags();
-
             RefreshFormTitle();
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs e)
         {
-            // Populate the list control
-            contactListView1.Contacts = currentData.AddressBook.Contacts;
-
-            // Disable the contact view control
-            contactView1.Contact = null;
-            contactView1.Enabled = false;
-
-            // Clear the "Find" textbox.
-            contactListView1.SearchText = string.Empty;
-
-            // Refresh the form title
             RefreshFormTitle();
         }
 
@@ -330,12 +295,6 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        void contactListView1_SelectedContactChanged(object sender, ContactListView.SelectedContactChangedEventArgs e)
-        {
-            contactView1.Contact = e.SelectedContact;
-            contactView1.Enabled = (e.SelectedContact != null);
-        }
-
         void contactView1_ContactChanged(object sender, EventArgs e)
         {
             if (!currentData.IsModified)
@@ -344,7 +303,7 @@ namespace DustInTheWind.Lisimba.Forms
                 RefreshFormTitle();
             }
 
-            contactListView1.SetContactChangedFlag(contactView1.Contact, true);
+            contactListView1.SetContactChangedFlag(contactView1.Presenter.Contact, true);
 
         }
 
@@ -374,42 +333,6 @@ namespace DustInTheWind.Lisimba.Forms
         private void toolStripMenuItem_File_Exit_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        #endregion
-
-        #region Menu OnClick - Address Book Menu
-
-        private void toolStripMenuItem_Agenda_AddContact_Click(object sender, EventArgs e)
-        {
-            FormAddContact formAddContact = new FormAddContact(currentData);
-
-            if (formAddContact.ShowDialog() == DialogResult.OK)
-            {
-                contactListView1.Add(formAddContact.Contact);
-
-                currentData.IsModified = true;
-                RefreshFormTitle();
-            }
-        }
-
-        private void toolStripMenuItem_Agenda_DeleteContact_Click(object sender, EventArgs e)
-        {
-            Contact contact = contactListView1.SelectedContact;
-
-            if (contact == null)
-                return;
-
-            string text = string.Format("Are you sure you wanna delete the contact {0} ?", contact);
-            DialogResult dialogResult = MessageBox.Show(text, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
-            if (dialogResult == DialogResult.Yes)
-                contactListView1.RemoveContact(contact);
-        }
-
-        private void toolStripMenuItem_Agenda_DropDownOpening(object sender, EventArgs e)
-        {
-            toolStripMenuItem_Agenda_DeleteContact.Enabled = (contactListView1.SelectedContact != null);
         }
 
         #endregion

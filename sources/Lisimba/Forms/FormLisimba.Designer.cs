@@ -114,7 +114,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_Agenda.Name = "toolStripMenuItem_Agenda";
             this.toolStripMenuItem_Agenda.Size = new System.Drawing.Size(91, 20);
             this.toolStripMenuItem_Agenda.Text = "&Address Book";
-            this.toolStripMenuItem_Agenda.DropDownOpening += new System.EventHandler(this.toolStripMenuItem_Agenda_DropDownOpening);
             // 
             // toolStripMenuItem4
             // 
@@ -160,7 +159,6 @@ namespace DustInTheWind.Lisimba.Forms
             // contactListView1
             // 
             this.contactListView1.AllowSort = true;
-            this.contactListView1.Contacts = null;
             this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
             this.contactListView1.Name = "contactListView1";
@@ -168,12 +166,10 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactListView1.Size = new System.Drawing.Size(194, 415);
             this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.Enums.ContactsSortingType.NicknameOrName;
             this.contactListView1.TabIndex = 9;
-            this.contactListView1.SelectedContactChanged += new DustInTheWind.Lisimba.UserControls.ContactListView.SelectedContactChangedHandler(this.contactListView1_SelectedContactChanged);
             // 
             // contactView1
             // 
             this.contactView1.Birthday = "";
-            this.contactView1.Contact = null;
             this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactView1.Enabled = false;
             this.contactView1.FirstName = "";
@@ -362,7 +358,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_Agenda_AddContact.Size = new System.Drawing.Size(208, 22);
             this.toolStripMenuItem_Agenda_AddContact.StatusService = null;
             this.toolStripMenuItem_Agenda_AddContact.Text = "&Add Contact";
-            this.toolStripMenuItem_Agenda_AddContact.Click += new System.EventHandler(this.toolStripMenuItem_Agenda_AddContact_Click);
             // 
             // toolStripMenuItem_Agenda_DeleteContact
             // 
@@ -375,7 +370,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripMenuItem_Agenda_DeleteContact.Size = new System.Drawing.Size(208, 22);
             this.toolStripMenuItem_Agenda_DeleteContact.StatusService = null;
             this.toolStripMenuItem_Agenda_DeleteContact.Text = "Delete Contact";
-            this.toolStripMenuItem_Agenda_DeleteContact.Click += new System.EventHandler(this.toolStripMenuItem_Agenda_DeleteContact_Click);
             // 
             // toolStripMenuItem_Agenda_Properties
             // 

@@ -14,10 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace DustInTheWind.Lisimba.Commands
 {
     internal interface ICommand
     {
+        bool IsEnabled { get; }
+        event EventHandler IsEnabledChanged;
         string ShortDescription { get; }
         void Execute();
         void Execute(object parameter);
