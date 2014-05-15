@@ -15,6 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -23,13 +27,17 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UIService uiService;
+        private readonly StatusService statusService;
 
         public override string ShortDescription
         {
             get { return "Import address book from Yahoo! csv format."; }
         }
 
-        public ImportYahooCsvCommand(CurrentData currentData, UIService uiService)
+        public Func<bool> AskIfAllowToContinue;
+        public Func<string> AskToOpenYahooCsvFile;
+
+        public ImportYahooCsvCommand(CurrentData currentData, UIService uiService, StatusService statusService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -37,20 +45,49 @@ namespace DustInTheWind.Lisimba.Commands
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
+            if (statusService == null)
+                throw new ArgumentNullException("statusService");
+
             this.currentData = currentData;
             this.uiService = uiService;
+            this.statusService = statusService;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                currentData.ImportFromYahooCsv();
+                bool allowToContinue = AskIfAllowToContinue == null || AskIfAllowToContinue();
+
+                if (!allowToContinue)
+                    return;
+
+                string fileName = AskToOpenYahooCsvFile();
+
+                if (fileName == null)
+                    return;
+
+                YahooCsvGate yahooCsvGate = new YahooCsvGate();
+                AddressBook yahooAddressBook = yahooCsvGate.Load(fileName);
+
+                ContactCollection yahooContacts = yahooAddressBook.Contacts;
+                ImportRuleCollection mergeRules = CreateMergeRules(yahooContacts);
+
+                currentData.AddressBook = new AddressBook();
+                int countImport = currentData.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
+
+                statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
             }
             catch (Exception ex)
             {
                 uiService.DisplayError(ex.Message);
             }
+        }
+
+        private static ImportRuleCollection CreateMergeRules(IEnumerable<Contact> contacts)
+        {
+            IEnumerable<ImportRule> rules = contacts.Select(x => new ImportRule(x));
+            return new ImportRuleCollection(rules.ToList());
         }
     }
 }

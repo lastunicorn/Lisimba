@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
@@ -36,6 +37,11 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<StatusService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFilesService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<CurrentData>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
+
+            unityContainer.RegisterType<OpenAddressBookCommand>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ImportYahooCsvCommand>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ExportYahooCsvCommand>(new ContainerControlledLifetimeManager());
 
             try
             {

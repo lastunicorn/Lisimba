@@ -74,6 +74,11 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<CreateNewContactCommand>(); }
         }
 
+        public ApplicationExitCommand ApplicationExitCommand
+        {
+            get { return servicePrvider.Resolve<ApplicationExitCommand>(); }
+        }
+
         public CommandPool(IUnityContainer servicePrvider)
         {
             if (servicePrvider == null)

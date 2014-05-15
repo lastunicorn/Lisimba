@@ -14,19 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Presenters;
+using System;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Services
 {
-    internal interface IAddContactView
+    public class AddressBookChangingEventArgs : EventArgs
     {
-        AddContactPresenter Presenter { set; }
+        private bool cancel;
 
-        Contact Contact { get; set; }
-
-        void Show();
-
-        void Close();
+        public bool Cancel
+        {
+            get { return cancel; }
+            set { cancel = cancel || value; }
+        }
     }
 }

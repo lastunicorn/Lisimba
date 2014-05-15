@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Config;
 using DustInTheWind.Lisimba.Services;
 
@@ -24,6 +25,8 @@ namespace DustInTheWind.Lisimba.UserControls
     class MenuItemWithChildren : ToolStripMenuItem
     {
         public RecentFilesService RecentFilesService { get; set; }
+
+        public ICommand ChildrenCommand { get; set; }
 
         #region Event SubItemClicked
 
@@ -46,23 +49,25 @@ namespace DustInTheWind.Lisimba.UserControls
 
             int j = 0; // index for the list of menu items (this.recentFilesMenuItems)
 
-            //RecentFilesConfigElementCollection recentFiles = configurationService.LisimbaConfigSection.RecentFilesList;
             RecentFilesConfigElementCollection recentFiles = RecentFilesService.GetAllFiles();
 
             for (int i = 0; i < recentFiles.Count; i++)
             {
-                ToolStripMenuItem menuItem;
+                CustomMenuItem menuItem;
 
                 if (j < DropDownItems.Count)
                 {
                     // If already exists some menu items, reuse them.
-                    menuItem = (ToolStripMenuItem)DropDownItems[j];
+                    menuItem = (CustomMenuItem)DropDownItems[j];
                 }
                 else
                 {
                     // Create new menu items if necessary.
-                    menuItem = new ToolStripMenuItem();
+                    menuItem = new CustomMenuItem();
                     menuItem.Click += HandleSubMenuItemClick;
+                    menuItem.Command = ChildrenCommand;
+                    menuItem.CommandParameterProvider = () => menuItem.Tag.ToString();
+
 
                     DropDownItems.Add(menuItem);
                 }

@@ -31,6 +31,8 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Open address book from file."; }
         }
 
+        public Func<bool> AskIfAllowToContinue;
+
         public OpenAddressBookCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)
@@ -47,6 +49,11 @@ namespace DustInTheWind.Lisimba.Commands
         {
             try
             {
+                bool allowToContinue = AskIfAllowToContinue == null || AskIfAllowToContinue();
+
+                if (!allowToContinue)
+                    return;
+
                 currentData.Open(fileName);
 
                 if (currentData.Warnings.Any())

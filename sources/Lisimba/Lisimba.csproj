@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ApplicationExitCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\CreateNewContactCommand.cs" />
     <Compile Include="Commands\DeleteCurrentContactCommand.cs" />
@@ -93,6 +94,8 @@
     <Compile Include="Forms\IAddContactView.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Services\AddressBookChangedEventArgs.cs" />
+    <Compile Include="Services\AddressBookChangingEventArgs.cs" />
+    <Compile Include="Services\ApplicationService.cs" />
     <Compile Include="Services\CommandPool.cs" />
     <Compile Include="Services\CurrentData.cs" />
     <Compile Include="Commands\OpenAddressBookCommand.cs" />
@@ -168,6 +171,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControls\IContactView.cs" />
+    <Compile Include="UserControls\LisimbaMainMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\LisimbaMainMenuStrip.Designer.cs">
+      <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\MenuItemWithChildren.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -203,11 +212,11 @@
     <Compile Include="Forms\FormAddressEdit.Designer.cs">
       <DependentUpon>FormAddressEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormAgendaProperties.cs">
+    <Compile Include="Forms\FormAddressBookProperties.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAgendaProperties.Designer.cs">
-      <DependentUpon>FormAgendaProperties.cs</DependentUpon>
+    <Compile Include="Forms\FormAddressBookProperties.Designer.cs">
+      <DependentUpon>FormAddressBookProperties.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormDateEdit.cs">
       <SubType>Form</SubType>
@@ -274,6 +283,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ContactListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\LisimbaMainMenuStrip.resx">
+      <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\WebSiteListView.resx">
       <DependentUpon>WebSiteListView.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -294,9 +306,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormAddressEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAgendaProperties.resx">
+    <EmbeddedResource Include="Forms\FormAddressBookProperties.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>FormAgendaProperties.cs</DependentUpon>
+      <DependentUpon>FormAddressBookProperties.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormDateEdit.resx">
       <SubType>Designer</SubType>

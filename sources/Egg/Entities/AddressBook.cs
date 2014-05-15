@@ -89,6 +89,20 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #endregion
 
+        #region Event AddressBookSaved
+
+        public event EventHandler AddressBookSaved;
+
+        protected virtual void OnAddressBookSaved(EventArgs e)
+        {
+            EventHandler handler = AddressBookSaved;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        #endregion
+
         #region Event ContactContentChanged
 
         public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
@@ -142,11 +156,19 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public void SetAsSaved()
         {
             Status = AddressBookStatus.Saved;
+            OnAddressBookSaved(EventArgs.Empty);
         }
 
-        public void SetAsNew()
+        public string GetFriendlyName()
         {
-            Status = AddressBookStatus.Saved;
+            bool hasName = !string.IsNullOrWhiteSpace(Name);
+
+            if (hasName)
+                return Name;
+
+            bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
+
+            return hasFileName ? FileName : null;
         }
     }
 }

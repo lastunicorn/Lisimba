@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormBookProperties
+    partial class FormAddressBookProperties
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBookProperties));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddressBookProperties));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -141,7 +141,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormBookProperties";
+            this.Name = "FormAddressBookProperties";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Properties";

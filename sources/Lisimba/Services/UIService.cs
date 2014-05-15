@@ -40,5 +40,15 @@ namespace DustInTheWind.Lisimba.Services
         {
             MessageBox.Show(mainForm, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        public bool? DisplayYesNoQuestion(string question, string title)
+        {
+            DialogResult dialogResult = MessageBox.Show(question, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Cancel)
+                return null;
+
+            return dialogResult == DialogResult.Yes;
+        }
     }
 }

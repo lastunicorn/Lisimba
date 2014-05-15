@@ -39,9 +39,9 @@ namespace DustInTheWind.Lisimba.Commands
 
         protected override void DoExecute(object parameter)
         {
-            FormBookProperties formBookProperties = new FormBookProperties();
-            formBookProperties.AddressBook = currentData.AddressBook;
-            formBookProperties.ShowDialog();
+            FormAddressBookProperties formAddressBookProperties = new FormAddressBookProperties();
+            formAddressBookProperties.AddressBook = currentData.AddressBook;
+            formAddressBookProperties.ShowDialog();
         }
     }
 }

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -23,6 +24,8 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UIService uiService;
+
+        public Func<string> AskToSaveYahooCsvFile { get; set; }
 
         public override string ShortDescription
         {
@@ -45,7 +48,13 @@ namespace DustInTheWind.Lisimba.Commands
         {
             try
             {
-                currentData.ExportToYahooCsv();
+                string fileName = AskToSaveYahooCsvFile();
+
+                if (fileName == null)
+                    return;
+
+                YahooCsvGate gate = new YahooCsvGate();
+                gate.Save(currentData.AddressBook, fileName);
             }
             catch (Exception ex)
             {

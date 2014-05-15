@@ -126,14 +126,10 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (currentData != null)
                 {
                     currentData.AddressBookChanged -= HandleCurrentAddressBookChanged;
-                    currentData.AddressBookSaved -= HandleCurrentAddressBookSaved;
                     currentData.ContactChanged -= HandleCurrentContactChanged;
 
                     if (currentData.AddressBook != null)
-                    {
-                        currentData.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-                        currentData.AddressBook.ContactContentChanged -= HandleContactContentChanged;
-                    }
+                        UnhookFromAddressBook(currentData.AddressBook);
                 }
 
                 currentData = value;
@@ -141,18 +137,28 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (currentData != null)
                 {
                     currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
-                    currentData.AddressBookSaved += HandleCurrentAddressBookSaved;
                     currentData.ContactChanged += HandleCurrentContactChanged;
 
                     if (currentData.AddressBook != null)
-                    {
-                        currentData.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                        currentData.AddressBook.ContactContentChanged += HandleContactContentChanged;
-                    }
+                        HookToAddressBook(currentData.AddressBook);
                 }
 
                 PopulateFromCurrentAddressBook();
             }
+        }
+
+        private void HookToAddressBook(AddressBook addressBook)
+        {
+            addressBook.Changed += HandleCurrentAddressBookContentChanged;
+            addressBook.ContactContentChanged += HandleContactContentChanged;
+            addressBook.AddressBookSaved += HandleCurrentAddressBookSaved;
+        }
+
+        private void UnhookFromAddressBook(AddressBook addressBook)
+        {
+            addressBook.Changed -= HandleCurrentAddressBookContentChanged;
+            addressBook.ContactContentChanged -= HandleContactContentChanged;
+            addressBook.AddressBookSaved -= HandleCurrentAddressBookSaved;
         }
 
         private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs e)
@@ -211,7 +217,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             Clear();
 
-            if (currentData.AddressBook == null || currentData.AddressBook.Contacts == null)
+            if (currentData == null || currentData.AddressBook == null || currentData.AddressBook.Contacts == null)
             {
                 contacts = null;
             }

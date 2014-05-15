@@ -15,12 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Windows.Forms;
 using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class CustomMenuItem : System.Windows.Forms.ToolStripMenuItem
+    class CustomMenuItem : ToolStripMenuItem
     {
         private ICommand command;
         public StatusService StatusService { get; set; }
