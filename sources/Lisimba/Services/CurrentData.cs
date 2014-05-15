@@ -15,25 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Gating;
 
 namespace DustInTheWind.Lisimba.Services
 {
     class CurrentData
     {
-        private readonly StatusService statusService;
-        private readonly RecentFilesService recentFilesService;
-
-        private readonly List<Exception> warnings;
-        private Contact contact;
         private AddressBook addressBook;
-
-        public Func<string> AskToOpenLsbFile { get; set; }
-
-        public Func<string> AskToSaveLsbFile { get; set; }
+        private Contact contact;
 
         public AddressBook AddressBook
         {
@@ -69,11 +58,6 @@ namespace DustInTheWind.Lisimba.Services
                 contact = value;
                 OnContactChanged();
             }
-        }
-
-        public IEnumerable<Exception> Warnings
-        {
-            get { return warnings; }
         }
 
         #region Event AddressBookChanging
@@ -117,81 +101,5 @@ namespace DustInTheWind.Lisimba.Services
         }
 
         #endregion
-
-
-        public CurrentData(StatusService statusService, RecentFilesService recentFilesService)
-        {
-            if (statusService == null)
-                throw new ArgumentNullException("statusService");
-
-            if (recentFilesService == null)
-                throw new ArgumentNullException("recentFilesService");
-
-            this.statusService = statusService;
-            this.recentFilesService = recentFilesService;
-
-            warnings = new List<Exception>();
-        }
-
-        public void Open(string fileName)
-        {
-            warnings.Clear();
-
-            if (string.IsNullOrEmpty(fileName))
-            {
-                fileName = AskToOpenLsbFile();
-
-                if (fileName == null)
-                    return;
-            }
-
-            ZipXmlGate gate = new ZipXmlGate();
-            AddressBook openedAddressBook = gate.Load(fileName);
-            openedAddressBook.SetAsSaved();
-
-            warnings.AddRange(gate.Warnings);
-
-            AddressBook = openedAddressBook;
-
-            statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
-            recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
-        }
-
-        public void Save()
-        {
-            warnings.Clear();
-
-            if (AddressBook.FileName == null)
-            {
-                SaveAs();
-                return;
-            }
-
-
-            ZipXmlGate gate = new ZipXmlGate();
-            gate.Save(AddressBook, AddressBook.FileName);
-
-            AddressBook.SetAsSaved();
-
-            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Contacts.Count);
-        }
-
-        public void SaveAs()
-        {
-            warnings.Clear();
-
-            string fileName = AskToSaveLsbFile();
-
-            if (fileName == null)
-                return;
-
-            ZipXmlGate gate = new ZipXmlGate();
-            gate.Save(AddressBook, fileName);
-
-            AddressBook.SetAsSaved();
-
-            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Contacts.Count);
-            recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
-        }
     }
 }

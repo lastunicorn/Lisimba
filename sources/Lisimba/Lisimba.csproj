@@ -119,7 +119,7 @@
     </Compile>
     <Compile Include="Config\RecentFilesConfigElement.cs" />
     <Compile Include="Config\LisimbaConfigSection.cs" />
-    <Compile Include="CmdLineArgs.cs" />
+    <Compile Include="CommandLineArguments.cs" />
     <Compile Include="Comparers\TreeNodeByBirthdateComparer.cs" />
     <Compile Include="Comparers\TreeNodeByBirthdayComparer.cs" />
     <Compile Include="Comparers\TreeNodeByFirstNameComparer.cs" />
@@ -150,9 +150,10 @@
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\LisimbaApplication.cs" />
     <Compile Include="Services\RecentFilesService.cs" />
     <Compile Include="Services\StatusService.cs" />
-    <Compile Include="Services\UIService.cs" />
+    <Compile Include="Services\UiService.cs" />
     <Compile Include="Services\ZodiacService.cs" />
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>

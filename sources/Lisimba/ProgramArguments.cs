@@ -18,19 +18,14 @@ namespace DustInTheWind.Lisimba
 {
     class ProgramArguments
     {
-        private readonly string fileName = string.Empty;
-
-        public string FileName
-        {
-            get { return fileName; }
-        }
+        public string FileName { get; private set; }
 
         public ProgramArguments(string[] args)
         {
-            CmdLineArgs argList = new CmdLineArgs(args);
+            CommandLineArguments commandLineArguments = new CommandLineArguments(args);
 
-            if (argList.Count > 0)
-                fileName = argList[0];
+            if (commandLineArguments.Count > 0)
+                FileName = commandLineArguments[0];
 
             //if (argList.ContainsKey("f"))
             //    fileName = argList["f"];

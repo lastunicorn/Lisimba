@@ -37,8 +37,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStripMain = new DustInTheWind.Lisimba.UserControls.LisimbaMainMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -115,16 +113,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
-            // saveFileDialog1
-            // 
-            this.saveFileDialog1.DefaultExt = "lsb";
-            this.saveFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Agenda Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.splitContainer1);
@@ -172,8 +160,6 @@ namespace DustInTheWind.Lisimba.Forms
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private ContactView contactView1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private ContactListView contactListView1;

@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Presenters
     class AddContactPresenter
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
+        private readonly UiService uiService;
 
         private Contact editedContact;
         private AddressBook addressBook;
@@ -42,7 +42,7 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        public AddContactPresenter(CurrentData currentData, UIService uiService)
+        public AddContactPresenter(CurrentData currentData, UiService uiService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");

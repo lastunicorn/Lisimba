@@ -23,16 +23,14 @@ namespace DustInTheWind.Lisimba.Commands
     class ExportYahooCsvCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
-
-        public Func<string> AskToSaveYahooCsvFile { get; set; }
+        private readonly UiService uiService;
 
         public override string ShortDescription
         {
             get { return "Export current opened address book in Yahoo! csv format."; }
         }
 
-        public ExportYahooCsvCommand(CurrentData currentData, UIService uiService)
+        public ExportYahooCsvCommand(CurrentData currentData, UiService uiService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -42,13 +40,21 @@ namespace DustInTheWind.Lisimba.Commands
 
             this.currentData = currentData;
             this.uiService = uiService;
+
+            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = currentData.AddressBook != null;
+        }
+
+        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
+        {
+            IsEnabled = currentData.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                string fileName = AskToSaveYahooCsvFile();
+                string fileName = uiService.AskToSaveYahooCsvFile();
 
                 if (fileName == null)
                     return;

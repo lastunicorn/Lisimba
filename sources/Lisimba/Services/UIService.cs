@@ -14,31 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    public class UIService
+    public class UiService
     {
-        private readonly Form mainForm;
-
-        public UIService(Form mainForm)
-        {
-            if (mainForm == null)
-                throw new ArgumentNullException("mainForm");
-
-            this.mainForm = mainForm;
-        }
+        public IWin32Window MainWindow { get; set; }
 
         public void DisplayWarning(string message)
         {
-            MessageBox.Show(mainForm, message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(MainWindow, message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public void DisplayError(string message)
         {
-            MessageBox.Show(mainForm, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(MainWindow, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public bool? DisplayYesNoQuestion(string question, string title)
@@ -49,6 +41,64 @@ namespace DustInTheWind.Lisimba.Services
                 return null;
 
             return dialogResult == DialogResult.Yes;
+        }
+
+        public string AskToSaveYahooCsvFile()
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                saveFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "csv";
+                saveFileDialog.FileName = string.Empty;
+
+                DialogResult dialogResult = saveFileDialog.ShowDialog();
+
+                return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
+            }
+        }
+
+        public string AskToOpenYahooCsvFile()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+                openFileDialog.DefaultExt = "csv";
+                openFileDialog.FileName = string.Empty;
+
+                DialogResult dialogResult = openFileDialog.ShowDialog();
+
+                return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
+            }
+        }
+
+        public string AskToSaveLsbFile()
+        {
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            {
+                saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                saveFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+                saveFileDialog.DefaultExt = "lsb";
+
+                DialogResult dialogResult = saveFileDialog.ShowDialog();
+
+                return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
+            }
+        }
+
+        public string AskToOpenLsbFile()
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+                openFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+                openFileDialog.DefaultExt = "lsb";
+
+                DialogResult dialogResult = openFileDialog.ShowDialog();
+
+                return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
+            }
         }
     }
 }

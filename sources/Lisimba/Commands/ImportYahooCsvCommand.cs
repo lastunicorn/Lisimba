@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Commands
     class ImportYahooCsvCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
+        private readonly UiService uiService;
         private readonly StatusService statusService;
 
         public override string ShortDescription
@@ -35,9 +35,8 @@ namespace DustInTheWind.Lisimba.Commands
         }
 
         public Func<bool> AskIfAllowToContinue;
-        public Func<string> AskToOpenYahooCsvFile;
 
-        public ImportYahooCsvCommand(CurrentData currentData, UIService uiService, StatusService statusService)
+        public ImportYahooCsvCommand(CurrentData currentData, UiService uiService, StatusService statusService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -62,7 +61,7 @@ namespace DustInTheWind.Lisimba.Commands
                 if (!allowToContinue)
                     return;
 
-                string fileName = AskToOpenYahooCsvFile();
+                string fileName = uiService.AskToOpenYahooCsvFile();
 
                 if (fileName == null)
                     return;

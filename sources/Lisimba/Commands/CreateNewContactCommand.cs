@@ -24,14 +24,14 @@ namespace DustInTheWind.Lisimba.Commands
     class CreateNewContactCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
-        private UIService uiService;
+        private readonly UiService uiService;
 
         public override string ShortDescription
         {
             get { return "Create a new contact."; }
         }
 
-        public CreateNewContactCommand(CurrentData currentData, UIService uiService)
+        public CreateNewContactCommand(CurrentData currentData, UiService uiService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");

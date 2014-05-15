@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Commands
     class CreateNewAddressBookCommand : CommandBase<string>
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
+        private readonly UiService uiService;
         private readonly StatusService statusService;
 
         public override string ShortDescription
@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Create a new address book."; }
         }
 
-        public CreateNewAddressBookCommand(CurrentData currentData, UIService uiService, StatusService statusService)
+        public CreateNewAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");

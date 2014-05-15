@@ -31,6 +31,31 @@ namespace DustInTheWind.Lisimba
         [STAThread]
         static void Main(string[] args)
         {
+            try
+            {
+                UnityContainer unityContainer = CreateUnityContainer();
+
+                ProgramArguments programArguments = new ProgramArguments(args);
+                unityContainer.RegisterInstance(programArguments, new ContainerControlledLifetimeManager());
+
+                unityContainer.Resolve<LisimbaApplication>().Start();
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+
+                FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
+                unityContainer.Resolve<UiService>().MainWindow = formLisimba;
+
+                Application.Run(formLisimba);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static UnityContainer CreateUnityContainer()
+        {
             UnityContainer unityContainer = new UnityContainer();
 
             unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
@@ -38,32 +63,14 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<RecentFilesService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<CurrentData>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<UiService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
 
             unityContainer.RegisterType<OpenAddressBookCommand>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ImportYahooCsvCommand>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ExportYahooCsvCommand>(new ContainerControlledLifetimeManager());
 
-            try
-            {
-                ProgramArguments programArguments = new ProgramArguments(args);
-                unityContainer.RegisterInstance(programArguments, new ContainerControlledLifetimeManager());
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            unityContainer.Resolve<StatusService>().DefaultStatusText = "Ready";
-
-            FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
-
-            UIService uiService = new UIService(formLisimba);
-            unityContainer.RegisterInstance(uiService, new ContainerControlledLifetimeManager());
-
-            Application.Run(formLisimba);
+            return unityContainer;
         }
     }
 }

@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
+using DustInTheWind.Lisimba.Egg.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -22,30 +24,66 @@ namespace DustInTheWind.Lisimba.Commands
     class SaveAddressBookCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
-        private readonly UIService uiService;
+        private readonly UiService uiService;
+        private readonly StatusService statusService;
+        private readonly RecentFilesService recentFilesService;
 
         public override string ShortDescription
         {
             get { return "Save current opened address book."; }
         }
 
-        public SaveAddressBookCommand(CurrentData currentData, UIService uiService)
+        public SaveAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFilesService recentFilesService)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
-
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
+            if (currentData == null) throw new ArgumentNullException("currentData");
+            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
 
             this.currentData = currentData;
             this.uiService = uiService;
+            this.statusService = statusService;
+            this.recentFilesService = recentFilesService;
+
+            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = currentData.AddressBook != null;
+        }
+
+        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
+        {
+            IsEnabled = currentData.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                currentData.Save();
+                string fileName;
+                bool isNew = false;
+
+                if (currentData.AddressBook.FileName == null)
+                {
+                    fileName = uiService.AskToSaveLsbFile();
+
+                    if (fileName == null)
+                        return;
+
+                    isNew = true;
+                }
+                else
+                {
+                    fileName = currentData.AddressBook.FileName;
+                }
+
+                ZipXmlGate gate = new ZipXmlGate();
+                gate.Save(currentData.AddressBook, fileName);
+
+                currentData.AddressBook.SetAsSaved();
+
+                statusService.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBook.Contacts.Count);
+
+                if (isNew)
+                    recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
             }
             catch (Exception ex)
             {
