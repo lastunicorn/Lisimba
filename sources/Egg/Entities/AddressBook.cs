@@ -27,6 +27,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     {
         private string version;
         private string name;
+        private AddressBookStatus status;
 
         /// <summary>
         /// The version of the application that created this address book.
@@ -73,7 +74,15 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public string FileName { get; set; }
 
         [XmlIgnore]
-        public AddressBookStatus Status { get; private set; }
+        public AddressBookStatus Status
+        {
+            get { return status; }
+            private set
+            {
+                status = value;
+                OnStatusChanged();
+            }
+        }
 
         #region Event Changed
 
@@ -99,6 +108,20 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             if (handler != null)
                 handler(this, e);
+        }
+
+        #endregion
+
+        #region Event StatusChanged
+
+        public event EventHandler StatusChanged;
+
+        protected virtual void OnStatusChanged()
+        {
+            EventHandler handler = StatusChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         #endregion

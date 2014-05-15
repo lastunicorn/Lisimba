@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
@@ -22,7 +23,6 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    // Extract the logic of Save, SaveAs, Open and put it in corresponding commands.
     // Create the LisimbaStatusBar control.
     // Refactor ContactListView to take advantage of the services.
     // Create a StatusChanged event in AddressBook.
@@ -32,6 +32,8 @@ namespace DustInTheWind.Lisimba.Forms
         private readonly StatusService statusService;
         private readonly CurrentData currentData;
         private readonly ApplicationService applicationService;
+
+        private bool allowToClose;
 
         // Lisimba - male name meaning "lion" in Zulu language.
 
@@ -60,6 +62,8 @@ namespace DustInTheWind.Lisimba.Forms
                 HookToAddressBook(currentData.AddressBook);
 
             this.applicationService = applicationService;
+            applicationService.Exiting += HandleApplicationExiting;
+            applicationService.ExitCanceled += HandleApplicationExitCanceled;
 
             contactListView1.CurrentData = currentData;
             contactListView1.CommandPool = commandPool;
@@ -67,6 +71,16 @@ namespace DustInTheWind.Lisimba.Forms
             contactListView1.ConfigurationService = configurationService;
 
             menuStripMain.Initialize(commandPool, statusService, recentFilesService);
+        }
+
+        private void HandleApplicationExitCanceled(object sender, EventArgs e)
+        {
+            allowToClose = false;
+        }
+
+        private void HandleApplicationExiting(object sender, CancelEventArgs e)
+        {
+            allowToClose = true;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
@@ -83,18 +97,17 @@ namespace DustInTheWind.Lisimba.Forms
         private void HookToAddressBook(AddressBook addressBook)
         {
             addressBook.Changed += HandleCurrentAddressBookContentChanged;
-            addressBook.AddressBookSaved += HandleCurrentAddressBookSaved;
+            addressBook.StatusChanged += HandleAddressBookStatusChanged;
         }
 
         private void UnhookFromAddressBook(AddressBook addressBook)
         {
             addressBook.Changed -= HandleCurrentAddressBookContentChanged;
-            addressBook.AddressBookSaved -= HandleCurrentAddressBookSaved;
+            addressBook.StatusChanged -= HandleAddressBookStatusChanged;
         }
 
-        private void HandleCurrentAddressBookSaved(object sender, EventArgs e)
+        private void HandleAddressBookStatusChanged(object sender, EventArgs eventArgs)
         {
-            // todo: should use StatusChanged event instead.
             Text = BuildFormTitle();
         }
 
@@ -138,6 +151,15 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripStatusLabel1.Text = statusService.StatusText;
 
             Text = BuildFormTitle();
+        }
+
+        private void FormLisimba_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (allowToClose)
+                return;
+
+            e.Cancel = !allowToClose;
+            applicationService.Exit();
         }
     }
 }

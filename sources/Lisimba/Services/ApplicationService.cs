@@ -23,6 +23,8 @@ namespace DustInTheWind.Lisimba.Services
 {
     class ApplicationService
     {
+        #region Event Exiting
+
         public event EventHandler<CancelEventArgs> Exiting;
 
         protected virtual void OnExiting(CancelEventArgs e)
@@ -32,6 +34,23 @@ namespace DustInTheWind.Lisimba.Services
             if (handler != null)
                 handler(this, e);
         }
+
+        #endregion
+
+        #region Event ExitCanceled
+
+        public event EventHandler ExitCanceled;
+
+        protected virtual void OnExitCanceled(EventArgs e)
+        {
+            EventHandler handler = ExitCanceled;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        #endregion
+
 
         public string ProgramName { get; private set; }
 
@@ -47,7 +66,10 @@ namespace DustInTheWind.Lisimba.Services
             OnExiting(eva);
 
             if (eva.Cancel)
+            {
+                OnExitCanceled(EventArgs.Empty);
                 return;
+            }
 
             Application.Exit();
         }
