@@ -49,6 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AddressBookStatus.cs" />
+    <Compile Include="Entities\ContactContentChangedEventArgs.cs" />
     <Compile Include="Entities\CustomObservableCollection.cs" />
     <Compile Include="Entities\IObservableEntity.cs" />
     <Compile Include="Entities\ItemChangedEventArgs.cs" />

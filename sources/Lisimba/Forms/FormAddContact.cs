@@ -17,72 +17,38 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Presenters;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormAddContact : Form
+    partial class FormAddContact : Form, IAddContactView
     {
-        private readonly CurrentData currentData;
+        public AddContactPresenter Presenter { private get; set; }
 
-        public Contact Contact { get; private set; }
-
-        public FormAddContact(CurrentData currentData)
+        public FormAddContact()
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
-
-            this.currentData = currentData;
-
             InitializeComponent();
+        }
 
-            contactView1.Presenter.Contact = new Contact();
+        public Contact Contact
+        {
+            get { return contactView1.Presenter.Contact; }
+            set { contactView1.Presenter.Contact = value; }
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            Contact editedContact = contactView1.Presenter.Contact;
-
-            bool isContactValid = ValidateContact(editedContact);
-
-            if (!isContactValid)
-            {
-                MessageBox.Show("Please enter at least one of the fields marked with \"*\".", "Insufficient data.",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                DialogResult = DialogResult.None;
-                return;
-            }
-
-            Contact = editedContact;
+            Presenter.OkButtonWasClicked();
         }
 
-        private bool ValidateContact(Contact contactToValidate)
+        private void buttonCancel_Click(object sender, EventArgs e)
         {
-            bool isNameFilled =
-                contactToValidate.Name.FirstName.Length != 0 ||
-                contactToValidate.Name.MiddleName.Length != 0 ||
-                contactToValidate.Name.LastName.Length != 0 ||
-                contactToValidate.Name.Nickname.Length != 0;
+            Presenter.CloseButtonWasClicked();
+        }
 
-            if (!isNameFilled)
-                return false;
-
-            if (currentData.AddressBook == null)
-                return true;
-
-            foreach (Contact c in currentData.AddressBook.Contacts)
-            {
-                bool contactAlreadyExists =
-                         c.Name.FirstName.Equals(contactToValidate.Name.FirstName) &&
-                         c.Name.MiddleName.Equals(contactToValidate.Name.MiddleName) &&
-                         c.Name.LastName.Equals(contactToValidate.Name.LastName) &&
-                         c.Name.Nickname.Equals(contactToValidate.Name.Nickname);
-
-                if (contactAlreadyExists)
-                    return false;
-            }
-
-            return true;
+        private void FormAddContact_Load(object sender, EventArgs e)
+        {
+            Presenter.ViewWasLoaded();
         }
     }
 }

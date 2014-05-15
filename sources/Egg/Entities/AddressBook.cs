@@ -18,7 +18,6 @@ using System;
 using System.Collections.Specialized;
 using System.Reflection;
 using System.Xml.Serialization;
-using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
@@ -26,10 +25,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     [Serializable()]
     public class AddressBook
     {
-
         private string version;
         private string name;
-        private ContactCollection contacts;
 
         /// <summary>
         /// The version of the application that created this address book.
@@ -41,6 +38,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 version = value;
+
+                Status = AddressBookStatus.Modified;
                 OnChanged();
             }
         }
@@ -55,6 +54,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             set
             {
                 name = value;
+
+                Status = AddressBookStatus.Modified;
                 OnChanged();
             }
         }
@@ -63,10 +64,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// Gets a collection of Contact.
         /// </summary>
         [XmlArray("Contacts"), XmlArrayItem("Contact")]
-        public ContactCollection Contacts
-        {
-            get { return contacts; }
-        }
+        public ContactCollection Contacts { get; private set; }
 
         /// <summary>
         /// Gets the full file name of the address book or empty string if is a new one.
@@ -74,63 +72,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         [XmlIgnore()]
         public string FileName { get; set; }
 
-        #region Events
-
-        //#region Event AddContact
-
-        //public event AddContactHandler AddContact;
-        //public delegate void AddContactHandler(object sender, AddContactEventArgs e);
-
-        //public class AddContactEventArgs : EventArgs
-        //{
-        //    private bool isProblem;
-        //    public bool IsProblem
-        //    {
-        //        get { return isProblem; }
-        //    }
-
-        //    private Contact newContact;
-        //    public Contact NewContact
-        //    {
-        //        get { return newContact; }
-        //    }
-
-        //    private Contact equalContact;
-        //    public Contact EqualContact
-        //    {
-        //        get { return equalContact; }
-        //    }
-
-        //    private ContactCollection almostEqualContacts;
-        //    public ContactCollection AlmostEqualContacts
-        //    {
-        //        get { return almostEqualContacts; }
-        //    }
-
-        //    private AddDecision decision = AddDecision.AddAsNew;
-        //    public AddDecision Decision
-        //    {
-        //        get { return decision; }
-        //        set { decision = value; }
-        //    }
-
-
-        //    public AddContactEventArgs(bool isProblem, Contact newContact)
-        //    {
-        //    }
-        //}
-
-        //protected virtual void OnAddContact(AddContactEventArgs e)
-        //{
-        //    if (AddContact != null)
-        //    {
-        //        AddContact(this, e);
-        //    }
-        //}
-
-        //#endregion Event AddContact
-
-        #endregion
+        [XmlIgnore]
+        public AddressBookStatus Status { get; private set; }
 
         #region Event Changed
 
@@ -146,25 +89,45 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #endregion
 
+        #region Event ContactContentChanged
+
+        public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
+
+        protected virtual void OnContactChanged(ContactContentChangedEventArgs e)
+        {
+            EventHandler<ContactContentChangedEventArgs> handler = ContactContentChanged;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        #endregion
+
         public AddressBook()
         {
             Name = "New Address Book";
-            contacts = new ContactCollection();
-            contacts.CollectionChanged += HandleContactsCollectionChanged;
-            contacts.ItemChanged += HandleContactChanged;
 
-            FileName = string.Empty;
+            Contacts = new ContactCollection();
+            Contacts.CollectionChanged += HandleContactsCollectionChanged;
+            Contacts.ItemChanged += HandleContactChanged;
+
+            FileName = null;
 
             Version = GetCurrentAssemblyVersion();
+
+            Status = AddressBookStatus.New;
         }
 
-        private void HandleContactChanged(object sender, ItemChangedEventArgs<Contact> itemChangedEventArgs)
+        private void HandleContactChanged(object sender, ItemChangedEventArgs<Contact> e)
         {
+            Status = AddressBookStatus.Modified;
+            OnContactChanged(new ContactContentChangedEventArgs(e.Item));
             OnChanged();
         }
 
         private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
+            Status = AddressBookStatus.Modified;
             OnChanged();
         }
 
@@ -176,90 +139,14 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             return assemblyName.Version.ToString();
         }
 
-        public void Add(Contact contact)
+        public void SetAsSaved()
         {
-            bool allowAdd = IsAllowToAdd(contact);
-
-            if (!allowAdd)
-                return;
-
-            Contacts.Add(contact);
+            Status = AddressBookStatus.Saved;
         }
 
-        private bool IsAllowToAdd(Contact contact)
+        public void SetAsNew()
         {
-            for (int i = 0; i < Contacts.Count; i++)
-            {
-                if (PersonName.Compare(Contacts[i].Name, contact.Name) == 0)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public int AddRange(ContactCollection contacts, ImportRuleCollection importRules)
-        {
-            ImportRule rule = null;
-            int countAdded = 0;
-
-            for (int i = 0; i < contacts.Count; i++)
-            {
-                rule = importRules[contacts[i]];
-                if (rule != null)
-                {
-                    switch (rule.ImportType)
-                    {
-                        case ImportType.AddAsNew:
-                            Add(contacts[i]);
-                            countAdded++;
-                            break;
-
-                        case ImportType.Combine:
-                            //if (contacts.Contains(rule.OriginalContact))
-                            //    rule.OriginalContact.CopyFrom(rule.NewContact);
-                            countAdded++;
-                            break;
-
-                        case ImportType.Overwrite:
-                            if (contacts.Contains(rule.OriginalContact))
-                                rule.OriginalContact.CopyFrom(rule.NewContact);
-                            countAdded++;
-                            break;
-
-                        case ImportType.DoNotAdd:
-                            break;
-                    }
-
-                }
-            }
-
-            return countAdded;
-        }
-
-        public void Remove(Contact contact)
-        {
-            Contacts.Remove(contact);
-        }
-
-        public void RemoveAt(int index)
-        {
-            Contacts.RemoveAt(index);
-        }
-
-        public int Count
-        {
-            get { return Contacts.Count; }
-        }
-
-        public Contact this[int index]
-        {
-            get { return Contacts[index]; }
-            set { Contacts[index] = value; }
-        }
-
-        public void Sort(ContactsSortingType sortType, SortDirection sortDirection)
-        {
-            Contacts.Sort(sortType, sortDirection);
+            Status = AddressBookStatus.Saved;
         }
     }
 }

@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections;
+using System.Linq;
 using DustInTheWind.Lisimba.Egg.Comparers;
 using DustInTheWind.Lisimba.Egg.Enums;
 
@@ -78,6 +79,54 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 default:
                     return new CompareContactByBirthdayComparer();
             }
+        }
+
+        protected override void InsertItem(int index, Contact item)
+        {
+            bool existsContactWithSameName = Items.Any(x => PersonName.Equals(x.Name, item.Name));
+
+            if (existsContactWithSameName)
+                return;
+
+            base.InsertItem(index, item);
+        }
+
+        public int AddRange(ContactCollection contacts, ImportRuleCollection mergeRules)
+        {
+            int countAdded = 0;
+
+            foreach (Contact contact in contacts)
+            {
+                ImportRule rule = mergeRules[contact];
+
+                if (rule == null)
+                    continue;
+
+                switch (rule.ImportType)
+                {
+                    case ImportType.AddAsNew:
+                        Add(contact);
+                        countAdded++;
+                        break;
+
+                    case ImportType.Combine:
+                        //if (contacts.Contains(rule.OriginalContact))
+                        //    rule.OriginalContact.CopyFrom(rule.NewContact);
+                        countAdded++;
+                        break;
+
+                    case ImportType.Overwrite:
+                        if (contacts.Contains(rule.OriginalContact))
+                            rule.OriginalContact.CopyFrom(rule.NewContact);
+                        countAdded++;
+                        break;
+
+                    case ImportType.DoNotAdd:
+                        break;
+                }
+            }
+
+            return countAdded;
         }
     }
 }

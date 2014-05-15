@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Gating;
@@ -40,29 +41,22 @@ namespace DustInTheWind.Lisimba.Services
 
         public Func<string> AskToSaveYahooCsvFile { get; set; }
 
-        public bool IsNew { get; private set; }
-
-        public bool IsModified { get; set; }
-
         public AddressBook AddressBook
         {
             get { return addressBook; }
             set
             {
-                if (addressBook != null)
-                    addressBook.Changed -= HandleAddressBookContentChanged;
+                if (addressBook == value)
+                    return;
 
+                OnAddressBookChanging(EventArgs.Empty);
+
+                AddressBook oldAddressBook = addressBook;
                 addressBook = value;
-
-                IsNew = addressBook.FileName == null;
-                IsModified = false;
-
-                if (addressBook != null)
-                    addressBook.Changed += HandleAddressBookContentChanged;
 
                 Contact = null;
 
-                OnAddressBookChanged(EventArgs.Empty);
+                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, addressBook));
             }
         }
 
@@ -71,6 +65,9 @@ namespace DustInTheWind.Lisimba.Services
             get { return contact; }
             set
             {
+                if (contact == value)
+                    return;
+
                 contact = value;
                 OnContactChanged();
             }
@@ -81,13 +78,13 @@ namespace DustInTheWind.Lisimba.Services
             get { return warnings; }
         }
 
-        #region Event AddressBookChanged
+        #region Event AddressBookChanging
 
-        public event EventHandler AddressBookChanged;
+        public event EventHandler AddressBookChanging;
 
-        protected virtual void OnAddressBookChanged(EventArgs e)
+        protected virtual void OnAddressBookChanging(EventArgs e)
         {
-            EventHandler handler = AddressBookChanged;
+            EventHandler handler = AddressBookChanging;
 
             if (handler != null)
                 handler(this, e);
@@ -95,13 +92,13 @@ namespace DustInTheWind.Lisimba.Services
 
         #endregion
 
-        #region Event AddressBookContentChanged
+        #region Event AddressBookChanged
 
-        public event EventHandler AddressBookContentChanged;
+        public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
 
-        protected virtual void OnAddressBookContentChanged(EventArgs e)
+        protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
         {
-            EventHandler handler = AddressBookContentChanged;
+            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
 
             if (handler != null)
                 handler(this, e);
@@ -149,16 +146,7 @@ namespace DustInTheWind.Lisimba.Services
             this.statusService = statusService;
             this.recentFilesService = recentFilesService;
 
-            IsNew = true;
-            IsModified = false;
-
             warnings = new List<Exception>();
-        }
-
-        private void HandleAddressBookContentChanged(object sender, EventArgs eventArgs)
-        {
-            IsModified = true;
-            OnAddressBookContentChanged(EventArgs.Empty);
         }
 
         public void Open(string fileName)
@@ -175,12 +163,13 @@ namespace DustInTheWind.Lisimba.Services
 
             ZipXmlGate gate = new ZipXmlGate();
             AddressBook openedAddressBook = gate.Load(fileName);
+            openedAddressBook.SetAsSaved();
 
             warnings.AddRange(gate.Warnings);
 
             AddressBook = openedAddressBook;
 
-            statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Count);
+            statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
             recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
         }
 
@@ -198,10 +187,9 @@ namespace DustInTheWind.Lisimba.Services
             ZipXmlGate gate = new ZipXmlGate();
             gate.Save(AddressBook, AddressBook.FileName);
 
-            IsNew = false;
-            IsModified = false;
+            AddressBook.SetAsSaved();
 
-            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Count);
+            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Contacts.Count);
 
             OnAddressBookSaved(EventArgs.Empty);
         }
@@ -218,10 +206,9 @@ namespace DustInTheWind.Lisimba.Services
             ZipXmlGate gate = new ZipXmlGate();
             gate.Save(AddressBook, fileName);
 
-            IsNew = false;
-            IsModified = false;
+            AddressBook.SetAsSaved();
 
-            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Count);
+            statusService.StatusText = string.Format("Address book saved. ({0} contacts)", AddressBook.Contacts.Count);
             recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
 
             OnAddressBookSaved(EventArgs.Empty);
@@ -242,16 +229,12 @@ namespace DustInTheWind.Lisimba.Services
                 AddressBook yahooAddressBook = yahooCsvGate.Load(fileName);
 
                 ContactCollection yahooContacts = yahooAddressBook.Contacts;
-                ImportRuleCollection importRules = CreateImportRules(yahooContacts);
+                ImportRuleCollection mergeRules = CreateMergeRules(yahooContacts);
 
                 AddressBook = new AddressBook();
-                int countImport = AddressBook.AddRange(yahooContacts, importRules);
-
-                IsModified = true;
+                int countImport = AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
 
                 statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
-
-                OnAddressBookContentChanged(EventArgs.Empty);
             }
             catch (Exception ex)
             {
@@ -259,16 +242,10 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        public ImportRuleCollection CreateImportRules(ContactCollection newContacts)
+        public ImportRuleCollection CreateMergeRules(ContactCollection contacts)
         {
-            ImportRuleCollection rules = new ImportRuleCollection();
-
-            for (int i = 0; i < newContacts.Count; i++)
-            {
-                rules.Add(new ImportRule(newContacts[i]));
-            }
-
-            return rules;
+            IEnumerable<ImportRule> rules = contacts.Select(x => new ImportRule(x));
+            return new ImportRuleCollection(rules.ToList());
         }
 
         public void ExportToYahooCsv()

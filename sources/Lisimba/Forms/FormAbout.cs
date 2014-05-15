@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Forms
             Text = Application.ProductName;
             labelTitle.Text = Application.ProductName;
             labelVersion.Text = string.Format("Ver. {0}", Application.ProductVersion);
-            labelAuthorAndDate.Text = "Iuga Alexandru - Dec 2007";
+            labelAuthorAndDate.Text = "Iuga Alexandru";
         }
     }
 }

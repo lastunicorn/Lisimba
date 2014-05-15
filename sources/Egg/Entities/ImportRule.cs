@@ -20,55 +20,29 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 {
     public class ImportRule
     {
-        private ImportType importType = ImportType.AddAsNew;
-        public ImportType ImportType
-        {
-            get { return importType; }
-            set { importType = value; }
-        }
+        public ImportType ImportType { get; set; }
 
-        private Contact newContact = null;
-        public Contact NewContact
-        {
-            get { return newContact; }
-            set { newContact = value; }
-        }
+        public Contact NewContact { get; set; }
 
-        private Contact originalContact = null;
-        public Contact OriginalContact
-        {
-            get { return originalContact; }
-            set { originalContact = value; }
-        }
+        public Contact OriginalContact { get; set; }
 
         public ImportRule(ImportRule record)
         {
+            ImportType = ImportType.AddAsNew;
             CopyFrom(record);
         }
 
         public ImportRule(Contact newContact)
         {
-            this.newContact = newContact;
-        }
-
-        public ImportRule(Contact newContact, ImportType importType)
-        {
-            this.newContact = newContact;
-            this.importType = importType;
-        }
-
-        public ImportRule(Contact newContact, ImportType importType, Contact originalContact)
-        {
-            this.newContact = newContact;
-            this.importType = importType;
-            this.originalContact = originalContact;
+            ImportType = ImportType.AddAsNew;
+            NewContact = newContact;
         }
 
         public void CopyFrom(ImportRule record)
         {
-            newContact = record.newContact;
-            importType = record.importType;
-            originalContact = record.originalContact;
+            NewContact = record.NewContact;
+            ImportType = record.ImportType;
+            OriginalContact = record.OriginalContact;
         }
     }
 }

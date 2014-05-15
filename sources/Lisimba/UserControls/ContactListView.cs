@@ -126,9 +126,14 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (currentData != null)
                 {
                     currentData.AddressBookChanged -= HandleCurrentAddressBookChanged;
-                    currentData.AddressBookContentChanged -= HandleCurrentAddressBookContentChanged;
                     currentData.AddressBookSaved -= HandleCurrentAddressBookSaved;
                     currentData.ContactChanged -= HandleCurrentContactChanged;
+
+                    if (currentData.AddressBook != null)
+                    {
+                        currentData.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                        currentData.AddressBook.ContactContentChanged -= HandleContactContentChanged;
+                    }
                 }
 
                 currentData = value;
@@ -136,12 +141,23 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (currentData != null)
                 {
                     currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
-                    currentData.AddressBookContentChanged += HandleCurrentAddressBookContentChanged;
+                    currentData.AddressBookSaved += HandleCurrentAddressBookSaved;
                     currentData.ContactChanged += HandleCurrentContactChanged;
+
+                    if (currentData.AddressBook != null)
+                    {
+                        currentData.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                        currentData.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                    }
                 }
 
                 PopulateFromCurrentAddressBook();
             }
+        }
+
+        private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs e)
+        {
+            SetContactChangedFlag(e.Contact, true);
         }
 
         private void HandleCurrentAddressBookSaved(object sender, EventArgs eventArgs)
@@ -173,8 +189,20 @@ namespace DustInTheWind.Lisimba.UserControls
             PopulateFromCurrentAddressBook();
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
+        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
+            if (e.OldAddressBook != null)
+            {
+                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                e.OldAddressBook.ContactContentChanged -= HandleContactContentChanged;
+            }
+
+            if (e.NewAddressBook != null)
+            {
+                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                e.NewAddressBook.ContactContentChanged += HandleContactContentChanged;
+            }
+
             SearchText = string.Empty;
             PopulateFromCurrentAddressBook();
         }
@@ -406,7 +434,7 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        public void SetContactChangedFlag(Contact c, bool value)
+        private void SetContactChangedFlag(Contact c, bool value)
         {
             if (c == null) return;
 

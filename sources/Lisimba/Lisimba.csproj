@@ -90,7 +90,9 @@
     <Compile Include="Commands\ExportYahooCsvCommand.cs" />
     <Compile Include="Commands\SaveAsAddressBookCommand.cs" />
     <Compile Include="Commands\ImportYahooCsvCommand.cs" />
+    <Compile Include="Forms\IAddContactView.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
+    <Compile Include="Services\AddressBookChangedEventArgs.cs" />
     <Compile Include="Services\CommandPool.cs" />
     <Compile Include="Services\CurrentData.cs" />
     <Compile Include="Commands\OpenAddressBookCommand.cs" />

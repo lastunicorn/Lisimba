@@ -17,9 +17,9 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 
@@ -59,12 +59,14 @@ namespace DustInTheWind.Lisimba.Forms
             recentFilesService.FileNameAdded += HandleRecentFilesServiceOnFileNameAdded;
 
             this.currentData = currentData;
-            currentData.AddressBookContentChanged += HandleCurrentAddressBookContentChanged;
-            currentData.ContactChanged += HandleCurrentContactChanged;
-            currentData.AskToOpenLsbFile = AskToOpenLsbFile;
-            currentData.AskToSaveLsbFile = AskToSaveLsbFile;
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
             currentData.AddressBookSaved += HandleCurrentAddressBookSaved;
+            if (currentData.AddressBook != null)
+                currentData.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+            currentData.ContactChanged += HandleCurrentContactChanged;
+
+            currentData.AskToOpenLsbFile = AskToOpenLsbFile;
+            currentData.AskToSaveLsbFile = AskToSaveLsbFile;
             currentData.AskToOpenYahooCsvFile = AskToOpenYahooCsvFile;
             currentData.AskToSaveYahooCsvFile = AskToSaveYahooCsvFile;
 
@@ -211,8 +213,14 @@ namespace DustInTheWind.Lisimba.Forms
             RefreshFormTitle();
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, EventArgs e)
+        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
+            if (e.OldAddressBook != null)
+                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+
+            if (e.NewAddressBook != null)
+                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
+
             RefreshFormTitle();
         }
 
@@ -244,7 +252,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private bool AskToSave()
         {
-            if (!currentData.IsModified)
+            if (currentData.AddressBook.Status == AddressBookStatus.Saved)
                 return true;
 
             DialogResult dialogResult = MessageBox.Show("Current address book is not saved.\nDo you wanna save it before proceedeing?", "Save?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
@@ -260,51 +268,48 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void RefreshFormTitle()
         {
-            string text = string.Empty;
+            Text = BuildFormTitle();
+        }
 
-            // Book name or file path
-            if (!currentData.IsNew || currentData.IsModified)
-            {
-                if (currentData.AddressBook.Name.Length == 0)
-                {
-                    if (currentData.AddressBook.FileName.Length == 0)
-                        text += "< Unnamed >";
-                    else
-                        text += currentData.AddressBook.FileName;
-                }
-                else
-                {
-                    text += currentData.AddressBook.Name;
-                }
-            }
+        private string BuildFormTitle()
+        {
+            if (currentData.AddressBook == null)
+                return programTitle;
 
-            // Is modified (*)
-            if (currentData.IsModified)
-                text += " *";
+            StringBuilder sb = new StringBuilder();
 
-            // -
-            if (text.Length > 0)
-                text += " - ";
+            string value = GetAddressBookNameOrFileName("< Unnamed >");
+            sb.Append(value);
 
-            // Progeam title
-            text += programTitle;
+            if (currentData.AddressBook.Status != AddressBookStatus.Saved)
+                sb.Append(" *");
 
-            // Display the title
-            Text = text;
+            sb.Append(" - ");
+
+            sb.Append(programTitle);
+
+            return sb.ToString();
+        }
+
+        private string GetAddressBookNameOrFileName(string defaultText)
+        {
+            bool hasName = !string.IsNullOrWhiteSpace(currentData.AddressBook.Name);
+
+            if (hasName)
+                return currentData.AddressBook.Name;
+
+            bool hasFileName = !string.IsNullOrWhiteSpace(currentData.AddressBook.FileName);
+
+            return hasFileName
+                ? currentData.AddressBook.FileName
+                : defaultText;
         }
 
         #endregion
 
         void contactView1_ContactChanged(object sender, EventArgs e)
         {
-            if (!currentData.IsModified)
-            {
-                currentData.IsModified = true;
-                RefreshFormTitle();
-            }
-
-            contactListView1.SetContactChangedFlag(contactView1.Presenter.Contact, true);
-
+            //contactListView1.SetContactChangedFlag(contactView1.Presenter.Contact, true);
         }
 
         #region Menu OnClick - File Menu

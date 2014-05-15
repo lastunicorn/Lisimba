@@ -15,73 +15,47 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
     [Serializable()]
-    public class ImportRuleCollection : CollectionBase
+    public class ImportRuleCollection : Collection<ImportRule>
     {
-        public ImportRule this[int index]
+        public ImportRuleCollection()
         {
-            get { return ((ImportRule)List[index]); }
-            set { List[index] = value; }
+        }
+
+        public ImportRuleCollection(IList<ImportRule> list)
+            : base(list)
+        {
         }
 
         public ImportRule this[Contact contact]
         {
             get
             {
-                for (int i = 0; i < List.Count; i++)
-                {
-                    if (((ImportRule)List[i]).NewContact == contact)
-                    {
-                        return (ImportRule)List[i];
-                    }
-                }
-                return null;
+                return Items.FirstOrDefault(x => x.NewContact == contact);
             }
             set
             {
-                for (int i = 0; i < List.Count; i++)
+                for (int i = 0; i < Items.Count; i++)
                 {
-                    if (((ImportRule)List[i]).NewContact == contact)
+                    if (Items[i].NewContact == contact)
                     {
-                        List[i] = value;
+                        Items[i] = value;
                         return;
                     }
                 }
             }
         }
 
-        public int Add(ImportRule value)
-        {
-            return (List.Add(value));
-        }
-
-        public int IndexOf(ImportRule value)
-        {
-            return (List.IndexOf(value));
-        }
-
-        public void Insert(int index, ImportRule value)
-        {
-            List.Insert(index, value);
-        }
-
-        public void Remove(ImportRule value)
-        {
-            List.Remove(value);
-        }
-
-        public bool Contains(ImportRule value)
-        {
-            return (List.Contains(value));
-        }
-
         public void CopyFrom(ImportRuleCollection values)
         {
             Clear();
+
             for (int i = 0; i < values.Count; i++)
             {
                 Add(new ImportRule(values[i]));
@@ -90,33 +64,35 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            if (!(obj is ImportRuleCollection))
+            ImportRuleCollection records = obj as ImportRuleCollection;
+            return Equals(records);
+        }
+
+        private bool Equals(ImportRuleCollection records)
+        {
+            if (records == null)
                 return false;
-
-            ImportRuleCollection records = (ImportRuleCollection)obj;
-
-            bool b1 = true;
-            bool b2;
 
             for (int i = 0; i < records.Count; i++)
             {
-                b2 = false;
-                for (int j = 0; j < List.Count; j++)
+                bool b2 = false;
+
+                for (int j = 0; j < Items.Count; j++)
                 {
-                    if (records[i].Equals(List[j]))
+                    if (records[i].Equals(Items[j]))
                     {
                         b2 = true;
                         break;
                     }
                 }
-                if (!b2)
-                {
-                    b1 = false;
-                    break;
-                }
+
+                if (b2)
+                    continue;
+
+                return false;
             }
 
-            return b1;
+            return true;
         }
     }
 }

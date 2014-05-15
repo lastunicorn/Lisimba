@@ -33,9 +33,9 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddContact));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
-            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,12 +53,12 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOkay
             // 
             this.buttonOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOkay.AutoSize = true;
-            this.buttonOkay.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOkay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.buttonOkay.Location = new System.Drawing.Point(376, 4);
             this.buttonOkay.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
@@ -68,22 +68,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay.Text = "Okay";
             this.buttonOkay.UseVisualStyleBackColor = true;
             this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
-            // 
-            // contactView1
-            // 
-            this.contactView1.Birthday = "";
-            this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactView1.FirstName = "";
-            this.contactView1.ForeColor = System.Drawing.Color.Black;
-            this.contactView1.LastName = "";
-            this.contactView1.Location = new System.Drawing.Point(8, 8);
-            this.contactView1.MiddleName = "";
-            this.contactView1.MinimumSize = new System.Drawing.Size(496, 384);
-            this.contactView1.Name = "contactView1";
-            this.contactView1.Nickname = "";
-            this.contactView1.Notes = "";
-            this.contactView1.Size = new System.Drawing.Size(526, 398);
-            this.contactView1.TabIndex = 0;
             // 
             // flowLayoutPanel1
             // 
@@ -109,10 +93,29 @@ namespace DustInTheWind.Lisimba.Forms
             this.panel1.Size = new System.Drawing.Size(542, 410);
             this.panel1.TabIndex = 4;
             // 
+            // contactView1
+            // 
+            this.contactView1.BackColor = System.Drawing.SystemColors.Control;
+            this.contactView1.Birthday = "";
+            this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactView1.FirstName = "";
+            this.contactView1.ForeColor = System.Drawing.Color.Black;
+            this.contactView1.LastName = "";
+            this.contactView1.Location = new System.Drawing.Point(8, 8);
+            this.contactView1.MiddleName = "";
+            this.contactView1.MinimumSize = new System.Drawing.Size(496, 384);
+            this.contactView1.Name = "contactView1";
+            this.contactView1.Nickname = "";
+            this.contactView1.Notes = "";
+            this.contactView1.Size = new System.Drawing.Size(526, 398);
+            this.contactView1.TabIndex = 0;
+            // 
             // FormAddContact
             // 
+            this.AcceptButton = this.buttonOkay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(542, 445);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -122,8 +125,9 @@ namespace DustInTheWind.Lisimba.Forms
             this.MinimizeBox = false;
             this.Name = "FormAddContact";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Contact";
+            this.Load += new System.EventHandler(this.FormAddContact_Load);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);

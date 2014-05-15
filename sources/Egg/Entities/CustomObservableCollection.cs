@@ -18,7 +18,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
@@ -65,7 +64,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 base.OnCollectionChanged(e);
         }
 
-        public void AddRange(IEnumerable<T> items)
+        public virtual void AddRange(IEnumerable<T> items)
         {
             if (items == null)
                 throw new ArgumentNullException("items");

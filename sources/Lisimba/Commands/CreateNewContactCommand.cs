@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -24,19 +24,25 @@ namespace DustInTheWind.Lisimba.Commands
     class CreateNewContactCommand : CommandBase<object>
     {
         private readonly CurrentData currentData;
+        private UIService uiService;
 
         public override string ShortDescription
         {
             get { return "Create a new contact."; }
         }
 
-        public CreateNewContactCommand(CurrentData currentData)
+        public CreateNewContactCommand(CurrentData currentData, UIService uiService)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
 
+            if (uiService == null)
+                throw new ArgumentNullException("uiService");
+
             this.currentData = currentData;
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+
+            this.uiService = uiService;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
@@ -46,10 +52,9 @@ namespace DustInTheWind.Lisimba.Commands
 
         protected override void DoExecute(object parameter)
         {
-            FormAddContact formAddContact = new FormAddContact(currentData);
-
-            if (formAddContact.ShowDialog() == DialogResult.OK)
-                currentData.AddressBook.Contacts.Add(formAddContact.Contact);
+            AddContactPresenter addContactPresenter = new AddContactPresenter(currentData, uiService);
+            addContactPresenter.View = new FormAddContact();
+            addContactPresenter.Show();
         }
     }
 }

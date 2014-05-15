@@ -51,7 +51,7 @@ namespace DustInTheWind.Lisimba.Forms
                     ? "<Address book is not saved yet.>"
                     : Path.GetFullPath(addressBook.FileName);
 
-                textBoxContactsCount.Text = addressBook.Count.ToString();
+                textBoxContactsCount.Text = addressBook.Contacts.Count.ToString();
             }
         }
 

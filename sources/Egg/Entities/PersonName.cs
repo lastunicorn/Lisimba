@@ -185,7 +185,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         public override bool Equals(object obj)
         {
             PersonName personName = obj as PersonName;
+            return Equals(personName);
+        }
 
+        public bool Equals(PersonName personName)
+        {
             if (personName == null)
                 return false;
 
@@ -249,5 +253,13 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         //        nickname = original.nickname
         //    };
         //}
+
+        public static bool Equals(PersonName p1, PersonName p2)
+        {
+            if (p1 == null)
+                return p2 == null;
+
+            return p1.Equals(p2);
+        }
     }
 }
