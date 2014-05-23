@@ -16,10 +16,6 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Commands;
-using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Services;
-using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba
 {
@@ -33,44 +29,13 @@ namespace DustInTheWind.Lisimba
         {
             try
             {
-                UnityContainer unityContainer = CreateUnityContainer();
-
-                ProgramArguments programArguments = new ProgramArguments(args);
-                unityContainer.RegisterInstance(programArguments, new ContainerControlledLifetimeManager());
-
-                unityContainer.Resolve<LisimbaApplication>().Start();
-
-                Application.EnableVisualStyles();
-                Application.SetCompatibleTextRenderingDefault(false);
-
-                FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
-                unityContainer.Resolve<UiService>().MainWindow = formLisimba;
-
-                Application.Run(formLisimba);
+                Bootstrapper bootstrapper = new Bootstrapper();
+                bootstrapper.Run(args);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private static UnityContainer CreateUnityContainer()
-        {
-            UnityContainer unityContainer = new UnityContainer();
-
-            unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<StatusService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<RecentFilesService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<CurrentData>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<UiService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
-
-            unityContainer.RegisterType<OpenAddressBookCommand>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ImportYahooCsvCommand>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ExportYahooCsvCommand>(new ContainerControlledLifetimeManager());
-
-            return unityContainer;
         }
     }
 }

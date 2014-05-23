@@ -25,7 +25,8 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public SubItemClickedEventArgs(ToolStripMenuItem menuItem)
         {
-            if (menuItem == null) throw new ArgumentNullException("menuItem");
+            if (menuItem == null)
+                throw new ArgumentNullException("menuItem");
 
             MenuItem = menuItem;
         }

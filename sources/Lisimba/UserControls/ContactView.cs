@@ -68,6 +68,11 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode != treeView1.GetNodeAt(e.Location))
                 return;
 
+            if (selectedNode.Tag is string)
+            {
+                // todo: display the corresponding edit form to add a new item.
+            }
+
             if (selectedNode.Tag is Phone)
             {
                 formPhoneEdit.Phone = (Phone)selectedNode.Tag;

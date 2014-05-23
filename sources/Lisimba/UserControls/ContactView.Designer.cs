@@ -29,12 +29,12 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactView));
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Phones", 4, 4);
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Emails", 3, 3);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("WebSites", 6, 6);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Addresses", 2, 2);
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Dates", 0, 0);
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("MessengerIds", 5, 5);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Phones", 4, 4);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Emails", 3, 3);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("WebSites", 6, 6);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Addresses", 2, 2);
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dates", 0, 0);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("MessengerIds", 5, 5);
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxMiddleName = new System.Windows.Forms.TextBox();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -245,37 +245,43 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(4, 17);
             this.treeView1.Name = "treeView1";
-            treeNode7.ImageIndex = 4;
-            treeNode7.Name = "Phones";
-            treeNode7.SelectedImageIndex = 4;
-            treeNode7.Text = "Phones";
-            treeNode8.ImageIndex = 3;
-            treeNode8.Name = "Emails";
-            treeNode8.SelectedImageIndex = 3;
-            treeNode8.Text = "Emails";
-            treeNode9.ImageIndex = 6;
-            treeNode9.Name = "WebSites";
-            treeNode9.SelectedImageIndex = 6;
-            treeNode9.Text = "WebSites";
-            treeNode10.ImageIndex = 2;
-            treeNode10.Name = "Addresses";
-            treeNode10.SelectedImageIndex = 2;
-            treeNode10.Text = "Addresses";
-            treeNode11.ImageIndex = 0;
-            treeNode11.Name = "Dates";
-            treeNode11.SelectedImageIndex = 0;
-            treeNode11.Text = "Dates";
-            treeNode12.ImageIndex = 5;
-            treeNode12.Name = "MessengerIds";
-            treeNode12.SelectedImageIndex = 5;
-            treeNode12.Text = "MessengerIds";
+            treeNode1.ImageIndex = 4;
+            treeNode1.Name = "Phones";
+            treeNode1.SelectedImageIndex = 4;
+            treeNode1.Tag = "Phones";
+            treeNode1.Text = "Phones";
+            treeNode2.ImageIndex = 3;
+            treeNode2.Name = "Emails";
+            treeNode2.SelectedImageIndex = 3;
+            treeNode2.Tag = "Emails";
+            treeNode2.Text = "Emails";
+            treeNode3.ImageIndex = 6;
+            treeNode3.Name = "WebSites";
+            treeNode3.SelectedImageIndex = 6;
+            treeNode3.Tag = "WebSites";
+            treeNode3.Text = "WebSites";
+            treeNode4.ImageIndex = 2;
+            treeNode4.Name = "Addresses";
+            treeNode4.SelectedImageIndex = 2;
+            treeNode4.Tag = "Addresses";
+            treeNode4.Text = "Addresses";
+            treeNode5.ImageIndex = 0;
+            treeNode5.Name = "Dates";
+            treeNode5.SelectedImageIndex = 0;
+            treeNode5.Tag = "Dates";
+            treeNode5.Text = "Dates";
+            treeNode6.ImageIndex = 5;
+            treeNode6.Name = "MessengerIds";
+            treeNode6.SelectedImageIndex = 5;
+            treeNode6.Tag = "MessengerIds";
+            treeNode6.Text = "MessengerIds";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;

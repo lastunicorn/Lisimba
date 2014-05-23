@@ -219,6 +219,8 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             messengerIds.CollectionChanged += (sender, e) => OnChanged();
             messengerIds.ItemChanged += (sender, e) => OnChanged();
+
+            birthday.Changed += (sender, e) => OnChanged();
         }
 
         private void HandleNameChanged(object sender, EventArgs e)

@@ -20,7 +20,7 @@ namespace DustInTheWind.Lisimba
     {
         public string FileName { get; private set; }
 
-        public ProgramArguments(string[] args)
+        public void Initialize(string[] args)
         {
             CommandLineArguments commandLineArguments = new CommandLineArguments(args);
 

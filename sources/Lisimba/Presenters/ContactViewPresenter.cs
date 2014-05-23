@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 
@@ -47,34 +46,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 RefreshData();
             }
         }
-
-        #region Event NameChanged
-
-        public event EventHandler<NameChangedEventArgs> NameChanged;
-
-        protected virtual void OnNameChanged(NameChangedEventArgs e)
-        {
-            EventHandler<NameChangedEventArgs> handler = NameChanged;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        #endregion Event NameChanged
-
-        #region Event ContactChanged
-
-        public event EventHandler ContactChanged;
-
-        protected virtual void OnContactChanged()
-        {
-            EventHandler handler = ContactChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        #endregion Event ContactChanged
 
         public ContactViewPresenter(ZodiacService zodiacService)
         {
@@ -155,8 +126,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 return;
 
             contact.Name.FirstName = View.FirstName;
-            OnNameChanged(new NameChangedEventArgs(NameSection.FirstName));
-            OnContactChanged();
         }
 
         public void MiddleNameWasChanged()
@@ -165,8 +134,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 return;
 
             contact.Name.MiddleName = View.MiddleName;
-            OnNameChanged(new NameChangedEventArgs(NameSection.MiddleName));
-            OnContactChanged();
         }
 
         public void LastNameWasChanged()
@@ -175,8 +142,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 return;
 
             contact.Name.LastName = View.LastName;
-            OnNameChanged(new NameChangedEventArgs(NameSection.LastName));
-            OnContactChanged();
         }
 
         public void NicknameWasChanged()
@@ -185,8 +150,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 return;
 
             contact.Name.Nickname = View.Nickname;
-            OnNameChanged(new NameChangedEventArgs(NameSection.Nickname));
-            OnContactChanged();
         }
 
         public void NotesWasChanged()
@@ -195,7 +158,6 @@ namespace DustInTheWind.Lisimba.Presenters
                 return;
 
             contact.Notes = View.Notes;
-            OnContactChanged();
         }
 
         public void BirthdayEditWasRequested()

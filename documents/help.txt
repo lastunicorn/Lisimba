@@ -1,9 +1,0 @@
-Lisimba 1.0
------------
-
-This program started as a verry small application that was supossed to a yahoo csv file containing an address book and arrange the contacts after the birth day. And that because i was frecuentlly forgeting who's birthday is next.
-
-Known bugs:
-
-1) When resizing the window, the last item of the list is displayed lower then the bottom of the control and is hard to see and click it.
-Work around: Type a text in the filter text box and then delete it. The items in the list will be displayed correctly.
