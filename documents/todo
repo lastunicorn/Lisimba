@@ -11,6 +11,10 @@ as a user i want to have icons for the Add Contact, Delete Contact and Propertie
 as a user, when i import contacts and the opened address book already contains a similar contact, i want to be asked to overwrite, merge or skip each contact. (10)
 	- create a wizard for import operation.
 
+as i user i want to be notified at application's start of the contacts whose birthday is today.
+
+as a user i want the application to start when os starts and remain minimized as an icon in the tray, next to the clock.
+	
 as a user i want to be able to open an address book from a url.
 
 

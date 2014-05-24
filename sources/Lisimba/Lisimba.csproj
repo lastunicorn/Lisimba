@@ -172,6 +172,7 @@
     <Compile Include="UserControls\CommandedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="UserControls\ContactsToTreeViewBinder.cs" />
     <Compile Include="UserControls\CustomTreeView.cs">
       <SubType>Component</SubType>
     </Compile>

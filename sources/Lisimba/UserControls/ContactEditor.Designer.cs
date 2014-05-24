@@ -29,6 +29,12 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Phones");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Emails");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Web Sites");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Addresses");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Dates");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Messenger Ids");
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxMiddleName = new System.Windows.Forms.TextBox();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -49,10 +55,10 @@ namespace DustInTheWind.Lisimba.UserControls
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customTreeView1 = new DustInTheWind.Lisimba.UserControls.CustomTreeView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            this.customTreeView1 = new DustInTheWind.Lisimba.UserControls.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +76,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Black;
@@ -106,6 +113,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Black;
@@ -118,6 +126,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
@@ -148,6 +157,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Black;
@@ -172,6 +182,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Black;
@@ -184,10 +195,11 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(3, 98);
+            this.label6.Location = new System.Drawing.Point(3, 120);
             this.label6.Margin = new System.Windows.Forms.Padding(3);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(77, 13);
@@ -328,6 +340,54 @@ namespace DustInTheWind.Lisimba.UserControls
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
+            // customTreeView1
+            // 
+            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
+            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.customTreeView1.FullRowSelect = true;
+            this.customTreeView1.ImageIndex = 0;
+            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
+            this.customTreeView1.Name = "customTreeView1";
+            treeNode7.ImageKey = "phone";
+            treeNode7.Name = "Phones";
+            treeNode7.SelectedImageKey = "phone";
+            treeNode7.Text = "Phones";
+            treeNode8.ImageKey = "e-mail";
+            treeNode8.Name = "Emails";
+            treeNode8.SelectedImageKey = "e-mail";
+            treeNode8.Text = "Emails";
+            treeNode9.ImageKey = "website";
+            treeNode9.Name = "Web Sites";
+            treeNode9.SelectedImageKey = "website";
+            treeNode9.Text = "Web Sites";
+            treeNode10.ImageKey = "address";
+            treeNode10.Name = "Addresses";
+            treeNode10.SelectedImageKey = "address";
+            treeNode10.Text = "Addresses";
+            treeNode11.ImageKey = "date";
+            treeNode11.Name = "Dates";
+            treeNode11.SelectedImageKey = "date";
+            treeNode11.Text = "Dates";
+            treeNode12.ImageKey = "mesengerid";
+            treeNode12.Name = "Messenger Ids";
+            treeNode12.SelectedImageKey = "mesengerid";
+            treeNode12.Text = "Messenger Ids";
+            this.customTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12});
+            this.customTreeView1.SelectedImageIndex = 0;
+            this.customTreeView1.ShowLines = false;
+            this.customTreeView1.ShowPlusMinus = false;
+            this.customTreeView1.ShowRootLines = false;
+            this.customTreeView1.Size = new System.Drawing.Size(250, 191);
+            this.customTreeView1.TabIndex = 12;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -363,10 +423,8 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             this.textBoxNotes.AcceptsReturn = true;
             this.textBoxNotes.AcceptsTab = true;
-            this.textBoxNotes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxNotes.BackColor = System.Drawing.Color.Ivory;
+            this.textBoxNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxNotes.Location = new System.Drawing.Point(3, 23);
             this.textBoxNotes.Multiline = true;
             this.textBoxNotes.Name = "textBoxNotes";
@@ -375,23 +433,6 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
             this.textBoxNotes.TextChanged += new System.EventHandler(this.textBoxNotes_TextChanged);
-            // 
-            // customTreeView1
-            // 
-            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.customTreeView1.FullRowSelect = true;
-            this.customTreeView1.ImageIndex = 0;
-            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
-            this.customTreeView1.Name = "customTreeView1";
-            this.customTreeView1.SelectedImageIndex = 0;
-            this.customTreeView1.ShowLines = false;
-            this.customTreeView1.ShowPlusMinus = false;
-            this.customTreeView1.ShowRootLines = false;
-            this.customTreeView1.Size = new System.Drawing.Size(250, 191);
-            this.customTreeView1.TabIndex = 12;
             // 
             // ContactEditor
             // 
