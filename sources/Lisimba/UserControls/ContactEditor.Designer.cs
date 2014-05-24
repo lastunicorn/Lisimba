@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.UserControls
 {
-    partial class ContactView
+    partial class ContactEditor
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,13 +28,7 @@ namespace DustInTheWind.Lisimba.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactView));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Phones", 4, 4);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Emails", 3, 3);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("WebSites", 6, 6);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Addresses", 2, 2);
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dates", 0, 0);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("MessengerIds", 5, 5);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxMiddleName = new System.Windows.Forms.TextBox();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -47,19 +41,18 @@ namespace DustInTheWind.Lisimba.UserControls
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.labelZodiacSign = new System.Windows.Forms.Label();
-            this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBirthday = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
+            this.customTreeView1 = new DustInTheWind.Lisimba.UserControls.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,6 +63,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.splitContainer2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
@@ -150,13 +144,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.White;
-            this.imageList1.Images.SetKeyName(0, "date.gif");
-            this.imageList1.Images.SetKeyName(1, "notes.gif");
-            this.imageList1.Images.SetKeyName(2, "home.gif");
-            this.imageList1.Images.SetKeyName(3, "mail.gif");
-            this.imageList1.Images.SetKeyName(4, "phone.gif");
-            this.imageList1.Images.SetKeyName(5, "mesengerid.gif");
-            this.imageList1.Images.SetKeyName(6, "webIcon.png");
+            this.imageList1.Images.SetKeyName(0, "notes.gif");
             // 
             // label5
             // 
@@ -217,78 +205,12 @@ namespace DustInTheWind.Lisimba.UserControls
             this.labelZodiacSign.Text = "ZodiacSign";
             this.labelZodiacSign.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBoxZodiacSign
-            // 
-            this.pictureBoxZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBoxZodiacSign.Location = new System.Drawing.Point(14, 16);
-            this.pictureBoxZodiacSign.Name = "pictureBoxZodiacSign";
-            this.pictureBoxZodiacSign.Size = new System.Drawing.Size(39, 39);
-            this.pictureBoxZodiacSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxZodiacSign.TabIndex = 10;
-            this.pictureBoxZodiacSign.TabStop = false;
-            // 
             // toolTip1
             // 
             this.toolTip1.AutomaticDelay = 0;
             this.toolTip1.AutoPopDelay = 10000;
             this.toolTip1.InitialDelay = 0;
             this.toolTip1.ReshowDelay = 0;
-            // 
-            // treeView1
-            // 
-            this.treeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.treeView1.FullRowSelect = true;
-            this.treeView1.ImageIndex = 0;
-            this.treeView1.ImageList = this.imageList1;
-            this.treeView1.Location = new System.Drawing.Point(4, 17);
-            this.treeView1.Name = "treeView1";
-            treeNode1.ImageIndex = 4;
-            treeNode1.Name = "Phones";
-            treeNode1.SelectedImageIndex = 4;
-            treeNode1.Tag = "Phones";
-            treeNode1.Text = "Phones";
-            treeNode2.ImageIndex = 3;
-            treeNode2.Name = "Emails";
-            treeNode2.SelectedImageIndex = 3;
-            treeNode2.Tag = "Emails";
-            treeNode2.Text = "Emails";
-            treeNode3.ImageIndex = 6;
-            treeNode3.Name = "WebSites";
-            treeNode3.SelectedImageIndex = 6;
-            treeNode3.Tag = "WebSites";
-            treeNode3.Text = "WebSites";
-            treeNode4.ImageIndex = 2;
-            treeNode4.Name = "Addresses";
-            treeNode4.SelectedImageIndex = 2;
-            treeNode4.Tag = "Addresses";
-            treeNode4.Text = "Addresses";
-            treeNode5.ImageIndex = 0;
-            treeNode5.Name = "Dates";
-            treeNode5.SelectedImageIndex = 0;
-            treeNode5.Tag = "Dates";
-            treeNode5.Text = "Dates";
-            treeNode6.ImageIndex = 5;
-            treeNode6.Name = "MessengerIds";
-            treeNode6.SelectedImageIndex = 5;
-            treeNode6.Tag = "MessengerIds";
-            treeNode6.Text = "MessengerIds";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
-            this.treeView1.SelectedImageIndex = 0;
-            this.treeView1.ShowLines = false;
-            this.treeView1.ShowPlusMinus = false;
-            this.treeView1.ShowRootLines = false;
-            this.treeView1.Size = new System.Drawing.Size(250, 191);
-            this.treeView1.TabIndex = 12;
-            this.treeView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
             // 
             // splitContainer1
             // 
@@ -385,9 +307,19 @@ namespace DustInTheWind.Lisimba.UserControls
             this.flowLayoutPanel1.TabIndex = 14;
             this.flowLayoutPanel1.WrapContents = false;
             // 
+            // pictureBoxZodiacSign
+            // 
+            this.pictureBoxZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBoxZodiacSign.Location = new System.Drawing.Point(14, 16);
+            this.pictureBoxZodiacSign.Name = "pictureBoxZodiacSign";
+            this.pictureBoxZodiacSign.Size = new System.Drawing.Size(39, 39);
+            this.pictureBoxZodiacSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxZodiacSign.TabIndex = 10;
+            this.pictureBoxZodiacSign.TabStop = false;
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.treeView1);
+            this.groupBox1.Controls.Add(this.customTreeView1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -416,7 +348,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.ImageIndex = 1;
+            this.label4.ImageIndex = 0;
             this.label4.ImageList = this.imageList1;
             this.label4.Location = new System.Drawing.Point(3, 3);
             this.label4.Margin = new System.Windows.Forms.Padding(3);
@@ -444,14 +376,30 @@ namespace DustInTheWind.Lisimba.UserControls
             this.textBoxNotes.WordWrap = false;
             this.textBoxNotes.TextChanged += new System.EventHandler(this.textBoxNotes_TextChanged);
             // 
-            // ContactView
+            // customTreeView1
+            // 
+            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
+            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.customTreeView1.FullRowSelect = true;
+            this.customTreeView1.ImageIndex = 0;
+            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
+            this.customTreeView1.Name = "customTreeView1";
+            this.customTreeView1.SelectedImageIndex = 0;
+            this.customTreeView1.ShowLines = false;
+            this.customTreeView1.ShowPlusMinus = false;
+            this.customTreeView1.ShowRootLines = false;
+            this.customTreeView1.Size = new System.Drawing.Size(250, 191);
+            this.customTreeView1.TabIndex = 12;
+            // 
+            // ContactEditor
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.splitContainer1);
             this.ForeColor = System.Drawing.Color.Black;
-            this.Name = "ContactView";
+            this.Name = "ContactEditor";
             this.Size = new System.Drawing.Size(514, 375);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -464,6 +412,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
@@ -487,7 +436,6 @@ namespace DustInTheWind.Lisimba.UserControls
         private System.Windows.Forms.PictureBox pictureBoxZodiacSign;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelZodiacSign;
-        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label4;
@@ -496,5 +444,6 @@ namespace DustInTheWind.Lisimba.UserControls
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private CustomTreeView customTreeView1;
     }
 }

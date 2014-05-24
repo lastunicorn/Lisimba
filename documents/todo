@@ -1,9 +1,8 @@
 Lisimba
 =======
 
-bug: when birthday is changed, it is not updated in ui.
-bug: when clickein the x button the application does not close from the first time.
 bug: when updating the current contact, the list of contacts should refresh itself without redisplaying all the contacts.
+bug: when clicking the x button the application does not close from the first time.
 
 as a user, when i double click the Phones, Emails, WebSites, Addresses, Dates or MessengerIds tree view items, i want a new corresponding item to be added in the list.
 

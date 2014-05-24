@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Presenters
         private Contact contact;
         private bool isInitializationMode;
 
-        public IContactView View { get; set; }
+        public IContactEditorView View { get; set; }
 
         public Contact Contact
         {

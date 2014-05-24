@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
-            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
+            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactEditor();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -161,7 +161,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private ContactView contactView1;
+        private ContactEditor contactView1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private ContactListView contactListView1;
         private System.Windows.Forms.Panel panel1;

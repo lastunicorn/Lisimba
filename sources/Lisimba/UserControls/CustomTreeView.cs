@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2014 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,29 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Presenters;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    /// <summary>
-    /// Control to display and edit a contact.
-    /// </summary>
-    partial class ContactView : UserControl, IContactView
+    partial class CustomTreeView : TreeView
     {
-        private readonly ContactViewPresenter presenter;
-
-        public ContactViewPresenter Presenter
-        {
-            get { return presenter; }
-        }
-
-        readonly FormDateEdit formBirthdayEdit;
+        private readonly TreeNode treeNodePhones;
+        private readonly TreeNode treeNodeEmails;
+        private readonly TreeNode treeNodeWebSites;
+        private readonly TreeNode treeNodeAddresses;
+        private readonly TreeNode treeNodeDates;
+        private readonly TreeNode treeNodeMessengerIds;
 
         readonly FormPhoneEdit formPhoneEdit;
         readonly FormEmailEdit formEmailEdit;
@@ -44,29 +35,44 @@ namespace DustInTheWind.Lisimba.UserControls
         readonly FormAddressEdit formAddressEdit;
         readonly FormDateEdit formDateEdit;
 
-        public ContactView()
+        public CustomTreeView()
         {
             InitializeComponent();
 
-            presenter = new ContactViewPresenter(new ZodiacService()) { View = this };
-
-            formBirthdayEdit = new FormDateEdit();
             formPhoneEdit = new FormPhoneEdit();
             formEmailEdit = new FormEmailEdit();
             formWebSiteEdit = new FormWebSiteEdit();
             formAddressEdit = new FormAddressEdit();
             formDateEdit = new FormDateEdit();
+
+            treeNodePhones = Nodes["Phones"];
+            treeNodeEmails = Nodes["Emails"];
+            treeNodeWebSites = Nodes["Web Sites"];
+            treeNodeAddresses = Nodes["Addresses"];
+            treeNodeDates = Nodes["Dates"];
+            treeNodeMessengerIds = Nodes["Messenger Ids"];
         }
 
         private void treeView1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            TreeNode selectedNode = treeView1.SelectedNode;
+            TreeNode selectedNode = SelectedNode;
 
-            if (selectedNode == null || selectedNode.Tag == null)
+            if (selectedNode == null)
                 return;
 
-            if (selectedNode != treeView1.GetNodeAt(e.Location))
+            if (selectedNode != GetNodeAt(e.Location))
                 return;
+
+            //if (selectedNode == treeNodePhones)
+            //{
+            //    Phone phone = new Phone("<number>", "<description>");
+            //    TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
+            //    phoneNode.Tag = phone;
+            //    treeNodePhones.Nodes.Add(phoneNode);
+            //    phoneNode.ImageIndex = -2;
+            //    phoneNode.SelectedImageIndex = -2;
+            //    selectedNode = phoneNode;
+            //}
 
             if (selectedNode.Tag is string)
             {
@@ -76,7 +82,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode.Tag is Phone)
             {
                 formPhoneEdit.Phone = (Phone)selectedNode.Tag;
-                formPhoneEdit.Location = treeView1.PointToScreen(e.Location);
+                formPhoneEdit.Location = PointToScreen(e.Location);
                 formPhoneEdit.Show();
                 formPhoneEdit.Focus();
                 return;
@@ -85,7 +91,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode.Tag is Email)
             {
                 formEmailEdit.Email = (Email)selectedNode.Tag;
-                formEmailEdit.Location = treeView1.PointToScreen(e.Location);
+                formEmailEdit.Location = PointToScreen(e.Location);
                 formEmailEdit.Show();
                 formEmailEdit.Focus();
                 return;
@@ -94,7 +100,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode.Tag is WebSite)
             {
                 formWebSiteEdit.WebSite = (WebSite)selectedNode.Tag;
-                formWebSiteEdit.Location = treeView1.PointToScreen(e.Location);
+                formWebSiteEdit.Location = PointToScreen(e.Location);
                 formWebSiteEdit.Show();
                 formWebSiteEdit.Focus();
                 return;
@@ -103,7 +109,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode.Tag is Address)
             {
                 formAddressEdit.Address = (Address)selectedNode.Tag;
-                formAddressEdit.Location = treeView1.PointToScreen(e.Location);
+                formAddressEdit.Location = PointToScreen(e.Location);
                 formAddressEdit.Show();
                 formAddressEdit.Focus();
                 return;
@@ -112,7 +118,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (selectedNode.Tag is Date)
             {
                 formDateEdit.Date = (Date)selectedNode.Tag;
-                formDateEdit.Location = treeView1.PointToScreen(e.Location);
+                formDateEdit.Location = PointToScreen(e.Location);
                 formDateEdit.Show();
                 formDateEdit.Focus();
                 return;
@@ -122,90 +128,11 @@ namespace DustInTheWind.Lisimba.UserControls
                 return;
         }
 
-        // -------------------------------------------------------------------
-
-        private void textBoxFirstName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.FirstNameWasChanged();
-        }
-
-        private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.MiddleNameWasChanged();
-        }
-
-        private void textBoxLastName_TextChanged(object sender, EventArgs e)
-        {
-            presenter.LastNameWasChanged();
-        }
-
-        private void textBoxNickname_TextChanged(object sender, EventArgs e)
-        {
-            presenter.NicknameWasChanged();
-        }
-
-        private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            presenter.BirthdayEditWasRequested();
-        }
-
-        private void textBoxNotes_TextChanged(object sender, EventArgs e)
-        {
-            presenter.NotesWasChanged();
-        }
-
-        public string FirstName
-        {
-            get { return textBoxFirstName.Text; }
-            set { textBoxFirstName.Text = value; }
-        }
-
-        public string MiddleName
-        {
-            get { return textBoxMiddleName.Text; }
-            set { textBoxMiddleName.Text = value; }
-        }
-
-        public string LastName
-        {
-            get { return textBoxLastName.Text; }
-            set { textBoxLastName.Text = value; }
-        }
-
-        public string Nickname
-        {
-            get { return textBoxNickname.Text; }
-            set { textBoxNickname.Text = value; }
-        }
-
-        public string Birthday
-        {
-            get { return labelBirthday.Text; }
-            set { labelBirthday.Text = value; }
-        }
-
-        public Image ZodiacSignImage
-        {
-            set { pictureBoxZodiacSign.Image = value; }
-        }
-
-        public string ZodiacSignText
-        {
-            set { labelZodiacSign.Text = value; }
-        }
-
-        public string Notes
-        {
-            get { return textBoxNotes.Text; }
-            set { textBoxNotes.Text = value; }
-        }
-
         public PhoneCollection Phones
         {
             set
             {
-                TreeNode phonesNode = treeView1.Nodes["Phones"];
-                phonesNode.Nodes.Clear();
+                treeNodePhones.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -214,12 +141,12 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
                     phoneNode.Tag = phone;
-                    phonesNode.Nodes.Add(phoneNode);
+                    treeNodePhones.Nodes.Add(phoneNode);
                     phoneNode.ImageIndex = -2;
                     phoneNode.SelectedImageIndex = -2;
                 }
 
-                phonesNode.Expand();
+                treeNodePhones.Expand();
             }
         }
 
@@ -227,8 +154,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                TreeNode emailsNode = treeView1.Nodes["Emails"];
-                emailsNode.Nodes.Clear();
+                treeNodeEmails.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -237,12 +163,12 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
                     emailNode.Tag = email;
-                    emailsNode.Nodes.Add(emailNode);
+                    treeNodeEmails.Nodes.Add(emailNode);
                     emailNode.ImageIndex = -2;
                     emailNode.SelectedImageIndex = -2;
                 }
 
-                emailsNode.Expand();
+                treeNodeEmails.Expand();
             }
         }
 
@@ -250,8 +176,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                TreeNode webSitesNode = treeView1.Nodes["WebSites"];
-                webSitesNode.Nodes.Clear();
+                treeNodeWebSites.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -260,12 +185,12 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
                     webSiteNode.Tag = webSite;
-                    webSitesNode.Nodes.Add(webSiteNode);
+                    treeNodeWebSites.Nodes.Add(webSiteNode);
                     webSiteNode.ImageIndex = -2;
                     webSiteNode.SelectedImageIndex = -2;
                 }
 
-                webSitesNode.Expand();
+                treeNodeWebSites.Expand();
             }
         }
 
@@ -273,8 +198,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                TreeNode addressesNode = treeView1.Nodes["Addresses"];
-                addressesNode.Nodes.Clear();
+                treeNodeAddresses.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -283,12 +207,12 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
                     addressNode.Tag = address;
-                    addressesNode.Nodes.Add(addressNode);
+                    treeNodeAddresses.Nodes.Add(addressNode);
                     addressNode.ImageIndex = -2;
                     addressNode.SelectedImageIndex = -2;
                 }
 
-                addressesNode.Expand();
+                treeNodeAddresses.Expand();
             }
         }
 
@@ -296,8 +220,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                TreeNode datesNode = treeView1.Nodes["Dates"];
-                datesNode.Nodes.Clear();
+                treeNodeDates.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -306,12 +229,12 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
                     dateNode.Tag = date;
-                    datesNode.Nodes.Add(dateNode);
+                    treeNodeDates.Nodes.Add(dateNode);
                     dateNode.ImageIndex = -2;
                     dateNode.SelectedImageIndex = -2;
                 }
 
-                datesNode.Expand();
+                treeNodeDates.Expand();
             }
         }
 
@@ -319,8 +242,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                TreeNode messengerIdsNode = treeView1.Nodes["MessengerIds"];
-                messengerIdsNode.Nodes.Clear();
+                treeNodeMessengerIds.Nodes.Clear();
 
                 if (value == null)
                     return;
@@ -329,32 +251,13 @@ namespace DustInTheWind.Lisimba.UserControls
                 {
                     TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
                     messengerIdNode.Tag = messengerId;
-                    messengerIdsNode.Nodes.Add(messengerIdNode);
+                    treeNodeMessengerIds.Nodes.Add(messengerIdNode);
                     messengerIdNode.ImageIndex = -2;
                     messengerIdNode.SelectedImageIndex = -2;
                 }
 
-                messengerIdsNode.Expand();
+                treeNodeMessengerIds.Expand();
             }
-        }
-
-        public void EditBirthday(Date birthday)
-        {
-            // client position 
-            int clientX = labelBirthday.Location.X;
-            int clientY = labelBirthday.Location.Y + labelBirthday.Height;
-            Point clientPoint = new Point(clientX, clientY);
-
-            // screen position
-            Point screenPoint = PointToScreen(clientPoint);
-
-            // initialize form
-            formBirthdayEdit.Location = screenPoint;
-            formBirthdayEdit.Date = birthday;
-
-            // show form
-            formBirthdayEdit.Show();
-            formBirthdayEdit.Focus();
         }
     }
 }

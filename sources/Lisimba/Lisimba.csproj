@@ -169,10 +169,16 @@
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenters\ContactViewPresenter.cs" />
-    <Compile Include="UserControls\CustomMenuItem.cs">
+    <Compile Include="UserControls\CommandedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControls\IContactView.cs" />
+    <Compile Include="UserControls\CustomTreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\CustomTreeView.Designer.cs">
+      <DependentUpon>CustomTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\IContactEditorView.cs" />
     <Compile Include="UserControls\LisimbaMainMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -232,11 +238,11 @@
     <Compile Include="Forms\FormLisimba.Designer.cs">
       <DependentUpon>FormLisimba.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ContactView.cs">
+    <Compile Include="UserControls\ContactEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ContactView.Designer.cs">
-      <DependentUpon>ContactView.cs</DependentUpon>
+    <Compile Include="UserControls\ContactEditor.Designer.cs">
+      <DependentUpon>ContactEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MessengerIdListView.cs">
       <SubType>UserControl</SubType>
@@ -285,6 +291,9 @@
       <SubType>Designer</SubType>
       <DependentUpon>ContactListView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\CustomTreeView.resx">
+      <DependentUpon>CustomTreeView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LisimbaMainMenuStrip.resx">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
@@ -320,8 +329,8 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormLisimba.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ContactView.resx">
-      <DependentUpon>ContactView.cs</DependentUpon>
+    <EmbeddedResource Include="UserControls\ContactEditor.resx">
+      <DependentUpon>ContactEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MessengerIdListView.resx">
