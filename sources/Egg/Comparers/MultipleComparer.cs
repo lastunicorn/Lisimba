@@ -16,27 +16,36 @@
 
 using System;
 using System.Collections;
-using DustInTheWind.Lisimba.Egg.Entities;
+using System.Collections.Generic;
 
 namespace DustInTheWind.Lisimba.Egg.Comparers
 {
-    /// <summary>
-    /// Compares two contacts by last name.
-    /// </summary>
-    internal class CompareContactByLastNameComparer : IComparer
+    internal class MultipleComparer : IComparer
     {
+        private readonly List<IComparer> comparers;
+
+        public MultipleComparer(IEnumerable<IComparer> comparers)
+        {
+            if (comparers == null)
+                throw new ArgumentNullException("comparers");
+
+            this.comparers = new List<IComparer>(comparers);
+        }
+
         public int Compare(object x, object y)
         {
-            Contact contactX = x as Contact;
-            Contact contactY = y as Contact;
+            if (comparers.Count == 0)
+                return 0;
 
-            if (contactX == null)
-                throw new ArgumentException("Argument x is not Contact.", "x");
+            foreach (IComparer comparer in comparers)
+            {
+                int value = comparer.Compare(x, y);
 
-            if (contactY == null)
-                throw new ArgumentException("Argument y is not Contact.", "y");
+                if (value != 0)
+                    return value;
+            }
 
-            return string.Compare(contactX.Name.LastName, contactY.Name.LastName);
+            return 0;
         }
     }
 }

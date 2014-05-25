@@ -39,16 +39,19 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.4.369, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL" />
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="zcsv, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>ref\zcsv.dll</HintPath>
+    <Reference Include="zcsv">
+      <HintPath>..\ExternalLibraries\zcsv.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\MultipleComparer.cs" />
+    <Compile Include="Comparers\CompareContactsByMiddleNameComparer.cs" />
     <Compile Include="Entities\AddressBookStatus.cs" />
     <Compile Include="Entities\ContactContentChangedEventArgs.cs" />
     <Compile Include="Entities\CustomObservableCollection.cs" />
@@ -93,8 +96,7 @@
     <Compile Include="Gating\YahooCsvGate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ref\ICSharpCode.SharpZipLib.dll" />
-    <Content Include="ref\zcsv.dll" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

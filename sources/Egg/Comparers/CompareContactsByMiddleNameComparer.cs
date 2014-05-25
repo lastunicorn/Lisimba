@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
     /// <summary>
     /// Compares two contacts by last name.
     /// </summary>
-    internal class CompareContactByLastNameComparer : IComparer
+    internal class CompareContactByMiddleNameComparer : IComparer
     {
         public int Compare(object x, object y)
         {
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
             if (contactY == null)
                 throw new ArgumentException("Argument y is not Contact.", "y");
 
-            return string.Compare(contactX.Name.LastName, contactY.Name.LastName);
+            return string.Compare(contactX.Name.MiddleName, contactY.Name.MiddleName);
         }
     }
 }

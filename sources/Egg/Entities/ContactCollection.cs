@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Egg.Comparers;
+using DustInTheWind.Lisimba.Egg.Enums;
 using System;
 using System.Collections;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
@@ -54,30 +54,60 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             //}
 
             //if (sortDirection == SortDirection.Descending)
-            //    InnerList.Reverse();
+            //    Items.Reverse();
         }
 
         private IComparer GetComparer(ContactsSortingType sortField)
         {
             switch (sortField)
             {
+                default:
                 case ContactsSortingType.Birthday:
-                    return new CompareContactByBirthdayComparer();
+                    return new MultipleComparer(new IComparer[]
+                    {
+                        new CompareContactByBirthdayComparer(),
+                        new CompareContactByNicknameComparer(),
+                        new CompareContactByFirstNameComparer(),
+                        new CompareContactByLastNameComparer(),
+                        new CompareContactByMiddleNameComparer()
+                    });
 
                 case ContactsSortingType.BirthDate:
-                    return new CompareContactsByBirthdateComparer();
+                    return new MultipleComparer(new IComparer[]
+                    {
+                        new CompareContactsByBirthdateComparer(),
+                        new CompareContactByNicknameComparer(),
+                        new CompareContactByFirstNameComparer(),
+                        new CompareContactByLastNameComparer(),
+                        new CompareContactByMiddleNameComparer()
+                    });
 
                 case ContactsSortingType.FirstName:
-                    return new CompareContactByFirstNameComparer();
+                    return new MultipleComparer(new IComparer[]
+                    {
+                        new CompareContactByFirstNameComparer(),
+                        new CompareContactByLastNameComparer(),
+                        new CompareContactByMiddleNameComparer(),
+                        new CompareContactByNicknameComparer()
+                    });
 
                 case ContactsSortingType.LastName:
-                    return new CompareContactByLastNameComparer();
+                    return new MultipleComparer(new IComparer[]
+                    {
+                        new CompareContactByLastNameComparer(),
+                        new CompareContactByFirstNameComparer(),
+                        new CompareContactByMiddleNameComparer(),
+                        new CompareContactByNicknameComparer()
+                    });
 
                 case ContactsSortingType.Nickname:
-                    return new CompareContactByNicknameComparer();
-
-                default:
-                    return new CompareContactByBirthdayComparer();
+                    return new MultipleComparer(new IComparer[]
+                    {
+                        new CompareContactByNicknameComparer(),
+                        new CompareContactByFirstNameComparer(),
+                        new CompareContactByLastNameComparer(),
+                        new CompareContactByMiddleNameComparer()
+                    });
             }
         }
 
