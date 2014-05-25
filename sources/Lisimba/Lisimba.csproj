@@ -92,7 +92,9 @@
     <Compile Include="Commands\ExportYahooCsvCommand.cs" />
     <Compile Include="Commands\SaveAsAddressBookCommand.cs" />
     <Compile Include="Commands\ImportYahooCsvCommand.cs" />
+    <Compile Include="Comparers\TreeNodeComparer.cs" />
     <Compile Include="Forms\IAddContactView.cs" />
+    <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Services\AddressBookChangedEventArgs.cs" />
     <Compile Include="Services\AddressBookChangingEventArgs.cs" />
@@ -121,11 +123,6 @@
     <Compile Include="Config\RecentFilesConfigElement.cs" />
     <Compile Include="Config\LisimbaConfigSection.cs" />
     <Compile Include="CommandLineArguments.cs" />
-    <Compile Include="Comparers\TreeNodeByBirthdateComparer.cs" />
-    <Compile Include="Comparers\TreeNodeByBirthdayComparer.cs" />
-    <Compile Include="Comparers\TreeNodeByFirstNameComparer.cs" />
-    <Compile Include="Comparers\TreeNodeByLastNameComparer.cs" />
-    <Compile Include="Comparers\TreeNodeByNicknameComparer.cs" />
     <Compile Include="Forms\FormEditBase.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -27,88 +27,34 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     {
         public void Sort(ContactsSortingType sortField, SortDirection sortDirection)
         {
-            IComparer comparer = GetComparer(sortField);
+            IComparer comparer = ComparerFactory.GetComparer(sortField);
             ArrayList.Adapter((IList)Items).Sort(comparer);
 
             //switch (sortField)
             //{
             //    case ContactsSortingType.Birthday:
-            //        InnerList.Sort(new CompareContactByBirthdayComparer());
+            //        InnerList.Sort(new ContactByBirthdayComparer());
             //        break;
 
             //    case ContactsSortingType.BirthDate:
-            //        InnerList.Sort(new CompareContactsByBirthdateComparer());
+            //        InnerList.Sort(new ContactsByBirthdateComparer());
             //        break;
 
             //    case ContactsSortingType.FirstName:
-            //        InnerList.Sort(new CompareContactByFirstNameComparer());
+            //        InnerList.Sort(new ContactByFirstNameComparer());
             //        break;
 
             //    case ContactsSortingType.LastName:
-            //        InnerList.Sort(new CompareContactByLastNameComparer());
+            //        InnerList.Sort(new ContactByLastNameComparer());
             //        break;
 
             //    case ContactsSortingType.Nickname:
-            //        InnerList.Sort(new CompareContactByNicknameComparer());
+            //        InnerList.Sort(new ContactByNicknameComparer());
             //        break;
             //}
 
             //if (sortDirection == SortDirection.Descending)
             //    Items.Reverse();
-        }
-
-        private IComparer GetComparer(ContactsSortingType sortField)
-        {
-            switch (sortField)
-            {
-                default:
-                case ContactsSortingType.Birthday:
-                    return new MultipleComparer(new IComparer[]
-                    {
-                        new CompareContactByBirthdayComparer(),
-                        new CompareContactByNicknameComparer(),
-                        new CompareContactByFirstNameComparer(),
-                        new CompareContactByLastNameComparer(),
-                        new CompareContactByMiddleNameComparer()
-                    });
-
-                case ContactsSortingType.BirthDate:
-                    return new MultipleComparer(new IComparer[]
-                    {
-                        new CompareContactsByBirthdateComparer(),
-                        new CompareContactByNicknameComparer(),
-                        new CompareContactByFirstNameComparer(),
-                        new CompareContactByLastNameComparer(),
-                        new CompareContactByMiddleNameComparer()
-                    });
-
-                case ContactsSortingType.FirstName:
-                    return new MultipleComparer(new IComparer[]
-                    {
-                        new CompareContactByFirstNameComparer(),
-                        new CompareContactByLastNameComparer(),
-                        new CompareContactByMiddleNameComparer(),
-                        new CompareContactByNicknameComparer()
-                    });
-
-                case ContactsSortingType.LastName:
-                    return new MultipleComparer(new IComparer[]
-                    {
-                        new CompareContactByLastNameComparer(),
-                        new CompareContactByFirstNameComparer(),
-                        new CompareContactByMiddleNameComparer(),
-                        new CompareContactByNicknameComparer()
-                    });
-
-                case ContactsSortingType.Nickname:
-                    return new MultipleComparer(new IComparer[]
-                    {
-                        new CompareContactByNicknameComparer(),
-                        new CompareContactByFirstNameComparer(),
-                        new CompareContactByLastNameComparer(),
-                        new CompareContactByMiddleNameComparer()
-                    });
-            }
         }
 
         protected override void InsertItem(int index, Contact item)

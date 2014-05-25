@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
     /// <summary>
     /// Compares two contacts by birthdate (year, month and day).
     /// </summary>
-    internal class CompareContactsByBirthdateComparer : IComparer
+    public class ContactsByBirthdateComparer : IComparer
     {
         public int Compare(object x, object y)
         {

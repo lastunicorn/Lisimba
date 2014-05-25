@@ -26,8 +26,6 @@ namespace DustInTheWind.Lisimba.Comparers
     /// </summary>
     class TreeNodeByNicknameOrNameComparer : IComparer
     {
-        #region IComparer Members
-
         public int Compare(object x, object y)
         {
             if (x is TreeNode && y is TreeNode)
@@ -60,7 +58,5 @@ namespace DustInTheWind.Lisimba.Comparers
 
             throw new ArgumentException("One or both of the objects to compare are not TreeNode.");
         }
-
-        #endregion
     }
 }

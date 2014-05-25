@@ -50,6 +50,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\ComparerFactory.cs" />
     <Compile Include="Comparers\MultipleComparer.cs" />
     <Compile Include="Comparers\CompareContactsByMiddleNameComparer.cs" />
     <Compile Include="Entities\AddressBookStatus.cs" />

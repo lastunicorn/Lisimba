@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
     /// <summary>
     /// Compares two contacts by last name.
     /// </summary>
-    internal class CompareContactByMiddleNameComparer : IComparer
+    internal class ContactByMiddleNameComparer : IComparer
     {
         public int Compare(object x, object y)
         {

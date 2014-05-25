@@ -68,15 +68,12 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // contactListView1
             // 
-            this.contactListView1.AllowSort = true;
             this.contactListView1.ConfigurationService = null;
             this.contactListView1.CurrentData = null;
             this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
             this.contactListView1.Name = "contactListView1";
-            this.contactListView1.SearchText = "";
             this.contactListView1.Size = new System.Drawing.Size(194, 415);
-            this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.Enums.ContactsSortingType.NicknameOrName;
             this.contactListView1.TabIndex = 9;
             // 
             // contactView1
