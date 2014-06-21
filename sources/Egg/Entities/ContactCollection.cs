@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Egg.Comparers;
+using DustInTheWind.Lisimba.Egg.Enums;
 using System;
 using System.Collections;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
@@ -27,58 +27,34 @@ namespace DustInTheWind.Lisimba.Egg.Entities
     {
         public void Sort(ContactsSortingType sortField, SortDirection sortDirection)
         {
-            IComparer comparer = GetComparer(sortField);
+            IComparer comparer = ComparerFactory.GetComparer(sortField);
             ArrayList.Adapter((IList)Items).Sort(comparer);
 
             //switch (sortField)
             //{
             //    case ContactsSortingType.Birthday:
-            //        InnerList.Sort(new CompareContactByBirthdayComparer());
+            //        InnerList.Sort(new ContactByBirthdayComparer());
             //        break;
 
             //    case ContactsSortingType.BirthDate:
-            //        InnerList.Sort(new CompareContactsByBirthdateComparer());
+            //        InnerList.Sort(new ContactsByBirthdateComparer());
             //        break;
 
             //    case ContactsSortingType.FirstName:
-            //        InnerList.Sort(new CompareContactByFirstNameComparer());
+            //        InnerList.Sort(new ContactByFirstNameComparer());
             //        break;
 
             //    case ContactsSortingType.LastName:
-            //        InnerList.Sort(new CompareContactByLastNameComparer());
+            //        InnerList.Sort(new ContactByLastNameComparer());
             //        break;
 
             //    case ContactsSortingType.Nickname:
-            //        InnerList.Sort(new CompareContactByNicknameComparer());
+            //        InnerList.Sort(new ContactByNicknameComparer());
             //        break;
             //}
 
             //if (sortDirection == SortDirection.Descending)
-            //    InnerList.Reverse();
-        }
-
-        private IComparer GetComparer(ContactsSortingType sortField)
-        {
-            switch (sortField)
-            {
-                case ContactsSortingType.Birthday:
-                    return new CompareContactByBirthdayComparer();
-
-                case ContactsSortingType.BirthDate:
-                    return new CompareContactsByBirthdateComparer();
-
-                case ContactsSortingType.FirstName:
-                    return new CompareContactByFirstNameComparer();
-
-                case ContactsSortingType.LastName:
-                    return new CompareContactByLastNameComparer();
-
-                case ContactsSortingType.Nickname:
-                    return new CompareContactByNicknameComparer();
-
-                default:
-                    return new CompareContactByBirthdayComparer();
-            }
+            //    Items.Reverse();
         }
 
         protected override void InsertItem(int index, Contact item)

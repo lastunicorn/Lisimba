@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    public interface IContactView
+    public interface IContactEditorView
     {
         string FirstName { get; set; }
         string MiddleName { get; set; }

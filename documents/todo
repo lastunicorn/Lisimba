@@ -4,6 +4,7 @@ Lisimba
 bug: add contact window: when birthday is changed, it is not updated in ui.
 bug: when clickein the x button the application does not close from the first time.
 bug: when updating the current contact, the list of contacts should refresh itself without redisplaying all the contacts.
+bug: when clicking the x button the application does not close from the first time.
 
 as a user, when i double click the Phones, Emails, WebSites, Addresses, Dates or MessengerIds tree view items, i want a new corresponding item to be added in the list.
 
@@ -12,6 +13,10 @@ as a user i want to have icons for the Add Contact, Delete Contact and Propertie
 as a user, when i import contacts and the opened address book already contains a similar contact, i want to be asked to overwrite, merge or skip each contact. (10)
 	- create a wizard for import operation.
 
+as i user i want to be notified at application's start of the contacts whose birthday is today.
+
+as a user i want the application to start when os starts and remain minimized as an icon in the tray, next to the clock.
+	
 as a user i want to be able to open an address book from a url.
 
 

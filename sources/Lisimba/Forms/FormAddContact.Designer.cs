@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
+            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactEditor();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -138,7 +138,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        private ContactView contactView1;
+        private ContactEditor contactView1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOkay;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

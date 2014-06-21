@@ -28,13 +28,13 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
     public class ContactChangedTests
     {
         private ContactViewPresenter contactViewPresenter;
-        private Mock<IContactView> view;
+        private Mock<IContactEditorView> view;
 
         [SetUp]
         public void SetUp()
         {
             contactViewPresenter = new ContactViewPresenter(new ZodiacService());
-            view = new Mock<IContactView>();
+            view = new Mock<IContactEditorView>();
         }
 
         [Test]

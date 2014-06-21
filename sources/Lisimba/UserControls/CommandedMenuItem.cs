@@ -15,19 +15,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class CustomMenuItem : ToolStripMenuItem
+    class CommandedMenuItem : ToolStripMenuItem
     {
         private ICommand command;
+
+        [Browsable(false)]
         public StatusService StatusService { get; set; }
 
         public string ShortDescription { get; set; }
 
+        [Browsable(false)]
         public ICommand Command
         {
             get { return command; }
@@ -45,13 +49,10 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        private void HandleCommandEnabledChanged(object sender, EventArgs eventArgs)
-        {
-            Enabled = command.IsEnabled;
-        }
-
+        [Browsable(false)]
         public object CommandParameter { get; set; }
 
+        [Browsable(false)]
         public Func<object> CommandParameterProvider { get; set; }
 
         protected override void OnMouseEnter(EventArgs e)
@@ -63,17 +64,6 @@ namespace DustInTheWind.Lisimba.UserControls
             }
 
             base.OnMouseEnter(e);
-        }
-
-        private string CalculateTextToDisplayAsStatus()
-        {
-            if (ShortDescription != null)
-                return ShortDescription;
-
-            if (Command != null && Command.ShortDescription != null)
-                return Command.ShortDescription;
-
-            return null;
         }
 
         protected override void OnMouseLeave(EventArgs e)
@@ -97,6 +87,22 @@ namespace DustInTheWind.Lisimba.UserControls
             }
 
             base.OnClick(e);
+        }
+
+        private void HandleCommandEnabledChanged(object sender, EventArgs eventArgs)
+        {
+            Enabled = command.IsEnabled;
+        }
+
+        private string CalculateTextToDisplayAsStatus()
+        {
+            if (ShortDescription != null)
+                return ShortDescription;
+
+            if (Command != null && Command.ShortDescription != null)
+                return Command.ShortDescription;
+
+            return null;
         }
 
         private object CalculateParameterToUseWithCommand()

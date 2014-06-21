@@ -53,17 +53,17 @@ namespace DustInTheWind.Lisimba.UserControls
 
             for (int i = 0; i < recentFiles.Count; i++)
             {
-                CustomMenuItem menuItem;
+                CommandedMenuItem menuItem;
 
                 if (j < DropDownItems.Count)
                 {
                     // If already exists some menu items, reuse them.
-                    menuItem = (CustomMenuItem)DropDownItems[j];
+                    menuItem = (CommandedMenuItem)DropDownItems[j];
                 }
                 else
                 {
                     // Create new menu items if necessary.
-                    menuItem = new CustomMenuItem();
+                    menuItem = new CommandedMenuItem();
                     menuItem.Click += HandleSubMenuItemClick;
                     menuItem.Command = ChildrenCommand;
                     menuItem.CommandParameterProvider = () => menuItem.Tag.ToString();

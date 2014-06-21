@@ -32,10 +32,10 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
-            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
+            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.UserControls.CustomMenuItem();
+            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStripListBox.SuspendLayout();
@@ -43,8 +43,8 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // treeView1
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeView1.FullRowSelect = true;
             this.treeView1.HideSelection = false;
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSearch.Location = new System.Drawing.Point(0, 273);
             this.textBoxSearch.Name = "textBoxSearch";
@@ -78,14 +78,24 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_Add
             // 
+            this.toolStripMenuItem_List_Add.Command = null;
+            this.toolStripMenuItem_List_Add.CommandParameter = null;
+            this.toolStripMenuItem_List_Add.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
+            this.toolStripMenuItem_List_Add.ShortDescription = null;
             this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_Add.StatusService = null;
             this.toolStripMenuItem_List_Add.Text = "&Add Contact";
             // 
             // toolStripMenuItem_List_Delete
             // 
+            this.toolStripMenuItem_List_Delete.Command = null;
+            this.toolStripMenuItem_List_Delete.CommandParameter = null;
+            this.toolStripMenuItem_List_Delete.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
+            this.toolStripMenuItem_List_Delete.ShortDescription = null;
             this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_Delete.StatusService = null;
             this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
             // 
             // toolStripMenuItem1
@@ -95,24 +105,22 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
+            this.toolStripMenuItem_List_ViewBiorythm.Command = null;
+            this.toolStripMenuItem_List_ViewBiorythm.CommandParameter = null;
+            this.toolStripMenuItem_List_ViewBiorythm.CommandParameterProvider = null;
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
+            this.toolStripMenuItem_List_ViewBiorythm.ShortDescription = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_ViewBiorythm.StatusService = null;
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
             this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
             // 
             // comboBoxSortBy
             // 
-            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.comboBoxSortBy.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSortBy.FormattingEnabled = true;
-            this.comboBoxSortBy.Items.AddRange(new object[] {
-            "Birthday (without year)",
-            "Birth Date (age)",
-            "First Name",
-            "Last Name",
-            "Nickname",
-            "Nickname or Name"});
             this.comboBoxSortBy.Location = new System.Drawing.Point(47, 0);
             this.comboBoxSortBy.Name = "comboBoxSortBy";
             this.comboBoxSortBy.Size = new System.Drawing.Size(131, 21);
@@ -150,10 +158,10 @@ namespace DustInTheWind.Lisimba.UserControls
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
-        private DustInTheWind.Lisimba.UserControls.CustomMenuItem toolStripMenuItem_List_Add;
-        private DustInTheWind.Lisimba.UserControls.CustomMenuItem toolStripMenuItem_List_Delete;
+        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_Add;
+        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_Delete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private DustInTheWind.Lisimba.UserControls.CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
+        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_ViewBiorythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
     }

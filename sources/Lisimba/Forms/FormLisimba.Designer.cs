@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
-            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactView();
+            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactEditor();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -68,15 +68,12 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // contactListView1
             // 
-            this.contactListView1.AllowSort = true;
             this.contactListView1.ConfigurationService = null;
             this.contactListView1.CurrentData = null;
             this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
             this.contactListView1.Name = "contactListView1";
-            this.contactListView1.SearchText = "";
             this.contactListView1.Size = new System.Drawing.Size(194, 415);
-            this.contactListView1.SortField = DustInTheWind.Lisimba.Egg.Enums.ContactsSortingType.NicknameOrName;
             this.contactListView1.TabIndex = 9;
             // 
             // contactView1
@@ -161,7 +158,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private ContactView contactView1;
+        private ContactEditor contactView1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private ContactListView contactListView1;
         private System.Windows.Forms.Panel panel1;

@@ -287,7 +287,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             Contact contact = obj as Contact;
 
             if (contact == null)
-                throw new ArgumentException("object is not a Contact.");
+                throw new ArgumentException("obj is not a Contact.");
 
             int comparisonResult = name.Nickname.CompareTo(contact.name.Nickname);
 

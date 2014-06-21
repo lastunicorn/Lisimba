@@ -23,37 +23,20 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
     /// <summary>
     /// Compares two contacts by nickname.
     /// </summary>
-    internal class CompareContactByNicknameComparer : IComparer
+    internal class ContactByNicknameComparer : IComparer
     {
-        #region IComparer Members
-
         public int Compare(object x, object y)
         {
-            if (x is Contact && y is Contact)
-            {
-                Contact p1 = (Contact)x;
-                Contact p2 = (Contact)y;
+            Contact contactX = x as Contact;
+            Contact contactY = y as Contact;
 
-                int value = string.Compare(p1.Name.Nickname, p2.Name.Nickname);
-                if (value == 0)
-                {
-                    value = string.Compare(p1.Name.FirstName, p2.Name.FirstName);
-                    if (value == 0)
-                    {
-                        value = string.Compare(p1.Name.LastName, p2.Name.LastName);
-                        if (value == 0)
-                        {
-                            value = string.Compare(p1.Name.MiddleName, p2.Name.MiddleName);
-                        }
-                    }
-                }
+            if (contactX == null)
+                throw new ArgumentException("Argument x is not Contact.", "x");
 
-                return value;
-            }
+            if (contactY == null)
+                throw new ArgumentException("Argument y is not Contact.", "y");
 
-            throw new ArgumentException("One or both of the objects to compare are not Contact.");
+            return string.Compare(contactX.Name.Nickname, contactY.Name.Nickname);
         }
-
-        #endregion
     }
 }
