@@ -1,7 +1,7 @@
 Lisimba
 =======
 
-bug: when birthday is changed, it is not updated in ui.
+bug: add contact window: when birthday is changed, it is not updated in ui.
 bug: when clickein the x button the application does not close from the first time.
 bug: when updating the current contact, the list of contacts should refresh itself without redisplaying all the contacts.
 
