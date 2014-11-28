@@ -195,7 +195,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             this.toolStripMenuItem_File_RecentFiles.ChildrenCommand = null;
             this.toolStripMenuItem_File_RecentFiles.Name = "toolStripMenuItem_File_RecentFiles";
-            this.toolStripMenuItem_File_RecentFiles.RecentFilesService = null;
+            this.toolStripMenuItem_File_RecentFiles.RecentFiles = null;
             this.toolStripMenuItem_File_RecentFiles.Size = new System.Drawing.Size(158, 22);
             this.toolStripMenuItem_File_RecentFiles.Text = "Recent &Files";
             // 

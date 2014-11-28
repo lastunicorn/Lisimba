@@ -26,24 +26,24 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UiService uiService;
         private readonly StatusService statusService;
-        private readonly RecentFilesService recentFilesService;
+        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
             get { return "Save current opened address book with another name."; }
         }
 
-        public SaveAsAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFilesService recentFilesService)
+        public SaveAsAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFiles recentFiles)
         {
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (statusService == null) throw new ArgumentNullException("statusService");
-            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.currentData = currentData;
             this.uiService = uiService;
             this.statusService = statusService;
-            this.recentFilesService = recentFilesService;
+            this.recentFiles = recentFiles;
 
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = currentData.AddressBook != null;
@@ -69,7 +69,7 @@ namespace DustInTheWind.Lisimba.Commands
                 currentData.AddressBook.SetAsSaved();
 
                 statusService.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBook.Contacts.Count);
-                recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
+                recentFiles.AddRecentFile(Path.GetFullPath(fileName));
             }
             catch (Exception ex)
             {

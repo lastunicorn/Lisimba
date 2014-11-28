@@ -31,7 +31,6 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             this.buttonClose = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.labelFramework = new System.Windows.Forms.Label();
             this.labelWeb = new System.Windows.Forms.Label();
             this.labelAuthorAndDate = new System.Windows.Forms.Label();
             this.labelTitle = new System.Windows.Forms.Label();
@@ -58,7 +57,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.labelFramework);
             this.groupBox1.Controls.Add(this.labelWeb);
             this.groupBox1.Controls.Add(this.labelAuthorAndDate);
             this.groupBox1.Location = new System.Drawing.Point(8, 64);
@@ -66,17 +64,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.groupBox1.Size = new System.Drawing.Size(240, 80);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            // 
-            // labelFramework
-            // 
-            this.labelFramework.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFramework.Location = new System.Drawing.Point(8, 56);
-            this.labelFramework.Name = "labelFramework";
-            this.labelFramework.Size = new System.Drawing.Size(224, 16);
-            this.labelFramework.TabIndex = 2;
-            this.labelFramework.Text = "C#.NET - .NET Framework 2.0";
-            this.labelFramework.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelWeb
             // 
@@ -97,7 +84,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.labelAuthorAndDate.Name = "labelAuthorAndDate";
             this.labelAuthorAndDate.Size = new System.Drawing.Size(224, 16);
             this.labelAuthorAndDate.TabIndex = 2;
-            this.labelAuthorAndDate.Text = "Iuga Alexandru";
+            this.labelAuthorAndDate.Text = "Dust in the Wind";
             this.labelAuthorAndDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTitle
@@ -165,8 +152,7 @@ namespace DustInTheWind.Lisimba.Forms
 		private System.Windows.Forms.Button buttonClose;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.Label labelTitle;
-		private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label labelFramework;
+        private System.Windows.Forms.PictureBox pictureBox1;
 		private System.Windows.Forms.Label labelAuthorAndDate;
 		private System.Windows.Forms.Label labelVersion;
         private System.Windows.Forms.Label labelWeb;

@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.UserControls
 {
     class MenuItemWithChildren : ToolStripMenuItem
     {
-        public RecentFilesService RecentFilesService { get; set; }
+        public RecentFiles RecentFiles { get; set; }
 
         public ICommand ChildrenCommand { get; set; }
 
@@ -44,12 +44,12 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public void RefreshRecentFilesMenu()
         {
-            if (RecentFilesService == null)
+            if (RecentFiles == null)
                 return;
 
             int j = 0; // index for the list of menu items (this.recentFilesMenuItems)
 
-            RecentFilesConfigElementCollection recentFiles = RecentFilesService.GetAllFiles();
+            RecentFilesConfigElementCollection recentFiles = RecentFiles.GetAllFiles();
 
             for (int i = 0; i < recentFiles.Count; i++)
             {

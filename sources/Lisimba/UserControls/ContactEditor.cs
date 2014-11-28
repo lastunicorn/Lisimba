@@ -42,7 +42,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             InitializeComponent();
 
-            presenter = new ContactViewPresenter(new ZodiacService()) { View = this };
+            presenter = new ContactViewPresenter(new Zodiac()) { View = this };
 
             formBirthdayEdit = new FormDateEdit();
         }

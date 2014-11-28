@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    public class ZodiacService
+    public class Zodiac
     {
         public Image GetZodiacImage(ZodiacSign zodiacSign)
         {

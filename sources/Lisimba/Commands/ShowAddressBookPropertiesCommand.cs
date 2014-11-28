@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -39,9 +40,18 @@ namespace DustInTheWind.Lisimba.Commands
 
         protected override void DoExecute(object parameter)
         {
-            FormAddressBookProperties formAddressBookProperties = new FormAddressBookProperties();
-            formAddressBookProperties.AddressBook = currentData.AddressBook;
-            formAddressBookProperties.ShowDialog();
+            DisplayAddressBookPropertiesWindow();
+        }
+
+        private void DisplayAddressBookPropertiesWindow()
+        {
+            AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
+            {
+                AddressBook = currentData.AddressBook,
+                View = new FormAddressBookProperties()
+            };
+
+            presenter.ShowWindow();
         }
     }
 }

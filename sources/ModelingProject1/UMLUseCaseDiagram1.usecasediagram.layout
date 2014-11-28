@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<useCaseDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="UMLUseCaseDiagram1">
+  <useCaseModelRootMoniker Id="f5acedac-d6cd-4920-bd0e-be5c3969a8fb" />
+  <nestedChildShapes>
+    <actorShape Id="8e998352-bff3-42ef-9a96-973bf15a5fe3" absoluteBounds="1.25, 1.125, 0.5, 0.5" isReference="false" heightOffset="0">
+      <actorMoniker Id="2ff75354-223c-4ad2-aa3b-ff6d8bb9f388" LastKnownName="Actor1" />
+      <relativeChildShapes />
+    </actorShape>
+    <useCaseShape Id="72864082-a1a8-46b7-8562-bc23f5a918f1" absoluteBounds="3.25, 1.75, 1, 0.5" customColor="238, 237, 131" heightOffset="0">
+      <useCaseMoniker Id="08ba2410-8743-48d9-958a-93a856aa51ff" LastKnownName="UseCase1" />
+      <relativeChildShapes />
+    </useCaseShape>
+    <artifactShape Id="e5e3c434-e919-4194-a878-09d8ee4b1c5a" absoluteBounds="5.75, 0.625, 1.5, 0.5" customColor="161, 199, 231">
+      <artifactMoniker Id="25a0aca8-dd3b-4250-8fa9-4387bc58ee18" LastKnownName="Artifact1" />
+    </artifactShape>
+    <commentShape Id="066ecbef-c4a1-4c8c-8e87-3707f0275e50" absoluteBounds="6.5, 4.75, 1.25, 0.375" customColor="251, 247, 200">
+      <commentMoniker Id="aebddb23-39c6-4918-af35-876fcc8818d1" />
+      <relativeChildShapes />
+    </commentShape>
+    <SubsystemShape Id="53be8a20-b3a4-4468-a0b7-43b3f743e4de" absoluteBounds="2.25, 3.125, 3, 2.5" customColor="White">
+      <subsystemMoniker Id="50cc27d4-f938-455b-95a7-82ff38b9a272" LastKnownName="Subsystem1" />
+    </SubsystemShape>
+  </nestedChildShapes>
+</useCaseDiagram>

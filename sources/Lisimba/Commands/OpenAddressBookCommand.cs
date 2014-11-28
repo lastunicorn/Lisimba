@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.Commands
         private readonly CurrentData currentData;
         private readonly UiService uiService;
         private readonly StatusService statusService;
-        private readonly RecentFilesService recentFilesService;
+        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
@@ -38,17 +38,17 @@ namespace DustInTheWind.Lisimba.Commands
 
         public Func<bool> AskIfAllowToContinue;
 
-        public OpenAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFilesService recentFilesService)
+        public OpenAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFiles recentFiles)
         {
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (statusService == null) throw new ArgumentNullException("statusService");
-            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.currentData = currentData;
             this.uiService = uiService;
             this.statusService = statusService;
-            this.recentFilesService = recentFilesService;
+            this.recentFiles = recentFiles;
         }
 
         protected override void DoExecute(string fileName)
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.Commands
                 currentData.AddressBook = openedAddressBook;
 
                 statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
-                recentFilesService.AddRecentFile(Path.GetFullPath(fileName));
+                recentFiles.AddRecentFile(Path.GetFullPath(fileName));
 
                 if (gate.Warnings.Any())
                 {

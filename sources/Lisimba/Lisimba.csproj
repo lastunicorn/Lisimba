@@ -94,8 +94,11 @@
     <Compile Include="Commands\ImportYahooCsvCommand.cs" />
     <Compile Include="Comparers\TreeNodeComparer.cs" />
     <Compile Include="Forms\IAddContactView.cs" />
+    <Compile Include="Forms\IAddressBookPropertiesView.cs" />
     <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
+    <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AddressBookChangedEventArgs.cs" />
     <Compile Include="Services\AddressBookChangingEventArgs.cs" />
     <Compile Include="Services\ApplicationService.cs" />
@@ -149,10 +152,10 @@
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\LisimbaApplication.cs" />
-    <Compile Include="Services\RecentFilesService.cs" />
+    <Compile Include="Services\RecentFiles.cs" />
     <Compile Include="Services\StatusService.cs" />
     <Compile Include="Services\UiService.cs" />
-    <Compile Include="Services\ZodiacService.cs" />
+    <Compile Include="Services\Zodiac.cs" />
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -257,6 +260,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgramArguments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddressBookPropertiesViewModel.cs" />
     <EmbeddedResource Include="ctrl.resx">
       <DependentUpon>ctrl.cs</DependentUpon>
       <SubType>Designer</SubType>

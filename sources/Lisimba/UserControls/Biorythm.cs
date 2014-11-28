@@ -26,20 +26,14 @@ namespace DustInTheWind.Lisimba.UserControls
         public DateTime Birthday
         {
             get { return DateTime.Now; }
-            set
-            {
-                biorythmView1.Birthday = value;
-            }
+            set { biorythmView1.Birthday = value; }
         }
 
         [Category("Data")]
         public DateTime CurrentDay
         {
             get { return DateTime.Now; }
-            set
-            {
-                biorythmView1.XDay = value;
-            }
+            set { biorythmView1.XDay = value; }
         }
 
         public Biorythm()

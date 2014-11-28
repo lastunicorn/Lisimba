@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Presenters
 {
     class ContactViewPresenter
     {
-        private readonly ZodiacService zodiacService;
+        private readonly Zodiac zodiac;
 
         private Contact contact;
         private bool isInitializationMode;
@@ -47,12 +47,12 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        public ContactViewPresenter(ZodiacService zodiacService)
+        public ContactViewPresenter(Zodiac zodiac)
         {
-            if (zodiacService == null)
-                throw new ArgumentNullException("zodiacService");
+            if (zodiac == null)
+                throw new ArgumentNullException("zodiac");
 
-            this.zodiacService = zodiacService;
+            this.zodiac = zodiac;
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
@@ -98,9 +98,9 @@ namespace DustInTheWind.Lisimba.Presenters
 
                     View.Birthday = contact.Birthday.ToString();
 
-                    View.ZodiacSignImage = zodiacService.GetZodiacImage(contact.ZogiacSign);
+                    View.ZodiacSignImage = zodiac.GetZodiacImage(contact.ZogiacSign);
                     //toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
-                    View.ZodiacSignText = zodiacService.GetZodiacSignName(contact.ZogiacSign);
+                    View.ZodiacSignText = zodiac.GetZodiacSignName(contact.ZogiacSign);
 
                     View.Notes = contact.Notes;
 

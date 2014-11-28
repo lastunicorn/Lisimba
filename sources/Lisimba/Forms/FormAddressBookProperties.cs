@@ -15,65 +15,45 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormAddressBookProperties : Form
+    public partial class FormAddressBookProperties : Form, IAddressBookPropertiesView
     {
-        private AddressBook addressBook;
-
-        public AddressBook AddressBook
-        {
-            get { return addressBook; }
-            set
-            {
-                addressBook = value;
-                PopulateView();
-            }
-        }
-
-        private void PopulateView()
-        {
-            if (addressBook == null)
-            {
-                textBoxBookName.Text = string.Empty;
-                textBoxFileLocation.Text = string.Empty;
-                textBoxContactsCount.Text = "0";
-            }
-            else
-            {
-                textBoxBookName.Text = addressBook.Name;
-
-                textBoxFileLocation.Text = addressBook.FileName == null
-                    ? "<Address book is not saved yet.>"
-                    : Path.GetFullPath(addressBook.FileName);
-
-                textBoxContactsCount.Text = addressBook.Contacts.Count.ToString();
-            }
-        }
+        public AddressBookPropertiesPresenter Presenter { private get; set; }
 
         public FormAddressBookProperties()
         {
             InitializeComponent();
         }
 
+        public void CreateBindings(AddressBookPropertiesViewModel viewModel)
+        {
+            textBoxBookName.DataBindings.Add("Text", viewModel, "BookName", false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxBookName.DataBindings.Add("Enabled", viewModel, "BookNameEnabled", false, DataSourceUpdateMode.Never);
+            textBoxFileLocation.DataBindings.Add("Text", viewModel, "FileLocation", false, DataSourceUpdateMode.Never);
+            textBoxContactsCount.DataBindings.Add("Text", viewModel, "ContactsCount", false, DataSourceUpdateMode.Never);
+        }
+
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            if (addressBook == null)
+            if (Presenter == null)
                 return;
 
-            bool nameIsChanged = !addressBook.Name.Equals(textBoxBookName.Text);
-
-            if (nameIsChanged)
-                addressBook.Name = textBoxBookName.Text;
+            Presenter.OkButtonWasClicked();
         }
 
         private void FormBookProperties_Shown(object sender, EventArgs e)
         {
             textBoxBookName.Focus();
+        }
+
+        public void ShowModalView()
+        {
+            ShowDialog();
         }
     }
 }

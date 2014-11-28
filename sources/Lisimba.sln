@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Desmond", "Desmond\Desmond.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Tests", "Lisimba.Tests\Lisimba.Tests.csproj", "{367C4ADF-B8A3-4FCE-8049-E23FD802073E}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ModelingProject1", "ModelingProject1\ModelingProject1.modelproj", "{7C5E798B-27CE-4FC2-BA70-C814FFEB26BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C5E798B-27CE-4FC2-BA70-C814FFEB26BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C5E798B-27CE-4FC2-BA70-C814FFEB26BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C5E798B-27CE-4FC2-BA70-C814FFEB26BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C5E798B-27CE-4FC2-BA70-C814FFEB26BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

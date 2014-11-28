@@ -29,6 +29,12 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Phones");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Emails");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Web Sites");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Addresses");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dates");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Messenger Ids");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Phones");
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Emails");
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Web Sites");
@@ -350,6 +356,30 @@ namespace DustInTheWind.Lisimba.UserControls
             this.customTreeView1.ImageIndex = 0;
             this.customTreeView1.Location = new System.Drawing.Point(4, 17);
             this.customTreeView1.Name = "customTreeView1";
+            treeNode1.ImageKey = "phone";
+            treeNode1.Name = "Phones";
+            treeNode1.SelectedImageKey = "phone";
+            treeNode1.Text = "Phones";
+            treeNode2.ImageKey = "e-mail";
+            treeNode2.Name = "Emails";
+            treeNode2.SelectedImageKey = "e-mail";
+            treeNode2.Text = "Emails";
+            treeNode3.ImageKey = "website";
+            treeNode3.Name = "Web Sites";
+            treeNode3.SelectedImageKey = "website";
+            treeNode3.Text = "Web Sites";
+            treeNode4.ImageKey = "address";
+            treeNode4.Name = "Addresses";
+            treeNode4.SelectedImageKey = "address";
+            treeNode4.Text = "Addresses";
+            treeNode5.ImageKey = "date";
+            treeNode5.Name = "Dates";
+            treeNode5.SelectedImageKey = "date";
+            treeNode5.Text = "Dates";
+            treeNode6.ImageKey = "mesengerid";
+            treeNode6.Name = "Messenger Ids";
+            treeNode6.SelectedImageKey = "mesengerid";
+            treeNode6.Text = "Messenger Ids";
             treeNode7.ImageKey = "phone";
             treeNode7.Name = "Phones";
             treeNode7.SelectedImageKey = "phone";
@@ -375,6 +405,12 @@ namespace DustInTheWind.Lisimba.UserControls
             treeNode12.SelectedImageKey = "mesengerid";
             treeNode12.Text = "Messenger Ids";
             this.customTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
             treeNode7,
             treeNode8,
             treeNode9,

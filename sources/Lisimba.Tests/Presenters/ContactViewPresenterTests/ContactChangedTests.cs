@@ -33,7 +33,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         [SetUp]
         public void SetUp()
         {
-            contactViewPresenter = new ContactViewPresenter(new ZodiacService());
+            contactViewPresenter = new ContactViewPresenter(new Zodiac());
             view = new Mock<IContactEditorView>();
         }
 

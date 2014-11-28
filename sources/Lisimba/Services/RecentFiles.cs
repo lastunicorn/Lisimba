@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class RecentFilesService
+    class RecentFiles
     {
         private readonly ConfigurationService configurationService;
 
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Services
 
         #endregion
 
-        public RecentFilesService(ConfigurationService configurationService)
+        public RecentFiles(ConfigurationService configurationService)
         {
             if (configurationService == null)
                 throw new ArgumentNullException("configurationService");

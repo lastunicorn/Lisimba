@@ -25,20 +25,20 @@ namespace DustInTheWind.Lisimba.Services
         private readonly StatusService statusService;
         private readonly ProgramArguments programArguments;
         private readonly ConfigurationService configurationService;
-        private readonly RecentFilesService recentFilesService;
+        private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UiService uiService;
         private readonly ApplicationService applicationService;
         private readonly CurrentData currentData;
 
         public LisimbaApplication(StatusService statusService, ProgramArguments programArguments, ConfigurationService configurationService,
-            RecentFilesService recentFilesService, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
+            RecentFiles recentFiles, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
             CurrentData currentData)
         {
             if (statusService == null) throw new ArgumentNullException("statusService");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (configurationService == null) throw new ArgumentNullException("configurationService");
-            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.Services
             this.statusService = statusService;
             this.programArguments = programArguments;
             this.configurationService = configurationService;
-            this.recentFilesService = recentFilesService;
+            this.recentFiles = recentFiles;
             this.commandPool = commandPool;
             this.uiService = uiService;
             this.applicationService = applicationService;
@@ -90,7 +90,7 @@ namespace DustInTheWind.Lisimba.Services
                     return null;
 
                 case "last":
-                    return recentFilesService.GetMostRecentFileName();
+                    return recentFiles.GetMostRecentFileName();
 
                 case "specified":
                     return configurationService.LisimbaConfigSection.LoadFileAtStart.FileName;

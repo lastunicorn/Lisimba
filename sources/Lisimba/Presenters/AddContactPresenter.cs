@@ -34,7 +34,6 @@ namespace DustInTheWind.Lisimba.Presenters
         private IAddContactView view;
         public IAddContactView View
         {
-            private get { return view; }
             set
             {
                 view = value;

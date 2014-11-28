@@ -38,12 +38,12 @@ namespace DustInTheWind.Lisimba.Forms
         // Lisimba - male name meaning "lion" in Zulu language.
 
         public FormLisimba(ConfigurationService configurationService, StatusService statusService,
-            RecentFilesService recentFilesService, CurrentData currentData, CommandPool commandPool, ApplicationService applicationService,
+            RecentFiles recentFiles, CurrentData currentData, CommandPool commandPool, ApplicationService applicationService,
             UiService uiService)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (statusService == null) throw new ArgumentNullException("statusService");
-            if (recentFilesService == null) throw new ArgumentNullException("recentFilesService");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Forms
             contactListView1.StatusService = statusService;
             contactListView1.ConfigurationService = configurationService;
 
-            menuStripMain.Initialize(commandPool, statusService, recentFilesService);
+            menuStripMain.Initialize(commandPool, statusService, recentFiles);
         }
 
         private void HandleApplicationExitCanceled(object sender, EventArgs e)
