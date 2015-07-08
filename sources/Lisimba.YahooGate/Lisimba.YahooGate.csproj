@@ -45,7 +45,7 @@
     <Compile Include="YahooCsvGate.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Egg\Lisimba.Egg.csproj">
+    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
       <Name>Lisimba.Egg</Name>
     </ProjectReference>
