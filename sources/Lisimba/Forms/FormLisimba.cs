@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.Forms
 
     internal partial class FormLisimba : Form
     {
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
         private readonly CurrentData currentData;
         private readonly ApplicationService applicationService;
 
@@ -37,12 +37,12 @@ namespace DustInTheWind.Lisimba.Forms
 
         // Lisimba - male name meaning "lion" in Zulu language.
 
-        public FormLisimba(ConfigurationService configurationService, StatusService statusService,
+        public FormLisimba(ConfigurationService configurationService, ApplicationStatus applicationStatus,
             RecentFiles recentFiles, CurrentData currentData, CommandPool commandPool, ApplicationService applicationService,
             UiService uiService)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
-            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
@@ -51,8 +51,8 @@ namespace DustInTheWind.Lisimba.Forms
 
             InitializeComponent();
 
-            this.statusService = statusService;
-            statusService.StatusTextChanged += HandleStatusTextChanged;
+            this.applicationStatus = applicationStatus;
+            applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
             this.currentData = currentData;
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
@@ -67,10 +67,10 @@ namespace DustInTheWind.Lisimba.Forms
 
             contactListView1.CurrentData = currentData;
             contactListView1.CommandPool = commandPool;
-            contactListView1.StatusService = statusService;
+            contactListView1.ApplicationStatus = applicationStatus;
             contactListView1.ConfigurationService = configurationService;
 
-            menuStripMain.Initialize(commandPool, statusService, recentFiles);
+            menuStripMain.Initialize(commandPool, applicationStatus, recentFiles);
         }
 
         private void HandleApplicationExitCanceled(object sender, EventArgs e)
@@ -123,7 +123,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleStatusTextChanged(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = statusService.StatusText;
+            toolStripStatusLabel1.Text = applicationStatus.StatusText;
         }
 
         private string BuildFormTitle()
@@ -148,7 +148,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void FormLisimba_Shown(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = statusService.StatusText;
+            toolStripStatusLabel1.Text = applicationStatus.StatusText;
 
             Text = BuildFormTitle();
         }

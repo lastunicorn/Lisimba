@@ -15,26 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    [XmlRoot("Date")]
     public class Date : IObservableEntity
     {
-        #region Fields
-
         private int day;
         private int month;
         private int year;
         private string description;
 
-        #endregion
-
-        #region Properties
-
-        [XmlAttribute("Day")]
         public int Day
         {
             get { return day; }
@@ -45,7 +35,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Month")]
         public int Month
         {
             get { return month; }
@@ -56,7 +45,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Year")]
         public int Year
         {
             get { return year; }
@@ -67,7 +55,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }
@@ -82,8 +69,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         {
             get { return day > 0 && month > 0 && year > 0; }
         }
-
-        #endregion
 
         #region Event Changed
 
@@ -132,16 +117,12 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         #endregion
 
-        #region public void SetValues(int day, int month, int year)
-
         public void SetValues(int day, int month, int year)
         {
             Month = month;
             Year = year;
             Day = day;
         }
-
-        #endregion
 
         private void SetDayInternal(int value)
         {
@@ -194,8 +175,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             Day = day;
         }
 
-        #region public void SetValues(int day, int month, int year, string description)
-
         public void SetValues(int day, int month, int year, string description)
         {
             // Description
@@ -211,10 +190,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             Day = day;
         }
 
-        #endregion
-
-        #region public void Clear()
-
         public void Clear()
         {
             day = 0;
@@ -223,155 +198,111 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             description = string.Empty;
         }
 
-        #endregion
-
-        #region public bool IsNull()
-
         public bool IsNull()
         {
-            if (Year == 0 &&
-                Month == 0 &&
-                Day == 0)
-                return true;
-            else
-                return false;
+            return Year == 0 && Month == 0 && Day == 0;
         }
-
-        #endregion
-
-        #region public static int Compare(Date d1, Date d2)
 
         public static int Compare(Date d1, Date d2)
         {
             if (d1.Year < d2.Year)
                 return -1;
-            else if (d1.Year > d2.Year)
+            
+            if (d1.Year > d2.Year)
                 return 1;
-            else
-            {
-                if (d1.Month < d2.Month)
-                    return -1;
-                else if (d1.Month > d2.Month)
-                    return 1;
-                else
-                {
-                    if (d1.Day < d2.Day)
-                        return -1;
-                    else if (d1.Day > d2.Day)
-                        return 1;
-                    else
-                        return 0;
-                }
-            }
+
+            if (d1.Month < d2.Month)
+                return -1;
+                
+            if (d1.Month > d2.Month)
+                return 1;
+
+            if (d1.Day < d2.Day)
+                return -1;
+                    
+            if (d1.Day > d2.Day)
+                return 1;
+                    
+            return 0;
         }
-
-        #endregion
-
-        #region public static int Compare(Date d1, DateTime d2)
 
         public static int Compare(Date d1, DateTime d2)
         {
             if (d1.Year < d2.Year)
                 return -1;
-            else if (d1.Year > d2.Year)
+            
+            if (d1.Year > d2.Year)
                 return 1;
-            else
-            {
-                if (d1.Month < d2.Month)
-                    return -1;
-                else if (d1.Month > d2.Month)
-                    return 1;
-                else
-                {
-                    if (d1.Day < d2.Day)
-                        return -1;
-                    else if (d1.Day > d2.Day)
-                        return 1;
-                    else
-                        return 0;
-                }
-            }
+
+            if (d1.Month < d2.Month)
+                return -1;
+                
+            if (d1.Month > d2.Month)
+                return 1;
+
+            if (d1.Day < d2.Day)
+                return -1;
+                    
+            if (d1.Day > d2.Day)
+                return 1;
+                    
+            return 0;
         }
-
-        #endregion
-
-        #region public static int Compare(Date d1, DateTime d2)
 
         public static int Compare(DateTime d1, Date d2)
         {
             if (d1.Year < d2.Year)
                 return -1;
-            else if (d1.Year > d2.Year)
+            
+            if (d1.Year > d2.Year)
                 return 1;
-            else
-            {
-                if (d1.Month < d2.Month)
-                    return -1;
-                else if (d1.Month > d2.Month)
-                    return 1;
-                else
-                {
-                    if (d1.Day < d2.Day)
-                        return -1;
-                    else if (d1.Day > d2.Day)
-                        return 1;
-                    else
-                        return 0;
-                }
-            }
+
+            if (d1.Month < d2.Month)
+                return -1;
+                
+            if (d1.Month > d2.Month)
+                return 1;
+
+            if (d1.Day < d2.Day)
+                return -1;
+                    
+            if (d1.Day > d2.Day)
+                return 1;
+                    
+            return 0;
         }
-
-        #endregion
-
-        #region public int Compare(Date d)
 
         public int Compare(Date d)
         {
-            return Date.Compare(this, d);
+            return Compare(this, d);
         }
-
-        #endregion
-
-        #region public int Compare(DateTime d)
 
         public int Compare(DateTime d)
         {
-            return Date.Compare(this, d);
+            return Compare(this, d);
         }
-
-        #endregion
-
-        #region public static int CompareWithoutYear(Date d1, Date d2)
 
         public static int CompareWithoutYear(Date d1, Date d2)
         {
             if (d1.Month < d2.Month)
                 return -1;
-            else if (d1.Month > d2.Month)
+            
+            if (d1.Month > d2.Month)
                 return 1;
-            else
-            {
-                if (d1.Day < d2.Day)
-                    return -1;
-                else if (d1.Day > d2.Day)
-                    return 1;
-                else
-                    return 0;
-            }
+
+            if (d1.Day < d2.Day)
+                return -1;
+                
+            if (d1.Day > d2.Day)
+                return 1;
+                
+            return 0;
         }
-
-        #endregion
-
-        #region public int CompareWithoutYear(Date d)
 
         public int CompareWithoutYear(Date d)
         {
-            return Date.CompareWithoutYear(this, d);
+            return CompareWithoutYear(this, d);
         }
-
-        #endregion
-
-        #region public void CopyFrom(Date d)
 
         public void CopyFrom(Date d)
         {
@@ -380,14 +311,11 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             year = d.year;
         }
 
-        #endregion
-
-        #region public static Date Parse(string value)
-
         public static Date Parse(string value)
         {
             Date d = new Date();
             string[] v = value.Split('/');
+            
             try
             {
                 d.Day = int.Parse(v[1]);
@@ -395,12 +323,9 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 d.Year = int.Parse(v[2]);
             }
             catch { }
+
             return d;
         }
-
-        #endregion
-
-        #region public void FromString(string value)
 
         public void FromString(string value)
         {
@@ -412,12 +337,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
                 Year = int.Parse(v[2]);
             }
             catch { }
-
         }
-
-        #endregion
-
-        #region public static string ShortMonthName(int month)
 
         public static string ShortMonthName(int month)
         {
@@ -441,10 +361,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             //}
         }
 
-        #endregion
-
-        #region public static string MonthName(int month)
-
         public static string MonthName(int month)
         {
             return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[month];
@@ -465,8 +381,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             //    default: return string.Empty;
             //}
         }
-
-        #endregion
 
         public override string ToString()
         {

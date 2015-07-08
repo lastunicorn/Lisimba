@@ -22,7 +22,6 @@ using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable]
     public class ContactCollection : CustomObservableCollection<Contact>
     {
         public void Sort(ContactsSortingType sortField, SortDirection sortDirection)

@@ -17,12 +17,9 @@
 using System;
 using System.Collections.Specialized;
 using System.Reflection;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [XmlRoot("Book")]
-    [Serializable()]
     public class AddressBook
     {
         private string version;
@@ -32,7 +29,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// <summary>
         /// The version of the application that created this address book.
         /// </summary>
-        [XmlElement("Version")]
         public string Version
         {
             get { return version; }
@@ -48,7 +44,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// <summary>
         /// Gets or sets the name of the address book.
         /// </summary>
-        [XmlElement("Name")]
         public string Name
         {
             get { return name; }
@@ -64,16 +59,13 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// <summary>
         /// Gets a collection of Contact.
         /// </summary>
-        [XmlArray("Contacts"), XmlArrayItem("Contact")]
         public ContactCollection Contacts { get; private set; }
 
         /// <summary>
         /// Gets the full file name of the address book or empty string if is a new one.
         /// </summary>
-        [XmlIgnore()]
         public string FileName { get; set; }
 
-        [XmlIgnore]
         public AddressBookStatus Status
         {
             get { return status; }
@@ -149,9 +141,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             Contacts.ItemChanged += HandleContactChanged;
 
             FileName = null;
-
             Version = GetCurrentAssemblyVersion();
-
             Status = AddressBookStatus.New;
         }
 

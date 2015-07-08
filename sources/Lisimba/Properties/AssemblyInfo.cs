@@ -24,10 +24,6 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Lisimba")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dust in the Wind")]
-[assembly: AssemblyProduct("Lisimba")]
-[assembly: AssemblyCopyright("Copyright © Dust in the Wind 2007, 2008")]
-[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
@@ -37,15 +33,5 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("9e7b2dac-6a93-4dc2-9638-93e6913f0d40")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-[assembly: AssemblyVersion("1.1.0.*")]
-//[assembly: AssemblyFileVersion("1.0.0.0")]
 
 [assembly: InternalsVisibleTo("DustInTheWind.Lisimba.Tests")]

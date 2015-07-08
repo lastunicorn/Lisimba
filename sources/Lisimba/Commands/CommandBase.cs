@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Commands
 {
-    abstract class CommandBase<T> : ICommand<T>, ICommand
+    abstract class CommandBase<T> : ICommand<T>
     {
         private bool isEnabled;
 

@@ -14,13 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Data;
 using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable]
     public class DateCollection : CustomObservableCollection<Date>
     {
         public DataTable ToDataTable()

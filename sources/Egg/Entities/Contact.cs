@@ -15,18 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable]
-    [XmlRoot("Contact")]
     public class Contact : IComparable, IObservableEntity
     {
         private PersonName name = new PersonName();
 
-        [XmlElement("Name")]
         public PersonName Name
         {
             get { return name; }
@@ -43,7 +39,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         private Date birthday = new Date();
 
-        [XmlElement("Birthday")]
         public Date Birthday
         {
             get { return birthday; }
@@ -114,7 +109,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         private string category = string.Empty;
 
-        [XmlAttribute("Category")]
         public string Category
         {
             get { return category; }
@@ -125,57 +119,20 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        private PhoneCollection phones = new PhoneCollection();
+        public PhoneCollection Phones { get; private set; }
 
-        [XmlArray("Phones"), XmlArrayItem("Phone")]
-        public PhoneCollection Phones
-        {
-            get { return phones; }
-        }
+        public EmailCollection Emails { get; private set; }
 
-        private EmailCollection emails = new EmailCollection();
+        public WebSiteCollection WebSites { get; private set; }
 
-        [XmlArray("Emails"), XmlArrayItem("Email")]
-        public EmailCollection Emails
-        {
-            get { return emails; }
-        }
+        public AddressCollection Addresses { get; private set; }
 
-        private WebSiteCollection webSites = new WebSiteCollection();
+        public DateCollection Dates { get; private set; }
 
-        [XmlArray("WebSites"), XmlArrayItem("WebSite")]
-        public WebSiteCollection WebSites
-        {
-            get { return webSites; }
-        }
-
-        private AddressCollection addresses = new AddressCollection();
-
-        [XmlArray("Addresses"), XmlArrayItem("Address")]
-        public AddressCollection Addresses
-        {
-            get { return addresses; }
-        }
-
-        private DateCollection dates = new DateCollection();
-
-        [XmlArray("Dates"), XmlArrayItem("Date")]
-        public DateCollection Dates
-        {
-            get { return dates; }
-        }
-
-        private MessengerIdCollection messengerIds = new MessengerIdCollection();
-
-        [XmlArray("MessengerIds"), XmlArrayItem("MessengerId")]
-        public MessengerIdCollection MessengerIds
-        {
-            get { return messengerIds; }
-        }
+        public MessengerIdCollection MessengerIds { get; private set; }
 
         private string notes = string.Empty;
 
-        [XmlElement("Notes")]
         public string Notes
         {
             get { return notes; }
@@ -202,23 +159,30 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public Contact()
         {
-            phones.CollectionChanged += (sender, e) => OnChanged();
-            phones.ItemChanged += (sender, e) => OnChanged();
+            Phones = new PhoneCollection();
+            Emails = new EmailCollection();
+            WebSites = new WebSiteCollection();
+            Addresses = new AddressCollection();
+            Dates = new DateCollection();
+            MessengerIds = new MessengerIdCollection();
 
-            emails.CollectionChanged += (sender, e) => OnChanged();
-            emails.ItemChanged += (sender, e) => OnChanged();
+            Phones.CollectionChanged += (sender, e) => OnChanged();
+            Phones.ItemChanged += (sender, e) => OnChanged();
 
-            webSites.CollectionChanged += (sender, e) => OnChanged();
-            webSites.ItemChanged += (sender, e) => OnChanged();
+            Emails.CollectionChanged += (sender, e) => OnChanged();
+            Emails.ItemChanged += (sender, e) => OnChanged();
 
-            addresses.CollectionChanged += (sender, e) => OnChanged();
-            addresses.ItemChanged += (sender, e) => OnChanged();
+            WebSites.CollectionChanged += (sender, e) => OnChanged();
+            WebSites.ItemChanged += (sender, e) => OnChanged();
 
-            dates.CollectionChanged += (sender, e) => OnChanged();
-            dates.ItemChanged += (sender, e) => OnChanged();
+            Addresses.CollectionChanged += (sender, e) => OnChanged();
+            Addresses.ItemChanged += (sender, e) => OnChanged();
 
-            messengerIds.CollectionChanged += (sender, e) => OnChanged();
-            messengerIds.ItemChanged += (sender, e) => OnChanged();
+            Dates.CollectionChanged += (sender, e) => OnChanged();
+            Dates.ItemChanged += (sender, e) => OnChanged();
+
+            MessengerIds.CollectionChanged += (sender, e) => OnChanged();
+            MessengerIds.ItemChanged += (sender, e) => OnChanged();
 
             birthday.Changed += (sender, e) => OnChanged();
         }
@@ -240,12 +204,12 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         {
             name.Clear();
             birthday.Clear();
-            phones.Clear();
-            emails.Clear();
-            webSites.Clear();
-            addresses.Clear();
-            dates.Clear();
-            messengerIds.Clear();
+            Phones.Clear();
+            Emails.Clear();
+            WebSites.Clear();
+            Addresses.Clear();
+            Dates.Clear();
+            MessengerIds.Clear();
             notes = string.Empty;
 
             OnChanged();
@@ -261,12 +225,12 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             birthday.CopyFrom(contact.birthday);
 
-            phones.CopyFrom(contact.phones);
-            emails.CopyFrom(contact.emails);
-            webSites.CopyFrom(contact.webSites);
-            addresses.CopyFrom(contact.addresses);
-            dates.CopyFrom(contact.dates);
-            messengerIds.CopyFrom(contact.messengerIds);
+            Phones.CopyFrom(contact.Phones);
+            Emails.CopyFrom(contact.Emails);
+            WebSites.CopyFrom(contact.WebSites);
+            Addresses.CopyFrom(contact.Addresses);
+            Dates.CopyFrom(contact.Dates);
+            MessengerIds.CopyFrom(contact.MessengerIds);
 
             notes = contact.notes;
 
@@ -318,12 +282,12 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             return name.Equals(contact.name) &&
                    birthday == contact.birthday &&
-                   phones.Equals(contact.phones) &&
-                   emails.Equals(contact.emails) &&
-                   webSites.Equals(contact.webSites) &&
-                   addresses.Equals(contact.addresses) &&
-                   dates.Equals(contact.dates) &&
-                   messengerIds.Equals(contact.messengerIds) &&
+                   Phones.Equals(contact.Phones) &&
+                   Emails.Equals(contact.Emails) &&
+                   WebSites.Equals(contact.WebSites) &&
+                   Addresses.Equals(contact.Addresses) &&
+                   Dates.Equals(contact.Dates) &&
+                   MessengerIds.Equals(contact.MessengerIds) &&
                    notes == contact.notes;
         }
     }

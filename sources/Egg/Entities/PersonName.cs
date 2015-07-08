@@ -16,17 +16,13 @@
 
 using System;
 using System.Text;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable]
-    [XmlRoot("Name")]
     public class PersonName
     {
         private string firstName = string.Empty;
 
-        [XmlAttribute("First")]
         public string FirstName
         {
             get { return firstName; }
@@ -39,7 +35,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         private string middleName = string.Empty;
 
-        [XmlAttribute("Middle")]
         public string MiddleName
         {
             get { return middleName; }
@@ -52,7 +47,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         private string lastName = string.Empty;
 
-        [XmlAttribute("Last")]
         public string LastName
         {
             get { return lastName; }
@@ -65,7 +59,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         private string nickname = string.Empty;
 
-        [XmlAttribute("Nickname")]
         public string Nickname
         {
             get { return nickname; }

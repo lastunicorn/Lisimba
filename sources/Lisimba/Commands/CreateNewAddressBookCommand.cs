@@ -24,14 +24,14 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UiService uiService;
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
         {
             get { return "Create a new address book."; }
         }
 
-        public CreateNewAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService)
+        public CreateNewAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -39,12 +39,12 @@ namespace DustInTheWind.Lisimba.Commands
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
-            if (statusService == null)
-                throw new ArgumentNullException("statusService");
+            if (applicationStatus == null)
+                throw new ArgumentNullException("applicationStatus");
 
             this.currentData = currentData;
             this.uiService = uiService;
-            this.statusService = statusService;
+            this.applicationStatus = applicationStatus;
         }
 
         protected override void DoExecute(string fileName)
@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.Commands
             try
             {
                 currentData.AddressBook = new AddressBook();
-                statusService.StatusText = "A new address book was created.";
+                applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)
             {

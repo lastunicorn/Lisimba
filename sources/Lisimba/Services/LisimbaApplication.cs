@@ -22,20 +22,19 @@ namespace DustInTheWind.Lisimba.Services
 {
     class LisimbaApplication
     {
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
         private readonly ProgramArguments programArguments;
         private readonly ConfigurationService configurationService;
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UiService uiService;
-        private readonly ApplicationService applicationService;
         private readonly CurrentData currentData;
 
-        public LisimbaApplication(StatusService statusService, ProgramArguments programArguments, ConfigurationService configurationService,
+        public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
             RecentFiles recentFiles, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
             CurrentData currentData)
         {
-            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
@@ -44,24 +43,23 @@ namespace DustInTheWind.Lisimba.Services
             if (applicationService == null) throw new ArgumentNullException("applicationService");
             if (currentData == null) throw new ArgumentNullException("currentData");
 
-            this.statusService = statusService;
+            this.applicationStatus = applicationStatus;
             this.programArguments = programArguments;
             this.configurationService = configurationService;
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
             this.uiService = uiService;
-            this.applicationService = applicationService;
             this.currentData = currentData;
 
-            commandPool.OpenAddressBookCommand.AskIfAllowToContinue = AskToSave;
-            commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = AskToSave;
+            commandPool.OpenAddressBookCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
+            commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
 
             applicationService.Exiting += HandleApplicationExiting;
         }
 
         private void HandleApplicationExiting(object sender, CancelEventArgs e)
         {
-            bool allowToContinue = AskToSave();
+            bool allowToContinue = EnsureCurrentDataIsSaved();
 
             if (!allowToContinue)
                 e.Cancel = true;
@@ -69,7 +67,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void Start()
         {
-            statusService.DefaultStatusText = "Ready";
+            applicationStatus.DefaultStatusText = "Ready";
 
             string fileNameToOpenAtLoad = CalculateFileNameToInitiallyOpen();
 
@@ -100,7 +98,7 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        private bool AskToSave()
+        private bool EnsureCurrentDataIsSaved()
         {
             if (currentData.AddressBook == null || currentData.AddressBook.Status == AddressBookStatus.Saved)
                 return true;

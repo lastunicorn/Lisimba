@@ -16,7 +16,7 @@
 
 using System;
 using System.IO;
-using DustInTheWind.Lisimba.Egg.Gating;
+using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -25,7 +25,7 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UiService uiService;
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
@@ -33,16 +33,16 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Save current opened address book with another name."; }
         }
 
-        public SaveAsAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFiles recentFiles)
+        public SaveAsAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (uiService == null) throw new ArgumentNullException("uiService");
-            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.currentData = currentData;
             this.uiService = uiService;
-            this.statusService = statusService;
+            this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
 
             currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
@@ -68,7 +68,7 @@ namespace DustInTheWind.Lisimba.Commands
 
                 currentData.AddressBook.SetAsSaved();
 
-                statusService.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
             }
             catch (Exception ex)

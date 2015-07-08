@@ -14,14 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable]
     public class MessengerIdCollection : CustomObservableCollection<MessengerId>
     {
         public DataTable ToDataTable()

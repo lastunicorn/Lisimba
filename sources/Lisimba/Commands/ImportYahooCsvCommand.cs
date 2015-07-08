@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Gating;
+using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UiService uiService;
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
         {
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Commands
 
         public Func<bool> AskIfAllowToContinue;
 
-        public ImportYahooCsvCommand(CurrentData currentData, UiService uiService, StatusService statusService)
+        public ImportYahooCsvCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus)
         {
             if (currentData == null)
                 throw new ArgumentNullException("currentData");
@@ -44,12 +44,12 @@ namespace DustInTheWind.Lisimba.Commands
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
-            if (statusService == null)
-                throw new ArgumentNullException("statusService");
+            if (applicationStatus == null)
+                throw new ArgumentNullException("applicationStatus");
 
             this.currentData = currentData;
             this.uiService = uiService;
-            this.statusService = statusService;
+            this.applicationStatus = applicationStatus;
         }
 
         protected override void DoExecute(object parameter)
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.Commands
                 currentData.AddressBook = new AddressBook();
                 int countImport = currentData.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
 
-                statusService.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
+                applicationStatus.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
             }
             catch (Exception ex)
             {

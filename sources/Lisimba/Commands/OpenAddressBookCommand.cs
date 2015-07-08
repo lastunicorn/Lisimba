@@ -19,7 +19,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Egg.Entities;
-using DustInTheWind.Lisimba.Egg.Gating;
+using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Commands
     {
         private readonly CurrentData currentData;
         private readonly UiService uiService;
-        private readonly StatusService statusService;
+        private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
@@ -38,16 +38,16 @@ namespace DustInTheWind.Lisimba.Commands
 
         public Func<bool> AskIfAllowToContinue;
 
-        public OpenAddressBookCommand(CurrentData currentData, UiService uiService, StatusService statusService, RecentFiles recentFiles)
+        public OpenAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (currentData == null) throw new ArgumentNullException("currentData");
             if (uiService == null) throw new ArgumentNullException("uiService");
-            if (statusService == null) throw new ArgumentNullException("statusService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.currentData = currentData;
             this.uiService = uiService;
-            this.statusService = statusService;
+            this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
         }
 
@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Commands
 
                 currentData.AddressBook = openedAddressBook;
 
-                statusService.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
 
                 if (gate.Warnings.Any())

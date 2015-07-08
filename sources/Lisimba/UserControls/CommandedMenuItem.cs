@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.UserControls
         private ICommand command;
 
         [Browsable(false)]
-        public StatusService StatusService { get; set; }
+        public ApplicationStatus ApplicationStatus { get; set; }
 
         public string ShortDescription { get; set; }
 
@@ -57,10 +57,10 @@ namespace DustInTheWind.Lisimba.UserControls
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            if (StatusService != null)
+            if (ApplicationStatus != null)
             {
                 string description = CalculateTextToDisplayAsStatus();
-                StatusService.SetPermanentStatusText(description);
+                ApplicationStatus.SetPermanentStatusText(description);
             }
 
             base.OnMouseEnter(e);
@@ -68,8 +68,8 @@ namespace DustInTheWind.Lisimba.UserControls
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            if (StatusService != null)
-                StatusService.Reset();
+            if (ApplicationStatus != null)
+                ApplicationStatus.Reset();
 
             base.OnMouseLeave(e);
         }

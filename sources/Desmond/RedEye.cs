@@ -22,7 +22,7 @@ using DustInTheWind.Desmond.Logging;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Egg.Gating;
+using DustInTheWind.Lisimba.Gating;
 
 namespace DustInTheWind.Desmond
 {

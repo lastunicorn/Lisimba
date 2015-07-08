@@ -15,12 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    [XmlRoot("Address")]
     public class Address : IObservableEntity
     {
         private string street;
@@ -30,7 +27,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         private string country;
         private string description;
 
-        [XmlAttribute("Street")]
         public string Street
         {
             get { return street; }
@@ -41,7 +37,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("City")]
         public string City
         {
             get { return city; }
@@ -52,7 +47,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("State")]
         public string State
         {
             get { return state; }
@@ -63,7 +57,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("PostalCode")]
         public string PostalCode
         {
             get { return postalCode; }
@@ -74,7 +67,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Country")]
         public string Country
         {
             get { return country; }
@@ -85,7 +77,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }

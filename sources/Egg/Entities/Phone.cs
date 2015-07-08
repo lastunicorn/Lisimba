@@ -15,18 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
-    [XmlRoot("Phone")]
     public class Phone : IObservableEntity
     {
         private string number;
         private string description;
 
-        [XmlAttribute("Number")]
         public string Number
         {
             get { return number; }
@@ -37,7 +33,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             }
         }
 
-        [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }

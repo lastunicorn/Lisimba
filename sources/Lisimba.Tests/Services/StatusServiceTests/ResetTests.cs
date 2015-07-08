@@ -22,41 +22,41 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
     [TestFixture]
     public class ResetTests
     {
-        private StatusService statusService;
+        private ApplicationStatus applicationStatus;
 
         [SetUp]
         public void SetUp()
         {
-            statusService = new StatusService();
+            applicationStatus = new ApplicationStatus();
         }
 
         [TearDown]
         public void TearDown()
         {
-            statusService.Dispose();
+            applicationStatus.Dispose();
         }
 
         [Test]
         public void sets_the_StatusText_value_equal_to_DefaultStatusText()
         {
             const string defaultStatusText = "DefaultStatusText";
-            statusService.DefaultStatusText = defaultStatusText;
-            statusService.SetPermanentStatusText("StatusText");
+            applicationStatus.DefaultStatusText = defaultStatusText;
+            applicationStatus.SetPermanentStatusText("StatusText");
 
-            statusService.Reset();
+            applicationStatus.Reset();
 
-            Assert.That(statusService.StatusText, Is.EqualTo(defaultStatusText));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(defaultStatusText));
         }
 
         [Test]
         public void raises_StatusTextChanged_event()
         {
             bool eventWasRaised = false;
-            statusService.DefaultStatusText = "DefaultStatusText";
-            statusService.SetPermanentStatusText("StatusText");
-            statusService.StatusTextChanged += (sender, args) => eventWasRaised = true;
+            applicationStatus.DefaultStatusText = "DefaultStatusText";
+            applicationStatus.SetPermanentStatusText("StatusText");
+            applicationStatus.StatusTextChanged += (sender, args) => eventWasRaised = true;
 
-            statusService.Reset();
+            applicationStatus.Reset();
 
             Assert.That(eventWasRaised, Is.True);
         }
@@ -66,11 +66,11 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         {
             bool eventWasRaised = false;
             const string statusText = "some status";
-            statusService.DefaultStatusText = statusText;
-            statusService.SetPermanentStatusText(statusText);
-            statusService.StatusTextChanged += (sender, args) => eventWasRaised = true;
+            applicationStatus.DefaultStatusText = statusText;
+            applicationStatus.SetPermanentStatusText(statusText);
+            applicationStatus.StatusTextChanged += (sender, args) => eventWasRaised = true;
 
-            statusService.Reset();
+            applicationStatus.Reset();
 
             Assert.That(eventWasRaised, Is.False);
         }

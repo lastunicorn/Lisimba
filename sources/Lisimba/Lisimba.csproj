@@ -63,22 +63,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ApplicationExitCommand.cs" />
     <Compile Include="Commands\CommandBase.cs" />
@@ -98,7 +93,6 @@
     <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\AddressBookChangedEventArgs.cs" />
     <Compile Include="Services\AddressBookChangingEventArgs.cs" />
     <Compile Include="Services\ApplicationService.cs" />
@@ -153,7 +147,7 @@
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\LisimbaApplication.cs" />
     <Compile Include="Services\RecentFiles.cs" />
-    <Compile Include="Services\StatusService.cs" />
+    <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiService.cs" />
     <Compile Include="Services\Zodiac.cs" />
     <Compile Include="UserControls\Biorythm.cs">
@@ -409,6 +403,18 @@
     <ProjectReference Include="..\Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.YahooGate\Lisimba.YahooGate.csproj">
+      <Project>{D2568067-DBF2-49A5-9672-9A76271CC6C3}</Project>
+      <Name>Lisimba.YahooGate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.ZipXmlGate\Lisimba.ZipXmlGate.csproj">
+      <Project>{652744F3-B7FA-43AD-80A9-6EFC86537817}</Project>
+      <Name>Lisimba.ZipXmlGate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
+      <Project>{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}</Project>
+      <Name>Lisimba.ZodiacSigns</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

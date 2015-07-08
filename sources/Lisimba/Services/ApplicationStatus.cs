@@ -19,7 +19,7 @@ using System.Threading;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    public class StatusService : IDisposable
+    public class ApplicationStatus : IDisposable
     {
         private string statusText;
         private string defaultStatusText;
@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Services
                 handler(this, e);
         }
 
-        public StatusService()
+        public ApplicationStatus()
         {
             timer = new Timer(HandleTimerElapsed);
             defaultStatusText = string.Empty;

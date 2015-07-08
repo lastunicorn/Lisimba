@@ -112,46 +112,45 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Aquarius" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_varsator.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Aquarius" xml:space="preserve">
+    <value>Aquarius</value>
   </data>
-  <data name="Aries" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_berbec.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Pisces" xml:space="preserve">
+    <value>Pisces</value>
   </data>
-  <data name="Cancer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_rac.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Aries" xml:space="preserve">
+    <value>Aries</value>
   </data>
-  <data name="Capricorn" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_capricorn.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Taurus" xml:space="preserve">
+    <value>Taurus</value>
   </data>
-  <data name="Gemini" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_gemeni.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Gemini" xml:space="preserve">
+    <value>Gemini</value>
   </data>
-  <data name="Leo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_leu.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Cancer" xml:space="preserve">
+    <value>Cancer</value>
   </data>
-  <data name="Libra" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_balanta.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Leo" xml:space="preserve">
+    <value>Leo</value>
   </data>
-  <data name="Pisces" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_pesti.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Virgo" xml:space="preserve">
+    <value>Virgo</value>
   </data>
-  <data name="Sagittarius" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_sagetator.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Libra" xml:space="preserve">
+    <value>Libra</value>
   </data>
-  <data name="Scorpio" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_scorpion.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Scorpio" xml:space="preserve">
+    <value>Scorpio</value>
   </data>
-  <data name="Taurus" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_taur.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Sagittarius" xml:space="preserve">
+    <value>Sagittarius</value>
   </data>
-  <data name="Virgo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\zodiac\mic_fecioara.gif;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+    <data name="ZodiacSign_Capricorn" xml:space="preserve">
+    <value>Capricorn</value>
   </data>
 </root>

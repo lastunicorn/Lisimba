@@ -24,30 +24,30 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
     [TestFixture]
     public class StatusTextTests
     {
-        private StatusService statusService;
+        private ApplicationStatus applicationStatus;
 
         [SetUp]
         public void SetUp()
         {
-            statusService = new StatusService();
+            applicationStatus = new ApplicationStatus();
         }
 
         [TearDown]
         public void TearDown()
         {
-            statusService.Dispose();
+            applicationStatus.Dispose();
         }
 
         [Test]
         public void raises_StatusTextChanged_event_when_value_is_changed()
         {
             bool eventWasRaised = false;
-            statusService.StatusTextChanged += (sender, e) =>
+            applicationStatus.StatusTextChanged += (sender, e) =>
             {
                 eventWasRaised = true;
             };
 
-            statusService.StatusText = "test status";
+            applicationStatus.StatusText = "test status";
 
             Assert.That(eventWasRaised, Is.True);
         }
@@ -57,13 +57,13 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         {
             bool eventWasRaised = false;
             const string statusText = "some text";
-            statusService.StatusText = statusText;
-            statusService.StatusTextChanged += (sender, e) =>
+            applicationStatus.StatusText = statusText;
+            applicationStatus.StatusTextChanged += (sender, e) =>
             {
                 eventWasRaised = true;
             };
 
-            statusService.StatusText = statusText;
+            applicationStatus.StatusText = statusText;
 
             Assert.That(eventWasRaised, Is.False);
         }
@@ -73,14 +73,14 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         {
             const string defaultStatusText = "default status text";
             const string statusText = "some status";
-            statusService.ResetTimeout = TimeSpan.FromMilliseconds(100);
-            statusService.DefaultStatusText = defaultStatusText;
+            applicationStatus.ResetTimeout = TimeSpan.FromMilliseconds(100);
+            applicationStatus.DefaultStatusText = defaultStatusText;
 
-            statusService.StatusText = statusText;
+            applicationStatus.StatusText = statusText;
 
             Thread.Sleep(1000 + TestConstants.AcceptedTimeError);
 
-            Assert.That(statusService.StatusText, Is.EqualTo(defaultStatusText));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(defaultStatusText));
         }
     }
 }

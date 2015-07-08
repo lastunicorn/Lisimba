@@ -34,22 +34,30 @@ namespace DustInTheWind.Lisimba.Services
         {
             try
             {
-                // Read the config file
-                config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-                // Read lisimba section
-                LisimbaConfigSection = config.GetSection("lisimba") as LisimbaConfigSection;
-                if (LisimbaConfigSection == null)
-                {
-                    LisimbaConfigSection = new LisimbaConfigSection();
-                    config.Sections.Add("lisimba", LisimbaConfigSection);
-                    LisimbaConfigSection.SectionInformation.ForceSave = true;
-                    config.Save(ConfigurationSaveMode.Full);
-                }
+                OpenConfigurationFile();
+                ReadLisimbaSection();
             }
             catch
             {
                 LisimbaConfigSection = new LisimbaConfigSection();
+            }
+        }
+
+        private void OpenConfigurationFile()
+        {
+            config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+        }
+
+        private void ReadLisimbaSection()
+        {
+            LisimbaConfigSection = config.GetSection("lisimba") as LisimbaConfigSection;
+            
+            if (LisimbaConfigSection == null)
+            {
+                LisimbaConfigSection = new LisimbaConfigSection();
+                config.Sections.Add("lisimba", LisimbaConfigSection);
+                LisimbaConfigSection.SectionInformation.ForceSave = true;
+                config.Save(ConfigurationSaveMode.Full);
             }
         }
 

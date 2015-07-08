@@ -22,7 +22,6 @@ namespace DustInTheWind.Lisimba.Egg.Exceptions
     public class EggException : ApplicationException
     {
         public EggException()
-            : base()
         {
         }
 

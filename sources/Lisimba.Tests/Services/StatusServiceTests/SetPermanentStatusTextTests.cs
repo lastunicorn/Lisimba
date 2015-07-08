@@ -24,18 +24,18 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
     [TestFixture]
     public class SetPermanentStatusTextTests
     {
-        private StatusService statusService;
+        private ApplicationStatus applicationStatus;
 
         [SetUp]
         public void SetUp()
         {
-            statusService = new StatusService();
+            applicationStatus = new ApplicationStatus();
         }
 
         [TearDown]
         public void TearDown()
         {
-            statusService.Dispose();
+            applicationStatus.Dispose();
         }
 
         [Test]
@@ -43,21 +43,21 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         {
             const string statusText = "some status";
 
-            statusService.SetPermanentStatusText(statusText);
+            applicationStatus.SetPermanentStatusText(statusText);
 
-            Assert.That(statusService.StatusText, Is.EqualTo(statusText));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(statusText));
         }
 
         [Test]
         public void raises_StatusTextChanged_event_when_value_is_changed()
         {
             bool eventWasRaised = false;
-            statusService.StatusTextChanged += (sender, e) =>
+            applicationStatus.StatusTextChanged += (sender, e) =>
             {
                 eventWasRaised = true;
             };
 
-            statusService.SetPermanentStatusText("test status");
+            applicationStatus.SetPermanentStatusText("test status");
 
             Assert.That(eventWasRaised, Is.True);
         }
@@ -67,13 +67,13 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         {
             bool eventWasRaised = false;
             const string statusText = "some text";
-            statusService.StatusText = statusText;
-            statusService.StatusTextChanged += (sender, e) =>
+            applicationStatus.StatusText = statusText;
+            applicationStatus.StatusTextChanged += (sender, e) =>
             {
                 eventWasRaised = true;
             };
 
-            statusService.SetPermanentStatusText(statusText);
+            applicationStatus.SetPermanentStatusText(statusText);
 
             Assert.That(eventWasRaised, Is.False);
         }
@@ -81,12 +81,12 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         [Test]
         public void StatusText_is_not_reset_after_ResetTimeout_time()
         {
-            statusService.ResetTimeout = TimeSpan.FromMilliseconds(100);
+            applicationStatus.ResetTimeout = TimeSpan.FromMilliseconds(100);
 
-            statusService.SetPermanentStatusText("some text");
+            applicationStatus.SetPermanentStatusText("some text");
 
             Thread.Sleep(100 + TestConstants.AcceptedTimeError);
-            Assert.That(statusService.StatusText, Is.Not.EqualTo(statusService.DefaultStatusText));
+            Assert.That(applicationStatus.StatusText, Is.Not.EqualTo(applicationStatus.DefaultStatusText));
         }
     }
 }

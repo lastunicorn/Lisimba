@@ -42,12 +42,9 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arguments.cs" />
@@ -109,6 +106,10 @@
     <ProjectReference Include="..\Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.ZipXmlGate\Lisimba.ZipXmlGate.csproj">
+      <Project>{652744F3-B7FA-43AD-80A9-6EFC86537817}</Project>
+      <Name>Lisimba.ZipXmlGate</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

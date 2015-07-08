@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using DustInTheWind.Lisimba.Annotations;
 
 namespace DustInTheWind.Lisimba.ViewModels
 {
@@ -53,7 +52,6 @@ namespace DustInTheWind.Lisimba.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;

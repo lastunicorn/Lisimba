@@ -22,27 +22,27 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
     [TestFixture]
     public class DefaultStatusTextTests
     {
-        private StatusService statusService;
+        private ApplicationStatus applicationStatus;
 
         [SetUp]
         public void SetUp()
         {
-            statusService = new StatusService();
+            applicationStatus = new ApplicationStatus();
         }
 
         [TearDown]
         public void TearDown()
         {
-            statusService.Dispose();
+            applicationStatus.Dispose();
         }
 
         [Test]
         public void when_value_is_set_StatusText_is_set_to_same_value()
         {
             const string statusText = "some value";
-            statusService.DefaultStatusText = statusText;
+            applicationStatus.DefaultStatusText = statusText;
 
-            Assert.That(statusService.StatusText, Is.EqualTo(statusText));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(statusText));
         }
     }
 }

@@ -23,36 +23,36 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
     [TestFixture]
     public class ConstructorTests
     {
-        private StatusService statusService;
+        private ApplicationStatus applicationStatus;
 
         [SetUp]
         public void SetUp()
         {
-            statusService = new StatusService();
+            applicationStatus = new ApplicationStatus();
         }
 
         [TearDown]
         public void TearDown()
         {
-            statusService.Dispose();
+            applicationStatus.Dispose();
         }
 
         [Test]
         public void StatusText_is_initially_empty_string()
         {
-            Assert.That(statusService.StatusText, Is.EqualTo(string.Empty));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(string.Empty));
         }
 
         [Test]
         public void DefaultStatusText_is_initially_empty_string()
         {
-            Assert.That(statusService.DefaultStatusText, Is.EqualTo(string.Empty));
+            Assert.That(applicationStatus.DefaultStatusText, Is.EqualTo(string.Empty));
         }
 
         [Test]
         public void ResetTimeout_is_initially_1_second()
         {
-            Assert.That(statusService.ResetTimeout, Is.EqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(applicationStatus.ResetTimeout, Is.EqualTo(TimeSpan.FromSeconds(1)));
         }
     }
 }

@@ -43,13 +43,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="Presenters\ContactViewPresenterTests\ConstructorTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ContactChangedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

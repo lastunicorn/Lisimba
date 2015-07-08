@@ -15,15 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
     /// <summary>
     /// Class containing information about a messenger id.
     /// </summary>
-    [Serializable()]
-    [XmlRoot("MessengerId")]
     public class MessengerId : IObservableEntity
     {
         private string id;
@@ -32,7 +29,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// <summary>
         /// The messenger id.
         /// </summary>
-        [XmlAttribute("Id")]
         public string Id
         {
             get { return id; }
@@ -46,7 +42,6 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         /// <summary>
         /// A short description of the e-mail address.
         /// </summary>
-        [XmlAttribute("Description")]
         public string Description
         {
             get { return description; }
