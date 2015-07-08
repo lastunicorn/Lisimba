@@ -121,7 +121,6 @@ namespace DustInTheWind.Lisimba.Gating
             }
 
             book.Version = eggVersion.ToString();
-            book.FileName = fileName;
 
             return book;
         }
@@ -136,8 +135,6 @@ namespace DustInTheWind.Lisimba.Gating
 
             IEnumerable<Contact> contacts = addressBookEntity.Contacts.Select(FromEntity);
             addressBook.Contacts.AddRange(contacts);
-
-            addressBook.SetAsSaved();
 
             return addressBook;
         }

@@ -82,8 +82,6 @@ namespace DustInTheWind.Lisimba.Gating
                         }
                     }
                 }
-
-                addressBook.FileName = fileName;
             }
             catch (Exception ex)
             {

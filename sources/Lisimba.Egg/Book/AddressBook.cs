@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Specialized;
 using System.Reflection;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
@@ -25,7 +24,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
     {
         private string version;
         private string name;
-        private AddressBookStatus status;
 
         /// <summary>
         /// Gets or sets the version of the application that created this address book.
@@ -36,8 +34,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             set
             {
                 version = value;
-
-                Status = AddressBookStatus.Modified;
                 OnChanged();
             }
         }
@@ -51,8 +47,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             set
             {
                 name = value;
-
-                Status = AddressBookStatus.Modified;
                 OnChanged();
             }
         }
@@ -62,25 +56,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         /// </summary>
         public ContactCollection Contacts { get; private set; }
 
-        /// <summary>
-        /// Gets the full file name of the address book or empty string if is a new one.
-        /// </summary>
-        public string FileName { get; set; }
-
-        public AddressBookStatus Status
-        {
-            get { return status; }
-            private set
-            {
-                status = value;
-                OnStatusChanged();
-            }
-        }
-
-        #region Event Changed
-
         public event EventHandler Changed;
-
+        public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
+        
         protected virtual void OnChanged()
         {
             EventHandler handler = Changed;
@@ -88,40 +66,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
-
-        #region Event AddressBookSaved
-
-        public event EventHandler AddressBookSaved;
-
-        protected virtual void OnAddressBookSaved(EventArgs e)
-        {
-            EventHandler handler = AddressBookSaved;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        #endregion
-
-        #region Event StatusChanged
-
-        public event EventHandler StatusChanged;
-
-        protected virtual void OnStatusChanged()
-        {
-            EventHandler handler = StatusChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        #endregion
-
-        #region Event ContactContentChanged
-
-        public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
 
         protected virtual void OnContactChanged(ContactContentChangedEventArgs e)
         {
@@ -131,8 +75,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 handler(this, e);
         }
 
-        #endregion
-
         public AddressBook()
         {
             Name = "New Address Book";
@@ -141,21 +83,17 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Contacts.CollectionChanged += HandleContactsCollectionChanged;
             Contacts.ItemChanged += HandleContactChanged;
 
-            FileName = null;
             Version = GetCurrentAssemblyVersion();
-            Status = AddressBookStatus.New;
         }
 
         private void HandleContactChanged(object sender, ItemChangedEventArgs<Contact> e)
         {
-            Status = AddressBookStatus.Modified;
             OnContactChanged(new ContactContentChangedEventArgs(e.Item));
             OnChanged();
         }
 
         private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
         {
-            Status = AddressBookStatus.Modified;
             OnChanged();
         }
 
@@ -165,24 +103,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             AssemblyName assemblyName = assembly.GetName();
 
             return assemblyName.Version.ToString();
-        }
-
-        public void SetAsSaved()
-        {
-            Status = AddressBookStatus.Saved;
-            OnAddressBookSaved(EventArgs.Empty);
-        }
-
-        public string GetFriendlyName()
-        {
-            bool hasName = !string.IsNullOrWhiteSpace(Name);
-
-            if (hasName)
-                return Name;
-
-            bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
-
-            return hasFileName ? FileName : null;
         }
     }
 }

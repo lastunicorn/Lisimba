@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.Commands
         {
             try
             {
-                currentData.AddressBook = new AddressBook();
+                currentData.AddressBookShell.LoadNew();
                 applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)

@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.Commands
         {
             AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
             {
-                AddressBook = currentData.AddressBook,
+                AddressBookShell = currentData.AddressBookShell,
                 View = new FormAddressBookProperties()
             };
 

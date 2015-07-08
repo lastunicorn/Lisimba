@@ -68,13 +68,14 @@ namespace DustInTheWind.Lisimba.Commands
                     return;
 
                 YahooCsvGate yahooCsvGate = new YahooCsvGate();
-                AddressBook yahooAddressBook = yahooCsvGate.Load(fileName);
+                AddressBookShell addressBookShell = new AddressBookShell();
+                addressBookShell.LoadFrom(yahooCsvGate, fileName);
 
-                ContactCollection yahooContacts = yahooAddressBook.Contacts;
+                ContactCollection yahooContacts = addressBookShell.AddressBook.Contacts;
                 ImportRuleCollection mergeRules = CreateMergeRules(yahooContacts);
 
-                currentData.AddressBook = new AddressBook();
-                int countImport = currentData.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
+                currentData.AddressBookShell.LoadNew();
+                int countImport = currentData.AddressBookShell.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
 
                 applicationStatus.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
             }

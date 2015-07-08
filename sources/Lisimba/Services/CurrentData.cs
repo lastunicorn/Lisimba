@@ -22,30 +22,23 @@ namespace DustInTheWind.Lisimba.Services
 {
     class CurrentData
     {
-        private AddressBook addressBook;
+        private readonly AddressBookShell addressBookShell;
         private Contact contact;
 
-        public AddressBook AddressBook
+        public CurrentData()
         {
-            get { return addressBook; }
-            set
-            {
-                if (addressBook == value)
-                    return;
+            addressBookShell = new AddressBookShell();
+            addressBookShell.AddressBookChanged += HandleAddressBookChanged;
+        }
 
-                AddressBookChangingEventArgs eva = new AddressBookChangingEventArgs();
-                OnAddressBookChanging(eva);
+        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs addressBookChangedEventArgs)
+        {
+            Contact = null;
+        }
 
-                if (eva.Cancel)
-                    return;
-
-                AddressBook oldAddressBook = addressBook;
-                addressBook = value;
-
-                Contact = null;
-
-                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, addressBook));
-            }
+        public AddressBookShell AddressBookShell
+        {
+            get { return addressBookShell; }
         }
 
         public Contact Contact
@@ -61,36 +54,6 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        #region Event AddressBookChanging
-
-        public event EventHandler<AddressBookChangingEventArgs> AddressBookChanging;
-
-        protected virtual void OnAddressBookChanging(AddressBookChangingEventArgs e)
-        {
-            EventHandler<AddressBookChangingEventArgs> handler = AddressBookChanging;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        #endregion
-
-        #region Event AddressBookChanged
-
-        public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
-
-        protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
-        {
-            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        #endregion
-
-        #region Event ContactChanged
-
         public event EventHandler ContactChanged;
 
         protected virtual void OnContactChanged()
@@ -101,6 +64,14 @@ namespace DustInTheWind.Lisimba.Services
                 handler(this, EventArgs.Empty);
         }
 
-        #endregion
+        public bool IsSaved
+        {
+            get
+            {
+                return AddressBookShell == null ||
+                       AddressBookShell.Status == AddressBookStatus.Saved ||
+                       AddressBookShell.Status == AddressBookStatus.New;
+            }
+        }
     }
 }

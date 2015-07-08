@@ -40,14 +40,14 @@ namespace DustInTheWind.Lisimba.Commands
                 throw new ArgumentNullException("uiService");
 
             this.currentData = currentData;
-            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
 
             this.uiService = uiService;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = currentData.AddressBook != null;
+            IsEnabled = currentData.AddressBookShell != null;
         }
 
         protected override void DoExecute(object parameter)

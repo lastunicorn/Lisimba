@@ -9,15 +9,15 @@ namespace DustInTheWind.Lisimba.Presenters
     public class AddressBookPropertiesPresenter
     {
         private readonly AddressBookPropertiesViewModel viewModel;
-        private AddressBook addressBook;
+        private AddressBookShell addressBookShell;
         private IAddressBookPropertiesView view;
 
-        public AddressBook AddressBook
+        public AddressBookShell AddressBookShell
         {
-            get { return addressBook; }
+            get { return addressBookShell; }
             set
             {
-                addressBook = value;
+                addressBookShell = value;
                 PopulateModel();
             }
         }
@@ -40,7 +40,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
         private void PopulateModel()
         {
-            if (addressBook == null)
+            if (addressBookShell == null)
             {
                 viewModel.BookName = string.Empty;
                 viewModel.BookNameEnabled = false;
@@ -49,10 +49,10 @@ namespace DustInTheWind.Lisimba.Presenters
             }
             else
             {
-                viewModel.BookName = addressBook.Name;
+                viewModel.BookName = addressBookShell.AddressBook.Name;
                 viewModel.BookNameEnabled = true;
-                viewModel.FileLocation = GetFullFileLocationForDisplay(addressBook.FileName);
-                viewModel.ContactsCount = addressBook.Contacts.Count;
+                viewModel.FileLocation = GetFullFileLocationForDisplay(addressBookShell.FileName);
+                viewModel.ContactsCount = addressBookShell.AddressBook.Contacts.Count;
             }
         }
 
@@ -65,13 +65,13 @@ namespace DustInTheWind.Lisimba.Presenters
 
         public void OkButtonWasClicked()
         {
-            if (addressBook == null)
+            if (addressBookShell == null)
                 return;
 
-            bool nameIsChanged = addressBook.Name != viewModel.BookName;
+            bool nameIsChanged = addressBookShell.AddressBook.Name != viewModel.BookName;
 
             if (nameIsChanged)
-                addressBook.Name = viewModel.BookName;
+                addressBookShell.AddressBook.Name = viewModel.BookName;
         }
 
         public void ShowWindow()

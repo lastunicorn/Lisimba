@@ -57,7 +57,7 @@ namespace DustInTheWind.Lisimba.Commands
 
             if (dialogResult == DialogResult.Yes)
             {
-                currentData.AddressBook.Contacts.Remove(contactToDelete);
+                currentData.AddressBookShell.AddressBook.Contacts.Remove(contactToDelete);
 
                 if (contactToDelete == currentData.Contact)
                     currentData.Contact = null;

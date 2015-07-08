@@ -70,12 +70,9 @@ namespace DustInTheWind.Lisimba.Commands
                 }
 
                 ZipXmlGate gate = new ZipXmlGate();
-                AddressBook openedAddressBook = gate.Load(fileName);
-                openedAddressBook.SetAsSaved();
+                currentData.AddressBookShell.LoadFrom(gate, fileName);
 
-                currentData.AddressBook = openedAddressBook;
-
-                applicationStatus.StatusText = string.Format("{0} contacts oppened.", openedAddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("{0} contacts oppened.", currentData.AddressBookShell.AddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
 
                 if (gate.Warnings.Any())

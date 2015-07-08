@@ -45,13 +45,13 @@ namespace DustInTheWind.Lisimba.Commands
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
 
-            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = currentData.AddressBook != null;
+            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = currentData.AddressBookShell != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = currentData.AddressBook != null;
+            IsEnabled = currentData.AddressBookShell != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.Commands
                 string fileName;
                 bool isNew = false;
 
-                if (currentData.AddressBook.FileName == null)
+                if (currentData.AddressBookShell.FileName == null)
                 {
                     fileName = uiService.AskToSaveLsbFile();
 
@@ -72,15 +72,13 @@ namespace DustInTheWind.Lisimba.Commands
                 }
                 else
                 {
-                    fileName = currentData.AddressBook.FileName;
+                    fileName = currentData.AddressBookShell.FileName;
                 }
 
                 ZipXmlGate gate = new ZipXmlGate();
-                gate.Save(currentData.AddressBook, fileName);
+                currentData.AddressBookShell.SaveTo(gate, fileName);
 
-                currentData.AddressBook.SetAsSaved();
-
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBookShell.AddressBook.Contacts.Count);
 
                 if (isNew)
                     recentFiles.AddRecentFile(Path.GetFullPath(fileName));

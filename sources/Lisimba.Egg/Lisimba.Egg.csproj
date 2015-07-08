@@ -51,10 +51,12 @@
     <Compile Include="Comparers\ComparerFactory.cs" />
     <Compile Include="Comparers\MultipleComparer.cs" />
     <Compile Include="Comparers\CompareContactsByMiddleNameComparer.cs" />
-    <Compile Include="Entities\AddressBookShell.cs">
+    <Compile Include="BookShell\AddressBookChangedEventArgs.cs" />
+    <Compile Include="BookShell\AddressBookChangingEventArgs.cs" />
+    <Compile Include="BookShell\AddressBookShell.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\AddressBookStatus.cs" />
+    <Compile Include="BookShell\AddressBookStatus.cs" />
     <Compile Include="Book\ContactContentChangedEventArgs.cs" />
     <Compile Include="Book\CustomObservableCollection.cs" />
     <Compile Include="Book\IObservableEntity.cs" />

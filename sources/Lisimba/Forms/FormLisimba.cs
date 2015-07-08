@@ -16,6 +16,7 @@
 
 using System;
 using System.ComponentModel;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
@@ -56,11 +57,12 @@ namespace DustInTheWind.Lisimba.Forms
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
             this.currentData = currentData;
-            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            currentData.AddressBookShell.StatusChanged += HandleAddressBookStatusChanged;
             currentData.ContactChanged += HandleCurrentContactChanged;
 
-            if (currentData.AddressBook != null)
-                HookToAddressBook(currentData.AddressBook);
+            if (currentData.AddressBookShell.AddressBook != null)
+                currentData.AddressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             this.applicationService = applicationService;
             applicationService.Exiting += HandleApplicationExiting;
@@ -87,24 +89,12 @@ namespace DustInTheWind.Lisimba.Forms
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             if (e.OldAddressBook != null)
-                UnhookFromAddressBook(e.OldAddressBook);
+                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
 
             if (e.NewAddressBook != null)
-                HookToAddressBook(e.NewAddressBook);
+                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             Text = BuildFormTitle();
-        }
-
-        private void HookToAddressBook(AddressBook addressBook)
-        {
-            addressBook.Changed += HandleCurrentAddressBookContentChanged;
-            addressBook.StatusChanged += HandleAddressBookStatusChanged;
-        }
-
-        private void UnhookFromAddressBook(AddressBook addressBook)
-        {
-            addressBook.Changed -= HandleCurrentAddressBookContentChanged;
-            addressBook.StatusChanged -= HandleAddressBookStatusChanged;
         }
 
         private void HandleAddressBookStatusChanged(object sender, EventArgs eventArgs)
@@ -129,15 +119,15 @@ namespace DustInTheWind.Lisimba.Forms
 
         private string BuildFormTitle()
         {
-            if (currentData.AddressBook == null)
+            if (currentData.AddressBookShell == null)
                 return applicationService.ProgramName;
 
             StringBuilder sb = new StringBuilder();
 
-            string addressBookName = currentData.AddressBook.GetFriendlyName() ?? "< Unnamed >";
+            string addressBookName = currentData.AddressBookShell.GetFriendlyName() ?? "< Unnamed >";
             sb.Append(addressBookName);
 
-            if (currentData.AddressBook.Status != AddressBookStatus.Saved)
+            if (currentData.AddressBookShell.Status != AddressBookStatus.Saved)
                 sb.Append(" *");
 
             sb.Append(" - ");

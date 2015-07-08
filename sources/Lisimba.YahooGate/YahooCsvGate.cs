@@ -31,8 +31,7 @@ namespace DustInTheWind.Lisimba.Gating
             AddressBook addressBook = new AddressBook
             {
                 Version = string.Empty,
-                Name = string.Empty,
-                FileName = fileName
+                Name = string.Empty
             };
 
             Csv csv = new Csv();

@@ -41,13 +41,13 @@ namespace DustInTheWind.Lisimba.Commands
             this.currentData = currentData;
             this.uiService = uiService;
 
-            currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = currentData.AddressBook != null;
+            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = currentData.AddressBookShell != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = currentData.AddressBook != null;
+            IsEnabled = currentData.AddressBookShell != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Commands
                     return;
 
                 YahooCsvGate gate = new YahooCsvGate();
-                gate.Save(currentData.AddressBook, fileName);
+                currentData.AddressBookShell.ExportTo(gate, fileName);
             }
             catch (Exception ex)
             {
