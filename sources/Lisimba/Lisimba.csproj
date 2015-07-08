@@ -385,18 +385,6 @@
     <Content Include="Images\save.png" />
     <Content Include="Images\sort.gif" />
     <Content Include="Images\yahoo_icon.gif" />
-    <None Include="Images\zodiac\mic_balanta.gif" />
-    <None Include="Images\zodiac\mic_berbec.gif" />
-    <None Include="Images\zodiac\mic_capricorn.gif" />
-    <None Include="Images\zodiac\mic_fecioara.gif" />
-    <None Include="Images\zodiac\mic_gemeni.gif" />
-    <None Include="Images\zodiac\mic_leu.gif" />
-    <None Include="Images\zodiac\mic_pesti.gif" />
-    <None Include="Images\zodiac\mic_rac.gif" />
-    <None Include="Images\zodiac\mic_sagetator.gif" />
-    <None Include="Images\zodiac\mic_scorpion.gif" />
-    <None Include="Images\zodiac\mic_taur.gif" />
-    <None Include="Images\zodiac\mic_varsator.gif" />
     <Content Include="Lion.ico" />
   </ItemGroup>
   <ItemGroup>
