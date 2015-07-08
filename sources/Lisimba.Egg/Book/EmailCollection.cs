@@ -18,19 +18,19 @@ using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class WebSiteCollection : CustomObservableCollection<WebSite>
+    public class EmailCollection : CustomObservableCollection<Email>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (WebSite webSite in this)
+            foreach (Email email in this)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = webSite.Address;
-                dr[1] = webSite.Description;
+                dr[0] = email.Address;
+                dr[1] = email.Description;
                 dt.Rows.Add(dr);
             }
 
@@ -39,54 +39,54 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public static DataTable GetEmptyDataTable()
         {
-            DataTable dt = new DataTable("WebSites");
+            DataTable dt = new DataTable("Emails");
 
-            dt.Columns.Add(new DataColumn("Web Site", typeof(string)));
+            dt.Columns.Add(new DataColumn("Email", typeof(string)));
             dt.Columns.Add(new DataColumn("Comment", typeof(string)));
 
             return dt;
         }
 
-        public void CopyFrom(WebSiteCollection values)
+        public void CopyFrom(EmailCollection values)
         {
             Clear();
 
             for (int i = 0; i < values.Count; i++)
             {
-                Add(new WebSite(values[i]));
+                Add(new Email(values[i]));
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="WebSite"/> object that match the description.
+        /// Returns the <see cref="Email"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="WebSite"/> object that match or <c>null</c>.</returns>
-        public WebSite SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="Email"/> object that match or <c>null</c>.</returns>
+        public Email SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (WebSite webSite in Items)
+            foreach (Email email in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (webSite.Description.CompareTo(text) == 0)
-                            return webSite;
+                        if (email.Description.CompareTo(text) == 0)
+                            return email;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (webSite.Description.StartsWith(text))
-                            return webSite;
+                        if (email.Description.StartsWith(text))
+                            return email;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (webSite.Description.EndsWith(text))
-                            return webSite;
+                        if (email.Description.EndsWith(text))
+                            return email;
                         break;
 
                     case SearchMode.Containing:
-                        if (webSite.Description.IndexOf(text) > 0)
-                            return webSite;
+                        if (email.Description.IndexOf(text) > 0)
+                            return email;
                         break;
                 }
             }
@@ -96,22 +96,22 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            WebSiteCollection webSites = obj as WebSiteCollection;
+            EmailCollection emails = obj as EmailCollection;
 
-            return Equals(webSites);
+            return Equals(emails);
         }
 
-        public bool Equals(WebSiteCollection webSites)
+        public bool Equals(EmailCollection emails)
         {
-            if (webSites == null)
+            if (emails == null)
                 return false;
 
-            if (webSites.Count != Count)
+            if (emails.Count != Count)
                 return false;
 
-            for (int i = 0; i < webSites.Count; i++)
+            for (int i = 0; i < emails.Count; i++)
             {
-                bool exists = Enumerable.Contains(Items, webSites[i]);
+                bool exists = Enumerable.Contains(Items, emails[i]);
 
                 if (!exists)
                     return false;

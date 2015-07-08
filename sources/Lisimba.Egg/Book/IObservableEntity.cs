@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2014 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,14 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Drawing;
-using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Enums;
+using System;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public interface IZodiacSignProvider
+    public interface IObservableEntity
     {
-        Image GetZodiacImage(ZodiacSign zodiacSign);
+        event EventHandler Changed;
     }
 }

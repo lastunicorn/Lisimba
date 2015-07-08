@@ -16,25 +16,25 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     /// <summary>
-    /// Class containing information about an e-mail
+    /// Class containing information about a messenger id.
     /// </summary>
-    public class Email : IObservableEntity
+    public class MessengerId : IObservableEntity
     {
-        private string address;
+        private string id;
         private string description;
 
         /// <summary>
-        /// The e-mail address.
+        /// The messenger id.
         /// </summary>
-        public string Address
+        public string Id
         {
-            get { return address; }
+            get { return id; }
             set
             {
-                address = value;
+                id = value;
                 OnChanged();
             }
         }
@@ -67,64 +67,63 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         #endregion
 
         /// <summary>
-        /// Creates a new empty Email object.
+        /// Creates a new empty MessengerId object.
         /// </summary>
-        public Email()
+        public MessengerId()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new Email object with the address and description specified.
+        /// Creates a new MessengerId object with the id and description specified.
         /// </summary>
-        /// <param name="address">The e-mail address</param>
-        /// <param name="description">A short description of the email address.</param>
-        public Email(string address, string description)
+        public MessengerId(string id, string description)
         {
-            this.address = address;
+            this.id = id;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new Email object with the data copied from the one passed as parameter.
+        /// Creates a new MessengerId object with the data copied from the one passed as parameter.
         /// </summary>
-        /// <param name="email"></param>
-        public Email(Email email)
+        public MessengerId(MessengerId messenger)
         {
-            CopyFrom(email);
+            CopyFrom(messenger);
         }
 
         /// <summary>
-        /// Copy the data from the Email object passed as parameter into the current object.
+        /// Removes the data from all the fields
         /// </summary>
-        /// <param name="email"></param>
-        private void CopyFrom(Email email)
+        public void Clear()
         {
-            address = email.address;
-            description = email.description;
+            id = string.Empty;
+            description = string.Empty;
+        }
+
+        /// <summary>
+        /// Copy the data from the MessengerId object passed as parameter into the current object.
+        /// </summary>
+        public void CopyFrom(MessengerId messenger)
+        {
+            id = messenger.id;
+            description = messenger.description;
         }
 
         public override bool Equals(object obj)
         {
-            Email email = obj as Email;
+            if (!(obj is MessengerId)) return false;
 
-            return Equals(email);
-        }
+            MessengerId messengerId = (MessengerId)obj;
 
-        private bool Equals(Email email)
-        {
-            if (email == null)
-                return false;
-
-            if (!address.Equals(email.address)) return false;
-            if (!description.Equals(email.description)) return false;
+            if (!id.Equals(messengerId.id)) return false;
+            if (!description.Equals(messengerId.description)) return false;
 
             return true;
         }
 
         public override string ToString()
         {
-            return address + (description.Length > 0 ? (" - " + description) : string.Empty);
+            return Id + (description.Length > 0 ? " - " + description : string.Empty);
         }
     }
 }

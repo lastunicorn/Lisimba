@@ -16,13 +16,15 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using zcsv;
 
 namespace DustInTheWind.Lisimba.Gating
 {
-    public class YahooCsvGate
+    public class YahooCsvGate : IGate
     {
         public AddressBook Load(string fileName)
         {

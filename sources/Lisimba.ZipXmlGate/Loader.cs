@@ -21,6 +21,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Exceptions;
 using DustInTheWind.Lisimba.Gating.Entities;

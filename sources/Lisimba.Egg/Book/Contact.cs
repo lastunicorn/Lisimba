@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class Contact : IComparable, IObservableEntity
     {

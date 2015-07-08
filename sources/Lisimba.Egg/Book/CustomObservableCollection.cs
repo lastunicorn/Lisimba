@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class CustomObservableCollection<T> : ObservableCollection<T>
         where T : class, IObservableEntity

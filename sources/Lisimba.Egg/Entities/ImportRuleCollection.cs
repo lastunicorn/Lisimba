@@ -18,10 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Egg.Entities
 {
-    [Serializable()]
+    [Serializable]
     public class ImportRuleCollection : Collection<ImportRule>
     {
         public ImportRuleCollection()

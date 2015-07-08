@@ -20,6 +20,7 @@ using System.Threading;
 using DustInTheWind.Desmond.Config;
 using DustInTheWind.Desmond.Logging;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Gating;

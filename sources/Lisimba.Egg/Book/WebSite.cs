@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     /// <summary>
     /// Class containing information about an e-mail

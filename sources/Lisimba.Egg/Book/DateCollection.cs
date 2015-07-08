@@ -17,7 +17,7 @@
 using System.Data;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class DateCollection : CustomObservableCollection<Date>
     {

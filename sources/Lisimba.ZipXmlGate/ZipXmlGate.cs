@@ -16,11 +16,13 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Gating
 {
-    public class ZipXmlGate
+    public class ZipXmlGate : IGate
     {
         private readonly Saver saver;
         private readonly Loader loader;

@@ -22,6 +22,7 @@ using DustInTheWind.Lisimba.Services;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.UserControls
 {

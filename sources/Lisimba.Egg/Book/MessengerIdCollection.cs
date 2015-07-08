@@ -18,7 +18,7 @@ using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class MessengerIdCollection : CustomObservableCollection<MessengerId>
     {

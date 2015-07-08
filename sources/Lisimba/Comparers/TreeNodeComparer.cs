@@ -19,6 +19,7 @@ using DustInTheWind.Lisimba.Egg.Entities;
 using System;
 using System.Collections;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Comparers

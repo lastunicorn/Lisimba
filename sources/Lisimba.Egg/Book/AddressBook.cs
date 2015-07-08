@@ -17,8 +17,9 @@
 using System;
 using System.Collections.Specialized;
 using System.Reflection;
+using DustInTheWind.Lisimba.Egg.Entities;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class AddressBook
     {
@@ -27,7 +28,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
         private AddressBookStatus status;
 
         /// <summary>
-        /// The version of the application that created this address book.
+        /// Gets or sets the version of the application that created this address book.
         /// </summary>
         public string Version
         {

@@ -17,7 +17,7 @@
 using System;
 using System.Text;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class PersonName
     {

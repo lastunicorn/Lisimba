@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Egg.Enums;
-using System;
 using System.Collections;
 using System.Linq;
+using DustInTheWind.Lisimba.Egg.Comparers;
+using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class ContactCollection : CustomObservableCollection<Contact>
     {

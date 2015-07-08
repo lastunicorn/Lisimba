@@ -14,24 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class AddressCollection : CustomObservableCollection<Address>
+    public class PhoneCollection : CustomObservableCollection<Phone>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (Address address in this)
+            foreach (Phone phone in this)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = address;
-                dr[1] = address.Description;
+                dr[0] = phone.Number;
+                dr[1] = phone.Description;
                 dt.Rows.Add(dr);
             }
 
@@ -40,56 +39,54 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public static DataTable GetEmptyDataTable()
         {
-            DataTable dt = new DataTable("Addresses");
+            DataTable dt = new DataTable("Phones");
 
-            dt.Columns.Add(new DataColumn("Address", typeof(string)));
+            dt.Columns.Add(new DataColumn("Phone", typeof(string)));
             dt.Columns.Add(new DataColumn("Comment", typeof(string)));
 
             return dt;
         }
 
-        public void CopyFrom(AddressCollection values)
+        public void CopyFrom(PhoneCollection values)
         {
             Clear();
 
-            IEnumerable<Address> newAddresses = values.Select(address => new Address(address));
-
-            foreach (Address newAddress in newAddresses)
+            for (int i = 0; i < values.Count; i++)
             {
-                Add(newAddress);
+                Add(new Phone(values[i]));
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="Address"/> object that match the description.
+        /// Returns the <see cref="Phone"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="Address"/> object that match or <c>null</c>.</returns>
-        public Address SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="Phone"/> object that match or <c>null</c>.</returns>
+        public Phone SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (Address address in Items)
+            foreach (Phone phone in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (address.Description.CompareTo(text) == 0)
-                            return address;
+                        if (phone.Description.CompareTo(text) == 0)
+                            return phone;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (address.Description.StartsWith(text))
-                            return address;
+                        if (phone.Description.StartsWith(text))
+                            return phone;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (address.Description.EndsWith(text))
-                            return address;
+                        if (phone.Description.EndsWith(text))
+                            return phone;
                         break;
 
                     case SearchMode.Containing:
-                        if (address.Description.IndexOf(text) > 0)
-                            return address;
+                        if (phone.Description.IndexOf(text) > 0)
+                            return phone;
                         break;
                 }
             }
@@ -99,22 +96,22 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public override bool Equals(object obj)
         {
-            AddressCollection addresses = obj as AddressCollection;
+            PhoneCollection phones = obj as PhoneCollection;
 
-            return Equals(addresses);
+            return Equals(phones);
         }
 
-        public bool Equals(AddressCollection addresses)
+        public bool Equals(PhoneCollection phones)
         {
-            if (addresses == null)
+            if (phones == null)
                 return false;
 
-            if (addresses.Count != Count)
+            if (phones.Count != Count)
                 return false;
 
-            foreach (Address address in addresses)
+            for (int i = 0; i < phones.Count; i++)
             {
-                bool exists = Enumerable.Contains(Items, address);
+                bool exists = Enumerable.Contains(Items, phones[i]);
 
                 if (!exists)
                     return false;
