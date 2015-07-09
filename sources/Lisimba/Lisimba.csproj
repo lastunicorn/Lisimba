@@ -180,7 +180,6 @@
     <Compile Include="UserControls\MenuItemWithChildren.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Presenters\NameChangedEventArgs.cs" />
     <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
     <Compile Include="UserControls\WebSiteListView.cs">
       <SubType>UserControl</SubType>

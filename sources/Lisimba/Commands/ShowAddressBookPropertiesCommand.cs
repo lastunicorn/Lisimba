@@ -18,7 +18,6 @@ using System;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
 {

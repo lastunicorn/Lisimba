@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Presenters
         {
             try
             {
-                ValidateContact(editedContact);
+                ValidateContact();
 
                 addressBook.Contacts.Add(editedContact);
 
@@ -86,14 +86,14 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        private void ValidateContact(Contact contactToValidate)
+        private void ValidateContact()
         {
-            bool isNameEmpty = contactToValidate.Name.IsEmpty();
+            bool isNameEmpty = editedContact.Name.IsEmpty();
 
             if (isNameEmpty)
                 throw new LisimbaException("Please enter at least one of the fields marked with '*'.");
 
-            bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(contactToValidate.Name));
+            bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(editedContact.Name));
 
             if (isAnotherContactWithSameName)
                 throw new LisimbaException("Another contact having the same name already exists.");
