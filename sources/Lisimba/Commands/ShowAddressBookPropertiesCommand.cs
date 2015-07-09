@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
@@ -23,19 +24,19 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class ShowAddressBookPropertiesCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
 
         public override string ShortDescription
         {
             get { return "Display the address book properties."; }
         }
 
-        public ShowAddressBookPropertiesCommand(CurrentData currentData)
+        public ShowAddressBookPropertiesCommand(AddressBookShell addressBookShell)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
         }
 
         protected override void DoExecute(object parameter)
@@ -47,7 +48,7 @@ namespace DustInTheWind.Lisimba.Commands
         {
             AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
             {
-                AddressBookShell = currentData.AddressBookShell,
+                AddressBookShell = addressBookShell,
                 View = new FormAddressBookProperties()
             };
 

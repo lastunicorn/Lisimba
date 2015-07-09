@@ -18,6 +18,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;
 
@@ -25,7 +26,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class OpenAddressBookCommand : CommandBase<string>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
         private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
@@ -37,14 +38,14 @@ namespace DustInTheWind.Lisimba.Commands
 
         public Func<bool> AskIfAllowToContinue;
 
-        public OpenAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public OpenAddressBookCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
-            if (currentData == null) throw new ArgumentNullException("currentData");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
@@ -68,9 +69,9 @@ namespace DustInTheWind.Lisimba.Commands
                 }
 
                 ZipXmlGate gate = new ZipXmlGate();
-                currentData.AddressBookShell.LoadFrom(gate, fileName);
+                addressBookShell.LoadFrom(gate, fileName);
 
-                applicationStatus.StatusText = string.Format("{0} contacts oppened.", currentData.AddressBookShell.AddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("{0} contacts oppened.", addressBookShell.AddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
 
                 if (gate.Warnings.Any())

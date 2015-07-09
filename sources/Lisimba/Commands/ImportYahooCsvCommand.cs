@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class ImportYahooCsvCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
         private readonly ApplicationStatus applicationStatus;
 
@@ -38,10 +38,10 @@ namespace DustInTheWind.Lisimba.Commands
 
         public Func<bool> AskIfAllowToContinue;
 
-        public ImportYahooCsvCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus)
+        public ImportYahooCsvCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Commands
             if (applicationStatus == null)
                 throw new ArgumentNullException("applicationStatus");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
             this.applicationStatus = applicationStatus;
         }
@@ -75,8 +75,8 @@ namespace DustInTheWind.Lisimba.Commands
                 ContactCollection yahooContacts = addressBookShell.AddressBook.Contacts;
                 ImportRuleCollection mergeRules = CreateMergeRules(yahooContacts);
 
-                currentData.AddressBookShell.LoadNew();
-                int countImport = currentData.AddressBookShell.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
+                this.addressBookShell.LoadNew();
+                int countImport = this.addressBookShell.AddressBook.Contacts.AddRange(yahooContacts, mergeRules);
 
                 applicationStatus.StatusText = string.Format("{0} contacts imported from {1} contacts in .csv file.", countImport, yahooContacts.Count);
             }

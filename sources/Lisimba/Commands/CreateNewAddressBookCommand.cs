@@ -15,13 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
 {
     class CreateNewAddressBookCommand : CommandBase<string>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
         private readonly ApplicationStatus applicationStatus;
 
@@ -30,10 +31,10 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Create a new address book."; }
         }
 
-        public CreateNewAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus)
+        public CreateNewAddressBookCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
@@ -41,7 +42,7 @@ namespace DustInTheWind.Lisimba.Commands
             if (applicationStatus == null)
                 throw new ArgumentNullException("applicationStatus");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
             this.applicationStatus = applicationStatus;
         }
@@ -50,7 +51,7 @@ namespace DustInTheWind.Lisimba.Commands
         {
             try
             {
-                currentData.AddressBookShell.LoadNew();
+                addressBookShell.LoadNew();
                 applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
@@ -23,7 +24,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class CreateNewContactCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
 
         public override string ShortDescription
@@ -31,28 +32,28 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Create a new contact."; }
         }
 
-        public CreateNewContactCommand(CurrentData currentData, UiService uiService)
+        public CreateNewContactCommand(AddressBookShell addressBookShell, UiService uiService)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
-            this.currentData = currentData;
-            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            this.addressBookShell = addressBookShell;
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
 
             this.uiService = uiService;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = currentData.AddressBookShell != null;
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            AddContactPresenter addContactPresenter = new AddContactPresenter(currentData, uiService);
+            AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, uiService);
             addContactPresenter.View = new FormAddContact();
             addContactPresenter.Show();
         }

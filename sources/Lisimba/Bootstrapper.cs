@@ -16,6 +16,7 @@
 
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Commands;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
@@ -42,7 +43,7 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<CurrentData>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<AddressBookShell>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<UiService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());

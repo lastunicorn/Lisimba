@@ -16,6 +16,8 @@
 
 using System;
 using System.ComponentModel;
+using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
@@ -27,11 +29,11 @@ namespace DustInTheWind.Lisimba.Services
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UiService uiService;
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
             RecentFiles recentFiles, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
-            CurrentData currentData)
+            AddressBookShell addressBookShell)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
@@ -40,7 +42,7 @@ namespace DustInTheWind.Lisimba.Services
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
-            if (currentData == null) throw new ArgumentNullException("currentData");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
             this.applicationStatus = applicationStatus;
             this.programArguments = programArguments;
@@ -48,7 +50,7 @@ namespace DustInTheWind.Lisimba.Services
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
             this.uiService = uiService;
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
 
             commandPool.OpenAddressBookCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
             commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
@@ -66,7 +68,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void Start()
         {
-            applicationStatus.DefaultStatusText = "Ready";
+            applicationStatus.DefaultStatusText = Resources.DefaultStatusText;
 
             string fileNameToOpenAtLoad = CalculateFileNameToInitiallyOpen();
 
@@ -99,10 +101,10 @@ namespace DustInTheWind.Lisimba.Services
 
         private bool EnsureCurrentDataIsSaved()
         {
-            if (currentData.AddressBookShell.IsSaved)
+            if (addressBookShell.IsSaved)
                 return true;
 
-            bool? response = uiService.DisplayYesNoQuestion("Current address book is not saved.\nDo you wanna save it before proceedeing?", "Save?");
+            bool? response = uiService.DisplayYesNoQuestion(Resources.EnsureAddressBookIsSaved_Question, Resources.EnsureAddressBookIsSaved_Title);
 
             if (response == null)
                 return false;

@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class SaveAddressBookCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
         private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
@@ -34,25 +34,25 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Save current opened address book."; }
         }
 
-        public SaveAddressBookCommand(CurrentData currentData, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public SaveAddressBookCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
-            if (currentData == null) throw new ArgumentNullException("currentData");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (uiService == null) throw new ArgumentNullException("uiService");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
 
-            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = currentData.AddressBookShell != null;
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = currentData.AddressBookShell != null;
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Commands
                 string fileName;
                 bool isNew = false;
 
-                if (currentData.AddressBookShell.FileName == null)
+                if (addressBookShell.FileName == null)
                 {
                     fileName = uiService.AskToSaveLsbFile();
 
@@ -73,13 +73,13 @@ namespace DustInTheWind.Lisimba.Commands
                 }
                 else
                 {
-                    fileName = currentData.AddressBookShell.FileName;
+                    fileName = addressBookShell.FileName;
                 }
 
                 ZipXmlGate gate = new ZipXmlGate();
-                currentData.AddressBookShell.SaveTo(gate, fileName);
+                addressBookShell.SaveTo(gate, fileName);
 
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", currentData.AddressBookShell.AddressBook.Contacts.Count);
+                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", addressBookShell.AddressBook.Contacts.Count);
 
                 if (isNew)
                     recentFiles.AddRecentFile(Path.GetFullPath(fileName));

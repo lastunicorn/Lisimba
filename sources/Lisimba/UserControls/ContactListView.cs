@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private bool ignoreCurrentContactChange;
 
-        private CurrentData currentData;
+        private AddressBookShell currentData;
         private ConfigurationService configurationService;
 
         public CommandPool CommandPool
@@ -64,31 +64,31 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        public CurrentData CurrentData
+        public AddressBookShell CurrentData
         {
             get { return currentData; }
             set
             {
                 if (currentData != null)
                 {
-                    currentData.AddressBookShell.AddressBookChanged -= HandleCurrentAddressBookChanged;
-                    currentData.AddressBookShell.AddressBookSaved -= HandleCurrentAddressBookSaved;
+                    currentData.AddressBookChanged -= HandleCurrentAddressBookChanged;
+                    currentData.AddressBookSaved -= HandleCurrentAddressBookSaved;
                     currentData.ContactChanged -= HandleCurrentContactChanged;
 
-                    if (currentData.AddressBookShell.AddressBook != null)
-                        UnhookFromAddressBook(currentData.AddressBookShell.AddressBook);
+                    if (currentData.AddressBook != null)
+                        UnhookFromAddressBook(currentData.AddressBook);
                 }
 
                 currentData = value;
 
                 if (currentData != null)
                 {
-                    currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-                    currentData.AddressBookShell.AddressBookSaved += HandleCurrentAddressBookSaved;
+                    currentData.AddressBookChanged += HandleCurrentAddressBookChanged;
+                    currentData.AddressBookSaved += HandleCurrentAddressBookSaved;
                     currentData.ContactChanged += HandleCurrentContactChanged;
 
-                    if (currentData.AddressBookShell.AddressBook != null)
-                        HookToAddressBook(currentData.AddressBookShell.AddressBook);
+                    if (currentData.AddressBook != null)
+                        HookToAddressBook(currentData.AddressBook);
                 }
 
                 RepopulateFromCurrentAddressBook();
@@ -158,12 +158,11 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             bool currentDataContainsContacts =
                 currentData != null &&
-                currentData.AddressBookShell != null &&
-                currentData.AddressBookShell.AddressBook != null &&
-                currentData.AddressBookShell.AddressBook.Contacts != null;
+                currentData.AddressBook != null &&
+                currentData.AddressBook.Contacts != null;
 
             contactsToTreeViewBinder.Contacts = currentDataContainsContacts
-                ? currentData.AddressBookShell.AddressBook.Contacts
+                ? currentData.AddressBook.Contacts
                 : null;
         }
 

@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Forms
     internal partial class FormLisimba : Form
     {
         private readonly ApplicationStatus applicationStatus;
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly ApplicationService applicationService;
 
         private bool allowToClose;
@@ -39,13 +39,13 @@ namespace DustInTheWind.Lisimba.Forms
         // Lisimba - male name meaning "lion" in Zulu language.
 
         public FormLisimba(ConfigurationService configurationService, ApplicationStatus applicationStatus,
-            RecentFiles recentFiles, CurrentData currentData, CommandPool commandPool, ApplicationService applicationService,
+            RecentFiles recentFiles, AddressBookShell addressBookShell, CommandPool commandPool, ApplicationService applicationService,
             UiService uiService)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (currentData == null) throw new ArgumentNullException("currentData");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
             if (uiService == null) throw new ArgumentNullException("uiService");
@@ -55,19 +55,19 @@ namespace DustInTheWind.Lisimba.Forms
             this.applicationStatus = applicationStatus;
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
-            this.currentData = currentData;
-            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            currentData.AddressBookShell.StatusChanged += HandleAddressBookStatusChanged;
-            currentData.ContactChanged += HandleCurrentContactChanged;
+            this.addressBookShell = addressBookShell;
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBookShell.StatusChanged += HandleAddressBookStatusChanged;
+            addressBookShell.ContactChanged += HandleCurrentContactChanged;
 
-            if (currentData.AddressBookShell.AddressBook != null)
-                currentData.AddressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+            if (addressBookShell.AddressBook != null)
+                addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             this.applicationService = applicationService;
             applicationService.Exiting += HandleApplicationExiting;
             applicationService.ExitCanceled += HandleApplicationExitCanceled;
 
-            contactListView1.CurrentData = currentData;
+            contactListView1.CurrentData = addressBookShell;
             contactListView1.CommandPool = commandPool;
             contactListView1.ApplicationStatus = applicationStatus;
             contactListView1.ConfigurationService = configurationService;
@@ -108,7 +108,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
-            contactView1.Presenter.Contact = currentData.Contact;
+            contactView1.Presenter.Contact = addressBookShell.Contact;
         }
 
         private void HandleStatusTextChanged(object sender, EventArgs e)
@@ -134,15 +134,15 @@ namespace DustInTheWind.Lisimba.Forms
 
         private string BuildFormTitle()
         {
-            if (currentData.AddressBookShell == null)
+            if (addressBookShell.AddressBook == null)
                 return applicationService.ProgramName;
 
             StringBuilder sb = new StringBuilder();
 
-            string addressBookName = currentData.AddressBookShell.GetFriendlyName() ?? "< Unnamed >";
+            string addressBookName = addressBookShell.GetFriendlyName() ?? "< Unnamed >";
             sb.Append(addressBookName);
 
-            if (currentData.AddressBookShell.Status != AddressBookStatus.Saved)
+            if (!addressBookShell.IsSaved)
                 sb.Append(" *");
 
             sb.Append(" - ");

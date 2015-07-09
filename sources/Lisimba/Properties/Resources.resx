@@ -153,4 +153,14 @@
     <data name="ZodiacSign_Capricorn" xml:space="preserve">
     <value>Capricorn</value>
   </data>
+  <data name="EnsureAddressBookIsSaved_Question" xml:space="preserve">
+    <value>Current address book is not saved.
+Do you wanna save it before proceedeing?</value>
+  </data>
+  <data name="EnsureAddressBookIsSaved_Title" xml:space="preserve">
+    <value>Save?</value>
+  </data>
+  <data name="DefaultStatusText" xml:space="preserve">
+    <value>Ready</value>
+  </data>
 </root>

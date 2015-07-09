@@ -95,7 +95,6 @@
     <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
     <Compile Include="Services\ApplicationService.cs" />
     <Compile Include="Services\CommandPool.cs" />
-    <Compile Include="Services\CurrentData.cs" />
     <Compile Include="Commands\OpenAddressBookCommand.cs" />
     <Compile Include="Commands\SaveAddressBookCommand.cs" />
     <Compile Include="Comparers\TreeNodeByNicknameOrNameComparer.cs" />

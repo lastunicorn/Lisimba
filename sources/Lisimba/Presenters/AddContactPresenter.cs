@@ -17,6 +17,7 @@
 using System;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Exceptions;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
@@ -25,7 +26,7 @@ namespace DustInTheWind.Lisimba.Presenters
 {
     class AddContactPresenter
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
 
         private Contact editedContact;
@@ -41,24 +42,24 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        public AddContactPresenter(CurrentData currentData, UiService uiService)
+        public AddContactPresenter(AddressBookShell addressBookShell, UiService uiService)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
         }
 
         public void ViewWasLoaded()
         {
-            if (currentData.AddressBookShell == null)
+            if (addressBookShell.AddressBook == null)
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
-            addressBook = currentData.AddressBookShell.AddressBook;
+            addressBook = addressBookShell.AddressBook;
             editedContact = new Contact();
 
             view.Contact = editedContact;

@@ -17,36 +17,37 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Commands
 {
     class DeleteCurrentContactCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
 
         public override string ShortDescription
         {
             get { return "Delete the currently selected contact."; }
         }
 
-        public DeleteCurrentContactCommand(CurrentData currentData)
+        public DeleteCurrentContactCommand(AddressBookShell addressBookShell)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
-            this.currentData = currentData;
-            currentData.ContactChanged += HandleCurrentContactChanged;
+            this.addressBookShell = addressBookShell;
+            addressBookShell.ContactChanged += HandleCurrentContactChanged;
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = currentData.Contact != null;
+            IsEnabled = addressBookShell.Contact != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            Contact contactToDelete = currentData.Contact;
+            Contact contactToDelete = addressBookShell.Contact;
 
             if (contactToDelete == null)
                 return;
@@ -56,10 +57,10 @@ namespace DustInTheWind.Lisimba.Commands
 
             if (dialogResult == DialogResult.Yes)
             {
-                currentData.AddressBookShell.AddressBook.Contacts.Remove(contactToDelete);
+                addressBookShell.AddressBook.Contacts.Remove(contactToDelete);
 
-                if (contactToDelete == currentData.Contact)
-                    currentData.Contact = null;
+                if (contactToDelete == addressBookShell.Contact)
+                    addressBookShell.Contact = null;
             }
         }
     }

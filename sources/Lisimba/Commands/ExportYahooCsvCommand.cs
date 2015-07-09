@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Commands
 {
     class ExportYahooCsvCommand : CommandBase<object>
     {
-        private readonly CurrentData currentData;
+        private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
 
         public override string ShortDescription
@@ -31,24 +31,24 @@ namespace DustInTheWind.Lisimba.Commands
             get { return "Export current opened address book in Yahoo! csv format."; }
         }
 
-        public ExportYahooCsvCommand(CurrentData currentData, UiService uiService)
+        public ExportYahooCsvCommand(AddressBookShell addressBookShell, UiService uiService)
         {
-            if (currentData == null)
-                throw new ArgumentNullException("currentData");
+            if (addressBookShell == null)
+                throw new ArgumentNullException("addressBookShell");
 
             if (uiService == null)
                 throw new ArgumentNullException("uiService");
 
-            this.currentData = currentData;
+            this.addressBookShell = addressBookShell;
             this.uiService = uiService;
 
-            currentData.AddressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = currentData.AddressBookShell != null;
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = currentData.AddressBookShell != null;
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.Commands
                     return;
 
                 YahooCsvGate gate = new YahooCsvGate();
-                currentData.AddressBookShell.ExportTo(gate, fileName);
+                addressBookShell.ExportTo(gate, fileName);
             }
             catch (Exception ex)
             {

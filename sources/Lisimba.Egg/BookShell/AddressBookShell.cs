@@ -7,14 +7,16 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
     {
         private AddressBookStatus status;
         private AddressBook addressBook;
+        private Contact contact;
 
         public event EventHandler<AddressBookChangingEventArgs> AddressBookChanging;
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
         public event EventHandler AddressBookSaved;
         public event EventHandler StatusChanged;
+        public event EventHandler ContactChanged;
 
         /// <summary>
-        /// Gets the full file name of the address book or empty string if is a new one.
+        /// Gets the full file name of the address book or null if it's a new one.
         /// </summary>
         public string FileName { get; private set; }
 
@@ -25,6 +27,19 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
             {
                 status = value;
                 OnStatusChanged();
+            }
+        }
+
+        public Contact Contact
+        {
+            get { return contact; }
+            set
+            {
+                if (contact == value)
+                    return;
+
+                contact = value;
+                OnContactChanged();
             }
         }
 
@@ -53,6 +68,7 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
                     addressBook.Changed += HandleChanged;
 
                 OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, addressBook));
+                Contact = null;
             }
         }
 
@@ -88,10 +104,36 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
                 handler(this, EventArgs.Empty);
         }
 
+        protected virtual void OnContactChanged()
+        {
+            EventHandler handler = ContactChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
         public AddressBookShell()
         {
             FileName = null;
-            Status = AddressBookStatus.New;
+            status = AddressBookStatus.New;
+        }
+
+        private void HandleChanged(object sender, EventArgs e)
+        {
+            Status = AddressBookStatus.Modified;
+        }
+
+        public string GetFriendlyName()
+        {
+            bool hasName = addressBook != null && !string.IsNullOrWhiteSpace(addressBook.Name);
+            if (hasName)
+                return addressBook.Name;
+
+            bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
+            if (hasFileName) return
+                FileName;
+
+            return null;
         }
 
         public void LoadNew()
@@ -106,47 +148,25 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
             AddressBook = gate.Load(fileName);
             FileName = fileName;
             Status = AddressBookStatus.Saved;
-
-            OnAddressBookSaved(EventArgs.Empty);
-        }
-
-        private void HandleChanged(object sender, EventArgs e)
-        {
-            Status = AddressBookStatus.Modified;
-        }
-
-        public string GetFriendlyName()
-        {
-            bool hasName = addressBook != null && !string.IsNullOrWhiteSpace(addressBook.Name);
-
-            if (hasName)
-                return addressBook.Name;
-
-            bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
-
-            return hasFileName ? FileName : null;
         }
 
         public void ExportTo(IGate gate, string fileName)
         {
             gate.Save(AddressBook, fileName);
-            FileName = fileName;
         }
 
         public void SaveTo(IGate gate, string fileName)
         {
             gate.Save(AddressBook, fileName);
-
+            FileName = fileName;
             Status = AddressBookStatus.Saved;
+
             OnAddressBookSaved(EventArgs.Empty);
         }
 
         public bool IsSaved
         {
-            get
-            {
-                return Status == AddressBookStatus.Saved || Status == AddressBookStatus.New;
-            }
+            get { return Status == AddressBookStatus.Saved || Status == AddressBookStatus.New; }
         }
     }
 }
