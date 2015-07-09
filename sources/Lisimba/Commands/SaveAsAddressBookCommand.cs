@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;
 

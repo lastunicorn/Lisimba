@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Services;

@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Services;
 
@@ -115,6 +116,22 @@ namespace DustInTheWind.Lisimba.Forms
             toolStripStatusLabel1.Text = applicationStatus.StatusText;
         }
 
+        private void HandleFormShown(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = applicationStatus.StatusText;
+
+            Text = BuildFormTitle();
+        }
+
+        private void HandleFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (allowToClose)
+                return;
+
+            e.Cancel = !allowToClose;
+            applicationService.Exit();
+        }
+
         private string BuildFormTitle()
         {
             if (currentData.AddressBookShell == null)
@@ -133,22 +150,6 @@ namespace DustInTheWind.Lisimba.Forms
             sb.Append(applicationService.ProgramName);
 
             return sb.ToString();
-        }
-
-        private void FormLisimba_Shown(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = applicationStatus.StatusText;
-
-            Text = BuildFormTitle();
-        }
-
-        private void FormLisimba_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (allowToClose)
-                return;
-
-            e.Cancel = !allowToClose;
-            applicationService.Exit();
         }
     }
 }

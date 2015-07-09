@@ -16,7 +16,6 @@
 
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg
 {

@@ -16,7 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
+using DustInTheWind.Lisimba.Egg.BookShell;
 
 namespace DustInTheWind.Lisimba.Services
 {
@@ -62,16 +62,6 @@ namespace DustInTheWind.Lisimba.Services
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
-        }
-
-        public bool IsSaved
-        {
-            get
-            {
-                return AddressBookShell == null ||
-                       AddressBookShell.Status == AddressBookStatus.Saved ||
-                       AddressBookShell.Status == AddressBookStatus.New;
-            }
         }
     }
 }

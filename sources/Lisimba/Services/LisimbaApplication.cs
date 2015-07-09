@@ -99,7 +99,7 @@ namespace DustInTheWind.Lisimba.Services
 
         private bool EnsureCurrentDataIsSaved()
         {
-            if (currentData.IsSaved)
+            if (currentData.AddressBookShell.IsSaved)
                 return true;
 
             bool? response = uiService.DisplayYesNoQuestion("Current address book is not saved.\nDo you wanna save it before proceedeing?", "Save?");

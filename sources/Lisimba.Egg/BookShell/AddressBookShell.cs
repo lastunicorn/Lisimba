@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.BookShell
 {
     public class AddressBookShell
     {
@@ -146,6 +139,14 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
             Status = AddressBookStatus.Saved;
             OnAddressBookSaved(EventArgs.Empty);
+        }
+
+        public bool IsSaved
+        {
+            get
+            {
+                return Status == AddressBookStatus.Saved || Status == AddressBookStatus.New;
+            }
         }
     }
 }
