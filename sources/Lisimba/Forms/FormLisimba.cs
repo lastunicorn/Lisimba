@@ -15,10 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
-using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -29,11 +28,8 @@ namespace DustInTheWind.Lisimba.Forms
 
     internal partial class FormLisimba : Form
     {
-        private readonly ApplicationStatus applicationStatus;
+        private readonly LisimbaViewModel viewModel;
         private readonly AddressBookShell addressBookShell;
-        private readonly ApplicationService applicationService;
-
-        private bool allowToClose;
 
         // Lisimba - male name meaning "lion" in Zulu language.
 
@@ -51,20 +47,10 @@ namespace DustInTheWind.Lisimba.Forms
 
             InitializeComponent();
 
-            this.applicationStatus = applicationStatus;
-            applicationStatus.StatusTextChanged += HandleStatusTextChanged;
+            viewModel = new LisimbaViewModel(addressBookShell, applicationService, applicationStatus);
 
             this.addressBookShell = addressBookShell;
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            addressBookShell.StatusChanged += HandleAddressBookStatusChanged;
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
-
-            if (addressBookShell.AddressBook != null)
-                addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-
-            this.applicationService = applicationService;
-            applicationService.Exiting += HandleApplicationExiting;
-            applicationService.ExitCanceled += HandleApplicationExitCanceled;
 
             contactListView1.CurrentData = addressBookShell;
             contactListView1.CommandPool = commandPool;
@@ -74,81 +60,23 @@ namespace DustInTheWind.Lisimba.Forms
             menuStripMain.Initialize(commandPool, applicationStatus, recentFiles);
         }
 
-        private void HandleApplicationExitCanceled(object sender, EventArgs e)
-        {
-            allowToClose = false;
-        }
-
-        private void HandleApplicationExiting(object sender, CancelEventArgs e)
-        {
-            allowToClose = true;
-        }
-
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
-        {
-            if (e.OldAddressBook != null)
-                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-
-            if (e.NewAddressBook != null)
-                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
-
-            Text = BuildFormTitle();
-        }
-
-        private void HandleAddressBookStatusChanged(object sender, EventArgs eventArgs)
-        {
-            Text = BuildFormTitle();
-        }
-
-        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
-        {
-            Text = BuildFormTitle();
-        }
-
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
             contactView1.Presenter.Contact = addressBookShell.Contact;
         }
 
-        private void HandleStatusTextChanged(object sender, EventArgs e)
-        {
-            toolStripStatusLabel1.Text = applicationStatus.StatusText;
-        }
-
         private void HandleFormShown(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = applicationStatus.StatusText;
+            DataBindings.Add("Text", viewModel, "Title");
+            toolStripStatusLabel1.DataBindings.Add("Text", viewModel, "StatusText");
 
-            Text = BuildFormTitle();
+            viewModel.WindowWasShown();
         }
 
         private void HandleFormClosing(object sender, FormClosingEventArgs e)
         {
-            if (allowToClose)
-                return;
-
+            bool allowToClose = viewModel.WindowIsClosing();
             e.Cancel = !allowToClose;
-            applicationService.Exit();
-        }
-
-        private string BuildFormTitle()
-        {
-            if (addressBookShell.AddressBook == null)
-                return applicationService.ProgramName;
-
-            StringBuilder sb = new StringBuilder();
-
-            string addressBookName = addressBookShell.GetFriendlyName() ?? "< Unnamed >";
-            sb.Append(addressBookName);
-
-            if (!addressBookShell.IsSaved)
-                sb.Append(" *");
-
-            sb.Append(" - ");
-
-            sb.Append(applicationService.ProgramName);
-
-            return sb.ToString();
         }
     }
 }

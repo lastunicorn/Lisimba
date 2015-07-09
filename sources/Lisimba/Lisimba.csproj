@@ -93,6 +93,7 @@
     <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
+    <Compile Include="Presenters\LisimbaViewModel.cs" />
     <Compile Include="Services\ApplicationService.cs" />
     <Compile Include="Services\CommandPool.cs" />
     <Compile Include="Commands\OpenAddressBookCommand.cs" />
@@ -147,6 +148,9 @@
     <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiService.cs" />
     <Compile Include="Services\Zodiac.cs" />
+    <Compile Include="UserControls\BindableToolStripStatusLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="UserControls\Biorythm.cs">
       <SubType>UserControl</SubType>
     </Compile>

@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
             this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactEditor();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new BindableToolStripStatusLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStripMain = new DustInTheWind.Lisimba.UserControls.LisimbaMainMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -159,7 +159,7 @@ namespace DustInTheWind.Lisimba.Forms
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private ContactEditor contactView1;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private BindableToolStripStatusLabel toolStripStatusLabel1;
         private ContactListView contactListView1;
         private System.Windows.Forms.Panel panel1;
         private LisimbaMainMenuStrip menuStripMain;
