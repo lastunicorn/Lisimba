@@ -24,7 +24,6 @@ namespace DustInTheWind.Lisimba.Forms
 {
     // Create the LisimbaStatusBar control.
     // Refactor ContactListView to take advantage of the services.
-    // Create a StatusChanged event in AddressBook.
 
     internal partial class FormLisimba : Form
     {
