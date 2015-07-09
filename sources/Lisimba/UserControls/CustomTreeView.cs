@@ -16,7 +16,6 @@
 
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Forms;
 
 namespace DustInTheWind.Lisimba.UserControls

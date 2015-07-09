@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
@@ -37,7 +36,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class PhoneAddedEventArgs : EventArgs
         {
-            private Phone phone = null;
+            private readonly Phone phone = null;
             public Phone Phone
             {
                 get { return phone; }
@@ -66,7 +65,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class PhoneDeletedEventArgs : EventArgs
         {
-            private Phone phone = null;
+            private readonly Phone phone = null;
             public Phone Phone
             {
                 get { return phone; }
@@ -95,7 +94,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class PhoneChangedEventArgs : EventArgs
         {
-            private Phone phone = null;
+            private readonly Phone phone = null;
             public Phone Phone
             {
                 get { return phone; }

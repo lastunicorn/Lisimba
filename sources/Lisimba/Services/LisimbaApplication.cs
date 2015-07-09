@@ -16,7 +16,6 @@
 
 using System;
 using System.ComponentModel;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.Services
 {

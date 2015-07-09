@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Presenters;
 
 namespace DustInTheWind.Lisimba.Forms

@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
@@ -37,7 +36,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class EmailAddedEventArgs : EventArgs
         {
-            private Email email;
+            private readonly Email email;
             public Email Email
             {
                 get { return email; }
@@ -66,7 +65,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class EmailChangedEventArgs : EventArgs
         {
-            private Email email;
+            private readonly Email email;
             public Email Email
             {
                 get { return email; }
@@ -95,7 +94,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class EmailDeletedEventArgs : EventArgs
         {
-            private Email email;
+            private readonly Email email;
             public Email Email
             {
                 get { return email; }

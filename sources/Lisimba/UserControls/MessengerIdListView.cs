@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
@@ -37,7 +36,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class MessengerIdAddedEventArgs : EventArgs
         {
-            private MessengerId messengerId;
+            private readonly MessengerId messengerId;
             public MessengerId MessengerId
             {
                 get { return messengerId; }
@@ -67,7 +66,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class MessengerIdChangedEventArgs : EventArgs
         {
-            private MessengerId messengerId;
+            private readonly MessengerId messengerId;
             public MessengerId MessengerId
             {
                 get { return messengerId; }
@@ -97,7 +96,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class MessengerIdDeletedEventArgs : EventArgs
         {
-            private MessengerId messengerId;
+            private readonly MessengerId messengerId;
             public MessengerId MessengerId
             {
                 get { return messengerId; }

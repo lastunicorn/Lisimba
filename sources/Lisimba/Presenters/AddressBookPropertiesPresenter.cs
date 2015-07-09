@@ -1,5 +1,4 @@
 using System.IO;
-using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.ViewModels;

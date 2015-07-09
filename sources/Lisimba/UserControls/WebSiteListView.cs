@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
@@ -37,7 +36,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class WebSiteAddedEventArgs : EventArgs
         {
-            private WebSite webSite;
+            private readonly WebSite webSite;
             public WebSite WebSite
             {
                 get { return webSite; }
@@ -66,7 +65,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class WebSiteChangedEventArgs : EventArgs
         {
-            private WebSite webSite;
+            private readonly WebSite webSite;
             public WebSite WebSite
             {
                 get { return webSite; }
@@ -95,7 +94,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         public class WebSiteDeletedEventArgs : EventArgs
         {
-            private WebSite webSite;
+            private readonly WebSite webSite;
             public WebSite WebSite
             {
                 get { return webSite; }
