@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormAddressBookProperties : Form, IAddressBookPropertiesView
+    partial class FormAddressBookProperties : Form, IAddressBookPropertiesView
     {
         public AddressBookPropertiesPresenter Presenter { private get; set; }
 

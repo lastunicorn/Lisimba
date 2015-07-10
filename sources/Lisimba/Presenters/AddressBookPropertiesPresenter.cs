@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    public class AddressBookPropertiesPresenter
+    class AddressBookPropertiesPresenter
     {
         private readonly AddressBookPropertiesViewModel viewModel;
         private AddressBookShell addressBookShell;

@@ -43,14 +43,6 @@ namespace DustInTheWind.Lisimba.Services
                 handler(this, e);
         }
 
-        public string ProgramName { get; private set; }
-
-        public ApplicationService()
-        {
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            ProgramName = string.Format("{0} {1}", Application.ProductName, version.ToString(2));
-        }
-
         public void Exit()
         {
             CancelEventArgs eva = new CancelEventArgs();

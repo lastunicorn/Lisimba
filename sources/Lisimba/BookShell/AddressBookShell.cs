@@ -1,10 +1,14 @@
 ﻿using System;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Egg.BookShell
 {
-    public class AddressBookShell
+    class AddressBookShell
     {
+        private readonly UiService uiService;
+        private readonly CommandPool commandPool;
         private AddressBookStatus status;
         private AddressBook addressBook;
         private Contact contact;
@@ -72,6 +76,17 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
             }
         }
 
+        public AddressBookShell(UiService uiService, CommandPool commandPool)
+        {
+            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (commandPool == null) throw new ArgumentNullException("commandPool");
+
+            this.uiService = uiService;
+            this.commandPool = commandPool;
+
+            status = AddressBookStatus.New;
+        }
+
         protected virtual void OnAddressBookChanging(AddressBookChangingEventArgs e)
         {
             EventHandler<AddressBookChangingEventArgs> handler = AddressBookChanging;
@@ -110,12 +125,6 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
-        }
-
-        public AddressBookShell()
-        {
-            FileName = null;
-            status = AddressBookStatus.New;
         }
 
         private void HandleChanged(object sender, EventArgs e)
@@ -167,6 +176,22 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
         public bool IsSaved
         {
             get { return Status == AddressBookStatus.Saved || Status == AddressBookStatus.New; }
+        }
+
+        public bool EnsureIsSaved()
+        {
+            if (IsSaved)
+                return true;
+
+            bool? response = uiService.DisplayYesNoQuestion(Resources.EnsureAddressBookIsSaved_Question, Resources.EnsureAddressBookIsSaved_Title);
+
+            if (response == null)
+                return false;
+
+            if (response.Value)
+                commandPool.SaveAddressBookCommand.Execute();
+
+            return true;
         }
     }
 }
