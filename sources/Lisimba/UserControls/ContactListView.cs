@@ -76,7 +76,10 @@ namespace DustInTheWind.Lisimba.UserControls
                     currentData.ContactChanged -= HandleCurrentContactChanged;
 
                     if (currentData.AddressBook != null)
-                        UnhookFromAddressBook(currentData.AddressBook);
+                    {
+                        currentData.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                        currentData.AddressBook.ContactContentChanged -= HandleContactContentChanged;
+                    }
                 }
 
                 currentData = value;
@@ -88,23 +91,14 @@ namespace DustInTheWind.Lisimba.UserControls
                     currentData.ContactChanged += HandleCurrentContactChanged;
 
                     if (currentData.AddressBook != null)
-                        HookToAddressBook(currentData.AddressBook);
+                    {
+                        currentData.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                        currentData.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                    }
                 }
 
                 RepopulateFromCurrentAddressBook();
             }
-        }
-
-        private void HookToAddressBook(AddressBook addressBook)
-        {
-            addressBook.Changed += HandleCurrentAddressBookContentChanged;
-            addressBook.ContactContentChanged += HandleContactContentChanged;
-        }
-
-        private void UnhookFromAddressBook(AddressBook addressBook)
-        {
-            addressBook.Changed -= HandleCurrentAddressBookContentChanged;
-            addressBook.ContactContentChanged -= HandleContactContentChanged;
         }
 
         private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs e)
@@ -350,7 +344,6 @@ namespace DustInTheWind.Lisimba.UserControls
                     treeView1.TreeViewNodeSorter = new TreeNodeByNicknameOrNameComparer();
                     treeView1.Sort();
                     break;
-
             }
         }
 

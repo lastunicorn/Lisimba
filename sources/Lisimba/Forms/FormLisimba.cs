@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         public FormLisimba(ConfigurationService configurationService, ApplicationStatus applicationStatus,
             RecentFiles recentFiles, AddressBookShell addressBookShell, CommandPool commandPool, ApplicationService applicationService,
-            UiService uiService)
+            UiService uiService, LisimbaApplication lisimbaApplication)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
@@ -43,10 +43,11 @@ namespace DustInTheWind.Lisimba.Forms
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
             if (uiService == null) throw new ArgumentNullException("uiService");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
             InitializeComponent();
 
-            viewModel = new LisimbaViewModel(addressBookShell, applicationService, applicationStatus);
+            viewModel = new LisimbaViewModel(addressBookShell, applicationService, applicationStatus, lisimbaApplication);
 
             this.addressBookShell = addressBookShell;
             addressBookShell.ContactChanged += HandleCurrentContactChanged;

@@ -28,6 +28,7 @@ namespace DustInTheWind.Lisimba.Presenters
         private readonly AddressBookShell addressBookShell;
         private readonly ApplicationService applicationService;
         private readonly ApplicationStatus applicationStatus;
+        private readonly LisimbaApplication lisimbaApplication;
 
         private string title;
         private string statusText;
@@ -65,15 +66,17 @@ namespace DustInTheWind.Lisimba.Presenters
         }
 
         public LisimbaViewModel(AddressBookShell addressBookShell, ApplicationService applicationService,
-            ApplicationStatus applicationStatus)
+            ApplicationStatus applicationStatus, LisimbaApplication lisimbaApplication)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
             this.addressBookShell = addressBookShell;
             this.applicationService = applicationService;
             this.applicationStatus = applicationStatus;
+            this.lisimbaApplication = lisimbaApplication;
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             addressBookShell.StatusChanged += HandleAddressBookStatusChanged;
@@ -126,7 +129,7 @@ namespace DustInTheWind.Lisimba.Presenters
         private string BuildFormTitle()
         {
             if (addressBookShell.AddressBook == null)
-                return applicationService.ProgramName;
+                return lisimbaApplication.ProgramName;
 
             StringBuilder sb = new StringBuilder();
 
@@ -138,7 +141,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
             sb.Append(" - ");
 
-            sb.Append(applicationService.ProgramName);
+            sb.Append(lisimbaApplication.ProgramName);
 
             return sb.ToString();
         }

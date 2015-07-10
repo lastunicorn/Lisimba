@@ -16,6 +16,8 @@
 
 using System;
 using System.ComponentModel;
+using System.Reflection;
+using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Properties;
 
@@ -30,6 +32,8 @@ namespace DustInTheWind.Lisimba.Services
         private readonly CommandPool commandPool;
         private readonly UiService uiService;
         private readonly AddressBookShell addressBookShell;
+
+        public string ProgramName { get; private set; }
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
             RecentFiles recentFiles, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
@@ -52,15 +56,25 @@ namespace DustInTheWind.Lisimba.Services
             this.uiService = uiService;
             this.addressBookShell = addressBookShell;
 
-            commandPool.OpenAddressBookCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
-            commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = EnsureCurrentDataIsSaved;
+            ProgramName = GetProgramName();
+
+            commandPool.OpenAddressBookCommand.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
+            commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
 
             applicationService.Exiting += HandleApplicationExiting;
         }
 
+        private static string GetProgramName()
+        {
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = executingAssembly.GetName();
+
+            return string.Format("{0} {1}", Application.ProductName, assemblyName.Version.ToString(2));
+        }
+
         private void HandleApplicationExiting(object sender, CancelEventArgs e)
         {
-            bool allowToContinue = EnsureCurrentDataIsSaved();
+            bool allowToContinue = addressBookShell.EnsureIsSaved();
 
             if (!allowToContinue)
                 e.Cancel = true;
@@ -97,22 +111,6 @@ namespace DustInTheWind.Lisimba.Services
                 default:
                     return null;
             }
-        }
-
-        private bool EnsureCurrentDataIsSaved()
-        {
-            if (addressBookShell.IsSaved)
-                return true;
-
-            bool? response = uiService.DisplayYesNoQuestion(Resources.EnsureAddressBookIsSaved_Question, Resources.EnsureAddressBookIsSaved_Title);
-
-            if (response == null)
-                return false;
-
-            if (response.Value)
-                commandPool.SaveAddressBookCommand.Execute();
-
-            return true;
         }
     }
 }

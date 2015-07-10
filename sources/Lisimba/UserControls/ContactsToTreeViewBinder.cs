@@ -42,14 +42,14 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
+                if (contacts == value)
+                    return;
+
                 if (contacts != null)
                 {
                     contacts.CollectionChanged -= HandleContactsCollectionChanged;
                     contacts.ItemChanged -= HandleContactChanged;
                 }
-
-                if (contacts == value)
-                    return;
 
                 contacts = value;
                 modifiedContacts.Clear();

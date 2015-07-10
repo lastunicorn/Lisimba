@@ -3,7 +3,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public interface IAddressBookPropertiesView
+    interface IAddressBookPropertiesView
     {
         void CreateBindings(AddressBookPropertiesViewModel viewModel);
         AddressBookPropertiesPresenter Presenter { set; }
