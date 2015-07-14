@@ -18,44 +18,40 @@ using System;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class CreateNewContactCommand : CommandBase<object>
+    class ShowAddressBookPropertiesOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
 
         public override string ShortDescription
         {
-            get { return "Create a new contact."; }
+            get { return Resources.ShowAddressBookPropertiesOperationDescription; }
         }
 
-        public CreateNewContactCommand(AddressBookShell addressBookShell, UiService uiService)
+        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell)
         {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
-
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
             this.addressBookShell = addressBookShell;
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-
-            this.uiService = uiService;
-        }
-
-        private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
-        {
-            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, uiService);
-            addContactPresenter.View = new FormAddContact();
-            addContactPresenter.Show();
+            DisplayAddressBookPropertiesWindow();
+        }
+
+        private void DisplayAddressBookPropertiesWindow()
+        {
+            AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
+            {
+                AddressBookShell = addressBookShell,
+                View = new FormAddressBookProperties()
+            };
+
+            presenter.ShowWindow();
         }
     }
 }

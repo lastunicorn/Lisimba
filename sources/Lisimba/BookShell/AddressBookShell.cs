@@ -189,7 +189,7 @@ namespace DustInTheWind.Lisimba.Egg.BookShell
                 return false;
 
             if (response.Value)
-                commandPool.SaveAddressBookCommand.Execute();
+                commandPool.SaveAddressBookOperation.Execute();
 
             return true;
         }

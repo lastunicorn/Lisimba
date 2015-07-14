@@ -15,17 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.BookShell;
-using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Gating;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class ImportYahooCsvCommand : CommandBase<object>
+    class ImportYahooCsvOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
@@ -33,21 +30,16 @@ namespace DustInTheWind.Lisimba.Commands
 
         public override string ShortDescription
         {
-            get { return "Import address book from Yahoo! csv format."; }
+            get { return Resources.ImportYahooCsvOperationDescription; }
         }
 
         public Func<bool> AskIfAllowToContinue;
 
-        public ImportYahooCsvCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
+        public ImportYahooCsvOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
         {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
-
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
-
-            if (applicationStatus == null)
-                throw new ArgumentNullException("applicationStatus");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBookShell = addressBookShell;
             this.uiService = uiService;
@@ -89,10 +81,10 @@ namespace DustInTheWind.Lisimba.Commands
             }
         }
 
-        private static ImportRuleCollection CreateMergeRules(IEnumerable<Contact> contacts)
-        {
-            IEnumerable<ImportRule> rules = contacts.Select(x => new ImportRule(x));
-            return new ImportRuleCollection(rules.ToList());
-        }
+        //private static ImportRuleCollection CreateMergeRules(IEnumerable<Contact> contacts)
+        //{
+        //    IEnumerable<ImportRule> rules = contacts.Select(x => new ImportRule(x));
+        //    return new ImportRuleCollection(rules.ToList());
+        //}
     }
 }

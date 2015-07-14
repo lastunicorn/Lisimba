@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    internal interface ICommand<in T> : ICommand
+    internal interface IOpertion<in T> : IOpertion
     {
         void Execute(T parameter);
     }

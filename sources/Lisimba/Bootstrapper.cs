@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
 
@@ -48,9 +48,9 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<UiService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
 
-            unityContainer.RegisterType<OpenAddressBookCommand>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ImportYahooCsvCommand>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ExportYahooCsvCommand>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ImportYahooCsvOperation>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ExportYahooCsvOperation>(new ContainerControlledLifetimeManager());
 
             return unityContainer;
         }

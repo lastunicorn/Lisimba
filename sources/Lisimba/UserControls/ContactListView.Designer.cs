@@ -78,7 +78,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_Add
             // 
-            this.toolStripMenuItem_List_Add.Command = null;
+            this.toolStripMenuItem_List_Add.Opertion = null;
             this.toolStripMenuItem_List_Add.CommandParameter = null;
             this.toolStripMenuItem_List_Add.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_Delete
             // 
-            this.toolStripMenuItem_List_Delete.Command = null;
+            this.toolStripMenuItem_List_Delete.Opertion = null;
             this.toolStripMenuItem_List_Delete.CommandParameter = null;
             this.toolStripMenuItem_List_Delete.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
@@ -105,7 +105,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
-            this.toolStripMenuItem_List_ViewBiorythm.Command = null;
+            this.toolStripMenuItem_List_ViewBiorythm.Opertion = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameter = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameterProvider = null;
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";

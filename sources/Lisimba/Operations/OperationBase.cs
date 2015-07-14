@@ -16,9 +16,9 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    abstract class CommandBase<T> : ICommand<T>
+    abstract class OperationBase<T> : IOpertion<T>
     {
         private bool isEnabled;
 
@@ -38,8 +38,6 @@ namespace DustInTheWind.Lisimba.Commands
 
         public abstract string ShortDescription { get; }
 
-        #region Event IsEnabledChanged
-
         public event EventHandler IsEnabledChanged;
 
         protected virtual void OnIsEnabledChanged()
@@ -50,9 +48,7 @@ namespace DustInTheWind.Lisimba.Commands
                 handler(this, EventArgs.Empty);
         }
 
-        #endregion
-
-        protected CommandBase()
+        protected OperationBase()
         {
             isEnabled = true;
         }

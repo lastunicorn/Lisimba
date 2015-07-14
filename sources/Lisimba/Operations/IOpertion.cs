@@ -14,22 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Forms;
+using System;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAboutCommand : CommandBase<object>
+    internal interface IOpertion
     {
-        public override string ShortDescription
-        {
-            get { return "Displays info about Lisimba."; }
-        }
-
-        protected override void DoExecute(object parameter)
-        {
-            FormAbout formAbout = new FormAbout();
-            formAbout.ShowDialog();
-            formAbout.Dispose();
-        }
+        bool IsEnabled { get; }
+        event EventHandler IsEnabledChanged;
+        string ShortDescription { get; }
+        void Execute();
+        void Execute(object parameter);
     }
 }

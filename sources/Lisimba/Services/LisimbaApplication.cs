@@ -58,8 +58,8 @@ namespace DustInTheWind.Lisimba.Services
 
             ProgramName = GetProgramName();
 
-            commandPool.OpenAddressBookCommand.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
-            commandPool.ImportYahooCsvCommand.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
+            commandPool.OpenAddressBookOperation.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
+            commandPool.ImportYahooCsvOperation.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
 
             applicationService.Exiting += HandleApplicationExiting;
         }
@@ -87,9 +87,9 @@ namespace DustInTheWind.Lisimba.Services
             string fileNameToOpenAtLoad = CalculateFileNameToInitiallyOpen();
 
             if (string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
-                commandPool.CreateNewAddressBookCommand.Execute();
+                commandPool.CreateNewAddressBookOperation.Execute();
             else
-                commandPool.OpenAddressBookCommand.Execute(fileNameToOpenAtLoad);
+                commandPool.OpenAddressBookOperation.Execute(fileNameToOpenAtLoad);
         }
 
         private string CalculateFileNameToInitiallyOpen()

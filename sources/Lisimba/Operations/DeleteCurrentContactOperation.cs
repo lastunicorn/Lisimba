@@ -18,22 +18,22 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class DeleteCurrentContactCommand : CommandBase<object>
+    class DeleteCurrentContactOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
 
         public override string ShortDescription
         {
-            get { return "Delete the currently selected contact."; }
+            get { return Resources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactCommand(AddressBookShell addressBookShell)
+        public DeleteCurrentContactOperation(AddressBookShell addressBookShell)
         {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
             this.addressBookShell = addressBookShell;
             addressBookShell.ContactChanged += HandleCurrentContactChanged;

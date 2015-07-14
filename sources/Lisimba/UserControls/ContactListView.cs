@@ -39,8 +39,8 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                toolStripMenuItem_List_Add.Command = value.CreateNewContactCommand;
-                toolStripMenuItem_List_Delete.Command = value.DeleteCurrentContactCommand;
+                toolStripMenuItem_List_Add.Opertion = value.CreateNewContactOperation;
+                toolStripMenuItem_List_Delete.Opertion = value.DeleteCurrentContactOperation;
             }
         }
 

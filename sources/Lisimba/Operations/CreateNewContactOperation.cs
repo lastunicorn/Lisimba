@@ -18,40 +18,42 @@ using System;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAddressBookPropertiesCommand : CommandBase<object>
+    class CreateNewContactOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
+        private readonly UiService uiService;
 
         public override string ShortDescription
         {
-            get { return "Display the address book properties."; }
+            get { return Resources.CreateNewContactOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesCommand(AddressBookShell addressBookShell)
+        public CreateNewContactOperation(AddressBookShell addressBookShell, UiService uiService)
         {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (uiService == null) throw new ArgumentNullException("uiService");
 
             this.addressBookShell = addressBookShell;
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
+
+            this.uiService = uiService;
+        }
+
+        private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
+        {
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            DisplayAddressBookPropertiesWindow();
-        }
-
-        private void DisplayAddressBookPropertiesWindow()
-        {
-            AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
-            {
-                AddressBookShell = addressBookShell,
-                View = new FormAddressBookProperties()
-            };
-
-            presenter.ShowWindow();
+            AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, uiService);
+            addContactPresenter.View = new FormAddContact();
+            addContactPresenter.Show();
         }
     }
 }

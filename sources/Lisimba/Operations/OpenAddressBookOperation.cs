@@ -16,13 +16,16 @@
 
 using System;
 using System.IO;
+using System.Linq;
+using System.Text;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Gating;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class SaveAsAddressBookCommand : CommandBase<object>
+    class OpenAddressBookOperation : OperationBase<string>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
@@ -31,10 +34,12 @@ namespace DustInTheWind.Lisimba.Commands
 
         public override string ShortDescription
         {
-            get { return "Save current opened address book with another name."; }
+            get { return Resources.OpenAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public Func<bool> AskIfAllowToContinue;
+
+        public OpenAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (uiService == null) throw new ArgumentNullException("uiService");
@@ -45,30 +50,43 @@ namespace DustInTheWind.Lisimba.Commands
             this.uiService = uiService;
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
-
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBookShell.AddressBook != null;
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
-        {
-            IsEnabled = addressBookShell.AddressBook != null;
-        }
-
-        protected override void DoExecute(object parameter)
+        protected override void DoExecute(string fileName)
         {
             try
             {
-                string fileName = uiService.AskToSaveLsbFile();
+                bool allowToContinue = AskIfAllowToContinue == null || AskIfAllowToContinue();
 
-                if (fileName == null)
+                if (!allowToContinue)
                     return;
 
-                ZipXmlGate gate = new ZipXmlGate();
-                addressBookShell.SaveTo(gate, fileName);
+                if (string.IsNullOrEmpty(fileName))
+                {
+                    fileName = uiService.AskToOpenLsbFile();
 
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", addressBookShell.AddressBook.Contacts.Count);
+                    if (fileName == null)
+                        return;
+                }
+
+                ZipXmlGate gate = new ZipXmlGate();
+                addressBookShell.LoadFrom(gate, fileName);
+
+                applicationStatus.StatusText = string.Format("{0} contacts oppened.", addressBookShell.AddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
+
+                if (gate.Warnings.Any())
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    foreach (Exception warning in gate.Warnings)
+                    {
+                        sb.AppendLine(warning.Message);
+                        sb.AppendLine();
+                    }
+
+                    uiService.DisplayWarning(sb.ToString());
+                }
             }
             catch (Exception ex)
             {

@@ -163,4 +163,37 @@ Do you wanna save it before proceedeing?</value>
   <data name="DefaultStatusText" xml:space="preserve">
     <value>Ready</value>
   </data>
+    <data name="ApplicationExitOperationDescription" xml:space="preserve">
+    <value>Exit the program.</value>
+  </data>
+    <data name="CreateNewAddressBookOperationDescription" xml:space="preserve">
+    <value>Create a new address book.</value>
+  </data>
+    <data name="CreateNewContactOperationDescription" xml:space="preserve">
+    <value>Create a new contact.</value>
+  </data>
+    <data name="DeleteCurrentContactOperationDescription" xml:space="preserve">
+    <value>Delete the currently selected contact.</value>
+  </data>
+    <data name="ExportYahooCsvOperationDescription" xml:space="preserve">
+    <value>Export current opened address book in Yahoo! csv format.</value>
+  </data>
+    <data name="ImportYahooCsvOperationDescription" xml:space="preserve">
+    <value>Import address book from Yahoo! csv format.</value>
+  </data>
+    <data name="OpenAddressBookOperationDescription" xml:space="preserve">
+    <value>Open address book from file.</value>
+  </data>
+    <data name="SaveAddressBookOperationDescription" xml:space="preserve">
+    <value>Save current opened address book.</value>
+  </data>
+    <data name="SaveAsAddressBookOperationDescription" xml:space="preserve">
+    <value>Save current opened address book with another name.</value>
+  </data>
+    <data name="ShowAboutOperationDescription" xml:space="preserve">
+    <value>Displays info about Lisimba.</value>
+  </data>
+    <data name="ShowAddressBookPropertiesOperationDescription" xml:space="preserve">
+    <value>Display the address book properties.</value>
+  </data>
 </root>

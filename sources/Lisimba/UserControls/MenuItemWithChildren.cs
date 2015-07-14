@@ -16,8 +16,8 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Commands;
 using DustInTheWind.Lisimba.Config;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.UserControls
     {
         public RecentFiles RecentFiles { get; set; }
 
-        public ICommand ChildrenCommand { get; set; }
+        public IOpertion ChildrenOpertion { get; set; }
 
         #region Event SubItemClicked
 
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.UserControls
                     // Create new menu items if necessary.
                     menuItem = new CommandedMenuItem();
                     menuItem.Click += HandleSubMenuItemClick;
-                    menuItem.Command = ChildrenCommand;
+                    menuItem.Opertion = ChildrenOpertion;
                     menuItem.CommandParameterProvider = () => menuItem.Tag.ToString();
 
 

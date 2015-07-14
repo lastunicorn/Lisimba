@@ -16,52 +16,39 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg.BookShell;
-using DustInTheWind.Lisimba.Gating;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class ExportYahooCsvCommand : CommandBase<object>
+    class CreateNewAddressBookOperation : OperationBase<string>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
+        private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
         {
-            get { return "Export current opened address book in Yahoo! csv format."; }
+            get { return Resources.CreateNewAddressBookOperationDescription; }
         }
 
-        public ExportYahooCsvCommand(AddressBookShell addressBookShell, UiService uiService)
+        public CreateNewAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
         {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
-
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBookShell = addressBookShell;
             this.uiService = uiService;
-
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBookShell.AddressBook != null;
+            this.applicationStatus = applicationStatus;
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
-        {
-            IsEnabled = addressBookShell.AddressBook != null;
-        }
-
-        protected override void DoExecute(object parameter)
+        protected override void DoExecute(string fileName)
         {
             try
             {
-                string fileName = uiService.AskToSaveYahooCsvFile();
-
-                if (fileName == null)
-                    return;
-
-                YahooCsvGate gate = new YahooCsvGate();
-                addressBookShell.ExportTo(gate, fileName);
+                addressBookShell.LoadNew();
+                applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)
             {

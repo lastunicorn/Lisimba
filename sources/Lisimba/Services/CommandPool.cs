@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Commands;
+using DustInTheWind.Lisimba.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
@@ -24,59 +24,59 @@ namespace DustInTheWind.Lisimba.Services
     {
         private readonly IUnityContainer servicePrvider;
 
-        public CreateNewAddressBookCommand CreateNewAddressBookCommand
+        public CreateNewAddressBookOperation CreateNewAddressBookOperation
         {
-            get { return servicePrvider.Resolve<CreateNewAddressBookCommand>(); }
+            get { return servicePrvider.Resolve<CreateNewAddressBookOperation>(); }
         }
 
-        public OpenAddressBookCommand OpenAddressBookCommand
+        public OpenAddressBookOperation OpenAddressBookOperation
         {
-            get { return servicePrvider.Resolve<OpenAddressBookCommand>(); }
+            get { return servicePrvider.Resolve<OpenAddressBookOperation>(); }
         }
 
-        public SaveAddressBookCommand SaveAddressBookCommand
+        public SaveAddressBookOperation SaveAddressBookOperation
         {
-            get { return servicePrvider.Resolve<SaveAddressBookCommand>(); }
+            get { return servicePrvider.Resolve<SaveAddressBookOperation>(); }
         }
 
-        public SaveAsAddressBookCommand SaveAsAddressBookCommand
+        public SaveAsAddressBookOperation SaveAsAddressBookOperation
         {
-            get { return servicePrvider.Resolve<SaveAsAddressBookCommand>(); }
+            get { return servicePrvider.Resolve<SaveAsAddressBookOperation>(); }
         }
 
-        public ExportYahooCsvCommand ExportYahooCsvCommand
+        public ExportYahooCsvOperation ExportYahooCsvOperation
         {
-            get { return servicePrvider.Resolve<ExportYahooCsvCommand>(); }
+            get { return servicePrvider.Resolve<ExportYahooCsvOperation>(); }
         }
 
-        public ShowAddressBookPropertiesCommand ShowAddressBookPropertiesCommand
+        public ShowAddressBookPropertiesOperation ShowAddressBookPropertiesOperation
         {
-            get { return servicePrvider.Resolve<ShowAddressBookPropertiesCommand>(); }
+            get { return servicePrvider.Resolve<ShowAddressBookPropertiesOperation>(); }
         }
 
-        public ShowAboutCommand ShowAboutCommand
+        public ShowAboutOperation ShowAboutOperation
         {
-            get { return servicePrvider.Resolve<ShowAboutCommand>(); }
+            get { return servicePrvider.Resolve<ShowAboutOperation>(); }
         }
 
-        public ImportYahooCsvCommand ImportYahooCsvCommand
+        public ImportYahooCsvOperation ImportYahooCsvOperation
         {
-            get { return servicePrvider.Resolve<ImportYahooCsvCommand>(); }
+            get { return servicePrvider.Resolve<ImportYahooCsvOperation>(); }
         }
 
-        public DeleteCurrentContactCommand DeleteCurrentContactCommand
+        public DeleteCurrentContactOperation DeleteCurrentContactOperation
         {
-            get { return servicePrvider.Resolve<DeleteCurrentContactCommand>(); }
+            get { return servicePrvider.Resolve<DeleteCurrentContactOperation>(); }
         }
 
-        public CreateNewContactCommand CreateNewContactCommand
+        public CreateNewContactOperation CreateNewContactOperation
         {
-            get { return servicePrvider.Resolve<CreateNewContactCommand>(); }
+            get { return servicePrvider.Resolve<CreateNewContactOperation>(); }
         }
 
-        public ApplicationExitCommand ApplicationExitCommand
+        public ApplicationExitOperation ApplicationExitOperation
         {
-            get { return servicePrvider.Resolve<ApplicationExitCommand>(); }
+            get { return servicePrvider.Resolve<ApplicationExitOperation>(); }
         }
 
         public CommandPool(IUnityContainer servicePrvider)

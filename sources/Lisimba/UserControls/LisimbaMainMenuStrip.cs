@@ -36,43 +36,43 @@ namespace DustInTheWind.Lisimba.UserControls
             recentFiles.FileNameAdded += HandleRecentFileNameAdded;
 
             toolStripMenuItem_File_New.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_File_New.Command = commandPool.CreateNewAddressBookCommand;
+            toolStripMenuItem_File_New.Opertion = commandPool.CreateNewAddressBookOperation;
 
             toolStripMenuItem_File_Open.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_File_Open.Command = commandPool.OpenAddressBookCommand;
+            toolStripMenuItem_File_Open.Opertion = commandPool.OpenAddressBookOperation;
 
             toolStripMenuItem_File_Save.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_File_Save.Command = commandPool.SaveAddressBookCommand;
+            toolStripMenuItem_File_Save.Opertion = commandPool.SaveAddressBookOperation;
 
             toolStripMenuItem_File_SaveAs.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_File_SaveAs.Command = commandPool.SaveAsAddressBookCommand;
+            toolStripMenuItem_File_SaveAs.Opertion = commandPool.SaveAsAddressBookOperation;
 
             toolStripMenuItem_File_Export.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Export.ShortDescription = "Export current opened address book in another format.";
 
-            toolStripMenuItem_ExportToYahooCSV.Command = commandPool.ExportYahooCsvCommand;
+            toolStripMenuItem_ExportToYahooCSV.Opertion = commandPool.ExportYahooCsvOperation;
 
             toolStripMenuItem_File_Import.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Import.ShortDescription = "Import address book from another format.";
 
-            toolStripMenuItem_ImportFromYahooCSV.Command = commandPool.ImportYahooCsvCommand;
+            toolStripMenuItem_ImportFromYahooCSV.Opertion = commandPool.ImportYahooCsvOperation;
 
             toolStripMenuItem_File_Exit.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_File_Exit.Command = commandPool.ApplicationExitCommand;
+            toolStripMenuItem_File_Exit.Opertion = commandPool.ApplicationExitOperation;
 
             toolStripMenuItem_AddressBook_AddContact.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_AddressBook_AddContact.Command = commandPool.CreateNewContactCommand;
+            toolStripMenuItem_AddressBook_AddContact.Opertion = commandPool.CreateNewContactOperation;
 
             toolStripMenuItem_AddressBook_DeleteContact.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_AddressBook_DeleteContact.Command = commandPool.DeleteCurrentContactCommand;
+            toolStripMenuItem_AddressBook_DeleteContact.Opertion = commandPool.DeleteCurrentContactOperation;
 
             toolStripMenuItem_AddressBook_Properties.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_AddressBook_Properties.Command = commandPool.ShowAddressBookPropertiesCommand;
+            toolStripMenuItem_AddressBook_Properties.Opertion = commandPool.ShowAddressBookPropertiesOperation;
 
             toolStripMenuItem_Help_About.ApplicationStatus = applicationStatus;
-            toolStripMenuItem_Help_About.Command = commandPool.ShowAboutCommand;
+            toolStripMenuItem_Help_About.Opertion = commandPool.ShowAboutOperation;
 
-            toolStripMenuItem_File_RecentFiles.ChildrenCommand = commandPool.OpenAddressBookCommand;
+            toolStripMenuItem_File_RecentFiles.ChildrenOpertion = commandPool.OpenAddressBookOperation;
             toolStripMenuItem_File_RecentFiles.RecentFiles = recentFiles;
             toolStripMenuItem_File_RecentFiles.RefreshRecentFilesMenu();
         }

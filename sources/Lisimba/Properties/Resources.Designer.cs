@@ -61,11 +61,47 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit the program..
+        /// </summary>
+        internal static string ApplicationExitOperationDescription {
+            get {
+                return ResourceManager.GetString("ApplicationExitOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new address book..
+        /// </summary>
+        internal static string CreateNewAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("CreateNewAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new contact..
+        /// </summary>
+        internal static string CreateNewContactOperationDescription {
+            get {
+                return ResourceManager.GetString("CreateNewContactOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string DefaultStatusText {
             get {
                 return ResourceManager.GetString("DefaultStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the currently selected contact..
+        /// </summary>
+        internal static string DeleteCurrentContactOperationDescription {
+            get {
+                return ResourceManager.GetString("DeleteCurrentContactOperationDescription", resourceCulture);
             }
         }
         
@@ -85,6 +121,69 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string EnsureAddressBookIsSaved_Title {
             get {
                 return ResourceManager.GetString("EnsureAddressBookIsSaved_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export current opened address book in Yahoo! csv format..
+        /// </summary>
+        internal static string ExportYahooCsvOperationDescription {
+            get {
+                return ResourceManager.GetString("ExportYahooCsvOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import address book from Yahoo! csv format..
+        /// </summary>
+        internal static string ImportYahooCsvOperationDescription {
+            get {
+                return ResourceManager.GetString("ImportYahooCsvOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open address book from file..
+        /// </summary>
+        internal static string OpenAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save current opened address book..
+        /// </summary>
+        internal static string SaveAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("SaveAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save current opened address book with another name..
+        /// </summary>
+        internal static string SaveAsAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("SaveAsAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displays info about Lisimba..
+        /// </summary>
+        internal static string ShowAboutOperationDescription {
+            get {
+                return ResourceManager.GetString("ShowAboutOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display the address book properties..
+        /// </summary>
+        internal static string ShowAddressBookPropertiesOperationDescription {
+            get {
+                return ResourceManager.GetString("ShowAddressBookPropertiesOperationDescription", resourceCulture);
             }
         }
         

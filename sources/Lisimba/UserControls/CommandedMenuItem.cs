@@ -17,14 +17,14 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Commands;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
     class CommandedMenuItem : ToolStripMenuItem
     {
-        private ICommand command;
+        private IOpertion opertion;
 
         [Browsable(false)]
         public ApplicationStatus ApplicationStatus { get; set; }
@@ -32,20 +32,20 @@ namespace DustInTheWind.Lisimba.UserControls
         public string ShortDescription { get; set; }
 
         [Browsable(false)]
-        public ICommand Command
+        public IOpertion Opertion
         {
-            get { return command; }
+            get { return opertion; }
             set
             {
-                if (command != null)
-                    command.IsEnabledChanged -= HandleCommandEnabledChanged;
+                if (opertion != null)
+                    opertion.IsEnabledChanged -= HandleOpertionEnabledChanged;
 
-                command = value;
+                opertion = value;
 
-                if (command != null)
-                    command.IsEnabledChanged += HandleCommandEnabledChanged;
+                if (opertion != null)
+                    opertion.IsEnabledChanged += HandleOpertionEnabledChanged;
 
-                Enabled = command == null || command.IsEnabled;
+                Enabled = opertion == null || opertion.IsEnabled;
             }
         }
 
@@ -76,22 +76,22 @@ namespace DustInTheWind.Lisimba.UserControls
 
         protected override void OnClick(EventArgs e)
         {
-            if (Command != null)
+            if (Opertion != null)
             {
                 object commandParameter = CalculateParameterToUseWithCommand();
 
                 if (commandParameter == null)
-                    Command.Execute();
+                    Opertion.Execute();
                 else
-                    Command.Execute(commandParameter);
+                    Opertion.Execute(commandParameter);
             }
 
             base.OnClick(e);
         }
 
-        private void HandleCommandEnabledChanged(object sender, EventArgs eventArgs)
+        private void HandleOpertionEnabledChanged(object sender, EventArgs eventArgs)
         {
-            Enabled = command.IsEnabled;
+            Enabled = opertion.IsEnabled;
         }
 
         private string CalculateTextToDisplayAsStatus()
@@ -99,8 +99,8 @@ namespace DustInTheWind.Lisimba.UserControls
             if (ShortDescription != null)
                 return ShortDescription;
 
-            if (Command != null && Command.ShortDescription != null)
-                return Command.ShortDescription;
+            if (Opertion != null && Opertion.ShortDescription != null)
+                return Opertion.ShortDescription;
 
             return null;
         }

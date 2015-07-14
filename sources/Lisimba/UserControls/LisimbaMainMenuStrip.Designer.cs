@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File
             // 
-            this.toolStripMenuItem_File.Command = null;
+            this.toolStripMenuItem_File.Opertion = null;
             this.toolStripMenuItem_File.CommandParameter = null;
             this.toolStripMenuItem_File.CommandParameterProvider = null;
             this.toolStripMenuItem_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -81,7 +81,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_New
             // 
-            this.toolStripMenuItem_File_New.Command = null;
+            this.toolStripMenuItem_File_New.Opertion = null;
             this.toolStripMenuItem_File_New.CommandParameter = null;
             this.toolStripMenuItem_File_New.CommandParameterProvider = null;
             this.toolStripMenuItem_File_New.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_File_New.Image")));
@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_Open
             // 
-            this.toolStripMenuItem_File_Open.Command = null;
+            this.toolStripMenuItem_File_Open.Opertion = null;
             this.toolStripMenuItem_File_Open.CommandParameter = null;
             this.toolStripMenuItem_File_Open.CommandParameterProvider = null;
             this.toolStripMenuItem_File_Open.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_File_Open.Image")));
@@ -107,7 +107,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_Save
             // 
-            this.toolStripMenuItem_File_Save.Command = null;
+            this.toolStripMenuItem_File_Save.Opertion = null;
             this.toolStripMenuItem_File_Save.CommandParameter = null;
             this.toolStripMenuItem_File_Save.CommandParameterProvider = null;
             this.toolStripMenuItem_File_Save.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_File_Save.Image")));
@@ -120,7 +120,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_SaveAs
             // 
-            this.toolStripMenuItem_File_SaveAs.Command = null;
+            this.toolStripMenuItem_File_SaveAs.Opertion = null;
             this.toolStripMenuItem_File_SaveAs.CommandParameter = null;
             this.toolStripMenuItem_File_SaveAs.CommandParameterProvider = null;
             this.toolStripMenuItem_File_SaveAs.Name = "toolStripMenuItem_File_SaveAs";
@@ -136,7 +136,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_Export
             // 
-            this.toolStripMenuItem_File_Export.Command = null;
+            this.toolStripMenuItem_File_Export.Opertion = null;
             this.toolStripMenuItem_File_Export.CommandParameter = null;
             this.toolStripMenuItem_File_Export.CommandParameterProvider = null;
             this.toolStripMenuItem_File_Export.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -150,7 +150,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_ExportToYahooCSV
             // 
-            this.toolStripMenuItem_ExportToYahooCSV.Command = null;
+            this.toolStripMenuItem_ExportToYahooCSV.Opertion = null;
             this.toolStripMenuItem_ExportToYahooCSV.CommandParameter = null;
             this.toolStripMenuItem_ExportToYahooCSV.CommandParameterProvider = null;
             this.toolStripMenuItem_ExportToYahooCSV.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_ExportToYahooCSV.Image")));
@@ -162,7 +162,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_Import
             // 
-            this.toolStripMenuItem_File_Import.Command = null;
+            this.toolStripMenuItem_File_Import.Opertion = null;
             this.toolStripMenuItem_File_Import.CommandParameter = null;
             this.toolStripMenuItem_File_Import.CommandParameterProvider = null;
             this.toolStripMenuItem_File_Import.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -176,7 +176,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_ImportFromYahooCSV
             // 
-            this.toolStripMenuItem_ImportFromYahooCSV.Command = null;
+            this.toolStripMenuItem_ImportFromYahooCSV.Opertion = null;
             this.toolStripMenuItem_ImportFromYahooCSV.CommandParameter = null;
             this.toolStripMenuItem_ImportFromYahooCSV.CommandParameterProvider = null;
             this.toolStripMenuItem_ImportFromYahooCSV.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_ImportFromYahooCSV.Image")));
@@ -193,7 +193,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_RecentFiles
             // 
-            this.toolStripMenuItem_File_RecentFiles.ChildrenCommand = null;
+            this.toolStripMenuItem_File_RecentFiles.ChildrenOpertion = null;
             this.toolStripMenuItem_File_RecentFiles.Name = "toolStripMenuItem_File_RecentFiles";
             this.toolStripMenuItem_File_RecentFiles.RecentFiles = null;
             this.toolStripMenuItem_File_RecentFiles.Size = new System.Drawing.Size(158, 22);
@@ -206,7 +206,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_File_Exit
             // 
-            this.toolStripMenuItem_File_Exit.Command = null;
+            this.toolStripMenuItem_File_Exit.Opertion = null;
             this.toolStripMenuItem_File_Exit.CommandParameter = null;
             this.toolStripMenuItem_File_Exit.CommandParameterProvider = null;
             this.toolStripMenuItem_File_Exit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_File_Exit.Image")));
@@ -219,7 +219,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_AddressBook
             // 
-            this.toolStripMenuItem_AddressBook.Command = null;
+            this.toolStripMenuItem_AddressBook.Opertion = null;
             this.toolStripMenuItem_AddressBook.CommandParameter = null;
             this.toolStripMenuItem_AddressBook.CommandParameterProvider = null;
             this.toolStripMenuItem_AddressBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -235,7 +235,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_AddressBook_AddContact
             // 
-            this.toolStripMenuItem_AddressBook_AddContact.Command = null;
+            this.toolStripMenuItem_AddressBook_AddContact.Opertion = null;
             this.toolStripMenuItem_AddressBook_AddContact.CommandParameter = null;
             this.toolStripMenuItem_AddressBook_AddContact.CommandParameterProvider = null;
             this.toolStripMenuItem_AddressBook_AddContact.Name = "toolStripMenuItem_AddressBook_AddContact";
@@ -247,7 +247,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_AddressBook_DeleteContact
             // 
-            this.toolStripMenuItem_AddressBook_DeleteContact.Command = null;
+            this.toolStripMenuItem_AddressBook_DeleteContact.Opertion = null;
             this.toolStripMenuItem_AddressBook_DeleteContact.CommandParameter = null;
             this.toolStripMenuItem_AddressBook_DeleteContact.CommandParameterProvider = null;
             this.toolStripMenuItem_AddressBook_DeleteContact.Name = "toolStripMenuItem_AddressBook_DeleteContact";
@@ -264,7 +264,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_AddressBook_Properties
             // 
-            this.toolStripMenuItem_AddressBook_Properties.Command = null;
+            this.toolStripMenuItem_AddressBook_Properties.Opertion = null;
             this.toolStripMenuItem_AddressBook_Properties.CommandParameter = null;
             this.toolStripMenuItem_AddressBook_Properties.CommandParameterProvider = null;
             this.toolStripMenuItem_AddressBook_Properties.Name = "toolStripMenuItem_AddressBook_Properties";
@@ -276,7 +276,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // toolStripMenuItem_Help
             // 
             this.toolStripMenuItem_Help.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripMenuItem_Help.Command = null;
+            this.toolStripMenuItem_Help.Opertion = null;
             this.toolStripMenuItem_Help.CommandParameter = null;
             this.toolStripMenuItem_Help.CommandParameterProvider = null;
             this.toolStripMenuItem_Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -289,7 +289,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_Help_About
             // 
-            this.toolStripMenuItem_Help_About.Command = null;
+            this.toolStripMenuItem_Help_About.Opertion = null;
             this.toolStripMenuItem_Help_About.CommandParameter = null;
             this.toolStripMenuItem_Help_About.CommandParameterProvider = null;
             this.toolStripMenuItem_Help_About.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem_Help_About.Image")));

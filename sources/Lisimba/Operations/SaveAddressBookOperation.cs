@@ -18,11 +18,12 @@ using System;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Gating;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Commands
+namespace DustInTheWind.Lisimba.Operations
 {
-    class SaveAddressBookCommand : CommandBase<object>
+    class SaveAddressBookOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UiService uiService;
@@ -31,10 +32,10 @@ namespace DustInTheWind.Lisimba.Commands
 
         public override string ShortDescription
         {
-            get { return "Save current opened address book."; }
+            get { return Resources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookCommand(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public SaveAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (uiService == null) throw new ArgumentNullException("uiService");
