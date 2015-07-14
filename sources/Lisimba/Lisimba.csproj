@@ -79,6 +79,7 @@
     <Compile Include="BookShell\AddressBookShell.cs" />
     <Compile Include="BookShell\AddressBookStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Forms\ControlExtensions.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\OperationBase.cs" />
     <Compile Include="Operations\CreateNewContactOperation.cs" />
