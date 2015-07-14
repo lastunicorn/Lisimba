@@ -39,7 +39,7 @@ namespace DustInTheWind.Desmond
         /// <summary>
         /// Object used to lock the access of the state field.
         /// </summary>
-        private object lockState = new object();
+        private readonly object lockState = new object();
 
         /// <summary>
         /// The state of the current instance.

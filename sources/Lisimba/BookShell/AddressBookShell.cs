@@ -1,9 +1,10 @@
 ﻿using System;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Egg.BookShell
+namespace DustInTheWind.Lisimba.BookShell
 {
     class AddressBookShell
     {

@@ -21,7 +21,6 @@ using DustInTheWind.Desmond.Config;
 using DustInTheWind.Desmond.Logging;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Gating;
 
@@ -29,12 +28,12 @@ namespace DustInTheWind.Desmond
 {
     internal class RedEye : TaskRunner
     {
-        private Timer timer;
+        private readonly Timer timer;
         private AddressBook addressBook;
         private object lastContact;
         private Contact nextContact;
         private DateTime nextBirthday = DateTime.MinValue;
-        private DesmondConfigurationSection config;
+        private readonly DesmondConfigurationSection config;
         private DateTime fileModifiedDate;
 
         public RedEye()

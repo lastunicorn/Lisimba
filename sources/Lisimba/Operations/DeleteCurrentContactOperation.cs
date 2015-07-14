@@ -16,8 +16,8 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.BookShell;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Operations

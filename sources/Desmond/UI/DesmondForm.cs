@@ -32,7 +32,7 @@ namespace DustInTheWind.Desmond.UI
     /// </summary>
     internal partial class DesmondForm : Form, IDesmondView
     {
-        private DesmondPresenter presenter;
+        private readonly DesmondPresenter presenter;
 
 
         #region Constructor

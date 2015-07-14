@@ -24,7 +24,7 @@ namespace DustInTheWind.Desmond
     /// </summary>
     public class Arguments
     {
-        private StringDictionary parameters;
+        private readonly StringDictionary parameters;
 
         #region Constructor
 

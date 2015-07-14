@@ -16,7 +16,7 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
 

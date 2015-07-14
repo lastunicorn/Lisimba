@@ -18,7 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
-using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Presenters

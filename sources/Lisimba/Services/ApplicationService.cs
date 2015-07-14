@@ -16,7 +16,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Reflection;
 using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Services

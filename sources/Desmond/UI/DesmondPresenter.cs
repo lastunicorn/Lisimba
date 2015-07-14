@@ -20,8 +20,8 @@ namespace DustInTheWind.Desmond.UI
 {
     internal class DesmondPresenter
     {
-        private IDesmondView view;
-        private RedEye redEye;
+        private readonly IDesmondView view;
+        private readonly RedEye redEye;
 
         #region Constructor
 

@@ -25,7 +25,7 @@ namespace DustInTheWind.Desmond.Logging
     /// </summary>
     public class Log : IDisposable
     {
-        private bool enabled = false;
+        private readonly bool enabled = false;
 
         public static Log Instance = new Log(Log.DefaultFileName, true);
 
@@ -124,7 +124,7 @@ namespace DustInTheWind.Desmond.Logging
         #endregion
 
         #region DefaultLocation
-        private static string defaultLocation;
+        private static readonly string defaultLocation;
         /// <summary>
         /// The location where the log file will be created if the user does not explicitly specifies the file.
         /// </summary>

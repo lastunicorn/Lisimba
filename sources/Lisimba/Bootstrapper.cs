@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;

@@ -22,8 +22,6 @@ namespace DustInTheWind.Lisimba.Services
     {
         private readonly ConfigurationService configurationService;
 
-        #region Event FileNameAdded
-
         public event EventHandler<EventArgs> FileNameAdded;
 
         protected virtual void OnFileNameAdded(EventArgs e)
@@ -33,8 +31,6 @@ namespace DustInTheWind.Lisimba.Services
             if (handler != null)
                 handler(this, e);
         }
-
-        #endregion
 
         public RecentFiles(ConfigurationService configurationService)
         {

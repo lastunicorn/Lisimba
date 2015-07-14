@@ -29,7 +29,7 @@ namespace DustInTheWind.Desmond.WinService
     /// </summary>
     public partial class DesmondService : ServiceBase
     {
-        private RedEye redEye;
+        private readonly RedEye redEye;
 
         public DesmondService()
         {

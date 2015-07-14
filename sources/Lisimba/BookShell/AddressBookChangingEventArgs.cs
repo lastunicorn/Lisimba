@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.BookShell
+namespace DustInTheWind.Lisimba.BookShell
 {
     public class AddressBookChangingEventArgs : EventArgs
     {

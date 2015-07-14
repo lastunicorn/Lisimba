@@ -18,7 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Egg.BookShell;
+using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
