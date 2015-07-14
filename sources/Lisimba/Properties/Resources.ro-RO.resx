@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,4 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DefaultStatusText" xml:space="preserve">
+    <value>Sunt pe fază</value>
+  </data>
+  <data name="EnsureAddressBookIsSaved_Question" xml:space="preserve">
+    <value>Agenda curentă nu este salvată.
+Vrei să o salvezi înainte de a continua?</value>
+  </data>
+  <data name="EnsureAddressBookIsSaved_Title" xml:space="preserve">
+    <value>Salvează?</value>
+  </data>
+  <data name="ZodiacSign_Aquarius" xml:space="preserve">
+    <value>Vărsător</value>
+  </data>
+  <data name="ZodiacSign_Aries" xml:space="preserve">
+    <value>Berbec</value>
+  </data>
+  <data name="ZodiacSign_Cancer" xml:space="preserve">
+    <value>Rac</value>
+  </data>
+  <data name="ZodiacSign_Capricorn" xml:space="preserve">
+    <value>Capricorn</value>
+  </data>
+  <data name="ZodiacSign_Gemini" xml:space="preserve">
+    <value>Gemeni</value>
+  </data>
+  <data name="ZodiacSign_Leo" xml:space="preserve">
+    <value>Leu</value>
+  </data>
+  <data name="ZodiacSign_Libra" xml:space="preserve">
+    <value>Balanță</value>
+  </data>
+  <data name="ZodiacSign_Pisces" xml:space="preserve">
+    <value>Pești</value>
+  </data>
+  <data name="ZodiacSign_Sagittarius" xml:space="preserve">
+    <value>Săgetător</value>
+  </data>
+  <data name="ZodiacSign_Scorpio" xml:space="preserve">
+    <value>Scorpion</value>
+  </data>
+  <data name="ZodiacSign_Taurus" xml:space="preserve">
+    <value>Taur</value>
+  </data>
+  <data name="ZodiacSign_Virgo" xml:space="preserve">
+    <value>Fecioară</value>
+  </data>
 </root>

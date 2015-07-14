@@ -17,7 +17,6 @@
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Enums;
 using Lisimba.ZodiacSigns.Properties;
 
 namespace Lisimba.ZodiacSigns
