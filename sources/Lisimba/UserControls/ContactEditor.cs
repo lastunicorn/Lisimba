@@ -43,10 +43,8 @@ namespace DustInTheWind.Lisimba.UserControls
             InitializeComponent();
 
             presenter = new ContactViewPresenter(new Zodiac()) { View = this };
-
-            CreateBindings();
-
             formBirthdayEdit = new FormDateEdit();
+            CreateBindings();
         }
 
         private void CreateBindings()
@@ -58,10 +56,13 @@ namespace DustInTheWind.Lisimba.UserControls
 
             labelBirthday.Bind(x => x.Text, presenter, x => x.Birthday, DataSourceUpdateMode.OnPropertyChanged);
 
+            pictureBoxZodiacSign.Bind(x=>x.Image, presenter, x=>x.ZodiacSignImage);
             pictureBoxZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
             labelZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
 
             textBoxNotes.Bind(x => x.Text, presenter, x => x.Notes, DataSourceUpdateMode.OnPropertyChanged);
+
+            this.Bind(x => x.Enabled, presenter, x => x.Enabled);
         }
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)

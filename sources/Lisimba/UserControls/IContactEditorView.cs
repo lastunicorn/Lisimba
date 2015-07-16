@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.UserControls
         //string Nickname { get; set; }
 
         //string Birthday { get; set; }
-        Image ZodiacSignImage { set; }
+        //Image ZodiacSignImage { set; }
         //string ZodiacSignText { set; }
 
         //string Notes { get; set; }
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.UserControls
         AddressCollection Addresses { set; }
         DateCollection Dates { set; }
         MessengerIdCollection MessengerIds { set; }
-        bool Enabled { set; }
+        //bool Enabled { set; }
 
         void EditBirthday(Date birthday);
     }

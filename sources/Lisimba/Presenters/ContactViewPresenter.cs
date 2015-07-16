@@ -36,6 +36,8 @@ namespace DustInTheWind.Lisimba.Presenters
         private string birthday;
         private string zodiacSignText;
         private string notes;
+        private Image zodiacSignImage;
+        private bool enabled;
 
         public IContactEditorView View { get; set; }
 
@@ -106,6 +108,16 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
+        public Image ZodiacSignImage
+        {
+            get { return zodiacSignImage; }
+            set
+            {
+                zodiacSignImage = value ?? new Bitmap(1, 1);
+                OnPropertyChanged();
+            }
+        }
+
         public string ZodiacSignText
         {
             get { return zodiacSignText; }
@@ -126,12 +138,24 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
+        public bool Enabled
+        {
+            get { return enabled; }
+            set
+            {
+                enabled = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ContactViewPresenter(Zodiac zodiac)
         {
             if (zodiac == null)
                 throw new ArgumentNullException("zodiac");
 
             this.zodiac = zodiac;
+
+            zodiacSignImage = new Bitmap(1, 1);
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
@@ -168,9 +192,8 @@ namespace DustInTheWind.Lisimba.Presenters
 
             Birthday = contact.Birthday.ToString();
 
-            View.ZodiacSignImage = zodiac.GetZodiacImage(contact.ZogiacSign);
-            //toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
-            ZodiacSignText = zodiac.GetZodiacSignName(contact.ZogiacSign);
+            ZodiacSignImage = zodiac.GetZodiacImage(contact.ZodiacSign);
+            ZodiacSignText = zodiac.GetZodiacSignName(contact.ZodiacSign);
 
             Notes = contact.Notes;
 
@@ -181,7 +204,7 @@ namespace DustInTheWind.Lisimba.Presenters
             View.Dates = contact.Dates;
             View.MessengerIds = contact.MessengerIds;
 
-            View.Enabled = true;
+            Enabled = true;
         }
 
         private void ClearView()
@@ -193,7 +216,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
             Birthday = string.Empty;
 
-            View.ZodiacSignImage = zodiac.GetEmptyImage();
+            ZodiacSignImage = zodiac.GetEmptyImage();
             ZodiacSignText = string.Empty;
 
             Notes = string.Empty;
@@ -205,7 +228,7 @@ namespace DustInTheWind.Lisimba.Presenters
             View.Dates = null;
             View.MessengerIds = null;
 
-            View.Enabled = false;
+            Enabled = false;
         }
 
         public void FirstNameWasChanged()

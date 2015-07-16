@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        public ZodiacSign ZogiacSign
+        public ZodiacSign ZodiacSign
         {
             get
             {
