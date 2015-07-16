@@ -128,14 +128,19 @@ namespace DustInTheWind.Lisimba.UserControls
                 return;
         }
 
+        private PhoneCollection phones;
+
         public PhoneCollection Phones
         {
+            get { return phones; }
             set
             {
                 treeNodePhones.Nodes.Clear();
 
                 if (value == null)
                     return;
+
+                phones = value;
 
                 foreach (Phone phone in value)
                 {

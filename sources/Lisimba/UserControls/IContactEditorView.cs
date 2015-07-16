@@ -21,16 +21,16 @@ namespace DustInTheWind.Lisimba.UserControls
 {
     public interface IContactEditorView
     {
-        string FirstName { get; set; }
-        string MiddleName { get; set; }
-        string LastName { get; set; }
-        string Nickname { get; set; }
+        //string FirstName { get; set; }
+        //string MiddleName { get; set; }
+        //string LastName { get; set; }
+        //string Nickname { get; set; }
 
-        string Birthday { get; set; }
+        //string Birthday { get; set; }
         Image ZodiacSignImage { set; }
-        string ZodiacSignText { set; }
+        //string ZodiacSignText { set; }
 
-        string Notes { get; set; }
+        //string Notes { get; set; }
 
         PhoneCollection Phones { set; }
         EmailCollection Emails { set; }

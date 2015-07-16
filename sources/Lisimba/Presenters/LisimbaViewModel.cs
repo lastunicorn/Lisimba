@@ -17,7 +17,6 @@
 using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Services;
 
@@ -131,19 +130,11 @@ namespace DustInTheWind.Lisimba.Presenters
             if (addressBookShell.AddressBook == null)
                 return lisimbaApplication.ProgramName;
 
-            StringBuilder sb = new StringBuilder();
+            string addressBookName = addressBookShell.GetFriendlyName();
+            string unsavedSign = addressBookShell.IsSaved ? string.Empty : " *";
+            string programName = lisimbaApplication.ProgramName;
 
-            string addressBookName = addressBookShell.GetFriendlyName() ?? "< Unnamed >";
-            sb.Append(addressBookName);
-
-            if (!addressBookShell.IsSaved)
-                sb.Append(" *");
-
-            sb.Append(" - ");
-
-            sb.Append(lisimbaApplication.ProgramName);
-
-            return sb.ToString();
+            return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
         }
 
         public void WindowWasShown()

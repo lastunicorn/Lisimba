@@ -143,7 +143,7 @@ namespace DustInTheWind.Lisimba.BookShell
             if (hasFileName) return
                 FileName;
 
-            return null;
+            return "< Unnamed >";
         }
 
         public void LoadNew()

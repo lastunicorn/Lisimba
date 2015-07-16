@@ -119,9 +119,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public void SetValues(int day, int month, int year)
         {
-            Month = month;
-            Year = year;
-            Day = day;
+            this.month = month;
+            this.year = year;
+            this.day = day;
+
+            OnChanged();
         }
 
         private void SetDayInternal(int value)

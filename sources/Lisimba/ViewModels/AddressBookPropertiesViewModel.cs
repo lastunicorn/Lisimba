@@ -1,9 +1,6 @@
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 namespace DustInTheWind.Lisimba.ViewModels
 {
-    public class AddressBookPropertiesViewModel : INotifyPropertyChanged
+    public class AddressBookPropertiesViewModel : ViewModelBase
     {
         private string bookName;
         private bool bookNameEnabled;
@@ -48,16 +45,6 @@ namespace DustInTheWind.Lisimba.ViewModels
                 contactsCount = value;
                 OnPropertyChanged();
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChangedEventHandler handler = PropertyChanged;
-
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

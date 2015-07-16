@@ -96,17 +96,11 @@ namespace DustInTheWind.Lisimba.Forms
             // contactView1
             // 
             this.contactView1.BackColor = System.Drawing.SystemColors.Control;
-            this.contactView1.Birthday = "";
             this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactView1.FirstName = "";
             this.contactView1.ForeColor = System.Drawing.Color.Black;
-            this.contactView1.LastName = "";
             this.contactView1.Location = new System.Drawing.Point(8, 8);
-            this.contactView1.MiddleName = "";
             this.contactView1.MinimumSize = new System.Drawing.Size(496, 384);
             this.contactView1.Name = "contactView1";
-            this.contactView1.Nickname = "";
-            this.contactView1.Notes = "";
             this.contactView1.Size = new System.Drawing.Size(526, 398);
             this.contactView1.TabIndex = 0;
             // 

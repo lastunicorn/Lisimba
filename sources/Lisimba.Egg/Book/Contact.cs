@@ -20,7 +20,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
 {
     public class Contact : IComparable, IObservableEntity
     {
-        private PersonName name = new PersonName();
+        private PersonName name;
 
         public PersonName Name
         {
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        private Date birthday = new Date();
+        private Date birthday;
 
         public Date Birthday
         {
@@ -158,12 +158,18 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public Contact()
         {
+            name = new PersonName();
+            birthday = new Date();
+
             Phones = new PhoneCollection();
             Emails = new EmailCollection();
             WebSites = new WebSiteCollection();
             Addresses = new AddressCollection();
             Dates = new DateCollection();
             MessengerIds = new MessengerIdCollection();
+
+            name.Changed += (sender, args) => OnChanged();
+            birthday.Changed += (sender, args) => OnChanged();
 
             Phones.CollectionChanged += (sender, e) => OnChanged();
             Phones.ItemChanged += (sender, e) => OnChanged();
@@ -182,8 +188,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
             MessengerIds.CollectionChanged += (sender, e) => OnChanged();
             MessengerIds.ItemChanged += (sender, e) => OnChanged();
-
-            birthday.Changed += (sender, e) => OnChanged();
         }
 
         private void HandleNameChanged(object sender, EventArgs e)

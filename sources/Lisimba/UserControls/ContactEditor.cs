@@ -44,7 +44,24 @@ namespace DustInTheWind.Lisimba.UserControls
 
             presenter = new ContactViewPresenter(new Zodiac()) { View = this };
 
+            CreateBindings();
+
             formBirthdayEdit = new FormDateEdit();
+        }
+
+        private void CreateBindings()
+        {
+            textBoxFirstName.Bind(x => x.Text, presenter, x => x.FirstName, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxMiddleName.Bind(x => x.Text, presenter, x => x.MiddleName, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxLastName.Bind(x => x.Text, presenter, x => x.LastName, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNickname.Bind(x => x.Text, presenter, x => x.Nickname, DataSourceUpdateMode.OnPropertyChanged);
+
+            labelBirthday.Bind(x => x.Text, presenter, x => x.Birthday, DataSourceUpdateMode.OnPropertyChanged);
+
+            pictureBoxZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
+            labelZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
+
+            textBoxNotes.Bind(x => x.Text, presenter, x => x.Notes, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
@@ -77,50 +94,9 @@ namespace DustInTheWind.Lisimba.UserControls
             presenter.NotesWasChanged();
         }
 
-        public string FirstName
-        {
-            get { return textBoxFirstName.Text; }
-            set { textBoxFirstName.Text = value; }
-        }
-
-        public string MiddleName
-        {
-            get { return textBoxMiddleName.Text; }
-            set { textBoxMiddleName.Text = value; }
-        }
-
-        public string LastName
-        {
-            get { return textBoxLastName.Text; }
-            set { textBoxLastName.Text = value; }
-        }
-
-        public string Nickname
-        {
-            get { return textBoxNickname.Text; }
-            set { textBoxNickname.Text = value; }
-        }
-
-        public string Birthday
-        {
-            get { return labelBirthday.Text; }
-            set { labelBirthday.Text = value; }
-        }
-
         public Image ZodiacSignImage
         {
             set { pictureBoxZodiacSign.Image = value; }
-        }
-
-        public string ZodiacSignText
-        {
-            set { labelZodiacSign.Text = value; }
-        }
-
-        public string Notes
-        {
-            get { return textBoxNotes.Text; }
-            set { textBoxNotes.Text = value; }
         }
 
         public PhoneCollection Phones

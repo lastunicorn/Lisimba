@@ -15,18 +15,27 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
+using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    class ContactViewPresenter
+    class ContactViewPresenter : ViewModelBase
     {
         private readonly Zodiac zodiac;
 
         private Contact contact;
         private bool isInitializationMode;
+        private string firstName;
+        private string middleName;
+        private string lastName;
+        private string nickname;
+        private string birthday;
+        private string zodiacSignText;
+        private string notes;
 
         public IContactEditorView View { get; set; }
 
@@ -44,6 +53,76 @@ namespace DustInTheWind.Lisimba.Presenters
                     contact.Changed += HandleContactChanged;
 
                 RefreshData();
+            }
+        }
+
+        public string FirstName
+        {
+            get { return firstName; }
+            set
+            {
+                firstName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string MiddleName
+        {
+            get { return middleName; }
+            set
+            {
+                middleName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string LastName
+        {
+            get { return lastName; }
+            set
+            {
+                lastName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Nickname
+        {
+            get { return nickname; }
+            set
+            {
+                nickname = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Birthday
+        {
+            get { return birthday; }
+            set
+            {
+                birthday = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ZodiacSignText
+        {
+            get { return zodiacSignText; }
+            set
+            {
+                zodiacSignText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Notes
+        {
+            get { return notes; }
+            set
+            {
+                notes = value;
+                OnPropertyChanged();
             }
         }
 
@@ -70,49 +149,9 @@ namespace DustInTheWind.Lisimba.Presenters
             try
             {
                 if (contact == null)
-                {
-                    View.FirstName = string.Empty;
-                    View.MiddleName = string.Empty;
-                    View.LastName = string.Empty;
-                    View.Nickname = string.Empty;
-
-                    View.Birthday = string.Empty;
-
-                    View.Notes = string.Empty;
-
-                    View.Phones = null;
-                    View.Emails = null;
-                    View.WebSites = null;
-                    View.Addresses = null;
-                    View.Dates = null;
-                    View.MessengerIds = null;
-
-                    View.Enabled = false;
-                }
+                    ClearView();
                 else
-                {
-                    View.FirstName = contact.Name.FirstName;
-                    View.MiddleName = contact.Name.MiddleName;
-                    View.LastName = contact.Name.LastName;
-                    View.Nickname = contact.Name.Nickname;
-
-                    View.Birthday = contact.Birthday.ToString();
-
-                    View.ZodiacSignImage = zodiac.GetZodiacImage(contact.ZogiacSign);
-                    //toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
-                    View.ZodiacSignText = zodiac.GetZodiacSignName(contact.ZogiacSign);
-
-                    View.Notes = contact.Notes;
-
-                    View.Phones = contact.Phones;
-                    View.Emails = contact.Emails;
-                    View.WebSites = contact.WebSites;
-                    View.Addresses = contact.Addresses;
-                    View.Dates = contact.Dates;
-                    View.MessengerIds = contact.MessengerIds;
-
-                    View.Enabled = true;
-                }
+                    DisplayContactInView();
             }
             finally
             {
@@ -120,12 +159,61 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
+        private void DisplayContactInView()
+        {
+            FirstName = contact.Name.FirstName;
+            MiddleName = contact.Name.MiddleName;
+            LastName = contact.Name.LastName;
+            Nickname = contact.Name.Nickname;
+
+            Birthday = contact.Birthday.ToString();
+
+            View.ZodiacSignImage = zodiac.GetZodiacImage(contact.ZogiacSign);
+            //toolTip1.SetToolTip(pictureBoxZodiacSign, contact.ZogiacSign.ToString());
+            ZodiacSignText = zodiac.GetZodiacSignName(contact.ZogiacSign);
+
+            Notes = contact.Notes;
+
+            View.Phones = contact.Phones;
+            View.Emails = contact.Emails;
+            View.WebSites = contact.WebSites;
+            View.Addresses = contact.Addresses;
+            View.Dates = contact.Dates;
+            View.MessengerIds = contact.MessengerIds;
+
+            View.Enabled = true;
+        }
+
+        private void ClearView()
+        {
+            FirstName = string.Empty;
+            MiddleName = string.Empty;
+            LastName = string.Empty;
+            Nickname = string.Empty;
+
+            Birthday = string.Empty;
+
+            View.ZodiacSignImage = zodiac.GetEmptyImage();
+            ZodiacSignText = string.Empty;
+
+            Notes = string.Empty;
+
+            View.Phones = null;
+            View.Emails = null;
+            View.WebSites = null;
+            View.Addresses = null;
+            View.Dates = null;
+            View.MessengerIds = null;
+
+            View.Enabled = false;
+        }
+
         public void FirstNameWasChanged()
         {
             if (isInitializationMode)
                 return;
 
-            contact.Name.FirstName = View.FirstName;
+            contact.Name.FirstName = FirstName;
         }
 
         public void MiddleNameWasChanged()
@@ -133,7 +221,7 @@ namespace DustInTheWind.Lisimba.Presenters
             if (isInitializationMode)
                 return;
 
-            contact.Name.MiddleName = View.MiddleName;
+            contact.Name.MiddleName = MiddleName;
         }
 
         public void LastNameWasChanged()
@@ -141,7 +229,7 @@ namespace DustInTheWind.Lisimba.Presenters
             if (isInitializationMode)
                 return;
 
-            contact.Name.LastName = View.LastName;
+            contact.Name.LastName = LastName;
         }
 
         public void NicknameWasChanged()
@@ -149,7 +237,7 @@ namespace DustInTheWind.Lisimba.Presenters
             if (isInitializationMode)
                 return;
 
-            contact.Name.Nickname = View.Nickname;
+            contact.Name.Nickname = Nickname;
         }
 
         public void NotesWasChanged()
@@ -157,7 +245,7 @@ namespace DustInTheWind.Lisimba.Presenters
             if (isInitializationMode)
                 return;
 
-            contact.Notes = View.Notes;
+            contact.Notes = Notes;
         }
 
         public void BirthdayEditWasRequested()

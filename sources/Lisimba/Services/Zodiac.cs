@@ -29,6 +29,12 @@ namespace DustInTheWind.Lisimba.Services
             return zodiacSignProvider.GetZodiacImage(zodiacSign);
         }
 
+        public Image GetEmptyImage()
+        {
+            ZodiacSignProvider zodiacSignProvider = new ZodiacSignProvider();
+            return zodiacSignProvider.GetZodiacImage(ZodiacSign.Aquarius);
+        }
+
         public string GetZodiacSignName(ZodiacSign zodiacSign)
         {
             switch (zodiacSign)
