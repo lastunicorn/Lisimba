@@ -123,28 +123,28 @@
     <Compile Include="Config\RecentFilesConfigElement.cs" />
     <Compile Include="Config\LisimbaConfigSection.cs" />
     <Compile Include="CommandLineArguments.cs" />
-    <Compile Include="Forms\FormEditBase.cs">
+    <Compile Include="ContactEdit\FormEditBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormEditBase.Designer.cs">
+    <Compile Include="ContactEdit\FormEditBase.Designer.cs">
       <DependentUpon>FormEditBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormEmailEdit.cs">
+    <Compile Include="ContactEdit\FormEmailEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormEmailEdit.Designer.cs">
+    <Compile Include="ContactEdit\FormEmailEdit.Designer.cs">
       <DependentUpon>FormEmailEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormPhoneEdit.cs">
+    <Compile Include="ContactEdit\FormPhoneEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormPhoneEdit.Designer.cs">
+    <Compile Include="ContactEdit\FormPhoneEdit.Designer.cs">
       <DependentUpon>FormPhoneEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormWebSiteEdit.cs">
+    <Compile Include="ContactEdit\FormWebSiteEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormWebSiteEdit.Designer.cs">
+    <Compile Include="ContactEdit\FormWebSiteEdit.Designer.cs">
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
@@ -168,7 +168,7 @@
     <Compile Include="UserControls\ContactListView.Designer.cs">
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presenters\ContactViewPresenter.cs" />
+    <Compile Include="ContactEdit\ContactViewPresenter.cs" />
     <Compile Include="UserControls\CommandedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -179,7 +179,7 @@
     <Compile Include="UserControls\CustomTreeView.Designer.cs">
       <DependentUpon>CustomTreeView.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\IContactEditorView.cs" />
+    <Compile Include="ContactEdit\IContactEditorView.cs" />
     <Compile Include="UserControls\LisimbaMainMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -214,10 +214,10 @@
     <Compile Include="Forms\FormAddContact.Designer.cs">
       <DependentUpon>FormAddContact.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormAddressEdit.cs">
+    <Compile Include="ContactEdit\FormAddressEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormAddressEdit.Designer.cs">
+    <Compile Include="ContactEdit\FormAddressEdit.Designer.cs">
       <DependentUpon>FormAddressEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormAddressBookProperties.cs">
@@ -226,10 +226,10 @@
     <Compile Include="Forms\FormAddressBookProperties.Designer.cs">
       <DependentUpon>FormAddressBookProperties.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\FormDateEdit.cs">
+    <Compile Include="ContactEdit\FormDateEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\FormDateEdit.Designer.cs">
+    <Compile Include="ContactEdit\FormDateEdit.Designer.cs">
       <DependentUpon>FormDateEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormLisimba.cs">
@@ -238,10 +238,10 @@
     <Compile Include="Forms\FormLisimba.Designer.cs">
       <DependentUpon>FormLisimba.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\ContactEditor.cs">
+    <Compile Include="ContactEdit\ContactEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControls\ContactEditor.Designer.cs">
+    <Compile Include="ContactEdit\ContactEditor.Designer.cs">
       <DependentUpon>ContactEditor.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\MessengerIdListView.cs">
@@ -269,19 +269,19 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormBiorythm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEditBase.resx">
+    <EmbeddedResource Include="ContactEdit\FormEditBase.resx">
       <DependentUpon>FormEditBase.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormEmailEdit.resx">
+    <EmbeddedResource Include="ContactEdit\FormEmailEdit.resx">
       <DependentUpon>FormEmailEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormPhoneEdit.resx">
+    <EmbeddedResource Include="ContactEdit\FormPhoneEdit.resx">
       <DependentUpon>FormPhoneEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormWebSiteEdit.resx">
+    <EmbeddedResource Include="ContactEdit\FormWebSiteEdit.resx">
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -316,7 +316,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormAddContact.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormAddressEdit.resx">
+    <EmbeddedResource Include="ContactEdit\FormAddressEdit.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormAddressEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,7 +324,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormAddressBookProperties.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\FormDateEdit.resx">
+    <EmbeddedResource Include="ContactEdit\FormDateEdit.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormDateEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,7 +332,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>FormLisimba.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\ContactEditor.resx">
+    <EmbeddedResource Include="ContactEdit\ContactEditor.resx">
       <DependentUpon>ContactEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.Forms
+﻿namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class FormEditBase
     {

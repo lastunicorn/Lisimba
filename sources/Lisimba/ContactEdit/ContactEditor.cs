@@ -19,10 +19,10 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.UserControls;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     /// <summary>
     /// Control to display and edit a contact.

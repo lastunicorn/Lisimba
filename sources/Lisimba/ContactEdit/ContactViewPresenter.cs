@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 using DustInTheWind.Lisimba.ViewModels;
 
-namespace DustInTheWind.Lisimba.Presenters
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     class ContactViewPresenter : ViewModelBase
     {

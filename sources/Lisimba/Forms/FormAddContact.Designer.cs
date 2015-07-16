@@ -1,3 +1,4 @@
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -35,7 +36,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.contactView1 = new DustInTheWind.Lisimba.UserControls.ContactEditor();
+            this.contactView1 = new ContactEditor();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();

@@ -18,7 +18,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     public partial class FormEditBase : Form
     {

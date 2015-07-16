@@ -16,35 +16,35 @@
 
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormPhoneEdit : FormEditBase
+    public partial class FormEmailEdit : FormEditBase
     {
-        private Phone phone;
-        public Phone Phone
+        private Email email;
+        public Email Email
         {
-            get { return phone; }
+            get { return email; }
             set
             {
-                phone = value;
+                email = value;
                 DisplayDataInView();
             }
         }
 
-        public FormPhoneEdit()
+        public FormEmailEdit()
         {
             InitializeComponent();
 
-            textBoxPhone.KeyDown += FormEditBase_KeyDown;
+            textBoxEmail.KeyDown += FormEditBase_KeyDown;
             textBoxComments.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
         {
-            bool dataWasChanged = !phone.Number.Equals(textBoxPhone.Text) ||
-                                  !phone.Description.Equals(textBoxComments.Text);
+            bool isAnyDataChanged = !email.Address.Equals(textBoxEmail.Text) ||
+                                    !email.Description.Equals(textBoxComments.Text);
 
-            if (!dataWasChanged)
+            if (!isAnyDataChanged)
                 return;
 
             ReadDataFromView();
@@ -52,14 +52,14 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void DisplayDataInView()
         {
-            textBoxPhone.Text = phone.Number;
-            textBoxComments.Text = phone.Description;
+            textBoxEmail.Text = email.Address;
+            textBoxComments.Text = email.Description;
         }
 
         private void ReadDataFromView()
         {
-            phone.Number = textBoxPhone.Text;
-            phone.Description = textBoxComments.Text;
+            email.Address = textBoxEmail.Text;
+            email.Description = textBoxComments.Text;
         }
     }
 }

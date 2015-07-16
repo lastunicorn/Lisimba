@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;

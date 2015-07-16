@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     public partial class FormWebSiteEdit : FormEditBase
     {
