@@ -30,21 +30,27 @@ namespace DustInTheWind.Lisimba.Services
         private readonly ConfigurationService configurationService;
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
-        private readonly UiService uiService;
         private readonly AddressBookShell addressBookShell;
 
-        public string ProgramName { get; private set; }
+        public string ProgramName
+        {
+            get
+            {
+                Assembly executingAssembly = Assembly.GetExecutingAssembly();
+                AssemblyName assemblyName = executingAssembly.GetName();
+
+                return string.Format("{0} {1}", Application.ProductName, assemblyName.Version.ToString(2));
+            }
+        }
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
-            RecentFiles recentFiles, CommandPool commandPool, UiService uiService, ApplicationService applicationService,
-            AddressBookShell addressBookShell)
+            RecentFiles recentFiles, CommandPool commandPool, ApplicationService applicationService, AddressBookShell addressBookShell)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
-            if (uiService == null) throw new ArgumentNullException("uiService");
             if (applicationService == null) throw new ArgumentNullException("applicationService");
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
@@ -53,23 +59,9 @@ namespace DustInTheWind.Lisimba.Services
             this.configurationService = configurationService;
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
-            this.uiService = uiService;
             this.addressBookShell = addressBookShell;
 
-            ProgramName = GetProgramName();
-
-            commandPool.OpenAddressBookOperation.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
-            commandPool.ImportYahooCsvOperation.AskIfAllowToContinue = addressBookShell.EnsureIsSaved;
-
             applicationService.Exiting += HandleApplicationExiting;
-        }
-
-        private static string GetProgramName()
-        {
-            Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            AssemblyName assemblyName = executingAssembly.GetName();
-
-            return string.Format("{0} {1}", Application.ProductName, assemblyName.Version.ToString(2));
         }
 
         private void HandleApplicationExiting(object sender, CancelEventArgs e)
@@ -84,7 +76,7 @@ namespace DustInTheWind.Lisimba.Services
         {
             applicationStatus.DefaultStatusText = Resources.DefaultStatusText;
 
-            string fileNameToOpenAtLoad = CalculateFileNameToInitiallyOpen();
+            string fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
 
             if (string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
                 commandPool.CreateNewAddressBookOperation.Execute();
@@ -92,7 +84,7 @@ namespace DustInTheWind.Lisimba.Services
                 commandPool.OpenAddressBookOperation.Execute(fileNameToOpenAtLoad);
         }
 
-        private string CalculateFileNameToInitiallyOpen()
+        private string CalculateInitiallyOpenedFileName()
         {
             if (!string.IsNullOrEmpty(programArguments.FileName))
                 return programArguments.FileName;

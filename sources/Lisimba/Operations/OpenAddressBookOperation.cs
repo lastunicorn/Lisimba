@@ -37,8 +37,6 @@ namespace DustInTheWind.Lisimba.Operations
             get { return Resources.OpenAddressBookOperationDescription; }
         }
 
-        public Func<bool> AskIfAllowToContinue;
-
         public OpenAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
@@ -56,7 +54,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                bool allowToContinue = AskIfAllowToContinue == null || AskIfAllowToContinue();
+                bool allowToContinue = addressBookShell.EnsureIsSaved();
 
                 if (!allowToContinue)
                     return;

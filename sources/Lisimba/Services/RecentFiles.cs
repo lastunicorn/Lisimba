@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Config;
 
 namespace DustInTheWind.Lisimba.Services
 {
@@ -34,18 +35,18 @@ namespace DustInTheWind.Lisimba.Services
 
         public RecentFiles(ConfigurationService configurationService)
         {
-            if (configurationService == null)
-                throw new ArgumentNullException("configurationService");
+            if (configurationService == null) throw new ArgumentNullException("configurationService");
 
             this.configurationService = configurationService;
         }
 
         public string GetMostRecentFileName()
         {
-            if (configurationService.LisimbaConfigSection.RecentFilesList.Count > 0)
-                return configurationService.LisimbaConfigSection.RecentFilesList[0].FileName;
+            RecentFilesConfigElementCollection recentFiles = configurationService.LisimbaConfigSection.RecentFilesList;
 
-            return null;
+            return recentFiles.Count > 0 
+                ? recentFiles[0].FileName
+                : null;
         }
 
         public void AddRecentFile(string fileName)
@@ -57,7 +58,7 @@ namespace DustInTheWind.Lisimba.Services
             configurationService.Save();
         }
 
-        public Config.RecentFilesConfigElementCollection GetAllFiles()
+        public RecentFilesConfigElementCollection GetAllFiles()
         {
             return configurationService.LisimbaConfigSection.RecentFilesList;
         }

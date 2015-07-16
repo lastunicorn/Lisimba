@@ -33,8 +33,6 @@ namespace DustInTheWind.Lisimba.Operations
             get { return Resources.ImportYahooCsvOperationDescription; }
         }
 
-        public Func<bool> AskIfAllowToContinue;
-
         public ImportYahooCsvOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
@@ -50,7 +48,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                bool allowToContinue = AskIfAllowToContinue == null || AskIfAllowToContinue();
+                bool allowToContinue = addressBookShell.EnsureIsSaved();
 
                 if (!allowToContinue)
                     return;
