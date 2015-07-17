@@ -37,6 +37,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private string notes;
         private Image zodiacSignImage = new Bitmap(1, 1);
         private bool enabled;
+        private PhoneCollection phones;
+        private EmailCollection emails;
+        private WebSiteCollection webSites;
+        private AddressCollection addresses;
+        private DateCollection dates;
+        private MessengerIdCollection messengerIds;
 
         public IContactEditorView View { get; set; }
 
@@ -147,6 +153,66 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public PhoneCollection Phones
+        {
+            get { return phones; }
+            set
+            {
+                phones = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public EmailCollection Emails
+        {
+            get { return emails; }
+            set
+            {
+                emails = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public WebSiteCollection WebSites
+        {
+            get { return webSites; }
+            set
+            {
+                webSites = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public AddressCollection Addresses
+        {
+            get { return addresses; }
+            set
+            {
+                addresses = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DateCollection Dates
+        {
+            get { return dates; }
+            set
+            {
+                dates = value; 
+                OnPropertyChanged();
+            }
+        }
+
+        public MessengerIdCollection MessengerIds
+        {
+            get { return messengerIds; }
+            set
+            {
+                messengerIds = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ContactViewPresenter(Zodiac zodiac)
         {
             if (zodiac == null)
@@ -194,12 +260,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             Notes = contact.Notes;
 
-            View.Phones = contact.Phones;
-            View.Emails = contact.Emails;
-            View.WebSites = contact.WebSites;
-            View.Addresses = contact.Addresses;
-            View.Dates = contact.Dates;
-            View.MessengerIds = contact.MessengerIds;
+            Phones = contact.Phones;
+            Emails = contact.Emails;
+            WebSites = contact.WebSites;
+            Addresses = contact.Addresses;
+            Dates = contact.Dates;
+            MessengerIds = contact.MessengerIds;
 
             Enabled = true;
         }
@@ -218,12 +284,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             Notes = string.Empty;
 
-            View.Phones = null;
-            View.Emails = null;
-            View.WebSites = null;
-            View.Addresses = null;
-            View.Dates = null;
-            View.MessengerIds = null;
+            Phones = null;
+            Emails = null;
+            WebSites = null;
+            Addresses = null;
+            Dates = null;
+            MessengerIds = null;
 
             Enabled = false;
         }

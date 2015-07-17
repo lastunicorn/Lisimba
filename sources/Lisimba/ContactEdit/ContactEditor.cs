@@ -20,7 +20,6 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -49,20 +48,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void CreateBindings()
         {
-            textBoxFirstName.Bind(x => x.Text, presenter, x => x.FirstName, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxMiddleName.Bind(x => x.Text, presenter, x => x.MiddleName, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxLastName.Bind(x => x.Text, presenter, x => x.LastName, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxNickname.Bind(x => x.Text, presenter, x => x.Nickname, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxFirstName.Bind(x => x.Text, presenter, x => x.FirstName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxMiddleName.Bind(x => x.Text, presenter, x => x.MiddleName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxLastName.Bind(x => x.Text, presenter, x => x.LastName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNickname.Bind(x => x.Text, presenter, x => x.Nickname, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            labelBirthday.Bind(x => x.Text, presenter, x => x.Birthday, DataSourceUpdateMode.OnPropertyChanged);
+            labelBirthday.Bind(x => x.Text, presenter, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            pictureBoxZodiacSign.Bind(x=>x.Image, presenter, x=>x.ZodiacSignImage);
-            pictureBoxZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
-            labelZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText);
+            pictureBoxZodiacSign.Bind(x => x.Image, presenter, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            labelZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            textBoxNotes.Bind(x => x.Text, presenter, x => x.Notes, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNotes.Bind(x => x.Text, presenter, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            this.Bind(x => x.Enabled, presenter, x => x.Enabled);
+            customTreeView1.Bind(x => x.Phones, presenter, x => x.Phones, true, DataSourceUpdateMode.Never);
+
+            this.Bind(x => x.Enabled, presenter, x => x.Enabled, false);
         }
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
@@ -100,35 +101,35 @@ namespace DustInTheWind.Lisimba.ContactEdit
             set { pictureBoxZodiacSign.Image = value; }
         }
 
-        public PhoneCollection Phones
-        {
-            set { customTreeView1.Phones = value; }
-        }
+        //public PhoneCollection Phones
+        //{
+        //    set { customTreeView1.Phones = value; }
+        //}
 
-        public EmailCollection Emails
-        {
-            set { customTreeView1.Emails = value; }
-        }
+        //public EmailCollection Emails
+        //{
+        //    set { customTreeView1.Emails = value; }
+        //}
 
-        public WebSiteCollection WebSites
-        {
-            set { customTreeView1.WebSites = value; }
-        }
+        //public WebSiteCollection WebSites
+        //{
+        //    set { customTreeView1.WebSites = value; }
+        //}
 
-        public AddressCollection Addresses
-        {
-            set { customTreeView1.Addresses = value; }
-        }
+        //public AddressCollection Addresses
+        //{
+        //    set { customTreeView1.Addresses = value; }
+        //}
 
-        public DateCollection Dates
-        {
-            set { customTreeView1.Dates = value; }
-        }
+        //public DateCollection Dates
+        //{
+        //    set { customTreeView1.Dates = value; }
+        //}
 
-        public MessengerIdCollection MessengerIds
-        {
-            set { customTreeView1.MessengerIds = value; }
-        }
+        //public MessengerIdCollection MessengerIds
+        //{
+        //    set { customTreeView1.MessengerIds = value; }
+        //}
 
         public void EditBirthday(Date birthday)
         {

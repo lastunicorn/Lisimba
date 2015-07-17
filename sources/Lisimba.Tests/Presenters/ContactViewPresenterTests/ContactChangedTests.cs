@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Name = new PersonName { FirstName = firstName }
             };
 
-            view.VerifySet(x => x.FirstName = firstName, Times.Once);
+            Assert.That(contactViewPresenter.FirstName, Is.EqualTo(firstName));
         }
 
         [Test]
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.FirstName = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.FirstName, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Name = new PersonName { MiddleName = middleName }
             };
 
-            view.VerifySet(x => x.MiddleName = middleName, Times.Once);
+            Assert.That(contactViewPresenter.MiddleName, Is.EqualTo(middleName));
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.MiddleName = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.MiddleName, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Name = new PersonName { LastName = lastName }
             };
 
-            view.VerifySet(x => x.LastName = lastName, Times.Once);
+            Assert.That(contactViewPresenter.LastName, Is.EqualTo(lastName));
         }
 
         [Test]
@@ -113,7 +113,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.LastName = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.LastName, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -127,7 +127,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Name = new PersonName { Nickname = nickname }
             };
 
-            view.VerifySet(x => x.Nickname = nickname, Times.Once);
+            Assert.That(contactViewPresenter.Nickname, Is.EqualTo(nickname));
         }
 
         [Test]
@@ -137,7 +137,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Nickname = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.Nickname, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -152,7 +152,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Birthday = birthday
             };
 
-            view.VerifySet(x => x.Birthday = birthday.ToString(), Times.Once);
+            Assert.That(contactViewPresenter.Birthday, Is.EqualTo(birthday.ToString()));
         }
 
         [Test]
@@ -162,7 +162,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Birthday = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.Birthday, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -176,7 +176,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Notes = notes
             };
 
-            view.VerifySet(x => x.Notes = notes, Times.Once);
+            Assert.That(contactViewPresenter.Notes, Is.EqualTo(notes));
         }
 
         [Test]
@@ -186,7 +186,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Notes = string.Empty, Times.Once);
+            Assert.That(contactViewPresenter.Notes, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -196,14 +196,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             PhoneCollection phones = new PhoneCollection { new Phone(), new Phone() };
             contact.Phones.AddRange(phones);
-            PhoneCollection actual = null;
-            view.SetupSet(x => x.Phones = It.IsAny<PhoneCollection>())
-                .Callback<PhoneCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(phones));
+            Assert.That(contactViewPresenter.Phones, Is.EquivalentTo(phones));
         }
 
         [Test]
@@ -213,7 +209,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Phones = null, Times.Once);
+            Assert.That(contactViewPresenter.Phones, Is.Null);
         }
 
         [Test]
@@ -223,14 +219,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             EmailCollection emails = new EmailCollection { new Email(), new Email() };
             contact.Emails.AddRange(emails);
-            EmailCollection actual = null;
-            view.SetupSet(x => x.Emails = It.IsAny<EmailCollection>())
-                .Callback<EmailCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(emails));
+            Assert.That(contactViewPresenter.Emails, Is.EquivalentTo(emails));
         }
 
         [Test]
@@ -240,7 +232,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Emails = null, Times.Once);
+            Assert.That(contactViewPresenter.Emails, Is.Null);
         }
 
         [Test]
@@ -250,14 +242,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             WebSiteCollection webSites = new WebSiteCollection { new WebSite(), new WebSite() };
             contact.WebSites.AddRange(webSites);
-            WebSiteCollection actual = null;
-            view.SetupSet(x => x.WebSites = It.IsAny<WebSiteCollection>())
-                .Callback<WebSiteCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(webSites));
+            Assert.That(contactViewPresenter.WebSites, Is.EquivalentTo(webSites));
         }
 
         [Test]
@@ -267,7 +255,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.WebSites = null, Times.Once);
+            Assert.That(contactViewPresenter.WebSites, Is.Null);
         }
 
         [Test]
@@ -277,14 +265,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             AddressCollection addresses = new AddressCollection { new Address(), new Address() };
             contact.Addresses.AddRange(addresses);
-            AddressCollection actual = null;
-            view.SetupSet(x => x.Addresses = It.IsAny<AddressCollection>())
-                .Callback<AddressCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(addresses));
+            Assert.That(contactViewPresenter.Addresses, Is.EquivalentTo(addresses));
         }
 
         [Test]
@@ -294,7 +278,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Addresses = null, Times.Once);
+            Assert.That(contactViewPresenter.Addresses, Is.Null);
         }
 
         [Test]
@@ -304,14 +288,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             DateCollection dates = new DateCollection { new Date(), new Date() };
             contact.Dates.AddRange(dates);
-            DateCollection actual = null;
-            view.SetupSet(x => x.Dates = It.IsAny<DateCollection>())
-                .Callback<DateCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(dates));
+            Assert.That(contactViewPresenter.Dates, Is.EquivalentTo(dates));
         }
 
         [Test]
@@ -321,7 +301,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.Dates = null, Times.Once);
+            Assert.That(contactViewPresenter.Dates, Is.Null);
         }
 
         [Test]
@@ -331,14 +311,10 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
             Contact contact = new Contact();
             MessengerIdCollection messengerIds = new MessengerIdCollection { new MessengerId(), new MessengerId() };
             contact.MessengerIds.AddRange(messengerIds);
-            MessengerIdCollection actual = null;
-            view.SetupSet(x => x.MessengerIds = It.IsAny<MessengerIdCollection>())
-                .Callback<MessengerIdCollection>(x => actual = x);
 
             contactViewPresenter.Contact = contact;
 
-            Assert.That(actual, Is.Not.Null);
-            Assert.That(actual, Is.EquivalentTo(messengerIds));
+            Assert.That(contactViewPresenter.MessengerIds, Is.EquivalentTo(messengerIds));
         }
 
         [Test]
@@ -348,7 +324,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactViewPresenter.Contact = null;
 
-            view.VerifySet(x => x.MessengerIds = null, Times.Once);
+            Assert.That(contactViewPresenter.MessengerIds, Is.Null);
         }
     }
 }

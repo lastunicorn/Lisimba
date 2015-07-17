@@ -63,7 +63,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customTreeView1 = new DustInTheWind.Lisimba.UserControls.CustomTreeView();
+            this.customTreeView1 = new CustomTreeView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();

@@ -14,14 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class CustomTreeView
     {
@@ -101,7 +96,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.ShowRootLines = false;
             this.Size = new System.Drawing.Size(250, 191);
             this.TabIndex = 12;
-            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDoubleClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HandleMouseDoubleClick);
             this.ResumeLayout(false);
 
         }

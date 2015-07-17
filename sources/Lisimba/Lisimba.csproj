@@ -174,10 +174,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControls\ContactsToTreeViewBinder.cs" />
-    <Compile Include="UserControls\CustomTreeView.cs">
+    <Compile Include="ContactEdit\CustomTreeView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControls\CustomTreeView.Designer.cs">
+    <Compile Include="ContactEdit\CustomTreeView.Designer.cs">
       <DependentUpon>CustomTreeView.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\IContactEditorView.cs" />
@@ -295,7 +295,7 @@
       <SubType>Designer</SubType>
       <DependentUpon>ContactListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\CustomTreeView.resx">
+    <EmbeddedResource Include="ContactEdit\CustomTreeView.resx">
       <DependentUpon>CustomTreeView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\LisimbaMainMenuStrip.resx">

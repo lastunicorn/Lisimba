@@ -32,10 +32,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         public void CreateBindings(AddressBookPropertiesViewModel viewModel)
         {
-            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, DataSourceUpdateMode.Never);
-            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, DataSourceUpdateMode.Never);
-            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, DataSourceUpdateMode.Never);
+            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
