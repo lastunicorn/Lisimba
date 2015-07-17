@@ -18,7 +18,6 @@ using System;
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -36,7 +35,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private string birthday;
         private string zodiacSignText;
         private string notes;
-        private Image zodiacSignImage;
+        private Image zodiacSignImage = new Bitmap(1, 1);
         private bool enabled;
 
         public IContactEditorView View { get; set; }
@@ -154,8 +153,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 throw new ArgumentNullException("zodiac");
 
             this.zodiac = zodiac;
-
-            zodiacSignImage = new Bitmap(1, 1);
         }
 
         private void HandleContactChanged(object sender, EventArgs e)

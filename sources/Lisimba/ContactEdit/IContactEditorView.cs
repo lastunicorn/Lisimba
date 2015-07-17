@@ -20,24 +20,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     public interface IContactEditorView
     {
-        //string FirstName { get; set; }
-        //string MiddleName { get; set; }
-        //string LastName { get; set; }
-        //string Nickname { get; set; }
-
-        //string Birthday { get; set; }
-        //Image ZodiacSignImage { set; }
-        //string ZodiacSignText { set; }
-
-        //string Notes { get; set; }
-
         PhoneCollection Phones { set; }
         EmailCollection Emails { set; }
         WebSiteCollection WebSites { set; }
         AddressCollection Addresses { set; }
         DateCollection Dates { set; }
         MessengerIdCollection MessengerIds { set; }
-        //bool Enabled { set; }
 
         void EditBirthday(Date birthday);
     }
