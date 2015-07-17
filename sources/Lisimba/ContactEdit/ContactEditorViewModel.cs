@@ -43,6 +43,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private AddressCollection addresses;
         private DateCollection dates;
         private MessengerIdCollection messengerIds;
+        private string fullName;
 
         public IContactEditorView View { get; set; }
 
@@ -198,7 +199,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return dates; }
             set
             {
-                dates = value; 
+                dates = value;
                 OnPropertyChanged();
             }
         }
@@ -209,6 +210,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             set
             {
                 messengerIds = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FullName
+        {
+            get { return fullName; }
+            set
+            {
+                fullName = value;
                 OnPropertyChanged();
             }
         }
@@ -248,6 +259,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void DisplayContactInView()
         {
+            FullName = Contact.Name.ToString();
+
             FirstName = contact.Name.FirstName;
             MiddleName = contact.Name.MiddleName;
             LastName = contact.Name.LastName;
@@ -272,6 +285,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void ClearView()
         {
+            FullName = string.Empty;
+
             FirstName = string.Empty;
             MiddleName = string.Empty;
             LastName = string.Empty;

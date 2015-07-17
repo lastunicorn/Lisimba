@@ -48,6 +48,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void CreateBindings()
         {
+            labelFullName.Bind(x => x.Text, Model, x => x.FullName, false, DataSourceUpdateMode.Never);
+
             textBoxFirstName.Bind(x => x.Text, model, x => x.FirstName, false, DataSourceUpdateMode.OnPropertyChanged);
             textBoxMiddleName.Bind(x => x.Text, model, x => x.MiddleName, false, DataSourceUpdateMode.OnPropertyChanged);
             textBoxLastName.Bind(x => x.Text, model, x => x.LastName, false, DataSourceUpdateMode.OnPropertyChanged);
@@ -73,6 +75,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
+            if (sender == null) throw new ArgumentNullException("sender");
+
             model.FirstNameWasChanged();
         }
 

@@ -170,7 +170,7 @@
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\ContactEditorViewModel.cs" />
-    <Compile Include="UserControls\CommandedMenuItem.cs">
+    <Compile Include="MainMenu\CommandedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControls\ContactsToTreeViewBinder.cs" />
@@ -187,22 +187,10 @@
     <Compile Include="UserControls\LisimbaMainMenuStrip.Designer.cs">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MenuItemWithChildren.cs">
+    <Compile Include="MainMenu\MenuItemWithChildren.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
-    <Compile Include="UserControls\WebSiteListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\WebSiteListView.Designer.cs">
-      <DependentUpon>WebSiteListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\EmailListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\EmailListView.Designer.cs">
-      <DependentUpon>EmailListView.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,18 +232,6 @@
     </Compile>
     <Compile Include="ContactEdit\ContactEditor.Designer.cs">
       <DependentUpon>ContactEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\MessengerIdListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\MessengerIdListView.Designer.cs">
-      <DependentUpon>MessengerIdListView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\PhoneListView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\PhoneListView.Designer.cs">
-      <DependentUpon>PhoneListView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="ProgramArguments.cs" />
@@ -301,14 +277,6 @@
     <EmbeddedResource Include="UserControls\LisimbaMainMenuStrip.resx">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\WebSiteListView.resx">
-      <DependentUpon>WebSiteListView.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\EmailListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>EmailListView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">
       <SubType>Designer</SubType>
       <DependentUpon>FormAbout.cs</DependentUpon>
@@ -336,14 +304,6 @@
     <EmbeddedResource Include="ContactEdit\ContactEditor.resx">
       <DependentUpon>ContactEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\MessengerIdListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>MessengerIdListView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\PhoneListView.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PhoneListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <SubType>Designer</SubType>
@@ -445,6 +405,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
