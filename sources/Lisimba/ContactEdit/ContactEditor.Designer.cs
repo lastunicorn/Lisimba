@@ -31,18 +31,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Phones");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Emails");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Web Sites");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Addresses");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Dates");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Messenger Ids");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Phones");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Emails");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Web Sites");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Addresses");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Dates");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Messenger Ids");
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxMiddleName = new System.Windows.Forms.TextBox();
             this.textBoxFirstName = new System.Windows.Forms.TextBox();
@@ -358,67 +346,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.customTreeView1.ImageIndex = 0;
             this.customTreeView1.Location = new System.Drawing.Point(4, 17);
             this.customTreeView1.Name = "customTreeView1";
-            treeNode1.ImageKey = "phone";
-            treeNode1.Name = "Phones";
-            treeNode1.SelectedImageKey = "phone";
-            treeNode1.Text = "Phones";
-            treeNode2.ImageKey = "e-mail";
-            treeNode2.Name = "Emails";
-            treeNode2.SelectedImageKey = "e-mail";
-            treeNode2.Text = "Emails";
-            treeNode3.ImageKey = "website";
-            treeNode3.Name = "Web Sites";
-            treeNode3.SelectedImageKey = "website";
-            treeNode3.Text = "Web Sites";
-            treeNode4.ImageKey = "address";
-            treeNode4.Name = "Addresses";
-            treeNode4.SelectedImageKey = "address";
-            treeNode4.Text = "Addresses";
-            treeNode5.ImageKey = "date";
-            treeNode5.Name = "Dates";
-            treeNode5.SelectedImageKey = "date";
-            treeNode5.Text = "Dates";
-            treeNode6.ImageKey = "mesengerid";
-            treeNode6.Name = "Messenger Ids";
-            treeNode6.SelectedImageKey = "mesengerid";
-            treeNode6.Text = "Messenger Ids";
-            treeNode7.ImageKey = "phone";
-            treeNode7.Name = "Phones";
-            treeNode7.SelectedImageKey = "phone";
-            treeNode7.Text = "Phones";
-            treeNode8.ImageKey = "e-mail";
-            treeNode8.Name = "Emails";
-            treeNode8.SelectedImageKey = "e-mail";
-            treeNode8.Text = "Emails";
-            treeNode9.ImageKey = "website";
-            treeNode9.Name = "Web Sites";
-            treeNode9.SelectedImageKey = "website";
-            treeNode9.Text = "Web Sites";
-            treeNode10.ImageKey = "address";
-            treeNode10.Name = "Addresses";
-            treeNode10.SelectedImageKey = "address";
-            treeNode10.Text = "Addresses";
-            treeNode11.ImageKey = "date";
-            treeNode11.Name = "Dates";
-            treeNode11.SelectedImageKey = "date";
-            treeNode11.Text = "Dates";
-            treeNode12.ImageKey = "mesengerid";
-            treeNode12.Name = "Messenger Ids";
-            treeNode12.SelectedImageKey = "mesengerid";
-            treeNode12.Text = "Messenger Ids";
-            this.customTreeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6,
-            treeNode7,
-            treeNode8,
-            treeNode9,
-            treeNode10,
-            treeNode11,
-            treeNode12});
             this.customTreeView1.SelectedImageIndex = 0;
             this.customTreeView1.ShowLines = false;
             this.customTreeView1.ShowPlusMinus = false;

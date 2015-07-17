@@ -169,7 +169,7 @@
     <Compile Include="UserControls\ContactListView.Designer.cs">
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactViewPresenter.cs" />
+    <Compile Include="ContactEdit\ContactEditorViewModel.cs" />
     <Compile Include="UserControls\CommandedMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

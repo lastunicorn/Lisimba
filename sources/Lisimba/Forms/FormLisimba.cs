@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
-            contactView1.Presenter.Contact = addressBookShell.Contact;
+            contactView1.Model.Contact = addressBookShell.Contact;
         }
 
         private void HandleFormShown(object sender, EventArgs e)

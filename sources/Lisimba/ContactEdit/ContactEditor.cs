@@ -28,11 +28,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
     /// </summary>
     partial class ContactEditor : UserControl, IContactEditorView
     {
-        private readonly ContactViewPresenter presenter;
+        private readonly ContactEditorViewModel model;
 
-        public ContactViewPresenter Presenter
+        public ContactEditorViewModel Model
         {
-            get { return presenter; }
+            get { return model; }
         }
 
         readonly FormDateEdit formBirthdayEdit;
@@ -41,95 +41,70 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
-            presenter = new ContactViewPresenter(new Zodiac()) { View = this };
+            model = new ContactEditorViewModel(new Zodiac()) { View = this };
             formBirthdayEdit = new FormDateEdit();
             CreateBindings();
         }
 
         private void CreateBindings()
         {
-            textBoxFirstName.Bind(x => x.Text, presenter, x => x.FirstName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxMiddleName.Bind(x => x.Text, presenter, x => x.MiddleName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxLastName.Bind(x => x.Text, presenter, x => x.LastName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxNickname.Bind(x => x.Text, presenter, x => x.Nickname, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxFirstName.Bind(x => x.Text, model, x => x.FirstName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxMiddleName.Bind(x => x.Text, model, x => x.MiddleName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxLastName.Bind(x => x.Text, model, x => x.LastName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNickname.Bind(x => x.Text, model, x => x.Nickname, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            labelBirthday.Bind(x => x.Text, presenter, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
+            labelBirthday.Bind(x => x.Text, model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            pictureBoxZodiacSign.Bind(x => x.Image, presenter, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, presenter, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Image, model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Text, model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            labelZodiacSign.Bind(x => x.Text, model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            textBoxNotes.Bind(x => x.Text, presenter, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNotes.Bind(x => x.Text, model, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            customTreeView1.Bind(x => x.Phones, presenter, x => x.Phones, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Phones, model, x => x.Phones, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Emails, model, x => x.Emails, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.WebSites, model, x => x.WebSites, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Addresses, model, x => x.Addresses, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Dates, model, x => x.Dates, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.MessengerIds, model, x => x.MessengerIds, true, DataSourceUpdateMode.Never);
 
-            this.Bind(x => x.Enabled, presenter, x => x.Enabled, false);
+            this.Bind(x => x.Enabled, model, x => x.Enabled, false);
         }
 
         private void textBoxFirstName_TextChanged(object sender, EventArgs e)
         {
-            presenter.FirstNameWasChanged();
+            model.FirstNameWasChanged();
         }
 
         private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
         {
-            presenter.MiddleNameWasChanged();
+            model.MiddleNameWasChanged();
         }
 
         private void textBoxLastName_TextChanged(object sender, EventArgs e)
         {
-            presenter.LastNameWasChanged();
+            model.LastNameWasChanged();
         }
 
         private void textBoxNickname_TextChanged(object sender, EventArgs e)
         {
-            presenter.NicknameWasChanged();
+            model.NicknameWasChanged();
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            presenter.BirthdayEditWasRequested();
+            model.BirthdayEditWasRequested();
         }
 
         private void textBoxNotes_TextChanged(object sender, EventArgs e)
         {
-            presenter.NotesWasChanged();
+            model.NotesWasChanged();
         }
 
         public Image ZodiacSignImage
         {
             set { pictureBoxZodiacSign.Image = value; }
         }
-
-        //public PhoneCollection Phones
-        //{
-        //    set { customTreeView1.Phones = value; }
-        //}
-
-        //public EmailCollection Emails
-        //{
-        //    set { customTreeView1.Emails = value; }
-        //}
-
-        //public WebSiteCollection WebSites
-        //{
-        //    set { customTreeView1.WebSites = value; }
-        //}
-
-        //public AddressCollection Addresses
-        //{
-        //    set { customTreeView1.Addresses = value; }
-        //}
-
-        //public DateCollection Dates
-        //{
-        //    set { customTreeView1.Dates = value; }
-        //}
-
-        //public MessengerIdCollection MessengerIds
-        //{
-        //    set { customTreeView1.MessengerIds = value; }
-        //}
 
         public void EditBirthday(Date birthday)
         {

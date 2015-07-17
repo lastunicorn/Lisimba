@@ -20,13 +20,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     public interface IContactEditorView
     {
-        //PhoneCollection Phones { set; }
-        //EmailCollection Emails { set; }
-        //WebSiteCollection WebSites { set; }
-        //AddressCollection Addresses { set; }
-        //DateCollection Dates { set; }
-        //MessengerIdCollection MessengerIds { set; }
-
         void EditBirthday(Date birthday);
     }
 }

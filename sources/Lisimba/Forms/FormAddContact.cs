@@ -32,8 +32,8 @@ namespace DustInTheWind.Lisimba.Forms
 
         public Contact Contact
         {
-            get { return contactView1.Presenter.Contact; }
-            set { contactView1.Presenter.Contact = value; }
+            get { return contactView1.Model.Contact; }
+            set { contactView1.Model.Contact = value; }
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)

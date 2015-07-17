@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -21,12 +22,58 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class CustomTreeView : TreeView
     {
-        private readonly TreeNode treeNodePhones;
-        private readonly TreeNode treeNodeEmails;
-        private readonly TreeNode treeNodeWebSites;
-        private readonly TreeNode treeNodeAddresses;
-        private readonly TreeNode treeNodeDates;
-        private readonly TreeNode treeNodeMessengerIds;
+        private TreeNode TreeNodePhones
+        {
+            get { return GetOrCreateCategoryNode("phones", "Phones", "phone"); }
+        }
+
+        private TreeNode TreeNodeEmails
+        {
+            get { return GetOrCreateCategoryNode("emails", "Emails", "e-mail"); }
+        }
+
+        private TreeNode TreeNodeWebSites
+        {
+            get { return GetOrCreateCategoryNode("websites", "Web Sites", "website"); }
+        }
+
+        private TreeNode TreeNodeAddresses
+        {
+            get { return GetOrCreateCategoryNode("addresses", "Addresses", "address"); }
+        }
+
+        private TreeNode TreeNodeDates
+        {
+            get { return GetOrCreateCategoryNode("dates", "Dates", "date"); }
+        }
+
+        private TreeNode TreeNodeMessengerIds
+        {
+            get { return GetOrCreateCategoryNode("mesengerids", "Mesenger Ids", "mesengerid"); }
+        }
+
+        private TreeNode GetOrCreateCategoryNode(string categoryId, string label, string imageKey)
+        {
+            TreeNode node = Nodes
+                .Cast<TreeNode>()
+                .FirstOrDefault(x => x.Tag == categoryId);
+
+            if (node == null)
+            {
+                node = new TreeNode(label)
+                {
+                    ImageKey = imageKey,
+                    //Name = "Phones",
+                    SelectedImageKey = imageKey,
+                    //Text = "Phones",
+                    Tag = categoryId
+                };
+
+                Nodes.Add(node);
+            }
+
+            return node;
+        }
 
         private readonly FormPhoneEdit formPhoneEdit;
         private readonly FormEmailEdit formEmailEdit;
@@ -111,12 +158,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             formAddressEdit = new FormAddressEdit();
             formDateEdit = new FormDateEdit();
 
-            treeNodePhones = Nodes["Phones"];
-            treeNodeEmails = Nodes["Emails"];
-            treeNodeWebSites = Nodes["Web Sites"];
-            treeNodeAddresses = Nodes["Addresses"];
-            treeNodeDates = Nodes["Dates"];
-            treeNodeMessengerIds = Nodes["Messenger Ids"];
+            //TreeNodePhones = Nodes["Phones"];
+            //TreeNodeEmails = Nodes["Emails"];
+            //TreeNodeWebSites = Nodes["Web Sites"];
+            //TreeNodeAddresses = Nodes["Addresses"];
+            //TreeNodeDates = Nodes["Dates"];
+            //TreeNodeMessengerIds = Nodes["Messenger Ids"];
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
@@ -206,7 +253,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void DisplayPhones()
         {
-            treeNodePhones.Nodes.Clear();
+            TreeNodePhones.Nodes.Clear();
 
             if (phones == null)
                 return;
@@ -215,17 +262,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
                 phoneNode.Tag = phone;
-                treeNodePhones.Nodes.Add(phoneNode);
+                TreeNodePhones.Nodes.Add(phoneNode);
                 phoneNode.ImageIndex = -2;
                 phoneNode.SelectedImageIndex = -2;
             }
 
-            treeNodePhones.Expand();
+            TreeNodePhones.Expand();
         }
 
         private void DisplayEmails()
         {
-            treeNodeEmails.Nodes.Clear();
+            TreeNodeEmails.Nodes.Clear();
 
             if (emails == null)
                 return;
@@ -234,17 +281,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
                 emailNode.Tag = email;
-                treeNodeEmails.Nodes.Add(emailNode);
+                TreeNodeEmails.Nodes.Add(emailNode);
                 emailNode.ImageIndex = -2;
                 emailNode.SelectedImageIndex = -2;
             }
 
-            treeNodeEmails.Expand();
+            TreeNodeEmails.Expand();
         }
 
         private void DisplayWebSites()
         {
-            treeNodeWebSites.Nodes.Clear();
+            TreeNodeWebSites.Nodes.Clear();
 
             if (webSites == null)
                 return;
@@ -253,17 +300,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
                 webSiteNode.Tag = webSite;
-                treeNodeWebSites.Nodes.Add(webSiteNode);
+                TreeNodeWebSites.Nodes.Add(webSiteNode);
                 webSiteNode.ImageIndex = -2;
                 webSiteNode.SelectedImageIndex = -2;
             }
 
-            treeNodeWebSites.Expand();
+            TreeNodeWebSites.Expand();
         }
 
         private void DisplayAddresses()
         {
-            treeNodeAddresses.Nodes.Clear();
+            TreeNodeAddresses.Nodes.Clear();
 
             if (addresses == null)
                 return;
@@ -272,17 +319,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
                 addressNode.Tag = address;
-                treeNodeAddresses.Nodes.Add(addressNode);
+                TreeNodeAddresses.Nodes.Add(addressNode);
                 addressNode.ImageIndex = -2;
                 addressNode.SelectedImageIndex = -2;
             }
 
-            treeNodeAddresses.Expand();
+            TreeNodeAddresses.Expand();
         }
 
         private void DisplayDates()
         {
-            treeNodeDates.Nodes.Clear();
+            TreeNodeDates.Nodes.Clear();
 
             if (dates == null)
                 return;
@@ -291,17 +338,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
                 dateNode.Tag = date;
-                treeNodeDates.Nodes.Add(dateNode);
+                TreeNodeDates.Nodes.Add(dateNode);
                 dateNode.ImageIndex = -2;
                 dateNode.SelectedImageIndex = -2;
             }
 
-            treeNodeDates.Expand();
+            TreeNodeDates.Expand();
         }
 
         private void DisplayMessengerIds()
         {
-            treeNodeMessengerIds.Nodes.Clear();
+            TreeNodeMessengerIds.Nodes.Clear();
 
             if (messengerIds == null)
                 return;
@@ -310,12 +357,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
                 messengerIdNode.Tag = messengerId;
-                treeNodeMessengerIds.Nodes.Add(messengerIdNode);
+                TreeNodeMessengerIds.Nodes.Add(messengerIdNode);
                 messengerIdNode.ImageIndex = -2;
                 messengerIdNode.SelectedImageIndex = -2;
             }
 
-            treeNodeMessengerIds.Expand();
+            TreeNodeMessengerIds.Expand();
         }
     }
 }
