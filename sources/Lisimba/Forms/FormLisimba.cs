@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Presenters;
@@ -67,8 +68,11 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleFormShown(object sender, EventArgs e)
         {
-            DataBindings.Add("Text", viewModel, "Title");
+            this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatusLabel1.DataBindings.Add("Text", viewModel, "StatusText");
+
+            contactView1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
+            //labelNoAddressBook.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
 
             viewModel.WindowWasShown();
         }

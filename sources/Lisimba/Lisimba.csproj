@@ -82,6 +82,7 @@
     <Compile Include="Forms\ControlExtensions.cs" />
     <Compile Include="Forms\Model.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
+    <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\OperationBase.cs" />
     <Compile Include="Operations\CreateNewContactOperation.cs" />
     <Compile Include="Operations\DeleteCurrentContactOperation.cs" />
@@ -181,10 +182,10 @@
       <DependentUpon>CustomTreeView.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\IContactEditorView.cs" />
-    <Compile Include="UserControls\LisimbaMainMenuStrip.cs">
+    <Compile Include="MainMenu\LisimbaMainMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControls\LisimbaMainMenuStrip.Designer.cs">
+    <Compile Include="MainMenu\LisimbaMainMenuStrip.Designer.cs">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu\MenuItemWithChildren.cs">
@@ -274,7 +275,7 @@
     <EmbeddedResource Include="ContactEdit\CustomTreeView.resx">
       <DependentUpon>CustomTreeView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\LisimbaMainMenuStrip.resx">
+    <EmbeddedResource Include="MainMenu\LisimbaMainMenuStrip.resx">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAbout.resx">

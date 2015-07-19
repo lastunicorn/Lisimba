@@ -196,4 +196,7 @@ Do you wanna save it before proceedeing?</value>
     <data name="ShowAddressBookPropertiesOperationDescription" xml:space="preserve">
     <value>Display the address book properties.</value>
   </data>
+    <data name="CloseCurrentAddressBookOperationDescription" xml:space="preserve">
+    <value>Close the currently opened address book.</value>
+  </data>
 </root>

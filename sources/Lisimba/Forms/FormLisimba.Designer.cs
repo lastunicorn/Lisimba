@@ -35,6 +35,7 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
+            this.labelNoAddressBook = new System.Windows.Forms.Label();
             this.contactView1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new DustInTheWind.Lisimba.UserControls.BindableToolStripStatusLabel();
@@ -62,6 +63,7 @@ namespace DustInTheWind.Lisimba.Forms
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.contactView1);
+            this.splitContainer1.Panel2.Controls.Add(this.labelNoAddressBook);
             this.splitContainer1.Size = new System.Drawing.Size(727, 415);
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.SplitterWidth = 8;
@@ -76,6 +78,17 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactListView1.Name = "contactListView1";
             this.contactListView1.Size = new System.Drawing.Size(194, 415);
             this.contactListView1.TabIndex = 9;
+            // 
+            // labelNoAddressBook
+            // 
+            this.labelNoAddressBook.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelNoAddressBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelNoAddressBook.Location = new System.Drawing.Point(0, 0);
+            this.labelNoAddressBook.Name = "labelNoAddressBook";
+            this.labelNoAddressBook.Size = new System.Drawing.Size(525, 415);
+            this.labelNoAddressBook.TabIndex = 6;
+            this.labelNoAddressBook.Text = "No address book loaded";
+            this.labelNoAddressBook.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // contactView1
             // 
@@ -158,5 +171,6 @@ namespace DustInTheWind.Lisimba.Forms
         private ContactListView contactListView1;
         private System.Windows.Forms.Panel panel1;
         private LisimbaMainMenuStrip menuStripMain;
+        private System.Windows.Forms.Label labelNoAddressBook;
     }
 }

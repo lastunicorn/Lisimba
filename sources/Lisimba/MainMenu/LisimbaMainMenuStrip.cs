@@ -47,6 +47,9 @@ namespace DustInTheWind.Lisimba.UserControls
             toolStripMenuItem_File_SaveAs.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_SaveAs.Opertion = commandPool.SaveAsAddressBookOperation;
 
+            toolStripMenuItem_File_Close.ApplicationStatus = applicationStatus;
+            toolStripMenuItem_File_Close.Opertion = commandPool.CloseAddressBookOperation;
+
             toolStripMenuItem_File_Export.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Export.ShortDescription = "Export current opened address book in another format.";
 

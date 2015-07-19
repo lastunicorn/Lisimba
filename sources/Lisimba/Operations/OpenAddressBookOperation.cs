@@ -54,10 +54,14 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
+                // check if safe to close previous
+
                 bool allowToContinue = addressBookShell.EnsureIsSaved();
 
                 if (!allowToContinue)
                     return;
+
+                // check params
 
                 if (string.IsNullOrEmpty(fileName))
                 {
@@ -67,11 +71,17 @@ namespace DustInTheWind.Lisimba.Operations
                         return;
                 }
 
+                // create the gate and load book
+
                 ZipXmlGate gate = new ZipXmlGate();
                 addressBookShell.LoadFrom(gate, fileName);
 
+                // display status
+
                 applicationStatus.StatusText = string.Format("{0} contacts oppened.", addressBookShell.AddressBook.Contacts.Count);
                 recentFiles.AddRecentFile(Path.GetFullPath(fileName));
+
+                // display warnings
 
                 if (gate.Warnings.Any())
                 {

@@ -73,36 +73,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.Bind(x => x.Enabled, model, x => x.Enabled, false);
         }
 
-        private void textBoxFirstName_TextChanged(object sender, EventArgs e)
-        {
-            if (sender == null) throw new ArgumentNullException("sender");
-
-            model.FirstNameWasChanged();
-        }
-
-        private void textBoxMiddleName_TextChanged(object sender, EventArgs e)
-        {
-            model.MiddleNameWasChanged();
-        }
-
-        private void textBoxLastName_TextChanged(object sender, EventArgs e)
-        {
-            model.LastNameWasChanged();
-        }
-
-        private void textBoxNickname_TextChanged(object sender, EventArgs e)
-        {
-            model.NicknameWasChanged();
-        }
-
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             model.BirthdayEditWasRequested();
-        }
-
-        private void textBoxNotes_TextChanged(object sender, EventArgs e)
-        {
-            model.NotesWasChanged();
         }
 
         public Image ZodiacSignImage

@@ -18,7 +18,7 @@ namespace DustInTheWind.Lisimba.BookShell
 {
     public enum AddressBookStatus
     {
-        Unknown,
+        None,
         New,
         Saved,
         Modified

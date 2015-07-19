@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Operations
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
         }
 
-        private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
+        private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
             IsEnabled = addressBookShell.Contact != null;
         }

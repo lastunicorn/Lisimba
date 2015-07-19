@@ -70,6 +70,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close the currently opened address book..
+        /// </summary>
+        internal static string CloseCurrentAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("CloseCurrentAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new address book..
         /// </summary>
         internal static string CreateNewAddressBookOperationDescription {

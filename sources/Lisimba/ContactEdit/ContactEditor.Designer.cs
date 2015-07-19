@@ -103,7 +103,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxMiddleName.Name = "textBoxMiddleName";
             this.textBoxMiddleName.Size = new System.Drawing.Size(147, 13);
             this.textBoxMiddleName.TabIndex = 1;
-            this.textBoxMiddleName.TextChanged += new System.EventHandler(this.textBoxMiddleName_TextChanged);
             // 
             // textBoxFirstName
             // 
@@ -115,7 +114,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxFirstName.Name = "textBoxFirstName";
             this.textBoxFirstName.Size = new System.Drawing.Size(147, 13);
             this.textBoxFirstName.TabIndex = 0;
-            this.textBoxFirstName.TextChanged += new System.EventHandler(this.textBoxFirstName_TextChanged);
             // 
             // label2
             // 
@@ -153,7 +151,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNickname.Name = "textBoxNickname";
             this.textBoxNickname.Size = new System.Drawing.Size(147, 13);
             this.textBoxNickname.TabIndex = 3;
-            this.textBoxNickname.TextChanged += new System.EventHandler(this.textBoxNickname_TextChanged);
             // 
             // imageList1
             // 
@@ -184,7 +181,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxLastName.Name = "textBoxLastName";
             this.textBoxLastName.Size = new System.Drawing.Size(147, 13);
             this.textBoxLastName.TabIndex = 2;
-            this.textBoxLastName.TextChanged += new System.EventHandler(this.textBoxLastName_TextChanged);
             // 
             // label7
             // 
@@ -422,7 +418,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNotes.Size = new System.Drawing.Size(508, 133);
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
-            this.textBoxNotes.TextChanged += new System.EventHandler(this.textBoxNotes_TextChanged);
             // 
             // label8
             // 

@@ -174,14 +174,14 @@ namespace DustInTheWind.Lisimba.BookShell
             OnAddressBookSaved(EventArgs.Empty);
         }
 
-        public bool IsSaved
+        public bool IsModified
         {
-            get { return Status == AddressBookStatus.Saved || Status == AddressBookStatus.New; }
+            get { return AddressBook != null && Status == AddressBookStatus.Modified; }
         }
 
         public bool EnsureIsSaved()
         {
-            if (IsSaved)
+            if (!IsModified)
                 return true;
 
             bool? response = uiService.DisplayYesNoQuestion(Resources.EnsureAddressBookIsSaved_Question, Resources.EnsureAddressBookIsSaved_Title);
@@ -193,6 +193,15 @@ namespace DustInTheWind.Lisimba.BookShell
                 commandPool.SaveAddressBookOperation.Execute();
 
             return true;
+        }
+
+        public void CloseAddressBook()
+        {
+            EnsureIsSaved();
+
+            AddressBook = null;
+            FileName = null;
+            Status = AddressBookStatus.None;
         }
     }
 }

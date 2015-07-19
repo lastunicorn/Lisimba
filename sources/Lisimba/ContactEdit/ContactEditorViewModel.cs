@@ -69,8 +69,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return firstName; }
             set
             {
+                if (firstName == value)
+                    return;
+
                 firstName = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                    contact.Name.FirstName = firstName;
             }
         }
 
@@ -79,8 +85,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return middleName; }
             set
             {
+                if (middleName == value)
+                    return;
+
                 middleName = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                    contact.Name.MiddleName = middleName;
             }
         }
 
@@ -89,8 +101,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return lastName; }
             set
             {
+                if (lastName == value)
+                    return;
+
                 lastName = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                    contact.Name.LastName = lastName;
             }
         }
 
@@ -99,8 +117,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return nickname; }
             set
             {
+                if (nickname == value)
+                    return;
+
                 nickname = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                    contact.Name.Nickname = nickname;
             }
         }
 
@@ -139,8 +163,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return notes; }
             set
             {
+                if (notes == value)
+                    return;
+
                 notes = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                    contact.Notes = notes;
             }
         }
 
@@ -307,46 +337,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             MessengerIds = null;
 
             Enabled = false;
-        }
-
-        public void FirstNameWasChanged()
-        {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.FirstName = FirstName;
-        }
-
-        public void MiddleNameWasChanged()
-        {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.MiddleName = MiddleName;
-        }
-
-        public void LastNameWasChanged()
-        {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.LastName = LastName;
-        }
-
-        public void NicknameWasChanged()
-        {
-            if (isInitializationMode)
-                return;
-
-            contact.Name.Nickname = Nickname;
-        }
-
-        public void NotesWasChanged()
-        {
-            if (isInitializationMode)
-                return;
-
-            contact.Notes = Notes;
         }
 
         public void BirthdayEditWasRequested()

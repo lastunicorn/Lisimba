@@ -44,6 +44,11 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<SaveAsAddressBookOperation>(); }
         }
 
+        public CloseAddressBookOperation CloseAddressBookOperation
+        {
+            get { return servicePrvider.Resolve<CloseAddressBookOperation>(); }
+        }
+
         public ExportYahooCsvOperation ExportYahooCsvOperation
         {
             get { return servicePrvider.Resolve<ExportYahooCsvOperation>(); }
