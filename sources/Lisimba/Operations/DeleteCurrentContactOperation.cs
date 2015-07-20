@@ -37,6 +37,8 @@ namespace DustInTheWind.Lisimba.Operations
 
             this.addressBookShell = addressBookShell;
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
+
+            IsEnabled = addressBookShell.Contact != null;
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs e)
@@ -51,16 +53,12 @@ namespace DustInTheWind.Lisimba.Operations
             if (contactToDelete == null)
                 return;
 
-            string text = string.Format("Are you sure you wanna delete the contact {0} ?", contactToDelete);
-            DialogResult dialogResult = MessageBox.Show(text, "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            string text = string.Format(Resources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = Resources.ContactDelete_ConfirmationTitle;
+            DialogResult dialogResult = MessageBox.Show(text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 
             if (dialogResult == DialogResult.Yes)
-            {
-                addressBookShell.AddressBook.Contacts.Remove(contactToDelete);
-
-                if (contactToDelete == addressBookShell.Contact)
-                    addressBookShell.Contact = null;
-            }
+                addressBookShell.DeleteContact(contactToDelete);
         }
     }
 }

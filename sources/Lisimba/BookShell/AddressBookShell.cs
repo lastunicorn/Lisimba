@@ -203,5 +203,16 @@ namespace DustInTheWind.Lisimba.BookShell
             FileName = null;
             Status = AddressBookStatus.None;
         }
+
+        public void DeleteContact(Contact contactToDelete)
+        {
+            if (contactToDelete == null)
+                return;
+
+            AddressBook.Contacts.Remove(contactToDelete);
+
+            if (contactToDelete == Contact)
+                Contact = null;
+        }
     }
 }

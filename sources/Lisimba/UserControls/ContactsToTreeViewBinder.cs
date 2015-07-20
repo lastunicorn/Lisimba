@@ -58,15 +58,7 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (contacts != null)
                 {
                     foreach (Contact contact in contacts)
-                    {
-                        modifiedContacts.Add(contact, false);
-
-                        if (treeNodesByContact.ContainsKey(contact))
-                            continue;
-
-                        TreeNode treeNode = new TreeNode(contact.ToString()) { Tag = contact };
-                        treeNodesByContact.Add(contact, treeNode);
-                    }
+                        AddContact(contact);
 
                     contacts.CollectionChanged += HandleContactsCollectionChanged;
                     contacts.ItemChanged += HandleContactChanged;
@@ -80,20 +72,53 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void HandleContactChanged(object sender, ItemChangedEventArgs<Contact> e)
         {
-            //if (ignoreCurrentContactChange)
-            //    return;
+            Contact contactToSelect = e.Item;
 
-            //Contact contactToSelect = e.Item;
+            TreeNode treeNodeToSelect = (contactToSelect == null || !treeNodesByContact.ContainsKey(contactToSelect))
+                ? null
+                : treeNodesByContact[contactToSelect];
 
-            //TreeNode treeNodeToSelect = (contactToSelect == null || !treeNodesByContact.ContainsKey(contactToSelect))
-            //    ? null
-            //    : treeNodesByContact[contactToSelect];
-
-            //treeView1.SelectedNode = treeNodeToSelect;
+            treeView1.SelectedNode = treeNodeToSelect;
         }
 
         private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    {
+                        IEnumerable<Contact> newContacts = e.NewItems.OfType<Contact>();
+
+                        foreach (Contact contact in newContacts)
+                            AddContact(contact);
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        IEnumerable<Contact> newContacts = e.OldItems.OfType<Contact>();
+
+                        foreach (Contact contact in newContacts)
+                            RemoveContact(contact);
+                    }
+                    break;
+            }
+
+            RefreshDisplayedNodes();
+        }
+
+        private void AddContact(Contact contact)
+        {
+            modifiedContacts.Add(contact, false);
+
+            TreeNode treeNode = new TreeNode(contact.ToString()) { Tag = contact };
+            treeNodesByContact.Add(contact, treeNode);
+        }
+
+        private void RemoveContact(Contact contact)
+        {
+            modifiedContacts.Remove(contact);
+            treeNodesByContact.Remove(contact);
         }
 
         public void RefreshDisplayedNodes()
@@ -101,7 +126,6 @@ namespace DustInTheWind.Lisimba.UserControls
             Dictionary<TreeNode, TreeNode> treeNodesToRemove = treeView1.Nodes
                 .Cast<TreeNode>()
                 .ToDictionary(node => node);
-
 
             treeView1.SuspendLayout();
             try

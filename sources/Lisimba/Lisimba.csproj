@@ -354,6 +354,7 @@
     <None Include="Images\agenda_ico.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\background.png" />
     <Content Include="Images\cancel.png" />
     <Content Include="Images\date.gif" />
     <Content Include="Images\export.gif" />

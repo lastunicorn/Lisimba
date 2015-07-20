@@ -199,4 +199,10 @@ Do you wanna save it before proceedeing?</value>
     <data name="CloseCurrentAddressBookOperationDescription" xml:space="preserve">
     <value>Close the currently opened address book.</value>
   </data>
+  <data name="ContactDelete_ConfirametionQuestion" xml:space="preserve">
+    <value>Are you sure you wanna delete the contact {0} ?</value>
+  </data>
+  <data name="ContactDelete_ConfirmationTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>
