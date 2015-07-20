@@ -50,6 +50,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeView1.HideSelection = false;
             this.treeView1.Location = new System.Drawing.Point(0, 27);
             this.treeView1.Name = "treeView1";
+            this.treeView1.ShowLines = false;
             this.treeView1.ShowPlusMinus = false;
             this.treeView1.Size = new System.Drawing.Size(178, 240);
             this.treeView1.TabIndex = 2;
@@ -78,24 +79,24 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_Add
             // 
-            this.toolStripMenuItem_List_Add.Opertion = null;
+            this.toolStripMenuItem_List_Add.ApplicationStatus = null;
             this.toolStripMenuItem_List_Add.CommandParameter = null;
             this.toolStripMenuItem_List_Add.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
+            this.toolStripMenuItem_List_Add.Opertion = null;
             this.toolStripMenuItem_List_Add.ShortDescription = null;
             this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_Add.ApplicationStatus = null;
             this.toolStripMenuItem_List_Add.Text = "&Add Contact";
             // 
             // toolStripMenuItem_List_Delete
             // 
-            this.toolStripMenuItem_List_Delete.Opertion = null;
+            this.toolStripMenuItem_List_Delete.ApplicationStatus = null;
             this.toolStripMenuItem_List_Delete.CommandParameter = null;
             this.toolStripMenuItem_List_Delete.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
+            this.toolStripMenuItem_List_Delete.Opertion = null;
             this.toolStripMenuItem_List_Delete.ShortDescription = null;
             this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_Delete.ApplicationStatus = null;
             this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
             // 
             // toolStripMenuItem1
@@ -105,13 +106,13 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
-            this.toolStripMenuItem_List_ViewBiorythm.Opertion = null;
+            this.toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameter = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameterProvider = null;
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
+            this.toolStripMenuItem_List_ViewBiorythm.Opertion = null;
             this.toolStripMenuItem_List_ViewBiorythm.ShortDescription = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = null;
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
             this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
             // 

@@ -63,14 +63,14 @@ namespace DustInTheWind.Lisimba.BookShell
                     return;
 
                 if (addressBook != null)
-                    addressBook.Changed -= HandleChanged;
+                    addressBook.Changed -= HandleAddressBookChanged;
 
                 AddressBook oldAddressBook = addressBook;
 
                 addressBook = value;
 
                 if (addressBook != null)
-                    addressBook.Changed += HandleChanged;
+                    addressBook.Changed += HandleAddressBookChanged;
 
                 OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, addressBook));
                 Contact = null;
@@ -128,7 +128,7 @@ namespace DustInTheWind.Lisimba.BookShell
                 handler(this, EventArgs.Empty);
         }
 
-        private void HandleChanged(object sender, EventArgs e)
+        private void HandleAddressBookChanged(object sender, EventArgs e)
         {
             Status = AddressBookStatus.Modified;
         }
@@ -199,6 +199,7 @@ namespace DustInTheWind.Lisimba.BookShell
         {
             EnsureIsSaved();
 
+            Contact = null;
             AddressBook = null;
             FileName = null;
             Status = AddressBookStatus.None;

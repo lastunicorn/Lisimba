@@ -98,7 +98,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // labelColorIntellectual
             // 
             this.labelColorIntellectual.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelColorIntellectual.BackColor = System.Drawing.Color.Green;
+            this.labelColorIntellectual.BackColor = System.Drawing.Color.LimeGreen;
             this.labelColorIntellectual.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelColorIntellectual.Location = new System.Drawing.Point(718, 3);
             this.labelColorIntellectual.Name = "labelColorIntellectual";
@@ -124,7 +124,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // labelColorEmotional
             // 
             this.labelColorEmotional.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelColorEmotional.BackColor = System.Drawing.Color.Blue;
+            this.labelColorEmotional.BackColor = System.Drawing.Color.RoyalBlue;
             this.labelColorEmotional.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelColorEmotional.Location = new System.Drawing.Point(600, 3);
             this.labelColorEmotional.Name = "labelColorEmotional";
@@ -150,7 +150,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // labelColorPhysical
             // 
             this.labelColorPhysical.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelColorPhysical.BackColor = System.Drawing.Color.Red;
+            this.labelColorPhysical.BackColor = System.Drawing.Color.OrangeRed;
             this.labelColorPhysical.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.labelColorPhysical.Location = new System.Drawing.Point(482, 3);
             this.labelColorPhysical.Name = "labelColorPhysical";
@@ -165,12 +165,12 @@ namespace DustInTheWind.Lisimba.UserControls
             this.biorythmView1.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.biorythmView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.biorythmView1.EmotionChartColor = System.Drawing.Color.Blue;
-            this.biorythmView1.FirstDay = new System.DateTime(2008, 2, 5, 0, 0, 0, 0);
+            this.biorythmView1.FirstDay = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
             this.biorythmView1.ForeColor = System.Drawing.Color.DimGray;
             this.biorythmView1.IntelectChartColor = System.Drawing.Color.Green;
             this.biorythmView1.IntuitionChartColor = System.Drawing.Color.Lime;
             this.biorythmView1.IntuitionChartVisible = false;
-            this.biorythmView1.LastDay = new System.DateTime(2008, 3, 5, 0, 0, 0, 0);
+            this.biorythmView1.LastDay = new System.DateTime(2008, 3, 1, 0, 0, 0, 0);
             this.biorythmView1.Location = new System.Drawing.Point(3, 22);
             this.biorythmView1.Name = "biorythmView1";
             this.biorythmView1.Size = new System.Drawing.Size(833, 224);
@@ -178,7 +178,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.biorythmView1.TabIndex = 4;
             this.biorythmView1.Text = "biorythmView1";
             this.biorythmView1.TodayBackColor = System.Drawing.Color.YellowGreen;
-            this.biorythmView1.XDay = new System.DateTime(2008, 2, 10, 0, 0, 0, 0);
+            this.biorythmView1.XDay = new System.DateTime(2008, 2, 6, 0, 0, 0, 0);
             this.biorythmView1.XDayBorderColor = System.Drawing.Color.Gray;
             this.biorythmView1.XDayIndex = 5;
             this.biorythmView1.FirstDayChanged += new DustInTheWind.Biorhythm.BiorhythmView.FirstDayChangedHandler(this.biorythmView1_FirstDayChanged);
