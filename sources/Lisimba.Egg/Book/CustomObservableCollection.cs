@@ -26,8 +26,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
     {
         private bool suppressCollectionChangedEvent;
 
-        #region Event ItemChanged
-
         public event EventHandler<ItemChangedEventArgs<T>> ItemChanged;
 
         protected virtual void OnItemChanged(ItemChangedEventArgs<T> e)
@@ -37,8 +35,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, e);
         }
-
-        #endregion
 
         protected override void InsertItem(int index, T item)
         {

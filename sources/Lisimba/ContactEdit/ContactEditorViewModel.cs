@@ -28,10 +28,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private Contact contact;
         private bool isInitializationMode;
-        private string firstName;
-        private string middleName;
-        private string lastName;
-        private string nickname;
         private string birthday;
         private string zodiacSignText;
         private string notes;
@@ -61,70 +57,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
                     contact.Changed += HandleContactChanged;
 
                 RefreshData();
-            }
-        }
-
-        public string FirstName
-        {
-            get { return firstName; }
-            set
-            {
-                if (firstName == value)
-                    return;
-
-                firstName = value;
-                OnPropertyChanged();
-
-                if (!isInitializationMode)
-                    contact.Name.FirstName = firstName;
-            }
-        }
-
-        public string MiddleName
-        {
-            get { return middleName; }
-            set
-            {
-                if (middleName == value)
-                    return;
-
-                middleName = value;
-                OnPropertyChanged();
-
-                if (!isInitializationMode)
-                    contact.Name.MiddleName = middleName;
-            }
-        }
-
-        public string LastName
-        {
-            get { return lastName; }
-            set
-            {
-                if (lastName == value)
-                    return;
-
-                lastName = value;
-                OnPropertyChanged();
-
-                if (!isInitializationMode)
-                    contact.Name.LastName = lastName;
-            }
-        }
-
-        public string Nickname
-        {
-            get { return nickname; }
-            set
-            {
-                if (nickname == value)
-                    return;
-
-                nickname = value;
-                OnPropertyChanged();
-
-                if (!isInitializationMode)
-                    contact.Name.Nickname = nickname;
             }
         }
 
@@ -291,11 +223,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             FullName = Contact.Name.ToString();
 
-            FirstName = contact.Name.FirstName;
-            MiddleName = contact.Name.MiddleName;
-            LastName = contact.Name.LastName;
-            Nickname = contact.Name.Nickname;
-
             Birthday = contact.Birthday.ToString();
 
             ZodiacSignImage = zodiac.GetZodiacImage(contact.ZodiacSign);
@@ -316,11 +243,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void ClearView()
         {
             FullName = string.Empty;
-
-            FirstName = string.Empty;
-            MiddleName = string.Empty;
-            LastName = string.Empty;
-            Nickname = string.Empty;
 
             Birthday = string.Empty;
 

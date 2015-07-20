@@ -70,8 +70,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             get { return day > 0 && month > 0 && year > 0; }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -81,10 +79,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
-
-        #region Constructors
 
         public Date()
             : this(0, 0, 0, string.Empty)
@@ -114,8 +108,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             CopyFrom(date);
         }
-
-        #endregion
 
         public void SetValues(int day, int month, int year)
         {
@@ -344,44 +336,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
         public static string ShortMonthName(int month)
         {
             return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedMonthNames[month];
-
-            //switch (month)
-            //{
-            //    case 1: return "Jan";
-            //    case 2: return "Feb";
-            //    case 3: return "Mar";
-            //    case 4: return "Apr";
-            //    case 5: return "May";
-            //    case 6: return "Jun";
-            //    case 7: return "Jul";
-            //    case 8: return "Aug";
-            //    case 9: return "Sep";
-            //    case 10: return "Oct";
-            //    case 11: return "Nov";
-            //    case 12: return "Dec";
-            //    default: return string.Empty;
-            //}
         }
 
         public static string MonthName(int month)
         {
             return System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames[month];
-            //switch (month)
-            //{
-            //    case 1: return "January";
-            //    case 2: return "February";
-            //    case 3: return "March";
-            //    case 4: return "Apryl";
-            //    case 5: return "May";
-            //    case 6: return "June";
-            //    case 7: return "July";
-            //    case 8: return "August";
-            //    case 9: return "September";
-            //    case 10: return "October";
-            //    case 11: return "November";
-            //    case 12: return "December";
-            //    default: return string.Empty;
-            //}
         }
 
         public override string ToString()
@@ -399,19 +358,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 ? new DateTime(year, month, day)
                 : new DateTime(0);
         }
-
-        //public string ToLongString()
-        //{
-        //    return (this.year == 0 ? "0000" : this.year.ToString()) + " " + (this.month < 10 ? "0" : "") + MonthName(this.month) + " " + (this.day < 10 ? "0" : "") + this.day;
-        //}
-
-        //public override string ToString(string template)
-        //{
-        //    string str = template.Replace("yyyy", this.year);
-        //    str = str.Replace("mmmm", MonthName(this.month));
-        //    str = str.Replace("mmm", 
-        //    return (this.year == 0 ? "0000" : this.year.ToString()) + " " + (this.month < 10 ? "0" : "") + this.month + " " + (this.day < 10 ? "0" : "") + this.day;
-        //}
 
         public override bool Equals(object obj)
         {

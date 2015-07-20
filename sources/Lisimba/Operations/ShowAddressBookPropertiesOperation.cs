@@ -36,6 +36,14 @@ namespace DustInTheWind.Lisimba.Operations
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
             this.addressBookShell = addressBookShell;
+            this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;
+
+            IsEnabled = addressBookShell.AddressBook != null;
+        }
+
+        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs addressBookChangedEventArgs)
+        {
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)

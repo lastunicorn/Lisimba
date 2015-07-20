@@ -42,6 +42,8 @@ namespace DustInTheWind.Lisimba.Operations
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
 
             this.uiService = uiService;
+
+            IsEnabled = addressBookShell.AddressBook != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)

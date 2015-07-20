@@ -106,11 +106,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
         }
 
-        public Address(string address, string city, string state, string postalCode, string country)
-            : this(address, city, state, postalCode, country, "")
-        {
-        }
-
         public Address(string address, string city, string state, string postalCode, string country, string description)
         {
             Street = address;

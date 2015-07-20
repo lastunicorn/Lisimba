@@ -28,32 +28,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             IComparer comparer = ComparerFactory.GetComparer(sortField);
             ArrayList.Adapter((IList)Items).Sort(comparer);
-
-            //switch (sortField)
-            //{
-            //    case ContactsSortingType.Birthday:
-            //        InnerList.Sort(new ContactByBirthdayComparer());
-            //        break;
-
-            //    case ContactsSortingType.BirthDate:
-            //        InnerList.Sort(new ContactsByBirthdateComparer());
-            //        break;
-
-            //    case ContactsSortingType.FirstName:
-            //        InnerList.Sort(new ContactByFirstNameComparer());
-            //        break;
-
-            //    case ContactsSortingType.LastName:
-            //        InnerList.Sort(new ContactByLastNameComparer());
-            //        break;
-
-            //    case ContactsSortingType.Nickname:
-            //        InnerList.Sort(new ContactByNicknameComparer());
-            //        break;
-            //}
-
-            //if (sortDirection == SortDirection.Descending)
-            //    Items.Reverse();
         }
 
         protected override void InsertItem(int index, Contact item)

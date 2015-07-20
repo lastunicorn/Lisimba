@@ -43,9 +43,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -55,8 +52,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
 
         public Phone()
             : this("", "")

@@ -69,8 +69,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -80,9 +78,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
-
 
         /// <summary>
         /// Remove all the information from the current instance.
@@ -232,20 +227,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
             return fullName.ToString();
         }
-
-        //public static PersonName Clone(PersonName original)
-        //{
-        //    if (original == null)
-        //        throw new ArgumentNullException("original");
-
-        //    return new PersonName
-        //    {
-        //        firstName = original.firstName,
-        //        middleName = original.middleName,
-        //        lastName = original.lastName,
-        //        nickname = original.nickname
-        //    };
-        //}
 
         public static bool Equals(PersonName p1, PersonName p2)
         {

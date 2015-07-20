@@ -50,12 +50,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void CreateBindings()
         {
             labelFullName.Bind(x => x.Text, Model, x => x.FullName, false, DataSourceUpdateMode.Never);
-
-            textBoxFirstName.Bind(x => x.Text, model, x => x.FirstName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxMiddleName.Bind(x => x.Text, model, x => x.MiddleName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxLastName.Bind(x => x.Text, model, x => x.LastName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxNickname.Bind(x => x.Text, model, x => x.Nickname, false, DataSourceUpdateMode.OnPropertyChanged);
-
             labelBirthday.Bind(x => x.Text, model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
             pictureBoxZodiacSign.Bind(x => x.Image, model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
