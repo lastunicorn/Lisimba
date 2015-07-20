@@ -34,6 +34,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
         private bool allowToClose;
         private bool isContactEditVisible;
+        private bool isAddressBookViewVisible;
 
         public string Title
         {
@@ -65,6 +66,16 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
+        public bool IsAddressBookViewVisible
+        {
+            get { return isAddressBookViewVisible; }
+            set
+            {
+                isAddressBookViewVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -90,6 +101,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             addressBookShell.StatusChanged += HandleAddressBookStatusChanged;
+            addressBookShell.ContactChanged += HandleContactChanged;
 
             if (addressBookShell.AddressBook != null)
                 addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
@@ -99,7 +111,13 @@ namespace DustInTheWind.Lisimba.Presenters
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
-            IsContactEditVisible = addressBookShell.AddressBook != null;
+            IsContactEditVisible = addressBookShell.Contact != null;
+            IsAddressBookViewVisible = addressBookShell.AddressBook != null;
+        }
+
+        private void HandleContactChanged(object sender, EventArgs eventArgs)
+        {
+            IsContactEditVisible = addressBookShell.Contact != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
@@ -111,7 +129,7 @@ namespace DustInTheWind.Lisimba.Presenters
                 e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             Title = BuildFormTitle();
-            IsContactEditVisible = addressBookShell.AddressBook != null;
+            IsAddressBookViewVisible = addressBookShell.AddressBook != null;
         }
 
         private void HandleAddressBookStatusChanged(object sender, EventArgs eventArgs)

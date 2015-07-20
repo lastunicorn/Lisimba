@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
@@ -36,6 +35,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         }
 
         readonly FormDateEdit formBirthdayEdit;
+        readonly FormNameEdit formNameEdit;
 
         public ContactEditor()
         {
@@ -43,6 +43,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             model = new ContactEditorViewModel(new Zodiac()) { View = this };
             formBirthdayEdit = new FormDateEdit();
+            formNameEdit = new FormNameEdit();
             CreateBindings();
         }
 
@@ -78,9 +79,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             model.BirthdayEditWasRequested();
         }
 
-        public Image ZodiacSignImage
+        //public Image ZodiacSignImage
+        //{
+        //    set { pictureBoxZodiacSign.Image = value; }
+        //}
+
+        private void labelFullName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            set { pictureBoxZodiacSign.Image = value; }
+            Model.NameEditWasRequested();
         }
 
         public void EditBirthday(Date birthday)
@@ -100,6 +106,25 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // show form
             formBirthdayEdit.Show();
             formBirthdayEdit.Focus();
+        }
+
+        public void EditName(PersonName name)
+        {
+            // client position 
+            int clientX = labelFullName.Location.X;
+            int clientY = labelFullName.Location.Y + labelFullName.Height;
+            Point clientPoint = new Point(clientX, clientY);
+
+            // screen position
+            Point screenPoint = PointToScreen(clientPoint);
+
+            // initialize form
+            formNameEdit.Location = screenPoint;
+            formNameEdit.PersonName = name;
+
+            // show form
+            formNameEdit.Show();
+            formNameEdit.Focus();
         }
     }
 }

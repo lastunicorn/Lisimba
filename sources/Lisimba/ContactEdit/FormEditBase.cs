@@ -78,10 +78,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
         public void FormEditBase_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
                 AcceptChanges();
+            }
 
             if (e.KeyCode == Keys.Escape)
+            {
+                e.Handled = true;
                 Close();
+            }
         }
 
         private void FormEditBase_FormClosing(object sender, FormClosingEventArgs e)

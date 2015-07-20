@@ -21,5 +21,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public interface IContactEditorView
     {
         void EditBirthday(Date birthday);
+        void EditName(PersonName name);
     }
 }

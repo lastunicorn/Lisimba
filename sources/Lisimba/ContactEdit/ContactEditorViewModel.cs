@@ -343,5 +343,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.EditBirthday(contact.Birthday);
         }
+
+        public void NameEditWasRequested()
+        {
+            View.EditName(contact.Name);
+        }
     }
 }

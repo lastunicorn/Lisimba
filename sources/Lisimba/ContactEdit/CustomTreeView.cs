@@ -63,13 +63,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 node = new TreeNode(label)
                 {
                     ImageKey = imageKey,
-                    //Name = "Phones",
                     SelectedImageKey = imageKey,
-                    //Text = "Phones",
                     Tag = categoryId
                 };
 
-                Nodes.Add(node);
+                if (!DesignMode)
+                    Nodes.Add(node);
             }
 
             return node;
@@ -157,13 +156,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             formWebSiteEdit = new FormWebSiteEdit();
             formAddressEdit = new FormAddressEdit();
             formDateEdit = new FormDateEdit();
-
-            //TreeNodePhones = Nodes["Phones"];
-            //TreeNodeEmails = Nodes["Emails"];
-            //TreeNodeWebSites = Nodes["Web Sites"];
-            //TreeNodeAddresses = Nodes["Addresses"];
-            //TreeNodeDates = Nodes["Dates"];
-            //TreeNodeMessengerIds = Nodes["Messenger Ids"];
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
