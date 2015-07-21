@@ -27,12 +27,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
     /// </summary>
     partial class ContactEditor : UserControl, IContactEditorView
     {
-        private readonly ContactEditorViewModel model;
-
-        public ContactEditorViewModel Model
-        {
-            get { return model; }
-        }
+        public ContactEditorViewModel Model { get; private set; }
 
         readonly FormDateEdit formBirthdayEdit;
         readonly FormNameEdit formNameEdit;
@@ -41,7 +36,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
-            model = new ContactEditorViewModel(new Zodiac()) { View = this };
+            Model = new ContactEditorViewModel(new Zodiac()) { View = this };
             formBirthdayEdit = new FormDateEdit();
             formNameEdit = new FormNameEdit();
             CreateBindings();
@@ -50,75 +45,78 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void CreateBindings()
         {
             labelFullName.Bind(x => x.Text, Model, x => x.FullName, false, DataSourceUpdateMode.Never);
-            labelBirthday.Bind(x => x.Text, model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
+            labelBirthday.Bind(x => x.Text, Model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            pictureBoxZodiacSign.Bind(x => x.Image, model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Image, Model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Text, Model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            labelZodiacSign.Bind(x => x.Text, Model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            textBoxNotes.Bind(x => x.Text, model, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNotes.Bind(x => x.Text, Model, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            customTreeView1.Bind(x => x.Phones, model, x => x.Phones, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Emails, model, x => x.Emails, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.WebSites, model, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Addresses, model, x => x.Addresses, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Dates, model, x => x.Dates, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.MessengerIds, model, x => x.MessengerIds, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Phones, Model, x => x.Phones, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Emails, Model, x => x.Emails, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.WebSites, Model, x => x.WebSites, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Addresses, Model, x => x.Addresses, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Dates, Model, x => x.Dates, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.MessengerIds, Model, x => x.MessengerIds, true, DataSourceUpdateMode.Never);
 
-            this.Bind(x => x.Enabled, model, x => x.Enabled, false);
+            this.Bind(x => x.Enabled, Model, x => x.Enabled, false);
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            model.BirthdayEditWasRequested();
+            Model.BirthdayEditWasRequested();
         }
-
-        //public Image ZodiacSignImage
-        //{
-        //    set { pictureBoxZodiacSign.Image = value; }
-        //}
 
         private void labelFullName_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Model.NameEditWasRequested();
         }
 
+        private void buttonAddAddress_Click(object sender, System.EventArgs e)
+        {
+            Model.AddAddressWasClicked();
+        }
+
         public void EditBirthday(Date birthday)
         {
-            // client position 
-            int clientX = labelBirthday.Location.X;
-            int clientY = labelBirthday.Location.Y + labelBirthday.Height;
-            Point clientPoint = new Point(clientX, clientY);
-
-            // screen position
-            Point screenPoint = PointToScreen(clientPoint);
-
-            // initialize form
-            formBirthdayEdit.Location = screenPoint;
+            formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
             formBirthdayEdit.Date = birthday;
 
-            // show form
             formBirthdayEdit.Show();
             formBirthdayEdit.Focus();
         }
 
         public void EditName(PersonName name)
         {
-            // client position 
-            int clientX = labelFullName.Location.X;
-            int clientY = labelFullName.Location.Y + labelFullName.Height;
-            Point clientPoint = new Point(clientX, clientY);
-
-            // screen position
-            Point screenPoint = PointToScreen(clientPoint);
-
-            // initialize form
-            formNameEdit.Location = screenPoint;
+            formNameEdit.Location = GetBottomLeftCorner(labelFullName);
             formNameEdit.PersonName = name;
 
-            // show form
             formNameEdit.Show();
             formNameEdit.Focus();
+        }
+
+        public void AddAddress(AddressCollection addresses)
+        {
+            FormAddressEdit form = new FormAddressEdit();
+
+            form.AddMode = true;
+            form.Addresses = addresses;
+            form.Location = GetBottomLeftCorner(buttonAddAddress);
+            form.Address = new Address();
+
+            form.Show();
+            form.Focus();
+        }
+
+        private Point GetBottomLeftCorner(Control control)
+        {
+            int clientX = control.Location.X;
+            int clientY = control.Location.Y + control.Height;
+
+            Point clientPoint = new Point(clientX, clientY);
+
+            return control.Parent.PointToScreen(clientPoint);
         }
     }
 }

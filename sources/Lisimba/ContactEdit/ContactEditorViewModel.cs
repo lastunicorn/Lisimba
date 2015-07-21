@@ -270,5 +270,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.EditName(contact.Name);
         }
+
+        public void AddAddressWasClicked()
+        {
+            View.AddAddress(contact.Addresses);
+        }
     }
 }

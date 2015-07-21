@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -22,6 +23,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormAddressEdit : FormEditBase
     {
         private Address address;
+
         public Address Address
         {
             get { return address; }
@@ -31,6 +33,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 DisplayDataInView();
             }
         }
+
+        public bool AddMode { get; set; }
+
+        public AddressCollection Addresses { get; set; }
 
         public FormAddressEdit()
         {
@@ -49,6 +55,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
 
             ReadDataFromView();
+
+            if (AddMode)
+                Addresses.Add(address);
+        }
+
+        protected override void OnShown(EventArgs e)
+        {
+            if (AddMode)
+                Address = new Address();
+            
+            base.OnShown(e);
         }
 
         private void textBox_KeyDown(object sender, KeyEventArgs e)

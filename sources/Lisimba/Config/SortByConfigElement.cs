@@ -20,17 +20,11 @@ namespace DustInTheWind.Lisimba.Config
 {
     public class SortByConfigElement : ConfigurationElement
     {
-        [ConfigurationProperty("value", DefaultValue="NicknameOrName", IsRequired = true, IsKey = false)]
+        [ConfigurationProperty("value", DefaultValue = "NicknameOrName", IsRequired = true, IsKey = false)]
         public string Value
         {
-            get
-            {
-                return (string)this["value"];
-            }
-            set
-            {
-                this["value"] = value;
-            }
+            get { return (string)this["value"]; }
+            set { this["value"] = value; }
         }
     }
 }

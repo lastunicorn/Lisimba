@@ -67,12 +67,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void FormEditBase_Deactivate(object sender, EventArgs e)
         {
-            if (DialogResult == DialogResult.None)
-            {
-                DialogResult = DialogResult.OK;
-                UpdateData();
-                Hide();
-            }
+            if (DialogResult != DialogResult.None)
+                return;
+
+            DialogResult = DialogResult.OK;
+            UpdateData();
+            Hide();
         }
 
         public void FormEditBase_KeyDown(object sender, KeyEventArgs e)

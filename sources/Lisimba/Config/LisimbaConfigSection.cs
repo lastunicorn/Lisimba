@@ -20,10 +20,6 @@ namespace DustInTheWind.Lisimba.Config
 {
     public class LisimbaConfigSection : ConfigurationSection
     {
-        public LisimbaConfigSection()
-        {
-        }
-
         [ConfigurationProperty("recentFiles")]
         public RecentFilesConfigElementCollection RecentFilesList
         {

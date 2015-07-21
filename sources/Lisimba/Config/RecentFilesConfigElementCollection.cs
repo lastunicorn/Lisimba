@@ -23,10 +23,7 @@ namespace DustInTheWind.Lisimba.Config
     {
         public RecentFilesConfigElement this[int index]
         {
-            get
-            {
-                return base.BaseGet(index) as RecentFilesConfigElement;
-            }
+            get { return BaseGet(index) as RecentFilesConfigElement; }
         }
 
         public void AddNewRecentFile(string fileName)
@@ -34,7 +31,7 @@ namespace DustInTheWind.Lisimba.Config
             int i = 0;
             while (i < Count)
             {
-                if (((RecentFilesConfigElement)this[i]).FileName.Equals(fileName))
+                if (this[i].FileName.Equals(fileName))
                 {
                     BaseRemoveAt(i);
                 }
