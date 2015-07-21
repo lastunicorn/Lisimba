@@ -146,6 +146,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(155, 6);
+            this.toolStripMenuItem1.Visible = false;
             // 
             // toolStripMenuItem_File_Export
             // 
@@ -160,6 +161,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_Export.ShortDescription = null;
             this.toolStripMenuItem_File_Export.Size = new System.Drawing.Size(158, 22);
             this.toolStripMenuItem_File_Export.Text = "&Export";
+            this.toolStripMenuItem_File_Export.Visible = false;
             // 
             // toolStripMenuItem_ExportToYahooCSV
             // 
@@ -186,6 +188,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_Import.ShortDescription = null;
             this.toolStripMenuItem_File_Import.Size = new System.Drawing.Size(158, 22);
             this.toolStripMenuItem_File_Import.Text = "&Import";
+            this.toolStripMenuItem_File_Import.Visible = false;
             // 
             // toolStripMenuItem_ImportFromYahooCSV
             // 

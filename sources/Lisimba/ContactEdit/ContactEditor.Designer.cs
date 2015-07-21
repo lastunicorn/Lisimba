@@ -33,22 +33,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.labelZodiacSign = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBirthday = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelFullName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -59,11 +59,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
-            this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -85,24 +86,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.label7.TabIndex = 8;
             this.label7.Text = "Birthday:";
             // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(3, 38);
-            this.label6.Margin = new System.Windows.Forms.Padding(3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(77, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Zodiac sign:";
-            // 
             // labelZodiacSign
             // 
             this.labelZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.labelZodiacSign.AutoSize = true;
-            this.labelZodiacSign.Location = new System.Drawing.Point(3, 16);
+            this.labelZodiacSign.Location = new System.Drawing.Point(3, 45);
             this.labelZodiacSign.Name = "labelZodiacSign";
             this.labelZodiacSign.Size = new System.Drawing.Size(61, 13);
             this.labelZodiacSign.TabIndex = 11;
@@ -172,60 +160,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.splitContainer2.SplitterDistance = 310;
             this.splitContainer2.TabIndex = 0;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.labelBirthday, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 1, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 70);
-            this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // labelBirthday
-            // 
-            this.labelBirthday.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBirthday.Location = new System.Drawing.Point(86, 3);
-            this.labelBirthday.Margin = new System.Windows.Forms.Padding(3);
-            this.labelBirthday.Name = "labelBirthday";
-            this.labelBirthday.Size = new System.Drawing.Size(105, 13);
-            this.labelBirthday.TabIndex = 13;
-            this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.labelZodiacSign);
-            this.flowLayoutPanel1.Controls.Add(this.pictureBoxZodiacSign);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(86, 22);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(105, 45);
-            this.flowLayoutPanel1.TabIndex = 14;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // pictureBoxZodiacSign
-            // 
-            this.pictureBoxZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBoxZodiacSign.Location = new System.Drawing.Point(70, 3);
-            this.pictureBoxZodiacSign.Name = "pictureBoxZodiacSign";
-            this.pictureBoxZodiacSign.Size = new System.Drawing.Size(39, 39);
-            this.pictureBoxZodiacSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxZodiacSign.TabIndex = 10;
-            this.pictureBoxZodiacSign.TabStop = false;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.customTreeView1);
@@ -236,6 +170,59 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.groupBox1.Size = new System.Drawing.Size(310, 155);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 155);
+            this.tableLayoutPanel1.TabIndex = 13;
+            // 
+            // labelBirthday
+            // 
+            this.labelBirthday.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelBirthday.AutoSize = true;
+            this.labelBirthday.Location = new System.Drawing.Point(63, 3);
+            this.labelBirthday.Margin = new System.Windows.Forms.Padding(0);
+            this.labelBirthday.Name = "labelBirthday";
+            this.labelBirthday.Size = new System.Drawing.Size(0, 13);
+            this.labelBirthday.TabIndex = 13;
+            this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Controls.Add(this.pictureBoxZodiacSign);
+            this.flowLayoutPanel1.Controls.Add(this.labelZodiacSign);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 61);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(67, 58);
+            this.flowLayoutPanel1.TabIndex = 14;
+            this.flowLayoutPanel1.WrapContents = false;
+            // 
+            // pictureBoxZodiacSign
+            // 
+            this.pictureBoxZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.pictureBoxZodiacSign.Location = new System.Drawing.Point(14, 3);
+            this.pictureBoxZodiacSign.Name = "pictureBoxZodiacSign";
+            this.pictureBoxZodiacSign.Size = new System.Drawing.Size(39, 39);
+            this.pictureBoxZodiacSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBoxZodiacSign.TabIndex = 10;
+            this.pictureBoxZodiacSign.TabStop = false;
             // 
             // labelFullName
             // 
@@ -308,6 +295,18 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
             // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.Controls.Add(this.label7);
+            this.flowLayoutPanel2.Controls.Add(this.labelBirthday);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(65, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(63, 19);
+            this.flowLayoutPanel2.TabIndex = 15;
+            this.flowLayoutPanel2.WrapContents = false;
+            // 
             // customTreeView1
             // 
             this.customTreeView1.Addresses = null;
@@ -349,14 +348,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).EndInit();
-            this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -365,7 +366,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.PictureBox pictureBoxZodiacSign;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label labelZodiacSign;
@@ -381,5 +381,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
     }
 }
