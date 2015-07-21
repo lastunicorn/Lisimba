@@ -49,6 +49,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.buttonAddAddress = new System.Windows.Forms.Button();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonAddEmail = new System.Windows.Forms.Button();
+            this.buttonAddWebSite = new System.Windows.Forms.Button();
+            this.buttonAddDate = new System.Windows.Forms.Button();
+            this.buttonAddPhone = new System.Windows.Forms.Button();
+            this.buttonAddMessengerId = new System.Windows.Forms.Button();
             this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -65,6 +73,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // imageList1
@@ -151,7 +161,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer2.Panel1.Controls.Add(this.tableLayoutPanel4);
             // 
             // splitContainer2.Panel2
             // 
@@ -164,10 +174,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.groupBox1.Controls.Add(this.customTreeView1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Location = new System.Drawing.Point(3, 39);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(310, 155);
+            this.groupBox1.Size = new System.Drawing.Size(304, 113);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
@@ -181,9 +191,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 155);
             this.tableLayoutPanel1.TabIndex = 13;
@@ -208,7 +219,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel1.Controls.Add(this.pictureBoxZodiacSign);
             this.flowLayoutPanel1.Controls.Add(this.labelZodiacSign);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 61);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 28);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(67, 58);
             this.flowLayoutPanel1.TabIndex = 14;
@@ -307,6 +318,105 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel2.TabIndex = 15;
             this.flowLayoutPanel2.WrapContents = false;
             // 
+            // buttonAddAddress
+            // 
+            this.buttonAddAddress.AutoSize = true;
+            this.buttonAddAddress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddAddress.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddAddress.Image")));
+            this.buttonAddAddress.Location = new System.Drawing.Point(3, 3);
+            this.buttonAddAddress.Name = "buttonAddAddress";
+            this.buttonAddAddress.Size = new System.Drawing.Size(22, 22);
+            this.buttonAddAddress.TabIndex = 13;
+            this.buttonAddAddress.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.AutoSize = true;
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddAddress);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddDate);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddEmail);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddMessengerId);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddPhone);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddWebSite);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(304, 30);
+            this.flowLayoutPanel3.TabIndex = 14;
+            this.flowLayoutPanel3.WrapContents = false;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.groupBox1, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.flowLayoutPanel3, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(310, 155);
+            this.tableLayoutPanel4.TabIndex = 13;
+            // 
+            // buttonAddEmail
+            // 
+            this.buttonAddEmail.AutoSize = true;
+            this.buttonAddEmail.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddEmail.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddEmail.Image")));
+            this.buttonAddEmail.Location = new System.Drawing.Point(59, 3);
+            this.buttonAddEmail.Name = "buttonAddEmail";
+            this.buttonAddEmail.Size = new System.Drawing.Size(22, 22);
+            this.buttonAddEmail.TabIndex = 13;
+            this.buttonAddEmail.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddWebSite
+            // 
+            this.buttonAddWebSite.AutoSize = true;
+            this.buttonAddWebSite.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddWebSite.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddWebSite.Image")));
+            this.buttonAddWebSite.Location = new System.Drawing.Point(145, 3);
+            this.buttonAddWebSite.Name = "buttonAddWebSite";
+            this.buttonAddWebSite.Size = new System.Drawing.Size(22, 22);
+            this.buttonAddWebSite.TabIndex = 13;
+            this.buttonAddWebSite.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddDate
+            // 
+            this.buttonAddDate.AutoSize = true;
+            this.buttonAddDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddDate.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddDate.Image")));
+            this.buttonAddDate.Location = new System.Drawing.Point(31, 3);
+            this.buttonAddDate.Name = "buttonAddDate";
+            this.buttonAddDate.Size = new System.Drawing.Size(22, 22);
+            this.buttonAddDate.TabIndex = 13;
+            this.buttonAddDate.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddPhone
+            // 
+            this.buttonAddPhone.AutoSize = true;
+            this.buttonAddPhone.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddPhone.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddPhone.Image")));
+            this.buttonAddPhone.Location = new System.Drawing.Point(117, 3);
+            this.buttonAddPhone.Name = "buttonAddPhone";
+            this.buttonAddPhone.Size = new System.Drawing.Size(22, 22);
+            this.buttonAddPhone.TabIndex = 13;
+            this.buttonAddPhone.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddMessengerId
+            // 
+            this.buttonAddMessengerId.AutoSize = true;
+            this.buttonAddMessengerId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddMessengerId.Image = ((System.Drawing.Image)(resources.GetObject("buttonAddMessengerId.Image")));
+            this.buttonAddMessengerId.Location = new System.Drawing.Point(87, 3);
+            this.buttonAddMessengerId.Name = "buttonAddMessengerId";
+            this.buttonAddMessengerId.Size = new System.Drawing.Size(24, 24);
+            this.buttonAddMessengerId.TabIndex = 13;
+            this.buttonAddMessengerId.UseVisualStyleBackColor = true;
+            // 
             // customTreeView1
             // 
             this.customTreeView1.Addresses = null;
@@ -326,7 +436,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.customTreeView1.ShowLines = false;
             this.customTreeView1.ShowPlusMinus = false;
             this.customTreeView1.ShowRootLines = false;
-            this.customTreeView1.Size = new System.Drawing.Size(302, 134);
+            this.customTreeView1.Size = new System.Drawing.Size(296, 92);
             this.customTreeView1.TabIndex = 12;
             this.customTreeView1.WebSites = null;
             // 
@@ -358,6 +468,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel2.PerformLayout();
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
+            this.flowLayoutPanel3.ResumeLayout(false);
+            this.flowLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -377,10 +491,18 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private CustomTreeView customTreeView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private System.Windows.Forms.Button buttonAddAddress;
+        private System.Windows.Forms.Button buttonAddEmail;
+        private System.Windows.Forms.Button buttonAddWebSite;
+        private System.Windows.Forms.Button buttonAddDate;
+        private System.Windows.Forms.Button buttonAddPhone;
+        private System.Windows.Forms.Button buttonAddMessengerId;
+        private CustomTreeView customTreeView1;
     }
 }
