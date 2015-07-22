@@ -31,15 +31,18 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public bool AddMode { get; set; }
+
+        public DateCollection Dates { get; set; }
+
         public FormDateEdit()
         {
             InitializeComponent();
 
             comboBoxDay.Items.Add("-");
+
             for (int i = 1; i < 32; i++)
-            {
                 comboBoxDay.Items.Add(i);
-            }
 
             comboBoxMonth.Items.Add("-");
             comboBoxMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
@@ -51,18 +54,37 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         protected override void UpdateData()
         {
+            bool dataWasChanged = UserChangedData();
+
+            if (!dataWasChanged)
+                return;
+
+            ReadDataFromView();
+
+            if (AddMode && Dates != null)
+                Dates.Add(date);
+        }
+
+        private void ReadDataFromView()
+        {
             int day = comboBoxDay.SelectedIndex;
             int month = comboBoxMonth.SelectedIndex;
 
             int year;
             int.TryParse(textBoxYear.Text, out year);
 
-            var dataWasChanged = date.Day != day || date.Month != month || date.Year != year;
-
-            if (!dataWasChanged)
-                return;
-
             date.SetValues(day, month, year);
+        }
+
+        private bool UserChangedData()
+        {
+            int day = comboBoxDay.SelectedIndex;
+            int month = comboBoxMonth.SelectedIndex;
+
+            int year;
+            int.TryParse(textBoxYear.Text, out year);
+
+            return date.Day != day || date.Month != month || date.Year != year;
         }
 
         private void DisplayDataInView()

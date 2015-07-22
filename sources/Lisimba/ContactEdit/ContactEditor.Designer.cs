@@ -240,6 +240,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonAddDate.Size = new System.Drawing.Size(45, 45);
             this.buttonAddDate.TabIndex = 13;
             this.buttonAddDate.UseVisualStyleBackColor = true;
+            this.buttonAddDate.Click += new System.EventHandler(this.buttonAddDate_Click);
             // 
             // buttonAddEmail
             // 

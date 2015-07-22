@@ -45,19 +45,24 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         protected override void UpdateData()
         {
-            bool isAnyDataChanged = !address.Street.Equals(textBoxAddress.Text) ||
-                     !address.City.Equals(textBoxCity.Text) ||
-                     !address.PostalCode.Equals(textBoxZip.Text) ||
-                     !address.State.Equals(textBoxState.Text) ||
-                     !address.Country.Equals(textBoxCountry.Text);
+            bool dataWasChanged = UserChangedData();
 
-            if (!isAnyDataChanged)
+            if (!dataWasChanged)
                 return;
 
             ReadDataFromView();
 
-            if (AddMode)
+            if (AddMode && Address != null)
                 Addresses.Add(address);
+        }
+
+        private bool UserChangedData()
+        {
+            return !address.Street.Equals(textBoxAddress.Text) ||
+                   !address.City.Equals(textBoxCity.Text) ||
+                   !address.PostalCode.Equals(textBoxZip.Text) ||
+                   !address.State.Equals(textBoxState.Text) ||
+                   !address.Country.Equals(textBoxCountry.Text);
         }
 
         protected override void OnShown(EventArgs e)
