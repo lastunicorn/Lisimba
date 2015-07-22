@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.UserControls
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeViewContacts = new System.Windows.Forms.TreeView();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
@@ -41,21 +41,21 @@ namespace DustInTheWind.Lisimba.UserControls
             this.contextMenuStripListBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // treeView1
+            // treeViewContacts
             // 
-            this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.treeViewContacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView1.FullRowSelect = true;
-            this.treeView1.HideSelection = false;
-            this.treeView1.Location = new System.Drawing.Point(0, 27);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.ShowLines = false;
-            this.treeView1.ShowPlusMinus = false;
-            this.treeView1.Size = new System.Drawing.Size(178, 240);
-            this.treeView1.TabIndex = 2;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseUp);
+            this.treeViewContacts.FullRowSelect = true;
+            this.treeViewContacts.HideSelection = false;
+            this.treeViewContacts.Location = new System.Drawing.Point(0, 27);
+            this.treeViewContacts.Name = "treeViewContacts";
+            this.treeViewContacts.ShowLines = false;
+            this.treeViewContacts.ShowPlusMinus = false;
+            this.treeViewContacts.Size = new System.Drawing.Size(178, 240);
+            this.treeViewContacts.TabIndex = 2;
+            this.treeViewContacts.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeViewContacts.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseUp);
             // 
             // textBoxSearch
             // 
@@ -143,7 +143,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.comboBoxSortBy);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeViewContacts);
             this.Controls.Add(this.textBoxSearch);
             this.Name = "ContactListView";
             this.Size = new System.Drawing.Size(178, 293);
@@ -156,7 +156,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeViewContacts;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
         private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_Add;

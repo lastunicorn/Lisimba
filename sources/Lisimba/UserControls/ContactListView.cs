@@ -34,6 +34,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private AddressBookShell currentData;
         private ConfigurationService configurationService;
+        private readonly ContactListViewModel viewModel;
 
         public CommandPool CommandPool
         {
@@ -50,7 +51,7 @@ namespace DustInTheWind.Lisimba.UserControls
             set
             {
                 configurationService = value;
-                RefreshSortMethod();
+                viewModel.SelectedSortingMethod = GetSortingType();
             }
         }
 
@@ -117,7 +118,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
             treeNode.Text = treeNode.Tag.ToString();
 
-            treeView1.Sort();
+            treeViewContacts.Sort();
         }
 
         private void HandleCurrentAddressBookSaved(object sender, EventArgs eventArgs)
@@ -164,23 +165,31 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             InitializeComponent();
 
-            comboBoxSortBy.Items.AddRange(new[]
-            {
-                new SortingComboBoxItem{ Text="Birthday (without year)", SortingType=ContactsSortingType.Birthday },
-                new SortingComboBoxItem{ Text="Birth Date (age)", SortingType=ContactsSortingType.BirthDate },
-                new SortingComboBoxItem{ Text="First Name", SortingType=ContactsSortingType.FirstName },
-                new SortingComboBoxItem{ Text="Last Name", SortingType=ContactsSortingType.LastName },
-                new SortingComboBoxItem{ Text="Nickname", SortingType=ContactsSortingType.Nickname },
-                new SortingComboBoxItem{ Text="Nickname or Name", SortingType=ContactsSortingType.NicknameOrName }
-            });
+            viewModel = new ContactListViewModel();
+
+            comboBoxSortBy.DataSource = viewModel.SortingMethods;
             comboBoxSortBy.DisplayMember = "Text";
             comboBoxSortBy.ValueMember = "SortingType";
 
-            treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Nickname);
+            comboBoxSortBy.Bind(x => x.SelectedValue, viewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
+
+            //comboBoxSortBy.Items.AddRange(new[]
+            //{
+            //    new SortingComboBoxItem{ Text="Birthday (without year)", SortingType=ContactsSortingType.Birthday },
+            //    new SortingComboBoxItem{ Text="Birth Date (age)", SortingType=ContactsSortingType.BirthDate },
+            //    new SortingComboBoxItem{ Text="First Name", SortingType=ContactsSortingType.FirstName },
+            //    new SortingComboBoxItem{ Text="Last Name", SortingType=ContactsSortingType.LastName },
+            //    new SortingComboBoxItem{ Text="Nickname", SortingType=ContactsSortingType.Nickname },
+            //    new SortingComboBoxItem{ Text="Nickname or Name", SortingType=ContactsSortingType.NicknameOrName }
+            //});
+            //comboBoxSortBy.DisplayMember = "Text";
+            //comboBoxSortBy.ValueMember = "SortingType";
+
+            treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Nickname);
 
             toolStripMenuItem_List_ViewBiorythm.ShortDescription = "Display the biorhythm of the selected person.";
 
-            contactsToTreeViewBinder = new ContactsToTreeViewBinder(treeView1);
+            contactsToTreeViewBinder = new ContactsToTreeViewBinder(treeViewContacts);
 
             contactsToTreeViewBinder.Filter = contact => textBoxSearch.Text.Length == 0 ||
                                                          contact.Name.FirstName.IndexOf(textBoxSearch.Text, StringComparison.CurrentCultureIgnoreCase) >= 0 ||
@@ -200,7 +209,7 @@ namespace DustInTheWind.Lisimba.UserControls
                 ? null
                 : contactsToTreeViewBinder.treeNodesByContact[contactToSelect];
 
-            treeView1.SelectedNode = treeNodeToSelect;
+            treeViewContacts.SelectedNode = treeNodeToSelect;
         }
 
         private void ResetModifiedFlags()
@@ -212,10 +221,10 @@ namespace DustInTheWind.Lisimba.UserControls
                 if (c == null)
                     continue;
 
-                if (!contactsToTreeViewBinder.modifiedContacts[c])
+                if (contactsToTreeViewBinder.modifiedContacts[c])
                 {
-                    contactsToTreeViewBinder.modifiedContacts[c] = true;
-                    HighlightTreeNode(treeNode, true);
+                    contactsToTreeViewBinder.modifiedContacts[c] = false;
+                    HighlightTreeNode(treeNode, false);
                 }
             }
         }
@@ -230,15 +239,15 @@ namespace DustInTheWind.Lisimba.UserControls
             if (e.Button != MouseButtons.Right)
                 return;
 
-            TreeNode node = treeView1.GetNodeAt(e.Location);
+            TreeNode node = treeViewContacts.GetNodeAt(e.Location);
 
             if (node != null)
-                treeView1.SelectedNode = node;
+                treeViewContacts.SelectedNode = node;
 
             // Display the menu
             Contact selectedContact = currentData.Contact;
             toolStripMenuItem_List_ViewBiorythm.Enabled = (selectedContact != null && selectedContact.Birthday.IsCompleteDate);
-            contextMenuStripListBox.Show(treeView1, e.Location);
+            contextMenuStripListBox.Show(treeViewContacts, e.Location);
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -247,7 +256,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
             try
             {
-                TreeNode selectedNode = treeView1.SelectedNode;
+                TreeNode selectedNode = treeViewContacts.SelectedNode;
                 Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
 
                 CurrentData.Contact = selectedContact;
@@ -291,7 +300,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void toolStripMenuItem_List_ViewBiorythm_Click(object sender, EventArgs e)
         {
-            TreeNode node = treeView1.SelectedNode;
+            TreeNode node = treeViewContacts.SelectedNode;
 
             if (node == null)
                 return;
@@ -308,81 +317,71 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SortingComboBoxItem selectedItem = comboBoxSortBy.SelectedItem as SortingComboBoxItem;
-
-            if (selectedItem == null)
-                return;
-
-            switch (selectedItem.SortingType)
+            switch (viewModel.SelectedSortingMethod)
             {
                 case ContactsSortingType.Birthday:
-                    treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Birthday);
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Birthday);
+                    treeViewContacts.Sort();
                     break;
 
                 case ContactsSortingType.BirthDate:
-                    treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.BirthDate);
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.BirthDate);
+                    treeViewContacts.Sort();
                     break;
 
                 case ContactsSortingType.FirstName:
-                    treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.FirstName);
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.FirstName);
+                    treeViewContacts.Sort();
                     break;
 
                 case ContactsSortingType.LastName:
-                    treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.LastName);
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.LastName);
+                    treeViewContacts.Sort();
                     break;
 
                 case ContactsSortingType.Nickname:
-                    treeView1.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Nickname);
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Nickname);
+                    treeViewContacts.Sort();
                     break;
 
                 case ContactsSortingType.NicknameOrName:
-                    treeView1.TreeViewNodeSorter = new TreeNodeByNicknameOrNameComparer();
-                    treeView1.Sort();
+                    treeViewContacts.TreeViewNodeSorter = new TreeNodeByNicknameOrNameComparer();
+                    treeViewContacts.Sort();
                     break;
             }
         }
 
         private void ContactListView_Load(object sender, EventArgs e)
         {
-            RefreshSortMethod();
+            viewModel.SelectedSortingMethod = GetSortingType();
             RepopulateFromCurrentAddressBook();
         }
 
-        private void RefreshSortMethod()
+        private ContactsSortingType GetSortingType()
         {
-            if (ConfigurationService == null)
-                return;
+            if (configurationService == null)
+                return ContactsSortingType.Birthday;
 
-            switch (ConfigurationService.LisimbaConfigSection.SortBy.Value)
+            switch (configurationService.LisimbaConfigSection.SortBy.Value)
             {
+                default:
                 case "Birthday":
-                    comboBoxSortBy.SelectedIndex = 0;
-                    break;
+                    return ContactsSortingType.Birthday;
 
                 case "BirthDate":
-                    comboBoxSortBy.SelectedIndex = 1;
-                    break;
+                    return ContactsSortingType.BirthDate;
 
                 case "FirstName":
-                    comboBoxSortBy.SelectedIndex = 2;
-                    break;
+                    return ContactsSortingType.FirstName;
 
                 case "LastName":
-                    comboBoxSortBy.SelectedIndex = 3;
-                    break;
+                    return ContactsSortingType.LastName;
 
                 case "Nickname":
-                    comboBoxSortBy.SelectedIndex = 4;
-                    break;
+                    return ContactsSortingType.Nickname;
 
                 case "NicknameOrName":
-                    comboBoxSortBy.SelectedIndex = 5;
-                    break;
+                    return ContactsSortingType.NicknameOrName;
             }
         }
     }
