@@ -1,10 +1,9 @@
 Lisimba
 =======
 
-An agenda with contacts. Similar to the one in yahoo or google or any other else. (But is made by me :D )
+An address book with contacts. Similar to the one in yahoo or google or any other else.
 
-Features:
-	- Can import the yahoo agenda. (Yahoo agenda has to be exported as .csv file from the yahoo page and then Lisimba can import that file.)
-	- Display biorythm graphic (in progress).
-	- Birthday reminder (in progress).
-	- Save agenda in a web location to use it. (in progress).
+Future Features:
+ - Synchronize contacts with the major social networking sites (Facebook, Twitter, LinkedIn, Google Plus+, etc.)
+ - Display biorythm charts.
+ - Birthday reminder.
