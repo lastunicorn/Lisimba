@@ -25,5 +25,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         void AddAddress(AddressCollection addresses);
         void AddDate(DateCollection dates);
         void AddEmail(EmailCollection emails);
+        void AddMessengerId(MessengerIdCollection messengerIds);
     }
 }

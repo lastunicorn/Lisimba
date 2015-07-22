@@ -88,6 +88,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Model.AddEmailWasClicked();
         }
 
+        private void buttonAddMessengerId_Click(object sender, System.EventArgs e)
+        {
+            Model.AddMessengerIdWasClicked();
+        }
+
         public void EditBirthday(Date birthday)
         {
             formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
@@ -144,6 +149,20 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 Email = new Email()
             };
             
+            form.Show();
+            form.Focus();
+        }
+
+        public void AddMessengerId(MessengerIdCollection messengerIds)
+        {
+            FormMessengerIdEdit form = new FormMessengerIdEdit
+            {
+                AddMode = true,
+                MessengerIds = messengerIds,
+                Location = GetBottomLeftCorner(buttonAddEmail),
+                MessengerId = new MessengerId()
+            };
+
             form.Show();
             form.Focus();
         }

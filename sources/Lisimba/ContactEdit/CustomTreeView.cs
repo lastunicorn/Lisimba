@@ -79,6 +79,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private readonly FormWebSiteEdit formWebSiteEdit;
         private readonly FormAddressEdit formAddressEdit;
         private readonly FormDateEdit formDateEdit;
+        private readonly FormMessengerIdEdit formMessengerIdEdit;
 
         private PhoneCollection phones;
         private EmailCollection emails;
@@ -156,6 +157,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             formWebSiteEdit = new FormWebSiteEdit();
             formAddressEdit = new FormAddressEdit();
             formDateEdit = new FormDateEdit();
+            formMessengerIdEdit = new FormMessengerIdEdit();
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
@@ -242,8 +244,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
             }
 
-            if (selectedNode.Tag is MessengerId)
+            MessengerId messengerIdTag = selectedNode.Tag as MessengerId;
+
+            if (messengerIdTag != null)
+            {
+                formMessengerIdEdit.MessengerId = messengerIdTag;
+                formMessengerIdEdit.Location = PointToScreen(e.Location);
+                formMessengerIdEdit.AddMode = false;
+                formMessengerIdEdit.Show();
+                formMessengerIdEdit.Focus();
                 return;
+            }
         }
 
         private void DisplayPhones()

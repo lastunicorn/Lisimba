@@ -285,5 +285,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.AddEmail(contact.Emails);
         }
+
+        public void AddMessengerIdWasClicked()
+        {
+            View.AddMessengerId(contact.MessengerIds);
+        }
     }
 }
