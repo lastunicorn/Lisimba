@@ -27,5 +27,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         void AddEmail(EmailCollection emails);
         void AddMessengerId(MessengerIdCollection messengerIds);
         void AddPhone(PhoneCollection phones);
+        void AddWebSite(WebSiteCollection webSites);
     }
 }

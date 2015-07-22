@@ -295,5 +295,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.AddPhone(contact.Phones);
         }
+
+        public void AddWebSiteClicked()
+        {
+            View.AddWebSite(contact.WebSites);
+        }
     }
 }

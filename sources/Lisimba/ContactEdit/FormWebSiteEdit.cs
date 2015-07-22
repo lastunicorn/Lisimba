@@ -21,6 +21,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormWebSiteEdit : FormEditBase
     {
         private WebSite webSite;
+        private bool addMode;
+
         public WebSite WebSite
         {
             get { return webSite; }
@@ -32,9 +34,24 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public bool AddMode
+        {
+            get { return addMode; }
+            set
+            {
+                addMode = value;
+
+                Text = value ? "Add Web Site" : "Edit Web Site";
+            }
+        }
+
+        public WebSiteCollection WebSites { get; set; }
+
         public FormWebSiteEdit()
         {
             InitializeComponent();
+
+            AddMode = false;
 
             textBoxAddress.KeyDown += FormEditBase_KeyDown;
             textBoxComments.KeyDown += FormEditBase_KeyDown;
@@ -42,13 +59,21 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         protected override void UpdateData()
         {
-            bool isAnyDataChanged = !webSite.Address.Equals(textBoxAddress.Text) ||
-                                    !webSite.Description.Equals(textBoxComments.Text);
+            bool isAnyDataChanged = UserChangedData();
 
             if (!isAnyDataChanged)
                 return;
 
             ReadDataFromView();
+
+            if (AddMode && WebSites != null)
+                WebSites.Add(webSite);
+        }
+
+        private bool UserChangedData()
+        {
+            return !webSite.Address.Equals(textBoxAddress.Text) ||
+                   !webSite.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()

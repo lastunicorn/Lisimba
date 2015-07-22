@@ -50,6 +50,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
+            AddMode = false;
+
             textBoxPhone.KeyDown += FormEditBase_KeyDown;
             textBoxComments.KeyDown += FormEditBase_KeyDown;
         }

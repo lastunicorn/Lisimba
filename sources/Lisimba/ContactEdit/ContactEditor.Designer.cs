@@ -318,6 +318,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonAddWebSite.Size = new System.Drawing.Size(45, 45);
             this.buttonAddWebSite.TabIndex = 13;
             this.buttonAddWebSite.UseVisualStyleBackColor = true;
+            this.buttonAddWebSite.Click += new System.EventHandler(this.buttonAddWebSite_Click);
             // 
             // tableLayoutPanel1
             // 

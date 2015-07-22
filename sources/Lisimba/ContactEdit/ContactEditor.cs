@@ -98,6 +98,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Model.AddPhoneWasClicked();
         }
 
+        private void buttonAddWebSite_Click(object sender, System.EventArgs e)
+        {
+            Model.AddWebSiteClicked();
+        }
+
         public void EditBirthday(Date birthday)
         {
             formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
@@ -180,6 +185,20 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 Phones = phones,
                 Location = GetBottomLeftCorner(buttonAddPhone),
                 Phone = new Phone()
+            };
+
+            form.Show();
+            form.Focus();
+        }
+
+        public void AddWebSite(WebSiteCollection webSites)
+        {
+            FormWebSiteEdit form = new FormWebSiteEdit
+            {
+                AddMode = true,
+                WebSites = webSites,
+                Location = GetBottomLeftCorner(buttonAddWebSite),
+                WebSite = new WebSite()
             };
 
             form.Show();
