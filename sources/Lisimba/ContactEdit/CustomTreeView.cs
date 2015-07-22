@@ -201,6 +201,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 formEmailEdit.Email = emailTag;
                 formEmailEdit.Location = PointToScreen(e.Location);
+                formEmailEdit.AddMode = false;
                 formEmailEdit.Show();
                 formEmailEdit.Focus();
                 return;
@@ -223,6 +224,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 formAddressEdit.Address = addressTag;
                 formAddressEdit.Location = PointToScreen(e.Location);
+                formAddressEdit.AddMode = false;
                 formAddressEdit.Show();
                 formAddressEdit.Focus();
                 return;
@@ -234,6 +236,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 formDateEdit.Date = dateTag;
                 formDateEdit.Location = PointToScreen(e.Location);
+                formDateEdit.AddMode = false;
                 formDateEdit.Show();
                 formDateEdit.Focus();
                 return;

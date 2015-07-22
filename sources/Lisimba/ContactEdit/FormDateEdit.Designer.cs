@@ -213,7 +213,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.Controls.Add(this.panel1);
             this.MinimumSize = new System.Drawing.Size(308, 90);
             this.Name = "FormDateEdit";
-            this.Text = "Edit Date";
+            this.Text = "";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);

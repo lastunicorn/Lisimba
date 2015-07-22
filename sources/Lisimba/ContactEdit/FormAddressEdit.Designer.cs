@@ -148,7 +148,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAddressEdit";
-            this.Text = "Edit Address";
+            this.Text = "";
             this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();

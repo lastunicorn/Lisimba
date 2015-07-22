@@ -359,14 +359,17 @@
     <Content Include="Images\date.gif" />
     <Content Include="Images\export.gif" />
     <Content Include="Images\help.png" />
+    <None Include="Images\home3.png" />
     <Content Include="Images\ico_new.png" />
     <Content Include="Images\import.gif" />
     <Content Include="Images\information.png" />
     <Content Include="Images\lion.gif" />
+    <Content Include="Images\mesengerid3.png" />
     <Content Include="Images\notes.gif" />
     <Content Include="Images\open.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\sort.gif" />
+    <Content Include="Images\webIcon.png" />
     <Content Include="Images\yahoo_icon.gif" />
     <Content Include="Lion.ico" />
   </ItemGroup>

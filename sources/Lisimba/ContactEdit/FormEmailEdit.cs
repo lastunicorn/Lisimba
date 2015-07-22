@@ -21,6 +21,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormEmailEdit : FormEditBase
     {
         private Email email;
+        private bool addMode;
+
         public Email Email
         {
             get { return email; }
@@ -31,7 +33,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode { get; set; }
+        public bool AddMode
+        {
+            get { return addMode; }
+            set
+            {
+                addMode = value;
+
+                Text = value ? "Add Email" : "Edit Email";
+            }
+        }
 
         public EmailCollection Emails { get; set; }
 

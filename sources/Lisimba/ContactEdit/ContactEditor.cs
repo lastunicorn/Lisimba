@@ -108,39 +108,42 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddAddress(AddressCollection addresses)
         {
-            FormAddressEdit form = new FormAddressEdit();
-
-            form.AddMode = true;
-            form.Addresses = addresses;
-            form.Location = GetBottomLeftCorner(buttonAddAddress);
-            form.Address = new Address();
-
+            FormAddressEdit form = new FormAddressEdit
+            {
+                AddMode = true,
+                Addresses = addresses,
+                Location = GetBottomLeftCorner(buttonAddAddress),
+                Address = new Address()
+            };
+            
             form.Show();
             form.Focus();
         }
 
         public void AddDate(DateCollection dates)
         {
-            FormDateEdit form = new FormDateEdit();
-
-            form.AddMode = true;
-            form.Dates = dates;
-            form.Location = GetBottomLeftCorner(buttonAddDate);
-            form.Date = new Date();
-
+            FormDateEdit form = new FormDateEdit
+            {
+                AddMode = true,
+                Dates = dates,
+                Location = GetBottomLeftCorner(buttonAddDate),
+                Date = new Date()
+            };
+            
             form.Show();
             form.Focus();
         }
 
         public void AddEmail(EmailCollection emails)
         {
-            FormEmailEdit form = new FormEmailEdit();
-
-            form.AddMode = true;
-            form.Emails = emails;
-            form.Location = GetBottomLeftCorner(buttonAddEmail);
-            form.Email = new Email();
-
+            FormEmailEdit form = new FormEmailEdit
+            {
+                AddMode = true,
+                Emails = emails,
+                Location = GetBottomLeftCorner(buttonAddEmail),
+                Email = new Email()
+            };
+            
             form.Show();
             form.Focus();
         }

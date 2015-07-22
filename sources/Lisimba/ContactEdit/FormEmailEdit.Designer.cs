@@ -45,8 +45,8 @@
             // 
             // textBoxEmail
             // 
-            this.textBoxEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxEmail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxEmail.BackColor = System.Drawing.Color.Ivory;
             this.textBoxEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEmail.Location = new System.Drawing.Point(90, 12);
@@ -65,8 +65,8 @@
             // 
             // textBoxComments
             // 
-            this.textBoxComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxComments.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxComments.BackColor = System.Drawing.Color.Ivory;
             this.textBoxComments.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxComments.Location = new System.Drawing.Point(90, 31);
@@ -84,7 +84,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxEmail);
             this.Name = "FormEmailEdit";
-            this.Text = "Edit Email";
+            this.Text = "";
             this.ResumeLayout(false);
             this.PerformLayout();
 

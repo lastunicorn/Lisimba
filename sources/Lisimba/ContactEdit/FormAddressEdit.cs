@@ -21,6 +21,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormAddressEdit : FormEditBase
     {
         private Address address;
+        private bool addMode;
 
         public Address Address
         {
@@ -32,13 +33,24 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode { get; set; }
+        public bool AddMode
+        {
+            get { return addMode; }
+            set
+            {
+                addMode = value;
+
+                Text = value ? "Add Address" : "Edit Address";
+            }
+        }
 
         public AddressCollection Addresses { get; set; }
 
         public FormAddressEdit()
         {
             InitializeComponent();
+
+            AddMode = false;
 
             textBoxAddress.KeyDown += FormEditBase_KeyDown;
             textBoxCity.KeyDown += FormEditBase_KeyDown;

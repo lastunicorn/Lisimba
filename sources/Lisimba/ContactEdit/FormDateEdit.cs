@@ -21,6 +21,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormDateEdit : FormEditBase
     {
         private Date date;
+        private bool addMode;
+
         public Date Date
         {
             get { return date; }
@@ -31,7 +33,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode { get; set; }
+        public bool AddMode
+        {
+            get { return addMode; }
+            set
+            {
+                addMode = value;
+
+                Text = value ? "Add Date" : "Edit Date";
+            }
+        }
 
         public DateCollection Dates { get; set; }
 
