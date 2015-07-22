@@ -342,9 +342,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\home.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Images\mail.gif" />
   </ItemGroup>
   <ItemGroup>
@@ -360,12 +357,13 @@
     <Content Include="Images\export.gif" />
     <Content Include="Images\help.png" />
     <None Include="Images\home3.png" />
+    <None Include="Images\home.png" />
     <Content Include="Images\ico_new.png" />
     <Content Include="Images\import.gif" />
     <Content Include="Images\information.png" />
     <Content Include="Images\lion.gif" />
     <Content Include="Images\mesengerid3.png" />
-    <Content Include="Images\notes.gif" />
+    <Content Include="Images\notes.png" />
     <Content Include="Images\open.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\sort.gif" />
