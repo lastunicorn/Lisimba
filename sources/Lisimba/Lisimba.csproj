@@ -367,6 +367,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\background.png" />
+    <None Include="Images\ContactGray\address.png" />
+    <None Include="Images\ContactGray\address_add.png" />
+    <Content Include="Images\ContactGray\date.png" />
+    <Content Include="Images\ContactGray\date_add.png" />
+    <None Include="Images\ContactGray\email.png" />
+    <None Include="Images\ContactGray\email_add.png" />
+    <Content Include="Images\ContactGray\mesengerid.png" />
+    <Content Include="Images\ContactGray\mesengerid_add.png" />
+    <Content Include="Images\ContactGray\notes.png" />
+    <None Include="Images\ContactGray\phone.png" />
+    <None Include="Images\ContactGray\phone_add.png" />
+    <Content Include="Images\ContactGray\webaddress.png" />
+    <Content Include="Images\ContactGray\webaddress_add.png" />
     <Content Include="Images\MainMenu\exit.png" />
     <None Include="Images\Contact\address_add.png" />
     <None Include="Images\Contact\address.png" />
