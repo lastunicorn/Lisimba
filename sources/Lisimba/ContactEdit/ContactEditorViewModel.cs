@@ -290,5 +290,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.AddMessengerId(contact.MessengerIds);
         }
+
+        public void AddPhoneWasClicked()
+        {
+            View.AddPhone(contact.Phones);
+        }
     }
 }

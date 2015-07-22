@@ -21,6 +21,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class FormPhoneEdit : FormEditBase
     {
         private Phone phone;
+        private bool addMode;
+
         public Phone Phone
         {
             get { return phone; }
@@ -30,6 +32,19 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 DisplayDataInView();
             }
         }
+
+        public bool AddMode
+        {
+            get { return addMode; }
+            set
+            {
+                addMode = value;
+
+                Text = value ? "Add Phone" : "Edit Phone";
+            }
+        }
+
+        public PhoneCollection Phones { get; set; }
 
         public FormPhoneEdit()
         {
@@ -41,13 +56,21 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         protected override void UpdateData()
         {
-            bool dataWasChanged = !phone.Number.Equals(textBoxPhone.Text) ||
-                                  !phone.Description.Equals(textBoxComments.Text);
+            bool dataWasChanged = UserChangedData();
 
             if (!dataWasChanged)
                 return;
 
             ReadDataFromView();
+
+            if (AddMode && Phones != null)
+                Phones.Add(phone);
+        }
+
+        private bool UserChangedData()
+        {
+            return !phone.Number.Equals(textBoxPhone.Text) ||
+                   !phone.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()

@@ -93,6 +93,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Model.AddMessengerIdWasClicked();
         }
 
+        private void buttonAddPhone_Click(object sender, System.EventArgs e)
+        {
+            Model.AddPhoneWasClicked();
+        }
+
         public void EditBirthday(Date birthday)
         {
             formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
@@ -120,7 +125,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 Location = GetBottomLeftCorner(buttonAddAddress),
                 Address = new Address()
             };
-            
+
             form.Show();
             form.Focus();
         }
@@ -134,7 +139,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 Location = GetBottomLeftCorner(buttonAddDate),
                 Date = new Date()
             };
-            
+
             form.Show();
             form.Focus();
         }
@@ -148,7 +153,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 Location = GetBottomLeftCorner(buttonAddEmail),
                 Email = new Email()
             };
-            
+
             form.Show();
             form.Focus();
         }
@@ -159,8 +164,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 MessengerIds = messengerIds,
-                Location = GetBottomLeftCorner(buttonAddEmail),
+                Location = GetBottomLeftCorner(buttonAddMessengerId),
                 MessengerId = new MessengerId()
+            };
+
+            form.Show();
+            form.Focus();
+        }
+
+        public void AddPhone(PhoneCollection phones)
+        {
+            FormPhoneEdit form = new FormPhoneEdit
+            {
+                AddMode = true,
+                Phones = phones,
+                Location = GetBottomLeftCorner(buttonAddPhone),
+                Phone = new Phone()
             };
 
             form.Show();
