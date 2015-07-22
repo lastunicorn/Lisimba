@@ -184,7 +184,7 @@ namespace DustInTheWind.Lisimba.BookShell
             if (!IsModified)
                 return true;
 
-            bool? response = uiService.DisplayYesNoQuestion(Resources.EnsureAddressBookIsSaved_Question, Resources.EnsureAddressBookIsSaved_Title);
+            bool? response = uiService.DisplayYesNoQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
 
             if (response == null)
                 return false;

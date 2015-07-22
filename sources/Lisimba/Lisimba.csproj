@@ -113,6 +113,11 @@
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
     <Compile Include="Presenters\LisimbaViewModel.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\ApplicationService.cs" />
     <Compile Include="Services\CommandPool.cs" />
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
@@ -286,7 +291,11 @@
       <DependentUpon>FormWebSiteEdit.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.ro-RO.resx" />
+    <EmbeddedResource Include="Properties\LocalizedResources.ro-RO.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Biorythm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Biorythm.cs</DependentUpon>
@@ -329,10 +338,10 @@
       <DependentUpon>ContactEditor.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Properties\LocalizedResources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>LocalizedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -340,19 +349,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>LocalizedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Images\mail.gif" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\phone.gif" />
@@ -362,20 +368,32 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\background.png" />
-    <Content Include="Images\cancel.png" />
-    <Content Include="Images\date.gif" />
-    <Content Include="Images\export.gif" />
-    <Content Include="Images\help.png" />
+    <Content Include="Images\MainMenu\exit.png" />
+    <None Include="Images\address_add.png" />
+    <None Include="Images\address.png" />
+    <None Include="Images\phone.png" />
+    <None Include="Images\phone_add.png" />
+    <Content Include="Images\MainMenu\export.png" />
+    <Content Include="Images\MainMenu\import.png" />
+    <Content Include="Images\MainMenu\new.png" />
+    <Content Include="Images\mesengerid_add.png" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\mesengerid.png" />
+    <Content Include="Images\webaddress.png" />
+    <Content Include="Images\date_add.png" />
+    <None Include="Images\email_add.png" />
+    <None Include="Images\email.png" />
+    <Content Include="Images\webaddress_add.png" />
+    <Content Include="Images\MainMenu\help.png" />
     <None Include="Images\home3.png" />
     <None Include="Images\home.png" />
-    <Content Include="Images\ico_new.png" />
-    <Content Include="Images\import.gif" />
-    <Content Include="Images\information.png" />
+    <Content Include="Images\MainMenu\new_address_book.png" />
+    <Content Include="Images\MainMenu\about.png" />
     <Content Include="Images\lion.gif" />
     <Content Include="Images\mesengerid3.png" />
     <Content Include="Images\notes.png" />
-    <Content Include="Images\open.png" />
-    <Content Include="Images\save.png" />
+    <Content Include="Images\MainMenu\open.png" />
+    <Content Include="Images\MainMenu\save.png" />
     <Content Include="Images\sort.gif" />
     <Content Include="Images\webIcon.png" />
     <Content Include="Images\yahoo_icon.gif" />

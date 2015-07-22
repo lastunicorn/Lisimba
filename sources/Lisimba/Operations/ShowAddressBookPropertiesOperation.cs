@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.ShowAddressBookPropertiesOperationDescription; }
+            get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
         }
 
         public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell)

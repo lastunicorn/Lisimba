@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.CreateNewContactOperationDescription; }
+            get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
         public CreateNewContactOperation(AddressBookShell addressBookShell, UiService uiService)

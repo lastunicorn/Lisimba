@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void Start()
         {
-            applicationStatus.DefaultStatusText = Resources.DefaultStatusText;
+            applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
 
             string fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
 

@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.ApplicationExitOperationDescription; }
+            get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
         public ApplicationExitOperation(ApplicationService applicationService)

@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.ImportYahooCsvOperationDescription; }
+            get { return LocalizedResources.ImportYahooCsvOperationDescription; }
         }
 
         public ImportYahooCsvOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)

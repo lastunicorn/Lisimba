@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.ExportYahooCsvOperationDescription; }
+            get { return LocalizedResources.ExportYahooCsvOperationDescription; }
         }
 
         public ExportYahooCsvOperation(AddressBookShell addressBookShell, UiService uiService)

@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Operations
     {
         public override string ShortDescription
         {
-            get { return Resources.ShowAboutOperationDescription; }
+            get { return LocalizedResources.ShowAboutOperationDescription; }
         }
 
         protected override void DoExecute(object parameter)

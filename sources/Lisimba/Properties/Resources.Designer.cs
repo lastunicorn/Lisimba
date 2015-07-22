@@ -61,264 +61,202 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exit the program..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ApplicationExitOperationDescription {
+        internal static System.Drawing.Bitmap about {
             get {
-                return ResourceManager.GetString("ApplicationExitOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("about", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close the currently opened address book..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string CloseCurrentAddressBookOperationDescription {
+        internal static System.Drawing.Bitmap address {
             get {
-                return ResourceManager.GetString("CloseCurrentAddressBookOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("address", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you wanna delete the contact {0} ?.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ContactDelete_ConfirametionQuestion {
+        internal static System.Drawing.Bitmap address_add {
             get {
-                return ResourceManager.GetString("ContactDelete_ConfirametionQuestion", resourceCulture);
+                object obj = ResourceManager.GetObject("address_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ContactDelete_ConfirmationTitle {
+        internal static System.Drawing.Bitmap date {
             get {
-                return ResourceManager.GetString("ContactDelete_ConfirmationTitle", resourceCulture);
+                object obj = ResourceManager.GetObject("date", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a new address book..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string CreateNewAddressBookOperationDescription {
+        internal static System.Drawing.Bitmap date_add {
             get {
-                return ResourceManager.GetString("CreateNewAddressBookOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("date_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a new contact..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string CreateNewContactOperationDescription {
+        internal static System.Drawing.Bitmap email {
             get {
-                return ResourceManager.GetString("CreateNewContactOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("email", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string DefaultStatusText {
+        internal static System.Drawing.Bitmap email_add {
             get {
-                return ResourceManager.GetString("DefaultStatusText", resourceCulture);
+                object obj = ResourceManager.GetObject("email_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete the currently selected contact..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string DeleteCurrentContactOperationDescription {
+        internal static System.Drawing.Bitmap exit {
             get {
-                return ResourceManager.GetString("DeleteCurrentContactOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current address book is not saved.
-        ///Do you wanna save it before proceedeing?.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string EnsureAddressBookIsSaved_Question {
+        internal static System.Drawing.Bitmap export {
             get {
-                return ResourceManager.GetString("EnsureAddressBookIsSaved_Question", resourceCulture);
+                object obj = ResourceManager.GetObject("export", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save?.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string EnsureAddressBookIsSaved_Title {
+        internal static System.Drawing.Bitmap help {
             get {
-                return ResourceManager.GetString("EnsureAddressBookIsSaved_Title", resourceCulture);
+                object obj = ResourceManager.GetObject("help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Export current opened address book in Yahoo! csv format..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ExportYahooCsvOperationDescription {
+        internal static System.Drawing.Bitmap import {
             get {
-                return ResourceManager.GetString("ExportYahooCsvOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("import", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import address book from Yahoo! csv format..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ImportYahooCsvOperationDescription {
+        internal static System.Drawing.Bitmap mesengerid {
             get {
-                return ResourceManager.GetString("ImportYahooCsvOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("mesengerid", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open address book from file..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string OpenAddressBookOperationDescription {
+        internal static System.Drawing.Bitmap mesengerid_add {
             get {
-                return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("mesengerid_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save current opened address book..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string SaveAddressBookOperationDescription {
+        internal static System.Drawing.Bitmap new_address_book {
             get {
-                return ResourceManager.GetString("SaveAddressBookOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("new_address_book", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save current opened address book with another name..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string SaveAsAddressBookOperationDescription {
+        internal static System.Drawing.Bitmap open {
             get {
-                return ResourceManager.GetString("SaveAsAddressBookOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays info about Lisimba..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ShowAboutOperationDescription {
+        internal static System.Drawing.Bitmap phone {
             get {
-                return ResourceManager.GetString("ShowAboutOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("phone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Display the address book properties..
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ShowAddressBookPropertiesOperationDescription {
+        internal static System.Drawing.Bitmap phone_add {
             get {
-                return ResourceManager.GetString("ShowAddressBookPropertiesOperationDescription", resourceCulture);
+                object obj = ResourceManager.GetObject("phone_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aquarius.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ZodiacSign_Aquarius {
+        internal static System.Drawing.Bitmap save {
             get {
-                return ResourceManager.GetString("ZodiacSign_Aquarius", resourceCulture);
+                object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Aries.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ZodiacSign_Aries {
+        internal static System.Drawing.Bitmap webaddress {
             get {
-                return ResourceManager.GetString("ZodiacSign_Aries", resourceCulture);
+                object obj = ResourceManager.GetObject("webaddress", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancer.
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static string ZodiacSign_Cancer {
+        internal static System.Drawing.Bitmap webaddress_add {
             get {
-                return ResourceManager.GetString("ZodiacSign_Cancer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Capricorn.
-        /// </summary>
-        internal static string ZodiacSign_Capricorn {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Capricorn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gemini.
-        /// </summary>
-        internal static string ZodiacSign_Gemini {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Gemini", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Leo.
-        /// </summary>
-        internal static string ZodiacSign_Leo {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Leo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Libra.
-        /// </summary>
-        internal static string ZodiacSign_Libra {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Libra", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pisces.
-        /// </summary>
-        internal static string ZodiacSign_Pisces {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Pisces", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sagittarius.
-        /// </summary>
-        internal static string ZodiacSign_Sagittarius {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Sagittarius", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Scorpio.
-        /// </summary>
-        internal static string ZodiacSign_Scorpio {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Scorpio", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Taurus.
-        /// </summary>
-        internal static string ZodiacSign_Taurus {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Taurus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Virgo.
-        /// </summary>
-        internal static string ZodiacSign_Virgo {
-            get {
-                return ResourceManager.GetString("ZodiacSign_Virgo", resourceCulture);
+                object obj = ResourceManager.GetObject("webaddress_add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

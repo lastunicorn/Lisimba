@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.DeleteCurrentContactOperationDescription; }
+            get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
         public DeleteCurrentContactOperation(AddressBookShell addressBookShell)
@@ -53,8 +53,8 @@ namespace DustInTheWind.Lisimba.Operations
             if (contactToDelete == null)
                 return;
 
-            string text = string.Format(Resources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
-            string title = Resources.ContactDelete_ConfirmationTitle;
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
             DialogResult dialogResult = MessageBox.Show(text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 
             if (dialogResult == DialogResult.Yes)

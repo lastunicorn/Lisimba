@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.OpenAddressBookOperationDescription; }
+            get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
         public OpenAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)

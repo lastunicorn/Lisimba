@@ -10,7 +10,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return Resources.CloseCurrentAddressBookOperationDescription; }
+            get { return LocalizedResources.CloseCurrentAddressBookOperationDescription; }
         }
 
         public CloseAddressBookOperation(AddressBookShell addressBookShell)
