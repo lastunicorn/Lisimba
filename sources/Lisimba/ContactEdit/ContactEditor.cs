@@ -83,6 +83,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Model.AddDateWasClicked();
         }
 
+        private void buttonAddEmail_Click(object sender, System.EventArgs e)
+        {
+            Model.AddEmailWasClicked();
+        }
+
         public void EditBirthday(Date birthday)
         {
             formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
@@ -122,6 +127,19 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Dates = dates;
             form.Location = GetBottomLeftCorner(buttonAddDate);
             form.Date = new Date();
+
+            form.Show();
+            form.Focus();
+        }
+
+        public void AddEmail(EmailCollection emails)
+        {
+            FormEmailEdit form = new FormEmailEdit();
+
+            form.AddMode = true;
+            form.Emails = emails;
+            form.Location = GetBottomLeftCorner(buttonAddEmail);
+            form.Email = new Email();
 
             form.Show();
             form.Focus();

@@ -31,6 +31,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public bool AddMode { get; set; }
+
+        public EmailCollection Emails { get; set; }
+
         public FormEmailEdit()
         {
             InitializeComponent();
@@ -41,13 +45,21 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         protected override void UpdateData()
         {
-            bool isAnyDataChanged = !email.Address.Equals(textBoxEmail.Text) ||
-                                    !email.Description.Equals(textBoxComments.Text);
+            bool isAnyDataChanged = UserChangedData();
 
             if (!isAnyDataChanged)
                 return;
 
             ReadDataFromView();
+
+            if (AddMode && Emails != null)
+                Emails.Add(Email);
+        }
+
+        private bool UserChangedData()
+        {
+            return !email.Address.Equals(textBoxEmail.Text) ||
+                   !email.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()

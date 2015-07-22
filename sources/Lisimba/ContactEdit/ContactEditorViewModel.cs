@@ -280,5 +280,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             View.AddDate(contact.Dates);
         }
+
+        public void AddEmailWasClicked()
+        {
+            View.AddEmail(contact.Emails);
+        }
     }
 }

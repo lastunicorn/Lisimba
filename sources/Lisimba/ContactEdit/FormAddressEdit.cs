@@ -14,8 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -41,6 +39,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
         public FormAddressEdit()
         {
             InitializeComponent();
+
+            textBoxAddress.KeyDown += FormEditBase_KeyDown;
+            textBoxCity.KeyDown += FormEditBase_KeyDown;
+            textBoxState.KeyDown += FormEditBase_KeyDown;
+            textBoxCountry.KeyDown += FormEditBase_KeyDown;
+            textBoxZip.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
@@ -63,20 +67,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
                    !address.PostalCode.Equals(textBoxZip.Text) ||
                    !address.State.Equals(textBoxState.Text) ||
                    !address.Country.Equals(textBoxCountry.Text);
-        }
-
-        protected override void OnShown(EventArgs e)
-        {
-            if (AddMode)
-                Address = new Address();
-            
-            base.OnShown(e);
-        }
-
-        private void textBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                AcceptChanges();
         }
 
         private void DisplayDataInView()

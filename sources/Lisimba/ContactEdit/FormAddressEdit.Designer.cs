@@ -57,7 +57,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxAddress.Name = "textBoxAddress";
             this.textBoxAddress.Size = new System.Drawing.Size(280, 13);
             this.textBoxAddress.TabIndex = 0;
-            this.textBoxAddress.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // label5
             // 
@@ -76,7 +75,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxCity.Name = "textBoxCity";
             this.textBoxCity.Size = new System.Drawing.Size(88, 13);
             this.textBoxCity.TabIndex = 1;
-            this.textBoxCity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // label6
             // 
@@ -95,7 +93,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxState.Name = "textBoxState";
             this.textBoxState.Size = new System.Drawing.Size(88, 13);
             this.textBoxState.TabIndex = 2;
-            this.textBoxState.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // label7
             // 
@@ -114,7 +111,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxCountry.Name = "textBoxCountry";
             this.textBoxCountry.Size = new System.Drawing.Size(88, 13);
             this.textBoxCountry.TabIndex = 4;
-            this.textBoxCountry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // label8
             // 
@@ -133,7 +129,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxZip.Name = "textBoxZip";
             this.textBoxZip.Size = new System.Drawing.Size(88, 13);
             this.textBoxZip.TabIndex = 3;
-            this.textBoxZip.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox_KeyDown);
             // 
             // FormAddressEdit
             // 
