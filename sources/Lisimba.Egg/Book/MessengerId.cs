@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
     /// <summary>
     /// Class containing information about a messenger id.
     /// </summary>
-    public class MessengerId : IObservableEntity
+    public class MessengerId : IObservableEntity, IEquatable<MessengerId>
     {
         private string id;
         private string description;
@@ -52,8 +52,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -63,8 +61,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
 
         /// <summary>
         /// Creates a new empty MessengerId object.
@@ -111,19 +107,32 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            if (!(obj is MessengerId)) return false;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(MessengerId)) return false;
 
-            MessengerId messengerId = (MessengerId)obj;
+            return Equals((MessengerId)obj);
+        }
 
-            if (!id.Equals(messengerId.id)) return false;
-            if (!description.Equals(messengerId.description)) return false;
+        public bool Equals(MessengerId messengerId)
+        {
+            if (ReferenceEquals(null, messengerId)) return false;
+            if (ReferenceEquals(this, messengerId)) return true;
 
-            return true;
+            return string.Equals(id, messengerId.id) && string.Equals(description, messengerId.description);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((id != null ? id.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+            }
         }
 
         public override string ToString()
         {
-            return Id + (description.Length > 0 ? " - " + description : string.Empty);
+            return id + (description.Length > 0 ? " - " + description : string.Empty);
         }
     }
 }

@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             TreeNode node = Nodes
                 .Cast<TreeNode>()
-                .FirstOrDefault(x => x.Tag == categoryId);
+                .FirstOrDefault(x => ReferenceEquals(x.Tag, categoryId));
 
             if (node == null)
             {

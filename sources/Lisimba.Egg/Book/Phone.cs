@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class Phone : IObservableEntity
+    public class Phone : IObservableEntity, IEquatable<Phone>
     {
         private string number;
         private string description;
@@ -90,14 +90,28 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            if (!(obj is Phone)) return false;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Phone)) return false;
+            
+            return Equals((Phone) obj);
+        }
 
-            Phone phone = (Phone)obj;
+        public bool Equals(Phone phone)
+        {
+            if (ReferenceEquals(null, phone)) return false;
+            if (ReferenceEquals(this, phone)) return true;
+            
+            return string.Equals(number, phone.number) &&
+                string.Equals(description, phone.description);
+        }
 
-            if (!number.Equals(phone.number)) return false;
-            if (!description.Equals(phone.description)) return false;
-
-            return true;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((number != null ? number.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+            }
         }
 
         public override string ToString()
