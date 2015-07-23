@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    public class WebSite : IObservableEntity
+    public class WebSite : IObservableEntity, IEquatable<WebSite>
     {
         private string address;
         private string description;
@@ -109,17 +109,42 @@ namespace DustInTheWind.Lisimba.Egg.Book
             description = webSite.description;
         }
 
+        //public override bool Equals(object obj)
+        //{
+        //    WebSite webSite = obj as WebSite;
+
+        //    if (webSite == null)
+        //        return false;
+
+        //    if (!address.Equals(webSite.address)) return false;
+        //    if (!description.Equals(webSite.description)) return false;
+
+        //    return true;
+        //}
+
         public override bool Equals(object obj)
         {
-            WebSite webSite = obj as WebSite;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(WebSite)) return false;
+            
+            return Equals((WebSite) obj);
+        }
 
-            if (webSite == null)
-                return false;
+        public bool Equals(WebSite webSite)
+        {
+            if (ReferenceEquals(null, webSite)) return false;
+            if (ReferenceEquals(this, webSite)) return true;
 
-            if (!address.Equals(webSite.address)) return false;
-            if (!description.Equals(webSite.description)) return false;
+            return string.Equals(address, webSite.address) && string.Equals(description, webSite.description);
+        }
 
-            return true;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((address != null ? address.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+            }
         }
 
         public override string ToString()

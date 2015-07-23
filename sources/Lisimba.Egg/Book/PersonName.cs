@@ -19,7 +19,7 @@ using System.Text;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class PersonName
+    public class PersonName : IEquatable<PersonName>
     {
         private string firstName = string.Empty;
 
@@ -170,21 +170,53 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return response;
         }
 
-        public override bool Equals(object obj)
+        //public override bool Equals(object obj)
+        //{
+        //    return Equals(obj as PersonName);
+        //}
+
+        //public bool Equals(PersonName personName)
+        //{
+        //    if (personName == null)
+        //        return false;
+
+        //    return firstName == personName.firstName &&
+        //           middleName == personName.middleName &&
+        //           lastName == personName.lastName &&
+        //           nickname == personName.nickname;
+        //}
+
+        public bool Equals(PersonName other)
         {
-            PersonName personName = obj as PersonName;
-            return Equals(personName);
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return string.Equals(firstName, other.firstName) &&
+                string.Equals(middleName, other.middleName) &&
+                string.Equals(lastName, other.lastName) &&
+                string.Equals(nickname, other.nickname);
         }
 
-        public bool Equals(PersonName personName)
+        public override bool Equals(object obj)
         {
-            if (personName == null)
-                return false;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(PersonName)) return false;
 
-            return firstName == personName.firstName &&
-                   middleName == personName.middleName &&
-                   lastName == personName.lastName &&
-                   nickname == personName.nickname;
+            return Equals((PersonName)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (firstName != null ? firstName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (middleName != null ? middleName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (lastName != null ? lastName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (nickname != null ? nickname.GetHashCode() : 0);
+
+                return hashCode;
+            }
         }
 
         public override string ToString()

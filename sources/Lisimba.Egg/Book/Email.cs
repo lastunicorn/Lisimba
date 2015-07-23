@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    public class Email : IObservableEntity
+    public class Email : IObservableEntity, IEquatable<Email>
     {
         private string address;
         private string description;
@@ -52,8 +52,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -64,10 +62,8 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 handler(this, EventArgs.Empty);
         }
 
-        #endregion
-
         /// <summary>
-        /// Creates a new empty Email object.
+        /// Creates a new empty <see cref="Email"/> object.
         /// </summary>
         public Email()
             : this(string.Empty, string.Empty)
@@ -75,7 +71,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Creates a new Email object with the address and description specified.
+        /// Creates a new <see cref="Email"/> object with the address and description specified.
         /// </summary>
         /// <param name="address">The e-mail address</param>
         /// <param name="description">A short description of the email address.</param>
@@ -86,7 +82,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Creates a new Email object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="Email"/> object with the data copied from the one passed as parameter.
         /// </summary>
         /// <param name="email"></param>
         public Email(Email email)
@@ -106,20 +102,27 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            Email email = obj as Email;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Email)) return false;
 
-            return Equals(email);
+            return Equals((Email)obj);
         }
 
-        private bool Equals(Email email)
+        public bool Equals(Email email)
         {
-            if (email == null)
-                return false;
+            if (ReferenceEquals(null, email)) return false;
+            if (ReferenceEquals(this, email)) return true;
 
-            if (!address.Equals(email.address)) return false;
-            if (!description.Equals(email.description)) return false;
+            return string.Equals(address, email.address) && string.Equals(description, email.description);
+        }
 
-            return true;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((address != null ? address.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+            }
         }
 
         public override string ToString()

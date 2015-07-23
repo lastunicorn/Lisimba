@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class Address : IObservableEntity
+    public class Address : IObservableEntity, IEquatable<Address>
     {
         private string street;
         private string city;
@@ -87,8 +87,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -98,8 +96,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-
-        #endregion
 
         public Address()
             : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
@@ -172,20 +168,57 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return tempString;
         }
 
+        //public override bool Equals(object obj)
+        //{
+        //    if (!(obj is Address)) return false;
+
+        //    Address address = (Address)obj;
+
+        //    if (!Street.Equals(address.Street)) return false;
+        //    if (!City.Equals(address.City)) return false;
+        //    if (!State.Equals(address.State)) return false;
+        //    if (!PostalCode.Equals(address.PostalCode)) return false;
+        //    if (!Country.Equals(address.Country)) return false;
+        //    if (!Description.Equals(address.Description)) return false;
+
+        //    return true;
+        //}
+
+        public bool Equals(Address other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return string.Equals(street, other.street) &&
+                string.Equals(city, other.city) &&
+                string.Equals(state, other.state) &&
+                string.Equals(postalCode, other.postalCode) &&
+                string.Equals(country, other.country) &&
+                string.Equals(description, other.description);
+        }
+
         public override bool Equals(object obj)
         {
-            if (!(obj is Address)) return false;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Address)) return false;
 
-            Address address = (Address)obj;
+            return Equals((Address)obj);
+        }
 
-            if (!Street.Equals(address.Street)) return false;
-            if (!City.Equals(address.City)) return false;
-            if (!State.Equals(address.State)) return false;
-            if (!PostalCode.Equals(address.PostalCode)) return false;
-            if (!Country.Equals(address.Country)) return false;
-            if (!Description.Equals(address.Description)) return false;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (street != null ? street.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (city != null ? city.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (state != null ? state.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (country != null ? country.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
 
-            return true;
+                return hashCode;
+            }
         }
     }
 }

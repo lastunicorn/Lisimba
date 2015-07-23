@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class Contact : IComparable, IObservableEntity
+    public class Contact : IComparable, IObservableEntity, IEquatable<Contact>
     {
         private PersonName name;
 
@@ -276,22 +276,67 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return comparisonResult;
         }
 
+        //public override bool Equals(object obj)
+        //{
+        //    Contact contact = obj as Contact;
+
+        //    if (contact == null)
+        //        return false;
+
+        //    return name.Equals(contact.name) &&
+        //           birthday == contact.birthday &&
+        //           Phones.Equals(contact.Phones) &&
+        //           Emails.Equals(contact.Emails) &&
+        //           WebSites.Equals(contact.WebSites) &&
+        //           Addresses.Equals(contact.Addresses) &&
+        //           Dates.Equals(contact.Dates) &&
+        //           MessengerIds.Equals(contact.MessengerIds) &&
+        //           notes == contact.notes;
+        //}
+
+        public bool Equals(Contact other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            return Equals(name, other.name) &&
+                Equals(birthday, other.birthday) &&
+                string.Equals(category, other.category) &&
+                string.Equals(notes, other.notes) &&
+                Equals(Phones, other.Phones) &&
+                Equals(Emails, other.Emails) &&
+                Equals(WebSites, other.WebSites) &&
+                Equals(Addresses, other.Addresses) &&
+                Equals(Dates, other.Dates) &&
+                Equals(MessengerIds, other.MessengerIds);
+        }
+
         public override bool Equals(object obj)
         {
-            Contact contact = obj as Contact;
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof(Contact)) return false;
 
-            if (contact == null)
-                return false;
+            return Equals((Contact)obj);
+        }
 
-            return name.Equals(contact.name) &&
-                   birthday == contact.birthday &&
-                   Phones.Equals(contact.Phones) &&
-                   Emails.Equals(contact.Emails) &&
-                   WebSites.Equals(contact.WebSites) &&
-                   Addresses.Equals(contact.Addresses) &&
-                   Dates.Equals(contact.Dates) &&
-                   MessengerIds.Equals(contact.MessengerIds) &&
-                   notes == contact.notes;
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                var hashCode = (name != null ? name.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (birthday != null ? birthday.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (category != null ? category.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (notes != null ? notes.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Phones != null ? Phones.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Emails != null ? Emails.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (WebSites != null ? WebSites.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Addresses != null ? Addresses.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Dates != null ? Dates.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (MessengerIds != null ? MessengerIds.GetHashCode() : 0);
+
+                return hashCode;
+            }
         }
     }
 }
