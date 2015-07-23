@@ -30,12 +30,12 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             this.components = new System.ComponentModel.Container();
             this.treeViewContacts = new System.Windows.Forms.TreeView();
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
             this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStripListBox.SuspendLayout();
@@ -46,6 +46,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeViewContacts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeViewContacts.ContextMenuStrip = this.contextMenuStripListBox;
             this.treeViewContacts.FullRowSelect = true;
             this.treeViewContacts.HideSelection = false;
             this.treeViewContacts.Location = new System.Drawing.Point(0, 27);
@@ -55,17 +56,8 @@ namespace DustInTheWind.Lisimba.UserControls
             this.treeViewContacts.Size = new System.Drawing.Size(178, 240);
             this.treeViewContacts.TabIndex = 2;
             this.treeViewContacts.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeViewContacts.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewContacts_NodeMouseClick);
             this.treeViewContacts.MouseUp += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseUp);
-            // 
-            // textBoxSearch
-            // 
-            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSearch.Location = new System.Drawing.Point(0, 273);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(178, 20);
-            this.textBoxSearch.TabIndex = 3;
-            this.textBoxSearch.TextChanged += new System.EventHandler(this.textBoxSearch_TextChanged);
             // 
             // contextMenuStripListBox
             // 
@@ -75,7 +67,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem1,
             this.toolStripMenuItem_List_ViewBiorythm});
             this.contextMenuStripListBox.Name = "contextMenuStripList";
-            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 76);
+            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 98);
             // 
             // toolStripMenuItem_List_Add
             // 
@@ -103,6 +95,7 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Visible = false;
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
@@ -114,7 +107,17 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_List_ViewBiorythm.ShortDescription = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
+            this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
             this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSearch.Location = new System.Drawing.Point(0, 273);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(178, 20);
+            this.textBoxSearch.TabIndex = 3;
             // 
             // comboBoxSortBy
             // 

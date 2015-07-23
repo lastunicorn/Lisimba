@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
 {
@@ -57,10 +58,13 @@ namespace DustInTheWind.Lisimba.Forms
             this.commandPool = commandPool;
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
 
-            contactListView1.CurrentData = addressBookShell;
+            ContactListViewModel contactListViewModel = new ContactListViewModel(configurationService, addressBookShell);
+            contactListView1.ViewModel = contactListViewModel;
+
+            //contactListView1.CurrentData = addressBookShell;
+            contactListViewModel.View = contactListView1;
             contactListView1.CommandPool = commandPool;
             contactListView1.ApplicationStatus = applicationStatus;
-            contactListView1.ConfigurationService = configurationService;
 
             menuStripMain.Initialize(commandPool, applicationStatus, recentFiles);
         }

@@ -80,8 +80,6 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // contactListView1
             // 
-            this.contactListView1.ConfigurationService = null;
-            this.contactListView1.CurrentData = null;
             this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
             this.contactListView1.Name = "contactListView1";
