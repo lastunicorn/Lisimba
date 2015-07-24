@@ -38,14 +38,17 @@ namespace DustInTheWind.Lisimba.UserControls
             {
                 viewModel = value;
 
-                viewModel.ContactsToTreeViewBinder = contactsToTreeViewBinder;
+                if (viewModel != null)
+                {
+                    viewModel.ContactsToTreeViewBinder = contactsToTreeViewBinder;
 
-                comboBoxSortBy.DataSource = ViewModel.SortingMethods;
-                comboBoxSortBy.DisplayMember = "Text";
-                comboBoxSortBy.ValueMember = "SortingType";
+                    comboBoxSortBy.DataSource = viewModel.SortingMethods;
+                    comboBoxSortBy.DisplayMember = "Text";
+                    comboBoxSortBy.ValueMember = "SortingType";
 
-                comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
-                textBoxSearch.Bind(x=>x.Text, viewModel, x=>x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
+                    comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
+                    textBoxSearch.Bind(x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
+                }
             }
         }
 
@@ -166,7 +169,8 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void ContactListView_Load(object sender, EventArgs e)
         {
-            viewModel.ViewWasLoaded();
+            if (viewModel != null)
+                viewModel.ViewWasLoaded();
         }
 
         public void SortContacts()

@@ -202,7 +202,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_New.ApplicationStatus = null;
             this.toolStripMenuItem_File_New.CommandParameter = null;
             this.toolStripMenuItem_File_New.CommandParameterProvider = null;
-            this.toolStripMenuItem_File_New.Image = global::DustInTheWind.Lisimba.Properties.Resources.new_address_book;
+            this.toolStripMenuItem_File_New.Image = global::DustInTheWind.Lisimba.Properties.Resources.new_16;
             this.toolStripMenuItem_File_New.Name = "toolStripMenuItem_File_New";
             this.toolStripMenuItem_File_New.Opertion = null;
             this.toolStripMenuItem_File_New.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
@@ -215,7 +215,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_Open.ApplicationStatus = null;
             this.toolStripMenuItem_File_Open.CommandParameter = null;
             this.toolStripMenuItem_File_Open.CommandParameterProvider = null;
-            this.toolStripMenuItem_File_Open.Image = global::DustInTheWind.Lisimba.Properties.Resources.open;
+            this.toolStripMenuItem_File_Open.Image = global::DustInTheWind.Lisimba.Properties.Resources.open_16;
             this.toolStripMenuItem_File_Open.Name = "toolStripMenuItem_File_Open";
             this.toolStripMenuItem_File_Open.Opertion = null;
             this.toolStripMenuItem_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
@@ -228,7 +228,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_Save.ApplicationStatus = null;
             this.toolStripMenuItem_File_Save.CommandParameter = null;
             this.toolStripMenuItem_File_Save.CommandParameterProvider = null;
-            this.toolStripMenuItem_File_Save.Image = global::DustInTheWind.Lisimba.Properties.Resources.save;
+            this.toolStripMenuItem_File_Save.Image = global::DustInTheWind.Lisimba.Properties.Resources.save_16;
             this.toolStripMenuItem_File_Save.Name = "toolStripMenuItem_File_Save";
             this.toolStripMenuItem_File_Save.Opertion = null;
             this.toolStripMenuItem_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
@@ -295,7 +295,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_File_Exit.ApplicationStatus = null;
             this.toolStripMenuItem_File_Exit.CommandParameter = null;
             this.toolStripMenuItem_File_Exit.CommandParameterProvider = null;
-            this.toolStripMenuItem_File_Exit.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit;
+            this.toolStripMenuItem_File_Exit.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit_16;
             this.toolStripMenuItem_File_Exit.Name = "toolStripMenuItem_File_Exit";
             this.toolStripMenuItem_File_Exit.Opertion = null;
             this.toolStripMenuItem_File_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
@@ -308,7 +308,7 @@ namespace DustInTheWind.Lisimba.UserControls
             this.toolStripMenuItem_Help_About.ApplicationStatus = null;
             this.toolStripMenuItem_Help_About.CommandParameter = null;
             this.toolStripMenuItem_Help_About.CommandParameterProvider = null;
-            this.toolStripMenuItem_Help_About.Image = global::DustInTheWind.Lisimba.Properties.Resources.about;
+            this.toolStripMenuItem_Help_About.Image = global::DustInTheWind.Lisimba.Properties.Resources.about_16;
             this.toolStripMenuItem_Help_About.Name = "toolStripMenuItem_Help_About";
             this.toolStripMenuItem_Help_About.Opertion = null;
             this.toolStripMenuItem_Help_About.ShortDescription = null;
