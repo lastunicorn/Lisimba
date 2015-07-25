@@ -31,18 +31,20 @@ namespace DustInTheWind.Lisimba.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddressBookProperties));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
             this.textBoxBookName = new System.Windows.Forms.TextBox();
             this.textBoxFileLocation = new System.Windows.Forms.TextBox();
             this.textBoxContactsCount = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelContainer = new System.Windows.Forms.Panel();
+            this.panel2MainContent = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.flowLayoutPanelButtons.SuspendLayout();
+            this.panelContainer.SuspendLayout();
+            this.panel2MainContent.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -70,25 +72,25 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay.UseVisualStyleBackColor = true;
             this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
             // 
-            // label1
+            // labelName
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 6);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Name:";
+            this.labelName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(3, 6);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(38, 13);
+            this.labelName.TabIndex = 1;
+            this.labelName.Text = "Name:";
             // 
-            // label2
+            // labelLocation
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(51, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Location:";
+            this.labelLocation.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Location = new System.Drawing.Point(3, 29);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(51, 13);
+            this.labelLocation.TabIndex = 1;
+            this.labelLocation.Text = "Location:";
             // 
             // textBoxBookName
             // 
@@ -130,53 +132,60 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxBookName, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBoxFileLocation, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 4);
+            this.tableLayoutPanel1.Controls.Add(this.labelLocation, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.textBoxContactsCount, 1, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(8, 8);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(474, 104);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(474, 64);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
-            // flowLayoutPanel1
+            // flowLayoutPanelButtons
             // 
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.SetColumnSpan(this.flowLayoutPanel1, 2);
-            this.flowLayoutPanel1.Controls.Add(this.buttonCancel);
-            this.flowLayoutPanel1.Controls.Add(this.buttonOkay);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 75);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(474, 29);
-            this.flowLayoutPanel1.TabIndex = 4;
+            this.flowLayoutPanelButtons.AutoSize = true;
+            this.flowLayoutPanelButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonCancel);
+            this.flowLayoutPanelButtons.Controls.Add(this.buttonOkay);
+            this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.flowLayoutPanelButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(8, 83);
+            this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(0);
+            this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(474, 29);
+            this.flowLayoutPanelButtons.TabIndex = 4;
             // 
-            // panel1
+            // panelContainer
             // 
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(8);
-            this.panel1.Size = new System.Drawing.Size(490, 120);
-            this.panel1.TabIndex = 5;
+            this.panelContainer.Controls.Add(this.panel2MainContent);
+            this.panelContainer.Controls.Add(this.flowLayoutPanelButtons);
+            this.panelContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContainer.Location = new System.Drawing.Point(0, 0);
+            this.panelContainer.Name = "panelContainer";
+            this.panelContainer.Padding = new System.Windows.Forms.Padding(8);
+            this.panelContainer.Size = new System.Drawing.Size(490, 120);
+            this.panelContainer.TabIndex = 5;
+            // 
+            // panel2MainContent
+            // 
+            this.panel2MainContent.Controls.Add(this.tableLayoutPanel1);
+            this.panel2MainContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2MainContent.Location = new System.Drawing.Point(8, 8);
+            this.panel2MainContent.Name = "panel2MainContent";
+            this.panel2MainContent.Size = new System.Drawing.Size(474, 75);
+            this.panel2MainContent.TabIndex = 5;
             // 
             // FormAddressBookProperties
             // 
@@ -185,7 +194,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(490, 120);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelContainer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -197,8 +206,11 @@ namespace DustInTheWind.Lisimba.Forms
             this.Shown += new System.EventHandler(this.FormBookProperties_Shown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.flowLayoutPanelButtons.ResumeLayout(false);
+            this.panelContainer.ResumeLayout(false);
+            this.panelContainer.PerformLayout();
+            this.panel2MainContent.ResumeLayout(false);
+            this.panel2MainContent.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -207,14 +219,15 @@ namespace DustInTheWind.Lisimba.Forms
 
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOkay;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelLocation;
         private System.Windows.Forms.TextBox textBoxBookName;
         private System.Windows.Forms.TextBox textBoxFileLocation;
         private System.Windows.Forms.TextBox textBoxContactsCount;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
+        private System.Windows.Forms.Panel panelContainer;
+        private System.Windows.Forms.Panel panel2MainContent;
     }
 }

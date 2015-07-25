@@ -81,7 +81,6 @@ namespace DustInTheWind.Lisimba.Forms
 
             contactView1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
-            //labelNoAddressBook.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
 
             buttonNewAddressBook.ApplicationStatus = applicationStatus;
             buttonNewAddressBook.Opertion = commandPool.CreateNewAddressBookOperation;

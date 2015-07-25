@@ -92,7 +92,6 @@
       <DependentUpon>FormNameEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ControlExtensions.cs" />
-    <Compile Include="Forms\Model.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\OperationBase.cs" />

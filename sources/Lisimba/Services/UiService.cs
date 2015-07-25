@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public bool? DisplayYesNoQuestion(string question, string title)
         {
-            DialogResult dialogResult = MessageBox.Show(question, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            DialogResult dialogResult = MessageBox.Show(MainWindow, question, title, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
             if (dialogResult == DialogResult.Cancel)
                 return null;
@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.Services
                 saveFileDialog.DefaultExt = "csv";
                 saveFileDialog.FileName = string.Empty;
 
-                DialogResult dialogResult = saveFileDialog.ShowDialog();
+                DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
 
                 return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
             }
@@ -67,7 +67,7 @@ namespace DustInTheWind.Lisimba.Services
                 openFileDialog.DefaultExt = "csv";
                 openFileDialog.FileName = string.Empty;
 
-                DialogResult dialogResult = openFileDialog.ShowDialog();
+                DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
 
                 return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
             }
@@ -81,7 +81,7 @@ namespace DustInTheWind.Lisimba.Services
                 saveFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
                 saveFileDialog.DefaultExt = "lsb";
 
-                DialogResult dialogResult = saveFileDialog.ShowDialog();
+                DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
 
                 return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
             }
@@ -95,7 +95,7 @@ namespace DustInTheWind.Lisimba.Services
                 openFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
                 openFileDialog.DefaultExt = "lsb";
 
-                DialogResult dialogResult = openFileDialog.ShowDialog();
+                DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
 
                 return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
             }
