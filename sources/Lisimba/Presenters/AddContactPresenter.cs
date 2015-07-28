@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Presenters
     class AddContactPresenter
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
 
         private Contact editedContact;
         private AddressBook addressBook;
@@ -42,16 +42,16 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        public AddContactPresenter(AddressBookShell addressBookShell, UiService uiService)
+        public AddContactPresenter(AddressBookShell addressBookShell, UserInterface userInterface)
         {
             if (addressBookShell == null)
                 throw new ArgumentNullException("addressBookShell");
 
-            if (uiService == null)
-                throw new ArgumentNullException("uiService");
+            if (userInterface == null)
+                throw new ArgumentNullException("userInterface");
 
             this.addressBookShell = addressBookShell;
-            this.uiService = uiService;
+            this.userInterface = userInterface;
         }
 
         public void ViewWasLoaded()
@@ -82,7 +82,7 @@ namespace DustInTheWind.Lisimba.Presenters
             }
             catch (Exception ex)
             {
-                uiService.DisplayError(ex.Message);
+                userInterface.DisplayError(ex.Message);
             }
         }
 

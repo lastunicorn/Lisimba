@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Presenters;
@@ -29,40 +28,61 @@ namespace DustInTheWind.Lisimba.Forms
 
     internal partial class FormLisimba : Form
     {
-        private readonly LisimbaViewModel viewModel;
+        // Lisimba - male name meaning "lion" in Zulu language.
+
         private readonly ApplicationStatus applicationStatus;
         private readonly AddressBookShell addressBookShell;
         private readonly CommandPool commandPool;
 
-        // Lisimba - male name meaning "lion" in Zulu language.
+        private LisimbaViewModel viewModel;
+        private ContactListViewModel contactListViewModel;
 
-        public FormLisimba(ConfigurationService configurationService, ApplicationStatus applicationStatus,
-            RecentFiles recentFiles, AddressBookShell addressBookShell, CommandPool commandPool, ApplicationService applicationService,
-            UiService uiService, LisimbaApplication lisimbaApplication)
+        public LisimbaViewModel ViewModel
         {
-            if (configurationService == null) throw new ArgumentNullException("configurationService");
+            get { return viewModel; }
+            set
+            {
+                viewModel = value;
+            }
+        }
+
+        public ContactListViewModel ContactListViewModel
+        {
+            get { return contactListViewModel; }
+            set
+            {
+                if (contactListViewModel != null)
+                {
+                    contactListView1.ViewModel = null;
+                    contactListViewModel.View = null;
+                }
+
+                contactListViewModel = value;
+
+                if (contactListViewModel != null)
+                {
+                    contactListView1.ViewModel = contactListViewModel;
+                    contactListViewModel.View = contactListView1;
+                }
+            }
+        }
+
+        public FormLisimba(ApplicationStatus applicationStatus, RecentFiles recentFiles,
+            AddressBookShell addressBookShell, CommandPool commandPool)
+        {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
-            if (applicationService == null) throw new ArgumentNullException("applicationService");
-            if (uiService == null) throw new ArgumentNullException("uiService");
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
             InitializeComponent();
-
-            viewModel = new LisimbaViewModel(addressBookShell, applicationService, applicationStatus, lisimbaApplication);
 
             this.applicationStatus = applicationStatus;
             this.addressBookShell = addressBookShell;
             this.commandPool = commandPool;
+
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
 
-            ContactListViewModel contactListViewModel = new ContactListViewModel(configurationService, addressBookShell);
-            contactListView1.ViewModel = contactListViewModel;
-
-            //contactListView1.CurrentData = addressBookShell;
-            contactListViewModel.View = contactListView1;
             contactListView1.CommandPool = commandPool;
             contactListView1.ApplicationStatus = applicationStatus;
 

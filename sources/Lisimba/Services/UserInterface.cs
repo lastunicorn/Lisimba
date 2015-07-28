@@ -16,21 +16,33 @@
 
 using System.IO;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    public class UiService
+    public class UserInterface
     {
-        public IWin32Window MainWindow { get; set; }
+        public Form MainWindow { get; set; }
+
+        public UserInterface()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+        }
+
+        public void Run()
+        {
+            Application.Run(MainWindow);
+        }
 
         public void DisplayWarning(string message)
         {
-            MessageBox.Show(MainWindow, message, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            MessageBox.Show(MainWindow, message, Resources.WarningPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         public void DisplayError(string message)
         {
-            MessageBox.Show(MainWindow, message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(MainWindow, message, Resources.ErrorPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         public bool? DisplayYesNoQuestion(string question, string title)

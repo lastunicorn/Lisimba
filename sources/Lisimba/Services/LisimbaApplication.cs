@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Services
             if (!allowToContinue)
                 e.Cancel = true;
         }
-
+         
         public void Start()
         {
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;

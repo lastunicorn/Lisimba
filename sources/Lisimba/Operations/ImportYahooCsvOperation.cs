@@ -25,7 +25,7 @@ namespace DustInTheWind.Lisimba.Operations
     class ImportYahooCsvOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
         private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
@@ -33,14 +33,14 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ImportYahooCsvOperationDescription; }
         }
 
-        public ImportYahooCsvOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
+        public ImportYahooCsvOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBookShell = addressBookShell;
-            this.uiService = uiService;
+            this.userInterface = userInterface;
             this.applicationStatus = applicationStatus;
         }
 
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Operations
                 if (!allowToContinue)
                     return;
 
-                string fileName = uiService.AskToOpenYahooCsvFile();
+                string fileName = userInterface.AskToOpenYahooCsvFile();
 
                 if (fileName == null)
                     return;
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.Operations
             }
             catch (Exception ex)
             {
-                uiService.DisplayError(ex.Message);
+                userInterface.DisplayError(ex.Message);
             }
         }
 

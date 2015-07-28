@@ -18,7 +18,9 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.UserControls;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba
@@ -32,7 +34,7 @@ namespace DustInTheWind.Lisimba
             unityContainer = CreateUnityContainer();
             InitializeProgramArgumentsService(args);
             StartApplicationMainService();
-            DisplayMainWindow();
+            InitializeAndStartUi();
         }
 
         private static UnityContainer CreateUnityContainer()
@@ -45,7 +47,7 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AddressBookShell>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<UiService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
 
             unityContainer.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
@@ -67,16 +69,17 @@ namespace DustInTheWind.Lisimba
             lisimbaApplication.Start();
         }
 
-        private void DisplayMainWindow()
+        private void InitializeAndStartUi()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
 
             FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
-            UiService uiService = unityContainer.Resolve<UiService>();
-            uiService.MainWindow = formLisimba;
+            formLisimba.ViewModel = unityContainer.Resolve<LisimbaViewModel>();
+            formLisimba.ContactListViewModel = unityContainer.Resolve<ContactListViewModel>();
 
-            Application.Run(formLisimba);
+            userInterface.MainWindow = formLisimba;
+
+            userInterface.Run();
         }
     }
 }

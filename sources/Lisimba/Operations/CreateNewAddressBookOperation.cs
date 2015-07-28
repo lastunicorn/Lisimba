@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Operations
     class CreateNewAddressBookOperation : OperationBase<string>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
         private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
@@ -32,14 +32,14 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewAddressBookOperationDescription; }
         }
 
-        public CreateNewAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus)
+        public CreateNewAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBookShell = addressBookShell;
-            this.uiService = uiService;
+            this.userInterface = userInterface;
             this.applicationStatus = applicationStatus;
         }
 
@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.Operations
             }
             catch (Exception ex)
             {
-                uiService.DisplayError(ex.Message);
+                userInterface.DisplayError(ex.Message);
             }
         }
     }

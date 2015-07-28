@@ -26,22 +26,22 @@ namespace DustInTheWind.Lisimba.Operations
     class CreateNewContactOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public CreateNewContactOperation(AddressBookShell addressBookShell, UiService uiService)
+        public CreateNewContactOperation(AddressBookShell addressBookShell, UserInterface userInterface)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.addressBookShell = addressBookShell;
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
 
-            this.uiService = uiService;
+            this.userInterface = userInterface;
 
             IsEnabled = addressBookShell.AddressBook != null;
         }
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, uiService);
+            AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, userInterface);
             addContactPresenter.View = new FormAddContact();
             addContactPresenter.Show();
         }

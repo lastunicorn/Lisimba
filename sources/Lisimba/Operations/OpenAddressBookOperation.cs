@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Operations
     class OpenAddressBookOperation : OperationBase<string>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
         private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
 
@@ -37,15 +37,15 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public OpenAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.addressBookShell = addressBookShell;
-            this.uiService = uiService;
+            this.userInterface = userInterface;
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
         }
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.Operations
 
                 if (string.IsNullOrEmpty(fileName))
                 {
-                    fileName = uiService.AskToOpenLsbFile();
+                    fileName = userInterface.AskToOpenLsbFile();
 
                     if (fileName == null)
                         return;
@@ -93,12 +93,12 @@ namespace DustInTheWind.Lisimba.Operations
                         sb.AppendLine();
                     }
 
-                    uiService.DisplayWarning(sb.ToString());
+                    userInterface.DisplayWarning(sb.ToString());
                 }
             }
             catch (Exception ex)
             {
-                uiService.DisplayError(ex.Message);
+                userInterface.DisplayError(ex.Message);
             }
         }
     }

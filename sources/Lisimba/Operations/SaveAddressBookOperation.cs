@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Operations
     class SaveAddressBookOperation : OperationBase<object>
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
         private readonly ApplicationStatus applicationStatus;
         private readonly RecentFiles recentFiles;
 
@@ -35,15 +35,15 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookOperation(AddressBookShell addressBookShell, UiService uiService, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public SaveAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.addressBookShell = addressBookShell;
-            this.uiService = uiService;
+            this.userInterface = userInterface;
             this.applicationStatus = applicationStatus;
             this.recentFiles = recentFiles;
 
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.Operations
 
                 if (addressBookShell.FileName == null)
                 {
-                    fileName = uiService.AskToSaveLsbFile();
+                    fileName = userInterface.AskToSaveLsbFile();
 
                     if (fileName == null)
                         return;
@@ -87,7 +87,7 @@ namespace DustInTheWind.Lisimba.Operations
             }
             catch (Exception ex)
             {
-                uiService.DisplayError(ex.Message);
+                userInterface.DisplayError(ex.Message);
             }
         }
     }

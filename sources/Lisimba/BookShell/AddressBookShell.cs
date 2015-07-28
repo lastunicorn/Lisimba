@@ -8,7 +8,7 @@ namespace DustInTheWind.Lisimba.BookShell
 {
     class AddressBookShell
     {
-        private readonly UiService uiService;
+        private readonly UserInterface userInterface;
         private readonly CommandPool commandPool;
         private AddressBookStatus status;
         private AddressBook addressBook;
@@ -77,12 +77,12 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public AddressBookShell(UiService uiService, CommandPool commandPool)
+        public AddressBookShell(UserInterface userInterface, CommandPool commandPool)
         {
-            if (uiService == null) throw new ArgumentNullException("uiService");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
-            this.uiService = uiService;
+            this.userInterface = userInterface;
             this.commandPool = commandPool;
 
             status = AddressBookStatus.New;
@@ -184,7 +184,7 @@ namespace DustInTheWind.Lisimba.BookShell
             if (!IsModified)
                 return true;
 
-            bool? response = uiService.DisplayYesNoQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
+            bool? response = userInterface.DisplayYesNoQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
 
             if (response == null)
                 return false;
