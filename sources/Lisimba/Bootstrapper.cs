@@ -46,7 +46,6 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AddressBookShell>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ApplicationService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
 

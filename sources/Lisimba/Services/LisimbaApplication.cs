@@ -18,7 +18,6 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
@@ -30,7 +29,11 @@ namespace DustInTheWind.Lisimba.Services
         private readonly ConfigurationService configurationService;
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
-        private readonly AddressBookShell addressBookShell;
+        private readonly UserInterface userInterface;
+
+        public event EventHandler<CancelEventArgs> Exiting;
+        public event EventHandler BeforeExiting;
+        public event EventHandler ExitCanceled;
 
         public string ProgramName
         {
@@ -44,32 +47,45 @@ namespace DustInTheWind.Lisimba.Services
         }
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
-            RecentFiles recentFiles, CommandPool commandPool, ApplicationService applicationService, AddressBookShell addressBookShell)
+            RecentFiles recentFiles, CommandPool commandPool, UserInterface userInterface)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
-            if (applicationService == null) throw new ArgumentNullException("applicationService");
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.applicationStatus = applicationStatus;
             this.programArguments = programArguments;
             this.configurationService = configurationService;
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
-            this.addressBookShell = addressBookShell;
-
-            applicationService.Exiting += HandleApplicationExiting;
+            this.userInterface = userInterface;
         }
 
-        private void HandleApplicationExiting(object sender, CancelEventArgs e)
+        protected virtual void OnExiting(CancelEventArgs e)
         {
-            bool allowToContinue = addressBookShell.EnsureIsSaved();
+            EventHandler<CancelEventArgs> handler = Exiting;
 
-            if (!allowToContinue)
-                e.Cancel = true;
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnBeforeExiting()
+        {
+            EventHandler handler = BeforeExiting;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnExitCanceled()
+        {
+            EventHandler handler = ExitCanceled;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
          
         public void Start()
@@ -103,6 +119,21 @@ namespace DustInTheWind.Lisimba.Services
                 default:
                     return null;
             }
+        }
+
+        public bool Exit()
+        {
+            OnBeforeExiting();
+
+            CancelEventArgs args = new CancelEventArgs();
+            OnExiting(args);
+
+            if (!args.Cancel)
+                userInterface.Exit();
+            else
+                OnExitCanceled();
+
+            return !args.Cancel;
         }
     }
 }

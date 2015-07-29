@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
@@ -40,7 +41,7 @@ namespace DustInTheWind.Lisimba.BookShell
             get { return contact; }
             set
             {
-                if (contact == value)
+                if (ReferenceEquals(contact, value))
                     return;
 
                 contact = value;
@@ -77,8 +78,9 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public AddressBookShell(UserInterface userInterface, CommandPool commandPool)
+        public AddressBookShell(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool)
         {
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
@@ -86,6 +88,16 @@ namespace DustInTheWind.Lisimba.BookShell
             this.commandPool = commandPool;
 
             status = AddressBookStatus.New;
+
+            lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
+        }
+
+        private void HandleLisimbaApplicationExiting(object sender, CancelEventArgs e)
+        {
+            bool allowToContinue = EnsureIsSaved();
+
+            if (!allowToContinue)
+                e.Cancel = true;
         }
 
         protected virtual void OnAddressBookChanging(AddressBookChangingEventArgs e)
@@ -212,7 +224,7 @@ namespace DustInTheWind.Lisimba.BookShell
 
             AddressBook.Contacts.Remove(contactToDelete);
 
-            if (contactToDelete == Contact)
+            if (ReferenceEquals(contactToDelete, Contact))
                 Contact = null;
         }
     }

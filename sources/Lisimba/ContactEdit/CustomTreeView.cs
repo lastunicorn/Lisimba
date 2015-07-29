@@ -74,13 +74,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             return node;
         }
 
-        private readonly PhoneEditForm formPhoneEdit;
-        private readonly EmailEditForm formEmailEdit;
-        private readonly WebSiteEditForm formWebSiteEdit;
-        private readonly AddressEditForm formAddressEdit;
-        private readonly DateEditForm formDateEdit;
-        private readonly MessengerIdEditForm formMessengerIdEdit;
-
         private PhoneCollection phones;
         private EmailCollection emails;
         private WebSiteCollection webSites;
@@ -151,13 +144,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         public CustomTreeView()
         {
             InitializeComponent();
-
-            formPhoneEdit = new PhoneEditForm();
-            formEmailEdit = new EmailEditForm();
-            formWebSiteEdit = new WebSiteEditForm();
-            formAddressEdit = new AddressEditForm();
-            formDateEdit = new DateEditForm();
-            formMessengerIdEdit = new MessengerIdEditForm();
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
@@ -190,10 +176,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (phoneTag != null)
             {
-                formPhoneEdit.Phone = phoneTag;
-                formPhoneEdit.Location = PointToScreen(e.Location);
-                formPhoneEdit.Show();
-                formPhoneEdit.Focus();
+                PhoneEditForm form = new PhoneEditForm
+                {
+                    Phone = phoneTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
 
@@ -201,11 +193,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (emailTag != null)
             {
-                formEmailEdit.Email = emailTag;
-                formEmailEdit.Location = PointToScreen(e.Location);
-                formEmailEdit.AddMode = false;
-                formEmailEdit.Show();
-                formEmailEdit.Focus();
+                EmailEditForm form = new EmailEditForm
+                {
+                    Email = emailTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
 
@@ -213,10 +210,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (webSiteTag != null)
             {
-                formWebSiteEdit.WebSite = webSiteTag;
-                formWebSiteEdit.Location = PointToScreen(e.Location);
-                formWebSiteEdit.Show();
-                formWebSiteEdit.Focus();
+                WebSiteEditForm form = new WebSiteEditForm
+                {
+                    WebSite = webSiteTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
 
@@ -224,11 +227,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (addressTag != null)
             {
-                formAddressEdit.Address = addressTag;
-                formAddressEdit.Location = PointToScreen(e.Location);
-                formAddressEdit.AddMode = false;
-                formAddressEdit.Show();
-                formAddressEdit.Focus();
+                AddressEditForm form = new AddressEditForm
+                {
+                    Address = addressTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
 
@@ -236,11 +244,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (dateTag != null)
             {
-                formDateEdit.Date = dateTag;
-                formDateEdit.Location = PointToScreen(e.Location);
-                formDateEdit.AddMode = false;
-                formDateEdit.Show();
-                formDateEdit.Focus();
+                DateEditForm form = new DateEditForm
+                {
+                    Date = dateTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
 
@@ -248,11 +261,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (messengerIdTag != null)
             {
-                formMessengerIdEdit.MessengerId = messengerIdTag;
-                formMessengerIdEdit.Location = PointToScreen(e.Location);
-                formMessengerIdEdit.AddMode = false;
-                formMessengerIdEdit.Show();
-                formMessengerIdEdit.Focus();
+                MessengerIdEditForm form = new MessengerIdEditForm
+                {
+                    MessengerId = messengerIdTag,
+                    Location = PointToScreen(e.Location),
+                    AddMode = false
+                };
+
+                form.Show();
+                form.Focus();
+
                 return;
             }
         }
@@ -266,8 +284,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (Phone phone in phones)
             {
-                TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
-                phoneNode.Tag = phone;
+                TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2)
+                {
+                    Tag = phone
+                };
+
                 TreeNodePhones.Nodes.Add(phoneNode);
                 phoneNode.ImageIndex = -2;
                 phoneNode.SelectedImageIndex = -2;
@@ -285,8 +306,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (Email email in emails)
             {
-                TreeNode emailNode = new TreeNode(email.ToString(), -2, -2);
-                emailNode.Tag = email;
+                TreeNode emailNode = new TreeNode(email.ToString(), -2, -2)
+                {
+                    Tag = email
+                };
+
                 TreeNodeEmails.Nodes.Add(emailNode);
                 emailNode.ImageIndex = -2;
                 emailNode.SelectedImageIndex = -2;
@@ -304,8 +328,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (WebSite webSite in webSites)
             {
-                TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2);
-                webSiteNode.Tag = webSite;
+                TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2)
+                {
+                    Tag = webSite
+                };
+
                 TreeNodeWebSites.Nodes.Add(webSiteNode);
                 webSiteNode.ImageIndex = -2;
                 webSiteNode.SelectedImageIndex = -2;
@@ -323,8 +350,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (Address address in addresses)
             {
-                TreeNode addressNode = new TreeNode(address.ToString(), -2, -2);
-                addressNode.Tag = address;
+                TreeNode addressNode = new TreeNode(address.ToString(), -2, -2)
+                {
+                    Tag = address
+                };
+
                 TreeNodeAddresses.Nodes.Add(addressNode);
                 addressNode.ImageIndex = -2;
                 addressNode.SelectedImageIndex = -2;
@@ -342,8 +372,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (Date date in dates)
             {
-                TreeNode dateNode = new TreeNode(date.ToString(), -2, -2);
-                dateNode.Tag = date;
+                TreeNode dateNode = new TreeNode(date.ToString(), -2, -2)
+                {
+                    Tag = date
+                };
+
                 TreeNodeDates.Nodes.Add(dateNode);
                 dateNode.ImageIndex = -2;
                 dateNode.SelectedImageIndex = -2;
@@ -361,8 +394,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             foreach (MessengerId messengerId in messengerIds)
             {
-                TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2);
-                messengerIdNode.Tag = messengerId;
+                TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2)
+                {
+                    Tag = messengerId
+                };
+
                 TreeNodeMessengerIds.Nodes.Add(messengerIdNode);
                 messengerIdNode.ImageIndex = -2;
                 messengerIdNode.SelectedImageIndex = -2;

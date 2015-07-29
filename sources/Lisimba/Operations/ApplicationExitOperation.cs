@@ -22,23 +22,23 @@ namespace DustInTheWind.Lisimba.Operations
 {
     class ApplicationExitOperation : OperationBase<object>
     {
-        private readonly ApplicationService applicationService;
+        private readonly LisimbaApplication lisimbaApplication;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(ApplicationService applicationService)
+        public ApplicationExitOperation(LisimbaApplication lisimbaApplication)
         {
-            if (applicationService == null) throw new ArgumentNullException("applicationService");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
-            this.applicationService = applicationService;
+            this.lisimbaApplication = lisimbaApplication;
         }
 
         protected override void DoExecute(object parameter)
         {
-            applicationService.Exit();
+            lisimbaApplication.Exit();
         }
     }
 }

@@ -22,8 +22,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     public partial class EditBaseForm : Form
     {
-        public bool AllowClose { get; set; }
-
         public EditBaseForm()
         {
             InitializeComponent();
@@ -94,12 +92,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             if (DialogResult == DialogResult.None)
                 DialogResult = DialogResult.Cancel;
-
-            if (!AllowClose)
-            {
-                e.Cancel = true;
-                Hide();
-            }
         }
     }
 }

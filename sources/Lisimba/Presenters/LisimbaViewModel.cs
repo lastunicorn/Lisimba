@@ -15,17 +15,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    class LisimbaViewModel : INotifyPropertyChanged
+    class LisimbaViewModel : ViewModelBase
     {
         private readonly AddressBookShell addressBookShell;
-        private readonly ApplicationService applicationService;
         private readonly ApplicationStatus applicationStatus;
         private readonly LisimbaApplication lisimbaApplication;
 
@@ -76,28 +74,15 @@ namespace DustInTheWind.Lisimba.Presenters
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public LisimbaViewModel(LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBookShell addressBookShell)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public LisimbaViewModel(AddressBookShell addressBookShell, ApplicationService applicationService,
-            ApplicationStatus applicationStatus, LisimbaApplication lisimbaApplication)
-        {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            if (applicationService == null) throw new ArgumentNullException("applicationService");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
-            this.addressBookShell = addressBookShell;
-            this.applicationService = applicationService;
-            this.applicationStatus = applicationStatus;
             this.lisimbaApplication = lisimbaApplication;
+            this.applicationStatus = applicationStatus;
+            this.addressBookShell = addressBookShell;
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             addressBookShell.StatusChanged += HandleAddressBookStatusChanged;
@@ -106,8 +91,8 @@ namespace DustInTheWind.Lisimba.Presenters
             if (addressBookShell.AddressBook != null)
                 addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
-            applicationService.Exiting += HandleApplicationExiting;
-            applicationService.ExitCanceled += HandleApplicationExitCanceled;
+            lisimbaApplication.BeforeExiting += HandleApplicationBeforeExiting;
+            lisimbaApplication.ExitCanceled += HandleApplicationExitCanceled;
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
@@ -147,14 +132,14 @@ namespace DustInTheWind.Lisimba.Presenters
             StatusText = applicationStatus.StatusText;
         }
 
+        private void HandleApplicationBeforeExiting(object sender, EventArgs e)
+        {
+            allowToClose = true;
+        }
+
         private void HandleApplicationExitCanceled(object sender, EventArgs e)
         {
             allowToClose = false;
-        }
-
-        private void HandleApplicationExiting(object sender, CancelEventArgs e)
-        {
-            allowToClose = true;
         }
 
         private string BuildFormTitle()
@@ -177,10 +162,7 @@ namespace DustInTheWind.Lisimba.Presenters
 
         public bool WindowIsClosing()
         {
-            if (!allowToClose)
-                applicationService.Exit();
-
-            return allowToClose;
+            return allowToClose || lisimbaApplication.Exit();
         }
     }
 }

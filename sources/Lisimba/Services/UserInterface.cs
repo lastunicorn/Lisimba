@@ -35,6 +35,11 @@ namespace DustInTheWind.Lisimba.Services
             Application.Run(MainWindow);
         }
 
+        public void Exit()
+        {
+            Application.Exit();
+        }
+
         public void DisplayWarning(string message)
         {
             MessageBox.Show(MainWindow, message, Resources.WarningPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
