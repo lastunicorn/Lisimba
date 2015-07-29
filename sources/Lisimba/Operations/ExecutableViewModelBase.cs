@@ -15,11 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    abstract class OperationBase<T> : IOpertion<T>
+    abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
     {
+        private readonly ApplicationStatus applicationStatus;
         private bool isEnabled;
 
         public bool IsEnabled
@@ -27,30 +30,33 @@ namespace DustInTheWind.Lisimba.Operations
             get { return isEnabled; }
             protected set
             {
-                bool isChanged = isEnabled != value;
+                if (isEnabled == value)
+                    return;
 
                 isEnabled = value;
-
-                if (isChanged)
-                    OnIsEnabledChanged();
+                OnPropertyChanged();
             }
         }
 
         public abstract string ShortDescription { get; }
 
-        public event EventHandler IsEnabledChanged;
-
-        protected virtual void OnIsEnabledChanged()
+        protected ExecutableViewModelBase(ApplicationStatus applicationStatus)
         {
-            EventHandler handler = IsEnabledChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            this.applicationStatus = applicationStatus;
+            
+            isEnabled = true;
         }
 
-        protected OperationBase()
+        public void MouseEnter()
         {
-            isEnabled = true;
+            if (applicationStatus != null)
+                applicationStatus.SetPermanentStatusText(ShortDescription);
+        }
+
+        public void MouseLeave()
+        {
+            if (applicationStatus != null)
+                applicationStatus.Reset();
         }
 
         public void Execute()

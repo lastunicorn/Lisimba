@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ImportYahooCsvOperation : OperationBase<object>
+    class ImportYahooCsvOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
@@ -34,6 +34,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public ImportYahooCsvOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

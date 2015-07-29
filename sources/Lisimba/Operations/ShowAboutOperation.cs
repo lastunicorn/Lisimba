@@ -16,14 +16,20 @@
 
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAboutOperation : OperationBase<object>
+    class ShowAboutOperation : ExecutableViewModelBase<object>
     {
         public override string ShortDescription
         {
             get { return LocalizedResources.ShowAboutOperationDescription; }
+        }
+
+        public ShowAboutOperation(ApplicationStatus applicationStatus)
+            : base(applicationStatus)
+        {
         }
 
         protected override void DoExecute(object parameter)

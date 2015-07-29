@@ -196,7 +196,7 @@ namespace DustInTheWind.Lisimba.BookShell
             if (!IsModified)
                 return true;
 
-            bool? response = userInterface.DisplayYesNoQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
+            bool? response = userInterface.DisplayYesNoCancelQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
 
             if (response == null)
                 return false;
@@ -217,15 +217,30 @@ namespace DustInTheWind.Lisimba.BookShell
             Status = AddressBookStatus.None;
         }
 
-        public void DeleteContact(Contact contactToDelete)
+        public void DeleteCurrentContact()
         {
+            Contact contactToDelete = Contact;
+
             if (contactToDelete == null)
                 return;
 
-            AddressBook.Contacts.Remove(contactToDelete);
+            bool allowToContinue = ConfirmDeleteContact(contactToDelete);
 
-            if (ReferenceEquals(contactToDelete, Contact))
-                Contact = null;
+            if (allowToContinue)
+            {
+                AddressBook.Contacts.Remove(contactToDelete);
+
+                if (ReferenceEquals(contactToDelete, Contact))
+                    Contact = null;
+            }
+        }
+
+        private bool ConfirmDeleteContact(Contact contactToDelete)
+        {
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
+            
+            return userInterface.DisplayYesNoExclamation(text, title);
         }
     }
 }

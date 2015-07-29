@@ -1,10 +1,11 @@
 ﻿using System;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class CloseAddressBookOperation : OperationBase<object>
+    internal class CloseAddressBookOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
 
@@ -13,7 +14,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CloseCurrentAddressBookOperationDescription; }
         }
 
-        public CloseAddressBookOperation(AddressBookShell addressBookShell)
+        public CloseAddressBookOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+            :base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 

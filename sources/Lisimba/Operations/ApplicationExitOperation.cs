@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ApplicationExitOperation : OperationBase<object>
+    class ApplicationExitOperation : ExecutableViewModelBase<object>
     {
         private readonly LisimbaApplication lisimbaApplication;
 
@@ -29,7 +29,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(LisimbaApplication lisimbaApplication)
+        public ApplicationExitOperation(LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus)
+            : base(applicationStatus)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 

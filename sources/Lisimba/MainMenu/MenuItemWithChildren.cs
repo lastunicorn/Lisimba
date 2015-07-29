@@ -26,9 +26,7 @@ namespace DustInTheWind.Lisimba.UserControls
     {
         public RecentFiles RecentFiles { get; set; }
 
-        public IOpertion ChildrenOpertion { get; set; }
-
-        #region Event SubItemClicked
+        public IExecutableViewModel ChildrenOpertion { get; set; }
 
         public event EventHandler<SubItemClickedEventArgs> SubItemClicked;
 
@@ -39,8 +37,6 @@ namespace DustInTheWind.Lisimba.UserControls
             if (handler != null)
                 handler(this, eventArgs);
         }
-
-        #endregion
 
         public void RefreshRecentFilesMenu()
         {
@@ -65,7 +61,7 @@ namespace DustInTheWind.Lisimba.UserControls
                     // Create new menu items if necessary.
                     menuItem = new CommandedMenuItem();
                     menuItem.Click += HandleSubMenuItemClick;
-                    menuItem.Opertion = ChildrenOpertion;
+                    menuItem.ViewModel = ChildrenOpertion;
                     menuItem.CommandParameterProvider = () => menuItem.Tag.ToString();
 
 

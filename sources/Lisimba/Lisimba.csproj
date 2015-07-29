@@ -98,13 +98,13 @@
     <Compile Include="LisimbaException.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
-    <Compile Include="Operations\OperationBase.cs" />
+    <Compile Include="Operations\ExecutableViewModelBase.cs" />
     <Compile Include="Operations\CreateNewContactOperation.cs" />
     <Compile Include="Operations\DeleteCurrentContactOperation.cs" />
     <Compile Include="Operations\ShowAddressBookPropertiesOperation.cs" />
     <Compile Include="Operations\CreateNewAddressBookOperation.cs" />
-    <Compile Include="Operations\IOpertion.cs" />
-    <Compile Include="Operations\ICommand1.cs" />
+    <Compile Include="Operations\IExecutableViewModel.cs" />
+    <Compile Include="Operations\IExecutableViewModel1.cs" />
     <Compile Include="Operations\ShowAboutOperation.cs" />
     <Compile Include="Operations\ExportYahooCsvOperation.cs" />
     <Compile Include="Operations\SaveAsAddressBookOperation.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
     <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
-    <Compile Include="Presenters\LisimbaViewModel.cs" />
+    <Compile Include="Forms\LisimbaViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -213,6 +213,9 @@
     </Compile>
     <Compile Include="UserControls\CustomButton.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\CustomButton.Designer.cs">
+      <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SubItemClickedEventArgs.cs" />
     <Compile Include="Forms\AboutForm.cs">

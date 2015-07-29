@@ -17,35 +17,83 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class CommandedMenuItem : ToolStripMenuItem
+    class CommandedMenuItem : ToolStripMenuItem, IBindableComponent
     {
-        private IOpertion opertion;
+        private BindingContext bindingContext;
+        private ControlBindingsCollection dataBindings;
 
         [Browsable(false)]
-        public ApplicationStatus ApplicationStatus { get; set; }
+        public BindingContext BindingContext
+        {
+            get
+            {
+                if (bindingContext == null)
+                    bindingContext = new BindingContext();
+
+                return bindingContext;
+            }
+            set
+            {
+                bindingContext = value;
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public ControlBindingsCollection DataBindings
+        {
+            get
+            {
+                if (dataBindings == null)
+                    dataBindings = new ControlBindingsCollection(this);
+
+                return dataBindings;
+            }
+        }
+
+        //private IOpertion opertion;
+
+        //[Browsable(false)]
+        //public ApplicationStatus ApplicationStatus { get; set; }
 
         public string ShortDescription { get; set; }
 
-        [Browsable(false)]
-        public IOpertion Opertion
+        //[Browsable(false)]
+        //public IOpertion Opertion
+        //{
+        //    get { return opertion; }
+        //    set
+        //    {
+        //        if (opertion != null)
+        //            opertion.IsEnabledChanged -= HandleOpertionEnabledChanged;
+
+        //        opertion = value;
+
+        //        if (opertion != null)
+        //            opertion.IsEnabledChanged += HandleOpertionEnabledChanged;
+
+        //        Enabled = opertion == null || opertion.IsEnabled;
+        //    }
+        //}
+
+        private IExecutableViewModel viewModel;
+
+        public IExecutableViewModel ViewModel
         {
-            get { return opertion; }
+            get { return viewModel; }
             set
             {
-                if (opertion != null)
-                    opertion.IsEnabledChanged -= HandleOpertionEnabledChanged;
+                DataBindings.Clear();
 
-                opertion = value;
+                viewModel = value;
 
-                if (opertion != null)
-                    opertion.IsEnabledChanged += HandleOpertionEnabledChanged;
-
-                Enabled = opertion == null || opertion.IsEnabled;
+                if (viewModel != null)
+                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
             }
         }
 
@@ -57,53 +105,50 @@ namespace DustInTheWind.Lisimba.UserControls
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            if (ApplicationStatus != null)
-            {
-                string description = CalculateTextToDisplayAsStatus();
-                ApplicationStatus.SetPermanentStatusText(description);
-            }
+            if (ViewModel != null)
+                ViewModel.MouseEnter();
 
             base.OnMouseEnter(e);
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            if (ApplicationStatus != null)
-                ApplicationStatus.Reset();
+            if (ViewModel != null)
+                ViewModel.MouseLeave();
 
             base.OnMouseLeave(e);
         }
 
         protected override void OnClick(EventArgs e)
         {
-            if (Opertion != null)
+            if (ViewModel != null)
             {
                 object commandParameter = CalculateParameterToUseWithCommand();
 
                 if (commandParameter == null)
-                    Opertion.Execute();
+                    ViewModel.Execute();
                 else
-                    Opertion.Execute(commandParameter);
+                    ViewModel.Execute(commandParameter);
             }
 
             base.OnClick(e);
         }
 
-        private void HandleOpertionEnabledChanged(object sender, EventArgs eventArgs)
-        {
-            Enabled = opertion.IsEnabled;
-        }
+        //private void HandleOpertionEnabledChanged(object sender, EventArgs eventArgs)
+        //{
+        //    Enabled = ViewModel.IsEnabled;
+        //}
 
-        private string CalculateTextToDisplayAsStatus()
-        {
-            if (ShortDescription != null)
-                return ShortDescription;
+        //private string CalculateTextToDisplayAsStatus()
+        //{
+        //    if (ShortDescription != null)
+        //        return ShortDescription;
 
-            if (Opertion != null && Opertion.ShortDescription != null)
-                return Opertion.ShortDescription;
+        //    if (Opertion != null && Opertion.ShortDescription != null)
+        //        return Opertion.ShortDescription;
 
-            return null;
-        }
+        //    return null;
+        //}
 
         private object CalculateParameterToUseWithCommand()
         {

@@ -162,7 +162,6 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // buttonNewAddressBook
             // 
-            this.buttonNewAddressBook.ApplicationStatus = null;
             this.buttonNewAddressBook.AutoSize = true;
             this.buttonNewAddressBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonNewAddressBook.Image = global::DustInTheWind.Lisimba.Properties.Resources.new_24;
@@ -170,7 +169,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonNewAddressBook.Margin = new System.Windows.Forms.Padding(10);
             this.buttonNewAddressBook.MinimumSize = new System.Drawing.Size(120, 50);
             this.buttonNewAddressBook.Name = "buttonNewAddressBook";
-            this.buttonNewAddressBook.Opertion = null;
+            this.buttonNewAddressBook.ViewModel = null;
             this.buttonNewAddressBook.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
             this.buttonNewAddressBook.Size = new System.Drawing.Size(120, 50);
             this.buttonNewAddressBook.TabIndex = 8;
@@ -180,7 +179,6 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // buttonOpenAddressBook
             // 
-            this.buttonOpenAddressBook.ApplicationStatus = null;
             this.buttonOpenAddressBook.AutoSize = true;
             this.buttonOpenAddressBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonOpenAddressBook.Image = global::DustInTheWind.Lisimba.Properties.Resources.open_24;
@@ -188,7 +186,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOpenAddressBook.Margin = new System.Windows.Forms.Padding(10);
             this.buttonOpenAddressBook.MinimumSize = new System.Drawing.Size(120, 50);
             this.buttonOpenAddressBook.Name = "buttonOpenAddressBook";
-            this.buttonOpenAddressBook.Opertion = null;
+            this.buttonOpenAddressBook.ViewModel = null;
             this.buttonOpenAddressBook.Padding = new System.Windows.Forms.Padding(10, 4, 10, 4);
             this.buttonOpenAddressBook.Size = new System.Drawing.Size(126, 50);
             this.buttonOpenAddressBook.TabIndex = 7;

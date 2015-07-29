@@ -56,8 +56,8 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                toolStripMenuItem_List_Add.Opertion = value.CreateNewContactOperation;
-                toolStripMenuItem_List_Delete.Opertion = value.DeleteCurrentContactOperation;
+                toolStripMenuItem_List_Add.ViewModel = value.CreateNewContactOperation;
+                toolStripMenuItem_List_Delete.ViewModel = value.DeleteCurrentContactOperation;
             }
         }
 
@@ -65,9 +65,9 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             set
             {
-                toolStripMenuItem_List_Add.ApplicationStatus = value;
-                toolStripMenuItem_List_Delete.ApplicationStatus = value;
-                toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = value;
+                //toolStripMenuItem_List_Add.ApplicationStatus = value;
+                //toolStripMenuItem_List_Delete.ApplicationStatus = value;
+                //toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = value; // todo: ???
             }
         }
 

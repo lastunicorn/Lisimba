@@ -25,7 +25,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class OpenAddressBookOperation : OperationBase<string>
+    class OpenAddressBookOperation : ExecutableViewModelBase<string>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
@@ -38,6 +38,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public OpenAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

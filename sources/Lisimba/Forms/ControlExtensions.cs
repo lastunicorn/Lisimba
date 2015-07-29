@@ -6,26 +6,32 @@ namespace DustInTheWind.Lisimba.Forms
 {
     static class ControlExtensions
     {
-        public static void Bind<TControl, TData, TProp1, TProp2>(this TControl control, Expression<Func<TControl, TProp1>> property, TData dataSource, Expression<Func<TData, TProp2>> dataSourceProperty, bool formattingEnabled)
-            where TControl : Control
+        public static Binding Bind<TControl, TData, TProp1, TProp2>(this TControl control, Expression<Func<TControl, TProp1>> property, TData dataSource, Expression<Func<TData, TProp2>> dataSourceProperty, bool formattingEnabled)
+            where TControl : IBindableComponent
         {
             if (control == null) throw new ArgumentNullException("control");
 
             string controlPropertyName = GetControlPropertyName(property);
             string dataSourcePropertyName = GetControlPropertyName(dataSourceProperty);
 
-            control.DataBindings.Add(controlPropertyName, dataSource, dataSourcePropertyName, formattingEnabled);
+            Binding binding = new Binding(controlPropertyName, dataSource, dataSourcePropertyName, formattingEnabled);
+            control.DataBindings.Add(binding);
+
+            return binding;
         }
 
-        public static void Bind<TControl, TData, TProp1, TProp2>(this TControl control, Expression<Func<TControl, TProp1>> property, TData dataSource, Expression<Func<TData, TProp2>> dataSourceProperty, bool formattingEnabled, DataSourceUpdateMode updateMode)
-            where TControl : Control
+        public static Binding Bind<TControl, TData, TProp1, TProp2>(this TControl control, Expression<Func<TControl, TProp1>> property, TData dataSource, Expression<Func<TData, TProp2>> dataSourceProperty, bool formattingEnabled, DataSourceUpdateMode updateMode)
+            where TControl : IBindableComponent
         {
             if (control == null) throw new ArgumentNullException("control");
 
             string controlPropertyName = GetControlPropertyName(property);
             string dataSourcePropertyName = GetControlPropertyName(dataSourceProperty);
 
-            control.DataBindings.Add(controlPropertyName, dataSource, dataSourcePropertyName, formattingEnabled, updateMode);
+            Binding binding = new Binding(controlPropertyName, dataSource, dataSourcePropertyName, formattingEnabled, updateMode);
+            control.DataBindings.Add(binding);
+
+            return binding;
         }
 
         private static string GetControlPropertyName<TObject, TProperty>(Expression<Func<TObject, TProperty>> property)

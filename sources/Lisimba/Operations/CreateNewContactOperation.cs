@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class CreateNewContactOperation : OperationBase<object>
+    class CreateNewContactOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
@@ -33,7 +33,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public CreateNewContactOperation(AddressBookShell addressBookShell, UserInterface userInterface)
+        public CreateNewContactOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

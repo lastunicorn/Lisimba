@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal interface IOpertion<in T> : IOpertion
+    internal interface IExecutableViewModel<in T> : IExecutableViewModel
     {
         void Execute(T parameter);
     }

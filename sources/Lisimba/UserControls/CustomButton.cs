@@ -1,5 +1,5 @@
-﻿// Lisimba
-// Copyright (C) 2007-2014 Dust in the Wind
+﻿// Acarus
+// Copyright (C) 2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,76 +15,57 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    internal class CustomButton : Button
+    partial class CustomButton : Button
     {
-        private IOpertion opertion;
+        private IExecutableViewModel viewModel;
 
-        [Browsable(false)]
-        public ApplicationStatus ApplicationStatus { get; set; }
-
-        [Browsable(false)]
-        public IOpertion Opertion
+        public IExecutableViewModel ViewModel
         {
-            get { return opertion; }
+            get { return viewModel; }
             set
             {
-                if (opertion != null)
-                    opertion.IsEnabledChanged -= HandleOpertionEnabledChanged;
+                DataBindings.Clear();
 
-                opertion = value;
+                viewModel = value;
 
-                if (opertion != null)
-                    opertion.IsEnabledChanged += HandleOpertionEnabledChanged;
-
-                Enabled = opertion == null || opertion.IsEnabled;
+                if (viewModel != null)
+                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
             }
+        }
+
+        public CustomButton()
+        {
+            InitializeComponent();
         }
 
         protected override void OnMouseEnter(EventArgs e)
         {
-            if (ApplicationStatus != null)
-            {
-                string description = CalculateTextToDisplayAsStatus();
-                ApplicationStatus.SetPermanentStatusText(description);
-            }
+            if (ViewModel != null)
+                ViewModel.MouseEnter();
 
             base.OnMouseEnter(e);
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
-            if (ApplicationStatus != null)
-                ApplicationStatus.Reset();
+            if (ViewModel != null)
+                ViewModel.MouseLeave();
 
             base.OnMouseLeave(e);
         }
 
         protected override void OnClick(EventArgs e)
         {
-            if (Opertion != null)
-                Opertion.Execute();
+            if (ViewModel != null)
+                ViewModel.Execute();
 
             base.OnClick(e);
-        }
-
-        private void HandleOpertionEnabledChanged(object sender, EventArgs eventArgs)
-        {
-            Enabled = opertion.IsEnabled;
-        }
-
-        private string CalculateTextToDisplayAsStatus()
-        {
-            if (Opertion != null && Opertion.ShortDescription != null)
-                return Opertion.ShortDescription;
-
-            return null;
         }
     }
 }

@@ -71,22 +71,20 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_Add
             // 
-            this.toolStripMenuItem_List_Add.ApplicationStatus = null;
             this.toolStripMenuItem_List_Add.CommandParameter = null;
             this.toolStripMenuItem_List_Add.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
-            this.toolStripMenuItem_List_Add.Opertion = null;
+            this.toolStripMenuItem_List_Add.ViewModel = null;
             this.toolStripMenuItem_List_Add.ShortDescription = null;
             this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Add.Text = "&Add Contact";
             // 
             // toolStripMenuItem_List_Delete
             // 
-            this.toolStripMenuItem_List_Delete.ApplicationStatus = null;
             this.toolStripMenuItem_List_Delete.CommandParameter = null;
             this.toolStripMenuItem_List_Delete.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
-            this.toolStripMenuItem_List_Delete.Opertion = null;
+            this.toolStripMenuItem_List_Delete.ViewModel = null;
             this.toolStripMenuItem_List_Delete.ShortDescription = null;
             this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
@@ -99,11 +97,10 @@ namespace DustInTheWind.Lisimba.UserControls
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
-            this.toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameter = null;
             this.toolStripMenuItem_List_ViewBiorythm.CommandParameterProvider = null;
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.Opertion = null;
+            this.toolStripMenuItem_List_ViewBiorythm.ViewModel = null;
             this.toolStripMenuItem_List_ViewBiorythm.ShortDescription = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";

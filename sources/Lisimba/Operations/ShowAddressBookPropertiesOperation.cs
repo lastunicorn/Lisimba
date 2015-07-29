@@ -19,10 +19,11 @@ using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAddressBookPropertiesOperation : OperationBase<object>
+    class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
 
@@ -31,7 +32,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell)
+        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 

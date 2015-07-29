@@ -15,14 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class DeleteCurrentContactOperation : OperationBase<object>
+    internal class DeleteCurrentContactOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
 
@@ -31,11 +30,13 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(AddressBookShell addressBookShell)
+        public DeleteCurrentContactOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
             this.addressBookShell = addressBookShell;
+
             addressBookShell.ContactChanged += HandleCurrentContactChanged;
 
             IsEnabled = addressBookShell.Contact != null;
@@ -48,17 +49,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            Contact contactToDelete = addressBookShell.Contact;
-
-            if (contactToDelete == null)
-                return;
-
-            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
-            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
-            DialogResult dialogResult = MessageBox.Show(text, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
-            if (dialogResult == DialogResult.Yes)
-                addressBookShell.DeleteContact(contactToDelete);
+            addressBookShell.DeleteCurrentContact();
         }
     }
 }
