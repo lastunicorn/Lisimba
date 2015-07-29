@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Forms;
+using System;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -22,21 +22,24 @@ namespace DustInTheWind.Lisimba.Operations
 {
     class ShowAboutOperation : ExecutableViewModelBase<object>
     {
+        private readonly UserInterface userInterface;
+
         public override string ShortDescription
         {
             get { return LocalizedResources.ShowAboutOperationDescription; }
         }
 
-        public ShowAboutOperation(ApplicationStatus applicationStatus)
+        public ShowAboutOperation(ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
         }
 
         protected override void DoExecute(object parameter)
         {
-            AboutForm formAbout = new AboutForm();
-            formAbout.ShowDialog();
-            formAbout.Dispose();
+            userInterface.ShowAbout();
         }
     }
 }

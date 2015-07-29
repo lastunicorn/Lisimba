@@ -16,11 +16,13 @@
 
 using System.IO;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    public class UserInterface
+    class UserInterface
     {
         public Form MainWindow { get; set; }
 
@@ -122,6 +124,22 @@ namespace DustInTheWind.Lisimba.Services
                 DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
 
                 return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
+            }
+        }
+
+        public void ShowAbout()
+        {
+            using (AboutForm form = new AboutForm())
+            {
+                form.ShowDialog(MainWindow);
+            }
+        }
+
+        public void DisplayAddressBookProperties(AddressBookPropertiesViewModel viewModel)
+        {
+            using (AddressBookPropertiesForm form = new AddressBookPropertiesForm { ViewModel = viewModel })
+            {
+                form.ShowDialog(MainWindow);
             }
         }
     }

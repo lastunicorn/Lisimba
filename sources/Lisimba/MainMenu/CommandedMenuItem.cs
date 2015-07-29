@@ -19,9 +19,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.MainMenu
 {
     class CommandedMenuItem : ToolStripMenuItem, IBindableComponent
     {

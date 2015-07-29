@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Forms
 {
     public partial class BiorythmForm : Form
     {
-        private Contact contact = null;
+        private Contact contact;
         public Contact Contact
         {
             get { return contact; }

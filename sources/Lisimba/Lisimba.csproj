@@ -94,7 +94,7 @@
     <Compile Include="ContactEdit\NameEditForm.Designer.cs">
       <DependentUpon>NameEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ControlExtensions.cs" />
+    <Compile Include="Forms\BindingExtensions.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
@@ -114,7 +114,7 @@
     <Compile Include="Forms\IAddressBookPropertiesView.cs" />
     <Compile Include="Forms\SortingComboBoxItem.cs" />
     <Compile Include="Presenters\AddContactPresenter.cs" />
-    <Compile Include="Presenters\AddressBookPropertiesPresenter.cs" />
+    <Compile Include="Forms\AddressBookPropertiesViewModel.cs" />
     <Compile Include="Forms\LisimbaViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -263,7 +263,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="ProgramArguments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AddressBookPropertiesViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <EmbeddedResource Include="ContactEdit\MessengerIdEditForm.resx">
       <DependentUpon>MessengerIdEditForm.cs</DependentUpon>

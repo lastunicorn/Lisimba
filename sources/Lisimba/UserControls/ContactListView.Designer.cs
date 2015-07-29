@@ -1,3 +1,5 @@
+using DustInTheWind.Lisimba.MainMenu;
+
 namespace DustInTheWind.Lisimba.UserControls
 {
     partial class ContactListView
@@ -31,10 +33,10 @@ namespace DustInTheWind.Lisimba.UserControls
             this.components = new System.ComponentModel.Container();
             this.treeViewContacts = new System.Windows.Forms.TreeView();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_List_Add = new CommandedMenuItem();
+            this.toolStripMenuItem_List_Delete = new CommandedMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_List_ViewBiorythm = new CommandedMenuItem();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -159,10 +161,10 @@ namespace DustInTheWind.Lisimba.UserControls
         private System.Windows.Forms.TreeView treeViewContacts;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_Add;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_Delete;
+        private CommandedMenuItem toolStripMenuItem_List_Add;
+        private CommandedMenuItem toolStripMenuItem_List_Delete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_List_ViewBiorythm;
+        private CommandedMenuItem toolStripMenuItem_List_ViewBiorythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
     }

@@ -17,43 +17,46 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Presenters;
-using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class AddressBookPropertiesForm : Form, IAddressBookPropertiesView
+    partial class AddressBookPropertiesForm : Form
     {
-        public AddressBookPropertiesPresenter Presenter { private get; set; }
+        private AddressBookPropertiesViewModel viewModel;
+
+        public AddressBookPropertiesViewModel ViewModel
+        {
+            set
+            {
+                textBoxBookName.DataBindings.Clear();
+                textBoxFileLocation.DataBindings.Clear();
+                textBoxContactsCount.DataBindings.Clear();
+
+                viewModel = value;
+
+                textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+                textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+                textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+                textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
+            }
+        }
 
         public AddressBookPropertiesForm()
         {
             InitializeComponent();
         }
 
-        public void CreateBindings(AddressBookPropertiesViewModel viewModel)
-        {
-            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
-            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
-            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
-        }
-
         private void buttonOkay_Click(object sender, EventArgs e)
         {
-            if (Presenter == null)
+            if (viewModel == null)
                 return;
 
-            Presenter.OkButtonWasClicked();
+            viewModel.OkButtonWasClicked();
         }
 
         private void FormBookProperties_Shown(object sender, EventArgs e)
         {
             textBoxBookName.Focus();
-        }
-
-        public void ShowModalView()
-        {
-            ShowDialog();
         }
     }
 }

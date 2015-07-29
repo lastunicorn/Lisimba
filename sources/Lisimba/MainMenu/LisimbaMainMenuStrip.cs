@@ -18,7 +18,7 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.MainMenu
 {
     partial class LisimbaMainMenuStrip : MenuStrip
     {

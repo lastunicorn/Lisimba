@@ -26,18 +26,21 @@ namespace DustInTheWind.Lisimba.Operations
     class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
+        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.addressBookShell = addressBookShell;
+            this.userInterface = userInterface;
             this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;
 
             IsEnabled = addressBookShell.AddressBook != null;
@@ -55,13 +58,8 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplayAddressBookPropertiesWindow()
         {
-            AddressBookPropertiesPresenter presenter = new AddressBookPropertiesPresenter
-            {
-                AddressBookShell = addressBookShell,
-                View = new AddressBookPropertiesForm()
-            };
-
-            presenter.ShowWindow();
+            AddressBookPropertiesViewModel viewModel = new AddressBookPropertiesViewModel(addressBookShell);
+            userInterface.DisplayAddressBookProperties(viewModel);
         }
     }
 }

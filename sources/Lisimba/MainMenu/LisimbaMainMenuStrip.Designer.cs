@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DustInTheWind.Lisimba.UserControls
+﻿namespace DustInTheWind.Lisimba.MainMenu
 {
     partial class LisimbaMainMenuStrip
     {
@@ -33,28 +27,28 @@ namespace DustInTheWind.Lisimba.UserControls
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisimbaMainMenuStrip));
-            this.toolStripMenuItem_File = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_SaveAs = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Close = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_File = new CommandedMenuItem();
+            this.toolStripMenuItem_File_SaveAs = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Close = new CommandedMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_File_RecentFiles = new DustInTheWind.Lisimba.UserControls.MenuItemWithChildren();
+            this.toolStripMenuItem_File_RecentFiles = new MenuItemWithChildren();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_AddressBook = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_AddressBook_AddContact = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_AddressBook_DeleteContact = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_AddressBook = new CommandedMenuItem();
+            this.toolStripMenuItem_AddressBook_AddContact = new CommandedMenuItem();
+            this.toolStripMenuItem_AddressBook_DeleteContact = new CommandedMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_AddressBook_Properties = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_Help = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_New = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Open = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Save = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Export = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_ExportToYahooCSV = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Import = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_ImportFromYahooCSV = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_File_Exit = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
-            this.toolStripMenuItem_Help_About = new DustInTheWind.Lisimba.UserControls.CommandedMenuItem();
+            this.toolStripMenuItem_AddressBook_Properties = new CommandedMenuItem();
+            this.toolStripMenuItem_Help = new CommandedMenuItem();
+            this.toolStripMenuItem_File_New = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Open = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Save = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Export = new CommandedMenuItem();
+            this.toolStripMenuItem_ExportToYahooCSV = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Import = new CommandedMenuItem();
+            this.toolStripMenuItem_ImportFromYahooCSV = new CommandedMenuItem();
+            this.toolStripMenuItem_File_Exit = new CommandedMenuItem();
+            this.toolStripMenuItem_Help_About = new CommandedMenuItem();
             this.SuspendLayout();
             // 
             // toolStripMenuItem_File
@@ -312,27 +306,27 @@ namespace DustInTheWind.Lisimba.UserControls
 
         }
 
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_New;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Open;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Save;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_SaveAs;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Close;
+        private CommandedMenuItem toolStripMenuItem_File;
+        private CommandedMenuItem toolStripMenuItem_File_New;
+        private CommandedMenuItem toolStripMenuItem_File_Open;
+        private CommandedMenuItem toolStripMenuItem_File_Save;
+        private CommandedMenuItem toolStripMenuItem_File_SaveAs;
+        private CommandedMenuItem toolStripMenuItem_File_Close;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Export;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_ExportToYahooCSV;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Import;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_ImportFromYahooCSV;
+        private CommandedMenuItem toolStripMenuItem_File_Export;
+        private CommandedMenuItem toolStripMenuItem_ExportToYahooCSV;
+        private CommandedMenuItem toolStripMenuItem_File_Import;
+        private CommandedMenuItem toolStripMenuItem_ImportFromYahooCSV;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
-        private DustInTheWind.Lisimba.UserControls.MenuItemWithChildren toolStripMenuItem_File_RecentFiles;
+        private MenuItemWithChildren toolStripMenuItem_File_RecentFiles;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_File_Exit;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_Help;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_Help_About;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_AddressBook;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_AddressBook_AddContact;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_AddressBook_DeleteContact;
+        private CommandedMenuItem toolStripMenuItem_File_Exit;
+        private CommandedMenuItem toolStripMenuItem_Help;
+        private CommandedMenuItem toolStripMenuItem_Help_About;
+        private CommandedMenuItem toolStripMenuItem_AddressBook;
+        private CommandedMenuItem toolStripMenuItem_AddressBook_AddContact;
+        private CommandedMenuItem toolStripMenuItem_AddressBook_DeleteContact;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
-        private DustInTheWind.Lisimba.UserControls.CommandedMenuItem toolStripMenuItem_AddressBook_Properties;
+        private CommandedMenuItem toolStripMenuItem_AddressBook_Properties;
     }
 }

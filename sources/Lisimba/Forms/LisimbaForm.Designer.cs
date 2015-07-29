@@ -1,5 +1,6 @@
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -46,7 +47,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactListView1 = new DustInTheWind.Lisimba.UserControls.ContactListView();
             this.contactView1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
             this.toolStripStatusLabel1 = new DustInTheWind.Lisimba.UserControls.BindableToolStripStatusLabel();
-            this.menuStripMain = new DustInTheWind.Lisimba.UserControls.LisimbaMainMenuStrip();
+            this.menuStripMain = new LisimbaMainMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
