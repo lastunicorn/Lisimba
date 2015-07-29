@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Operations
         protected override void DoExecute(object parameter)
         {
             AddContactPresenter addContactPresenter = new AddContactPresenter(addressBookShell, userInterface);
-            addContactPresenter.View = new FormAddContact();
+            addContactPresenter.View = new AddContactForm();
             addContactPresenter.Show();
         }
     }

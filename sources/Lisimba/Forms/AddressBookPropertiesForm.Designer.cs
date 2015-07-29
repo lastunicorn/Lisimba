@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormAddressBookProperties
+    partial class AddressBookPropertiesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddressBookProperties));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddressBookPropertiesForm));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
             this.labelName = new System.Windows.Forms.Label();

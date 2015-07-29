@@ -74,12 +74,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             return node;
         }
 
-        private readonly FormPhoneEdit formPhoneEdit;
-        private readonly FormEmailEdit formEmailEdit;
-        private readonly FormWebSiteEdit formWebSiteEdit;
-        private readonly FormAddressEdit formAddressEdit;
-        private readonly FormDateEdit formDateEdit;
-        private readonly FormMessengerIdEdit formMessengerIdEdit;
+        private readonly PhoneEditForm formPhoneEdit;
+        private readonly EmailEditForm formEmailEdit;
+        private readonly WebSiteEditForm formWebSiteEdit;
+        private readonly AddressEditForm formAddressEdit;
+        private readonly DateEditForm formDateEdit;
+        private readonly MessengerIdEditForm formMessengerIdEdit;
 
         private PhoneCollection phones;
         private EmailCollection emails;
@@ -152,12 +152,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
-            formPhoneEdit = new FormPhoneEdit();
-            formEmailEdit = new FormEmailEdit();
-            formWebSiteEdit = new FormWebSiteEdit();
-            formAddressEdit = new FormAddressEdit();
-            formDateEdit = new FormDateEdit();
-            formMessengerIdEdit = new FormMessengerIdEdit();
+            formPhoneEdit = new PhoneEditForm();
+            formEmailEdit = new EmailEditForm();
+            formWebSiteEdit = new WebSiteEditForm();
+            formAddressEdit = new AddressEditForm();
+            formDateEdit = new DateEditForm();
+            formMessengerIdEdit = new MessengerIdEditForm();
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)

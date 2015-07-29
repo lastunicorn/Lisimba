@@ -18,7 +18,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormDateEdit : FormEditBase
+    public partial class DateEditForm : EditBaseForm
     {
         private Date date;
         private bool addMode;
@@ -46,7 +46,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public DateCollection Dates { get; set; }
 
-        public FormDateEdit()
+        public DateEditForm()
         {
             InitializeComponent();
 

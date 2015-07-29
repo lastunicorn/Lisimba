@@ -18,18 +18,17 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormWebSiteEdit : FormEditBase
+    public partial class PhoneEditForm : EditBaseForm
     {
-        private WebSite webSite;
+        private Phone phone;
         private bool addMode;
 
-        public WebSite WebSite
+        public Phone Phone
         {
-            get { return webSite; }
+            get { return phone; }
             set
             {
-                webSite = value;
-
+                phone = value;
                 DisplayDataInView();
             }
         }
@@ -41,51 +40,51 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add Web Site" : "Edit Web Site";
+                Text = value ? "Add Phone" : "Edit Phone";
             }
         }
 
-        public WebSiteCollection WebSites { get; set; }
+        public PhoneCollection Phones { get; set; }
 
-        public FormWebSiteEdit()
+        public PhoneEditForm()
         {
             InitializeComponent();
 
             AddMode = false;
 
-            textBoxAddress.KeyDown += FormEditBase_KeyDown;
+            textBoxPhone.KeyDown += FormEditBase_KeyDown;
             textBoxComments.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
         {
-            bool isAnyDataChanged = UserChangedData();
+            bool dataWasChanged = UserChangedData();
 
-            if (!isAnyDataChanged)
+            if (!dataWasChanged)
                 return;
 
             ReadDataFromView();
 
-            if (AddMode && WebSites != null)
-                WebSites.Add(webSite);
+            if (AddMode && Phones != null)
+                Phones.Add(phone);
         }
 
         private bool UserChangedData()
         {
-            return !webSite.Address.Equals(textBoxAddress.Text) ||
-                   !webSite.Description.Equals(textBoxComments.Text);
+            return !phone.Number.Equals(textBoxPhone.Text) ||
+                   !phone.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()
         {
-            textBoxAddress.Text = webSite.Address;
-            textBoxComments.Text = webSite.Description;
+            textBoxPhone.Text = phone.Number;
+            textBoxComments.Text = phone.Description;
         }
 
         private void ReadDataFromView()
         {
-            webSite.Address = textBoxAddress.Text;
-            webSite.Description = textBoxComments.Text;
+            phone.Number = textBoxPhone.Text;
+            phone.Description = textBoxComments.Text;
         }
     }
 }

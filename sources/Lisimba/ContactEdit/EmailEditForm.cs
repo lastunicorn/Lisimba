@@ -18,17 +18,17 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormMessengerIdEdit : FormEditBase
+    public partial class EmailEditForm : EditBaseForm
     {
-        private MessengerId messengerId;
+        private Email email;
         private bool addMode;
 
-        public MessengerId MessengerId
+        public Email Email
         {
-            get { return messengerId; }
+            get { return email; }
             set
             {
-                messengerId = value;
+                email = value;
                 DisplayDataInView();
             }
         }
@@ -40,13 +40,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add messenger id" : "Edit messenger id";
+                Text = value ? "Add Email" : "Edit Email";
             }
         }
 
-        public MessengerIdCollection MessengerIds { get; set; }
+        public EmailCollection Emails { get; set; }
 
-        public FormMessengerIdEdit()
+        public EmailEditForm()
         {
             InitializeComponent();
 
@@ -65,26 +65,26 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && MessengerIds != null)
-                MessengerIds.Add(MessengerId);
+            if (AddMode && Emails != null)
+                Emails.Add(Email);
         }
 
         private bool UserChangedData()
         {
-            return !messengerId.Id.Equals(textBoxEmail.Text) ||
-                   !messengerId.Description.Equals(textBoxComments.Text);
+            return !email.Address.Equals(textBoxEmail.Text) ||
+                   !email.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()
         {
-            textBoxEmail.Text = messengerId.Id;
-            textBoxComments.Text = messengerId.Description;
+            textBoxEmail.Text = email.Address;
+            textBoxComments.Text = email.Description;
         }
 
         private void ReadDataFromView()
         {
-            messengerId.Id = textBoxEmail.Text;
-            messengerId.Description = textBoxComments.Text;
+            email.Address = textBoxEmail.Text;
+            email.Description = textBoxComments.Text;
         }
     }
 }

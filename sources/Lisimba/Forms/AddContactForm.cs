@@ -14,23 +14,41 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Presenters;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormAbout : Form
+    partial class AddContactForm : Form, IAddContactView
     {
-        public FormAbout()
+        public AddContactPresenter Presenter { private get; set; }
+
+        public AddContactForm()
         {
             InitializeComponent();
         }
 
-        private void FormAbout_Load(object sender, System.EventArgs e)
+        public Contact Contact
         {
-            Text = Application.ProductName;
-            labelTitle.Text = Application.ProductName;
-            labelVersion.Text = string.Format("Ver. {0}", Application.ProductVersion);
-            labelAuthorAndDate.Text = "Iuga Alexandru";
+            get { return contactView1.Model.Contact; }
+            set { contactView1.Model.Contact = value; }
+        }
+
+        private void buttonOkay_Click(object sender, EventArgs e)
+        {
+            Presenter.OkButtonWasClicked();
+        }
+
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            Presenter.CloseButtonWasClicked();
+        }
+
+        private void FormAddContact_Load(object sender, EventArgs e)
+        {
+            Presenter.ViewWasLoaded();
         }
     }
 }

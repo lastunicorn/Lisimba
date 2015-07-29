@@ -3,7 +3,7 @@ using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormAddContact
+    partial class AddContactForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAddContact));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddContactForm));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOkay = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();

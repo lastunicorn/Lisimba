@@ -4,7 +4,7 @@ using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormLisimba
+    partial class LisimbaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLisimba));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisimbaForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.labelNoContact = new System.Windows.Forms.Label();
             this.labelNoAddressBook = new System.Windows.Forms.Label();

@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    public partial class FormBiorythm : Form
+    public partial class BiorythmForm : Form
     {
         private Contact contact = null;
         public Contact Contact
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Forms
             }
         }
 
-        public FormBiorythm()
+        public BiorythmForm()
         {
             InitializeComponent();
             biorythm1.CurrentDay = DateTime.Today;

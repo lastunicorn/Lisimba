@@ -17,7 +17,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.Lisimba.Exceptions
+namespace DustInTheWind.Lisimba
 {
     class LisimbaException : ApplicationException
     {

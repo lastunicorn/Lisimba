@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormNameEdit : FormEditBase
+    public partial class NameEditForm : EditBaseForm
     {
         private PersonName personName;
         public PersonName PersonName
@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public FormNameEdit()
+        public NameEditForm()
         {
             InitializeComponent();
 

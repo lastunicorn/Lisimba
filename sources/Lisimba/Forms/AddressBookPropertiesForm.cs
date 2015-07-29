@@ -16,39 +16,44 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormAddContact : Form, IAddContactView
+    partial class AddressBookPropertiesForm : Form, IAddressBookPropertiesView
     {
-        public AddContactPresenter Presenter { private get; set; }
+        public AddressBookPropertiesPresenter Presenter { private get; set; }
 
-        public FormAddContact()
+        public AddressBookPropertiesForm()
         {
             InitializeComponent();
         }
 
-        public Contact Contact
+        public void CreateBindings(AddressBookPropertiesViewModel viewModel)
         {
-            get { return contactView1.Model.Contact; }
-            set { contactView1.Model.Contact = value; }
+            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)
         {
+            if (Presenter == null)
+                return;
+
             Presenter.OkButtonWasClicked();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void FormBookProperties_Shown(object sender, EventArgs e)
         {
-            Presenter.CloseButtonWasClicked();
+            textBoxBookName.Focus();
         }
 
-        private void FormAddContact_Load(object sender, EventArgs e)
+        public void ShowModalView()
         {
-            Presenter.ViewWasLoaded();
+            ShowDialog();
         }
     }
 }

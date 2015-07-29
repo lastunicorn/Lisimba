@@ -20,11 +20,11 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormEditBase : Form
+    public partial class EditBaseForm : Form
     {
         public bool AllowClose { get; set; }
 
-        public FormEditBase()
+        public EditBaseForm()
         {
             InitializeComponent();
         }

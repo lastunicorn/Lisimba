@@ -18,7 +18,6 @@ using System;
 using System.Linq;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Exceptions;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
 

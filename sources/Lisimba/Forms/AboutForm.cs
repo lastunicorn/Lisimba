@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2014 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,23 +14,23 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Properties;
+using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.Forms
 {
-    class ShowAboutOperation : OperationBase<object>
+    public partial class AboutForm : Form
     {
-        public override string ShortDescription
+        public AboutForm()
         {
-            get { return LocalizedResources.ShowAboutOperationDescription; }
+            InitializeComponent();
         }
 
-        protected override void DoExecute(object parameter)
+        private void FormAbout_Load(object sender, System.EventArgs e)
         {
-            AboutForm formAbout = new AboutForm();
-            formAbout.ShowDialog();
-            formAbout.Dispose();
+            Text = Application.ProductName;
+            labelTitle.Text = Application.ProductName;
+            labelVersion.Text = string.Format("Ver. {0}", Application.ProductVersion);
+            labelAuthorAndDate.Text = "Iuga Alexandru";
         }
     }
 }

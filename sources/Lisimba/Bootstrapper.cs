@@ -73,7 +73,7 @@ namespace DustInTheWind.Lisimba
         {
             UserInterface userInterface = unityContainer.Resolve<UserInterface>();
 
-            FormLisimba formLisimba = unityContainer.Resolve<FormLisimba>();
+            LisimbaForm formLisimba = unityContainer.Resolve<LisimbaForm>();
             formLisimba.ViewModel = unityContainer.Resolve<LisimbaViewModel>();
             formLisimba.ContactListViewModel = unityContainer.Resolve<ContactListViewModel>();
 

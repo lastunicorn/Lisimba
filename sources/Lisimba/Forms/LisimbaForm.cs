@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Forms
     // Create the LisimbaStatusBar control.
     // Refactor ContactListView to take advantage of the services.
 
-    internal partial class FormLisimba : Form
+    internal partial class LisimbaForm : Form
     {
         // Lisimba - male name meaning "lion" in Zulu language.
 
@@ -67,7 +67,7 @@ namespace DustInTheWind.Lisimba.Forms
             }
         }
 
-        public FormLisimba(ApplicationStatus applicationStatus, RecentFiles recentFiles,
+        public LisimbaForm(ApplicationStatus applicationStatus, RecentFiles recentFiles,
             AddressBookShell addressBookShell, CommandPool commandPool)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");

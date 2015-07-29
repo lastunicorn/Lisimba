@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.Forms
 {
-    partial class FormBiorythm
+    partial class BiorythmForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBiorythm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BiorythmForm));
             this.buttonClose = new System.Windows.Forms.Button();
             this.biorythm1 = new DustInTheWind.Lisimba.UserControls.Biorythm();
             this.SuspendLayout();

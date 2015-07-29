@@ -29,16 +29,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
     {
         public ContactEditorViewModel Model { get; private set; }
 
-        readonly FormDateEdit formBirthdayEdit;
-        readonly FormNameEdit formNameEdit;
+        readonly DateEditForm formBirthdayEdit;
+        readonly NameEditForm formNameEdit;
 
         public ContactEditor()
         {
             InitializeComponent();
 
             Model = new ContactEditorViewModel(new Zodiac()) { View = this };
-            formBirthdayEdit = new FormDateEdit();
-            formNameEdit = new FormNameEdit();
+            formBirthdayEdit = new DateEditForm();
+            formNameEdit = new NameEditForm();
             CreateBindings();
         }
 
@@ -123,7 +123,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddAddress(AddressCollection addresses)
         {
-            FormAddressEdit form = new FormAddressEdit
+            AddressEditForm form = new AddressEditForm
             {
                 AddMode = true,
                 Addresses = addresses,
@@ -137,7 +137,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddDate(DateCollection dates)
         {
-            FormDateEdit form = new FormDateEdit
+            DateEditForm form = new DateEditForm
             {
                 AddMode = true,
                 Dates = dates,
@@ -151,7 +151,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddEmail(EmailCollection emails)
         {
-            FormEmailEdit form = new FormEmailEdit
+            EmailEditForm form = new EmailEditForm
             {
                 AddMode = true,
                 Emails = emails,
@@ -165,7 +165,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddMessengerId(MessengerIdCollection messengerIds)
         {
-            FormMessengerIdEdit form = new FormMessengerIdEdit
+            MessengerIdEditForm form = new MessengerIdEditForm
             {
                 AddMode = true,
                 MessengerIds = messengerIds,
@@ -179,7 +179,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddPhone(PhoneCollection phones)
         {
-            FormPhoneEdit form = new FormPhoneEdit
+            PhoneEditForm form = new PhoneEditForm
             {
                 AddMode = true,
                 Phones = phones,
@@ -193,7 +193,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddWebSite(WebSiteCollection webSites)
         {
-            FormWebSiteEdit form = new FormWebSiteEdit
+            WebSiteEditForm form = new WebSiteEditForm
             {
                 AddMode = true,
                 WebSites = webSites,

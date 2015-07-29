@@ -1,6 +1,6 @@
 ﻿namespace DustInTheWind.Lisimba.ContactEdit
 {
-    partial class FormMessengerIdEdit
+    partial class MessengerIdEditForm
     {
         /// <summary>
         /// Required designer variable.

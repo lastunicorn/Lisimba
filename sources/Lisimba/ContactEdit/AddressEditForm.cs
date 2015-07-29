@@ -18,7 +18,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class FormAddressEdit : FormEditBase
+    public partial class AddressEditForm : EditBaseForm
     {
         private Address address;
         private bool addMode;
@@ -46,7 +46,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public AddressCollection Addresses { get; set; }
 
-        public FormAddressEdit()
+        public AddressEditForm()
         {
             InitializeComponent();
 

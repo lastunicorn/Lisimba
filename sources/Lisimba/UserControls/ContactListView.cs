@@ -125,7 +125,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
             if (contact.Birthday.IsCompleteDate)
             {
-                FormBiorythm formBiorythm = new FormBiorythm();
+                BiorythmForm formBiorythm = new BiorythmForm();
                 formBiorythm.Contact = contact;
                 formBiorythm.ShowDialog(this);
             }
