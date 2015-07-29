@@ -320,23 +320,23 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return Equals((Contact)obj);
         }
 
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = (name != null ? name.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (birthday != null ? birthday.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (category != null ? category.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (notes != null ? notes.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Phones != null ? Phones.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Emails != null ? Emails.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (WebSites != null ? WebSites.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Addresses != null ? Addresses.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (Dates != null ? Dates.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (MessengerIds != null ? MessengerIds.GetHashCode() : 0);
+        //public override int GetHashCode()
+        //{
+        //    unchecked
+        //    {
+        //        var hashCode = (name != null ? name.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (birthday != null ? birthday.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (category != null ? category.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (notes != null ? notes.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (Phones != null ? Phones.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (Emails != null ? Emails.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (WebSites != null ? WebSites.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (Addresses != null ? Addresses.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (Dates != null ? Dates.GetHashCode() : 0);
+        //        hashCode = (hashCode * 397) ^ (MessengerIds != null ? MessengerIds.GetHashCode() : 0);
 
-                return hashCode;
-            }
-        }
+        //        return hashCode;
+        //    }
+        //}
     }
 }
