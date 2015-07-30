@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -40,7 +41,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add Postal Address" : "Edit Postal Address";
+                Text = value ? Resources.AddPostalAddress_WindowTitle : Resources.EditPostalAddress_WindowTitle;
             }
         }
 
@@ -57,6 +58,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxState.KeyDown += FormEditBase_KeyDown;
             textBoxCountry.KeyDown += FormEditBase_KeyDown;
             textBoxZip.KeyDown += FormEditBase_KeyDown;
+            textBoxComments.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
@@ -78,7 +80,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
                    !postalAddress.City.Equals(textBoxCity.Text) ||
                    !postalAddress.PostalCode.Equals(textBoxZip.Text) ||
                    !postalAddress.State.Equals(textBoxState.Text) ||
-                   !postalAddress.Country.Equals(textBoxCountry.Text);
+                   !postalAddress.Country.Equals(textBoxCountry.Text) ||
+                   !postalAddress.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()
@@ -88,6 +91,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxZip.Text = postalAddress.PostalCode;
             textBoxState.Text = postalAddress.State;
             textBoxCountry.Text = postalAddress.Country;
+            textBoxComments.Text = postalAddress.Description;
         }
 
         private void ReadDataFromView()
@@ -97,6 +101,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             postalAddress.PostalCode = textBoxZip.Text;
             postalAddress.State = textBoxState.Text;
             postalAddress.Country = textBoxCountry.Text;
+            postalAddress.Description = textBoxComments.Text;
         }
     }
 }

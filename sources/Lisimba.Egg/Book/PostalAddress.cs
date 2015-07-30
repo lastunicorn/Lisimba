@@ -136,33 +136,39 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             string tempString = string.Empty;
 
-            if (Street.Length > 0)
+            if (!string.IsNullOrEmpty(Street))
             {
                 tempString += Street;
             }
 
-            if (City.Length > 0)
+            if (!string.IsNullOrEmpty(City))
             {
                 if (tempString.Length > 0) tempString += " ";
                 tempString += City;
             }
 
-            if (PostalCode.Length > 0)
+            if (!string.IsNullOrEmpty(PostalCode))
             {
                 if (tempString.Length > 0) tempString += " ";
                 tempString += PostalCode;
             }
 
-            if (State.Length > 0)
+            if (!string.IsNullOrEmpty(State))
             {
                 if (tempString.Length > 0) tempString += " ";
                 tempString += State;
             }
 
-            if (Country.Length > 0)
+            if (!string.IsNullOrEmpty(Country))
             {
                 if (tempString.Length > 0) tempString += ", ";
                 tempString += Country;
+            }
+
+            if (!string.IsNullOrEmpty(Description))
+            {
+                if (tempString.Length > 0) tempString += " - ";
+                tempString += Description;
             }
 
             return tempString;
