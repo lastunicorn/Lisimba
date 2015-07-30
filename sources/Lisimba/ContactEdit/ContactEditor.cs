@@ -63,6 +63,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.Bind(x => x.Enabled, Model, x => x.Enabled, false);
         }
 
+        private void label7_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Model.BirthdayEditWasRequested();
+        }
+
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Model.BirthdayEditWasRequested();
