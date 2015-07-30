@@ -18,17 +18,17 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class MessengerIdEditForm : EditBaseForm
+    public partial class SocialProfileIdEditForm : EditBaseForm
     {
-        private MessengerId messengerId;
+        private SocialProfileId socialProfileId;
         private bool addMode;
 
-        public MessengerId MessengerId
+        public SocialProfileId SocialProfileId
         {
-            get { return messengerId; }
+            get { return socialProfileId; }
             set
             {
-                messengerId = value;
+                socialProfileId = value;
                 DisplayDataInView();
             }
         }
@@ -40,13 +40,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add messenger id" : "Edit messenger id";
+                Text = value ? "Add Social Profile Id" : "Edit Social Profile Id";
             }
         }
 
-        public MessengerIdCollection MessengerIds { get; set; }
+        public SocialProfileIdCollection SocialProfileIds { get; set; }
 
-        public MessengerIdEditForm()
+        public SocialProfileIdEditForm()
         {
             InitializeComponent();
 
@@ -65,26 +65,26 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && MessengerIds != null)
-                MessengerIds.Add(MessengerId);
+            if (AddMode && SocialProfileIds != null)
+                SocialProfileIds.Add(SocialProfileId);
         }
 
         private bool UserChangedData()
         {
-            return !messengerId.Id.Equals(textBoxEmail.Text) ||
-                   !messengerId.Description.Equals(textBoxComments.Text);
+            return !socialProfileId.Id.Equals(textBoxEmail.Text) ||
+                   !socialProfileId.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()
         {
-            textBoxEmail.Text = messengerId.Id;
-            textBoxComments.Text = messengerId.Description;
+            textBoxEmail.Text = socialProfileId.Id;
+            textBoxComments.Text = socialProfileId.Description;
         }
 
         private void ReadDataFromView()
         {
-            messengerId.Id = textBoxEmail.Text;
-            messengerId.Description = textBoxComments.Text;
+            socialProfileId.Id = textBoxEmail.Text;
+            socialProfileId.Description = textBoxComments.Text;
         }
     }
 }

@@ -56,9 +56,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             customTreeView1.Bind(x => x.Phones, Model, x => x.Phones, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.Emails, Model, x => x.Emails, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.WebSites, Model, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Addresses, Model, x => x.Addresses, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.PostalAddresses, Model, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.Dates, Model, x => x.Dates, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.MessengerIds, Model, x => x.MessengerIds, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.SocialProfileIds, Model, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
             this.Bind(x => x.Enabled, Model, x => x.Enabled, false);
         }
@@ -88,9 +88,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Model.AddEmailWasClicked();
         }
 
-        private void buttonAddMessengerId_Click(object sender, System.EventArgs e)
+        private void buttonAddSocialProfileId_Click(object sender, System.EventArgs e)
         {
-            Model.AddMessengerIdWasClicked();
+            Model.AddSocialProfileIdWasClicked();
         }
 
         private void buttonAddPhone_Click(object sender, System.EventArgs e)
@@ -121,14 +121,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             formNameEdit.Focus();
         }
 
-        public void AddAddress(AddressCollection addresses)
+        public void AddAddress(PostalAddressCollection postalAddresses)
         {
-            AddressEditForm form = new AddressEditForm
+            PostalAddressEditForm form = new PostalAddressEditForm
             {
                 AddMode = true,
-                Addresses = addresses,
+                PostalAddresses = postalAddresses,
                 Location = GetBottomLeftCorner(buttonAddAddress),
-                Address = new Address()
+                PostalAddress = new PostalAddress()
             };
 
             form.Show();
@@ -163,14 +163,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddMessengerId(MessengerIdCollection messengerIds)
+        public void AddSocialProfileId(SocialProfileIdCollection socialProfileIds)
         {
-            MessengerIdEditForm form = new MessengerIdEditForm
+            SocialProfileIdEditForm form = new SocialProfileIdEditForm
             {
                 AddMode = true,
-                MessengerIds = messengerIds,
-                Location = GetBottomLeftCorner(buttonAddMessengerId),
-                MessengerId = new MessengerId()
+                SocialProfileIds = socialProfileIds,
+                Location = GetBottomLeftCorner(buttonAddSocialProfileId),
+                SocialProfileId = new SocialProfileId()
             };
 
             form.Show();

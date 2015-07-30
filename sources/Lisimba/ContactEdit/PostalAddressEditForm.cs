@@ -18,17 +18,17 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class AddressEditForm : EditBaseForm
+    public partial class PostalAddressEditForm : EditBaseForm
     {
-        private Address address;
+        private PostalAddress postalAddress;
         private bool addMode;
 
-        public Address Address
+        public PostalAddress PostalAddress
         {
-            get { return address; }
+            get { return postalAddress; }
             set
             {
-                address = value;
+                postalAddress = value;
                 DisplayDataInView();
             }
         }
@@ -40,13 +40,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add Address" : "Edit Address";
+                Text = value ? "Add Postal Address" : "Edit Postal Address";
             }
         }
 
-        public AddressCollection Addresses { get; set; }
+        public PostalAddressCollection PostalAddresses { get; set; }
 
-        public AddressEditForm()
+        public PostalAddressEditForm()
         {
             InitializeComponent();
 
@@ -68,35 +68,35 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && Address != null)
-                Addresses.Add(address);
+            if (AddMode && PostalAddress != null)
+                PostalAddresses.Add(postalAddress);
         }
 
         private bool UserChangedData()
         {
-            return !address.Street.Equals(textBoxAddress.Text) ||
-                   !address.City.Equals(textBoxCity.Text) ||
-                   !address.PostalCode.Equals(textBoxZip.Text) ||
-                   !address.State.Equals(textBoxState.Text) ||
-                   !address.Country.Equals(textBoxCountry.Text);
+            return !postalAddress.Street.Equals(textBoxAddress.Text) ||
+                   !postalAddress.City.Equals(textBoxCity.Text) ||
+                   !postalAddress.PostalCode.Equals(textBoxZip.Text) ||
+                   !postalAddress.State.Equals(textBoxState.Text) ||
+                   !postalAddress.Country.Equals(textBoxCountry.Text);
         }
 
         private void DisplayDataInView()
         {
-            textBoxAddress.Text = address.Street;
-            textBoxCity.Text = address.City;
-            textBoxZip.Text = address.PostalCode;
-            textBoxState.Text = address.State;
-            textBoxCountry.Text = address.Country;
+            textBoxAddress.Text = postalAddress.Street;
+            textBoxCity.Text = postalAddress.City;
+            textBoxZip.Text = postalAddress.PostalCode;
+            textBoxState.Text = postalAddress.State;
+            textBoxCountry.Text = postalAddress.Country;
         }
 
         private void ReadDataFromView()
         {
-            address.Street = textBoxAddress.Text;
-            address.City = textBoxCity.Text;
-            address.PostalCode = textBoxZip.Text;
-            address.State = textBoxState.Text;
-            address.Country = textBoxCountry.Text;
+            postalAddress.Street = textBoxAddress.Text;
+            postalAddress.City = textBoxCity.Text;
+            postalAddress.PostalCode = textBoxZip.Text;
+            postalAddress.State = textBoxState.Text;
+            postalAddress.Country = textBoxCountry.Text;
         }
     }
 }

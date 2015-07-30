@@ -46,7 +46,7 @@
     <Compile Include="Entities\ContactEntity.cs" />
     <Compile Include="Entities\DateEntity.cs" />
     <Compile Include="Entities\EmailEntity.cs" />
-    <Compile Include="Entities\MessengerIdEntity.cs" />
+    <Compile Include="Entities\SocialProfileIdEntity.cs" />
     <Compile Include="Entities\PersonNameEntity.cs" />
     <Compile Include="Entities\PhoneEntity.cs" />
     <Compile Include="Entities\WebSiteEntity.cs" />

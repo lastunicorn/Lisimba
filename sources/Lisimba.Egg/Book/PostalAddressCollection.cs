@@ -21,13 +21,13 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class AddressCollection : CustomObservableCollection<Address>
+    public class PostalAddressCollection : CustomObservableCollection<PostalAddress>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (Address address in this)
+            foreach (PostalAddress address in this)
             {
                 DataRow dr = dt.NewRow();
                 dr[0] = address;
@@ -48,27 +48,27 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return dt;
         }
 
-        public void CopyFrom(AddressCollection values)
+        public void CopyFrom(PostalAddressCollection values)
         {
             Clear();
 
-            IEnumerable<Address> newAddresses = values.Select(address => new Address(address));
+            IEnumerable<PostalAddress> newAddresses = values.Select(address => new PostalAddress(address));
 
-            foreach (Address newAddress in newAddresses)
+            foreach (PostalAddress newAddress in newAddresses)
             {
                 Add(newAddress);
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="Address"/> object that match the description.
+        /// Returns the <see cref="PostalAddress"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="Address"/> object that match or <c>null</c>.</returns>
-        public Address SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="PostalAddress"/> object that match or <c>null</c>.</returns>
+        public PostalAddress SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (Address address in Items)
+            foreach (PostalAddress address in Items)
             {
                 switch (searchMode)
                 {
@@ -99,20 +99,20 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            AddressCollection addresses = obj as AddressCollection;
+            PostalAddressCollection postalAddresses = obj as PostalAddressCollection;
 
-            return Equals(addresses);
+            return Equals(postalAddresses);
         }
 
-        public bool Equals(AddressCollection addresses)
+        public bool Equals(PostalAddressCollection postalAddresses)
         {
-            if (addresses == null)
+            if (postalAddresses == null)
                 return false;
 
-            if (addresses.Count != Count)
+            if (postalAddresses.Count != Count)
                 return false;
 
-            foreach (Address address in addresses)
+            foreach (PostalAddress address in postalAddresses)
             {
                 bool exists = Enumerable.Contains(Items, address);
 

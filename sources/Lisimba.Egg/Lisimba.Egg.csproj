@@ -59,8 +59,8 @@
     <Compile Include="Book\WebSite.cs" />
     <Compile Include="Entities\ImportRuleCollection.cs" />
     <Compile Include="Enums\AddDecision.cs" />
-    <Compile Include="Book\Address.cs" />
-    <Compile Include="Book\AddressCollection.cs" />
+    <Compile Include="Book\PostalAddress.cs" />
+    <Compile Include="Book\PostalAddressCollection.cs" />
     <Compile Include="Book\AddressBook.cs" />
     <Compile Include="Comparers\CompareContactsByBirthdayComparer.cs" />
     <Compile Include="Comparers\CompareContactsByBirthdayWithoutYear.cs" />
@@ -75,8 +75,8 @@
     <Compile Include="Enums\NameSection.cs" />
     <Compile Include="Exceptions\EggException.cs" />
     <Compile Include="Book\Contact.cs" />
-    <Compile Include="Book\MessengerId.cs" />
-    <Compile Include="Book\MessengerIdCollection.cs" />
+    <Compile Include="Book\SocialProfileId.cs" />
+    <Compile Include="Book\SocialProfileIdCollection.cs" />
     <Compile Include="Book\PersonName.cs" />
     <Compile Include="Book\Phone.cs" />
     <Compile Include="Book\PhoneCollection.cs" />

@@ -124,11 +124,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public WebSiteCollection WebSites { get; private set; }
 
-        public AddressCollection Addresses { get; private set; }
+        public PostalAddressCollection PostalAddresses { get; private set; }
 
         public DateCollection Dates { get; private set; }
 
-        public MessengerIdCollection MessengerIds { get; private set; }
+        public SocialProfileIdCollection SocialProfileIds { get; private set; }
 
         private string notes = string.Empty;
 
@@ -164,9 +164,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Phones = new PhoneCollection();
             Emails = new EmailCollection();
             WebSites = new WebSiteCollection();
-            Addresses = new AddressCollection();
+            PostalAddresses = new PostalAddressCollection();
             Dates = new DateCollection();
-            MessengerIds = new MessengerIdCollection();
+            SocialProfileIds = new SocialProfileIdCollection();
 
             name.Changed += (sender, args) => OnChanged();
             birthday.Changed += (sender, args) => OnChanged();
@@ -180,14 +180,14 @@ namespace DustInTheWind.Lisimba.Egg.Book
             WebSites.CollectionChanged += (sender, e) => OnChanged();
             WebSites.ItemChanged += (sender, e) => OnChanged();
 
-            Addresses.CollectionChanged += (sender, e) => OnChanged();
-            Addresses.ItemChanged += (sender, e) => OnChanged();
+            PostalAddresses.CollectionChanged += (sender, e) => OnChanged();
+            PostalAddresses.ItemChanged += (sender, e) => OnChanged();
 
             Dates.CollectionChanged += (sender, e) => OnChanged();
             Dates.ItemChanged += (sender, e) => OnChanged();
 
-            MessengerIds.CollectionChanged += (sender, e) => OnChanged();
-            MessengerIds.ItemChanged += (sender, e) => OnChanged();
+            SocialProfileIds.CollectionChanged += (sender, e) => OnChanged();
+            SocialProfileIds.ItemChanged += (sender, e) => OnChanged();
         }
 
         private void HandleNameChanged(object sender, EventArgs e)
@@ -210,9 +210,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Phones.Clear();
             Emails.Clear();
             WebSites.Clear();
-            Addresses.Clear();
+            PostalAddresses.Clear();
             Dates.Clear();
-            MessengerIds.Clear();
+            SocialProfileIds.Clear();
             notes = string.Empty;
 
             OnChanged();
@@ -231,9 +231,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Phones.CopyFrom(contact.Phones);
             Emails.CopyFrom(contact.Emails);
             WebSites.CopyFrom(contact.WebSites);
-            Addresses.CopyFrom(contact.Addresses);
+            PostalAddresses.CopyFrom(contact.PostalAddresses);
             Dates.CopyFrom(contact.Dates);
-            MessengerIds.CopyFrom(contact.MessengerIds);
+            SocialProfileIds.CopyFrom(contact.SocialProfileIds);
 
             notes = contact.notes;
 
@@ -306,9 +306,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 Equals(Phones, other.Phones) &&
                 Equals(Emails, other.Emails) &&
                 Equals(WebSites, other.WebSites) &&
-                Equals(Addresses, other.Addresses) &&
+                Equals(PostalAddresses, other.PostalAddresses) &&
                 Equals(Dates, other.Dates) &&
-                Equals(MessengerIds, other.MessengerIds);
+                Equals(SocialProfileIds, other.SocialProfileIds);
         }
 
         public override bool Equals(object obj)

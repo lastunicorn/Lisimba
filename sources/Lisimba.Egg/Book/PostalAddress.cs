@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class Address : IObservableEntity, IEquatable<Address>
+    public class PostalAddress : IObservableEntity, IEquatable<PostalAddress>
     {
         private string street;
         private string city;
@@ -97,12 +97,12 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 handler(this, EventArgs.Empty);
         }
 
-        public Address()
+        public PostalAddress()
             : this(string.Empty, string.Empty, string.Empty, string.Empty, string.Empty, string.Empty)
         {
         }
 
-        public Address(string address, string city, string state, string postalCode, string country, string description)
+        public PostalAddress(string address, string city, string state, string postalCode, string country, string description)
         {
             Street = address;
             City = city;
@@ -112,24 +112,24 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Description = description;
         }
 
-        public Address(Address address)
+        public PostalAddress(PostalAddress postalAddress)
         {
-            CopyFrom(address);
+            CopyFrom(postalAddress);
         }
 
-        public void CopyFrom(Address address)
+        public void CopyFrom(PostalAddress postalAddress)
         {
-            Street = address.Street;
-            City = address.City;
-            State = address.State;
-            PostalCode = address.PostalCode;
-            Country = address.Country;
-            Description = address.Description;
+            Street = postalAddress.Street;
+            City = postalAddress.City;
+            State = postalAddress.State;
+            PostalCode = postalAddress.PostalCode;
+            Country = postalAddress.Country;
+            Description = postalAddress.Description;
         }
 
-        public Address GetCopy()
+        public PostalAddress GetCopy()
         {
-            return new Address(Street, City, State, PostalCode, Country, Description);
+            return new PostalAddress(Street, City, State, PostalCode, Country, Description);
         }
 
         public override string ToString()
@@ -184,7 +184,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         //    return true;
         //}
 
-        public bool Equals(Address other)
+        public bool Equals(PostalAddress other)
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
@@ -201,9 +201,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Address)) return false;
+            if (obj.GetType() != typeof(PostalAddress)) return false;
 
-            return Equals((Address)obj);
+            return Equals((PostalAddress)obj);
         }
 
         public override int GetHashCode()

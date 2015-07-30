@@ -36,9 +36,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private PhoneCollection phones;
         private EmailCollection emails;
         private WebSiteCollection webSites;
-        private AddressCollection addresses;
+        private PostalAddressCollection postalAddresses;
         private DateCollection dates;
-        private MessengerIdCollection messengerIds;
+        private SocialProfileIdCollection socialProfileIds;
         private string fullName;
 
         public IContactEditorView View { get; set; }
@@ -146,12 +146,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public AddressCollection Addresses
+        public PostalAddressCollection PostalAddresses
         {
-            get { return addresses; }
+            get { return postalAddresses; }
             set
             {
-                addresses = value;
+                postalAddresses = value;
                 OnPropertyChanged();
             }
         }
@@ -166,12 +166,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public MessengerIdCollection MessengerIds
+        public SocialProfileIdCollection SocialProfileIds
         {
-            get { return messengerIds; }
+            get { return socialProfileIds; }
             set
             {
-                messengerIds = value;
+                socialProfileIds = value;
                 OnPropertyChanged();
             }
         }
@@ -233,9 +233,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Phones = contact.Phones;
             Emails = contact.Emails;
             WebSites = contact.WebSites;
-            Addresses = contact.Addresses;
+            PostalAddresses = contact.PostalAddresses;
             Dates = contact.Dates;
-            MessengerIds = contact.MessengerIds;
+            SocialProfileIds = contact.SocialProfileIds;
 
             Enabled = true;
         }
@@ -254,9 +254,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Phones = null;
             Emails = null;
             WebSites = null;
-            Addresses = null;
+            PostalAddresses = null;
             Dates = null;
-            MessengerIds = null;
+            SocialProfileIds = null;
 
             Enabled = false;
         }
@@ -273,7 +273,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddAddressWasClicked()
         {
-            View.AddAddress(contact.Addresses);
+            View.AddAddress(contact.PostalAddresses);
         }
 
         public void AddDateWasClicked()
@@ -286,9 +286,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             View.AddEmail(contact.Emails);
         }
 
-        public void AddMessengerIdWasClicked()
+        public void AddSocialProfileIdWasClicked()
         {
-            View.AddMessengerId(contact.MessengerIds);
+            View.AddSocialProfileId(contact.SocialProfileIds);
         }
 
         public void AddPhoneWasClicked()

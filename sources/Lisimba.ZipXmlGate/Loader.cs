@@ -161,14 +161,14 @@ namespace DustInTheWind.Lisimba.Gating
             IEnumerable<WebSite> webSites = contactEntity.WebSites.Select(FromEntity);
             contact.WebSites.AddRange(webSites);
 
-            IEnumerable<Address> addresses = contactEntity.Addresses.Select(FromEntity);
-            contact.Addresses.AddRange(addresses);
+            IEnumerable<PostalAddress> addresses = contactEntity.Addresses.Select(FromEntity);
+            contact.PostalAddresses.AddRange(addresses);
 
             IEnumerable<Date> dates = contactEntity.Dates.Select(FromEntity);
             contact.Dates.AddRange(dates);
 
-            IEnumerable<MessengerId> messengerIds = contactEntity.MessengerIds.Select(FromEntity);
-            contact.MessengerIds.AddRange(messengerIds);
+            IEnumerable<SocialProfileId> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
+            contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contact.Notes = contactEntity.Notes;
 
@@ -202,9 +202,9 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private Address FromEntity(AddressEntity addeEntity)
+        private PostalAddress FromEntity(AddressEntity addeEntity)
         {
-            return new Address
+            return new PostalAddress
             {
                 Street = addeEntity.Street,
                 City = addeEntity.City,
@@ -226,12 +226,12 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private MessengerId FromEntity(MessengerIdEntity messengerIdEntity)
+        private SocialProfileId FromEntity(SocialProfileIdEntity socialProfileIdEntity)
         {
-            return new MessengerId
+            return new SocialProfileId
             {
-                Id = messengerIdEntity.Id,
-                Description = messengerIdEntity.Description
+                Id = socialProfileIdEntity.Id,
+                Description = socialProfileIdEntity.Description
             };
         }
 

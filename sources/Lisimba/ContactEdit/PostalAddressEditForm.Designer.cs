@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    partial class AddressEditForm
+    partial class PostalAddressEditForm
     {
         /// <summary>
         /// Required designer variable.

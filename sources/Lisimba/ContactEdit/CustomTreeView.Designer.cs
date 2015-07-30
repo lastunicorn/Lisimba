@@ -36,10 +36,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.imageList1.TransparentColor = System.Drawing.Color.White;
             this.imageList1.Images.SetKeyName(0, "phone");
             this.imageList1.Images.SetKeyName(1, "e-mail");
-            this.imageList1.Images.SetKeyName(2, "website");
-            this.imageList1.Images.SetKeyName(3, "address");
+            this.imageList1.Images.SetKeyName(2, "webSite");
+            this.imageList1.Images.SetKeyName(3, "postalAddress");
             this.imageList1.Images.SetKeyName(4, "date");
-            this.imageList1.Images.SetKeyName(5, "mesengerid");
+            this.imageList1.Images.SetKeyName(5, "socialProfileId");
             // 
             // CustomTreeView
             // 

@@ -20,17 +20,17 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class MessengerIdCollection : CustomObservableCollection<MessengerId>
+    public class SocialProfileIdCollection : CustomObservableCollection<SocialProfileId>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (MessengerId messenger in this)
+            foreach (SocialProfileId socialProfileId in this)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = messenger.Id;
-                dr[1] = messenger.Description;
+                dr[0] = socialProfileId.Id;
+                dr[1] = socialProfileId.Description;
                 dt.Rows.Add(dr);
             }
 
@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public static DataTable GetEmptyDataTable()
         {
-            DataTable dt = new DataTable("MessengerIds");
+            DataTable dt = new DataTable("SocialProfileIds");
 
             dt.Columns.Add(new DataColumn("Id", typeof(string)));
             dt.Columns.Add(new DataColumn("Comment", typeof(string)));
@@ -47,46 +47,46 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return dt;
         }
 
-        public void CopyFrom(MessengerIdCollection values)
+        public void CopyFrom(SocialProfileIdCollection values)
         {
             Clear();
 
             for (int i = 0; i < values.Count; i++)
             {
-                Add(new MessengerId(values[i]));
+                Add(new SocialProfileId(values[i]));
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="MessengerId"/> object that match the description.
+        /// Returns the <see cref="SocialProfileId"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="MessengerId"/> object that match or <c>null</c>.</returns>
-        public MessengerId SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="SocialProfileId"/> object that match or <c>null</c>.</returns>
+        public SocialProfileId SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (MessengerId messengerId in Items)
+            foreach (SocialProfileId socialProfileId in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (messengerId.Description.CompareTo(text) == 0)
-                            return messengerId;
+                        if (socialProfileId.Description.CompareTo(text) == 0)
+                            return socialProfileId;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (messengerId.Description.StartsWith(text))
-                            return messengerId;
+                        if (socialProfileId.Description.StartsWith(text))
+                            return socialProfileId;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (messengerId.Description.EndsWith(text))
-                            return messengerId;
+                        if (socialProfileId.Description.EndsWith(text))
+                            return socialProfileId;
                         break;
 
                     case SearchMode.Containing:
-                        if (messengerId.Description.IndexOf(text) > 0)
-                            return messengerId;
+                        if (socialProfileId.Description.IndexOf(text) > 0)
+                            return socialProfileId;
                         break;
                 }
             }
@@ -96,22 +96,22 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            MessengerIdCollection messengerIds = obj as MessengerIdCollection;
+            SocialProfileIdCollection socialProfileIds = obj as SocialProfileIdCollection;
 
-            return Equals(messengerIds);
+            return Equals(socialProfileIds);
         }
 
-        public bool Equals(MessengerIdCollection messengerIds)
+        public bool Equals(SocialProfileIdCollection socialProfileIds)
         {
-            if (messengerIds == null)
+            if (socialProfileIds == null)
                 return false;
 
-            if (messengerIds.Count != Count)
+            if (socialProfileIds.Count != Count)
                 return false;
 
-            for (int i = 0; i < messengerIds.Count; i++)
+            for (int i = 0; i < socialProfileIds.Count; i++)
             {
-                bool exists = Enumerable.Contains(Items, messengerIds[i]);
+                bool exists = Enumerable.Contains(Items, socialProfileIds[i]);
 
                 if (!exists)
                     return false;

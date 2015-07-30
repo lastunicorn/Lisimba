@@ -120,9 +120,9 @@ namespace DustInTheWind.Lisimba.Gating
                 Phones = contact.Phones.Select(ToEntity).ToList(),
                 Emails = contact.Emails.Select(ToEntity).ToList(),
                 WebSites = contact.WebSites.Select(ToEntity).ToList(),
-                Addresses = contact.Addresses.Select(ToEntity).ToList(),
+                Addresses = contact.PostalAddresses.Select(ToEntity).ToList(),
                 Dates = contact.Dates.Select(ToEntity).ToList(),
-                MessengerIds = contact.MessengerIds.Select(ToEntity).ToList(),
+                SocialProfileIds = contact.SocialProfileIds.Select(ToEntity).ToList(),
                 Notes = contact.Notes
             };
         }
@@ -154,16 +154,16 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private AddressEntity ToEntity(Address address)
+        private AddressEntity ToEntity(PostalAddress postalAddress)
         {
             return new AddressEntity
             {
-                Street = address.Street,
-                City = address.City,
-                State = address.State,
-                PostalCode = address.PostalCode,
-                Country = address.Country,
-                Description = address.Description
+                Street = postalAddress.Street,
+                City = postalAddress.City,
+                State = postalAddress.State,
+                PostalCode = postalAddress.PostalCode,
+                Country = postalAddress.Country,
+                Description = postalAddress.Description
             };
         }
 
@@ -178,12 +178,12 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private MessengerIdEntity ToEntity(MessengerId messengerId)
+        private SocialProfileIdEntity ToEntity(SocialProfileId socialProfileId)
         {
-            return new MessengerIdEntity
+            return new SocialProfileIdEntity
             {
-                Id = messengerId.Id,
-                Description = messengerId.Description
+                Id = socialProfileId.Id,
+                Description = socialProfileId.Description
             };
         }
     }

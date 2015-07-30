@@ -20,20 +20,20 @@ using System.Xml.Serialization;
 namespace DustInTheWind.Lisimba.Gating.Entities
 {
     /// <summary>
-    /// Class containing information about a messenger id.
+    /// Class containing information about a social profile id.
     /// </summary>
     [Serializable]
     [XmlRoot("MessengerId")]
-    public class MessengerIdEntity
+    public class SocialProfileIdEntity
     {
         /// <summary>
-        /// The messenger id.
+        /// The so profile id.
         /// </summary>
         [XmlAttribute("Id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// A short description of the e-mail address.
+        /// A short description of the social profile id.
         /// </summary>
         [XmlAttribute("Description")]
         public string Description { get; set; }

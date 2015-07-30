@@ -40,12 +40,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
             this.buttonAddEmail = new System.Windows.Forms.Button();
-            this.buttonAddMessengerId = new System.Windows.Forms.Button();
+            this.buttonAddSocialProfileId = new System.Windows.Forms.Button();
             this.buttonAddPhone = new System.Windows.Forms.Button();
             this.buttonAddWebSite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -58,6 +57,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
+            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -198,36 +198,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             // 
-            // customTreeView1
-            // 
-            this.customTreeView1.Addresses = null;
-            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customTreeView1.Dates = null;
-            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTreeView1.Emails = null;
-            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.customTreeView1.FullRowSelect = true;
-            this.customTreeView1.ImageIndex = 0;
-            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
-            this.customTreeView1.MessengerIds = null;
-            this.customTreeView1.Name = "customTreeView1";
-            this.customTreeView1.Phones = null;
-            this.customTreeView1.SelectedImageIndex = 0;
-            this.customTreeView1.ShowLines = false;
-            this.customTreeView1.ShowPlusMinus = false;
-            this.customTreeView1.ShowRootLines = false;
-            this.customTreeView1.Size = new System.Drawing.Size(298, 71);
-            this.customTreeView1.TabIndex = 12;
-            this.customTreeView1.WebSites = null;
-            // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.AutoSize = true;
             this.flowLayoutPanel3.Controls.Add(this.buttonAddAddress);
             this.flowLayoutPanel3.Controls.Add(this.buttonAddDate);
             this.flowLayoutPanel3.Controls.Add(this.buttonAddEmail);
-            this.flowLayoutPanel3.Controls.Add(this.buttonAddMessengerId);
+            this.flowLayoutPanel3.Controls.Add(this.buttonAddSocialProfileId);
             this.flowLayoutPanel3.Controls.Add(this.buttonAddPhone);
             this.flowLayoutPanel3.Controls.Add(this.buttonAddWebSite);
             this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -279,18 +256,18 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonAddEmail.UseVisualStyleBackColor = true;
             this.buttonAddEmail.Click += new System.EventHandler(this.buttonAddEmail_Click);
             // 
-            // buttonAddMessengerId
+            // buttonAddSocialProfileId
             // 
-            this.buttonAddMessengerId.AutoSize = true;
-            this.buttonAddMessengerId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddMessengerId.Image = global::DustInTheWind.Lisimba.Properties.Resources.mesengerid_add;
-            this.buttonAddMessengerId.Location = new System.Drawing.Point(156, 3);
-            this.buttonAddMessengerId.MinimumSize = new System.Drawing.Size(45, 45);
-            this.buttonAddMessengerId.Name = "buttonAddMessengerId";
-            this.buttonAddMessengerId.Size = new System.Drawing.Size(45, 45);
-            this.buttonAddMessengerId.TabIndex = 13;
-            this.buttonAddMessengerId.UseVisualStyleBackColor = true;
-            this.buttonAddMessengerId.Click += new System.EventHandler(this.buttonAddMessengerId_Click);
+            this.buttonAddSocialProfileId.AutoSize = true;
+            this.buttonAddSocialProfileId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonAddSocialProfileId.Image = global::DustInTheWind.Lisimba.Properties.Resources.mesengerid_add;
+            this.buttonAddSocialProfileId.Location = new System.Drawing.Point(156, 3);
+            this.buttonAddSocialProfileId.MinimumSize = new System.Drawing.Size(45, 45);
+            this.buttonAddSocialProfileId.Name = "buttonAddSocialProfileId";
+            this.buttonAddSocialProfileId.Size = new System.Drawing.Size(45, 45);
+            this.buttonAddSocialProfileId.TabIndex = 13;
+            this.buttonAddSocialProfileId.UseVisualStyleBackColor = true;
+            this.buttonAddSocialProfileId.Click += new System.EventHandler(this.buttonAddSocialProfileId_Click);
             // 
             // buttonAddPhone
             // 
@@ -455,6 +432,29 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
             // 
+            // customTreeView1
+            // 
+            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
+            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.Dates = null;
+            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTreeView1.Emails = null;
+            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.customTreeView1.FullRowSelect = true;
+            this.customTreeView1.ImageIndex = 0;
+            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
+            this.customTreeView1.Name = "customTreeView1";
+            this.customTreeView1.Phones = null;
+            this.customTreeView1.PostalAddresses = null;
+            this.customTreeView1.SelectedImageIndex = 0;
+            this.customTreeView1.ShowLines = false;
+            this.customTreeView1.ShowPlusMinus = false;
+            this.customTreeView1.ShowRootLines = false;
+            this.customTreeView1.Size = new System.Drawing.Size(298, 71);
+            this.customTreeView1.SocialProfileIds = null;
+            this.customTreeView1.TabIndex = 12;
+            this.customTreeView1.WebSites = null;
+            // 
             // ContactEditor
             // 
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -518,7 +518,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.Button buttonAddWebSite;
         private System.Windows.Forms.Button buttonAddDate;
         private System.Windows.Forms.Button buttonAddPhone;
-        private System.Windows.Forms.Button buttonAddMessengerId;
+        private System.Windows.Forms.Button buttonAddSocialProfileId;
         private CustomTreeView customTreeView1;
     }
 }

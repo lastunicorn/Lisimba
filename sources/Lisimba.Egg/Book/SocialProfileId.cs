@@ -19,15 +19,15 @@ using System;
 namespace DustInTheWind.Lisimba.Egg.Book
 {
     /// <summary>
-    /// Class containing information about a messenger id.
+    /// Class containing information about a social profile id.
     /// </summary>
-    public class MessengerId : IObservableEntity, IEquatable<MessengerId>
+    public class SocialProfileId : IObservableEntity, IEquatable<SocialProfileId>
     {
         private string id;
         private string description;
 
         /// <summary>
-        /// The messenger id.
+        /// The social profile id.
         /// </summary>
         public string Id
         {
@@ -63,28 +63,28 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Creates a new empty MessengerId object.
+        /// Creates a new empty <see cref="SocialProfileId"/> object.
         /// </summary>
-        public MessengerId()
+        public SocialProfileId()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new MessengerId object with the id and description specified.
+        /// Creates a new <see cref="SocialProfileId"/> object with the id and description specified.
         /// </summary>
-        public MessengerId(string id, string description)
+        public SocialProfileId(string id, string description)
         {
             this.id = id;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new MessengerId object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="SocialProfileId"/> object with the data copied from the one passed as parameter.
         /// </summary>
-        public MessengerId(MessengerId messenger)
+        public SocialProfileId(SocialProfileId socialProfile)
         {
-            CopyFrom(messenger);
+            CopyFrom(socialProfile);
         }
 
         /// <summary>
@@ -97,29 +97,29 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Copy the data from the MessengerId object passed as parameter into the current object.
+        /// Copy the data from the <see cref="SocialProfileId"/> object passed as parameter into the current object.
         /// </summary>
-        public void CopyFrom(MessengerId messenger)
+        public void CopyFrom(SocialProfileId socialProfile)
         {
-            id = messenger.id;
-            description = messenger.description;
+            id = socialProfile.id;
+            description = socialProfile.description;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(MessengerId)) return false;
+            if (obj.GetType() != typeof(SocialProfileId)) return false;
 
-            return Equals((MessengerId)obj);
+            return Equals((SocialProfileId)obj);
         }
 
-        public bool Equals(MessengerId messengerId)
+        public bool Equals(SocialProfileId socialProfileId)
         {
-            if (ReferenceEquals(null, messengerId)) return false;
-            if (ReferenceEquals(this, messengerId)) return true;
+            if (ReferenceEquals(null, socialProfileId)) return false;
+            if (ReferenceEquals(this, socialProfileId)) return true;
 
-            return string.Equals(id, messengerId.id) && string.Equals(description, messengerId.description);
+            return string.Equals(id, socialProfileId.id) && string.Equals(description, socialProfileId.description);
         }
 
         public override int GetHashCode()

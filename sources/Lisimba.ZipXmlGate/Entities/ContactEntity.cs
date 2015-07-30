@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Gating.Entities
         public List<DateEntity> Dates { get; set; }
 
         [XmlArray("MessengerIds"), XmlArrayItem("MessengerId")]
-        public List<MessengerIdEntity> MessengerIds { get; set; }
+        public List<SocialProfileIdEntity> SocialProfileIds { get; set; }
 
         [XmlElement("Notes")]
         public string Notes { get; set; }

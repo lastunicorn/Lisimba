@@ -22,10 +22,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
     {
         void EditBirthday(Date birthday);
         void EditName(PersonName name);
-        void AddAddress(AddressCollection addresses);
+        void AddAddress(PostalAddressCollection postalAddresses);
         void AddDate(DateCollection dates);
         void AddEmail(EmailCollection emails);
-        void AddMessengerId(MessengerIdCollection messengerIds);
+        void AddSocialProfileId(SocialProfileIdCollection socialProfileIds);
         void AddPhone(PhoneCollection phones);
         void AddWebSite(WebSiteCollection webSites);
     }

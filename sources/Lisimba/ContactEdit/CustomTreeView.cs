@@ -29,17 +29,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private TreeNode TreeNodeEmails
         {
-            get { return GetOrCreateCategoryNode("emails", "Emails", "e-mail"); }
+            get { return GetOrCreateCategoryNode("e-mails", "Emails", "e-mail"); }
         }
 
         private TreeNode TreeNodeWebSites
         {
-            get { return GetOrCreateCategoryNode("websites", "Web Sites", "website"); }
+            get { return GetOrCreateCategoryNode("web-sites", "Web Sites", "webSite"); }
         }
 
         private TreeNode TreeNodeAddresses
         {
-            get { return GetOrCreateCategoryNode("addresses", "Addresses", "address"); }
+            get { return GetOrCreateCategoryNode("postal-addresses", "Postal Addresses", "postalAddress"); }
         }
 
         private TreeNode TreeNodeDates
@@ -47,9 +47,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             get { return GetOrCreateCategoryNode("dates", "Dates", "date"); }
         }
 
-        private TreeNode TreeNodeMessengerIds
+        private TreeNode TreeNodeSocialProfileIds
         {
-            get { return GetOrCreateCategoryNode("mesengerids", "Mesenger Ids", "mesengerid"); }
+            get { return GetOrCreateCategoryNode("social-profile-ids", "Social Profile Ids", "socialProfileid"); }
         }
 
         private TreeNode GetOrCreateCategoryNode(string categoryId, string label, string imageKey)
@@ -77,9 +77,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private PhoneCollection phones;
         private EmailCollection emails;
         private WebSiteCollection webSites;
-        private AddressCollection addresses;
+        private PostalAddressCollection postalAddresses;
         private DateCollection dates;
-        private MessengerIdCollection messengerIds;
+        private SocialProfileIdCollection socialProfileIds;
 
         public PhoneCollection Phones
         {
@@ -111,12 +111,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public AddressCollection Addresses
+        public PostalAddressCollection PostalAddresses
         {
-            get { return addresses; }
+            get { return postalAddresses; }
             set
             {
-                addresses = value;
+                postalAddresses = value;
                 DisplayAddresses();
             }
         }
@@ -131,13 +131,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public MessengerIdCollection MessengerIds
+        public SocialProfileIdCollection SocialProfileIds
         {
-            get { return messengerIds; }
+            get { return socialProfileIds; }
             set
             {
-                messengerIds = value;
-                DisplayMessengerIds();
+                socialProfileIds = value;
+                DisplaySocialProfileIds();
             }
         }
 
@@ -223,13 +223,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
             }
 
-            Address addressTag = selectedNode.Tag as Address;
+            PostalAddress postalAddressTag = selectedNode.Tag as PostalAddress;
 
-            if (addressTag != null)
+            if (postalAddressTag != null)
             {
-                AddressEditForm form = new AddressEditForm
+                PostalAddressEditForm form = new PostalAddressEditForm
                 {
-                    Address = addressTag,
+                    PostalAddress = postalAddressTag,
                     Location = PointToScreen(e.Location),
                     AddMode = false
                 };
@@ -257,13 +257,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
             }
 
-            MessengerId messengerIdTag = selectedNode.Tag as MessengerId;
+            SocialProfileId socialProfileIdTag = selectedNode.Tag as SocialProfileId;
 
-            if (messengerIdTag != null)
+            if (socialProfileIdTag != null)
             {
-                MessengerIdEditForm form = new MessengerIdEditForm
+                SocialProfileIdEditForm form = new SocialProfileIdEditForm
                 {
-                    MessengerId = messengerIdTag,
+                    SocialProfileId = socialProfileIdTag,
                     Location = PointToScreen(e.Location),
                     AddMode = false
                 };
@@ -345,10 +345,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             TreeNodeAddresses.Nodes.Clear();
 
-            if (addresses == null)
+            if (postalAddresses == null)
                 return;
 
-            foreach (Address address in addresses)
+            foreach (PostalAddress address in postalAddresses)
             {
                 TreeNode addressNode = new TreeNode(address.ToString(), -2, -2)
                 {
@@ -385,26 +385,26 @@ namespace DustInTheWind.Lisimba.ContactEdit
             TreeNodeDates.Expand();
         }
 
-        private void DisplayMessengerIds()
+        private void DisplaySocialProfileIds()
         {
-            TreeNodeMessengerIds.Nodes.Clear();
+            TreeNodeSocialProfileIds.Nodes.Clear();
 
-            if (messengerIds == null)
+            if (socialProfileIds == null)
                 return;
 
-            foreach (MessengerId messengerId in messengerIds)
+            foreach (SocialProfileId socialProfileId in socialProfileIds)
             {
-                TreeNode messengerIdNode = new TreeNode(messengerId.ToString(), -2, -2)
+                TreeNode socialProfileIdNode = new TreeNode(socialProfileId.ToString(), -2, -2)
                 {
-                    Tag = messengerId
+                    Tag = socialProfileId
                 };
 
-                TreeNodeMessengerIds.Nodes.Add(messengerIdNode);
-                messengerIdNode.ImageIndex = -2;
-                messengerIdNode.SelectedImageIndex = -2;
+                TreeNodeSocialProfileIds.Nodes.Add(socialProfileIdNode);
+                socialProfileIdNode.ImageIndex = -2;
+                socialProfileIdNode.SelectedImageIndex = -2;
             }
 
-            TreeNodeMessengerIds.Expand();
+            TreeNodeSocialProfileIds.Expand();
         }
     }
 }

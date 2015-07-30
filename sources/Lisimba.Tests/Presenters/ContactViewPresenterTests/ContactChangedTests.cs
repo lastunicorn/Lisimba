@@ -167,12 +167,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            AddressCollection addresses = new AddressCollection { new Address(), new Address() };
-            contact.Addresses.AddRange(addresses);
+            PostalAddressCollection postalAddresses = new PostalAddressCollection { new PostalAddress(), new PostalAddress() };
+            contact.PostalAddresses.AddRange(postalAddresses);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.Addresses, Is.EquivalentTo(addresses));
+            Assert.That(contactEditorViewModel.PostalAddresses, Is.EquivalentTo(postalAddresses));
         }
 
         [Test]
@@ -182,7 +182,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.Addresses, Is.Null);
+            Assert.That(contactEditorViewModel.PostalAddresses, Is.Null);
         }
 
         [Test]
@@ -209,26 +209,26 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         }
 
         [Test]
-        public void if_Contact_is_set_messengerids_list_is_set_in_view()
+        public void if_Contact_is_set_socialprofileids_list_is_set_in_view()
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            MessengerIdCollection messengerIds = new MessengerIdCollection { new MessengerId(), new MessengerId() };
-            contact.MessengerIds.AddRange(messengerIds);
+            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfileId(), new SocialProfileId() };
+            contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.MessengerIds, Is.EquivalentTo(messengerIds));
+            Assert.That(contactEditorViewModel.SocialProfileIds, Is.EquivalentTo(socialProfileIds));
         }
 
         [Test]
-        public void if_Contact_is_set_to_null_messengerids_list_is_set_to_null_in_view()
+        public void if_Contact_is_set_to_null_socialprofileids_list_is_set_to_null_in_view()
         {
             contactEditorViewModel.View = view.Object;
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.MessengerIds, Is.Null);
+            Assert.That(contactEditorViewModel.SocialProfileIds, Is.Null);
         }
     }
 }
