@@ -35,44 +35,19 @@ namespace DustInTheWind.Lisimba.MainMenu
 
             recentFiles.FileNameAdded += HandleRecentFileNameAdded;
 
-            //toolStripMenuItem_File_New.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_New.ViewModel = commandPool.CreateNewAddressBookOperation;
-
-            //toolStripMenuItem_File_Open.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Open.ViewModel = commandPool.OpenAddressBookOperation;
-
-            //toolStripMenuItem_File_Save.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Save.ViewModel = commandPool.SaveAddressBookOperation;
-
-            //toolStripMenuItem_File_SaveAs.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_SaveAs.ViewModel = commandPool.SaveAsAddressBookOperation;
-
-            //toolStripMenuItem_File_Close.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Close.ViewModel = commandPool.CloseAddressBookOperation;
-
-            //toolStripMenuItem_File_Export.ApplicationStatus = applicationStatus;
             toolStripMenuItem_File_Export.ShortDescription = "Export current opened address book in another format.";
-
-            toolStripMenuItem_ExportToYahooCSV.ViewModel = commandPool.ExportYahooCsvOperation;
-
-            //toolStripMenuItem_File_Import.ApplicationStatus = applicationStatus;
+            //toolStripMenuItem_ExportToYahooCSV.ViewModel = commandPool.ExportYahooCsvOperation;
             toolStripMenuItem_File_Import.ShortDescription = "Import address book from another format.";
-
-            toolStripMenuItem_ImportFromYahooCSV.ViewModel = commandPool.ImportYahooCsvOperation;
-
-            //toolStripMenuItem_File_Exit.ApplicationStatus = applicationStatus;
+            //toolStripMenuItem_ImportFromYahooCSV.ViewModel = commandPool.ImportYahooCsvOperation;
             toolStripMenuItem_File_Exit.ViewModel = commandPool.ApplicationExitOperation;
-
-            //toolStripMenuItem_AddressBook_AddContact.ApplicationStatus = applicationStatus;
             toolStripMenuItem_AddressBook_AddContact.ViewModel = commandPool.CreateNewContactOperation;
-
-            //toolStripMenuItem_AddressBook_DeleteContact.ApplicationStatus = applicationStatus;
             toolStripMenuItem_AddressBook_DeleteContact.ViewModel = commandPool.DeleteCurrentContactOperation;
-
-            //toolStripMenuItem_AddressBook_Properties.ApplicationStatus = applicationStatus;
             toolStripMenuItem_AddressBook_Properties.ViewModel = commandPool.ShowAddressBookPropertiesOperation;
-
-            //toolStripMenuItem_Help_About.ApplicationStatus = applicationStatus;
             toolStripMenuItem_Help_About.ViewModel = commandPool.ShowAboutOperation;
 
             toolStripMenuItem_File_RecentFiles.ChildrenOpertion = commandPool.OpenAddressBookOperation;

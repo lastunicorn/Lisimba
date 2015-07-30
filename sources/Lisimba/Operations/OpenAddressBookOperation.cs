@@ -55,32 +55,18 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                // check if safe to close previous
-
-                bool allowToContinue = addressBookShell.EnsureIsSaved();
-
-                if (!allowToContinue)
-                    return;
-
-                // check params
-
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    fileName = userInterface.AskToOpenLsbFile();
-
-                    if (fileName == null)
-                        return;
-                }
-
                 // create the gate and load book
 
                 ZipXmlGate gate = new ZipXmlGate();
-                addressBookShell.LoadFrom(gate, fileName);
+                bool succeeded = addressBookShell.LoadFrom(gate, fileName);
+
+                if (!succeeded)
+                    return;
 
                 // display status
 
                 applicationStatus.StatusText = string.Format("{0} contacts oppened.", addressBookShell.AddressBook.Contacts.Count);
-                recentFiles.AddRecentFile(Path.GetFullPath(fileName));
+                recentFiles.AddRecentFile(Path.GetFullPath(addressBookShell.FileName));
 
                 // display warnings
 

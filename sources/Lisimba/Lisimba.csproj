@@ -106,9 +106,7 @@
     <Compile Include="Operations\IExecutableViewModel.cs" />
     <Compile Include="Operations\IExecutableViewModel1.cs" />
     <Compile Include="Operations\ShowAboutOperation.cs" />
-    <Compile Include="Operations\ExportYahooCsvOperation.cs" />
     <Compile Include="Operations\SaveAsAddressBookOperation.cs" />
-    <Compile Include="Operations\ImportYahooCsvOperation.cs" />
     <Compile Include="Comparers\TreeNodeComparer.cs" />
     <Compile Include="Forms\IAddContactView.cs" />
     <Compile Include="Forms\IAddressBookPropertiesView.cs" />

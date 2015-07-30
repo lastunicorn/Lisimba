@@ -49,10 +49,10 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<CloseAddressBookOperation>(); }
         }
 
-        public ExportYahooCsvOperation ExportYahooCsvOperation
-        {
-            get { return servicePrvider.Resolve<ExportYahooCsvOperation>(); }
-        }
+        //public ExportYahooCsvOperation ExportYahooCsvOperation
+        //{
+        //    get { return servicePrvider.Resolve<ExportYahooCsvOperation>(); }
+        //}
 
         public ShowAddressBookPropertiesOperation ShowAddressBookPropertiesOperation
         {
@@ -64,10 +64,10 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<ShowAboutOperation>(); }
         }
 
-        public ImportYahooCsvOperation ImportYahooCsvOperation
-        {
-            get { return servicePrvider.Resolve<ImportYahooCsvOperation>(); }
-        }
+        //public ImportYahooCsvOperation ImportYahooCsvOperation
+        //{
+        //    get { return servicePrvider.Resolve<ImportYahooCsvOperation>(); }
+        //}
 
         public DeleteCurrentContactOperation DeleteCurrentContactOperation
         {

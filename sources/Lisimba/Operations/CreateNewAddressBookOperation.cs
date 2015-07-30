@@ -48,8 +48,10 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                addressBookShell.LoadNew();
-                applicationStatus.StatusText = "A new address book was created.";
+                bool succeeded = addressBookShell.LoadNew();
+
+                if (succeeded)
+                    applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)
             {

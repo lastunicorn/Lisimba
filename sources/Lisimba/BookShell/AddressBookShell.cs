@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.BookShell
 
         private void HandleLisimbaApplicationExiting(object sender, CancelEventArgs e)
         {
-            bool allowToContinue = EnsureIsSaved();
+            bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
                 e.Cancel = true;
@@ -158,18 +158,42 @@ namespace DustInTheWind.Lisimba.BookShell
             return "< Unnamed >";
         }
 
-        public void LoadNew()
+        public bool LoadNew()
         {
+            bool allowToContinue = CloseAddressBook();
+
+            if (!allowToContinue)
+                return false;
+
+            Contact = null;
             AddressBook = new AddressBook();
             FileName = null;
             Status = AddressBookStatus.New;
+
+            return true;
         }
 
-        public void LoadFrom(IGate gate, string fileName)
+        public bool LoadFrom(IGate gate, string fileName)
         {
+            bool succeeded = CloseAddressBook();
+
+            if (!succeeded)
+                return false;
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                fileName = userInterface.AskToOpenLsbFile();
+
+                if (fileName == null)
+                    return false;
+            }
+
+            Contact = null;
             AddressBook = gate.Load(fileName);
             FileName = fileName;
             Status = AddressBookStatus.Saved;
+
+            return true;
         }
 
         public void ExportTo(IGate gate, string fileName)
@@ -207,14 +231,19 @@ namespace DustInTheWind.Lisimba.BookShell
             return true;
         }
 
-        public void CloseAddressBook()
+        public bool CloseAddressBook()
         {
-            EnsureIsSaved();
+            bool allowToContinue = EnsureIsSaved();
+
+            if (!allowToContinue)
+                return false;
 
             Contact = null;
             AddressBook = null;
             FileName = null;
             Status = AddressBookStatus.None;
+
+            return true;
         }
 
         public void DeleteCurrentContact()
@@ -239,7 +268,7 @@ namespace DustInTheWind.Lisimba.BookShell
         {
             string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
             string title = LocalizedResources.ContactDelete_ConfirmationTitle;
-            
+
             return userInterface.DisplayYesNoExclamation(text, title);
         }
     }
