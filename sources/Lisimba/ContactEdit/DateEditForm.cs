@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -40,7 +41,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add Date" : "Edit Date";
+                Text = value ? Resources.AddDate_WindowTitle : Resources.EditDate_WindowTitle;
             }
         }
 
@@ -61,6 +62,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             comboBoxDay.KeyDown += FormEditBase_KeyDown;
             comboBoxMonth.KeyDown += FormEditBase_KeyDown;
             textBoxYear.KeyDown += FormEditBase_KeyDown;
+            textBoxComment.KeyDown += FormEditBase_KeyDown;
         }
 
         protected override void UpdateData()
@@ -85,6 +87,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             int.TryParse(textBoxYear.Text, out year);
 
             date.SetValues(day, month, year);
+
+            date.Description = textBoxComment.Text;
         }
 
         private bool UserChangedData()
@@ -95,7 +99,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             int year;
             int.TryParse(textBoxYear.Text, out year);
 
-            return date.Day != day || date.Month != month || date.Year != year;
+            return date.Day != day || date.Month != month || date.Year != year || date.Description != textBoxComment.Text;
         }
 
         private void DisplayDataInView()
@@ -103,6 +107,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             comboBoxDay.SelectedIndex = date.Day;
             comboBoxMonth.SelectedIndex = date.Month;
             textBoxYear.Text = (date.Year != 0 ? date.Year.ToString() : string.Empty);
+            textBoxComment.Text = date.Description;
         }
     }
 }

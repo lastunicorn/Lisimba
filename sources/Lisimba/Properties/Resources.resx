@@ -196,4 +196,10 @@
   <data name="ErrorPopup_Title" xml:space="preserve">
     <value>Error</value>
   </data>
+    <data name="AddDate_WindowTitle" xml:space="preserve">
+    <value>Add Date</value>
+  </data>
+    <data name="EditDate_WindowTitle" xml:space="preserve">
+    <value>Edit Date</value>
+  </data>
 </root>

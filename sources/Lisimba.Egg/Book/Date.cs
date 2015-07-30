@@ -349,6 +349,15 @@ namespace DustInTheWind.Lisimba.Egg.Book
             string monthAsString = (month < 10 ? "0" : "") + month;
             string dayAsString = (day < 10 ? "0" : "") + day;
 
+            return string.Format("{0} {1} {2} - {3}", yearAsString, monthAsString, dayAsString, description);
+        }
+
+        public string ToShortString()
+        {
+            string yearAsString = year == 0 ? "0000" : year.ToString();
+            string monthAsString = (month < 10 ? "0" : "") + month;
+            string dayAsString = (day < 10 ? "0" : "") + day;
+
             return string.Format("{0} {1} {2}", yearAsString, monthAsString, dayAsString);
         }
 

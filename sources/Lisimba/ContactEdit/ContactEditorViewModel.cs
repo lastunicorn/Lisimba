@@ -223,7 +223,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             FullName = Contact.Name.ToString();
 
-            Birthday = contact.Birthday.ToString();
+            Birthday = contact.Birthday.ToShortString();
 
             ZodiacSignImage = zodiac.GetZodiacImage(contact.ZodiacSign);
             ZodiacSignText = zodiac.GetZodiacSignName(contact.ZodiacSign);
