@@ -39,6 +39,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void CreateBindings()
         {
+            nameEditor1.Bind(x => x.PersonName, Model, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
             labelFullName.Bind(x => x.Text, Model, x => x.FullName, false, DataSourceUpdateMode.Never);
             labelBirthday.Bind(x => x.Text, Model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 

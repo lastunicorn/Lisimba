@@ -65,10 +65,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void ReadDataFromView()
         {
-            personName.FirstName = textBoxFirstName.Text;
-            personName.MiddleName = textBoxMiddleName.Text;
-            personName.LastName = textBoxLastName.Text;
-            personName.Nickname = textBoxNickname.Text;
+            personName.CopyFrom(new PersonName
+            {
+                FirstName = textBoxFirstName.Text,
+                MiddleName = textBoxMiddleName.Text,
+                LastName = textBoxLastName.Text,
+                Nickname = textBoxNickname.Text
+            });
         }
     }
 }

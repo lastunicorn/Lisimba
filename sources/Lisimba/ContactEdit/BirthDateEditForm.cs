@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Globalization;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -44,7 +45,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 comboBoxDay.Items.Add(i);
 
             comboBoxMonth.Items.Add("-");
-            comboBoxMonth.Items.AddRange(System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
+            comboBoxMonth.Items.AddRange(CultureInfo.CurrentCulture.DateTimeFormat.MonthNames);
 
             comboBoxDay.KeyDown += HandleFormKeyDown;
             comboBoxMonth.KeyDown += HandleFormKeyDown;

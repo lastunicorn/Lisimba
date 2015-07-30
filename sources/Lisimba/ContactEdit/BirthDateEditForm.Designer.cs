@@ -211,14 +211,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel1.Size = new System.Drawing.Size(302, 23);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
-            // DateEditForm
+            // BirthDateEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(323, 80);
             this.MinimumSize = new System.Drawing.Size(308, 90);
-            this.Name = "DateEditForm";
+            this.Name = "BirthDateEditForm";
             this.Text = "Edit Birthday";
             this.panelInnerContainer.ResumeLayout(false);
             this.panelInnerContainer.PerformLayout();

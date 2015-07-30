@@ -223,7 +223,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             string fullName = GetFullNameWithoutNickname();
 
-            if (nickname.Length > 0)
+            bool nicknameExists = !string.IsNullOrWhiteSpace(nickname);
+
+            if (nicknameExists)
                 return string.Format("{0} ({1})", nickname, fullName);
 
             return fullName.Length == 0 ? "< NA >" : fullName;

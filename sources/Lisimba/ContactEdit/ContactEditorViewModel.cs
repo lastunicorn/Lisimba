@@ -40,6 +40,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private DateCollection dates;
         private SocialProfileIdCollection socialProfileIds;
         private string fullName;
+        private PersonName name;
 
         public IContactEditorView View { get; set; }
 
@@ -186,6 +187,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public PersonName Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ContactEditorViewModel(Zodiac zodiac)
         {
             if (zodiac == null)
@@ -221,6 +232,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void DisplayContactInView()
         {
+            Name = Contact.Name;
             FullName = Contact.Name.ToString();
 
             Birthday = contact.Birthday.ToShortString();
@@ -242,6 +254,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void ClearView()
         {
+            Name = null;
             FullName = string.Empty;
 
             Birthday = string.Empty;
