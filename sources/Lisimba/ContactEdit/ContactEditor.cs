@@ -29,16 +29,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
     {
         public ContactEditorViewModel Model { get; private set; }
 
-        readonly DateEditForm formBirthdayEdit;
-        readonly NameEditForm formNameEdit;
-
         public ContactEditor()
         {
             InitializeComponent();
 
             Model = new ContactEditorViewModel(new Zodiac()) { View = this };
-            formBirthdayEdit = new DateEditForm();
-            formNameEdit = new NameEditForm();
             CreateBindings();
         }
 
@@ -110,20 +105,26 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void EditBirthday(Date birthday)
         {
-            formBirthdayEdit.Location = GetBottomLeftCorner(labelBirthday);
-            formBirthdayEdit.Date = birthday;
+            DateEditForm form = new DateEditForm
+            {
+                Location = GetBottomLeftCorner(labelBirthday),
+                Date = birthday
+            };
 
-            formBirthdayEdit.Show();
-            formBirthdayEdit.Focus();
+            form.Show();
+            form.Focus();
         }
 
         public void EditName(PersonName name)
         {
-            formNameEdit.Location = GetBottomLeftCorner(labelFullName);
-            formNameEdit.PersonName = name;
+            NameEditForm form = new NameEditForm
+            {
+                Location = GetBottomLeftCorner(labelFullName),
+                PersonName = name
+            };
 
-            formNameEdit.Show();
-            formNameEdit.Focus();
+            form.Show();
+            form.Focus();
         }
 
         public void AddAddress(PostalAddressCollection postalAddresses)
