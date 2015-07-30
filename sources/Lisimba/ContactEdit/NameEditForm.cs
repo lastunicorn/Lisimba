@@ -36,10 +36,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
-            textBoxFirstName.KeyDown += FormEditBase_KeyDown;
-            textBoxMiddleName.KeyDown += FormEditBase_KeyDown;
-            textBoxLastName.KeyDown += FormEditBase_KeyDown;
-            textBoxNickname.KeyDown += FormEditBase_KeyDown;
+            textBoxFirstName.KeyDown += HandleFormKeyDown;
+            textBoxMiddleName.KeyDown += HandleFormKeyDown;
+            textBoxLastName.KeyDown += HandleFormKeyDown;
+            textBoxNickname.KeyDown += HandleFormKeyDown;
         }
 
         protected override void UpdateData()

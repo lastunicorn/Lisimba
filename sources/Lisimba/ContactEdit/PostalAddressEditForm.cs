@@ -53,12 +53,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             AddMode = false;
 
-            textBoxAddress.KeyDown += FormEditBase_KeyDown;
-            textBoxCity.KeyDown += FormEditBase_KeyDown;
-            textBoxState.KeyDown += FormEditBase_KeyDown;
-            textBoxCountry.KeyDown += FormEditBase_KeyDown;
-            textBoxZip.KeyDown += FormEditBase_KeyDown;
-            textBoxComments.KeyDown += FormEditBase_KeyDown;
+            textBoxAddress.KeyDown += HandleFormKeyDown;
+            textBoxCity.KeyDown += HandleFormKeyDown;
+            textBoxState.KeyDown += HandleFormKeyDown;
+            textBoxCountry.KeyDown += HandleFormKeyDown;
+            textBoxZip.KeyDown += HandleFormKeyDown;
+            textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
         protected override void UpdateData()

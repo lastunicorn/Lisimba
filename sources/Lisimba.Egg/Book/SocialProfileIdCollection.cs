@@ -20,13 +20,13 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class SocialProfileIdCollection : CustomObservableCollection<SocialProfileId>
+    public class SocialProfileIdCollection : CustomObservableCollection<SocialProfile>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (SocialProfileId socialProfileId in this)
+            foreach (SocialProfile socialProfileId in this)
             {
                 DataRow dr = dt.NewRow();
                 dr[0] = socialProfileId.Id;
@@ -53,19 +53,19 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
             for (int i = 0; i < values.Count; i++)
             {
-                Add(new SocialProfileId(values[i]));
+                Add(new SocialProfile(values[i]));
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="SocialProfileId"/> object that match the description.
+        /// Returns the <see cref="SocialProfile"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="SocialProfileId"/> object that match or <c>null</c>.</returns>
-        public SocialProfileId SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="SocialProfile"/> object that match or <c>null</c>.</returns>
+        public SocialProfile SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (SocialProfileId socialProfileId in Items)
+            foreach (SocialProfile socialProfileId in Items)
             {
                 switch (searchMode)
                 {

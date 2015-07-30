@@ -257,13 +257,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
             }
 
-            SocialProfileId socialProfileIdTag = selectedNode.Tag as SocialProfileId;
+            SocialProfile socialProfileTag = selectedNode.Tag as SocialProfile;
 
-            if (socialProfileIdTag != null)
+            if (socialProfileTag != null)
             {
-                SocialProfileIdEditForm form = new SocialProfileIdEditForm
+                SocialProfileEditForm form = new SocialProfileEditForm
                 {
-                    SocialProfileId = socialProfileIdTag,
+                    SocialProfile = socialProfileTag,
                     Location = PointToScreen(e.Location),
                     AddMode = false
                 };
@@ -392,7 +392,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             if (socialProfileIds == null)
                 return;
 
-            foreach (SocialProfileId socialProfileId in socialProfileIds)
+            foreach (SocialProfile socialProfileId in socialProfileIds)
             {
                 TreeNode socialProfileIdNode = new TreeNode(socialProfileId.ToString(), -2, -2)
                 {

@@ -213,7 +213,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfileId(), new SocialProfileId() };
+            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfile(), new SocialProfile() };
             contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contactEditorViewModel.Contact = contact;

@@ -41,10 +41,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxComments = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelInnerContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panelInnerContainer
+            // 
+            this.panelInnerContainer.Controls.Add(this.tableLayoutPanel1);
+            this.panelInnerContainer.Size = new System.Drawing.Size(384, 94);
             // 
             // label1
             // 
@@ -65,7 +69,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxAddress, 3);
             this.textBoxAddress.Location = new System.Drawing.Point(77, 3);
             this.textBoxAddress.Name = "textBoxAddress";
-            this.textBoxAddress.Size = new System.Drawing.Size(308, 13);
+            this.textBoxAddress.Size = new System.Drawing.Size(304, 13);
             this.textBoxAddress.TabIndex = 0;
             // 
             // label5
@@ -86,7 +90,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxCity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxCity.Location = new System.Drawing.Point(77, 28);
             this.textBoxCity.Name = "textBoxCity";
-            this.textBoxCity.Size = new System.Drawing.Size(108, 13);
+            this.textBoxCity.Size = new System.Drawing.Size(106, 13);
             this.textBoxCity.TabIndex = 1;
             // 
             // label6
@@ -107,7 +111,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxState.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxState.Location = new System.Drawing.Point(77, 47);
             this.textBoxState.Name = "textBoxState";
-            this.textBoxState.Size = new System.Drawing.Size(108, 13);
+            this.textBoxState.Size = new System.Drawing.Size(106, 13);
             this.textBoxState.TabIndex = 2;
             // 
             // label7
@@ -115,7 +119,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(191, 47);
+            this.label7.Location = new System.Drawing.Point(189, 47);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(54, 13);
             this.label7.TabIndex = 14;
@@ -126,9 +130,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxCountry.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxCountry.BackColor = System.Drawing.Color.Ivory;
             this.textBoxCountry.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxCountry.Location = new System.Drawing.Point(276, 47);
+            this.textBoxCountry.Location = new System.Drawing.Point(274, 47);
             this.textBoxCountry.Name = "textBoxCountry";
-            this.textBoxCountry.Size = new System.Drawing.Size(109, 13);
+            this.textBoxCountry.Size = new System.Drawing.Size(107, 13);
             this.textBoxCountry.TabIndex = 4;
             // 
             // label8
@@ -136,7 +140,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(191, 28);
+            this.label8.Location = new System.Drawing.Point(189, 28);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(79, 13);
             this.label8.TabIndex = 12;
@@ -147,9 +151,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxZip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxZip.BackColor = System.Drawing.Color.Ivory;
             this.textBoxZip.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxZip.Location = new System.Drawing.Point(276, 28);
+            this.textBoxZip.Location = new System.Drawing.Point(274, 28);
             this.textBoxZip.Name = "textBoxZip";
-            this.textBoxZip.Size = new System.Drawing.Size(109, 13);
+            this.textBoxZip.Size = new System.Drawing.Size(107, 13);
             this.textBoxZip.TabIndex = 3;
             // 
             // textBoxComments
@@ -160,7 +164,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.SetColumnSpan(this.textBoxComments, 3);
             this.textBoxComments.Location = new System.Drawing.Point(77, 72);
             this.textBoxComments.Name = "textBoxComments";
-            this.textBoxComments.Size = new System.Drawing.Size(308, 13);
+            this.textBoxComments.Size = new System.Drawing.Size(304, 13);
             this.textBoxComments.TabIndex = 0;
             // 
             // label2
@@ -195,7 +199,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 5);
             this.tableLayoutPanel1.Controls.Add(this.textBoxComments, 1, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -204,34 +208,23 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 6F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(388, 88);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(384, 88);
             this.tableLayoutPanel1.TabIndex = 16;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(4);
-            this.panel1.Size = new System.Drawing.Size(396, 96);
-            this.panel1.TabIndex = 17;
             // 
             // PostalAddressEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(396, 96);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(396, 129);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PostalAddressEditForm";
             this.Text = "";
             this.TopMost = true;
+            this.panelInnerContainer.ResumeLayout(false);
+            this.panelInnerContainer.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -251,6 +244,5 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxComments;
-        private System.Windows.Forms.Panel panel1;
     }
 }

@@ -72,7 +72,7 @@ namespace DustInTheWind.Lisimba.Gating
 
 
             // Messenger ID
-            if (csvRecord[7].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[7], "Yahoo!"));
+            if (csvRecord[7].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[7], "Yahoo!"));
 
 
             // Home
@@ -174,52 +174,52 @@ namespace DustInTheWind.Lisimba.Gating
 
 
             // Messenger ID1
-            if (csvRecord[39].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[39], "Messenger ID1"));
+            if (csvRecord[39].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[39], "Messenger ID1"));
 
             // Messenger ID2
-            if (csvRecord[40].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[40], "Messenger ID2"));
+            if (csvRecord[40].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[40], "Messenger ID2"));
 
             // Messenger ID3
-            if (csvRecord[41].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[41], "Messenger ID3"));
+            if (csvRecord[41].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[41], "Messenger ID3"));
 
             // Messenger ID4
-            if (csvRecord[42].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[42], "Messenger ID4"));
+            if (csvRecord[42].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[42], "Messenger ID4"));
 
             // Messenger ID5
-            if (csvRecord[43].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[43], "Messenger ID5"));
+            if (csvRecord[43].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[43], "Messenger ID5"));
 
             // Messenger ID6
-            if (csvRecord[44].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[44], "Messenger ID6"));
+            if (csvRecord[44].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[44], "Messenger ID6"));
 
             // Messenger ID7
-            if (csvRecord[45].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[45], "Messenger ID7"));
+            if (csvRecord[45].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[45], "Messenger ID7"));
 
             // Messenger ID8
-            if (csvRecord[46].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[46], "Messenger ID8"));
+            if (csvRecord[46].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[46], "Messenger ID8"));
 
             // Messenger ID9
-            if (csvRecord[47].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[47], "Messenger ID9"));
+            if (csvRecord[47].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[47], "Messenger ID9"));
 
             // Skype ID
-            if (csvRecord[48].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[48], "Skype ID"));
+            if (csvRecord[48].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[48], "Skype ID"));
 
             // IRC ID
-            if (csvRecord[49].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[49], "IRC ID"));
+            if (csvRecord[49].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[49], "IRC ID"));
 
             // ICQ ID
-            if (csvRecord[50].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[50], "ICQ ID"));
+            if (csvRecord[50].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[50], "ICQ ID"));
 
             // Google ID
-            if (csvRecord[51].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[51], "Google ID"));
+            if (csvRecord[51].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[51], "Google ID"));
 
             // MSN ID
-            if (csvRecord[52].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[52], "MSN ID"));
+            if (csvRecord[52].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[52], "MSN ID"));
 
             // AIM ID
-            if (csvRecord[53].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[53], "AIM ID"));
+            if (csvRecord[53].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[53], "AIM ID"));
 
             // QQ ID
-            if (csvRecord[54].Length > 0) contact.SocialProfileIds.Add(new SocialProfileId(csvRecord[54], "QQ ID"));
+            if (csvRecord[54].Length > 0) contact.SocialProfileIds.Add(new SocialProfile(csvRecord[54], "QQ ID"));
 
             return contact;
         }
@@ -313,7 +313,7 @@ namespace DustInTheWind.Lisimba.Gating
             Email email;
             PostalAddress postalAddress;
             Date date;
-            SocialProfileId socialProfileId;
+            SocialProfile socialProfile;
 
             CsvRecord csvRecord = new CsvRecord();
 
@@ -341,8 +341,8 @@ namespace DustInTheWind.Lisimba.Gating
             csvRecord.Add(string.Empty);
 
             // Messenger ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Home
             phone = contact.Phones.SearchByDescription("Home", SearchMode.Exact);
@@ -460,68 +460,68 @@ namespace DustInTheWind.Lisimba.Gating
             csvRecord.Add(contact.Notes);
 
             // Messenger ID1
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID1", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID1", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID2
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID2", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID2", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID3
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID3", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID3", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID4
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID4", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID4", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID5
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID5", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID5", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID6
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID6", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID6", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID7
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID7", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID7", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID8
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID8", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID8", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Messenger ID9
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Messenger ID9", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Messenger ID9", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Skype ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Skype ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Skype ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // IRC ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("IRC ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("IRC ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // ICQ ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("ICQ ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("ICQ ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // Google ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("Google ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("Google ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // MSN ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("MSN ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("MSN ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // AIM ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("AIM ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("AIM ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             // QQ ID
-            socialProfileId = contact.SocialProfileIds.SearchByDescription("QQ ID", SearchMode.Exact);
-            csvRecord.Add(socialProfileId == null ? string.Empty : socialProfileId.Id);
+            socialProfile = contact.SocialProfileIds.SearchByDescription("QQ ID", SearchMode.Exact);
+            csvRecord.Add(socialProfile == null ? string.Empty : socialProfile.Id);
 
             return csvRecord;
         }

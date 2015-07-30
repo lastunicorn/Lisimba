@@ -105,7 +105,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void EditBirthday(Date birthday)
         {
-            DateEditForm form = new DateEditForm
+            BirthDateEditForm form = new BirthDateEditForm
             {
                 Location = GetBottomLeftCorner(labelBirthday),
                 Date = birthday
@@ -171,12 +171,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         public void AddSocialProfileId(SocialProfileIdCollection socialProfileIds)
         {
-            SocialProfileIdEditForm form = new SocialProfileIdEditForm
+            SocialProfileEditForm form = new SocialProfileEditForm
             {
                 AddMode = true,
-                SocialProfileIds = socialProfileIds,
+                SocialProfiles = socialProfileIds,
                 Location = GetBottomLeftCorner(buttonAddSocialProfileId),
-                SocialProfileId = new SocialProfileId()
+                SocialProfile = new SocialProfile()
             };
 
             form.Show();

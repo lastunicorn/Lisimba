@@ -18,17 +18,17 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class SocialProfileIdEditForm : EditBaseForm
+    public partial class SocialProfileEditForm : EditBaseForm
     {
-        private SocialProfileId socialProfileId;
+        private SocialProfile socialProfile;
         private bool addMode;
 
-        public SocialProfileId SocialProfileId
+        public SocialProfile SocialProfile
         {
-            get { return socialProfileId; }
+            get { return socialProfile; }
             set
             {
-                socialProfileId = value;
+                socialProfile = value;
                 DisplayDataInView();
             }
         }
@@ -40,20 +40,20 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 addMode = value;
 
-                Text = value ? "Add Social Profile Id" : "Edit Social Profile Id";
+                Text = value ? "Add Social Profile" : "Edit Social Profile";
             }
         }
 
-        public SocialProfileIdCollection SocialProfileIds { get; set; }
+        public SocialProfileIdCollection SocialProfiles { get; set; }
 
-        public SocialProfileIdEditForm()
+        public SocialProfileEditForm()
         {
             InitializeComponent();
 
             AddMode = false;
 
-            textBoxEmail.KeyDown += FormEditBase_KeyDown;
-            textBoxComments.KeyDown += FormEditBase_KeyDown;
+            textBoxEmail.KeyDown += HandleFormKeyDown;
+            textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
         protected override void UpdateData()
@@ -65,26 +65,26 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && SocialProfileIds != null)
-                SocialProfileIds.Add(SocialProfileId);
+            if (AddMode && SocialProfiles != null)
+                SocialProfiles.Add(SocialProfile);
         }
 
         private bool UserChangedData()
         {
-            return !socialProfileId.Id.Equals(textBoxEmail.Text) ||
-                   !socialProfileId.Description.Equals(textBoxComments.Text);
+            return !socialProfile.Id.Equals(textBoxEmail.Text) ||
+                   !socialProfile.Description.Equals(textBoxComments.Text);
         }
 
         private void DisplayDataInView()
         {
-            textBoxEmail.Text = socialProfileId.Id;
-            textBoxComments.Text = socialProfileId.Description;
+            textBoxEmail.Text = socialProfile.Id;
+            textBoxComments.Text = socialProfile.Description;
         }
 
         private void ReadDataFromView()
         {
-            socialProfileId.Id = textBoxEmail.Text;
-            socialProfileId.Description = textBoxComments.Text;
+            socialProfile.Id = textBoxEmail.Text;
+            socialProfile.Description = textBoxComments.Text;
         }
     }
 }

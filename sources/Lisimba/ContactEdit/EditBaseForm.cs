@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             DialogResult = DialogResult.OK;
             UpdateData();
-            Hide();
+            Close();
         }
 
         private void FormEditBase_Activated(object sender, EventArgs e)
@@ -70,10 +70,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             DialogResult = DialogResult.OK;
             UpdateData();
-            Hide();
+            Close();
         }
 
-        public void FormEditBase_KeyDown(object sender, KeyEventArgs e)
+        public void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -92,6 +92,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             if (DialogResult == DialogResult.None)
                 DialogResult = DialogResult.Cancel;
+        }
+
+        private void HandleButtonOkClick(object sender, EventArgs e)
+        {
+            AcceptChanges();
+        }
+
+        private void HandleButtonCancelClick(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

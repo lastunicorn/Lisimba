@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
     /// <summary>
     /// Class containing information about a social profile id.
     /// </summary>
-    public class SocialProfileId : IObservableEntity, IEquatable<SocialProfileId>
+    public class SocialProfile : IObservableEntity, IEquatable<SocialProfile>
     {
         private string id;
         private string description;
@@ -63,26 +63,26 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Creates a new empty <see cref="SocialProfileId"/> object.
+        /// Creates a new empty <see cref="SocialProfile"/> object.
         /// </summary>
-        public SocialProfileId()
+        public SocialProfile()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfileId"/> object with the id and description specified.
+        /// Creates a new <see cref="SocialProfile"/> object with the id and description specified.
         /// </summary>
-        public SocialProfileId(string id, string description)
+        public SocialProfile(string id, string description)
         {
             this.id = id;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfileId"/> object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="SocialProfile"/> object with the data copied from the one passed as parameter.
         /// </summary>
-        public SocialProfileId(SocialProfileId socialProfile)
+        public SocialProfile(SocialProfile socialProfile)
         {
             CopyFrom(socialProfile);
         }
@@ -97,9 +97,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Copy the data from the <see cref="SocialProfileId"/> object passed as parameter into the current object.
+        /// Copy the data from the <see cref="SocialProfile"/> object passed as parameter into the current object.
         /// </summary>
-        public void CopyFrom(SocialProfileId socialProfile)
+        public void CopyFrom(SocialProfile socialProfile)
         {
             id = socialProfile.id;
             description = socialProfile.description;
@@ -109,17 +109,17 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(SocialProfileId)) return false;
+            if (obj.GetType() != typeof(SocialProfile)) return false;
 
-            return Equals((SocialProfileId)obj);
+            return Equals((SocialProfile)obj);
         }
 
-        public bool Equals(SocialProfileId socialProfileId)
+        public bool Equals(SocialProfile socialProfile)
         {
-            if (ReferenceEquals(null, socialProfileId)) return false;
-            if (ReferenceEquals(this, socialProfileId)) return true;
+            if (ReferenceEquals(null, socialProfile)) return false;
+            if (ReferenceEquals(this, socialProfile)) return true;
 
-            return string.Equals(id, socialProfileId.id) && string.Equals(description, socialProfileId.description);
+            return string.Equals(id, socialProfile.id) && string.Equals(description, socialProfile.description);
         }
 
         public override int GetHashCode()

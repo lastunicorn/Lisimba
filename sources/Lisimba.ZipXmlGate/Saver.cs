@@ -178,12 +178,12 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private SocialProfileIdEntity ToEntity(SocialProfileId socialProfileId)
+        private SocialProfileIdEntity ToEntity(SocialProfile socialProfile)
         {
             return new SocialProfileIdEntity
             {
-                Id = socialProfileId.Id,
-                Description = socialProfileId.Description
+                Id = socialProfile.Id,
+                Description = socialProfile.Description
             };
         }
     }

@@ -167,7 +167,7 @@ namespace DustInTheWind.Lisimba.Gating
             IEnumerable<Date> dates = contactEntity.Dates.Select(FromEntity);
             contact.Dates.AddRange(dates);
 
-            IEnumerable<SocialProfileId> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
+            IEnumerable<SocialProfile> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
             contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contact.Notes = contactEntity.Notes;
@@ -226,9 +226,9 @@ namespace DustInTheWind.Lisimba.Gating
             };
         }
 
-        private SocialProfileId FromEntity(SocialProfileIdEntity socialProfileIdEntity)
+        private SocialProfile FromEntity(SocialProfileIdEntity socialProfileIdEntity)
         {
-            return new SocialProfileId
+            return new SocialProfile
             {
                 Id = socialProfileIdEntity.Id,
                 Description = socialProfileIdEntity.Description

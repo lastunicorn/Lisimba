@@ -1,6 +1,6 @@
 ﻿namespace DustInTheWind.Lisimba.ContactEdit
 {
-    partial class EmailEditForm
+    partial class SocialProfileEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -49,9 +49,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(22, 13);
             this.label1.TabIndex = 13;
-            this.label1.Text = "E-mail:";
+            this.label1.Text = "Id:";
             // 
             // textBoxEmail
             // 
@@ -91,9 +91,9 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxComments, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxEmail, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxComments, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -103,12 +103,12 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(362, 38);
             this.tableLayoutPanel1.TabIndex = 16;
             // 
-            // EmailEditForm
+            // SocialProfileEditForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(374, 78);
-            this.Name = "EmailEditForm";
+            this.Name = "SocialProfileEditForm";
             this.Text = "";
             this.panelInnerContainer.ResumeLayout(false);
             this.panelInnerContainer.PerformLayout();

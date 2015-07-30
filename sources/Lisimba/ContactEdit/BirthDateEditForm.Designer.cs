@@ -1,6 +1,6 @@
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    partial class DateEditForm
+    partial class BirthDateEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -35,8 +35,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.label1 = new System.Windows.Forms.Label();
             this.labelDay = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxComment = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelInnerContainer.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -45,7 +43,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // panelInnerContainer
             // 
             this.panelInnerContainer.Controls.Add(this.tableLayoutPanel1);
-            this.panelInnerContainer.Size = new System.Drawing.Size(311, 64);
+            this.panelInnerContainer.Size = new System.Drawing.Size(311, 45);
             // 
             // textBoxYear
             // 
@@ -194,40 +192,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxDay, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxYear, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBoxComment, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(311, 59);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(311, 40);
             this.tableLayoutPanel1.TabIndex = 7;
-            // 
-            // textBoxComment
-            // 
-            this.textBoxComment.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxComment.BackColor = System.Drawing.Color.Ivory;
-            this.textBoxComment.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tableLayoutPanel1.SetColumnSpan(this.textBoxComment, 2);
-            this.textBoxComment.Location = new System.Drawing.Point(77, 43);
-            this.textBoxComment.Name = "textBoxComment";
-            this.textBoxComment.Size = new System.Drawing.Size(231, 13);
-            this.textBoxComment.TabIndex = 8;
-            this.textBoxComment.WordWrap = false;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label3.Location = new System.Drawing.Point(3, 43);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Comments:";
             // 
             // flowLayoutPanel1
             // 
@@ -244,10 +216,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(323, 99);
+            this.ClientSize = new System.Drawing.Size(323, 80);
             this.MinimumSize = new System.Drawing.Size(308, 90);
             this.Name = "DateEditForm";
-            this.Text = "";
+            this.Text = "Edit Birthday";
             this.panelInnerContainer.ResumeLayout(false);
             this.panelInnerContainer.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -265,8 +237,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelDay;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxComment;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

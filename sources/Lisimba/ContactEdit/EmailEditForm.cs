@@ -52,8 +52,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             AddMode = false;
 
-            textBoxEmail.KeyDown += FormEditBase_KeyDown;
-            textBoxComments.KeyDown += FormEditBase_KeyDown;
+            textBoxEmail.KeyDown += HandleFormKeyDown;
+            textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
         protected override void UpdateData()

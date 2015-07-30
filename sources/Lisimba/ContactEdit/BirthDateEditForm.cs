@@ -14,18 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Drawing;
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class DateEditForm : EditBaseForm
+    public partial class BirthDateEditForm : EditBaseForm
     {
         private Date date;
-        private bool addMode;
 
         public Date Date
         {
@@ -37,20 +32,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? Resources.AddDate_WindowTitle : Resources.EditDate_WindowTitle;
-            }
-        }
-
         public DateCollection Dates { get; set; }
 
-        public DateEditForm()
+        public BirthDateEditForm()
         {
             InitializeComponent();
 
@@ -65,7 +49,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             comboBoxDay.KeyDown += HandleFormKeyDown;
             comboBoxMonth.KeyDown += HandleFormKeyDown;
             textBoxYear.KeyDown += HandleFormKeyDown;
-            textBoxComment.KeyDown += HandleFormKeyDown;
         }
 
         protected override void UpdateData()
@@ -77,7 +60,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && Dates != null)
+            if (Dates != null)
                 Dates.Add(date);
         }
 
@@ -90,8 +73,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             int.TryParse(textBoxYear.Text, out year);
 
             date.SetValues(day, month, year);
-
-            date.Description = textBoxComment.Text;
         }
 
         private bool UserChangedData()
@@ -102,7 +83,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             int year;
             int.TryParse(textBoxYear.Text, out year);
 
-            return date.Day != day || date.Month != month || date.Year != year || date.Description != textBoxComment.Text;
+            return date.Day != day || date.Month != month || date.Year != year;
         }
 
         private void DisplayDataInView()
@@ -110,7 +91,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             comboBoxDay.SelectedIndex = date.Day;
             comboBoxMonth.SelectedIndex = date.Month;
             textBoxYear.Text = (date.Year != 0 ? date.Year.ToString() : string.Empty);
-            textBoxComment.Text = date.Description;
         }
     }
 }

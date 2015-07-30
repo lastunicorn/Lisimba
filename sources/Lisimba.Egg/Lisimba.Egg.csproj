@@ -75,7 +75,7 @@
     <Compile Include="Enums\NameSection.cs" />
     <Compile Include="Exceptions\EggException.cs" />
     <Compile Include="Book\Contact.cs" />
-    <Compile Include="Book\SocialProfileId.cs" />
+    <Compile Include="Book\SocialProfile.cs" />
     <Compile Include="Book\SocialProfileIdCollection.cs" />
     <Compile Include="Book\PersonName.cs" />
     <Compile Include="Book\Phone.cs" />
