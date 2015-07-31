@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.contactView1 = new ContactEditor();
+            this.contactView1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -105,9 +105,8 @@ namespace DustInTheWind.Lisimba.Forms
             this.contactView1.Size = new System.Drawing.Size(526, 398);
             this.contactView1.TabIndex = 0;
             // 
-            // FormAddContact
+            // AddContactForm
             // 
-            this.AcceptButton = this.buttonOkay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
@@ -118,7 +117,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAddContact";
+            this.Name = "AddContactForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Contact";

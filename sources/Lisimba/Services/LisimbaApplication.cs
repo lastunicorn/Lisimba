@@ -42,7 +42,8 @@ namespace DustInTheWind.Lisimba.Services
                 Assembly executingAssembly = Assembly.GetExecutingAssembly();
                 AssemblyName assemblyName = executingAssembly.GetName();
 
-                return string.Format("{0} {1}", Application.ProductName, assemblyName.Version.ToString(2));
+                string version = assemblyName.Version.Build == 0 ? assemblyName.Version.ToString(2) : assemblyName.Version.ToString(3);
+                return string.Format("{0} {1}", Application.ProductName, version);
             }
         }
 
