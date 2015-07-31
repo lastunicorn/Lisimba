@@ -177,16 +177,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public string FullName
-        {
-            get { return fullName; }
-            set
-            {
-                fullName = value;
-                OnPropertyChanged();
-            }
-        }
-
         public PersonName Name
         {
             get { return name; }
@@ -233,7 +223,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void DisplayContactInView()
         {
             Name = Contact.Name;
-            FullName = Contact.Name.ToString();
 
             Birthday = contact.Birthday.ToShortString();
 
@@ -255,7 +244,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void ClearView()
         {
             Name = null;
-            FullName = string.Empty;
 
             Birthday = string.Empty;
 
@@ -277,11 +265,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         public void BirthdayEditWasRequested()
         {
             View.EditBirthday(contact.Birthday);
-        }
-
-        public void NameEditWasRequested()
-        {
-            View.EditName(contact.Name);
         }
 
         public void AddAddressWasClicked()

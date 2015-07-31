@@ -37,9 +37,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.nameEditor1 = new DustInTheWind.Lisimba.ContactEdit.NameEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
@@ -52,13 +54,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.labelBirthday = new System.Windows.Forms.Label();
-            this.labelFullName = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            this.nameEditor1 = new DustInTheWind.Lisimba.ContactEdit.NameEditor();
-            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -142,25 +141,34 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.nameEditor1, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.splitContainer2, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.labelFullName, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.splitContainer2, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(516, 212);
             this.tableLayoutPanel3.TabIndex = 1;
+            // 
+            // nameEditor1
+            // 
+            this.nameEditor1.AutoSize = true;
+            this.nameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameEditor1.Location = new System.Drawing.Point(3, 3);
+            this.nameEditor1.Name = "nameEditor1";
+            this.nameEditor1.PersonName = null;
+            this.nameEditor1.Size = new System.Drawing.Size(510, 31);
+            this.nameEditor1.TabIndex = 13;
             // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer2.Location = new System.Drawing.Point(3, 91);
+            this.splitContainer2.Location = new System.Drawing.Point(3, 54);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -170,7 +178,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer2.Size = new System.Drawing.Size(510, 118);
+            this.splitContainer2.Size = new System.Drawing.Size(510, 155);
             this.splitContainer2.SplitterDistance = 312;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -188,7 +196,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(312, 118);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(312, 155);
             this.tableLayoutPanel4.TabIndex = 13;
             // 
             // groupBox1
@@ -198,9 +206,32 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.groupBox1.Location = new System.Drawing.Point(3, 60);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(306, 55);
+            this.groupBox1.Size = new System.Drawing.Size(306, 92);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            // 
+            // customTreeView1
+            // 
+            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
+            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.Dates = null;
+            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTreeView1.Emails = null;
+            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.customTreeView1.FullRowSelect = true;
+            this.customTreeView1.ImageIndex = 0;
+            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
+            this.customTreeView1.Name = "customTreeView1";
+            this.customTreeView1.Phones = null;
+            this.customTreeView1.PostalAddresses = null;
+            this.customTreeView1.SelectedImageIndex = 0;
+            this.customTreeView1.ShowLines = false;
+            this.customTreeView1.ShowPlusMinus = false;
+            this.customTreeView1.ShowRootLines = false;
+            this.customTreeView1.Size = new System.Drawing.Size(298, 71);
+            this.customTreeView1.SocialProfileIds = null;
+            this.customTreeView1.TabIndex = 12;
+            this.customTreeView1.WebSites = null;
             // 
             // flowLayoutPanel3
             // 
@@ -315,7 +346,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 118);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 155);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // flowLayoutPanel1
@@ -326,7 +357,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel1.Controls.Add(this.pictureBoxZodiacSign);
             this.flowLayoutPanel1.Controls.Add(this.labelZodiacSign);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 42);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 61);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(67, 58);
             this.flowLayoutPanel1.TabIndex = 14;
@@ -366,27 +397,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.labelBirthday.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.labelBirthday.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelBirthday_MouseDoubleClick);
             // 
-            // labelFullName
-            // 
-            this.labelFullName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFullName.AutoSize = true;
-            this.labelFullName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFullName.Location = new System.Drawing.Point(3, 40);
-            this.labelFullName.Margin = new System.Windows.Forms.Padding(3);
-            this.labelFullName.Name = "labelFullName";
-            this.labelFullName.Size = new System.Drawing.Size(510, 31);
-            this.labelFullName.TabIndex = 1;
-            this.labelFullName.Text = "Full Name";
-            this.labelFullName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelFullName.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.labelFullName_MouseDoubleClick);
-            // 
             // label8
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label8.Location = new System.Drawing.Point(3, 79);
+            this.label8.Location = new System.Drawing.Point(3, 42);
             this.label8.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(510, 4);
@@ -435,38 +450,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNotes.Size = new System.Drawing.Size(510, 133);
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
-            // 
-            // nameEditor1
-            // 
-            this.nameEditor1.AutoSize = true;
-            this.nameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameEditor1.Location = new System.Drawing.Point(3, 3);
-            this.nameEditor1.Name = "nameEditor1";
-            this.nameEditor1.Size = new System.Drawing.Size(510, 31);
-            this.nameEditor1.TabIndex = 13;
-            // 
-            // customTreeView1
-            // 
-            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customTreeView1.Dates = null;
-            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTreeView1.Emails = null;
-            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.customTreeView1.FullRowSelect = true;
-            this.customTreeView1.ImageIndex = 0;
-            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
-            this.customTreeView1.Name = "customTreeView1";
-            this.customTreeView1.Phones = null;
-            this.customTreeView1.PostalAddresses = null;
-            this.customTreeView1.SelectedImageIndex = 0;
-            this.customTreeView1.ShowLines = false;
-            this.customTreeView1.ShowPlusMinus = false;
-            this.customTreeView1.ShowRootLines = false;
-            this.customTreeView1.Size = new System.Drawing.Size(298, 34);
-            this.customTreeView1.SocialProfileIds = null;
-            this.customTreeView1.TabIndex = 12;
-            this.customTreeView1.WebSites = null;
             // 
             // ContactEditor
             // 
@@ -521,7 +504,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label labelFullName;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;

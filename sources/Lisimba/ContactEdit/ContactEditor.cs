@@ -40,7 +40,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void CreateBindings()
         {
             nameEditor1.Bind(x => x.PersonName, Model, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-            labelFullName.Bind(x => x.Text, Model, x => x.FullName, false, DataSourceUpdateMode.Never);
             labelBirthday.Bind(x => x.Text, Model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
             pictureBoxZodiacSign.Bind(x => x.Image, Model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
@@ -67,11 +66,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             Model.BirthdayEditWasRequested();
-        }
-
-        private void labelFullName_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            Model.NameEditWasRequested();
         }
 
         private void buttonAddAddress_Click(object sender, System.EventArgs e)
@@ -110,18 +104,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 Location = GetBottomLeftCorner(labelBirthday),
                 Date = birthday
-            };
-
-            form.Show();
-            form.Focus();
-        }
-
-        public void EditName(PersonName name)
-        {
-            NameEditForm form = new NameEditForm
-            {
-                Location = GetBottomLeftCorner(labelFullName),
-                PersonName = name
             };
 
             form.Show();
