@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
                 case ContactsSortingType.BirthDate:
                     return new MultipleComparer(new IComparer[]
                     {
-                        new ContactsByBirthdateComparer(),
+                        new ContactByBirthDateComparer(),
                         new ContactByNicknameComparer(),
                         new ContactByFirstNameComparer(),
                         new ContactByLastNameComparer(),

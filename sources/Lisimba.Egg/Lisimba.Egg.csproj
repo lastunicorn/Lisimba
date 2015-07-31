@@ -50,7 +50,7 @@
     </Compile>
     <Compile Include="Comparers\ComparerFactory.cs" />
     <Compile Include="Comparers\MultipleComparer.cs" />
-    <Compile Include="Comparers\CompareContactsByMiddleNameComparer.cs" />
+    <Compile Include="Comparers\ContactByMiddleNameComparer.cs" />
     <Compile Include="Book\ContactContentChangedEventArgs.cs" />
     <Compile Include="Book\CustomObservableCollection.cs" />
     <Compile Include="Book\IObservableEntity.cs" />
@@ -62,11 +62,11 @@
     <Compile Include="Book\PostalAddress.cs" />
     <Compile Include="Book\PostalAddressCollection.cs" />
     <Compile Include="Book\AddressBook.cs" />
-    <Compile Include="Comparers\CompareContactsByBirthdayComparer.cs" />
-    <Compile Include="Comparers\CompareContactsByBirthdayWithoutYear.cs" />
-    <Compile Include="Comparers\CompareContactsByFirstNameComparer.cs" />
-    <Compile Include="Comparers\CompareContactsByLastNameComparer.cs" />
-    <Compile Include="Comparers\CompareContactsByNicknameComparer.cs" />
+    <Compile Include="Comparers\ContactByBirthdateComparer.cs" />
+    <Compile Include="Comparers\ContactByBirthdayComparer.cs" />
+    <Compile Include="Comparers\ContactByFirstNameComparer.cs" />
+    <Compile Include="Comparers\ContactByLastNameComparer.cs" />
+    <Compile Include="Comparers\ContactByNicknameComparer.cs" />
     <Compile Include="Book\Date.cs" />
     <Compile Include="Book\DateCollection.cs" />
     <Compile Include="Book\Email.cs" />

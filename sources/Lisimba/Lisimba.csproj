@@ -288,10 +288,6 @@
     <EmbeddedResource Include="ContactEdit\NameEditor.resx">
       <DependentUpon>NameEditor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\SocialProfileEditForm.resx">
-      <DependentUpon>SocialProfileEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\NameEditForm.resx">
       <DependentUpon>NameEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>

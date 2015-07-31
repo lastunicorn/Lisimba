@@ -77,11 +77,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 if (!nameParser.Success)
                     return;
 
-                //PersonName.FirstName = nameParser.FirstName;
-                //PersonName.MiddleName = nameParser.MiddleName;
-                //PersonName.LastName = nameParser.LastName;
-                //PersonName.Nickname = nameParser.Nickname;
-
                 PersonName.CopyFrom(nameParser.Result);
 
                 LeaveEditMode();

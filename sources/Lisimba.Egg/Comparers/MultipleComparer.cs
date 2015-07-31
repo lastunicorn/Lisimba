@@ -17,6 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Comparers
 {
@@ -26,8 +27,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
 
         public MultipleComparer(IEnumerable<IComparer> comparers)
         {
-            if (comparers == null)
-                throw new ArgumentNullException("comparers");
+            if (comparers == null) throw new ArgumentNullException("comparers");
 
             this.comparers = new List<IComparer>(comparers);
         }
@@ -37,15 +37,9 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
             if (comparers.Count == 0)
                 return 0;
 
-            foreach (IComparer comparer in comparers)
-            {
-                int value = comparer.Compare(x, y);
-
-                if (value != 0)
-                    return value;
-            }
-
-            return 0;
+            return comparers
+                .Select(comparer => comparer.Compare(x, y))
+                .FirstOrDefault(value => value != 0);
         }
     }
 }
