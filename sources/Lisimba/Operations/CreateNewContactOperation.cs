@@ -40,10 +40,9 @@ namespace DustInTheWind.Lisimba.Operations
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.addressBookShell = addressBookShell;
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-
             this.userInterface = userInterface;
 
+            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = addressBookShell.AddressBook != null;
         }
 

@@ -27,13 +27,27 @@ namespace DustInTheWind.Lisimba.ContactEdit
     /// </summary>
     partial class ContactEditor : UserControl, IContactEditorView
     {
-        public ContactEditorViewModel Model { get; private set; }
+        private ContactEditorViewModel model;
+
+        public ContactEditorViewModel Model
+        {
+            get { return model; }
+            private set
+            {
+                if (model != null)
+                    return;
+
+                model = value;
+
+                CreateBindings();
+            }
+        }
 
         public ContactEditor()
         {
             InitializeComponent();
 
-            Model = new ContactEditorViewModel(new Zodiac()) { View = this };
+            model = new ContactEditorViewModel(new Zodiac()) { View = this };
             CreateBindings();
         }
 

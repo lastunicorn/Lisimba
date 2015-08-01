@@ -42,13 +42,17 @@ namespace DustInTheWind.Lisimba.Services
                 Assembly executingAssembly = Assembly.GetExecutingAssembly();
                 AssemblyName assemblyName = executingAssembly.GetName();
 
-                string version = assemblyName.Version.Build == 0 ? assemblyName.Version.ToString(2) : assemblyName.Version.ToString(3);
+                string version = assemblyName.Version.Build == 0
+                    ? assemblyName.Version.ToString(2)
+                    : assemblyName.Version.ToString(3);
+
                 return string.Format("{0} {1}", Application.ProductName, version);
             }
         }
 
-        public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments, ConfigurationService configurationService,
-            RecentFiles recentFiles, CommandPool commandPool, UserInterface userInterface)
+        public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments,
+            ConfigurationService configurationService, RecentFiles recentFiles, CommandPool commandPool,
+            UserInterface userInterface)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
@@ -88,7 +92,7 @@ namespace DustInTheWind.Lisimba.Services
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
-         
+
         public void Start()
         {
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;

@@ -28,6 +28,8 @@ namespace DustInTheWind.Lisimba.Forms
         public AddContactForm()
         {
             InitializeComponent();
+
+            //contactView1.Bind(x => x.Model, Presenter, x => x.EditedContact, true);
         }
 
         public Contact Contact

@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Presenters
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
 
-        private Contact editedContact;
+        public Contact EditedContact { get; private set; }
         private AddressBook addressBook;
 
         private IAddContactView view;
@@ -59,9 +59,9 @@ namespace DustInTheWind.Lisimba.Presenters
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
             addressBook = addressBookShell.AddressBook;
-            editedContact = new Contact();
+            EditedContact = new Contact();
 
-            view.Contact = editedContact;
+            view.Contact = EditedContact;
         }
 
         public void Show()
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.Presenters
             {
                 ValidateContact();
 
-                addressBook.Contacts.Add(editedContact);
+                addressBook.Contacts.Add(EditedContact);
 
                 view.Close();
             }
@@ -87,15 +87,15 @@ namespace DustInTheWind.Lisimba.Presenters
 
         private void ValidateContact()
         {
-            bool isNameEmpty = editedContact.Name.IsEmpty();
+            bool isNameEmpty = EditedContact.Name.IsEmpty();
 
             if (isNameEmpty)
-                throw new LisimbaException("Please enter at least one of the fields marked with '*'.");
+                throw new LisimbaException("Please enter a name.");
 
-            bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(editedContact.Name));
+            bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
 
             if (isAnotherContactWithSameName)
-                throw new LisimbaException("Another contact having the same name already exists.");
+                throw new LisimbaException("Another contact with the same name already exists.");
         }
 
         public void CloseButtonWasClicked()

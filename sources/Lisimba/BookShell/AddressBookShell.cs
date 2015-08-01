@@ -215,22 +215,6 @@ namespace DustInTheWind.Lisimba.BookShell
             get { return AddressBook != null && Status == AddressBookStatus.Modified; }
         }
 
-        public bool EnsureIsSaved()
-        {
-            if (!IsModified)
-                return true;
-
-            bool? response = userInterface.DisplayYesNoCancelQuestion(LocalizedResources.EnsureAddressBookIsSaved_Question, LocalizedResources.EnsureAddressBookIsSaved_Title);
-
-            if (response == null)
-                return false;
-
-            if (response.Value)
-                commandPool.SaveAddressBookOperation.Execute();
-
-            return true;
-        }
-
         public bool CloseAddressBook()
         {
             bool allowToContinue = EnsureIsSaved();
@@ -242,6 +226,25 @@ namespace DustInTheWind.Lisimba.BookShell
             AddressBook = null;
             FileName = null;
             Status = AddressBookStatus.None;
+
+            return true;
+        }
+
+        private bool EnsureIsSaved()
+        {
+            if (!IsModified)
+                return true;
+
+            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
+            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
+
+            bool? response = userInterface.DisplayYesNoCancelQuestion(text, title);
+
+            if (response == null)
+                return false;
+
+            if (response.Value)
+                commandPool.SaveAddressBookOperation.Execute();
 
             return true;
         }
