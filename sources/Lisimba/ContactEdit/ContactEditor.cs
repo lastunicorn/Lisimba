@@ -46,7 +46,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             InitializeComponent();
 
-            model = new ContactEditorViewModel(new Zodiac()) { View = this };
+            model = new ContactEditorViewModel(new Zodiac()) {View = this};
             CreateBindings();
         }
 

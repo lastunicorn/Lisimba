@@ -25,7 +25,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class OpenAddressBookOperation : ExecutableViewModelBase<string>
+    internal class OpenAddressBookOperation : ExecutableViewModelBase<string>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;

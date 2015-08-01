@@ -11,7 +11,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class ContactListViewModel : ViewModelBase
+    internal class ContactListViewModel : ViewModelBase
     {
         private readonly ConfigurationService configurationService;
         private readonly AddressBookShell addressBookShell;
@@ -42,7 +42,7 @@ namespace DustInTheWind.Lisimba.UserControls
                 searchedText = value;
 
                 ContactsToTreeViewBinder.RefreshDisplayedNodes();
-                
+
                 OnPropertyChanged();
             }
         }
@@ -59,12 +59,12 @@ namespace DustInTheWind.Lisimba.UserControls
 
             SortingMethods = new List<SortingComboBoxItem>
             {
-                new SortingComboBoxItem{ Text="Birthday (without year)", SortingType=ContactsSortingType.Birthday },
-                new SortingComboBoxItem{ Text="Birth Date (age)", SortingType=ContactsSortingType.BirthDate },
-                new SortingComboBoxItem{ Text="First Name", SortingType=ContactsSortingType.FirstName },
-                new SortingComboBoxItem{ Text="Last Name", SortingType=ContactsSortingType.LastName },
-                new SortingComboBoxItem{ Text="Nickname", SortingType=ContactsSortingType.Nickname },
-                new SortingComboBoxItem{ Text="Nickname or Name", SortingType=ContactsSortingType.NicknameOrName }
+                new SortingComboBoxItem {Text = "Birthday (without year)", SortingType = ContactsSortingType.Birthday},
+                new SortingComboBoxItem {Text = "Birth Date (age)", SortingType = ContactsSortingType.BirthDate},
+                new SortingComboBoxItem {Text = "First Name", SortingType = ContactsSortingType.FirstName},
+                new SortingComboBoxItem {Text = "Last Name", SortingType = ContactsSortingType.LastName},
+                new SortingComboBoxItem {Text = "Nickname", SortingType = ContactsSortingType.Nickname},
+                new SortingComboBoxItem {Text = "Nickname or Name", SortingType = ContactsSortingType.NicknameOrName}
             };
 
             SelectedSortingMethod = GetSortingType();
@@ -102,7 +102,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             ResetModifiedFlags();
         }
-        
+
         private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
         {
             RepopulateFromCurrentAddressBook();
@@ -207,7 +207,7 @@ namespace DustInTheWind.Lisimba.UserControls
             try
             {
                 TreeNode selectedNode = View.GetSelecteContact();
-                Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
+                Contact selectedContact = selectedNode != null ? (Contact) selectedNode.Tag : null;
 
                 addressBookShell.Contact = selectedContact;
             }

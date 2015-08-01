@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class ContactsToTreeViewBinder
+    internal class ContactsToTreeViewBinder
     {
         private readonly TreeView treeView1;
 
@@ -86,21 +86,21 @@ namespace DustInTheWind.Lisimba.UserControls
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    {
-                        IEnumerable<Contact> newContacts = e.NewItems.OfType<Contact>();
+                {
+                    IEnumerable<Contact> newContacts = e.NewItems.OfType<Contact>();
 
-                        foreach (Contact contact in newContacts)
-                            AddContact(contact);
-                    }
+                    foreach (Contact contact in newContacts)
+                        AddContact(contact);
+                }
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                    {
-                        IEnumerable<Contact> newContacts = e.OldItems.OfType<Contact>();
+                {
+                    IEnumerable<Contact> newContacts = e.OldItems.OfType<Contact>();
 
-                        foreach (Contact contact in newContacts)
-                            RemoveContact(contact);
-                    }
+                    foreach (Contact contact in newContacts)
+                        RemoveContact(contact);
+                }
                     break;
             }
 
@@ -111,7 +111,7 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             modifiedContacts.Add(contact, false);
 
-            TreeNode treeNode = new TreeNode(contact.ToString()) { Tag = contact };
+            TreeNode treeNode = new TreeNode(contact.ToString()) {Tag = contact};
             treeNodesByContact.Add(contact, treeNode);
         }
 

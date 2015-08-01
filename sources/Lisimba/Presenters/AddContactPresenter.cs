@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Presenters
 {
-    class AddContactPresenter
+    internal class AddContactPresenter
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
@@ -32,6 +32,7 @@ namespace DustInTheWind.Lisimba.Presenters
         private AddressBook addressBook;
 
         private IAddContactView view;
+
         public IAddContactView View
         {
             set

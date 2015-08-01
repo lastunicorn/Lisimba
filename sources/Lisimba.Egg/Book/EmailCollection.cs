@@ -41,8 +41,8 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             DataTable dt = new DataTable("Emails");
 
-            dt.Columns.Add(new DataColumn("Email", typeof(string)));
-            dt.Columns.Add(new DataColumn("Comment", typeof(string)));
+            dt.Columns.Add(new DataColumn("Email", typeof (string)));
+            dt.Columns.Add(new DataColumn("Comment", typeof (string)));
 
             return dt;
         }

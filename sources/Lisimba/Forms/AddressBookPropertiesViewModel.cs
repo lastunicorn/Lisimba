@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    class AddressBookPropertiesViewModel : ViewModelBase
+    internal class AddressBookPropertiesViewModel : ViewModelBase
     {
         private readonly AddressBookShell addressBookShell;
 
@@ -73,7 +73,7 @@ namespace DustInTheWind.Lisimba.Forms
         public AddressBookPropertiesViewModel(AddressBookShell addressBookShell)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            
+
             this.addressBookShell = addressBookShell;
 
             this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;

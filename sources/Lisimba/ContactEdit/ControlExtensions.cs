@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    static class ControlExtensions
+    internal static class ControlExtensions
     {
         public static Point GetBottomLeftCorner(this Control control)
         {

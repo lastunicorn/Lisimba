@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public event EventHandler Changed;
         public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
-        
+
         protected virtual void OnChanged()
         {
             EventHandler handler = Changed;

@@ -16,7 +16,6 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Comparers;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
@@ -121,7 +120,7 @@ namespace DustInTheWind.Lisimba.UserControls
             if (node == null)
                 return;
 
-            Contact contact = (Contact)node.Tag;
+            Contact contact = (Contact) node.Tag;
 
             if (contact.Birthday.IsCompleteDate)
             {

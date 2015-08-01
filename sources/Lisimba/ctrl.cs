@@ -24,10 +24,15 @@ namespace DustInTheWind.Lisimba
     public partial class ctrl : UserControl
     {
         private Contact value = null;
+
         public Contact Value
         {
             get { return value; }
-            set { this.value = value; Invalidate(); }
+            set
+            {
+                this.value = value;
+                Invalidate();
+            }
         }
 
         //private int padding = 10;
@@ -65,12 +70,12 @@ namespace DustInTheWind.Lisimba
             // Draw border
             // --------------------------------------------------------------------------------
 
-             g.DrawRectangle(basePen, new Rectangle(new Point(0, 0), new Size(Size.Width - 1, Size.Height - 1)));
-            
+            g.DrawRectangle(basePen, new Rectangle(new Point(0, 0), new Size(Size.Width - 1, Size.Height - 1)));
+
             // --------------------------------------------------------------------------------
             // Draw the name
             // --------------------------------------------------------------------------------
-            
+
             if (value != null)
                 text = "Name: " + value.Name.ToString();
             else
@@ -78,7 +83,7 @@ namespace DustInTheWind.Lisimba
 
             location = new Point(Padding.Left, Padding.Top);
             sizeF = g.MeasureString(text, Font);
-            size = new Size((int)Math.Ceiling(sizeF.Width), (int)Math.Ceiling(sizeF.Height));
+            size = new Size((int) Math.Ceiling(sizeF.Width), (int) Math.Ceiling(sizeF.Height));
 
             nameRect = new Rectangle(location, size);
 

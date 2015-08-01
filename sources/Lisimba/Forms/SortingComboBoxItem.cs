@@ -2,7 +2,7 @@
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    class SortingComboBoxItem
+    internal class SortingComboBoxItem
     {
         public string Text { get; set; }
         public ContactsSortingType SortingType { get; set; }

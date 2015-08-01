@@ -24,15 +24,15 @@ namespace DustInTheWind.Lisimba.Comparers
     /// <summary>
     /// Compares two contaCTs by nickname.
     /// </summary>
-    class TreeNodeByNicknameOrNameComparer : IComparer
+    internal class TreeNodeByNicknameOrNameComparer : IComparer
     {
         public int Compare(object x, object y)
         {
             if (!(x is TreeNode) || !(y is TreeNode))
                 throw new ArgumentException("One or both of the objects to compare are not TreeNode.");
 
-            Contact c1 = (Contact)((TreeNode)x).Tag;
-            Contact c2 = (Contact)((TreeNode)y).Tag;
+            Contact c1 = (Contact) ((TreeNode) x).Tag;
+            Contact c2 = (Contact) ((TreeNode) y).Tag;
 
             if (c1 == null || c2 == null) return 0;
 

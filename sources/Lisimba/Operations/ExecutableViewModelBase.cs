@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
+    internal abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
     {
         private readonly ApplicationStatus applicationStatus;
         private bool isEnabled;
@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Operations
         protected ExecutableViewModelBase(ApplicationStatus applicationStatus)
         {
             this.applicationStatus = applicationStatus;
-            
+
             isEnabled = true;
         }
 
@@ -71,11 +71,11 @@ namespace DustInTheWind.Lisimba.Operations
         {
             if (parameter != null && !(parameter is T))
             {
-                string message = string.Format("The parameter is not of type {0}", typeof(T).Name);
+                string message = string.Format("The parameter is not of type {0}", typeof (T).Name);
                 throw new ArgumentException(message);
             }
 
-            Execute((T)parameter);
+            Execute((T) parameter);
         }
 
         public void Execute(T parameter)

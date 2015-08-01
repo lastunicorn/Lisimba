@@ -17,7 +17,6 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 
@@ -40,10 +39,7 @@ namespace DustInTheWind.Lisimba.Forms
         public LisimbaViewModel ViewModel
         {
             get { return viewModel; }
-            set
-            {
-                viewModel = value;
-            }
+            set { viewModel = value; }
         }
 
         public ContactListViewModel ContactListViewModel

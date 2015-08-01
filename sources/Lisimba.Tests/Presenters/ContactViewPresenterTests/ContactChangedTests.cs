@@ -17,9 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 using Moq;
 using NUnit.Framework;
 
@@ -98,7 +96,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PhoneCollection phones = new PhoneCollection { new Phone(), new Phone() };
+            PhoneCollection phones = new PhoneCollection {new Phone(), new Phone()};
             contact.Phones.AddRange(phones);
 
             contactEditorViewModel.Contact = contact;
@@ -121,7 +119,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            EmailCollection emails = new EmailCollection { new Email(), new Email() };
+            EmailCollection emails = new EmailCollection {new Email(), new Email()};
             contact.Emails.AddRange(emails);
 
             contactEditorViewModel.Contact = contact;
@@ -144,7 +142,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            WebSiteCollection webSites = new WebSiteCollection { new WebSite(), new WebSite() };
+            WebSiteCollection webSites = new WebSiteCollection {new WebSite(), new WebSite()};
             contact.WebSites.AddRange(webSites);
 
             contactEditorViewModel.Contact = contact;
@@ -167,7 +165,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PostalAddressCollection postalAddresses = new PostalAddressCollection { new PostalAddress(), new PostalAddress() };
+            PostalAddressCollection postalAddresses = new PostalAddressCollection {new PostalAddress(), new PostalAddress()};
             contact.PostalAddresses.AddRange(postalAddresses);
 
             contactEditorViewModel.Contact = contact;
@@ -190,7 +188,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            DateCollection dates = new DateCollection { new Date(), new Date() };
+            DateCollection dates = new DateCollection {new Date(), new Date()};
             contact.Dates.AddRange(dates);
 
             contactEditorViewModel.Contact = contact;
@@ -213,7 +211,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfile(), new SocialProfile() };
+            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection {new SocialProfile(), new SocialProfile()};
             contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contactEditorViewModel.Contact = contact;

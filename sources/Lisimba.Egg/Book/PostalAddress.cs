@@ -196,20 +196,20 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (ReferenceEquals(this, other)) return true;
 
             return string.Equals(street, other.street) &&
-                string.Equals(city, other.city) &&
-                string.Equals(state, other.state) &&
-                string.Equals(postalCode, other.postalCode) &&
-                string.Equals(country, other.country) &&
-                string.Equals(description, other.description);
+                   string.Equals(city, other.city) &&
+                   string.Equals(state, other.state) &&
+                   string.Equals(postalCode, other.postalCode) &&
+                   string.Equals(country, other.country) &&
+                   string.Equals(description, other.description);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(PostalAddress)) return false;
+            if (obj.GetType() != typeof (PostalAddress)) return false;
 
-            return Equals((PostalAddress)obj);
+            return Equals((PostalAddress) obj);
         }
 
         public override int GetHashCode()
@@ -217,11 +217,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
             unchecked
             {
                 var hashCode = (street != null ? street.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (city != null ? city.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (state != null ? state.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (country != null ? country.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (city != null ? city.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (state != null ? state.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (country != null ? country.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (description != null ? description.GetHashCode() : 0);
 
                 return hashCode;
             }

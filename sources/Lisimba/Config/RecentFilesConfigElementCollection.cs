@@ -18,7 +18,7 @@ using System.Configuration;
 
 namespace DustInTheWind.Lisimba.Config
 {
-    [ConfigurationCollection(typeof(RecentFilesConfigElement), AddItemName = "file")]
+    [ConfigurationCollection(typeof (RecentFilesConfigElement), AddItemName = "file")]
     public class RecentFilesConfigElementCollection : ConfigurationElementCollection
     {
         public RecentFilesConfigElement this[int index]
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Config
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            return ((RecentFilesConfigElement)element).FileName;
+            return ((RecentFilesConfigElement) element).FileName;
         }
     }
 }

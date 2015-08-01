@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Config;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class ConfigurationService
+    internal class ConfigurationService
     {
         private Configuration config;
 
@@ -51,7 +51,7 @@ namespace DustInTheWind.Lisimba.Services
         private void ReadLisimbaSection()
         {
             LisimbaConfigSection = config.GetSection("lisimba") as LisimbaConfigSection;
-            
+
             if (LisimbaConfigSection == null)
             {
                 LisimbaConfigSection = new LisimbaConfigSection();

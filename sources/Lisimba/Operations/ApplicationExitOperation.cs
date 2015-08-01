@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ApplicationExitOperation : ExecutableViewModelBase<object>
+    internal class ApplicationExitOperation : ExecutableViewModelBase<object>
     {
         private readonly LisimbaApplication lisimbaApplication;
 

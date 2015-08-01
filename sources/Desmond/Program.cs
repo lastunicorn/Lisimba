@@ -22,13 +22,13 @@ using DustInTheWind.Desmond.WinService;
 
 namespace DustInTheWind.Desmond
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Arguments arguments = new Arguments(args);
 
@@ -42,7 +42,7 @@ namespace DustInTheWind.Desmond
             else if (startAs == null || startAs.ToLower().Equals("service"))
             {
                 ServiceBase[] ServicesToRun;
-                ServicesToRun = new ServiceBase[] { new DesmondService() };
+                ServicesToRun = new ServiceBase[] {new DesmondService()};
                 ServiceBase.Run(ServicesToRun);
             }
         }

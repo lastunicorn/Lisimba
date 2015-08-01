@@ -23,9 +23,8 @@ namespace DustInTheWind.Lisimba.Config
         [ConfigurationProperty("fileName", IsRequired = true, IsKey = false)]
         public string FileName
         {
-            get { return (string)this["fileName"]; }
+            get { return (string) this["fileName"]; }
             set { this["fileName"] = value; }
         }
-
     }
 }

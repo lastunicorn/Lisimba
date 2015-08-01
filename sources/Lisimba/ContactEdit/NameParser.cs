@@ -78,7 +78,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (match.Success)
                 return match;
-            
+
             return null;
         }
 

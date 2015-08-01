@@ -23,19 +23,13 @@ namespace DustInTheWind.Lisimba.Config
         [ConfigurationProperty("recentFiles")]
         public RecentFilesConfigElementCollection RecentFilesList
         {
-            get
-            {
-                return (RecentFilesConfigElementCollection)this["recentFiles"] ?? new RecentFilesConfigElementCollection();
-            }
+            get { return (RecentFilesConfigElementCollection) this["recentFiles"] ?? new RecentFilesConfigElementCollection(); }
         }
 
         [ConfigurationProperty("loadFileAtStart")]
         public LoadFileAtStartConfigElement LoadFileAtStart
         {
-            get
-            {
-                return (LoadFileAtStartConfigElement)this["loadFileAtStart"] ?? new LoadFileAtStartConfigElement();
-            }
+            get { return (LoadFileAtStartConfigElement) this["loadFileAtStart"] ?? new LoadFileAtStartConfigElement(); }
         }
 
         //[ConfigurationProperty("sortBy")]
@@ -50,10 +44,7 @@ namespace DustInTheWind.Lisimba.Config
         [ConfigurationProperty("sortBy")]
         public SortByConfigElement SortBy
         {
-            get
-            {
-                return (SortByConfigElement)this["sortBy"] ?? new SortByConfigElement();
-            }
+            get { return (SortByConfigElement) this["sortBy"] ?? new SortByConfigElement(); }
         }
 
         //protected override ConfigurationElement CreateNewElement()

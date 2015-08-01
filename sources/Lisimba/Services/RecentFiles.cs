@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Config;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class RecentFiles
+    internal class RecentFiles
     {
         private readonly ConfigurationService configurationService;
 
@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.Services
         {
             RecentFilesConfigElementCollection recentFiles = configurationService.LisimbaConfigSection.RecentFilesList;
 
-            return recentFiles.Count > 0 
+            return recentFiles.Count > 0
                 ? recentFiles[0].FileName
                 : null;
         }

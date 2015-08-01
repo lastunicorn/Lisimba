@@ -20,7 +20,7 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    static class BindingExtensions
+    internal static class BindingExtensions
     {
         public static Binding Bind<TControl, TData, TProp1, TProp2>(this TControl control, Expression<Func<TControl, TProp1>> property, TData dataSource, Expression<Func<TData, TProp2>> dataSourceProperty, bool formattingEnabled)
             where TControl : IBindableComponent

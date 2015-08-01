@@ -52,9 +52,10 @@ namespace DustInTheWind.Desmond.Logging
         //    }
         //}
 
-
         #region FileName
+
         private string fileName = string.Empty;
+
         /// <summary>
         /// The name of the file into witch will be generated the logs.
         /// </summary>
@@ -62,10 +63,13 @@ namespace DustInTheWind.Desmond.Logging
         {
             get { return fileName; }
         }
+
         #endregion
 
         #region NewLine
+
         private string newLine = "\r\n";
+
         /// <summary>
         /// The string containing the new line characters. Default value is "\r\n";
         /// </summary>
@@ -74,10 +78,13 @@ namespace DustInTheWind.Desmond.Logging
             get { return newLine; }
             set { newLine = value; }
         }
+
         #endregion
 
         #region WriteTimeStamp
+
         private bool writeTimeStamp = true;
+
         /// <summary>
         /// If true, a timestamp is written at the beginning of every line.
         /// </summary>
@@ -86,10 +93,13 @@ namespace DustInTheWind.Desmond.Logging
             get { return writeTimeStamp; }
             set { writeTimeStamp = value; }
         }
+
         #endregion
 
         #region TimeStampFormat
+
         private string timeStampFormat = "[yyyy/MM/dd HH:mm:ss]";
+
         /// <summary>
         /// The format of the timestamp written at the beginning of every line.
         /// </summary>
@@ -98,10 +108,13 @@ namespace DustInTheWind.Desmond.Logging
             get { return timeStampFormat; }
             set { timeStampFormat = value; }
         }
+
         #endregion
 
         #region IndentString
+
         private string indentString = "    ";
+
         /// <summary>
         /// The string used to indent the lines. (where indent is needed)
         /// </summary>
@@ -110,10 +123,13 @@ namespace DustInTheWind.Desmond.Logging
             get { return indentString; }
             set { indentString = value; }
         }
+
         #endregion
 
         #region LastException
+
         private Exception lastException = null;
+
         /// <summary>
         /// No function of this class raises any exception. So, the last internal exception is exposed here.
         /// </summary>
@@ -121,10 +137,13 @@ namespace DustInTheWind.Desmond.Logging
         {
             get { return lastException; }
         }
+
         #endregion
 
         #region DefaultLocation
+
         private static readonly string defaultLocation;
+
         /// <summary>
         /// The location where the log file will be created if the user does not explicitly specifies the file.
         /// </summary>
@@ -132,9 +151,11 @@ namespace DustInTheWind.Desmond.Logging
         {
             get { return defaultLocation; }
         }
+
         #endregion
 
         #region DefaultFileName
+
         /// <summary>
         /// The name of the log file if the user does not explicitly specifies it.
         /// </summary>
@@ -142,6 +163,7 @@ namespace DustInTheWind.Desmond.Logging
         {
             get { return DefaultLocation + "\\logfile.log"; }
         }
+
         #endregion
 
         private enum ErrorLevel
@@ -229,7 +251,6 @@ namespace DustInTheWind.Desmond.Logging
             {
                 return false;
             }
-
         }
 
         /// <summary>
@@ -259,7 +280,9 @@ namespace DustInTheWind.Desmond.Logging
                     //sw.Dispose();
                     sw = null;
                 }
-                catch { }
+                catch
+                {
+                }
             }
         }
 
@@ -374,17 +397,19 @@ namespace DustInTheWind.Desmond.Logging
         {
             return WriteLog(text, true, ErrorLevel.Error, true, true);
         }
+
         public bool WriteError(string text, Exception ex)
         {
             Exception e = ex;
             while (e != null)
             {
                 text += (text.Length == 0 ? string.Empty : "\r\n") +
-                    e.GetType().Name + ": " + e.Message + "\r\nStackTrace: " + e.StackTrace;
+                        e.GetType().Name + ": " + e.Message + "\r\nStackTrace: " + e.StackTrace;
                 e = e.InnerException;
             }
             return WriteLog(text, true, ErrorLevel.Error, true, true);
         }
+
         public bool WriteError(Exception ex)
         {
             return WriteError(string.Empty, ex);

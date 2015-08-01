@@ -19,7 +19,7 @@ using System.Collections.Generic;
 
 namespace DustInTheWind.Lisimba
 {
-    class CommandLineArguments
+    internal class CommandLineArguments
     {
         private readonly List<string> keys = new List<string>();
         private readonly List<string> values = new List<string>();

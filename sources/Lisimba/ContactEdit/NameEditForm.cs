@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -22,6 +21,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class NameEditForm : EditBaseForm
     {
         private PersonName personName;
+
         public PersonName PersonName
         {
             get { return personName; }
@@ -45,9 +45,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
         protected override void UpdateData()
         {
             bool isAnyDataChanged = !textBoxFirstName.Text.Equals(personName.FirstName) ||
-                     !textBoxMiddleName.Text.Equals(personName.MiddleName) ||
-                     !textBoxLastName.Text.Equals(personName.LastName) ||
-                     !textBoxNickname.Text.Equals(personName.Nickname);
+                                    !textBoxMiddleName.Text.Equals(personName.MiddleName) ||
+                                    !textBoxLastName.Text.Equals(personName.LastName) ||
+                                    !textBoxNickname.Text.Equals(personName.Nickname);
 
             if (!isAnyDataChanged)
                 return;

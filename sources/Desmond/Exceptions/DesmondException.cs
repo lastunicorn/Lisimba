@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Desmond.Exceptions
 {
-    class DesmondException : ApplicationException
+    internal class DesmondException : ApplicationException
     {
     }
 }

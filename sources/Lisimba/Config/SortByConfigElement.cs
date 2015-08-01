@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Config
         [ConfigurationProperty("value", DefaultValue = "NicknameOrName", IsRequired = true, IsKey = false)]
         public string Value
         {
-            get { return (string)this["value"]; }
+            get { return (string) this["value"]; }
             set { this["value"] = value; }
         }
     }

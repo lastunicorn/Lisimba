@@ -23,10 +23,15 @@ namespace DustInTheWind.Lisimba.Forms
     public partial class BiorythmForm : Form
     {
         private Contact contact;
+
         public Contact Contact
         {
             get { return contact; }
-            set { contact = value; RefreshData(); }
+            set
+            {
+                contact = value;
+                RefreshData();
+            }
         }
 
         private void RefreshData()

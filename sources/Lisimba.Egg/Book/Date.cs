@@ -316,7 +316,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 d.Month = int.Parse(v[0]);
                 d.Year = int.Parse(v[2]);
             }
-            catch { }
+            catch
+            {
+            }
 
             return d;
         }
@@ -330,7 +332,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 Month = int.Parse(v[0]);
                 Year = int.Parse(v[2]);
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         public static string ShortMonthName(int month)
@@ -374,18 +378,18 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (ReferenceEquals(this, other)) return true;
 
             return day == other.day &&
-                month == other.month &&
-                year == other.year &&
-                string.Equals(description, other.description);
+                   month == other.month &&
+                   year == other.year &&
+                   string.Equals(description, other.description);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Date)) return false;
+            if (obj.GetType() != typeof (Date)) return false;
 
-            return Equals((Date)obj);
+            return Equals((Date) obj);
         }
 
         public override int GetHashCode()
@@ -393,9 +397,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             unchecked
             {
                 var hashCode = day;
-                hashCode = (hashCode * 397) ^ month;
-                hashCode = (hashCode * 397) ^ year;
-                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ month;
+                hashCode = (hashCode*397) ^ year;
+                hashCode = (hashCode*397) ^ (description != null ? description.GetHashCode() : 0);
 
                 return hashCode;
             }

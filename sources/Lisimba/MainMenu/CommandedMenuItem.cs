@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Operations;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class CommandedMenuItem : ToolStripMenuItem, IBindableComponent
+    internal class CommandedMenuItem : ToolStripMenuItem, IBindableComponent
     {
         private BindingContext bindingContext;
         private ControlBindingsCollection dataBindings;
@@ -37,10 +37,7 @@ namespace DustInTheWind.Lisimba.MainMenu
 
                 return bindingContext;
             }
-            set
-            {
-                bindingContext = value;
-            }
+            set { bindingContext = value; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]

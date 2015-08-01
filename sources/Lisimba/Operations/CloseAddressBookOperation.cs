@@ -15,7 +15,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public CloseAddressBookOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
-            :base(applicationStatus)
+            : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 

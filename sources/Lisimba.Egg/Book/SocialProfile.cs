@@ -109,9 +109,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(SocialProfile)) return false;
+            if (obj.GetType() != typeof (SocialProfile)) return false;
 
-            return Equals((SocialProfile)obj);
+            return Equals((SocialProfile) obj);
         }
 
         public bool Equals(SocialProfile socialProfile)
@@ -126,7 +126,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             unchecked
             {
-                return ((id != null ? id.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((id != null ? id.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

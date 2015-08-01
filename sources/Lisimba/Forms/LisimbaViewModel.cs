@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    class LisimbaViewModel : ViewModelBase
+    internal class LisimbaViewModel : ViewModelBase
     {
         private readonly AddressBookShell addressBookShell;
         private readonly ApplicationStatus applicationStatus;

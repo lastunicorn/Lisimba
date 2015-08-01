@@ -53,10 +53,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             // new position
             Point p = Location;
-            
+
             int x = Math.Min(screen.Width, p.X);
             x = Math.Max(margin, x);
-            
+
             int y = Math.Min(screen.Height, p.Y);
             y = Math.Max(margin, y);
 

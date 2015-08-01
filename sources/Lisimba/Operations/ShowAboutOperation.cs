@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAboutOperation : ExecutableViewModelBase<object>
+    internal class ShowAboutOperation : ExecutableViewModelBase<object>
     {
         private readonly UserInterface userInterface;
 

@@ -34,7 +34,6 @@ namespace DustInTheWind.Desmond.UI
     {
         private readonly DesmondPresenter presenter;
 
-
         #region Constructor
 
         /// <summary>
@@ -49,7 +48,6 @@ namespace DustInTheWind.Desmond.UI
 
         #endregion
 
-
         #region public void DisplayError(Exception ex)
 
         private delegate void DisplayErrorDelegate(Exception ex);
@@ -62,7 +60,7 @@ namespace DustInTheWind.Desmond.UI
         {
             if (InvokeRequired)
             {
-                Invoke(new DisplayErrorDelegate(DisplayError), new object[] { ex });
+                Invoke(new DisplayErrorDelegate(DisplayError), new object[] {ex});
             }
             else
             {
@@ -84,7 +82,7 @@ namespace DustInTheWind.Desmond.UI
         {
             if (InvokeRequired)
             {
-                Invoke(new DisplayErrorMessageDelegate(DisplayErrorMessage), new object[] { message });
+                Invoke(new DisplayErrorMessageDelegate(DisplayErrorMessage), new object[] {message});
             }
             else
             {
@@ -106,7 +104,7 @@ namespace DustInTheWind.Desmond.UI
         {
             if (InvokeRequired)
             {
-                Invoke(new DisplayMessageDelegate(DisplayMessage), new object[] { message });
+                Invoke(new DisplayMessageDelegate(DisplayMessage), new object[] {message});
             }
             else
             {

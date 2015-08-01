@@ -17,13 +17,12 @@
 using System;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
+    internal class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;

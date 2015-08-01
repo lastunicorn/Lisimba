@@ -300,24 +300,24 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (ReferenceEquals(this, other)) return true;
 
             return Equals(name, other.name) &&
-                Equals(birthday, other.birthday) &&
-                string.Equals(category, other.category) &&
-                string.Equals(notes, other.notes) &&
-                Equals(Phones, other.Phones) &&
-                Equals(Emails, other.Emails) &&
-                Equals(WebSites, other.WebSites) &&
-                Equals(PostalAddresses, other.PostalAddresses) &&
-                Equals(Dates, other.Dates) &&
-                Equals(SocialProfileIds, other.SocialProfileIds);
+                   Equals(birthday, other.birthday) &&
+                   string.Equals(category, other.category) &&
+                   string.Equals(notes, other.notes) &&
+                   Equals(Phones, other.Phones) &&
+                   Equals(Emails, other.Emails) &&
+                   Equals(WebSites, other.WebSites) &&
+                   Equals(PostalAddresses, other.PostalAddresses) &&
+                   Equals(Dates, other.Dates) &&
+                   Equals(SocialProfileIds, other.SocialProfileIds);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Contact)) return false;
+            if (obj.GetType() != typeof (Contact)) return false;
 
-            return Equals((Contact)obj);
+            return Equals((Contact) obj);
         }
 
         //public override int GetHashCode()

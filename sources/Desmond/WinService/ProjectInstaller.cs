@@ -39,7 +39,7 @@ namespace DustInTheWind.Desmond.WinService
                 ServiceController serviceController = new ServiceController(serviceInstaller1.ServiceName);
                 serviceController.Start();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Instance.WriteError(ex);
             }

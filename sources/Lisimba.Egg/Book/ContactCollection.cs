@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         public void Sort(ContactsSortingType sortField, SortDirection sortDirection)
         {
             IComparer comparer = ComparerFactory.GetComparer(sortField);
-            ArrayList.Adapter((IList)Items).Sort(comparer);
+            ArrayList.Adapter((IList) Items).Sort(comparer);
         }
 
         protected override void InsertItem(int index, Contact item)

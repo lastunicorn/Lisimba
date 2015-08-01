@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.UserControls
 {
-    class SubItemClickedEventArgs : EventArgs
+    internal class SubItemClickedEventArgs : EventArgs
     {
         public ToolStripMenuItem MenuItem { get; private set; }
 

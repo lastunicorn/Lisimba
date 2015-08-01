@@ -126,10 +126,7 @@ namespace DustInTheWind.Desmond
         /// <returns></returns>
         public string this[string paramName]
         {
-            get
-            {
-                return (parameters[paramName]);
-            }
+            get { return (parameters[paramName]); }
         }
     }
 }

@@ -7,7 +7,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.BookShell
 {
-    class AddressBookShell
+    internal class AddressBookShell
     {
         private readonly UserInterface userInterface;
         private readonly CommandPool commandPool;
@@ -152,8 +152,9 @@ namespace DustInTheWind.Lisimba.BookShell
                 return addressBook.Name;
 
             bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
-            if (hasFileName) return
-                FileName;
+            if (hasFileName)
+                return
+                    FileName;
 
             return "< Unnamed >";
         }

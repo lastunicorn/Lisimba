@@ -24,18 +24,18 @@ namespace DustInTheWind.Desmond.Config
 
         public static DesmondConfigurationSection GetSection()
         {
-            return (DesmondConfigurationSection)ConfigurationManager.GetSection(DesmondConfigurationSection.SECTION_NAME);
+            return (DesmondConfigurationSection) ConfigurationManager.GetSection(DesmondConfigurationSection.SECTION_NAME);
         }
 
         public static DesmondConfigurationSection GetSection(Configuration config)
         {
-            return (DesmondConfigurationSection)config.GetSection(DesmondConfigurationSection.SECTION_NAME);
+            return (DesmondConfigurationSection) config.GetSection(DesmondConfigurationSection.SECTION_NAME);
         }
 
         [ConfigurationProperty("addressBook")]
         public AddressBookConfigurationElement AddressBook
         {
-            get { return (AddressBookConfigurationElement)this["addressBook"]; }
+            get { return (AddressBookConfigurationElement) this["addressBook"]; }
             set { this["addressBook"] = value; }
         }
     }

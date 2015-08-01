@@ -42,10 +42,7 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         public void raises_StatusTextChanged_event_when_value_is_changed()
         {
             bool eventWasRaised = false;
-            applicationStatus.StatusTextChanged += (sender, e) =>
-            {
-                eventWasRaised = true;
-            };
+            applicationStatus.StatusTextChanged += (sender, e) => { eventWasRaised = true; };
 
             applicationStatus.StatusText = "test status";
 
@@ -58,10 +55,7 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
             bool eventWasRaised = false;
             const string statusText = "some text";
             applicationStatus.StatusText = statusText;
-            applicationStatus.StatusTextChanged += (sender, e) =>
-            {
-                eventWasRaised = true;
-            };
+            applicationStatus.StatusTextChanged += (sender, e) => { eventWasRaised = true; };
 
             applicationStatus.StatusText = statusText;
 

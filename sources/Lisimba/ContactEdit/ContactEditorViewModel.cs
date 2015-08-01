@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    class ContactEditorViewModel : ViewModelBase
+    internal class ContactEditorViewModel : ViewModelBase
     {
         private readonly Zodiac zodiac;
 

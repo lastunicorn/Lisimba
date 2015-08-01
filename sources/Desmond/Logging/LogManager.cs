@@ -57,7 +57,6 @@ namespace DustInTheWind.Desmond.Logging
                 {
                     return logFile;
                 }
-
             }
         }
 

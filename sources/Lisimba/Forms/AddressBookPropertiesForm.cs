@@ -16,7 +16,6 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Presenters;
 
 namespace DustInTheWind.Lisimba.Forms
 {

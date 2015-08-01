@@ -126,8 +126,8 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(WebSite)) return false;
-            
+            if (obj.GetType() != typeof (WebSite)) return false;
+
             return Equals((WebSite) obj);
         }
 
@@ -143,7 +143,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             unchecked
             {
-                return ((address != null ? address.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((address != null ? address.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

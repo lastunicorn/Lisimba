@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class LisimbaApplication
+    internal class LisimbaApplication
     {
         private readonly ApplicationStatus applicationStatus;
         private readonly ProgramArguments programArguments;

@@ -36,10 +36,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
 
         public ImportRule this[Contact contact]
         {
-            get
-            {
-                return Items.FirstOrDefault(x => x.NewContact == contact);
-            }
+            get { return Items.FirstOrDefault(x => x.NewContact == contact); }
             set
             {
                 for (int i = 0; i < Items.Count; i++)

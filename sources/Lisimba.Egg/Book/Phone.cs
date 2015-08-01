@@ -92,8 +92,8 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(Phone)) return false;
-            
+            if (obj.GetType() != typeof (Phone)) return false;
+
             return Equals((Phone) obj);
         }
 
@@ -101,16 +101,16 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, phone)) return false;
             if (ReferenceEquals(this, phone)) return true;
-            
+
             return string.Equals(number, phone.number) &&
-                string.Equals(description, phone.description);
+                   string.Equals(description, phone.description);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((number != null ? number.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((number != null ? number.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

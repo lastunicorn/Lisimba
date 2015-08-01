@@ -54,7 +54,7 @@ namespace DustInTheWind.Desmond
             System.Windows.Forms.MessageBox.Show(nextContact.ToString());
         }
 
-        void addressBookLoader_IncorrectXmlVersion(object sender, IncorrectXmlVersionEventArgs e)
+        private void addressBookLoader_IncorrectXmlVersion(object sender, IncorrectXmlVersionEventArgs e)
         {
             e.ContinueParsing = true;
         }

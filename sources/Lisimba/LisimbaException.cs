@@ -19,7 +19,7 @@ using System.Runtime.Serialization;
 
 namespace DustInTheWind.Lisimba
 {
-    class LisimbaException : ApplicationException
+    internal class LisimbaException : ApplicationException
     {
         public LisimbaException()
             : base()

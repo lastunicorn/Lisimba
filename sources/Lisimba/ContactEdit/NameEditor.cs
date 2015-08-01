@@ -132,22 +132,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             NameEditForm form = new NameEditForm
             {
-                Location = GetBottomLeftCorner(labelName),
+                Location = labelName.GetBottomLeftCorner(),
                 PersonName = personName
             };
 
             form.Show();
             form.Focus();
-        }
-
-        private Point GetBottomLeftCorner(Control control)
-        {
-            int clientX = control.Location.X;
-            int clientY = control.Location.Y + control.Height;
-
-            Point clientPoint = new Point(clientX, clientY);
-
-            return control.Parent.PointToScreen(clientPoint);
         }
 
         private void textBoxName_Leave(object sender, EventArgs e)

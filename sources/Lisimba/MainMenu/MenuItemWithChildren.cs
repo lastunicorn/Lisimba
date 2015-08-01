@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class MenuItemWithChildren : ToolStripMenuItem
+    internal class MenuItemWithChildren : ToolStripMenuItem
     {
         public RecentFiles RecentFiles { get; set; }
 
@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.MainMenu
                 if (j < DropDownItems.Count)
                 {
                     // If already exists some menu items, reuse them.
-                    menuItem = (CommandedMenuItem)DropDownItems[j];
+                    menuItem = (CommandedMenuItem) DropDownItems[j];
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace DustInTheWind.Lisimba.MainMenu
 
         private void HandleSubMenuItemClick(object sender, EventArgs e)
         {
-            ToolStripMenuItem menuItem = (ToolStripMenuItem)sender;
+            ToolStripMenuItem menuItem = (ToolStripMenuItem) sender;
             OnSubItemClicked(new SubItemClickedEventArgs(menuItem));
         }
     }

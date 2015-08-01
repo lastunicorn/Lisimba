@@ -212,18 +212,18 @@ namespace DustInTheWind.Lisimba.Egg.Book
             if (ReferenceEquals(this, other)) return true;
 
             return string.Equals(firstName, other.firstName) &&
-                string.Equals(middleName, other.middleName) &&
-                string.Equals(lastName, other.lastName) &&
-                string.Equals(nickname, other.nickname);
+                   string.Equals(middleName, other.middleName) &&
+                   string.Equals(lastName, other.lastName) &&
+                   string.Equals(nickname, other.nickname);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(PersonName)) return false;
+            if (obj.GetType() != typeof (PersonName)) return false;
 
-            return Equals((PersonName)obj);
+            return Equals((PersonName) obj);
         }
 
         public override int GetHashCode()
@@ -231,9 +231,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             unchecked
             {
                 var hashCode = (firstName != null ? firstName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (middleName != null ? middleName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (lastName != null ? lastName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (nickname != null ? nickname.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (middleName != null ? middleName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (lastName != null ? lastName.GetHashCode() : 0);
+                hashCode = (hashCode*397) ^ (nickname != null ? nickname.GetHashCode() : 0);
 
                 return hashCode;
             }

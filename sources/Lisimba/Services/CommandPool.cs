@@ -20,7 +20,7 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class CommandPool
+    internal class CommandPool
     {
         private readonly IUnityContainer servicePrvider;
 

@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Comparers
 {
-    class TreeNodeComparer : IComparer
+    internal class TreeNodeComparer : IComparer
     {
         private readonly ContactsSortingType contactsSortingType;
 
@@ -37,8 +37,8 @@ namespace DustInTheWind.Lisimba.Comparers
             if (!(x is TreeNode) || !(y is TreeNode))
                 throw new ArgumentException("One or both of the objects to compare are not TreeNode.");
 
-            TreeNode treeNodeX = (TreeNode)x;
-            TreeNode treeNodeY = (TreeNode)y;
+            TreeNode treeNodeX = (TreeNode) x;
+            TreeNode treeNodeY = (TreeNode) y;
 
             Contact c1 = treeNodeX.Tag as Contact;
             Contact c2 = treeNodeY.Tag as Contact;
