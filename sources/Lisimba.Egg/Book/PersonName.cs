@@ -33,6 +33,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
+        public bool HasFirstName
+        {
+            get { return !string.IsNullOrEmpty(firstName); }
+        }
+
         private string middleName = string.Empty;
 
         public string MiddleName
@@ -43,6 +48,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 middleName = value;
                 OnChanged();
             }
+        }
+
+        public bool HasMiddleName
+        {
+            get { return !string.IsNullOrEmpty(middleName); }
         }
 
         private string lastName = string.Empty;
@@ -57,6 +67,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
+        public bool HasLastName
+        {
+            get { return !string.IsNullOrEmpty(lastName); }
+        }
+
         private string nickname = string.Empty;
 
         public string Nickname
@@ -67,6 +82,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 nickname = value;
                 OnChanged();
             }
+        }
+
+        public bool HasNickname
+        {
+            get { return !string.IsNullOrEmpty(nickname); }
         }
 
         public event EventHandler Changed;

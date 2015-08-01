@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -9,6 +8,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class NameEditor : UserControl
     {
         private PersonName personName;
+        private readonly NameEditorLabel nameEditorLabel;
 
         public event EventHandler PersonNameChanged;
 
@@ -32,6 +32,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         public NameEditor()
         {
             InitializeComponent();
+
+            nameEditorLabel = new NameEditorLabel();
         }
 
         private void buttonEdit_Resize(object sender, EventArgs e)
@@ -54,6 +56,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             tableLayoutPanel1.Controls.Add(textBoxName);
 
             textBoxName.Visible = true;
+
+            nameEditorLabel.Location = textBoxName.GetBottomLeftCorner();
+            nameEditorLabel.Show(this);
+
             textBoxName.Focus();
             textBoxName.Text = labelName.Text;
             textBoxName.SelectionStart = 0;
@@ -64,6 +70,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             tableLayoutPanel1.Controls.Remove(textBoxName);
             tableLayoutPanel1.Controls.Add(labelName);
+
+            nameEditorLabel.Hide();
         }
 
         private void textBoxName_KeyDown(object sender, KeyEventArgs e)
@@ -158,6 +166,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            nameEditorLabel.LabelText = textBoxName.Text;
         }
     }
 }

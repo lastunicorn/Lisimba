@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Forms;
@@ -116,7 +115,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             BirthDateEditForm form = new BirthDateEditForm
             {
-                Location = GetBottomLeftCorner(labelBirthday),
+                Location = labelBirthday.GetBottomLeftCorner(),
                 Date = birthday
             };
 
@@ -130,7 +129,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 PostalAddresses = postalAddresses,
-                Location = GetBottomLeftCorner(buttonAddAddress),
+                Location = buttonAddAddress.GetBottomLeftCorner(),
                 PostalAddress = new PostalAddress()
             };
 
@@ -144,7 +143,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 Dates = dates,
-                Location = GetBottomLeftCorner(buttonAddDate),
+                Location = buttonAddDate.GetBottomLeftCorner(),
                 Date = new Date()
             };
 
@@ -158,7 +157,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 Emails = emails,
-                Location = GetBottomLeftCorner(buttonAddEmail),
+                Location = buttonAddEmail.GetBottomLeftCorner(),
                 Email = new Email()
             };
 
@@ -172,7 +171,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 SocialProfiles = socialProfileIds,
-                Location = GetBottomLeftCorner(buttonAddSocialProfileId),
+                Location = buttonAddSocialProfileId.GetBottomLeftCorner(),
                 SocialProfile = new SocialProfile()
             };
 
@@ -186,7 +185,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 Phones = phones,
-                Location = GetBottomLeftCorner(buttonAddPhone),
+                Location = buttonAddPhone.GetBottomLeftCorner(),
                 Phone = new Phone()
             };
 
@@ -200,22 +199,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 AddMode = true,
                 WebSites = webSites,
-                Location = GetBottomLeftCorner(buttonAddWebSite),
+                Location = buttonAddWebSite.GetBottomLeftCorner(),
                 WebSite = new WebSite()
             };
 
             form.Show();
             form.Focus();
-        }
-
-        private Point GetBottomLeftCorner(Control control)
-        {
-            int clientX = control.Location.X;
-            int clientY = control.Location.Y + control.Height;
-
-            Point clientPoint = new Point(clientX, clientY);
-
-            return control.Parent.PointToScreen(clientPoint);
         }
     }
 }

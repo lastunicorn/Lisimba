@@ -43,7 +43,7 @@
             this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelName.Location = new System.Drawing.Point(3, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(486, 132);
+            this.labelName.Size = new System.Drawing.Size(492, 132);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "label1";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -57,18 +57,20 @@
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxName.Location = new System.Drawing.Point(33, 19);
-            this.textBoxName.Margin = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.textBoxName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.textBoxName.Name = "textBoxName";
             this.textBoxName.Size = new System.Drawing.Size(103, 38);
             this.textBoxName.TabIndex = 1;
             this.textBoxName.Visible = false;
+            this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
             this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxName_KeyDown);
             this.textBoxName.Leave += new System.EventHandler(this.textBoxName_Leave);
             // 
             // buttonEdit
             // 
             this.buttonEdit.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.buttonEdit.Location = new System.Drawing.Point(495, 42);
+            this.buttonEdit.Location = new System.Drawing.Point(498, 42);
+            this.buttonEdit.Margin = new System.Windows.Forms.Padding(0);
             this.buttonEdit.MaximumSize = new System.Drawing.Size(48, 48);
             this.buttonEdit.Name = "buttonEdit";
             this.buttonEdit.Size = new System.Drawing.Size(48, 48);
