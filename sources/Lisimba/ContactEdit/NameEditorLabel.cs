@@ -1,79 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Lisimba
+// Copyright (C) 2007-2014 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Forms;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
     public partial class NameEditorLabel : Form
     {
+        private readonly NameEditorLabelViewModel viewModel;
+
         public NameEditorLabel()
         {
             InitializeComponent();
+
+            viewModel = new NameEditorLabelViewModel();
+
+            labelError.Bind(x => x.Visible, viewModel, x => x.ErrorVisible, false, DataSourceUpdateMode.Never);
+
+            labelFirstLabel.Bind(x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
+            labelFirst.Bind(x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
+            labelFirst.Bind(x => x.Text, viewModel, x => x.FirstName, false, DataSourceUpdateMode.Never);
+
+            labelMiddleLabel.Bind(x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
+            labelMiddle.Bind(x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
+            labelMiddle.Bind(x => x.Text, viewModel, x => x.MiddleName, false, DataSourceUpdateMode.Never);
+
+            labelLastLabel.Bind(x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
+            labelLast.Bind(x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
+            labelLast.Bind(x => x.Text, viewModel, x => x.LastName, false, DataSourceUpdateMode.Never);
+
+            labelNickLabel.Bind(x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
+            labelNick.Bind(x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
+            labelNick.Bind(x => x.Text, viewModel, x => x.Nickname, false, DataSourceUpdateMode.Never);
         }
 
         public string LabelText
         {
-            get { return label1.Text; }
             set
             {
-                label1.Text = ParseText(value);
+                NameParser nameParser = new NameParser(value);
+
+                if (nameParser.Success)
+                {
+                    PersonName personName = nameParser.Result;
+
+                    viewModel.FirstName = personName.FirstName;
+                    viewModel.MiddleName = personName.MiddleName;
+                    viewModel.LastName = personName.LastName;
+                    viewModel.Nickname = personName.Nickname;
+                }
+                else
+                {
+                    viewModel.FirstName = null;
+                    viewModel.MiddleName = null;
+                    viewModel.LastName = null;
+                    viewModel.Nickname = null;
+                }
             }
-        }
-
-        private static string ParseText(string value)
-        {
-            NameParser nameParser = new NameParser(value);
-
-            return !nameParser.Success
-                ? "< Error >"
-                : CreateText(nameParser.Result);
-        }
-
-        private static string CreateText(PersonName personName)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (personName.HasFirstName)
-            {
-                sb.Append("first: ");
-                sb.Append(personName.FirstName);
-            }
-
-            if (personName.HasMiddleName)
-            {
-                if (sb.Length > 0)
-                    sb.Append(" - ");
-
-                sb.Append("middle: ");
-                sb.Append(personName.MiddleName);
-            }
-
-            if (personName.HasLastName)
-            {
-                if (sb.Length > 0)
-                    sb.Append(" - ");
-
-                sb.Append("last: ");
-                sb.Append(personName.LastName);
-            }
-
-            if (personName.HasNickname)
-            {
-                if (sb.Length > 0)
-                    sb.Append(" - ");
-
-                sb.Append("nick: ");
-                sb.Append(personName.Nickname);
-            }
-
-            return sb.ToString();
         }
     }
 }

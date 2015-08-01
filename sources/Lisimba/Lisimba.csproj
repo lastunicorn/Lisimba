@@ -101,6 +101,7 @@
     <Compile Include="ContactEdit\NameEditorLabel.Designer.cs">
       <DependentUpon>NameEditorLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactEdit\NameEditorLabelViewModel.cs" />
     <Compile Include="ContactEdit\NameParser.cs" />
     <Compile Include="ContactEdit\SocialProfileEditForm.cs">
       <SubType>Form</SubType>
