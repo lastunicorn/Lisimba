@@ -14,9 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.UserControls;
 using Microsoft.Practices.Unity;
@@ -68,13 +70,17 @@ namespace DustInTheWind.Lisimba
 
         private void InitializeAndStartUi()
         {
+            TrayIcon trayIcon = new TrayIcon();
+            TrayIconPresenter trayIconPresenter = unityContainer.Resolve<TrayIconPresenter>();
+            trayIconPresenter.TrayIcon = trayIcon;
+
             UserInterface userInterface = unityContainer.Resolve<UserInterface>();
 
-            LisimbaForm formLisimba = unityContainer.Resolve<LisimbaForm>();
-            formLisimba.ViewModel = unityContainer.Resolve<LisimbaViewModel>();
-            formLisimba.ContactListViewModel = unityContainer.Resolve<ContactListViewModel>();
+            //LisimbaForm formLisimba = unityContainer.Resolve<LisimbaForm>();
+            //formLisimba.ViewModel = unityContainer.Resolve<LisimbaViewModel>();
+            //formLisimba.ContactListViewModel = unityContainer.Resolve<ContactListViewModel>();
 
-            userInterface.MainWindow = formLisimba;
+            //userInterface.MainWindow = formLisimba;
 
             userInterface.Run();
         }

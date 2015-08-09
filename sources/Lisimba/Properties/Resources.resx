@@ -196,10 +196,10 @@
   <data name="ErrorPopup_Title" xml:space="preserve">
     <value>Error</value>
   </data>
-    <data name="AddDate_WindowTitle" xml:space="preserve">
+  <data name="AddDate_WindowTitle" xml:space="preserve">
     <value>Add Date</value>
   </data>
-    <data name="EditDate_WindowTitle" xml:space="preserve">
+  <data name="EditDate_WindowTitle" xml:space="preserve">
     <value>Edit Date</value>
   </data>
   <data name="AddPostalAddress_WindowTitle" xml:space="preserve">
@@ -207,5 +207,8 @@
   </data>
   <data name="EditPostalAddress_WindowTitle" xml:space="preserve">
     <value>Edit Postal Address</value>
+  </data>
+  <data name="Lion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Lion.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

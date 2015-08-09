@@ -116,6 +116,13 @@
       <DependentUpon>NameEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\BindingExtensions.cs" />
+    <Compile Include="Forms\TrayIcon.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\TrayIcon.Designer.cs">
+      <DependentUpon>TrayIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TrayIconPresenter.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
@@ -326,6 +333,9 @@
     <EmbeddedResource Include="ContactEdit\WebSiteEditForm.resx">
       <DependentUpon>WebSiteEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TrayIcon.resx">
+      <DependentUpon>TrayIcon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\LocalizedResources.ro-RO.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
