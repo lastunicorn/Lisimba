@@ -70,6 +70,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -198,6 +199,7 @@
     <Compile Include="Services\LisimbaApplication.cs" />
     <Compile Include="Services\RecentFiles.cs" />
     <Compile Include="Services\ApplicationStatus.cs" />
+    <Compile Include="Services\UiFactory.cs" />
     <Compile Include="Services\UserInterface.cs" />
     <Compile Include="Services\Zodiac.cs" />
     <Compile Include="UserControls\BindableToolStripStatusLabel.cs">

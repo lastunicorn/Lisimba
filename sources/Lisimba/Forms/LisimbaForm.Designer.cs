@@ -242,7 +242,6 @@ namespace DustInTheWind.Lisimba.Forms
             this.Name = "FormLisimba";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lisimba";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HandleFormClosing);
             this.Shown += new System.EventHandler(this.HandleFormShown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);

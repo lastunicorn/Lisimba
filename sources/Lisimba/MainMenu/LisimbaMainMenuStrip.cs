@@ -27,10 +27,9 @@ namespace DustInTheWind.Lisimba.MainMenu
             InitializeComponent();
         }
 
-        public void Initialize(CommandPool commandPool, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public void Initialize(CommandPool commandPool, RecentFiles recentFiles)
         {
             if (commandPool == null) throw new ArgumentNullException("commandPool");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             recentFiles.FileNameAdded += HandleRecentFileNameAdded;

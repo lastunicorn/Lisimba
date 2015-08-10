@@ -29,7 +29,6 @@ namespace DustInTheWind.Lisimba.Forms
     {
         // Lisimba - male name meaning "lion" in Zulu language.
 
-        private readonly ApplicationStatus applicationStatus;
         private readonly AddressBookShell addressBookShell;
         private readonly CommandPool commandPool;
 
@@ -73,7 +72,6 @@ namespace DustInTheWind.Lisimba.Forms
 
             InitializeComponent();
 
-            this.applicationStatus = applicationStatus;
             this.addressBookShell = addressBookShell;
             this.commandPool = commandPool;
 
@@ -82,7 +80,7 @@ namespace DustInTheWind.Lisimba.Forms
             contactListView1.CommandPool = commandPool;
             contactListView1.ApplicationStatus = applicationStatus;
 
-            menuStripMain.Initialize(commandPool, applicationStatus, recentFiles);
+            menuStripMain.Initialize(commandPool, recentFiles);
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
@@ -102,12 +100,6 @@ namespace DustInTheWind.Lisimba.Forms
             buttonOpenAddressBook.ViewModel = commandPool.OpenAddressBookOperation;
 
             viewModel.WindowWasShown();
-        }
-
-        private void HandleFormClosing(object sender, FormClosingEventArgs e)
-        {
-            bool allowToClose = viewModel.WindowIsClosing();
-            e.Cancel = !allowToClose;
         }
     }
 }
