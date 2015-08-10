@@ -18,10 +18,9 @@ using System;
 using System.Linq;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Presenters
+namespace DustInTheWind.Lisimba.Forms
 {
     internal class AddContactPresenter
     {

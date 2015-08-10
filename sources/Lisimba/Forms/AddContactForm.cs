@@ -16,8 +16,9 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Presenters;
+using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Forms
 {
@@ -29,13 +30,15 @@ namespace DustInTheWind.Lisimba.Forms
         {
             InitializeComponent();
 
+            contactView1.ViewModel = new ContactEditorViewModel(new Zodiac()) { View = contactView1 };
+
             //contactView1.Bind(x => x.Model, Presenter, x => x.EditedContact, true);
         }
 
         public Contact Contact
         {
-            get { return contactView1.Model.Contact; }
-            set { contactView1.Model.Contact = value; }
+            get { return contactView1.ViewModel.Contact; }
+            set { contactView1.ViewModel.Contact = value; }
         }
 
         private void buttonOkay_Click(object sender, EventArgs e)

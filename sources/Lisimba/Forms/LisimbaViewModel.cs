@@ -16,7 +16,9 @@
 
 using System;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.UserControls;
 using DustInTheWind.Lisimba.ViewModels;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -33,6 +35,9 @@ namespace DustInTheWind.Lisimba.Forms
         private bool allowToClose;
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
+
+        public ContactListViewModel ContactListViewModel { get; private set; }
+        public ContactEditorViewModel ContactEditorViewModel { get; private set; }
 
         public string Title
         {
@@ -74,12 +79,17 @@ namespace DustInTheWind.Lisimba.Forms
             }
         }
 
-        public LisimbaViewModel(LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBookShell addressBookShell)
+        public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
+            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBookShell addressBookShell)
         {
+            if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
+            if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
 
+            ContactListViewModel = contactListViewModel;
+            ContactEditorViewModel = contactEditorViewModel;
             this.lisimbaApplication = lisimbaApplication;
             this.applicationStatus = applicationStatus;
             this.addressBookShell = addressBookShell;
@@ -103,6 +113,7 @@ namespace DustInTheWind.Lisimba.Forms
         private void HandleContactChanged(object sender, EventArgs eventArgs)
         {
             IsContactEditVisible = addressBookShell.Contact != null;
+            ContactEditorViewModel.Contact = addressBookShell.Contact;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)

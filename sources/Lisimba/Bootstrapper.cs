@@ -71,8 +71,8 @@ namespace DustInTheWind.Lisimba
         {
             UserInterface userInterface = unityContainer.Resolve<UserInterface>();
 
-            //userInterface.RunAsTrayApp();
-            userInterface.RunAsWindowApp();
+            userInterface.RunAsTrayApp();
+            //userInterface.RunAsWindowApp();
         }
     }
 }

@@ -39,7 +39,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private PostalAddressCollection postalAddresses;
         private DateCollection dates;
         private SocialProfileIdCollection socialProfileIds;
-        private string fullName;
         private PersonName name;
 
         public IContactEditorView View { get; set; }

@@ -17,7 +17,6 @@
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -26,89 +25,87 @@ namespace DustInTheWind.Lisimba.ContactEdit
     /// </summary>
     partial class ContactEditor : UserControl, IContactEditorView
     {
-        private ContactEditorViewModel model;
+        private ContactEditorViewModel viewModel;
 
-        public ContactEditorViewModel Model
+        public ContactEditorViewModel ViewModel
         {
-            get { return model; }
-            private set
+            get { return viewModel; }
+            set
             {
-                if (model != null)
+                if (viewModel != null)
                     return;
 
-                model = value;
+                viewModel = value;
 
-                CreateBindings();
+                if (viewModel != null)
+                    CreateBindings();
             }
         }
 
         public ContactEditor()
         {
             InitializeComponent();
-
-            model = new ContactEditorViewModel(new Zodiac()) {View = this};
-            CreateBindings();
         }
 
         private void CreateBindings()
         {
-            nameEditor1.Bind(x => x.PersonName, Model, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-            labelBirthday.Bind(x => x.Text, Model, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
+            nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+            labelBirthday.Bind(x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            pictureBoxZodiacSign.Bind(x => x.Image, Model, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, Model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, Model, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            labelZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            textBoxNotes.Bind(x => x.Text, Model, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            customTreeView1.Bind(x => x.Phones, Model, x => x.Phones, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Emails, Model, x => x.Emails, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.WebSites, Model, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.PostalAddresses, Model, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Dates, Model, x => x.Dates, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.SocialProfileIds, Model, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
-            this.Bind(x => x.Enabled, Model, x => x.Enabled, false);
+            this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
         }
 
         private void label7_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Model.BirthdayEditWasRequested();
+            ViewModel.BirthdayEditWasRequested();
         }
 
         private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Model.BirthdayEditWasRequested();
+            ViewModel.BirthdayEditWasRequested();
         }
 
         private void buttonAddAddress_Click(object sender, System.EventArgs e)
         {
-            Model.AddAddressWasClicked();
+            ViewModel.AddAddressWasClicked();
         }
 
         private void buttonAddDate_Click(object sender, System.EventArgs e)
         {
-            Model.AddDateWasClicked();
+            ViewModel.AddDateWasClicked();
         }
 
         private void buttonAddEmail_Click(object sender, System.EventArgs e)
         {
-            Model.AddEmailWasClicked();
+            ViewModel.AddEmailWasClicked();
         }
 
         private void buttonAddSocialProfileId_Click(object sender, System.EventArgs e)
         {
-            Model.AddSocialProfileIdWasClicked();
+            ViewModel.AddSocialProfileIdWasClicked();
         }
 
         private void buttonAddPhone_Click(object sender, System.EventArgs e)
         {
-            Model.AddPhoneWasClicked();
+            ViewModel.AddPhoneWasClicked();
         }
 
         private void buttonAddWebSite_Click(object sender, System.EventArgs e)
         {
-            Model.AddWebSiteClicked();
+            ViewModel.AddWebSiteClicked();
         }
 
         public void EditBirthday(Date birthday)

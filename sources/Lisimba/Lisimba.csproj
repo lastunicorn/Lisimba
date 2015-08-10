@@ -140,7 +140,7 @@
     <Compile Include="Forms\IAddContactView.cs" />
     <Compile Include="Forms\IAddressBookPropertiesView.cs" />
     <Compile Include="Forms\SortingComboBoxItem.cs" />
-    <Compile Include="Presenters\AddContactPresenter.cs" />
+    <Compile Include="Forms\AddContactPresenter.cs" />
     <Compile Include="Forms\AddressBookPropertiesViewModel.cs" />
     <Compile Include="Forms\LisimbaViewModel.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

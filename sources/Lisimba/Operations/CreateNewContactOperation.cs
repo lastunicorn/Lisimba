@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Presenters;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 

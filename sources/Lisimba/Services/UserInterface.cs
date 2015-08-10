@@ -191,7 +191,6 @@ namespace DustInTheWind.Lisimba.Services
 
             LisimbaForm lisimbaForm = uiFactory.GetForm<LisimbaForm>();
             lisimbaForm.ViewModel = uiFactory.GetViewModel<LisimbaViewModel>();
-            lisimbaForm.ContactListViewModel = uiFactory.GetViewModel<ContactListViewModel>();
 
             MainWindow = lisimbaForm;
         }

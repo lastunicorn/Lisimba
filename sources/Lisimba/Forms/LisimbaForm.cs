@@ -16,9 +16,7 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
 {
@@ -29,69 +27,59 @@ namespace DustInTheWind.Lisimba.Forms
     {
         // Lisimba - male name meaning "lion" in Zulu language.
 
-        private readonly AddressBookShell addressBookShell;
+        private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
 
         private LisimbaViewModel viewModel;
-        private ContactListViewModel contactListViewModel;
 
         public LisimbaViewModel ViewModel
         {
             get { return viewModel; }
-            set { viewModel = value; }
-        }
-
-        public ContactListViewModel ContactListViewModel
-        {
-            get { return contactListViewModel; }
             set
             {
-                if (contactListViewModel != null)
+                if (contactListView1.ViewModel != null)
                 {
+                    contactListView1.ViewModel.View = null;
                     contactListView1.ViewModel = null;
-                    contactListViewModel.View = null;
                 }
 
-                contactListViewModel = value;
-
-                if (contactListViewModel != null)
+                if (contactView1.ViewModel != null)
                 {
-                    contactListView1.ViewModel = contactListViewModel;
-                    contactListViewModel.View = contactListView1;
+                    contactView1.ViewModel.View = null;
+                    contactView1.ViewModel = null;
+                }
+
+                viewModel = value;
+
+                if (viewModel != null)
+                {
+                    contactListView1.ViewModel = viewModel.ContactListViewModel;
+                    contactListView1.ViewModel.View = contactListView1;
+
+                    contactView1.ViewModel = viewModel.ContactEditorViewModel;
+                    contactView1.ViewModel.View = contactView1;
+                    
+                    contactListView1.CommandPool = commandPool;
+                    menuStripMain.Initialize(commandPool, recentFiles);
                 }
             }
         }
 
-        public LisimbaForm(ApplicationStatus applicationStatus, RecentFiles recentFiles,
-            AddressBookShell addressBookShell, CommandPool commandPool)
+        public LisimbaForm(RecentFiles recentFiles, CommandPool commandPool)
         {
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
             InitializeComponent();
 
-            this.addressBookShell = addressBookShell;
+            this.recentFiles = recentFiles;
             this.commandPool = commandPool;
-
-            addressBookShell.ContactChanged += HandleCurrentContactChanged;
-
-            contactListView1.CommandPool = commandPool;
-            contactListView1.ApplicationStatus = applicationStatus;
-
-            menuStripMain.Initialize(commandPool, recentFiles);
-        }
-
-        private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
-        {
-            contactView1.Model.Contact = addressBookShell.Contact;
         }
 
         private void HandleFormShown(object sender, EventArgs e)
         {
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
-            toolStripStatusLabel1.DataBindings.Add("Text", viewModel, "StatusText");
+            toolStripStatusLabel1.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
 
             contactView1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);

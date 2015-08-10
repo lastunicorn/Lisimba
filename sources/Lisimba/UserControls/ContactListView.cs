@@ -60,16 +60,6 @@ namespace DustInTheWind.Lisimba.UserControls
             }
         }
 
-        public ApplicationStatus ApplicationStatus
-        {
-            set
-            {
-                //toolStripMenuItem_List_Add.ApplicationStatus = value;
-                //toolStripMenuItem_List_Delete.ApplicationStatus = value;
-                //toolStripMenuItem_List_ViewBiorythm.ApplicationStatus = value; // todo: ???
-            }
-        }
-
         public ContactListView()
         {
             InitializeComponent();
