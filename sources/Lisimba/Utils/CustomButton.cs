@@ -16,10 +16,9 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.Utils
 {
     partial class CustomButton : Button
     {

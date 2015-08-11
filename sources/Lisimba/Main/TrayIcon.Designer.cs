@@ -1,6 +1,6 @@
 ﻿using DustInTheWind.Lisimba.MainMenu;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Main
 {
     partial class TrayIcon
     {

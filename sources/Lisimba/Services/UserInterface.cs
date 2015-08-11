@@ -18,8 +18,8 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Services
 {

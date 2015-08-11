@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace DustInTheWind.Lisimba.ViewModels
+namespace DustInTheWind.Lisimba.Utils
 {
     public abstract class ViewModelBase : INotifyPropertyChanged
     {

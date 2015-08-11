@@ -1,6 +1,6 @@
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.Biorhythm
 {
-    partial class Biorythm
+    partial class BiorhythmView
     {
         /// <summary> 
         /// Required designer variable.

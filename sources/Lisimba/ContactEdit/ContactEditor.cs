@@ -17,6 +17,7 @@
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {

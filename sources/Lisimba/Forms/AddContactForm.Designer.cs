@@ -1,5 +1,4 @@
 using DustInTheWind.Lisimba.ContactEdit;
-using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.Forms
 {

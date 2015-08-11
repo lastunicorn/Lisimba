@@ -16,7 +16,7 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services

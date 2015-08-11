@@ -17,7 +17,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.MainMenu
 {
     internal class SubItemClickedEventArgs : EventArgs
     {

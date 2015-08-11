@@ -17,7 +17,7 @@
 using System;
 using System.IO;
 using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Forms
 {

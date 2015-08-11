@@ -18,9 +18,9 @@ using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Main
 {
     internal class TrayIconPresenter : ViewModelBase
     {

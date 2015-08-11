@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {

@@ -18,9 +18,9 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.Biorhythm
 {
-    public partial class Biorythm : UserControl
+    public partial class BiorhythmView : UserControl
     {
         [Category("Data")]
         public DateTime Birthday
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.UserControls
             set { biorythmView1.XDay = value; }
         }
 
-        public Biorythm()
+        public BiorhythmView()
         {
             InitializeComponent();
         }
@@ -52,8 +52,6 @@ namespace DustInTheWind.Lisimba.UserControls
         {
             biorythmView1.SlideChart(days);
         }
-
-        #region Checkbox
 
         private void checkBoxPhysical_CheckedChanged(object sender, EventArgs e)
         {
@@ -96,8 +94,6 @@ namespace DustInTheWind.Lisimba.UserControls
                 biorythmView1.IntelectChartColor = labelColorIntellectual.BackColor;
             }
         }
-
-        #endregion
 
         private void biorythmView1_FirstDayChanged(object sender, EventArgs e)
         {

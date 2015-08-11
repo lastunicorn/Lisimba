@@ -17,7 +17,7 @@
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Main
 {
     partial class TrayIcon : Component
     {

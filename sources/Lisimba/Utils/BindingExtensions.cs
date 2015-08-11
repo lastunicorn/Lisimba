@@ -18,7 +18,7 @@ using System;
 using System.Linq.Expressions;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Utils
 {
     internal static class BindingExtensions
     {

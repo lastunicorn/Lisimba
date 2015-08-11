@@ -21,8 +21,9 @@ using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.ContactList
 {
     partial class ContactListView : UserControl
     {

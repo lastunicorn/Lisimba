@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Config;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {

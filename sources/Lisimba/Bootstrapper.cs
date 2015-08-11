@@ -18,7 +18,6 @@ using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba

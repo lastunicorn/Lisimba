@@ -1,5 +1,3 @@
-using DustInTheWind.Lisimba.UserControls;
-
 namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class ContactEditor

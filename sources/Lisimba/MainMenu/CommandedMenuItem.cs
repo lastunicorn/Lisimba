@@ -17,8 +17,8 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {

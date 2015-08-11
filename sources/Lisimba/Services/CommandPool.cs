@@ -86,8 +86,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public CommandPool(IUnityContainer servicePrvider)
         {
-            if (servicePrvider == null)
-                throw new ArgumentNullException("servicePrvider");
+            if (servicePrvider == null) throw new ArgumentNullException("servicePrvider");
 
             this.servicePrvider = servicePrvider;
         }

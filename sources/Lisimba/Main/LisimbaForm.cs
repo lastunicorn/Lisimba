@@ -17,8 +17,9 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Main
 {
     // Create the LisimbaStatusBar control.
     // Refactor ContactListView to take advantage of the services.
@@ -37,6 +38,8 @@ namespace DustInTheWind.Lisimba.Forms
             get { return viewModel; }
             set
             {
+                RemoveBindings();
+
                 if (contactListView1.ViewModel != null)
                 {
                     contactListView1.ViewModel.View = null;
@@ -58,9 +61,11 @@ namespace DustInTheWind.Lisimba.Forms
 
                     contactView1.ViewModel = viewModel.ContactEditorViewModel;
                     contactView1.ViewModel.View = contactView1;
-                    
+
                     contactListView1.CommandPool = commandPool;
                     menuStripMain.Initialize(commandPool, recentFiles);
+
+                    CreateBindings();
                 }
             }
         }
@@ -76,7 +81,17 @@ namespace DustInTheWind.Lisimba.Forms
             this.commandPool = commandPool;
         }
 
-        private void HandleFormShown(object sender, EventArgs e)
+        private void RemoveBindings()
+        {
+            DataBindings.Clear();
+            toolStripStatusLabel1.DataBindings.Clear();
+            contactView1.DataBindings.Clear();
+            panelAddressBookView.DataBindings.Clear();
+            buttonNewAddressBook.ViewModel = null;
+            buttonOpenAddressBook.ViewModel = null;
+        }
+
+        private void CreateBindings()
         {
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatusLabel1.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
@@ -86,8 +101,11 @@ namespace DustInTheWind.Lisimba.Forms
 
             buttonNewAddressBook.ViewModel = commandPool.CreateNewAddressBookOperation;
             buttonOpenAddressBook.ViewModel = commandPool.OpenAddressBookOperation;
+        }
 
-            viewModel.WindowWasShown();
+        private void LisimbaForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ViewModel = null;
         }
     }
 }

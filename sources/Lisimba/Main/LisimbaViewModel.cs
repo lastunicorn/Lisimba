@@ -17,11 +17,11 @@
 using System;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.ContactEdit;
+using DustInTheWind.Lisimba.ContactList;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.UserControls;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Main
 {
     internal class LisimbaViewModel : ViewModelBase
     {
@@ -108,6 +108,9 @@ namespace DustInTheWind.Lisimba.Forms
 
             IsContactEditVisible = addressBookShell.Contact != null;
             IsAddressBookViewVisible = addressBookShell.AddressBook != null;
+
+            StatusText = applicationStatus.StatusText;
+            Title = BuildFormTitle();
         }
 
         private void HandleContactChanged(object sender, EventArgs eventArgs)
@@ -163,12 +166,6 @@ namespace DustInTheWind.Lisimba.Forms
             string programName = lisimbaApplication.ProgramName;
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
-        }
-
-        public void WindowWasShown()
-        {
-            StatusText = applicationStatus.StatusText;
-            Title = BuildFormTitle();
         }
 
         public bool WindowIsClosing()

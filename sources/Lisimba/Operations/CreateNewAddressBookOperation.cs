@@ -25,7 +25,6 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
-        private readonly ApplicationStatus applicationStatus;
 
         public override string ShortDescription
         {
@@ -37,11 +36,9 @@ namespace DustInTheWind.Lisimba.Operations
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBookShell = addressBookShell;
             this.userInterface = userInterface;
-            this.applicationStatus = applicationStatus;
         }
 
         protected override void DoExecute(string fileName)

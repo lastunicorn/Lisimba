@@ -18,7 +18,7 @@ using System;
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {

@@ -16,13 +16,13 @@
 
 using System;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Operations
 {
     internal abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
     {
-        private readonly ApplicationStatus applicationStatus;
+        protected readonly ApplicationStatus applicationStatus;
         private bool isEnabled;
 
         public bool IsEnabled

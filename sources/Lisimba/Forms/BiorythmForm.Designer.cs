@@ -1,3 +1,5 @@
+using DustInTheWind.Lisimba.Biorhythm;
+
 namespace DustInTheWind.Lisimba.Forms
 {
     partial class BiorythmForm
@@ -30,7 +32,7 @@ namespace DustInTheWind.Lisimba.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BiorythmForm));
             this.buttonClose = new System.Windows.Forms.Button();
-            this.biorythm1 = new DustInTheWind.Lisimba.UserControls.Biorythm();
+            this.biorythm1 = new BiorhythmView();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -79,7 +81,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        private DustInTheWind.Lisimba.UserControls.Biorythm biorythm1;
+        private BiorhythmView biorythm1;
         private System.Windows.Forms.Button buttonClose;
 
 

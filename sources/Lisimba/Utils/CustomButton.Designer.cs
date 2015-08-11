@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.UserControls
+﻿namespace DustInTheWind.Lisimba.Utils
 {
     partial class CustomButton
     {

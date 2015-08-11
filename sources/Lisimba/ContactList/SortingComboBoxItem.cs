@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.ContactList
 {
     internal class SortingComboBoxItem
     {

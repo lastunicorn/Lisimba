@@ -5,11 +5,10 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.ViewModels;
+using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.ContactList
 {
     internal class ContactListViewModel : ViewModelBase
     {
@@ -129,7 +128,7 @@ namespace DustInTheWind.Lisimba.UserControls
 
         private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
         {
-            if (ignoreCurrentContactChange)
+            if (ignoreCurrentContactChange || View == null)
                 return;
 
             Contact contactToSelect = addressBookShell.Contact;

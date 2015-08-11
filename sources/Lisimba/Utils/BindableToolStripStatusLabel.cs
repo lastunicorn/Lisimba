@@ -17,7 +17,7 @@
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.Utils
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.StatusStrip)]
     public class BindableToolStripStatusLabel : ToolStripStatusLabel, IBindableComponent

@@ -1,6 +1,6 @@
 using DustInTheWind.Lisimba.MainMenu;
 
-namespace DustInTheWind.Lisimba.UserControls
+namespace DustInTheWind.Lisimba.ContactList
 {
     partial class ContactListView
     {
