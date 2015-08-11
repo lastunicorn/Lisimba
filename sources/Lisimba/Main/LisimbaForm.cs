@@ -106,5 +106,11 @@ namespace DustInTheWind.Lisimba.Main
         {
             ViewModel = null;
         }
+
+        private void LisimbaForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            bool success = ViewModel.WindowIsClosing();
+            e.Cancel = !success;
+        }
     }
 }

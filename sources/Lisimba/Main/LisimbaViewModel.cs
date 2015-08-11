@@ -153,5 +153,10 @@ namespace DustInTheWind.Lisimba.Main
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
         }
+
+        public bool WindowIsClosing()
+        {
+            return addressBookShell.EnsureIsSaved();
+        }
     }
 }

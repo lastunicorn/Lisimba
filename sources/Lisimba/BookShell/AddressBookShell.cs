@@ -231,7 +231,7 @@ namespace DustInTheWind.Lisimba.BookShell
             return true;
         }
 
-        private bool EnsureIsSaved()
+        public bool EnsureIsSaved()
         {
             if (!IsModified)
                 return true;
@@ -245,8 +245,11 @@ namespace DustInTheWind.Lisimba.BookShell
                 return false;
 
             if (response.Value)
+            {
                 commandPool.SaveAddressBookOperation.Execute();
-
+                return Status == AddressBookStatus.Saved;
+            }
+            
             return true;
         }
 
