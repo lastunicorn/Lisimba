@@ -18,6 +18,7 @@ using System;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
@@ -37,6 +38,8 @@ namespace DustInTheWind.Lisimba.Main
 
         public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
+        public CreateNewAddressBookOperation CreateNewAddressBookOperation { get; private set; }
+        public OpenAddressBookOperation OpenAddressBookOperation { get; private set; }
 
         public string Title
         {
@@ -79,19 +82,23 @@ namespace DustInTheWind.Lisimba.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBookShell addressBookShell)
+            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBookShell addressBookShell, CommandPool commandPool)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (commandPool == null) throw new ArgumentNullException("commandPool");
 
-            ContactListViewModel = contactListViewModel;
-            ContactEditorViewModel = contactEditorViewModel;
             this.lisimbaApplication = lisimbaApplication;
             this.applicationStatus = applicationStatus;
             this.addressBookShell = addressBookShell;
+
+            ContactListViewModel = contactListViewModel;
+            ContactEditorViewModel = contactEditorViewModel;
+            CreateNewAddressBookOperation = commandPool.CreateNewAddressBookOperation;
+            OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             addressBookShell.StatusChanged += HandleAddressBookStatusChanged;

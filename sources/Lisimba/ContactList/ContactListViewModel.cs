@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
@@ -20,6 +21,8 @@ namespace DustInTheWind.Lisimba.ContactList
         private bool ignoreCurrentContactChange;
 
         public List<SortingComboBoxItem> SortingMethods { get; private set; }
+        public CreateNewContactOperation CreateNewContactOperation { get; private set; }
+        public DeleteCurrentContactOperation DeleteCurrentContactOperation { get; private set; }
 
         public ContactListView View { get; set; }
 
@@ -48,13 +51,17 @@ namespace DustInTheWind.Lisimba.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ConfigurationService configurationService, AddressBookShell addressBookShell)
+        public ContactListViewModel(ConfigurationService configurationService, AddressBookShell addressBookShell, CommandPool commandPool)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (commandPool == null) throw new ArgumentNullException("commandPool");
 
             this.configurationService = configurationService;
             this.addressBookShell = addressBookShell;
+
+            CreateNewContactOperation = commandPool.CreateNewContactOperation;
+            DeleteCurrentContactOperation = commandPool.DeleteCurrentContactOperation;
 
             SortingMethods = new List<SortingComboBoxItem>
             {

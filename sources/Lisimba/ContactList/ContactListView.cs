@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactList
@@ -47,16 +46,10 @@ namespace DustInTheWind.Lisimba.ContactList
 
                     comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
                     textBoxSearch.Bind(x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
-                }
-            }
-        }
 
-        public CommandPool CommandPool
-        {
-            set
-            {
-                toolStripMenuItem_List_Add.ViewModel = value.CreateNewContactOperation;
-                toolStripMenuItem_List_Delete.ViewModel = value.DeleteCurrentContactOperation;
+                    toolStripMenuItem_List_Add.ViewModel = ViewModel.CreateNewContactOperation;
+                    toolStripMenuItem_List_Delete.ViewModel = ViewModel.DeleteCurrentContactOperation;
+                }
             }
         }
 
@@ -110,7 +103,7 @@ namespace DustInTheWind.Lisimba.ContactList
             if (node == null)
                 return;
 
-            Contact contact = (Contact) node.Tag;
+            Contact contact = (Contact)node.Tag;
 
             if (contact.Birthday.IsCompleteDate)
             {

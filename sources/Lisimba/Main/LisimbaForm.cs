@@ -89,7 +89,6 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
             contactEditor1.ViewModel.View = contactEditor1;
 
-            contactListView1.CommandPool = commandPool;
             menuStripMain.Initialize(commandPool, recentFiles);
 
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
@@ -98,8 +97,8 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
 
-            buttonNewAddressBook.ViewModel = commandPool.CreateNewAddressBookOperation;
-            buttonOpenAddressBook.ViewModel = commandPool.OpenAddressBookOperation;
+            buttonNewAddressBook.ViewModel = viewModel.CreateNewAddressBookOperation;
+            buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookOperation;
         }
 
         private void LisimbaForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -109,8 +108,8 @@ namespace DustInTheWind.Lisimba.Main
 
         private void LisimbaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bool success = ViewModel.WindowIsClosing();
-            e.Cancel = !success;
+            bool allowToContinue = ViewModel.WindowIsClosing();
+            e.Cancel = !allowToContinue;
         }
     }
 }
