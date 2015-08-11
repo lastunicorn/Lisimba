@@ -118,6 +118,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address book saved. ({0} contacts).
+        /// </summary>
+        internal static string AddressBookSaved_StatusText {
+            get {
+                return ResourceManager.GetString("AddressBookSaved_StatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap date {
@@ -225,6 +234,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string InfoPopup_Title {
+            get {
+                return ResourceManager.GetString("InfoPopup_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon Lion {
@@ -311,6 +329,15 @@ namespace DustInTheWind.Lisimba.Properties {
             get {
                 object obj = ResourceManager.GetObject("open_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} contacts opened..
+        /// </summary>
+        internal static string OpenAddressBook_SuccessStatusText {
+            get {
+                return ResourceManager.GetString("OpenAddressBook_SuccessStatusText", resourceCulture);
             }
         }
         

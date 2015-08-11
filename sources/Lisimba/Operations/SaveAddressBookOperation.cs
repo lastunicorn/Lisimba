@@ -59,7 +59,7 @@ namespace DustInTheWind.Lisimba.Operations
             try
             {
                 string fileName;
-                bool isNew = false;
+                bool isNew;
 
                 if (addressBookShell.FileName == null)
                 {
@@ -73,20 +73,38 @@ namespace DustInTheWind.Lisimba.Operations
                 else
                 {
                     fileName = addressBookShell.FileName;
+                    isNew = false;
                 }
 
-                ZipXmlGate gate = new ZipXmlGate();
-                addressBookShell.SaveTo(gate, fileName);
+                SaveAddressBook(fileName);
 
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", addressBookShell.AddressBook.Contacts.Count);
+                DisplaySuccessStatusText();
 
                 if (isNew)
-                    recentFiles.AddRecentFile(Path.GetFullPath(fileName));
+                    AddFileToRecentFileList(fileName);
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
+        }
+
+        private void SaveAddressBook(string fileName)
+        {
+            ZipXmlGate gate = new ZipXmlGate();
+            addressBookShell.SaveTo(gate, fileName);
+        }
+
+        private void DisplaySuccessStatusText()
+        {
+            int contactCount = addressBookShell.AddressBook.Contacts.Count;
+            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
+        }
+
+        private void AddFileToRecentFileList(string fileName)
+        {
+            string fileFullPath = Path.GetFullPath(fileName);
+            recentFiles.AddRecentFile(fileFullPath);
         }
     }
 }

@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.Book
 {
-    public class Date : IObservableEntity, IEquatable<Date>
+    public class Date : IObservableEntity, IEquatable<Date>, IComparable, IComparable<Date>
     {
         private int day;
         private int month;
@@ -97,11 +97,11 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public Date(int day, int month, int year, string description)
         {
-            this.description = description;
+            SetMonthInternal(month);
+            SetYearInternal(year);
+            SetDayInternal(day);
 
-            Month = month;
-            Year = year;
-            Day = day;
+            this.description = description;
         }
 
         public Date(Date date)
@@ -109,11 +109,33 @@ namespace DustInTheWind.Lisimba.Egg.Book
             CopyFrom(date);
         }
 
-        public void SetValues(int day, int month, int year)
+        public void SetValues(int newDay, int newMonth, int newYear)
         {
-            this.month = month;
-            this.year = year;
-            this.day = day;
+            SetDayInternal(newDay);
+            SetMonthInternal(newMonth);
+            SetYearInternal(newYear);
+
+            OnChanged();
+        }
+
+        public void SetValues(int newDay, int newMonth, int newYear, string newDescription)
+        {
+            SetDayInternal(newDay);
+            SetMonthInternal(newMonth);
+            SetYearInternal(newYear);
+
+            description = newDescription;
+
+            OnChanged();
+        }
+
+        public void Clear()
+        {
+            day = 0;
+            month = 0;
+            year = 0;
+
+            description = string.Empty;
 
             OnChanged();
         }
@@ -169,33 +191,12 @@ namespace DustInTheWind.Lisimba.Egg.Book
             Day = day;
         }
 
-        public void SetValues(int day, int month, int year, string description)
-        {
-            // Description
-            this.description = description;
-
-            // Month
-            Month = month;
-
-            // Year
-            Year = year;
-
-            // Day
-            Day = day;
-        }
-
-        public void Clear()
-        {
-            day = 0;
-            month = 0;
-            year = 0;
-            description = string.Empty;
-        }
-
         public bool IsNull()
         {
             return Year == 0 && Month == 0 && Day == 0;
         }
+
+        #region Compare - static
 
         public static int Compare(Date d1, Date d2)
         {
@@ -266,15 +267,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return 0;
         }
 
-        public int Compare(Date d)
-        {
-            return Compare(this, d);
-        }
+        #endregion
 
-        public int Compare(DateTime d)
-        {
-            return Compare(this, d);
-        }
+        #region Compare Without Year - static
 
         public static int CompareWithoutYear(Date d1, Date d2)
         {
@@ -293,7 +288,127 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return 0;
         }
 
-        public int CompareWithoutYear(Date d)
+        public static int CompareWithoutYear(Date d1, DateTime d2)
+        {
+            if (d1.Month < d2.Month)
+                return -1;
+
+            if (d1.Month > d2.Month)
+                return 1;
+
+            if (d1.Day < d2.Day)
+                return -1;
+
+            if (d1.Day > d2.Day)
+                return 1;
+
+            return 0;
+        }
+
+        public static int CompareWithoutYear(DateTime d1, Date d2)
+        {
+            if (d1.Month < d2.Month)
+                return -1;
+
+            if (d1.Month > d2.Month)
+                return 1;
+
+            if (d1.Day < d2.Day)
+                return -1;
+
+            if (d1.Day > d2.Day)
+                return 1;
+
+            return 0;
+        }
+
+        #endregion
+
+        #region Compare Operators
+
+        public static bool operator ==(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) == 0;
+        }
+
+        public static bool operator !=(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) != 0;
+        }
+
+        public static bool operator <(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) < 0;
+        }
+
+        public static bool operator >(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) > 0;
+        }
+
+        public static bool operator <=(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) <= 0;
+        }
+
+        public static bool operator >=(Date d1, DateTime d2)
+        {
+            return Compare(d1, d2) >= 0;
+        }
+
+        public static bool operator ==(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) == 0;
+        }
+
+        public static bool operator !=(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) != 0;
+        }
+
+        public static bool operator <(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) < 0;
+        }
+
+        public static bool operator >(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) > 0;
+        }
+
+        public static bool operator <=(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) <= 0;
+        }
+
+        public static bool operator >=(DateTime d1, Date d2)
+        {
+            return Compare(d1, d2) >= 0;
+        }
+
+        #endregion
+
+        public int CompareTo(object obj)
+        {
+            return CompareTo(obj as Date);
+        }
+
+        public int CompareTo(Date d)
+        {
+            return Compare(this, d);
+        }
+
+        public int CompareTo(DateTime d)
+        {
+            return Compare(this, d);
+        }
+
+        public int CompareToWithoutYear(Date d)
+        {
+            return CompareWithoutYear(this, d);
+        }
+
+        public int CompareToWithoutYear(DateTime d)
         {
             return CompareWithoutYear(this, d);
         }
@@ -387,9 +502,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Date)) return false;
+            if (obj.GetType() != typeof(Date)) return false;
 
-            return Equals((Date) obj);
+            return Equals((Date)obj);
         }
 
         public override int GetHashCode()
@@ -397,9 +512,9 @@ namespace DustInTheWind.Lisimba.Egg.Book
             unchecked
             {
                 var hashCode = day;
-                hashCode = (hashCode*397) ^ month;
-                hashCode = (hashCode*397) ^ year;
-                hashCode = (hashCode*397) ^ (description != null ? description.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ month;
+                hashCode = (hashCode * 397) ^ year;
+                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
 
                 return hashCode;
             }

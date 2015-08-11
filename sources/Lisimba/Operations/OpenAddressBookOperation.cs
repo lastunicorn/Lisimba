@@ -15,10 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
@@ -52,38 +54,70 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                // create the gate and load book
-
                 ZipXmlGate gate = new ZipXmlGate();
                 bool succeeded = addressBookShell.LoadFrom(gate, fileName);
 
                 if (!succeeded)
                     return;
 
-                // display status
-
-                applicationStatus.StatusText = string.Format("{0} contacts oppened.", addressBookShell.AddressBook.Contacts.Count);
-                recentFiles.AddRecentFile(Path.GetFullPath(addressBookShell.FileName));
-
-                // display warnings
-
-                if (gate.Warnings.Any())
-                {
-                    StringBuilder sb = new StringBuilder();
-
-                    foreach (Exception warning in gate.Warnings)
-                    {
-                        sb.AppendLine(warning.Message);
-                        sb.AppendLine();
-                    }
-
-                    userInterface.DisplayWarning(sb.ToString());
-                }
+                DisplaySuccessStatusText();
+                AddFileToRecentFileList();
+                DisplayWarnings(gate);
+                DisplayBirthdays();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
+        }
+
+        private void DisplaySuccessStatusText()
+        {
+            int contactsCount = addressBookShell.AddressBook.Contacts.Count;
+            applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
+        }
+
+        private void AddFileToRecentFileList()
+        {
+            string fileFullPath = Path.GetFullPath(addressBookShell.FileName);
+            recentFiles.AddRecentFile(fileFullPath);
+        }
+
+        private void DisplayWarnings(ZipXmlGate gate)
+        {
+            if (!gate.Warnings.Any())
+                return;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Exception warning in gate.Warnings)
+            {
+                sb.AppendLine(warning.Message);
+                sb.AppendLine();
+            }
+
+            userInterface.DisplayWarning(sb.ToString());
+        }
+
+        private void DisplayBirthdays()
+        {
+            List<Contact> contacts = addressBookShell.AddressBook.GetBirthdays(DateTime.Today, DateTime.Today.AddDays(7)).ToList();
+
+            if (contacts.Count <= 0)
+                return;
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("The next birthdays are:");
+            sb.AppendLine();
+
+            foreach (Contact contact in contacts)
+            {
+                string line = string.Format("{0} - {1}", contact.Name, contact.Birthday.ToShortString());
+                sb.AppendLine(line);
+            }
+
+            userInterface.DisplayInfo(sb.ToString());
         }
     }
 }

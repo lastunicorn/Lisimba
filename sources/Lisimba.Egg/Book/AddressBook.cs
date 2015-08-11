@@ -15,7 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Reflection;
 
 namespace DustInTheWind.Lisimba.Egg.Book
@@ -103,6 +105,15 @@ namespace DustInTheWind.Lisimba.Egg.Book
             AssemblyName assemblyName = assembly.GetName();
 
             return assemblyName.Version.ToString();
+        }
+
+        public IEnumerable<Contact> GetBirthdays(DateTime startDate, DateTime endDate)
+        {
+            return Contacts
+                .Where(x => x.Birthday != null &&
+                    x.Birthday.CompareToWithoutYear(startDate) >= 0 &&
+                    x.Birthday.CompareToWithoutYear(endDate) <= 0)
+                .OrderBy(x=>x.Birthday);
         }
     }
 }

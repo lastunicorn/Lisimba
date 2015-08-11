@@ -211,7 +211,16 @@
   <data name="Lion" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Lion.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-    <data name="AddressBookNotSavedYet" xml:space="preserve">
+  <data name="AddressBookNotSavedYet" xml:space="preserve">
     <value>&lt; Address book is not saved yet &gt;</value>
+  </data>
+  <data name="AddressBookSaved_StatusText" xml:space="preserve">
+    <value>Address book saved. ({0} contacts)</value>
+  </data>
+  <data name="OpenAddressBook_SuccessStatusText" xml:space="preserve">
+    <value>{0} contacts opened.</value>
+  </data>
+  <data name="InfoPopup_Title" xml:space="preserve">
+    <value>Info</value>
   </data>
 </root>

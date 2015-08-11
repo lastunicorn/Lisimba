@@ -77,6 +77,11 @@ namespace DustInTheWind.Lisimba.Services
             Application.Exit();
         }
 
+        public void DisplayInfo(string message)
+        {
+            MessageBox.Show(MainWindow, message, Resources.InfoPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         public void DisplayWarning(string message)
         {
             MessageBox.Show(MainWindow, message, Resources.WarningPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
