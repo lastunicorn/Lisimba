@@ -30,21 +30,10 @@ namespace DustInTheWind.Lisimba.Forms
             {
                 RemoveBindings();
 
-                if (contactEditor1.ViewModel != null)
-                {
-                    contactEditor1.ViewModel.View = null;
-                    contactEditor1.ViewModel = null;
-                }
-
                 viewModel = value;
 
                 if (viewModel != null)
-                {
-                    contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
-                    contactEditor1.ViewModel.View = contactEditor1;
-
                     CreateBindings();
-                }
             }
         }
 
@@ -55,11 +44,17 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void RemoveBindings()
         {
+            if (contactEditor1.ViewModel != null)
+            {
+                contactEditor1.ViewModel.View = null;
+                contactEditor1.ViewModel = null;
+            }
         }
 
         private void CreateBindings()
         {
-            //contactView1.Bind(x => x.Model, Presenter, x => x.EditedContact, true);
+            contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
+            contactEditor1.ViewModel.View = contactEditor1;
         }
 
         private void HandleButtonOkayClick(object sender, EventArgs e)

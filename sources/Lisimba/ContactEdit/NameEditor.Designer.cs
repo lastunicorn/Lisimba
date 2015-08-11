@@ -47,10 +47,10 @@
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Name";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelName.Click += new System.EventHandler(this.labelName_Click);
-            this.labelName.MouseEnter += new System.EventHandler(this.labelName_MouseEnter);
-            this.labelName.MouseLeave += new System.EventHandler(this.labelName_MouseLeave);
-            this.labelName.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelName_MouseMove);
+            this.labelName.Click += new System.EventHandler(this.HandleLabelNameClick);
+            this.labelName.MouseEnter += new System.EventHandler(this.HandleLabelNameMouseEnter);
+            this.labelName.MouseLeave += new System.EventHandler(this.HandleLabelNameMouseLeave);
+            this.labelName.MouseMove += new System.Windows.Forms.MouseEventHandler(this.HandleLabelNameMouseMove);
             // 
             // textBoxName
             // 
@@ -62,9 +62,9 @@
             this.textBoxName.Size = new System.Drawing.Size(103, 38);
             this.textBoxName.TabIndex = 1;
             this.textBoxName.Visible = false;
-            this.textBoxName.TextChanged += new System.EventHandler(this.textBoxName_TextChanged);
-            this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxName_KeyDown);
-            this.textBoxName.Leave += new System.EventHandler(this.textBoxName_Leave);
+            this.textBoxName.TextChanged += new System.EventHandler(this.HandleTextBoxNameTextChanged);
+            this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HandleTextBoxNameKeyDown);
+            this.textBoxName.Leave += new System.EventHandler(this.HandleTextBoxNameLeave);
             // 
             // buttonEdit
             // 
@@ -77,9 +77,9 @@
             this.buttonEdit.TabIndex = 2;
             this.buttonEdit.UseVisualStyleBackColor = true;
             this.buttonEdit.Visible = false;
-            this.buttonEdit.Click += new System.EventHandler(this.buttonEdit_Click);
-            this.buttonEdit.MouseLeave += new System.EventHandler(this.buttonEdit_MouseLeave);
-            this.buttonEdit.Resize += new System.EventHandler(this.buttonEdit_Resize);
+            this.buttonEdit.Click += new System.EventHandler(this.HandleButtonEditClick);
+            this.buttonEdit.MouseLeave += new System.EventHandler(this.HandleButtonEditMouseLeave);
+            this.buttonEdit.Resize += new System.EventHandler(this.HandleButtonEditResize);
             // 
             // tableLayoutPanel1
             // 
@@ -98,7 +98,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(546, 132);
             this.tableLayoutPanel1.TabIndex = 3;
-            this.tableLayoutPanel1.MouseLeave += new System.EventHandler(this.tableLayoutPanel1_MouseLeave);
+            this.tableLayoutPanel1.MouseLeave += new System.EventHandler(this.HandleTableLayoutPanelMouseLeave);
             // 
             // NameEditor
             // 

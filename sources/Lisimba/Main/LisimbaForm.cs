@@ -40,33 +40,10 @@ namespace DustInTheWind.Lisimba.Main
             {
                 RemoveBindings();
 
-                if (contactListView1.ViewModel != null)
-                {
-                    contactListView1.ViewModel.View = null;
-                    contactListView1.ViewModel = null;
-                }
-
-                if (contactEditor1.ViewModel != null)
-                {
-                    contactEditor1.ViewModel.View = null;
-                    contactEditor1.ViewModel = null;
-                }
-
                 viewModel = value;
 
                 if (viewModel != null)
-                {
-                    contactListView1.ViewModel = viewModel.ContactListViewModel;
-                    contactListView1.ViewModel.View = contactListView1;
-
-                    contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
-                    contactEditor1.ViewModel.View = contactEditor1;
-
-                    contactListView1.CommandPool = commandPool;
-                    menuStripMain.Initialize(commandPool, recentFiles);
-
                     CreateBindings();
-                }
             }
         }
 
@@ -87,12 +64,34 @@ namespace DustInTheWind.Lisimba.Main
             toolStripStatusLabel1.DataBindings.Clear();
             contactEditor1.DataBindings.Clear();
             panelAddressBookView.DataBindings.Clear();
+
             buttonNewAddressBook.ViewModel = null;
             buttonOpenAddressBook.ViewModel = null;
+
+            if (contactListView1.ViewModel != null)
+            {
+                contactListView1.ViewModel.View = null;
+                contactListView1.ViewModel = null;
+            }
+
+            if (contactEditor1.ViewModel != null)
+            {
+                contactEditor1.ViewModel.View = null;
+                contactEditor1.ViewModel = null;
+            }
         }
 
         private void CreateBindings()
         {
+            contactListView1.ViewModel = viewModel.ContactListViewModel;
+            contactListView1.ViewModel.View = contactListView1;
+
+            contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
+            contactEditor1.ViewModel.View = contactEditor1;
+
+            contactListView1.CommandPool = commandPool;
+            menuStripMain.Initialize(commandPool, recentFiles);
+
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatusLabel1.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
 

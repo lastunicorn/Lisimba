@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             nameEditorLabel = new NameEditorLabel();
         }
 
-        private void buttonEdit_Resize(object sender, EventArgs e)
+        private void HandleButtonEditResize(object sender, EventArgs e)
         {
             if (buttonEdit.Width < buttonEdit.Height)
                 buttonEdit.Height = buttonEdit.Width;
@@ -46,7 +46,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 buttonEdit.Width = buttonEdit.Height;
         }
 
-        private void labelName_Click(object sender, EventArgs e)
+        private void HandleLabelNameClick(object sender, EventArgs e)
         {
             EnterEditMode();
         }
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             nameEditorLabel.Hide();
         }
 
-        private void textBoxName_KeyDown(object sender, KeyEventArgs e)
+        private void HandleTextBoxNameKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -99,7 +99,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        private void labelName_MouseMove(object sender, MouseEventArgs e)
+        private void HandleLabelNameMouseMove(object sender, MouseEventArgs e)
         {
             if (Width - e.Location.X < buttonEdit.Width + buttonEdit.Margin.Left + buttonEdit.Margin.Right)
                 buttonEdit.Visible = true;
@@ -109,24 +109,24 @@ namespace DustInTheWind.Lisimba.ContactEdit
             tableLayoutPanel1.PerformLayout();
         }
 
-        private void buttonEdit_MouseLeave(object sender, EventArgs e)
+        private void HandleButtonEditMouseLeave(object sender, EventArgs e)
         {
             buttonEdit.Visible = false;
         }
 
-        private void labelName_MouseEnter(object sender, EventArgs e)
+        private void HandleLabelNameMouseEnter(object sender, EventArgs e)
         {
             labelName.BackColor = SystemColors.Highlight;
             labelName.ForeColor = SystemColors.HighlightText;
         }
 
-        private void labelName_MouseLeave(object sender, EventArgs e)
+        private void HandleLabelNameMouseLeave(object sender, EventArgs e)
         {
             labelName.BackColor = SystemColors.Control;
             labelName.ForeColor = SystemColors.ControlText;
         }
 
-        private void buttonEdit_Click(object sender, EventArgs e)
+        private void HandleButtonEditClick(object sender, EventArgs e)
         {
             if (personName == null)
                 return;
@@ -141,12 +141,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        private void textBoxName_Leave(object sender, EventArgs e)
+        private void HandleTextBoxNameLeave(object sender, EventArgs e)
         {
             LeaveEditMode();
         }
 
-        private void tableLayoutPanel1_MouseLeave(object sender, EventArgs e)
+        private void HandleTableLayoutPanelMouseLeave(object sender, EventArgs e)
         {
             buttonEdit.Visible = false;
         }
@@ -159,7 +159,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 handler(this, EventArgs.Empty);
         }
 
-        private void textBoxName_TextChanged(object sender, EventArgs e)
+        private void HandleTextBoxNameTextChanged(object sender, EventArgs e)
         {
             nameEditorLabel.LabelText = textBoxName.Text;
         }

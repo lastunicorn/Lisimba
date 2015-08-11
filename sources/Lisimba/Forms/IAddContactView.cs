@@ -14,14 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Egg.Book;
-
 namespace DustInTheWind.Lisimba.Forms
 {
     internal interface IAddContactView
     {
-        AddContactPresenter ViewModel { set; }
-        //Contact Contact { get; set; }
         void Close();
     }
 }
