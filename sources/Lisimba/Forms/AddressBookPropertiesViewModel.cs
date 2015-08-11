@@ -17,6 +17,7 @@
 using System;
 using System.IO;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -77,36 +78,42 @@ namespace DustInTheWind.Lisimba.Forms
             this.addressBookShell = addressBookShell;
 
             this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;
-            PopulateModel();
+            RefreshModel();
         }
 
         private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            PopulateModel();
+            RefreshModel();
+        }
+
+        private void RefreshModel()
+        {
+            if (addressBookShell.AddressBook == null)
+                ClearModel();
+            else
+                PopulateModel();
+        }
+
+        private void ClearModel()
+        {
+            BookName = string.Empty;
+            BookNameEnabled = false;
+            FileLocation = string.Empty;
+            ContactsCount = 0;
         }
 
         private void PopulateModel()
         {
-            if (addressBookShell.AddressBook == null)
-            {
-                BookName = string.Empty;
-                BookNameEnabled = false;
-                FileLocation = string.Empty;
-                ContactsCount = 0;
-            }
-            else
-            {
-                BookName = addressBookShell.AddressBook.Name;
-                BookNameEnabled = true;
-                FileLocation = GetFullFileLocationForDisplay(addressBookShell.FileName);
-                ContactsCount = addressBookShell.AddressBook.Contacts.Count;
-            }
+            BookName = addressBookShell.AddressBook.Name;
+            BookNameEnabled = true;
+            FileLocation = GetFullFileLocationForDisplay(addressBookShell.FileName);
+            ContactsCount = addressBookShell.AddressBook.Contacts.Count;
         }
 
         private static string GetFullFileLocationForDisplay(string fileName)
         {
             return fileName == null
-                ? "<Address book is not saved yet.>"
+                ? Resources.AddressBookNotSavedYet
                 : Path.GetFullPath(fileName);
         }
 

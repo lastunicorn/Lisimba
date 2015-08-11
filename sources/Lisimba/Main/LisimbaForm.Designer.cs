@@ -35,18 +35,18 @@ namespace DustInTheWind.Lisimba.Main
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisimbaForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.contactListView1 = new DustInTheWind.Lisimba.ContactList.ContactListView();
+            this.contactEditor1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
             this.labelNoContact = new System.Windows.Forms.Label();
             this.labelNoAddressBook = new System.Windows.Forms.Label();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel();
             this.panelAddressBookView = new System.Windows.Forms.Panel();
             this.panelFormContent = new System.Windows.Forms.Panel();
             this.tableLayoutPanelNoAddressBook = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.contactListView1 = new ContactListView();
-            this.contactView1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
-            this.buttonNewAddressBook = new CustomButton();
-            this.buttonOpenAddressBook = new CustomButton();
-            this.toolStripStatusLabel1 = new BindableToolStripStatusLabel();
+            this.buttonNewAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
+            this.buttonOpenAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
             this.menuStripMain = new DustInTheWind.Lisimba.MainMenu.LisimbaMainMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -72,12 +72,34 @@ namespace DustInTheWind.Lisimba.Main
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.contactView1);
+            this.splitContainer1.Panel2.Controls.Add(this.contactEditor1);
             this.splitContainer1.Panel2.Controls.Add(this.labelNoContact);
             this.splitContainer1.Size = new System.Drawing.Size(727, 490);
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // contactListView1
+            // 
+            this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactListView1.Location = new System.Drawing.Point(0, 0);
+            this.contactListView1.Name = "contactListView1";
+            this.contactListView1.Size = new System.Drawing.Size(194, 490);
+            this.contactListView1.TabIndex = 9;
+            this.contactListView1.ViewModel = null;
+            // 
+            // contactEditor1
+            // 
+            this.contactEditor1.BackColor = System.Drawing.SystemColors.Control;
+            this.contactEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactEditor1.Enabled = false;
+            this.contactEditor1.ForeColor = System.Drawing.Color.Black;
+            this.contactEditor1.Location = new System.Drawing.Point(0, 0);
+            this.contactEditor1.MinimumSize = new System.Drawing.Size(516, 300);
+            this.contactEditor1.Name = "contactEditor1";
+            this.contactEditor1.Size = new System.Drawing.Size(525, 490);
+            this.contactEditor1.TabIndex = 5;
+            this.contactEditor1.ViewModel = null;
             // 
             // labelNoContact
             // 
@@ -113,6 +135,12 @@ namespace DustInTheWind.Lisimba.Main
             this.statusStripMain.Name = "statusStripMain";
             this.statusStripMain.Size = new System.Drawing.Size(743, 22);
             this.statusStripMain.TabIndex = 8;
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // panelAddressBookView
             // 
@@ -161,28 +189,6 @@ namespace DustInTheWind.Lisimba.Main
             this.flowLayoutPanel1.Size = new System.Drawing.Size(286, 70);
             this.flowLayoutPanel1.TabIndex = 8;
             // 
-            // contactListView1
-            // 
-            this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactListView1.Location = new System.Drawing.Point(0, 0);
-            this.contactListView1.Name = "contactListView1";
-            this.contactListView1.Size = new System.Drawing.Size(194, 490);
-            this.contactListView1.TabIndex = 9;
-            this.contactListView1.ViewModel = null;
-            // 
-            // contactView1
-            // 
-            this.contactView1.BackColor = System.Drawing.SystemColors.Control;
-            this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactView1.Enabled = false;
-            this.contactView1.ForeColor = System.Drawing.Color.Black;
-            this.contactView1.Location = new System.Drawing.Point(0, 0);
-            this.contactView1.MinimumSize = new System.Drawing.Size(516, 300);
-            this.contactView1.Name = "contactView1";
-            this.contactView1.Size = new System.Drawing.Size(525, 490);
-            this.contactView1.TabIndex = 5;
-            this.contactView1.ViewModel = null;
-            // 
             // buttonNewAddressBook
             // 
             this.buttonNewAddressBook.AutoSize = true;
@@ -216,12 +222,6 @@ namespace DustInTheWind.Lisimba.Main
             this.buttonOpenAddressBook.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonOpenAddressBook.UseVisualStyleBackColor = true;
             this.buttonOpenAddressBook.ViewModel = null;
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 15);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // menuStripMain
             // 
@@ -265,7 +265,7 @@ namespace DustInTheWind.Lisimba.Main
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStripMain;
-        private ContactEditor contactView1;
+        private ContactEditor contactEditor1;
         private BindableToolStripStatusLabel toolStripStatusLabel1;
         private ContactListView contactListView1;
         private System.Windows.Forms.Panel panelAddressBookView;

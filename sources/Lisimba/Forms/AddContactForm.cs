@@ -16,44 +16,65 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.ContactEdit;
-using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Forms
 {
     partial class AddContactForm : Form, IAddContactView
     {
-        public AddContactPresenter Presenter { private get; set; }
+        private AddContactPresenter viewModel;
+
+        public AddContactPresenter ViewModel
+        {
+            private get { return viewModel; }
+            set
+            {
+                RemoveBindings();
+
+                if (contactEditor1.ViewModel != null)
+                {
+                    contactEditor1.ViewModel.View = null;
+                    contactEditor1.ViewModel = null;
+                }
+
+                viewModel = value;
+
+                if (viewModel != null)
+                {
+                    contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
+                    contactEditor1.ViewModel.View = contactEditor1;
+
+                    CreateBindings();
+                }
+            }
+        }
 
         public AddContactForm()
         {
             InitializeComponent();
+        }
 
-            contactView1.ViewModel = new ContactEditorViewModel(new Zodiac()) { View = contactView1 };
+        private void RemoveBindings()
+        {
+        }
 
+        private void CreateBindings()
+        {
             //contactView1.Bind(x => x.Model, Presenter, x => x.EditedContact, true);
         }
 
-        public Contact Contact
+        private void HandleButtonOkayClick(object sender, EventArgs e)
         {
-            get { return contactView1.ViewModel.Contact; }
-            set { contactView1.ViewModel.Contact = value; }
+            ViewModel.OkButtonWasClicked();
         }
 
-        private void buttonOkay_Click(object sender, EventArgs e)
+        private void HandleButtonCancelClick(object sender, EventArgs e)
         {
-            Presenter.OkButtonWasClicked();
+            ViewModel.CloseButtonWasClicked();
         }
 
-        private void buttonCancel_Click(object sender, EventArgs e)
+        private void HandleFormLoad(object sender, EventArgs e)
         {
-            Presenter.CloseButtonWasClicked();
-        }
-
-        private void FormAddContact_Load(object sender, EventArgs e)
-        {
-            Presenter.ViewWasLoaded();
+            ViewModel.ViewWasLoaded();
         }
     }
 }

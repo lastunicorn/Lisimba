@@ -32,7 +32,6 @@ namespace DustInTheWind.Lisimba.Main
         private string title;
         private string statusText;
 
-        private bool allowToClose;
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
 
@@ -101,9 +100,6 @@ namespace DustInTheWind.Lisimba.Main
             if (addressBookShell.AddressBook != null)
                 addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
-            lisimbaApplication.BeforeExiting += HandleApplicationBeforeExiting;
-            lisimbaApplication.ExitCanceled += HandleApplicationExitCanceled;
-
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
             IsContactEditVisible = addressBookShell.Contact != null;
@@ -146,16 +142,6 @@ namespace DustInTheWind.Lisimba.Main
             StatusText = applicationStatus.StatusText;
         }
 
-        private void HandleApplicationBeforeExiting(object sender, EventArgs e)
-        {
-            allowToClose = true;
-        }
-
-        private void HandleApplicationExitCanceled(object sender, EventArgs e)
-        {
-            allowToClose = false;
-        }
-
         private string BuildFormTitle()
         {
             if (addressBookShell.AddressBook == null)
@@ -166,11 +152,6 @@ namespace DustInTheWind.Lisimba.Main
             string programName = lisimbaApplication.ProgramName;
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
-        }
-
-        public bool WindowIsClosing()
-        {
-            return allowToClose || lisimbaApplication.Exit();
         }
     }
 }

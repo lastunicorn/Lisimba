@@ -46,10 +46,10 @@ namespace DustInTheWind.Lisimba.Main
                     contactListView1.ViewModel = null;
                 }
 
-                if (contactView1.ViewModel != null)
+                if (contactEditor1.ViewModel != null)
                 {
-                    contactView1.ViewModel.View = null;
-                    contactView1.ViewModel = null;
+                    contactEditor1.ViewModel.View = null;
+                    contactEditor1.ViewModel = null;
                 }
 
                 viewModel = value;
@@ -59,8 +59,8 @@ namespace DustInTheWind.Lisimba.Main
                     contactListView1.ViewModel = viewModel.ContactListViewModel;
                     contactListView1.ViewModel.View = contactListView1;
 
-                    contactView1.ViewModel = viewModel.ContactEditorViewModel;
-                    contactView1.ViewModel.View = contactView1;
+                    contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
+                    contactEditor1.ViewModel.View = contactEditor1;
 
                     contactListView1.CommandPool = commandPool;
                     menuStripMain.Initialize(commandPool, recentFiles);
@@ -85,7 +85,7 @@ namespace DustInTheWind.Lisimba.Main
         {
             DataBindings.Clear();
             toolStripStatusLabel1.DataBindings.Clear();
-            contactView1.DataBindings.Clear();
+            contactEditor1.DataBindings.Clear();
             panelAddressBookView.DataBindings.Clear();
             buttonNewAddressBook.ViewModel = null;
             buttonOpenAddressBook.ViewModel = null;
@@ -96,7 +96,7 @@ namespace DustInTheWind.Lisimba.Main
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatusLabel1.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
 
-            contactView1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
+            contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
 
             buttonNewAddressBook.ViewModel = commandPool.CreateNewAddressBookOperation;

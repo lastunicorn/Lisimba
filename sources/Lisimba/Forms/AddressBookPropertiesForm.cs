@@ -28,17 +28,28 @@ namespace DustInTheWind.Lisimba.Forms
         {
             set
             {
-                textBoxBookName.DataBindings.Clear();
-                textBoxFileLocation.DataBindings.Clear();
-                textBoxContactsCount.DataBindings.Clear();
+                ClearAllBindings();
 
                 viewModel = value;
 
-                textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
-                textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
-                textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
-                textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
+                if (viewModel != null)
+                    CreateBindings();
             }
+        }
+
+        private void ClearAllBindings()
+        {
+            textBoxBookName.DataBindings.Clear();
+            textBoxFileLocation.DataBindings.Clear();
+            textBoxContactsCount.DataBindings.Clear();
+        }
+
+        private void CreateBindings()
+        {
+            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
         }
 
         public AddressBookPropertiesForm()
@@ -46,7 +57,7 @@ namespace DustInTheWind.Lisimba.Forms
             InitializeComponent();
         }
 
-        private void buttonOkay_Click(object sender, EventArgs e)
+        private void HandleButtonOkayClick(object sender, EventArgs e)
         {
             if (viewModel == null)
                 return;
@@ -54,7 +65,7 @@ namespace DustInTheWind.Lisimba.Forms
             viewModel.OkButtonWasClicked();
         }
 
-        private void FormBookProperties_Shown(object sender, EventArgs e)
+        private void HandleFormShown(object sender, EventArgs e)
         {
             textBoxBookName.Focus();
         }

@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay.TabIndex = 0;
             this.buttonOkay.Text = "Okay";
             this.buttonOkay.UseVisualStyleBackColor = true;
-            this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
+            this.buttonOkay.Click += new System.EventHandler(this.HandleButtonOkayClick);
             // 
             // labelName
             // 
@@ -203,7 +203,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Properties";
-            this.Shown += new System.EventHandler(this.FormBookProperties_Shown);
+            this.Shown += new System.EventHandler(this.HandleFormShown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.flowLayoutPanelButtons.ResumeLayout(false);

@@ -17,12 +17,14 @@
 using System;
 using System.Linq;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Forms
 {
-    internal class AddContactPresenter
+    internal class AddContactPresenter : ViewModelBase
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
@@ -30,25 +32,16 @@ namespace DustInTheWind.Lisimba.Forms
         public Contact EditedContact { get; private set; }
         private AddressBook addressBook;
 
-        private IAddContactView view;
+        public IAddContactView View { get; set; }
+        public ContactEditorViewModel ContactEditorViewModel { get; set; }
 
-        public IAddContactView View
+        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel,
+            AddressBookShell addressBookShell, UserInterface userInterface)
         {
-            set
-            {
-                view = value;
-                view.Presenter = this;
-            }
-        }
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-        public AddContactPresenter(AddressBookShell addressBookShell, UserInterface userInterface)
-        {
-            if (addressBookShell == null)
-                throw new ArgumentNullException("addressBookShell");
-
-            if (userInterface == null)
-                throw new ArgumentNullException("userInterface");
-
+            ContactEditorViewModel = contactEditorViewModel;
             this.addressBookShell = addressBookShell;
             this.userInterface = userInterface;
         }
@@ -61,12 +54,7 @@ namespace DustInTheWind.Lisimba.Forms
             addressBook = addressBookShell.AddressBook;
             EditedContact = new Contact();
 
-            view.Contact = EditedContact;
-        }
-
-        public void Show()
-        {
-            view.Show();
+            ContactEditorViewModel.Contact = EditedContact;
         }
 
         public void OkButtonWasClicked()
@@ -77,7 +65,7 @@ namespace DustInTheWind.Lisimba.Forms
 
                 addressBook.Contacts.Add(EditedContact);
 
-                view.Close();
+                View.Close();
             }
             catch (Exception ex)
             {
@@ -100,7 +88,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         public void CloseButtonWasClicked()
         {
-            view.Close();
+            View.Close();
         }
     }
 }

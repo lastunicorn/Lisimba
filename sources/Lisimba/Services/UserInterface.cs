@@ -182,6 +182,7 @@ namespace DustInTheWind.Lisimba.Services
             CreateMainWindow();
 
             MainWindow.Show();
+            MainWindow.Activate();
         }
 
         public void CreateMainWindow()
@@ -189,10 +190,10 @@ namespace DustInTheWind.Lisimba.Services
             if (MainWindow != null)
                 return;
 
-            LisimbaForm lisimbaForm = uiFactory.GetForm<LisimbaForm>();
-            lisimbaForm.ViewModel = uiFactory.GetViewModel<LisimbaViewModel>();
+            LisimbaForm form = uiFactory.GetForm<LisimbaForm>();
+            form.ViewModel = uiFactory.GetViewModel<LisimbaViewModel>();
 
-            MainWindow = lisimbaForm;
+            MainWindow = form;
         }
 
         public void CreateTrayIcon()
@@ -204,6 +205,17 @@ namespace DustInTheWind.Lisimba.Services
             trayIconPresenter.TrayIcon = trayIcon;
 
             this.trayIcon = trayIcon;
+        }
+
+        public void DisplayAddContactWindow()
+        {
+            AddContactPresenter presenter = uiFactory.GetViewModel<AddContactPresenter>();
+            AddContactForm form = uiFactory.GetForm<AddContactForm>();
+
+            form.ViewModel = presenter;
+            presenter.View = form;
+            
+            form.Show(MainWindow);
         }
     }
 }

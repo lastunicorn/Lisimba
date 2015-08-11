@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay = new System.Windows.Forms.Button();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.contactView1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
+            this.contactEditor1 = new DustInTheWind.Lisimba.ContactEdit.ContactEditor();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            this.buttonCancel.Click += new System.EventHandler(this.HandleButtonCancelClick);
             // 
             // buttonOkay
             // 
@@ -67,7 +67,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonOkay.TabIndex = 1;
             this.buttonOkay.Text = "Okay";
             this.buttonOkay.UseVisualStyleBackColor = true;
-            this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
+            this.buttonOkay.Click += new System.EventHandler(this.HandleButtonOkayClick);
             // 
             // flowLayoutPanel1
             // 
@@ -85,7 +85,7 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.contactView1);
+            this.panel1.Controls.Add(this.contactEditor1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -93,16 +93,17 @@ namespace DustInTheWind.Lisimba.Forms
             this.panel1.Size = new System.Drawing.Size(542, 410);
             this.panel1.TabIndex = 4;
             // 
-            // contactView1
+            // contactEditor1
             // 
-            this.contactView1.BackColor = System.Drawing.SystemColors.Control;
-            this.contactView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactView1.ForeColor = System.Drawing.Color.Black;
-            this.contactView1.Location = new System.Drawing.Point(8, 8);
-            this.contactView1.MinimumSize = new System.Drawing.Size(496, 384);
-            this.contactView1.Name = "contactView1";
-            this.contactView1.Size = new System.Drawing.Size(526, 398);
-            this.contactView1.TabIndex = 0;
+            this.contactEditor1.BackColor = System.Drawing.SystemColors.Control;
+            this.contactEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactEditor1.ForeColor = System.Drawing.Color.Black;
+            this.contactEditor1.Location = new System.Drawing.Point(8, 8);
+            this.contactEditor1.MinimumSize = new System.Drawing.Size(496, 384);
+            this.contactEditor1.Name = "contactEditor1";
+            this.contactEditor1.Size = new System.Drawing.Size(526, 398);
+            this.contactEditor1.TabIndex = 0;
+            this.contactEditor1.ViewModel = null;
             // 
             // AddContactForm
             // 
@@ -120,7 +121,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Contact";
-            this.Load += new System.EventHandler(this.FormAddContact_Load);
+            this.Load += new System.EventHandler(this.HandleFormLoad);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -131,7 +132,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         #endregion
 
-        private ContactEditor contactView1;
+        private ContactEditor contactEditor1;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOkay;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

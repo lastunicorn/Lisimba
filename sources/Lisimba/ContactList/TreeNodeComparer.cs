@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Comparers
+namespace DustInTheWind.Lisimba.ContactList
 {
     internal class TreeNodeComparer : IComparer
     {
