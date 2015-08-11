@@ -68,6 +68,7 @@ namespace DustInTheWind.Lisimba.Services
         public void RunAsTrayApp()
         {
             CreateTrayIcon();
+            DisplayMainWindow();
             Application.Run();
         }
 
@@ -185,7 +186,7 @@ namespace DustInTheWind.Lisimba.Services
             MainWindow.Activate();
         }
 
-        public void CreateMainWindow()
+        private void CreateMainWindow()
         {
             if (MainWindow != null)
                 return;
@@ -196,7 +197,7 @@ namespace DustInTheWind.Lisimba.Services
             MainWindow = form;
         }
 
-        public void CreateTrayIcon()
+        private void CreateTrayIcon()
         {
             TrayIcon trayIcon = new TrayIcon();
             TrayIconPresenter trayIconPresenter = uiFactory.GetViewModel<TrayIconPresenter>();
