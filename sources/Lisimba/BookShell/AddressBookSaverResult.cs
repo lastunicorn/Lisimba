@@ -18,8 +18,8 @@ namespace DustInTheWind.Lisimba.BookShell
 {
     internal class AddressBookSaverResult
     {
-        public bool Canceled { get; set; }
+        public bool Success { get; set; }
         public string FileName { get; set; }
-        public bool IsNew { get; set; }
+        public bool IsSavedInNewLocation { get; set; }
     }
 }

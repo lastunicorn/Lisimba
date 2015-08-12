@@ -254,14 +254,14 @@ namespace DustInTheWind.Lisimba.BookShell
 
             AddressBookSaverResult result = addressBookSaver.Save();
 
-            if (!result.Canceled)
+            if (result.Success)
             {
                 FileName = addressBookSaver.FileName;
                 Status = AddressBookStatus.Saved;
 
                 OnAddressBookSaved(EventArgs.Empty);
 
-                if (result.IsNew)
+                if (result.IsSavedInNewLocation)
                     AddFileToRecentFileList(result.FileName);
             }
 

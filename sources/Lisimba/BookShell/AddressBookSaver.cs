@@ -42,35 +42,29 @@ namespace DustInTheWind.Lisimba.BookShell
 
         public AddressBookSaverResult Save()
         {
-            string fileName;
-            bool isNew;
+            if (Gate == null)
+                throw new Exception("The Gate was not provided.");
+
+            if (AddressBook == null)
+                throw new Exception("The AddressBook was not provided.");
+
+            bool isSavedInNewLocation = FileName == null;
 
             if (FileName == null)
-            {
-                fileName = userInterface.AskToSaveLsbFile();
+                FileName = userInterface.AskToSaveLsbFile();
 
-                if (fileName == null)
-                    return new AddressBookSaverResult
-                    {
-                        Canceled = true
-                    };
+            if (FileName == null)
+                return new AddressBookSaverResult { Success = false };
 
-                isNew = true;
-            }
-            else
-            {
-                fileName = FileName;
-                isNew = false;
-            }
-
-            Gate.Save(AddressBook, fileName);
+            Gate.Save(AddressBook, FileName);
 
             DisplaySuccessStatusText();
 
             return new AddressBookSaverResult
             {
-                FileName = fileName,
-                IsNew = isNew
+                Success = true,
+                FileName = FileName,
+                IsSavedInNewLocation = isSavedInNewLocation
             };
         }
 
