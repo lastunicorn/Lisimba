@@ -80,6 +80,8 @@
     </Compile>
     <Compile Include="BookShell\AddressBookChangedEventArgs.cs" />
     <Compile Include="BookShell\AddressBookChangingEventArgs.cs" />
+    <Compile Include="BookShell\AddressBookSaver.cs" />
+    <Compile Include="BookShell\AddressBookSaverResult.cs" />
     <Compile Include="BookShell\AddressBookShell.cs" />
     <Compile Include="BookShell\AddressBookStatus.cs" />
     <Compile Include="Bootstrapper.cs" />

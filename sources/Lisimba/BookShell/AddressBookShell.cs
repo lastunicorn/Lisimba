@@ -1,5 +1,22 @@
-﻿using System;
+﻿// Lisimba
+// Copyright (C) 2007-2014 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
 using System.ComponentModel;
+using System.IO;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
@@ -14,6 +31,8 @@ namespace DustInTheWind.Lisimba.BookShell
         private AddressBookStatus status;
         private AddressBook addressBook;
         private Contact contact;
+        private readonly AddressBookSaver addressBookSaver;
+        private readonly RecentFiles recentFiles;
 
         public event EventHandler<AddressBookChangingEventArgs> AddressBookChanging;
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
@@ -78,14 +97,19 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public AddressBookShell(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool)
+        public AddressBookShell(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool,
+            AddressBookSaver addressBookSaver, RecentFiles recentFiles)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (addressBookSaver == null) throw new ArgumentNullException("addressBookSaver");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.userInterface = userInterface;
             this.commandPool = commandPool;
+            this.addressBookSaver = addressBookSaver;
+            this.recentFiles = recentFiles;
 
             status = AddressBookStatus.New;
 
@@ -197,18 +221,47 @@ namespace DustInTheWind.Lisimba.BookShell
             return true;
         }
 
-        public void ExportTo(IGate gate, string fileName)
+        //public void ExportTo(IGate gate, string fileName)
+        //{
+        //    gate.Save(AddressBook, fileName);
+        //}
+
+        public AddressBookSaverResult Save(IGate gate)
         {
-            gate.Save(AddressBook, fileName);
+            return SaveInternal(gate, FileName);
         }
 
-        public void SaveTo(IGate gate, string fileName)
+        public AddressBookSaverResult SaveNew(IGate gate)
         {
-            gate.Save(AddressBook, fileName);
-            FileName = fileName;
+            return SaveInternal(gate, null);
+        }
+
+        private AddressBookSaverResult SaveInternal(IGate gate, string fileName)
+        {
+            addressBookSaver.Gate = gate;
+            addressBookSaver.FileName = fileName;
+            addressBookSaver.AddressBook = AddressBook;
+
+            AddressBookSaverResult result = addressBookSaver.Save();
+
+            if (result.Canceled)
+                return result;
+
+            FileName = addressBookSaver.FileName;
             Status = AddressBookStatus.Saved;
 
             OnAddressBookSaved(EventArgs.Empty);
+
+            if (result.IsNew)
+                AddFileToRecentFileList(result.FileName);
+
+            return result;
+        }
+
+        private void AddFileToRecentFileList(string fileName)
+        {
+            string fileFullPath = Path.GetFullPath(fileName);
+            recentFiles.AddRecentFile(fileFullPath);
         }
 
         public bool IsModified
@@ -249,7 +302,7 @@ namespace DustInTheWind.Lisimba.BookShell
                 commandPool.SaveAddressBookOperation.Execute();
                 return Status == AddressBookStatus.Saved;
             }
-            
+
             return true;
         }
 

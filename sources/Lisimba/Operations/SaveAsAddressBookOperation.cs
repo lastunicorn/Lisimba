@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
@@ -27,24 +26,20 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
-        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface,
-            ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public SaveAsAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.addressBookShell = addressBookShell;
             this.userInterface = userInterface;
-            this.recentFiles = recentFiles;
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = addressBookShell.AddressBook != null;
@@ -59,19 +54,8 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                string fileName = userInterface.AskToSaveLsbFile();
-
-                if (fileName == null)
-                    return;
-
                 ZipXmlGate gate = new ZipXmlGate();
-                addressBookShell.SaveTo(gate, fileName);
-
-                int contactCount = addressBookShell.AddressBook.Contacts.Count;
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", contactCount);
-
-                string fileFullPath = Path.GetFullPath(fileName);
-                recentFiles.AddRecentFile(fileFullPath);
+                addressBookShell.SaveNew(gate);
             }
             catch (Exception ex)
             {

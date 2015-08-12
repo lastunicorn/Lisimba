@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
@@ -27,23 +26,20 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly AddressBookShell addressBookShell;
         private readonly UserInterface userInterface;
-        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public SaveAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
             if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.addressBookShell = addressBookShell;
             this.userInterface = userInterface;
-            this.recentFiles = recentFiles;
 
             addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = addressBookShell.AddressBook != null;
@@ -58,53 +54,13 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                string fileName;
-                bool isNew;
-
-                if (addressBookShell.FileName == null)
-                {
-                    fileName = userInterface.AskToSaveLsbFile();
-
-                    if (fileName == null)
-                        return;
-
-                    isNew = true;
-                }
-                else
-                {
-                    fileName = addressBookShell.FileName;
-                    isNew = false;
-                }
-
-                SaveAddressBook(fileName);
-
-                DisplaySuccessStatusText();
-
-                if (isNew)
-                    AddFileToRecentFileList(fileName);
+                ZipXmlGate gate = new ZipXmlGate();
+                addressBookShell.Save(gate);
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        private void SaveAddressBook(string fileName)
-        {
-            ZipXmlGate gate = new ZipXmlGate();
-            addressBookShell.SaveTo(gate, fileName);
-        }
-
-        private void DisplaySuccessStatusText()
-        {
-            int contactCount = addressBookShell.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
-        }
-
-        private void AddFileToRecentFileList(string fileName)
-        {
-            string fileFullPath = Path.GetFullPath(fileName);
-            recentFiles.AddRecentFile(fileFullPath);
         }
     }
 }
