@@ -112,7 +112,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
             return Contacts
                 .Where(x => x.Birthday != null &&
                     x.Birthday.CompareToWithoutYear(startDate) >= 0 &&
-                    x.Birthday.CompareToWithoutYear(endDate) <= 0)
+                    x.Birthday.CompareToWithoutYear(endDate) < 0)
                 .OrderBy(x=>x.Birthday);
         }
     }

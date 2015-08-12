@@ -101,14 +101,17 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplayBirthdays()
         {
-            List<Contact> contacts = addressBookShell.AddressBook.GetBirthdays(DateTime.Today, DateTime.Today.AddDays(7)).ToList();
+            DateTime startDate = DateTime.Today;
+            DateTime endDate = DateTime.Today.AddDays(7);
+            List<Contact> contacts = addressBookShell.AddressBook.GetBirthdays(startDate, endDate).ToList();
 
             if (contacts.Count <= 0)
                 return;
 
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine("The next birthdays are:");
+            double totalDays = (endDate - startDate).TotalDays;
+            sb.AppendLine("The birthdays for the next " + totalDays + " days are:");
             sb.AppendLine();
 
             foreach (Contact contact in contacts)

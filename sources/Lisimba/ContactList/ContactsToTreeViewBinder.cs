@@ -86,21 +86,21 @@ namespace DustInTheWind.Lisimba.ContactList
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                {
-                    IEnumerable<Contact> newContacts = e.NewItems.OfType<Contact>();
+                    {
+                        IEnumerable<Contact> newContacts = e.NewItems.OfType<Contact>();
 
-                    foreach (Contact contact in newContacts)
-                        AddContact(contact);
-                }
+                        foreach (Contact contact in newContacts)
+                            AddContact(contact);
+                    }
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
-                {
-                    IEnumerable<Contact> newContacts = e.OldItems.OfType<Contact>();
+                    {
+                        IEnumerable<Contact> newContacts = e.OldItems.OfType<Contact>();
 
-                    foreach (Contact contact in newContacts)
-                        RemoveContact(contact);
-                }
+                        foreach (Contact contact in newContacts)
+                            RemoveContact(contact);
+                    }
                     break;
             }
 
@@ -111,7 +111,7 @@ namespace DustInTheWind.Lisimba.ContactList
         {
             modifiedContacts.Add(contact, false);
 
-            TreeNode treeNode = new TreeNode(contact.ToString()) {Tag = contact};
+            TreeNode treeNode = new TreeNode(contact.ToString()) { Tag = contact };
             treeNodesByContact.Add(contact, treeNode);
         }
 

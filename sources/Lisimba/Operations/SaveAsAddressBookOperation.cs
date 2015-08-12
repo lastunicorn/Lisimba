@@ -67,8 +67,11 @@ namespace DustInTheWind.Lisimba.Operations
                 ZipXmlGate gate = new ZipXmlGate();
                 addressBookShell.SaveTo(gate, fileName);
 
-                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", addressBookShell.AddressBook.Contacts.Count);
-                recentFiles.AddRecentFile(Path.GetFullPath(fileName));
+                int contactCount = addressBookShell.AddressBook.Contacts.Count;
+                applicationStatus.StatusText = string.Format("Address book saved. ({0} contacts)", contactCount);
+
+                string fileFullPath = Path.GetFullPath(fileName);
+                recentFiles.AddRecentFile(fileFullPath);
             }
             catch (Exception ex)
             {
