@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.IO;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -44,6 +45,8 @@ namespace DustInTheWind.Lisimba.BookShell
         /// Gets the full file name of the address book or null if it's a new one.
         /// </summary>
         public string FileName { get; private set; }
+
+        public IGate DefaultGate { get; set; }
 
         public AddressBookStatus Status
         {
@@ -112,6 +115,8 @@ namespace DustInTheWind.Lisimba.BookShell
             this.recentFiles = recentFiles;
 
             status = AddressBookStatus.New;
+
+            DefaultGate = new ZipXmlGate();
 
             lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
         }
@@ -198,62 +203,67 @@ namespace DustInTheWind.Lisimba.BookShell
             return true;
         }
 
-        public bool LoadFrom(IGate gate, string fileName)
+        public AddressBookLoadResult LoadFrom(string fileName)
         {
-            bool succeeded = CloseAddressBook();
+            bool allowToContinue = CloseAddressBook();
 
-            if (!succeeded)
-                return false;
+            if (!allowToContinue)
+                return new AddressBookLoadResult
+                {
+                    Success = false
+                };
 
             if (string.IsNullOrEmpty(fileName))
             {
                 fileName = userInterface.AskToOpenLsbFile();
 
                 if (fileName == null)
-                    return false;
+                    return new AddressBookLoadResult
+                    {
+                        Success = false
+                    };
             }
 
             Contact = null;
-            AddressBook = gate.Load(fileName);
+            AddressBook = DefaultGate.Load(fileName);
             FileName = fileName;
             Status = AddressBookStatus.Saved;
 
-            return true;
+            return new AddressBookLoadResult
+            {
+                Success = true,
+                Warnings = DefaultGate.Warnings
+            };
         }
 
-        //public void ExportTo(IGate gate, string fileName)
-        //{
-        //    gate.Save(AddressBook, fileName);
-        //}
-
-        public AddressBookSaverResult Save(IGate gate)
+        public AddressBookSaverResult Save()
         {
-            return SaveInternal(gate, FileName);
+            return SaveInternal(FileName);
         }
 
-        public AddressBookSaverResult SaveNew(IGate gate)
+        public AddressBookSaverResult SaveNew()
         {
-            return SaveInternal(gate, null);
+            return SaveInternal(null);
         }
 
-        private AddressBookSaverResult SaveInternal(IGate gate, string fileName)
+        private AddressBookSaverResult SaveInternal(string fileName)
         {
-            addressBookSaver.Gate = gate;
+            addressBookSaver.Gate = DefaultGate;
             addressBookSaver.FileName = fileName;
             addressBookSaver.AddressBook = AddressBook;
 
             AddressBookSaverResult result = addressBookSaver.Save();
 
-            if (result.Canceled)
-                return result;
+            if (!result.Canceled)
+            {
+                FileName = addressBookSaver.FileName;
+                Status = AddressBookStatus.Saved;
 
-            FileName = addressBookSaver.FileName;
-            Status = AddressBookStatus.Saved;
+                OnAddressBookSaved(EventArgs.Empty);
 
-            OnAddressBookSaved(EventArgs.Empty);
-
-            if (result.IsNew)
-                AddFileToRecentFileList(result.FileName);
+                if (result.IsNew)
+                    AddFileToRecentFileList(result.FileName);
+            }
 
             return result;
         }

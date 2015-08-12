@@ -54,15 +54,14 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                ZipXmlGate gate = new ZipXmlGate();
-                bool succeeded = addressBookShell.LoadFrom(gate, fileName);
+                AddressBookLoadResult result = addressBookShell.LoadFrom(fileName);
 
-                if (!succeeded)
+                if (!result.Success)
                     return;
 
                 DisplaySuccessStatusText();
                 AddFileToRecentFileList();
-                DisplayWarnings(gate);
+                DisplayWarnings(result.Warnings);
                 DisplayBirthdays();
             }
             catch (Exception ex)
@@ -83,14 +82,14 @@ namespace DustInTheWind.Lisimba.Operations
             recentFiles.AddRecentFile(fileFullPath);
         }
 
-        private void DisplayWarnings(ZipXmlGate gate)
+        private void DisplayWarnings(IEnumerable<Exception> warnings)
         {
-            if (!gate.Warnings.Any())
+            if (!warnings.Any())
                 return;
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (Exception warning in gate.Warnings)
+            foreach (Exception warning in warnings)
             {
                 sb.AppendLine(warning.Message);
                 sb.AppendLine();

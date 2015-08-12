@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -54,8 +53,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                ZipXmlGate gate = new ZipXmlGate();
-                addressBookShell.Save(gate);
+                addressBookShell.Save();
             }
             catch (Exception ex)
             {

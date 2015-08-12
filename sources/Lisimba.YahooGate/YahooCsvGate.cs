@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg;
@@ -25,6 +26,13 @@ namespace DustInTheWind.Lisimba.Gating
 {
     public class YahooCsvGate : IGate
     {
+        public IEnumerable<Exception> Warnings { get; private set; }
+
+        public YahooCsvGate()
+        {
+            Warnings = new Exception[0];
+        }
+
         public AddressBook Load(string fileName)
         {
             AddressBook addressBook = new AddressBook
