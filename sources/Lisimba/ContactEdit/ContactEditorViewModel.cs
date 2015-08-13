@@ -222,7 +222,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void DisplayContactInView()
         {
             Name = Contact.Name;
-
             Birthday = contact.Birthday.ToShortString();
 
             ZodiacSignImage = zodiac.GetZodiacImage(contact.ZodiacSign);
@@ -243,7 +242,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void ClearView()
         {
             Name = null;
-
             Birthday = string.Empty;
 
             ZodiacSignImage = zodiac.GetEmptyImage();
