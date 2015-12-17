@@ -21,10 +21,10 @@ namespace Lisimba.Cmd
             Console.WriteLine("Unknown command");
         }
 
-        public string ReadCommand(string addressBookName)
+        public string ReadCommand(string addressBookName, bool isSaved)
         {
             Console.WriteLine();
-            DisplayPrompter(addressBookName);
+            DisplayPrompter(addressBookName, isSaved);
 
             //string command = string.Empty;
 
@@ -45,11 +45,11 @@ namespace Lisimba.Cmd
             return Console.ReadLine();
         }
 
-        private static void DisplayPrompter(string addressBookName)
+        private static void DisplayPrompter(string addressBookName, bool isSaved)
         {
             string prompter = addressBookName == null
                 ? "lisimba > "
-                : "lisimba (" + addressBookName + ") > ";
+                : "lisimba [" + addressBookName + (isSaved ? string.Empty : " *") + "] > ";
 
             Console.Write(prompter);
         }

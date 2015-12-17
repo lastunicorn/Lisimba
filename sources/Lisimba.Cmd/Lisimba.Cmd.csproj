@@ -48,6 +48,7 @@
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
+    <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="ConsoleView.cs" />
     <Compile Include="DomainData.cs" />
     <Compile Include="Commands\ExitCommand.cs" />

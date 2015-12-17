@@ -15,6 +15,11 @@ namespace Lisimba.Cmd.Commands
             get { return parameters.Any(); }
         }
 
+        public int ParameterCount
+        {
+            get { return parameters.Count; }
+        }
+
         public string this[int index]
         {
             get
@@ -40,7 +45,7 @@ namespace Lisimba.Cmd.Commands
             {
                 string[] items = commandText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-                Name = items[0];
+                Name = items.Length > 0 ? items[0] : string.Empty;
 
                 parameters = items
                     .Skip(1)

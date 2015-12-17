@@ -19,8 +19,8 @@ namespace Lisimba.Cmd
 
             while (!domainData.ExitRequested)
             {
-                string addressBookName = domainData.GetAddressBookName();
-                string commandText = consoleView.ReadCommand(addressBookName);
+                string addressBookName = domainData.AddressBookName;
+                string commandText = consoleView.ReadCommand(addressBookName, domainData.IsAddressBookSaved);
 
                 ProcessCommand(commandText);
             }
@@ -41,6 +41,9 @@ namespace Lisimba.Cmd
             {
                 case "new":
                     return new NewCommand(domainData, consoleView);
+
+                case "update":
+                    return new UpdateCommand(domainData, consoleView);
 
                 case "load":
                     return new LoadCommand(domainData, consoleView);

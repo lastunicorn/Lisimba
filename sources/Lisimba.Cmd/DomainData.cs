@@ -20,12 +20,20 @@ namespace Lisimba.Cmd
             get { return DefaultGate == null ? string.Empty : DefaultGate.Id; }
         }
 
+        public string AddressBookName
+        {
+            get { return AddressBook == null ? null : AddressBook.Name; }
+        }
+
+        public bool IsAddressBookSaved { get; private set; }
+
         public DomainData(ApplicationConfiguration config)
         {
             if (config == null) throw new ArgumentNullException("config");
 
             this.config = config;
             DefaultGate = CreateDefaultGate();
+            IsAddressBookSaved = true;
         }
 
         private IGate CreateDefaultGate()
@@ -42,30 +50,41 @@ namespace Lisimba.Cmd
 
         public void LoadAddressBook(string fileName)
         {
+            CloseAddressBook();
+
             string addressBookLocation = fileName ?? config.DefaultAddressBookFileName;
 
             if (addressBookLocation == null)
                 return;
 
             AddressBook = DefaultGate.Load(addressBookLocation);
+            AddressBook.Changed += HandleAddressBookChanged;
+
             AddressBookLocation = addressBookLocation;
         }
 
         public void CloseAddressBook()
         {
+            if (AddressBook != null)
+                AddressBook.Changed -= HandleAddressBookChanged;
+
             AddressBook = null;
             AddressBookLocation = null;
-        }
-
-        public string GetAddressBookName()
-        {
-            return AddressBook == null ? null : AddressBook.Name;
+            IsAddressBookSaved = true;
         }
 
         public void NewAddressBook(string name)
         {
+            CloseAddressBook();
+
             string addressBookName = name ?? DefaultAddressBookName;
             AddressBook = new AddressBook { Name = addressBookName };
+            AddressBook.Changed += HandleAddressBookChanged;
+        }
+
+        private void HandleAddressBookChanged(object sender, EventArgs eventArgs)
+        {
+            IsAddressBookSaved = false;
         }
     }
 }
