@@ -1,0 +1,26 @@
+Lisimba Command Line
+====================
+
+exit
+- closes the application.
+
+bye
+- closes the application. identical to "exit".
+
+goodbye
+- closes the application. identical to "exit".
+
+load
+- loads the "agenda.lsb" file from the same location.
+
+load <file_name>
+- loads the specified file name.
+
+show
+- displays the list of contacts.
+
+show <contact_name>
+- displays details about the contacts that contains the specified name.
+
+next-birthdays
+- displays the next 10 contacts ordered by the birth date starting from the current day.
