@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Egg.Comparers
@@ -23,13 +24,24 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
     /// <summary>
     /// Compares two contacts only by day and month of their birthdate. (Ignores the year)
     /// </summary>
-    internal class ContactByBirthdayComparer : IComparer
+    public class ContactByBirthdayComparer : IComparer, IComparer<Contact>
     {
         public int Compare(object x, object y)
         {
             Contact contactX = x as Contact;
             Contact contactY = y as Contact;
 
+            if (contactX == null)
+                throw new ArgumentException("Argument x is not Contact.", "x");
+
+            if (contactY == null)
+                throw new ArgumentException("Argument y is not Contact.", "y");
+
+            return Date.CompareWithoutYear(contactX.Birthday, contactY.Birthday);
+        }
+
+        public int Compare(Contact contactX, Contact contactY)
+        {
             if (contactX == null)
                 throw new ArgumentException("Argument x is not Contact.", "x");
 

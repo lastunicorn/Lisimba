@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.YahooGate", "Lisimb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.ZipXmlGate", "Lisimba.ZipXmlGate\Lisimba.ZipXmlGate.csproj", "{652744F3-B7FA-43AD-80A9-6EFC86537817}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Cmd", "Lisimba.Cmd\Lisimba.Cmd.csproj", "{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{652744F3-B7FA-43AD-80A9-6EFC86537817}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{652744F3-B7FA-43AD-80A9-6EFC86537817}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{652744F3-B7FA-43AD-80A9-6EFC86537817}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
