@@ -57,6 +57,7 @@
     <Compile Include="Book\ItemChangedEventArgs.cs" />
     <Compile Include="Book\WebSiteCollection.cs" />
     <Compile Include="Book\WebSite.cs" />
+    <Compile Include="EmptyGate.cs" />
     <Compile Include="Entities\ImportRuleCollection.cs" />
     <Compile Include="Enums\AddDecision.cs" />
     <Compile Include="Book\PostalAddress.cs" />

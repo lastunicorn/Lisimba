@@ -28,6 +28,21 @@ namespace DustInTheWind.Lisimba.Gating
     {
         public IEnumerable<Exception> Warnings { get; private set; }
 
+        public string Id
+        {
+            get { return "YahooCsvGate"; }
+        }
+
+        public string Name
+        {
+            get { return "Yahoo CSV Gate"; }
+        }
+
+        public string Description
+        {
+            get { return "A Gate that knows to save and load address books from a Yahoo csv file."; }
+        }
+
         public YahooCsvGate()
         {
             Warnings = new Exception[0];

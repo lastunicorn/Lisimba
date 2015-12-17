@@ -64,10 +64,15 @@ namespace Lisimba.Cmd
             Console.WriteLine(number);
         }
 
-        public void DisplayAddressBookLoadSuccess(int contactsCount)
+        public void DisplayAddressBookLoadSuccess(string addressBookFileName, int contactsCount)
         {
-            string message = string.Format("Successfully loaded {0} contacts.", contactsCount);
+            string message = string.Format("Successfully loaded {0} contacts from file '{1}'.", contactsCount, addressBookFileName);
             Console.WriteLine(message);
+        }
+
+        public void WriteGateInfo(string gateName)
+        {
+            Console.WriteLine("DefaultGate: {0}", gateName);
         }
     }
 }

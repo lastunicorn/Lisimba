@@ -25,5 +25,8 @@ namespace DustInTheWind.Lisimba.Egg
         AddressBook Load(string fileName);
         void Save(AddressBook addressBook, string fileName);
         IEnumerable<Exception> Warnings { get; }
+        string Id { get; }
+        string Name { get; }
+        string Description { get; }
     }
 }

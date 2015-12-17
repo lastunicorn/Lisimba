@@ -31,6 +31,21 @@ namespace DustInTheWind.Lisimba.Gating
             get { return loader.Warnings; }
         }
 
+        public string Id
+        {
+            get { return "ZipXmlGate"; }
+        }
+
+        public string Name
+        {
+            get { return "Zipped Xml Gate"; }
+        }
+
+        public string Description
+        {
+            get { return "A Gate that knows to save and load address books from a xml file that is zipped."; }
+        }
+
         public ZipXmlGate()
         {
             loader = new Loader();
