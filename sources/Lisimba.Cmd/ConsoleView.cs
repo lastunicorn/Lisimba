@@ -24,18 +24,34 @@ namespace Lisimba.Cmd
         public string ReadCommand(string addressBookName)
         {
             Console.WriteLine();
+            DisplayPrompter(addressBookName);
 
-            string prompter = GetPrompter(addressBookName);
-            Console.Write(prompter);
+            //string command = string.Empty;
+
+            //while (true)
+            //{
+            //    ConsoleKeyInfo key = Console.ReadKey(false);
+
+            //    if (key.Key == ConsoleKey.Enter)
+            //    {
+            //        Console.WriteLine();
+            //        return command;
+            //    }
+
+            //    if (char.IsLetterOrDigit(key.KeyChar))
+            //        command += key.KeyChar;
+            //}
 
             return Console.ReadLine();
         }
 
-        private static string GetPrompter(string addressBookName)
+        private static void DisplayPrompter(string addressBookName)
         {
-            return addressBookName == null
+            string prompter = addressBookName == null
                 ? "lisimba > "
                 : "lisimba (" + addressBookName + ") > ";
+
+            Console.Write(prompter);
         }
 
         public void WriteInfo(string text)

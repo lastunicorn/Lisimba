@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Commands
 {
-    class Command
+    class CommandInfo
     {
         private readonly List<string> parameters;
 
@@ -29,7 +29,7 @@ namespace Lisimba.Cmd
             }
         }
 
-        public Command(string commandText)
+        public CommandInfo(string commandText)
         {
             if (commandText == null)
             {

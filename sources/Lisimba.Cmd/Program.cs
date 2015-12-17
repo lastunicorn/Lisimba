@@ -1,107 +1,57 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Gating;
+﻿using Lisimba.Cmd.Commands;
 
 namespace Lisimba.Cmd
 {
     class Program
     {
-        private static bool exitRequested;
         private static ConsoleView consoleView;
-        private static AddressBook addressBook;
+        private static DomainData domainData;
 
         static void Main(string[] args)
         {
             consoleView = new ConsoleView();
+            domainData = new DomainData();
 
             consoleView.WriteWelcomeMessage();
 
-            while (!exitRequested)
+            while (!domainData.ExitRequested)
             {
-                string addressBookName = GetAddressBookName();
+                string addressBookName = domainData.GetAddressBookName();
                 string commandText = consoleView.ReadCommand(addressBookName);
-                Command command = new Command(commandText);
-                ProcessCommand(command);
+                
+                CommandInfo commandInfo = new CommandInfo(commandText);
+                ProcessCommand(commandInfo);
             }
 
             consoleView.WriteGoodByeMessage();
         }
 
-        private static string GetAddressBookName()
+        public static void ProcessCommand(CommandInfo commandInfo)
         {
-            return addressBook == null ? null : addressBook.Name;
+            ICommand command = CreateCommand(commandInfo.Name);
+            command.Execute(commandInfo);
         }
 
-        public static void ProcessCommand(Command command)
+        private static ICommand CreateCommand(string commandName)
         {
-            switch (command.Name)
+            switch (commandName)
             {
                 case "load":
-                    ZipXmlGate gate = new ZipXmlGate();
-                    addressBook = gate.Load(command[1] ?? "agenda.lsb");
-                    consoleView.DisplayAddressBookLoadSuccess(addressBook.Contacts.Count);
-                    break;
+                    return new LoadCommand(domainData, consoleView);
 
                 case "show":
-                    if (command.HasParameters)
-                        DisplayContact(command[1]);
-                    else
-                        DisplayAddressBook();
-                    break;
+                    return new ShowCommand(domainData, consoleView);
 
-                case "next-birthday":
-                    DisplayNextBirthdays();
-                    break;
+                case "next-birthdays":
+                    return new NextBirthdaysCommand(domainData, consoleView);
 
                 case "exit":
                 case "bye":
                 case "goodbye":
-                    exitRequested = true;
-                    break;
+                    return new ExitCommand(domainData);
 
                 default:
-                    consoleView.WriteUnknownCommand();
-                    break;
-            }
-        }
-
-        private static void DisplayContact(string contactName)
-        {
-            var contacts = addressBook.Contacts
-                .Where(x =>
-                    (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.LastName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.LastName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.Nickname != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.Nickname, contactName, CompareOptions.IgnoreCase) >= 0));
-
-            foreach (Contact contact in contacts)
-            {
-                consoleView.WriteInfo(contact.Name.ToString());
-            }
-        }
-
-        private static void DisplayAddressBook()
-        {
-            foreach (Contact contact in addressBook.Contacts)
-            {
-                consoleView.WriteInfo(contact.ToString());
-            }
-        }
-
-        private static void DisplayNextBirthdays()
-        {
-            var contacts = addressBook.Contacts
-                .Where(x => x.Birthday != null)
-                .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
-                .OrderBy(x => x, new ContactByBirthdayComparer())
-                .Take(10);
-
-            foreach (Contact contact in contacts)
-            {
-                consoleView.WriteInfo(contact.Name + " : " + contact.Birthday);
+                    return new UnknownCommand(consoleView);
             }
         }
     }
