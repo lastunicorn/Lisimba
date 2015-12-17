@@ -45,8 +45,8 @@ namespace Lisimba.Cmd
                 case "update":
                     return new UpdateCommand(domainData, consoleView);
 
-                case "load":
-                    return new LoadCommand(domainData, consoleView);
+                case "open":
+                    return new OpenCommand(domainData, consoleView);
 
                 case "show":
                     return new ShowCommand(domainData, consoleView);

@@ -52,7 +52,7 @@
     <Compile Include="ConsoleView.cs" />
     <Compile Include="DomainData.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
-    <Compile Include="Commands\LoadCommand.cs" />
+    <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Commands\NextBirthdaysCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

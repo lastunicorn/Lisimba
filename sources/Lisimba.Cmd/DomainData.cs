@@ -48,7 +48,7 @@ namespace Lisimba.Cmd
             }
         }
 
-        public void LoadAddressBook(string fileName)
+        public void OpenAddressBook(string fileName)
         {
             CloseAddressBook();
 
