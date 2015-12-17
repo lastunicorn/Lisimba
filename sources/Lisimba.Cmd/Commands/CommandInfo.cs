@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Lisimba.Cmd.Commands
@@ -43,7 +42,9 @@ namespace Lisimba.Cmd.Commands
             }
             else
             {
-                string[] items = commandText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                //string[] items = commandText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                CommandParser commandParser = new CommandParser(commandText);
+                string[] items = commandParser.Items;
 
                 Name = items.Length > 0 ? items[0] : string.Empty;
 

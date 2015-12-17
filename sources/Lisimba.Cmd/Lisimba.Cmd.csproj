@@ -43,11 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="CommandParser.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
+    <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="ConsoleView.cs" />
     <Compile Include="DomainData.cs" />

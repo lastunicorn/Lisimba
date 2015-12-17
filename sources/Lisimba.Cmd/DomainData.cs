@@ -86,5 +86,33 @@ namespace Lisimba.Cmd
         {
             IsAddressBookSaved = false;
         }
+
+        public void SaveAddressBook()
+        {
+            if (AddressBook == null)
+                throw new Exception("No address book is opened.");
+
+            if (DefaultGate == null)
+                throw new Exception("No default gate is set.");
+
+            if (AddressBookLocation == null)
+                throw new Exception("A location has to be specified.");
+
+            DefaultGate.Save(AddressBook, AddressBookLocation);
+            IsAddressBookSaved = true;
+        }
+
+        public void SaveAddressBookAs(string newLocation)
+        {
+            if (AddressBook == null)
+                throw new Exception("No address book is opened.");
+
+            if (DefaultGate == null)
+                throw new Exception("No default gate is set.");
+
+            DefaultGate.Save(AddressBook, newLocation);
+            AddressBookLocation = newLocation;
+            IsAddressBookSaved = true;
+        }
     }
 }

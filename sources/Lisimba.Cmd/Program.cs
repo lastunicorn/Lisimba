@@ -48,6 +48,9 @@ namespace Lisimba.Cmd
                 case "open":
                     return new OpenCommand(domainData, consoleView);
 
+                case "save":
+                    return new SaveCommand(domainData, consoleView);
+
                 case "show":
                     return new ShowCommand(domainData, consoleView);
 

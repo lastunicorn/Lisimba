@@ -47,8 +47,12 @@ namespace Lisimba.Cmd.Commands
                     }
                     else
                     {
-                        consoleView.WriteInfo("No address book is loaded.");
+                        consoleView.WriteInfo("No address book is opened.");
                     }
+                    break;
+
+                default:
+                    consoleView.WriteInfo("Invalid update action.");
                     break;
             }
         }

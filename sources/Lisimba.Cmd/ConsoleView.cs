@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Text;
 
 namespace Lisimba.Cmd
 {
@@ -47,11 +48,21 @@ namespace Lisimba.Cmd
 
         private static void DisplayPrompter(string addressBookName, bool isSaved)
         {
-            string prompter = addressBookName == null
-                ? "lisimba > "
-                : "lisimba [" + addressBookName + (isSaved ? string.Empty : " *") + "] > ";
+            StringBuilder sb = new StringBuilder();
 
-            Console.Write(prompter);
+            sb.Append("lisimba");
+
+            if (addressBookName != null)
+            {
+                sb.Append(" [").Append(addressBookName).Append("]");
+
+                if (!isSaved)
+                    sb.Append("*");
+            }
+
+            sb.Append(" > ");
+
+            Console.Write(sb);
         }
 
         public void WriteInfo(string text)
