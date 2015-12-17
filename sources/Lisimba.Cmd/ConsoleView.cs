@@ -59,11 +59,6 @@ namespace Lisimba.Cmd
             Console.WriteLine(text);
         }
 
-        public void WriteInfo(int number)
-        {
-            Console.WriteLine(number);
-        }
-
         public void DisplayAddressBookLoadSuccess(string addressBookFileName, int contactsCount)
         {
             string message = string.Format("Successfully loaded {0} contacts from file '{1}'.", contactsCount, addressBookFileName);

@@ -7,6 +7,7 @@ namespace Lisimba.Cmd
 {
     class DomainData
     {
+        private const string DefaultAddressBookName = "New Address Book";
         private readonly ApplicationConfiguration config;
         public AddressBook AddressBook { get; private set; }
         public string AddressBookLocation { get; private set; }
@@ -59,6 +60,12 @@ namespace Lisimba.Cmd
         public string GetAddressBookName()
         {
             return AddressBook == null ? null : AddressBook.Name;
+        }
+
+        public void NewAddressBook(string name)
+        {
+            string addressBookName = name ?? DefaultAddressBookName;
+            AddressBook = new AddressBook { Name = addressBookName };
         }
     }
 }

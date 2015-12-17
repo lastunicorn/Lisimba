@@ -36,7 +36,8 @@ namespace Lisimba.Cmd.Commands
 
             foreach (Contact contact in contacts)
             {
-                consoleView.WriteInfo(contact.Name + " : " + contact.Birthday);
+                string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
+                consoleView.WriteInfo(text);
             }
         }
     }

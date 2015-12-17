@@ -22,15 +22,15 @@ namespace Lisimba.Cmd
                 string addressBookName = domainData.GetAddressBookName();
                 string commandText = consoleView.ReadCommand(addressBookName);
 
-                CommandInfo commandInfo = new CommandInfo(commandText);
-                ProcessCommand(commandInfo);
+                ProcessCommand(commandText);
             }
 
             consoleView.WriteGoodByeMessage();
         }
 
-        public static void ProcessCommand(CommandInfo commandInfo)
+        private static void ProcessCommand(string commandText)
         {
+            CommandInfo commandInfo = new CommandInfo(commandText);
             ICommand command = CreateCommand(commandInfo.Name);
             command.Execute(commandInfo);
         }
@@ -39,6 +39,9 @@ namespace Lisimba.Cmd
         {
             switch (commandName)
             {
+                case "new":
+                    return new NewCommand(domainData, consoleView);
+
                 case "load":
                     return new LoadCommand(domainData, consoleView);
 
