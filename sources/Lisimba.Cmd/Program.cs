@@ -1,5 +1,4 @@
 ﻿using System;
-using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Commands;
 using Microsoft.Practices.Unity;
 
@@ -9,9 +8,9 @@ namespace Lisimba.Cmd
     {
         private static UnityContainer container;
 
-        private static ApplicationConfiguration config;
         private static ConsoleView consoleView;
         private static DomainData domainData;
+        private static CommandProvider commandProvider;
 
         static void Main(string[] args)
         {
@@ -19,22 +18,14 @@ namespace Lisimba.Cmd
             {
                 container = DependencyContainerSetup.CreateContainer();
 
-                config = container.Resolve<ApplicationConfiguration>();
                 consoleView = container.Resolve<ConsoleView>();
                 domainData = container.Resolve<DomainData>();
-
-                domainData.DefaultGate = CreateDefaultGate();
+                commandProvider = container.Resolve<CommandProvider>();
 
                 consoleView.WriteWelcomeMessage();
                 consoleView.WriteGateInfo(domainData.DefaultGateName);
 
-                CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
-
-                while (!domainData.ExitRequested)
-                {
-                    CommandInfo command = commandReadControl.Read();
-                    ProcessCommand(command);
-                }
+                RunCommandLoop();
 
                 consoleView.WriteGoodByeMessage();
 
@@ -46,15 +37,14 @@ namespace Lisimba.Cmd
             }
         }
 
-        private static IGate CreateDefaultGate()
+        private static void RunCommandLoop()
         {
-            try
+            CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
+
+            while (!domainData.ExitRequested)
             {
-                return container.Resolve<IGate>(config.DefaultGateName);
-            }
-            catch
-            {
-                return new EmptyGate();
+                CommandInfo command = commandReadControl.Read();
+                ProcessCommand(command);
             }
         }
 
@@ -62,56 +52,12 @@ namespace Lisimba.Cmd
         {
             try
             {
-                ICommand command = CreateCommand(commandInfo.Name);
+                ICommand command = commandProvider.CreateCommand(commandInfo.Name);
                 command.Execute(commandInfo);
             }
             catch (Exception ex)
             {
                 consoleView.WriteError(ex.Message);
-            }
-        }
-
-        private static ICommand CreateCommand(string commandName)
-        {
-            switch (commandName)
-            {
-                case "new":
-                    return new NewCommand(domainData, consoleView);
-
-                case "update":
-                    return new UpdateCommand(domainData, consoleView);
-
-                case "open":
-                    return new OpenCommand(domainData, consoleView);
-
-                case "save":
-                    return new SaveCommand(domainData);
-
-                case "show":
-                    return new ShowCommand(domainData, consoleView);
-
-                case "next-birthdays":
-                    return new NextBirthdaysCommand(domainData, consoleView);
-
-                case "close":
-                    return new CloseCommand(domainData, consoleView);
-
-                case "info":
-                    return new InfoCommand(domainData, consoleView);
-
-                case "gate":
-                    return new GateCommand(domainData, consoleView, container.Resolve<GateProvider>());
-
-                case "exit":
-                case "bye":
-                case "goodbye":
-                    return new ExitCommand(domainData);
-
-                case "":
-                    return new EmptyCommand();
-
-                default:
-                    return new UnknownCommand(consoleView);
             }
         }
     }
