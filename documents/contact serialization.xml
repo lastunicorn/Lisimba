@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Book xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OwnerId="16">
+	<Version>1.2.0.16909</Version>
+	<Name>My first address book</Name>
+
+	<Contact Category="">
+		<Name First="Alexandru" Middle="Nicolae" Last="Iuga" Nickname="alez"/>
+		<Birthday Day="13" Month="6" Year="1980" Description="this is not necessary"/>
+		<Phones>
+			<Phone Number="0723002252" Description="Mobile"/>
+		</Phones>
+		<Emails>
+			<Email Address="alex.iuga@gmail.com" Description="Email"/>
+			<Email Address="coldblackstar@yahoo.com" Description="Email"/>
+			<Email Address="alex.iuga@yahoo.com" Description="Email"/>
+		</Emails>
+		<WebSites>
+			<WebSite Address="http://alez.ro" Description="my web site"/>
+		</WebSites>
+		<Addresses>
+			<Address Street="str.Zizinului nr.71 bl.104 sc.G ap.27" City="Brasov" State="Brasov" PostalCode="" Country="Romania" Description="Home Address"/>
+		</Addresses>
+		<Dates>
+			<Date Day="8" Month="9" Year="2007" Description="S-au casatorit"/>
+		</Dates>
+		<MessengerIds>
+			<MessengerId Id="coldblackstar" Description="yahoo"/>
+			<MessengerId Id="alex.iuga" Description="yahoo"/>
+			<MessengerId Id="alex.iuga" Description="skype"/>
+			<MessengerId Id="lastunicorn" Description="github"/>
+			<MessengerId Id="lastunicorn" Description="sourceforge"/>
+		</MessengerIds>
+		<Notes>This is me</Notes>
+	</Contact>
+
+	<Contact Id="16" Labels="label1,label2,label3">
+		<Name First="Alexandru" Middle="Nicolae" Last="Iuga" Nickname="alez"/>
+		<BirthDate Day="13" Month="6" Year="1980"/>
+		<DeathDate Day="13" Month="6" Year="2080"/>
+		<Link Type="Mother" Id="23" Description=""/>
+		<Link Type="Sister" Id="67" Description=""/>
+		<Phone Type="Mobile" Number="0723002252" Description="my only phone number"/>
+		<Email Address="alex.iuga@gmail.com" Description="Email"/>
+		<Email Address="coldblackstar@yahoo.com" Description="Email"/>
+		<Email Address="alex.iuga@yahoo.com" Description="Email"/>
+		<WebSite Address="http://alez.ro" Description="my personal web site"/>
+		<Address Street="aleea.Daliei nr.8 bl.L118 sc.A ap.25" City="Constanța" State="Constanța" PostalCode="8700" Country="Romania" Description="adresa unde am copilărit"/>
+		<Address Street="str.Ștefan Luchian nr.2 bl.L6 sc.C ap.58" City="Constanța" State="Constanța" PostalCode="" Country="Romania" Description="adresa din buletin"/>
+		<Address Street="str.Zizinului nr.71 bl.104 sc.G ap.27" City="Brasov" State="Brasov" PostalCode="" Country="Romania" Description="flotant în bv"/>
+		<Date Day="8" Month="9" Year="2007" Description="S-au casatorit"/>
+		<SocialProfile Network="yahoo" Id="coldblackstar" Description="my first account at yahoo"/>
+		<SocialProfile Network="google" Id="alex.iuga"/>
+		<SocialProfile Network="skype" Id="alex.iuga"/>
+		<SocialProfile Network="github" Id="lastunicorn"/>
+		<SocialProfile Network="sourceforge" Id="lastunicorn"/>
+		<Notes>This is me</Notes>
+	</Contact>
+
+</Book>

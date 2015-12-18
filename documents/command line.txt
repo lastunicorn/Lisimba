@@ -1,6 +1,37 @@
 Lisimba Command Line
 ====================
 
+open
+- loads the address book file specified in the app.config file (DefaultAddressBook value). if no file is specified in the app.config file, no address book is opened.
+- the default gate is used.
+
+open <file_name>
+- loads the specified address book file.
+- the default gate is used.
+
+show
+- displays the list of all contacts.
+
+show <contact_name>
+- displays details about the contacts that contains the specified name.
+
+next-birthdays
+- displays 10 contacts ordered by the birth date starting from the current day.
+
+new
+- creates a new address book.
+
+save
+- saves the address book in the same location from where it was opened.
+- if the current address book is new, it cannot be saved.
+
+save <file_name>
+- saves the address book in the specified location.
+- this command can be used for saving a new address book or for saving in a new location an address book.
+
+update key=value key=value ...
+- tbd
+
 exit
 - closes the application.
 
@@ -10,17 +41,9 @@ bye
 goodbye
 - closes the application. identical to "exit".
 
-load
-- loads the "agenda.lsb" file from the same location.
+---------------------------------
+to be added:
+---------------------------------
 
-load <file_name>
-- loads the specified file name.
-
-show
-- displays the list of contacts.
-
-show <contact_name>
-- displays details about the contacts that contains the specified name.
-
-next-birthdays
-- displays the next 10 contacts ordered by the birth date starting from the current day.
+info
+- displays information about the current address book.
