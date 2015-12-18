@@ -19,41 +19,55 @@ namespace Lisimba.Cmd.Commands
         public void Execute(CommandInfo commandInfo)
         {
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
-
-            for (int i = 1; i <= commandInfo.ParameterCount; i++)
+            
+            foreach (string actionText in commandInfo)
             {
-                string action = commandInfo[i];
-                ProcessAction(action);
+                ProcessAction(actionText);
             }
         }
 
-        private void ProcessAction(string action)
+        private void ProcessAction(string actionText)
         {
-            int pos = action.IndexOf('=');
+            Tuple<string, string> action = ParseAction(actionText);
 
-            if (pos == -1)
-                return;
-
-            string paramName = action.Substring(0, pos);
-            string value = action.Substring(pos + 1);
-
-            switch (paramName.ToLower())
+            switch (action.Item1.ToLower())
             {
                 case "name":
-                    if (domainData.AddressBook != null)
-                    {
-                        domainData.AddressBook.Name = value;
-                        consoleView.DisplayAddressBookNameChangeSuccess();
-                    }
-                    else
-                    {
-                        consoleView.DisplayNoAddressBookMessage();
-                    }
+                    UpdateAddressBookName(action.Item2);
                     break;
 
                 default:
                     consoleView.DisplayInvalidUpdateActionError();
                     break;
+            }
+        }
+
+        private static Tuple<string, string> ParseAction(string actionText)
+        {
+            int pos = actionText.IndexOf('=');
+
+            if (pos == -1)
+                return null;
+
+            string paramName = actionText.Substring(0, pos);
+
+            string value = actionText.Substring(pos + 1);
+            if (value.Length >= 2 && value[0] == '"' && value[value.Length - 1] == '"')
+                value = value.Substring(1, value.Length - 2);
+
+            return new Tuple<string, string>(paramName, value);
+        }
+
+        private void UpdateAddressBookName(string newAddressBookName)
+        {
+            if (domainData.AddressBook != null)
+            {
+                domainData.AddressBook.Name = newAddressBookName;
+                consoleView.DisplayAddressBookNameChangeSuccess();
+            }
+            else
+            {
+                consoleView.DisplayNoAddressBookMessage();
             }
         }
     }

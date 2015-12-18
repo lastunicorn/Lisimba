@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Lisimba.Cmd.Commands
 {
-    class CommandInfo
+    class CommandInfo : IEnumerable<string>
     {
         private readonly List<string> parameters;
 
@@ -51,6 +52,16 @@ namespace Lisimba.Cmd.Commands
                     .Skip(1)
                     .ToList();
             }
+        }
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            return parameters.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

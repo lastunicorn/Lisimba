@@ -8,6 +8,9 @@ namespace Lisimba.Cmd
         private readonly string commandText;
         private int index;
         private List<string> items;
+        private int quotaCount;
+        private int wordStartIndex;
+        private int wordEndIndex;
 
         public string[] Items
         {
@@ -40,41 +43,59 @@ namespace Lisimba.Cmd
                 if (IsEndOfString())
                     break;
 
-                int startIndex = index;
-                int endIndex;
-
-                if (commandText[index] == '"')
-                {
-                    SkipUntilChar('"');
-
-                    if (IsEndOfWord())
-                    {
-                        startIndex++;
-                        endIndex = index - 1;
-                    }
-                    else
-                    {
-                        SkipUntilChar(' ');
-                        endIndex = index - 1;
-                    }
-                }
-                else
-                {
-                    SkipUntilChar(' ');
-                    endIndex = index - 1;
-                }
-
-                string item = commandText.Substring(startIndex, endIndex - startIndex + 1);
+                string item = ReadNextWord();
                 items.Add(item);
             }
         }
 
-        private bool IsEndOfWord()
+        private string ReadNextWord()
         {
-            if (index + 1 >= commandText.Length)
-                return true;
+            IdentifyNextWordPosition();
 
-            return commandText[index + 1] == ' ';
+            int wordLength = wordEndIndex - wordStartIndex + 1;
+            return commandText.Substring(wordStartIndex, wordLength);
+        }
+
+        private void IdentifyNextWordPosition()
+        {
+            wordStartIndex = index;
+            wordEndIndex = -1;
+
+            quotaCount = 0;
+
+            do
+            {
+                SkipUntilSpace();
+            }
+            while (quotaCount % 2 == 1 && !IsEndOfString());
+
+            wordEndIndex = index - 1;
+
+            bool isWordEnclosedInQuotas = quotaCount == 2 && commandText[wordStartIndex] == '"' && commandText[wordEndIndex] == '"';
+            
+            if (isWordEnclosedInQuotas)
+            {
+                wordStartIndex++;
+                wordEndIndex--;
+            }
+        }
+
+        private void SkipUntilSpace()
+        {
+            if (IsEndOfString())
+                return;
+
+            do
+            {
+                if (commandText[index] == '"')
+                    quotaCount++;
+
+                index++;
+
+                if (IsEndOfString())
+                    break;
+            }
+            while (commandText[index] != ' ');
         }
 
         private void SkipSpaces()
@@ -87,18 +108,6 @@ namespace Lisimba.Cmd
                     break;
             }
             while (commandText[index] == ' ');
-        }
-
-        private void SkipUntilChar(char c)
-        {
-            do
-            {
-                index++;
-
-                if (IsEndOfString())
-                    break;
-            }
-            while (commandText[index] != c);
         }
 
         private bool IsEndOfString()
