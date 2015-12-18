@@ -32,6 +32,9 @@ save <file_name>
 update key=value key=value ...
 - tbd
 
+info
+- displays information about the current address book.
+
 exit
 - closes the application.
 
@@ -44,6 +47,3 @@ goodbye
 ---------------------------------
 to be added:
 ---------------------------------
-
-info
-- displays information about the current address book.
