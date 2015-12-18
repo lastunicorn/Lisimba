@@ -51,6 +51,7 @@
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />

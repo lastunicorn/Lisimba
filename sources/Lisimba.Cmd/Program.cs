@@ -1,4 +1,5 @@
-﻿using Lisimba.Cmd.Commands;
+﻿using System;
+using Lisimba.Cmd.Commands;
 
 namespace Lisimba.Cmd
 {
@@ -30,9 +31,16 @@ namespace Lisimba.Cmd
 
         private static void ProcessCommand(string commandText)
         {
-            CommandInfo commandInfo = new CommandInfo(commandText);
-            ICommand command = CreateCommand(commandInfo.Name);
-            command.Execute(commandInfo);
+            try
+            {
+                CommandInfo commandInfo = new CommandInfo(commandText);
+                ICommand command = CreateCommand(commandInfo.Name);
+                command.Execute(commandInfo);
+            }
+            catch (Exception ex)
+            {
+                consoleView.WriteError(ex.Message);
+            }
         }
 
         private static ICommand CreateCommand(string commandName)
@@ -59,6 +67,9 @@ namespace Lisimba.Cmd
 
                 case "close":
                     return new CloseCommand(domainData, consoleView);
+
+                case "info":
+                    return new InfoCommand(domainData, consoleView);
 
                 case "exit":
                 case "bye":

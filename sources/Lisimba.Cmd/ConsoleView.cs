@@ -20,7 +20,7 @@ namespace Lisimba.Cmd
 
         public void WriteUnknownCommand()
         {
-            Console.WriteLine("Unknown command");
+            WriteLine("Unknown command", ConsoleColor.Red);
         }
 
         public string ReadCommand(string addressBookName, bool isSaved)
@@ -49,26 +49,27 @@ namespace Lisimba.Cmd
 
         private static void DisplayPrompter(string addressBookName, bool isSaved)
         {
-            StringBuilder sb = new StringBuilder();
+            Write("lisimba", ConsoleColor.White);
 
-            sb.Append("lisimba");
+            string formattedAddressBookName = BuildAddressBookName(addressBookName, isSaved);
+            Console.Write(formattedAddressBookName);
 
-            if (addressBookName != null)
-            {
-                sb.Append(" [").Append(addressBookName).Append("]");
-
-                if (!isSaved)
-                    sb.Append("*");
-            }
-
-            sb.Append(" > ");
-
-            Console.Write(sb);
+            Write(" > ", ConsoleColor.White);
         }
 
-        public void WriteInfo(string text)
+        private static string BuildAddressBookName(string addressBookName, bool isSaved)
         {
-            Console.WriteLine(text);
+            if (addressBookName == null)
+                return string.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(" [").Append(addressBookName).Append("]");
+
+            if (!isSaved)
+                sb.Append("*");
+
+            return sb.ToString();
         }
 
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
@@ -84,12 +85,13 @@ namespace Lisimba.Cmd
 
         public void DisplayAddressBookCloseSuccess()
         {
+            Write("[Done] ", ConsoleColor.Green);
             Console.WriteLine("Address book was closed.");
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            Console.WriteLine("No address book is oppened.");
+            WriteLine("No address book is oppened.", ConsoleColor.Red);
         }
 
         public void DisplayAddressBookCreateSuccess()
@@ -105,7 +107,7 @@ namespace Lisimba.Cmd
 
         public void WriteError(string message)
         {
-            Console.WriteLine(message);
+            WriteLine(message, ConsoleColor.Red);
         }
 
         public void DisplayContactDetails(Contact contact)
@@ -126,6 +128,31 @@ namespace Lisimba.Cmd
         public void DisplayInvalidUpdateActionError()
         {
             Console.WriteLine("Invalid update action.");
+        }
+
+        public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
+        {
+            Console.WriteLine("Address book: " + addressBook.Name);
+            Console.WriteLine("Location: " + addressBookLocation);
+            Console.WriteLine("Contacts: " + addressBook.Contacts.Count);
+        }
+
+        private static void Write(string text, ConsoleColor color)
+        {
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            Console.ForegroundColor = color;
+            Console.Write(text);
+            Console.ForegroundColor = oldColor;
+        }
+
+        private static void WriteLine(string text, ConsoleColor color)
+        {
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            Console.ForegroundColor = color;
+            Console.WriteLine(text);
+            Console.ForegroundColor = oldColor;
         }
     }
 }

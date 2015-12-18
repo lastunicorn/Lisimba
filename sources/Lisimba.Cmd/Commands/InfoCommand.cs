@@ -2,12 +2,12 @@
 
 namespace Lisimba.Cmd.Commands
 {
-    class SaveCommand : ICommand
+    class InfoCommand : ICommand
     {
         private readonly DomainData domainData;
         private readonly ConsoleView consoleView;
 
-        public SaveCommand(DomainData domainData, ConsoleView consoleView)
+        public InfoCommand(DomainData domainData, ConsoleView consoleView)
         {
             if (domainData == null) throw new ArgumentNullException("domainData");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
@@ -20,10 +20,10 @@ namespace Lisimba.Cmd.Commands
         {
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
-            if (commandInfo[1] != null)
-                domainData.SaveAddressBookAs(commandInfo[1]);
+            if (domainData.AddressBook == null)
+                consoleView.DisplayNoAddressBookMessage();
             else
-                domainData.SaveAddressBook();
+                consoleView.DisplayAddressBookInfo(domainData.AddressBook, domainData.AddressBookLocation);
         }
     }
 }
