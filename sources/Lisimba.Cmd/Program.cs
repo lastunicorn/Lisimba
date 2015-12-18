@@ -1,32 +1,61 @@
 ﻿using System;
+using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Commands;
+using Microsoft.Practices.Unity;
 
 namespace Lisimba.Cmd
 {
     class Program
     {
+        private static UnityContainer container;
+
+        private static ApplicationConfiguration config;
         private static ConsoleView consoleView;
         private static DomainData domainData;
-        private static ApplicationConfiguration config;
 
         static void Main(string[] args)
         {
-            config = new ApplicationConfiguration();
-            consoleView = new ConsoleView();
-            domainData = new DomainData(config);
-
-            consoleView.WriteWelcomeMessage();
-            consoleView.WriteGateInfo(domainData.DefaultGateName);
-
-            CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
-
-            while (!domainData.ExitRequested)
+            try
             {
-                CommandInfo command = commandReadControl.Read();
-                ProcessCommand(command);
-            }
+                container = DependencyContainerSetup.CreateContainer();
 
-            consoleView.WriteGoodByeMessage();
+                config = container.Resolve<ApplicationConfiguration>();
+                consoleView = container.Resolve<ConsoleView>();
+                domainData = container.Resolve<DomainData>();
+
+                domainData.DefaultGate = CreateDefaultGate();
+
+                consoleView.WriteWelcomeMessage();
+                consoleView.WriteGateInfo(domainData.DefaultGateName);
+
+                CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
+
+                while (!domainData.ExitRequested)
+                {
+                    CommandInfo command = commandReadControl.Read();
+                    ProcessCommand(command);
+                }
+
+                consoleView.WriteGoodByeMessage();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                Console.ReadKey(true);
+            }
+        }
+
+        private static IGate CreateDefaultGate()
+        {
+            try
+            {
+                return container.Resolve<IGate>(config.DefaultGateName);
+            }
+            catch
+            {
+                return new EmptyGate();
+            }
         }
 
         private static void ProcessCommand(CommandInfo commandInfo)

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DustInTheWind.Lisimba.Egg</RootNamespace>
-    <AssemblyName>Egg</AssemblyName>
+    <AssemblyName>DustInTheWind.Lisimba.Egg</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>

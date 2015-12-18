@@ -1,7 +1,6 @@
 using System;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Gating;
 
 namespace Lisimba.Cmd
 {
@@ -11,7 +10,7 @@ namespace Lisimba.Cmd
         private readonly ApplicationConfiguration config;
         public AddressBook AddressBook { get; private set; }
         public string AddressBookLocation { get; private set; }
-        public IGate DefaultGate { get; private set; }
+        public IGate DefaultGate { get; set; }
 
         public bool ExitRequested { get; set; }
 
@@ -32,20 +31,7 @@ namespace Lisimba.Cmd
             if (config == null) throw new ArgumentNullException("config");
 
             this.config = config;
-            DefaultGate = CreateDefaultGate();
             IsAddressBookSaved = true;
-        }
-
-        private IGate CreateDefaultGate()
-        {
-            switch (config.DefaultGateName)
-            {
-                case "ZipXmlGate":
-                    return new ZipXmlGate();
-
-                default:
-                    return new EmptyGate();
-            }
         }
 
         public void OpenAddressBook(string fileName)
