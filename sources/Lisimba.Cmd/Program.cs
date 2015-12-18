@@ -99,6 +99,9 @@ namespace Lisimba.Cmd
                 case "info":
                     return new InfoCommand(domainData, consoleView);
 
+                case "gate":
+                    return new GateCommand(domainData, consoleView, container.Resolve<GateProvider>());
+
                 case "exit":
                 case "bye":
                 case "goodbye":

@@ -35,6 +35,12 @@ update key=value key=value ...
 info
 - displays information about the current address book.
 
+gate
+- displays the current default gate
+
+gate <gate_id>
+- sets the default gate to the one with the specified id.
+
 exit
 - closes the application.
 

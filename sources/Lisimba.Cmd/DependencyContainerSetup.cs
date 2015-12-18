@@ -15,6 +15,8 @@ namespace Lisimba.Cmd
             UnityConfigurationSection unitySection = GetUnityConfigurationSection();
             container.LoadConfiguration(unitySection);
 
+            container.RegisterInstance(container);
+
             return container;
         }
 

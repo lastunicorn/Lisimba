@@ -58,6 +58,7 @@
     <Compile Include="CommandReadControl.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="Commands\GateCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Commands\NextBirthdaysCommand.cs" />
+    <Compile Include="GateProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\ShowCommand.cs" />

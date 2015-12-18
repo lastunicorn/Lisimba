@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using System.Text;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace Lisimba.Cmd
@@ -117,6 +118,19 @@ namespace Lisimba.Cmd
 
             ConsoleHelper.WriteEmphasize("Contacts: ");
             Console.WriteLine(addressBook.Contacts.Count);
+        }
+
+        public void DisplayGate(IGate gate)
+        {
+            Console.WriteLine();
+            ConsoleHelper.WriteEmphasize("DefaultGate: ");
+            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
+            Console.WriteLine(gate.Description);
+        }
+
+        public void DisplayGateChangeSuccess()
+        {
+            ConsoleHelper.WriteLineSuccess("The gate was successfully changed.");
         }
     }
 }
