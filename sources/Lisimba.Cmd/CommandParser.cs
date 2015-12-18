@@ -41,7 +41,7 @@ namespace Lisimba.Cmd
                     break;
 
                 int startIndex = index;
-                int endIndex = -1;
+                int endIndex;
 
                 if (commandText[index] == '"')
                 {

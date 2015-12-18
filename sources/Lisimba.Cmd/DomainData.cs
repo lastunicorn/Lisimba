@@ -104,6 +104,8 @@ namespace Lisimba.Cmd
 
         public void SaveAddressBookAs(string newLocation)
         {
+            if (newLocation == null) throw new ArgumentNullException("newLocation");
+
             if (AddressBook == null)
                 throw new Exception("No address book is opened.");
 

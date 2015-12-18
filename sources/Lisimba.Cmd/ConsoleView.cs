@@ -10,7 +10,7 @@ namespace Lisimba.Cmd
         public void WriteWelcomeMessage()
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
-            Console.WriteLine("Lisimba ver. " + version);
+            ConsoleHelper.WriteLineEmphasize("Lisimba ver. " + version);
         }
 
         public void WriteGoodByeMessage()
@@ -20,51 +20,34 @@ namespace Lisimba.Cmd
 
         public void WriteUnknownCommand()
         {
-            WriteLine("Unknown command", ConsoleColor.Red);
+            ConsoleHelper.WriteLineError("Unknown command");
         }
 
-        public string ReadCommand(string addressBookName, bool isSaved)
+        public void WriteError(string text)
         {
-            Console.WriteLine();
-            DisplayPrompter(addressBookName, isSaved);
-
-            //string command = string.Empty;
-
-            //while (true)
-            //{
-            //    ConsoleKeyInfo key = Console.ReadKey(false);
-
-            //    if (key.Key == ConsoleKey.Enter)
-            //    {
-            //        Console.WriteLine();
-            //        return command;
-            //    }
-
-            //    if (char.IsLetterOrDigit(key.KeyChar))
-            //        command += key.KeyChar;
-            //}
-
-            return Console.ReadLine();
+            ConsoleHelper.WriteLineError(text);
         }
 
-        private static void DisplayPrompter(string addressBookName, bool isSaved)
+        public void DisplayPrompter(string addressBookName, bool isSaved)
         {
-            Write("lisimba", ConsoleColor.White);
+            ConsoleHelper.WriteEmphasize("lisimba");
 
-            string formattedAddressBookName = BuildAddressBookName(addressBookName, isSaved);
-            Console.Write(formattedAddressBookName);
+            if (addressBookName != null)
+            {
+                Console.Write(" ");
 
-            Write(" > ", ConsoleColor.White);
+                string formattedAddressBookName = BuildAddressBookName(addressBookName, isSaved);
+                Console.Write(formattedAddressBookName);
+            }
+
+            ConsoleHelper.WriteEmphasize(" > ");
         }
 
         private static string BuildAddressBookName(string addressBookName, bool isSaved)
         {
-            if (addressBookName == null)
-                return string.Empty;
-
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(" [").Append(addressBookName).Append("]");
+            sb.Append("[").Append(addressBookName).Append("]");
 
             if (!isSaved)
                 sb.Append("*");
@@ -75,7 +58,7 @@ namespace Lisimba.Cmd
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
         {
             string message = string.Format("Successfully loaded {0} contacts from file '{1}'.", contactsCount, addressBookFileName);
-            Console.WriteLine(message);
+            ConsoleHelper.WriteLineSuccess(message);
         }
 
         public void WriteGateInfo(string gateName)
@@ -85,29 +68,23 @@ namespace Lisimba.Cmd
 
         public void DisplayAddressBookCloseSuccess()
         {
-            Write("[Done] ", ConsoleColor.Green);
-            Console.WriteLine("Address book was closed.");
+            ConsoleHelper.WriteLineSuccess("Address book was closed.");
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            WriteLine("No address book is oppened.", ConsoleColor.Red);
+            ConsoleHelper.WriteLineError("No address book is oppened.");
         }
 
         public void DisplayAddressBookCreateSuccess()
         {
-            Console.WriteLine("New address book successfully created.");
+            ConsoleHelper.WriteLineSuccess("New address book successfully created.");
         }
 
         public void DisplayContactWithBirthday(Contact contact)
         {
             string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
             Console.WriteLine(text);
-        }
-
-        public void WriteError(string message)
-        {
-            WriteLine(message, ConsoleColor.Red);
         }
 
         public void DisplayContactDetails(Contact contact)
@@ -122,37 +99,24 @@ namespace Lisimba.Cmd
 
         public void DisplayAddressBookNameChangeSuccess()
         {
-            Console.WriteLine("Address book name successfully changed.");
+            ConsoleHelper.WriteLineSuccess("Address book name successfully changed.");
         }
 
         public void DisplayInvalidUpdateActionError()
         {
-            Console.WriteLine("Invalid update action.");
+            ConsoleHelper.WriteLineError("Invalid update action.");
         }
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            Console.WriteLine("Address book: " + addressBook.Name);
-            Console.WriteLine("Location: " + addressBookLocation);
-            Console.WriteLine("Contacts: " + addressBook.Contacts.Count);
-        }
+            ConsoleHelper.WriteEmphasize("Address book: ");
+            Console.WriteLine(addressBook.Name);
 
-        private static void Write(string text, ConsoleColor color)
-        {
-            ConsoleColor oldColor = Console.ForegroundColor;
+            ConsoleHelper.WriteEmphasize("Location: ");
+            Console.WriteLine(addressBookLocation);
 
-            Console.ForegroundColor = color;
-            Console.Write(text);
-            Console.ForegroundColor = oldColor;
-        }
-
-        private static void WriteLine(string text, ConsoleColor color)
-        {
-            ConsoleColor oldColor = Console.ForegroundColor;
-
-            Console.ForegroundColor = color;
-            Console.WriteLine(text);
-            Console.ForegroundColor = oldColor;
+            ConsoleHelper.WriteEmphasize("Contacts: ");
+            Console.WriteLine(addressBook.Contacts.Count);
         }
     }
 }

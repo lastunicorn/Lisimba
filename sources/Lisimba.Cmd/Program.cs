@@ -18,22 +18,21 @@ namespace Lisimba.Cmd
             consoleView.WriteWelcomeMessage();
             consoleView.WriteGateInfo(domainData.DefaultGateName);
 
+            CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
+
             while (!domainData.ExitRequested)
             {
-                string addressBookName = domainData.AddressBookName;
-                string commandText = consoleView.ReadCommand(addressBookName, domainData.IsAddressBookSaved);
-
-                ProcessCommand(commandText);
+                CommandInfo command = commandReadControl.Read();
+                ProcessCommand(command);
             }
 
             consoleView.WriteGoodByeMessage();
         }
 
-        private static void ProcessCommand(string commandText)
+        private static void ProcessCommand(CommandInfo commandInfo)
         {
             try
             {
-                CommandInfo commandInfo = new CommandInfo(commandText);
                 ICommand command = CreateCommand(commandInfo.Name);
                 command.Execute(commandInfo);
             }
@@ -57,7 +56,7 @@ namespace Lisimba.Cmd
                     return new OpenCommand(domainData, consoleView);
 
                 case "save":
-                    return new SaveCommand(domainData, consoleView);
+                    return new SaveCommand(domainData);
 
                 case "show":
                     return new ShowCommand(domainData, consoleView);

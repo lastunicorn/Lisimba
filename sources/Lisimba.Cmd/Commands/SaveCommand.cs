@@ -5,15 +5,12 @@ namespace Lisimba.Cmd.Commands
     class SaveCommand : ICommand
     {
         private readonly DomainData domainData;
-        private readonly ConsoleView consoleView;
 
-        public SaveCommand(DomainData domainData, ConsoleView consoleView)
+        public SaveCommand(DomainData domainData)
         {
             if (domainData == null) throw new ArgumentNullException("domainData");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
 
             this.domainData = domainData;
-            this.consoleView = consoleView;
         }
 
         public void Execute(CommandInfo commandInfo)

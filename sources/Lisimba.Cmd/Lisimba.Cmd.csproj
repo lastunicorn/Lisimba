@@ -36,11 +36,6 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -48,6 +43,7 @@
     </Compile>
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="CommandReadControl.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -56,6 +52,7 @@
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />
     <Compile Include="ConsoleView.cs" />
+    <Compile Include="ConsoleHelper.cs" />
     <Compile Include="DomainData.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
