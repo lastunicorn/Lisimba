@@ -21,7 +21,7 @@ namespace Lisimba.Cmd.Commands
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
             domainData.NewAddressBook(commandInfo[1]);
-            consoleView.WriteInfo("New address book successfully created.");
+            consoleView.DisplayAddressBookCreateSuccess();
         }
     }
 }

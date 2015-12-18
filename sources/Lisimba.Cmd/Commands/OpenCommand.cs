@@ -21,10 +21,11 @@ namespace Lisimba.Cmd.Commands
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
             domainData.OpenAddressBook(commandInfo[1]);
+
             if (domainData.AddressBook == null)
-                consoleView.WriteInfo("No address book was loaded.");
+                consoleView.DisplayNoAddressBookMessage();
             else
-                consoleView.DisplayAddressBookLoadSuccess(domainData.AddressBookLocation, domainData.AddressBook.Contacts.Count);
+                consoleView.DisplayAddressBookOpenSuccess(domainData.AddressBookLocation, domainData.AddressBook.Contacts.Count);
         }
     }
 }

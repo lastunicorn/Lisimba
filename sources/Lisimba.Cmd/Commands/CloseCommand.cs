@@ -23,11 +23,11 @@ namespace Lisimba.Cmd.Commands
             if (domainData.AddressBook != null)
             {
                 domainData.CloseAddressBook();
-                consoleView.WriteInfo("Address book was closed.");
+                consoleView.DisplayAddressBookCloseSuccess();
             }
             else
             {
-                consoleView.WriteInfo("No address book is oppened.");
+                consoleView.DisplayNoAddressBookMessage();
             }
         }
     }

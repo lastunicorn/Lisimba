@@ -42,7 +42,6 @@ namespace Lisimba.Cmd.Commands
             }
             else
             {
-                //string[] items = commandText.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 CommandParser commandParser = new CommandParser(commandText);
                 string[] items = commandParser.Items;
 

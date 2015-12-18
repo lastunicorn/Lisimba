@@ -24,12 +24,12 @@ namespace Lisimba.Cmd.Commands
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
             if (commandInfo.HasParameters)
-                DisplayContact(commandInfo[1]);
+                DisplayContactDetails(commandInfo[1]);
             else
-                DisplayAddressBook();
+                DisplayAllContacts();
         }
 
-        private void DisplayContact(string contactName)
+        private void DisplayContactDetails(string contactName)
         {
             var contacts = domainData.AddressBook.Contacts
                 .Where(x =>
@@ -40,15 +40,15 @@ namespace Lisimba.Cmd.Commands
 
             foreach (Contact contact in contacts)
             {
-                consoleView.WriteInfo(contact.Name.ToString());
+                consoleView.DisplayContactDetails(contact);
             }
         }
 
-        private void DisplayAddressBook()
+        private void DisplayAllContacts()
         {
             foreach (Contact contact in domainData.AddressBook.Contacts)
             {
-                consoleView.WriteInfo(contact.ToString());
+                consoleView.DisplayContactShort(contact);
             }
         }
     }

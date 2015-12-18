@@ -29,7 +29,7 @@ namespace Lisimba.Cmd.Commands
             }
             catch (Exception ex)
             {
-                consoleView.WriteInfo(ex.Message);
+                consoleView.WriteError(ex.Message);
             }
         }
     }

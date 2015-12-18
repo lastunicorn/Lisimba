@@ -43,16 +43,16 @@ namespace Lisimba.Cmd.Commands
                     if (domainData.AddressBook != null)
                     {
                         domainData.AddressBook.Name = value;
-                        consoleView.WriteInfo("Address book name changed.");
+                        consoleView.DisplayAddressBookNameChangeSuccess();
                     }
                     else
                     {
-                        consoleView.WriteInfo("No address book is opened.");
+                        consoleView.DisplayNoAddressBookMessage();
                     }
                     break;
 
                 default:
-                    consoleView.WriteInfo("Invalid update action.");
+                    consoleView.DisplayInvalidUpdateActionError();
                     break;
             }
         }
