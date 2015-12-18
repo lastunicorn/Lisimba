@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="3.5" DefaultTargets="CopyFiles" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="3.5" DefaultTargets="Default" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     
     <PropertyGroup>
         <SolutionDir>.</SolutionDir>
@@ -11,11 +11,14 @@
         <GateFiles Include="DustInTheWind.Lisimba.Egg.dll" />
     </ItemGroup>
 
-    <Target Name="CopyFiles">
-        <Copy
-            SourceFiles="@(GateFiles)"
-            DestinationFolder="$(SolutionDir)\Publish\ZipXmlGate"
-        />
+    <Target Name="Default" DependsOnTargets="Publish;CleanUp"></Target>
+
+    <Target Name="Publish">
+        <Copy SourceFiles="@(GateFiles)" DestinationFolder="$(SolutionDir)\Publish\ZipXmlGate" />
+    </Target>
+
+    <Target Name="CleanUp">
+        <Delete Files="postbuild.xml" />
     </Target>
     
 </Project>

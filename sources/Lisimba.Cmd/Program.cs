@@ -107,6 +107,9 @@ namespace Lisimba.Cmd
                 case "goodbye":
                     return new ExitCommand(domainData);
 
+                case "":
+                    return new EmptyCommand();
+
                 default:
                     return new UnknownCommand(consoleView);
             }
