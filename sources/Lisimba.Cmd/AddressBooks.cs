@@ -33,7 +33,7 @@ namespace Lisimba.Cmd
 
         public void OpenAddressBook(string fileName)
         {
-            if (DefaultGate == null)
+            if (gates.DefaultGate == null)
                 throw new Exception("No default gate is set.");
 
             CloseAddressBook();
