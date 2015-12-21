@@ -16,6 +16,7 @@ namespace Lisimba.Cmd
             container.LoadConfiguration(unitySection);
 
             container.RegisterInstance(container);
+            container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
 
             return container;
         }

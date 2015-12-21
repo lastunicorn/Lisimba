@@ -5,19 +5,16 @@ namespace Lisimba.Cmd.Commands
 {
     class GateCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly Gates gates;
         private readonly ConsoleView consoleView;
-        private readonly GateProvider gateProvider;
 
-        public GateCommand(DomainData domainData, ConsoleView consoleView, GateProvider gateProvider)
+        public GateCommand(Gates gates, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
-            if (gateProvider == null) throw new ArgumentNullException("gateProvider");
 
-            this.domainData = domainData;
+            this.gates = gates;
             this.consoleView = consoleView;
-            this.gateProvider = gateProvider;
         }
 
         public void Execute(CommandInfo commandInfo)
@@ -26,12 +23,12 @@ namespace Lisimba.Cmd.Commands
 
             if (commandInfo.ParameterCount == 0)
             {
-                consoleView.DisplayGate(domainData.DefaultGate);
+                consoleView.DisplayGate(gates.DefaultGate);
             }
             else
             {
-                IGate gate = gateProvider.GetGate(commandInfo[1]);
-                domainData.DefaultGate = gate;
+                IGate gate = gates.GetGate(commandInfo[1]);
+                gates.DefaultGate = gate;
 
                 consoleView.DisplayGateChangeSuccess();
             }

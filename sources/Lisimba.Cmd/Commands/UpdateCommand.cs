@@ -4,15 +4,15 @@ namespace Lisimba.Cmd.Commands
 {
     internal class UpdateCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public UpdateCommand(DomainData domainData, ConsoleView consoleView)
+        public UpdateCommand(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
@@ -60,9 +60,9 @@ namespace Lisimba.Cmd.Commands
 
         private void UpdateAddressBookName(string newAddressBookName)
         {
-            if (domainData.AddressBook != null)
+            if (addressBooks.AddressBook != null)
             {
-                domainData.AddressBook.Name = newAddressBookName;
+                addressBooks.AddressBook.Name = newAddressBookName;
                 consoleView.DisplayAddressBookNameChangeSuccess();
             }
             else

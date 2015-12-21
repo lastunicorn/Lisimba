@@ -4,15 +4,15 @@ namespace Lisimba.Cmd.Commands
 {
     class CloseCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public CloseCommand(DomainData domainData, ConsoleView consoleView)
+        public CloseCommand(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
@@ -20,9 +20,9 @@ namespace Lisimba.Cmd.Commands
         {
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
-            if (domainData.AddressBook != null)
+            if (addressBooks.AddressBook != null)
             {
-                domainData.CloseAddressBook();
+                addressBooks.CloseAddressBook();
                 consoleView.DisplayAddressBookCloseSuccess();
             }
             else

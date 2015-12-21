@@ -110,6 +110,8 @@ namespace Lisimba.Cmd
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
+            Console.WriteLine();
+
             ConsoleHelper.WriteEmphasize("Address book: ");
             Console.WriteLine(addressBook.Name);
 

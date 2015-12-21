@@ -1,23 +1,17 @@
 using System;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace Lisimba.Cmd
 {
-    class DomainData
+    class AddressBooks
     {
         private const string DefaultAddressBookName = "New Address Book";
         private readonly ApplicationConfiguration config;
+        private readonly Gates gates;
         public AddressBook AddressBook { get; private set; }
         public string AddressBookLocation { get; private set; }
-        public IGate DefaultGate { get; set; }
 
         public bool ExitRequested { get; set; }
-
-        public string DefaultGateName
-        {
-            get { return DefaultGate == null ? string.Empty : DefaultGate.Id; }
-        }
 
         public string AddressBookName
         {
@@ -26,11 +20,14 @@ namespace Lisimba.Cmd
 
         public bool IsAddressBookSaved { get; private set; }
 
-        public DomainData(ApplicationConfiguration config)
+        public AddressBooks(ApplicationConfiguration config, Gates gates)
         {
             if (config == null) throw new ArgumentNullException("config");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.config = config;
+            this.gates = gates;
+
             IsAddressBookSaved = true;
         }
 
@@ -43,7 +40,7 @@ namespace Lisimba.Cmd
             if (addressBookLocation == null)
                 return;
 
-            AddressBook = DefaultGate.Load(addressBookLocation);
+            AddressBook = gates.DefaultGate.Load(addressBookLocation);
             AddressBook.Changed += HandleAddressBookChanged;
 
             AddressBookLocation = addressBookLocation;
@@ -78,13 +75,13 @@ namespace Lisimba.Cmd
             if (AddressBook == null)
                 throw new Exception("No address book is opened.");
 
-            if (DefaultGate == null)
+            if (gates.DefaultGate == null)
                 throw new Exception("No default gate is set.");
 
             if (AddressBookLocation == null)
                 throw new Exception("A location has to be specified.");
 
-            DefaultGate.Save(AddressBook, AddressBookLocation);
+            gates.DefaultGate.Save(AddressBook, AddressBookLocation);
             IsAddressBookSaved = true;
         }
 
@@ -95,10 +92,10 @@ namespace Lisimba.Cmd
             if (AddressBook == null)
                 throw new Exception("No address book is opened.");
 
-            if (DefaultGate == null)
+            if (gates.DefaultGate == null)
                 throw new Exception("No default gate is set.");
 
-            DefaultGate.Save(AddressBook, newLocation);
+            gates.DefaultGate.Save(AddressBook, newLocation);
             AddressBookLocation = newLocation;
             IsAddressBookSaved = true;
         }

@@ -7,15 +7,15 @@ namespace Lisimba.Cmd.Commands
 {
     class NextBirthdaysCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public NextBirthdaysCommand(DomainData domainData, ConsoleView consoleView)
+        public NextBirthdaysCommand(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
@@ -28,7 +28,7 @@ namespace Lisimba.Cmd.Commands
 
         private void DisplayNextBirthdays()
         {
-            var contacts = domainData.AddressBook.Contacts
+            var contacts = addressBooks.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())

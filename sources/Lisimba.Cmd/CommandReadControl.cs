@@ -8,22 +8,22 @@ namespace Lisimba.Cmd
     /// </summary>
     class CommandReadControl
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public CommandReadControl(DomainData domainData, ConsoleView consoleView)
+        public CommandReadControl(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
         public CommandInfo Read()
         {
-            string addressBookName = domainData.AddressBookName;
-            bool isSaved = domainData.IsAddressBookSaved;
+            string addressBookName = addressBooks.AddressBookName;
+            bool isSaved = addressBooks.IsAddressBookSaved;
 
             Console.WriteLine();
             consoleView.DisplayPrompter(addressBookName, isSaved);

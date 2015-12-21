@@ -4,15 +4,15 @@ namespace Lisimba.Cmd.Commands
 {
     class InfoCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public InfoCommand(DomainData domainData, ConsoleView consoleView)
+        public InfoCommand(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
@@ -20,10 +20,10 @@ namespace Lisimba.Cmd.Commands
         {
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
-            if (domainData.AddressBook == null)
+            if (addressBooks.AddressBook == null)
                 consoleView.DisplayNoAddressBookMessage();
             else
-                consoleView.DisplayAddressBookInfo(domainData.AddressBook, domainData.AddressBookLocation);
+                consoleView.DisplayAddressBookInfo(addressBooks.AddressBook, addressBooks.AddressBookLocation);
         }
     }
 }

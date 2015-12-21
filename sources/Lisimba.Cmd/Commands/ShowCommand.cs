@@ -7,15 +7,15 @@ namespace Lisimba.Cmd.Commands
 {
     class ShowCommand : ICommand
     {
-        private readonly DomainData domainData;
+        private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public ShowCommand(DomainData domainData, ConsoleView consoleView)
+        public ShowCommand(AddressBooks addressBooks, ConsoleView consoleView)
         {
-            if (domainData == null) throw new ArgumentNullException("domainData");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.domainData = domainData;
+            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
@@ -31,7 +31,7 @@ namespace Lisimba.Cmd.Commands
 
         private void DisplayContactDetails(string contactName)
         {
-            var contacts = domainData.AddressBook.Contacts
+            var contacts = addressBooks.AddressBook.Contacts
                 .Where(x =>
                     (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||
@@ -46,7 +46,7 @@ namespace Lisimba.Cmd.Commands
 
         private void DisplayAllContacts()
         {
-            foreach (Contact contact in domainData.AddressBook.Contacts)
+            foreach (Contact contact in addressBooks.AddressBook.Contacts)
             {
                 consoleView.DisplayContactShort(contact);
             }
