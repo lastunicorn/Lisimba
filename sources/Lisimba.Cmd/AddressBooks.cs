@@ -11,8 +11,6 @@ namespace Lisimba.Cmd
         public AddressBook AddressBook { get; private set; }
         public string AddressBookLocation { get; private set; }
 
-        public bool ExitRequested { get; set; }
-
         public string AddressBookName
         {
             get { return AddressBook == null ? null : AddressBook.Name; }

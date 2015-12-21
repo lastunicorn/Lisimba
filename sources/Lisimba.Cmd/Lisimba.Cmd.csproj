@@ -75,6 +75,7 @@
     <Compile Include="Commands\NextBirthdaysCommand.cs" />
     <Compile Include="GateProvider.cs" />
     <Compile Include="Gates.cs" />
+    <Compile Include="LisimbaApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Commands\ShowCommand.cs" />

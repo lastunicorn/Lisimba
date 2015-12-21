@@ -4,20 +4,20 @@ namespace Lisimba.Cmd.Commands
 {
     class ExitCommand : ICommand
     {
-        private readonly AddressBooks addressBooks;
+        private readonly LisimbaApplication lisimbaApplication;
 
-        public ExitCommand(AddressBooks addressBooks)
+        public ExitCommand(LisimbaApplication lisimbaApplication)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
-            this.addressBooks = addressBooks;
+            this.lisimbaApplication = lisimbaApplication;
         }
 
         public void Execute(CommandInfo commandInfo)
         {
             if (commandInfo == null) throw new ArgumentNullException("commandInfo");
 
-            addressBooks.ExitRequested = true;
+            lisimbaApplication.ExitRequested = true;
         }
     }
 }
