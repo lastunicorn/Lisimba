@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Lisimba.Cmd.Presentation
 {
-    class CommandControlView
+    class PrompterView
     {
         public void DisplayPrompter(string addressBookName, bool isSaved)
         {

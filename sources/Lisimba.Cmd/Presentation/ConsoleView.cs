@@ -134,5 +134,10 @@ namespace Lisimba.Cmd.Presentation
             Console.WriteLine("Address book file name [empty string to cancel]: ");
             return Console.ReadLine();
         }
+
+        public string ReadCommand()
+        {
+            return Console.ReadLine();
+        }
     }
 }

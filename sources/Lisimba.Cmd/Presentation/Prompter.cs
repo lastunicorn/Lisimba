@@ -7,12 +7,12 @@ namespace Lisimba.Cmd.Presentation
     /// <summary>
     /// Reads a command from the console and parses it.
     /// </summary>
-    class CommandControl
+    class Prompter
     {
         private readonly AddressBooks addressBooks;
-        private readonly CommandControlView view;
+        private readonly PrompterView view;
 
-        public CommandControl(AddressBooks addressBooks, CommandControlView view)
+        public Prompter(AddressBooks addressBooks, PrompterView view)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (view == null) throw new ArgumentNullException("view");

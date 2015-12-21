@@ -8,28 +8,24 @@ namespace Lisimba.Cmd
 {
     class LisimbaApplication
     {
-        private readonly AddressBooks addressBooks;
         private readonly Gates gates;
         private readonly CommandProvider commandProvider;
         private readonly ConsoleView consoleView;
-        private readonly CommandControl commandControl;
+        private readonly Prompter prompter;
 
         public bool ExitRequested { get; set; }
 
-        public LisimbaApplication(AddressBooks addressBooks, Gates gates, CommandProvider commandProvider,
-            ConsoleView consoleView, CommandControl commandControl)
+        public LisimbaApplication(Gates gates, CommandProvider commandProvider, ConsoleView consoleView, Prompter prompter)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
             if (commandProvider == null) throw new ArgumentNullException("commandProvider");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
-            if (commandControl == null) throw new ArgumentNullException("commandControl");
+            if (prompter == null) throw new ArgumentNullException("prompter");
 
-            this.addressBooks = addressBooks;
             this.gates = gates;
             this.commandProvider = commandProvider;
             this.consoleView = consoleView;
-            this.commandControl = commandControl;
+            this.prompter = prompter;
         }
 
         public void Run()
@@ -46,8 +42,8 @@ namespace Lisimba.Cmd
         {
             while (!ExitRequested)
             {
-                CommandInfo command = commandControl.Read();
-                ProcessCommand(command);
+                CommandInfo commandInfo = prompter.Read();
+                ProcessCommand(commandInfo);
             }
         }
 
