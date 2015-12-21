@@ -54,27 +54,28 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="ApplicationConfiguration.cs" />
-    <Compile Include="CommandParser.cs" />
-    <Compile Include="CommandProvider.cs" />
-    <Compile Include="CommandReadControl.cs" />
+    <Compile Include="CommandSystem\CommandParser.cs" />
+    <Compile Include="Commands\CommandProvider.cs" />
+    <Compile Include="Presentation\CommandControl.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
-    <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="CommandSystem\CommandInfo.cs" />
     <Compile Include="Commands\EmptyCommand.cs" />
     <Compile Include="Commands\GateCommand.cs" />
-    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="CommandSystem\ICommand.cs" />
     <Compile Include="Commands\InfoCommand.cs" />
     <Compile Include="Commands\NewCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
     <Compile Include="Commands\UpdateCommand.cs" />
-    <Compile Include="ConsoleView.cs" />
-    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="Presentation\CommandControlView.cs" />
+    <Compile Include="Presentation\ConsoleView.cs" />
+    <Compile Include="Presentation\ConsoleHelper.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
-    <Compile Include="AddressBooks.cs" />
+    <Compile Include="Data\AddressBooks.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Commands\NextBirthdaysCommand.cs" />
     <Compile Include="GateProvider.cs" />
-    <Compile Include="Gates.cs" />
+    <Compile Include="Data\Gates.cs" />
     <Compile Include="LisimbaApplication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

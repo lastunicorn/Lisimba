@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.CommandSystem
 {
     class CommandParser
     {

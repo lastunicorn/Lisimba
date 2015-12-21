@@ -1,8 +1,8 @@
 using System;
-using Lisimba.Cmd.Commands;
+using Lisimba.Cmd.CommandSystem;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Commands
 {
     class CommandProvider
     {

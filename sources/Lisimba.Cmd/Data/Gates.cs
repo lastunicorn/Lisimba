@@ -1,7 +1,7 @@
 using System;
 using DustInTheWind.Lisimba.Egg;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Data
 {
     class Gates
     {

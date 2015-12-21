@@ -1,6 +1,6 @@
 using System;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Presentation
 {
     /// <summary>
     /// It is a wrapper over the System.Console class.

@@ -1,5 +1,8 @@
 ﻿using System;
 using Lisimba.Cmd.Commands;
+using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Data;
+using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd
 {
@@ -9,20 +12,24 @@ namespace Lisimba.Cmd
         private readonly Gates gates;
         private readonly CommandProvider commandProvider;
         private readonly ConsoleView consoleView;
+        private readonly CommandControl commandControl;
 
         public bool ExitRequested { get; set; }
 
-        public LisimbaApplication(AddressBooks addressBooks, Gates gates, CommandProvider commandProvider, ConsoleView consoleView)
+        public LisimbaApplication(AddressBooks addressBooks, Gates gates, CommandProvider commandProvider,
+            ConsoleView consoleView, CommandControl commandControl)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
             if (commandProvider == null) throw new ArgumentNullException("commandProvider");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (commandControl == null) throw new ArgumentNullException("commandControl");
 
             this.addressBooks = addressBooks;
             this.gates = gates;
             this.commandProvider = commandProvider;
             this.consoleView = consoleView;
+            this.commandControl = commandControl;
         }
 
         public void Run()
@@ -37,11 +44,9 @@ namespace Lisimba.Cmd
 
         private void RunMainLoop()
         {
-            CommandReadControl commandReadControl = new CommandReadControl(addressBooks, consoleView);
-
             while (!ExitRequested)
             {
-                CommandInfo command = commandReadControl.Read();
+                CommandInfo command = commandControl.Read();
                 ProcessCommand(command);
             }
         }

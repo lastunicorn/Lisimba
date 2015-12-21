@@ -1,4 +1,4 @@
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.CommandSystem
 {
     internal interface ICommand
     {

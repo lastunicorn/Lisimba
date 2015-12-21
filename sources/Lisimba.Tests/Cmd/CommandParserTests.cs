@@ -1,4 +1,5 @@
 ﻿using Lisimba.Cmd;
+using Lisimba.Cmd.CommandSystem;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Cmd

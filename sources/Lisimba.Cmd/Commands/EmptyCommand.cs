@@ -1,4 +1,6 @@
-﻿namespace Lisimba.Cmd.Commands
+﻿using Lisimba.Cmd.CommandSystem;
+
+namespace Lisimba.Cmd.Commands
 {
     internal class EmptyCommand : ICommand
     {

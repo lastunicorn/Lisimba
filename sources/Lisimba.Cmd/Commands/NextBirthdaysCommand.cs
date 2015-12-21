@@ -2,6 +2,9 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
+using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Data;
+using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Commands
 {

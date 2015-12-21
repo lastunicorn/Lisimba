@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.CommandSystem
 {
     class CommandInfo : IEnumerable<string>
     {

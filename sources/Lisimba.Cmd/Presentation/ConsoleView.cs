@@ -4,7 +4,7 @@ using System.Text;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Presentation
 {
     class ConsoleView
     {
@@ -27,33 +27,6 @@ namespace Lisimba.Cmd
         public void WriteError(string text)
         {
             ConsoleHelper.WriteLineError(text);
-        }
-
-        public void DisplayPrompter(string addressBookName, bool isSaved)
-        {
-            ConsoleHelper.WriteEmphasize("lisimba");
-
-            if (addressBookName != null)
-            {
-                Console.Write(" ");
-
-                string formattedAddressBookName = BuildAddressBookName(addressBookName, isSaved);
-                Console.Write(formattedAddressBookName);
-            }
-
-            ConsoleHelper.WriteEmphasize(" > ");
-        }
-
-        private static string BuildAddressBookName(string addressBookName, bool isSaved)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("[").Append(addressBookName).Append("]");
-
-            if (!isSaved)
-                sb.Append("*");
-
-            return sb.ToString();
         }
 
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
@@ -125,7 +98,7 @@ namespace Lisimba.Cmd
         public void DisplayGate(IGate gate)
         {
             Console.WriteLine();
-            
+
             ConsoleHelper.WriteEmphasize("DefaultGate: ");
             Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
 
@@ -136,6 +109,30 @@ namespace Lisimba.Cmd
         public void DisplayGateChangeSuccess()
         {
             ConsoleHelper.WriteLineSuccess("The gate was successfully changed.");
+        }
+
+        public bool? AskToSaveAddressBook()
+        {
+            Console.WriteLine("Do you want to save current address book? [y-yes; n-no; c-cancel] ");
+            ConsoleKeyInfo key = Console.ReadKey(false);
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Y:
+                    return true;
+
+                case ConsoleKey.N:
+                    return false;
+
+                default:
+                    return null;
+            }
+        }
+
+        public string AskForLocation()
+        {
+            Console.WriteLine("Address book file name [empty string to cancel]: ");
+            return Console.ReadLine();
         }
     }
 }
