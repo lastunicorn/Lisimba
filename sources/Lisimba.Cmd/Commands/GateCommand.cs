@@ -1,5 +1,4 @@
 ﻿using System;
-using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.CommandSystem;
 using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
@@ -30,8 +29,7 @@ namespace Lisimba.Cmd.Commands
             }
             else
             {
-                IGate gate = gates.GetGate(commandInfo[1]);
-                gates.DefaultGate = gate;
+                gates.SetDefaultGate(commandInfo[1]);
 
                 consoleView.DisplayGateChangeSuccess();
             }

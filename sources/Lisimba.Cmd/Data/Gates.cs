@@ -23,31 +23,31 @@ namespace Lisimba.Cmd.Data
             this.config = config;
             this.gateProvider = gateProvider;
 
-            DefaultGate = CreateDefaultGate();
+            InitializeDefaultGate();
         }
 
-        public IGate GetGate(string gateId)
+        private void InitializeDefaultGate()
         {
             try
             {
-                return gateProvider.GetGate(gateId);
+                DefaultGate = gateProvider.GetGate(config.DefaultGateName);
+            }
+            catch
+            {
+                DefaultGate = new EmptyGate();
+            }
+        }
+
+        public void SetDefaultGate(string gateId)
+        {
+            try
+            {
+                DefaultGate = gateProvider.GetGate(gateId);
             }
             catch (Exception ex)
             {
                 string message = string.Format("There is no gate with id = {0}", gateId);
                 throw new Exception(message, ex);
-            }
-        }
-
-        private IGate CreateDefaultGate()
-        {
-            try
-            {
-                return gateProvider.GetGate(config.DefaultGateName);
-            }
-            catch
-            {
-                return new EmptyGate();
             }
         }
     }
