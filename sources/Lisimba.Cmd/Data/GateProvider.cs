@@ -2,7 +2,7 @@
 using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd
+namespace Lisimba.Cmd.Data
 {
     class GateProvider
     {
