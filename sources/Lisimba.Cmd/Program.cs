@@ -25,13 +25,7 @@ namespace Lisimba.Cmd
                 consoleView.WriteWelcomeMessage();
                 consoleView.WriteGateInfo(gates.DefaultGateName);
 
-                CommandReadControl commandReadControl = new CommandReadControl(addressBooks, consoleView);
-
-                while (!addressBooks.ExitRequested)
-                {
-                    CommandInfo command = commandReadControl.Read();
-                    ProcessCommand(command);
-                }
+                RunCommandLoop();
 
                 consoleView.WriteGoodByeMessage();
 
@@ -43,11 +37,22 @@ namespace Lisimba.Cmd
             }
         }
 
+        private static void RunCommandLoop()
+        {
+            CommandReadControl commandReadControl = new CommandReadControl(domainData, consoleView);
+
+            while (!domainData.ExitRequested)
+            {
+                CommandInfo command = commandReadControl.Read();
+                ProcessCommand(command);
+            }
+        }
+
         private static void ProcessCommand(CommandInfo commandInfo)
         {
             try
             {
-                ICommand command = CreateCommand(commandInfo.Name);
+                ICommand command = commandProvider.CreateCommand(commandInfo.Name);
                 command.Execute(commandInfo);
             }
             catch (Exception ex)
@@ -61,36 +66,36 @@ namespace Lisimba.Cmd
             switch (commandName)
             {
                 case "new":
-                    return new NewCommand(addressBooks, consoleView);
+                    return new NewCommand(domainData, consoleView);
 
                 case "update":
-                    return new UpdateCommand(addressBooks, consoleView);
+                    return new UpdateCommand(domainData, consoleView);
 
                 case "open":
-                    return new OpenCommand(addressBooks, consoleView);
+                    return new OpenCommand(domainData, consoleView);
 
                 case "save":
-                    return new SaveCommand(addressBooks);
+                    return new SaveCommand(domainData);
 
                 case "show":
-                    return new ShowCommand(addressBooks, consoleView);
+                    return new ShowCommand(domainData, consoleView);
 
                 case "next-birthdays":
-                    return new NextBirthdaysCommand(addressBooks, consoleView);
+                    return new NextBirthdaysCommand(domainData, consoleView);
 
                 case "close":
-                    return new CloseCommand(addressBooks, consoleView);
+                    return new CloseCommand(domainData, consoleView);
 
                 case "info":
-                    return new InfoCommand(addressBooks, consoleView);
+                    return new InfoCommand(domainData, consoleView);
 
                 case "gate":
-                    return new GateCommand(gates, consoleView);
+                    return new GateCommand(domainData, consoleView, container.Resolve<GateProvider>());
 
                 case "exit":
                 case "bye":
                 case "goodbye":
-                    return new ExitCommand(addressBooks);
+                    return new ExitCommand(domainData);
 
                 default:
                     return new UnknownCommand(consoleView);

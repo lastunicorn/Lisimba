@@ -125,8 +125,11 @@ namespace Lisimba.Cmd
         public void DisplayGate(IGate gate)
         {
             Console.WriteLine();
+            
             ConsoleHelper.WriteEmphasize("DefaultGate: ");
             Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
+
+            ConsoleHelper.WriteEmphasize("Description: ");
             Console.WriteLine(gate.Description);
         }
 

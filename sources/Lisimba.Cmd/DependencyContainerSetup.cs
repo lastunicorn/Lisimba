@@ -16,6 +16,8 @@ namespace Lisimba.Cmd
             container.LoadConfiguration(unitySection);
 
             container.RegisterInstance(container);
+            container.RegisterType<DomainData>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
 
             return container;

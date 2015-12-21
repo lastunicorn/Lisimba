@@ -55,9 +55,11 @@
     </Compile>
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="CommandProvider.cs" />
     <Compile Include="CommandReadControl.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CommandInfo.cs" />
+    <Compile Include="Commands\EmptyCommand.cs" />
     <Compile Include="Commands\GateCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\InfoCommand.cs" />
