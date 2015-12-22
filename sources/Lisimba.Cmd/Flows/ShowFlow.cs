@@ -2,18 +2,18 @@
 using System.Globalization;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.Flows
 {
-    class ShowCommand : ICommand
+    class ShowFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public ShowCommand(AddressBooks addressBooks, ConsoleView consoleView)
+        public ShowFlow(AddressBooks addressBooks, ConsoleView consoleView)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
@@ -22,12 +22,12 @@ namespace Lisimba.Cmd.Commands
             this.consoleView = consoleView;
         }
 
-        public void Execute(CommandInfo commandInfo)
+        public void Execute(Command command)
         {
-            if (commandInfo == null) throw new ArgumentNullException("commandInfo");
+            if (command == null) throw new ArgumentNullException("command");
 
-            if (commandInfo.HasParameters)
-                DisplayContactDetails(commandInfo[1]);
+            if (command.HasParameters)
+                DisplayContactDetails(command[1]);
             else
                 DisplayAllContacts();
         }

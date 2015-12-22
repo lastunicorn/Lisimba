@@ -11,8 +11,8 @@ namespace Lisimba.Cmd
             {
                 UnityContainer container = DependencyContainerSetup.CreateContainer();
 
-                LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
-                lisimbaApplication.Run();
+                ApplicationLoop applicationLoop = container.Resolve<ApplicationLoop>();
+                applicationLoop.Run();
             }
             catch (Exception ex)
             {

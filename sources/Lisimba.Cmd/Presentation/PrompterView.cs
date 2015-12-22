@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using Lisimba.Cmd.Common;
 
 namespace Lisimba.Cmd.Presentation
 {

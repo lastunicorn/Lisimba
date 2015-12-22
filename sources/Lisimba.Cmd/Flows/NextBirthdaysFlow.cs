@@ -2,18 +2,18 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.Flows
 {
-    class NextBirthdaysCommand : ICommand
+    class NextBirthdaysFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public NextBirthdaysCommand(AddressBooks addressBooks, ConsoleView consoleView)
+        public NextBirthdaysFlow(AddressBooks addressBooks, ConsoleView consoleView)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
@@ -22,9 +22,9 @@ namespace Lisimba.Cmd.Commands
             this.consoleView = consoleView;
         }
 
-        public void Execute(CommandInfo commandInfo)
+        public void Execute(Command command)
         {
-            if (commandInfo == null) throw new ArgumentNullException("commandInfo");
+            if (command == null) throw new ArgumentNullException("command");
 
             DisplayNextBirthdays();
         }

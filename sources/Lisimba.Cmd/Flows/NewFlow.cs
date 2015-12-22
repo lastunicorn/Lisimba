@@ -1,16 +1,16 @@
 using System;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.Flows
 {
-    class NewCommand : ICommand
+    class NewFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
         private readonly ConsoleView consoleView;
 
-        public NewCommand(AddressBooks addressBooks, ConsoleView consoleView)
+        public NewFlow(AddressBooks addressBooks, ConsoleView consoleView)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
@@ -19,11 +19,11 @@ namespace Lisimba.Cmd.Commands
             this.consoleView = consoleView;
         }
 
-        public void Execute(CommandInfo commandInfo)
+        public void Execute(Command command)
         {
-            if (commandInfo == null) throw new ArgumentNullException("commandInfo");
+            if (command == null) throw new ArgumentNullException("command");
 
-            addressBooks.NewAddressBook(commandInfo[1]);
+            addressBooks.NewAddressBook(command[1]);
             consoleView.DisplayAddressBookCreateSuccess();
         }
     }

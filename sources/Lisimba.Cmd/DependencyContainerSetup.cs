@@ -13,16 +13,16 @@ namespace Lisimba.Cmd
         {
             UnityContainer container = new UnityContainer();
 
-            UnityConfigurationSection unitySection = GetUnityConfigurationSection();
-            container.LoadConfiguration(unitySection);
-
-            container.RegisterInstance(container);
-            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
-            container.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
-            container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
+            LoadFromConfigurationFile(container);
+            RegisterAdditionalTypes(container);
 
             return container;
+        }
+
+        private static void LoadFromConfigurationFile(IUnityContainer container)
+        {
+            UnityConfigurationSection unitySection = GetUnityConfigurationSection();
+            container.LoadConfiguration(unitySection);
         }
 
         private static UnityConfigurationSection GetUnityConfigurationSection()
@@ -39,6 +39,15 @@ namespace Lisimba.Cmd
             Assembly entryAssembly = Assembly.GetEntryAssembly();
             string applicationDirectory = Path.GetDirectoryName(entryAssembly.Location);
             return Path.Combine(applicationDirectory, "Unity.config");
+        }
+
+        private static void RegisterAdditionalTypes(UnityContainer container)
+        {
+            container.RegisterInstance(container);
+            container.RegisterType<ApplicationLoop>(new ContainerControlledLifetimeManager());
+            container.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
+            container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
         }
     }
 }

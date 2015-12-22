@@ -1,29 +1,29 @@
 ﻿using System;
-using Lisimba.Cmd.Commands;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Data;
+using Lisimba.Cmd.Flows;
 using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd
 {
-    class LisimbaApplication
+    class ApplicationLoop
     {
         private readonly Gates gates;
-        private readonly CommandProvider commandProvider;
+        private readonly FlowProvider flowProvider;
         private readonly ConsoleView consoleView;
         private readonly Prompter prompter;
 
         public bool ExitRequested { get; set; }
 
-        public LisimbaApplication(Gates gates, CommandProvider commandProvider, ConsoleView consoleView, Prompter prompter)
+        public ApplicationLoop(Gates gates, FlowProvider flowProvider, ConsoleView consoleView, Prompter prompter)
         {
             if (gates == null) throw new ArgumentNullException("gates");
-            if (commandProvider == null) throw new ArgumentNullException("commandProvider");
+            if (flowProvider == null) throw new ArgumentNullException("flowProvider");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
             if (prompter == null) throw new ArgumentNullException("prompter");
 
             this.gates = gates;
-            this.commandProvider = commandProvider;
+            this.flowProvider = flowProvider;
             this.consoleView = consoleView;
             this.prompter = prompter;
         }
@@ -42,17 +42,17 @@ namespace Lisimba.Cmd
         {
             while (!ExitRequested)
             {
-                CommandInfo commandInfo = prompter.Read();
-                ProcessCommand(commandInfo);
+                Command command = prompter.Read();
+                ProcessCommand(command);
             }
         }
 
-        private void ProcessCommand(CommandInfo commandInfo)
+        private void ProcessCommand(Command command)
         {
             try
             {
-                ICommand command = commandProvider.CreateCommand(commandInfo.Name);
-                command.Execute(commandInfo);
+                IFlow flow = flowProvider.CreateCommand(command.Name);
+                flow.Execute(command);
             }
             catch (Exception ex)
             {

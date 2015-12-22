@@ -1,23 +1,23 @@
 using System;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Commands
+namespace Lisimba.Cmd.Flows
 {
-    class UnknownCommand : ICommand
+    class UnknownFlow : IFlow
     {
         private readonly ConsoleView consoleView;
 
-        public UnknownCommand(ConsoleView consoleView)
+        public UnknownFlow(ConsoleView consoleView)
         {
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
             this.consoleView = consoleView;
         }
 
-        public void Execute(CommandInfo commandInfo)
+        public void Execute(Command command)
         {
-            if (commandInfo == null) throw new ArgumentNullException("commandInfo");
+            if (command == null) throw new ArgumentNullException("command");
 
             consoleView.WriteUnknownCommand();
         }

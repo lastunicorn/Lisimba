@@ -1,5 +1,5 @@
 using System;
-using Lisimba.Cmd.CommandSystem;
+using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Data;
 
 namespace Lisimba.Cmd.Presentation
@@ -21,7 +21,7 @@ namespace Lisimba.Cmd.Presentation
             this.view = view;
         }
 
-        public CommandInfo Read()
+        public Command Read()
         {
             string addressBookName = addressBooks.AddressBookName;
             bool isSaved = addressBooks.IsAddressBookSaved;
@@ -30,7 +30,7 @@ namespace Lisimba.Cmd.Presentation
 
             string commandText = view.ReadCommand();
 
-            return new CommandInfo(commandText);
+            return new Command(commandText);
         }
     }
 }
