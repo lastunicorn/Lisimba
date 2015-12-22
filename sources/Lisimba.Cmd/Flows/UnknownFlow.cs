@@ -19,7 +19,7 @@ namespace Lisimba.Cmd.Flows
         {
             if (command == null) throw new ArgumentNullException("command");
 
-            consoleView.WriteUnknownCommand();
+            consoleView.DisplayUnknownCommandError();
         }
     }
 }

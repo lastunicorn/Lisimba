@@ -10,15 +10,15 @@ namespace Lisimba.Cmd.Presentation
     class Prompter
     {
         private readonly AddressBooks addressBooks;
-        private readonly PrompterView view;
+        private readonly PrompterConsole console;
 
-        public Prompter(AddressBooks addressBooks, PrompterView view)
+        public Prompter(AddressBooks addressBooks, PrompterConsole console)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (view == null) throw new ArgumentNullException("view");
+            if (console == null) throw new ArgumentNullException("console");
 
             this.addressBooks = addressBooks;
-            this.view = view;
+            this.console = console;
         }
 
         public Command Read()
@@ -26,9 +26,9 @@ namespace Lisimba.Cmd.Presentation
             string addressBookName = addressBooks.AddressBookName;
             bool isSaved = addressBooks.IsAddressBookSaved;
 
-            view.DisplayPrompter(addressBookName, isSaved);
+            console.DisplayPrompter(addressBookName, isSaved);
 
-            string commandText = view.ReadCommand();
+            string commandText = console.ReadCommand();
 
             return new Command(commandText);
         }

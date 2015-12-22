@@ -8,6 +8,22 @@ namespace Lisimba.Cmd.Presentation
 {
     class ConsoleView
     {
+        #region Common
+
+        public void DisplayNoAddressBookMessage()
+        {
+            ConsoleHelper.WriteLineError("No address book is oppened.");
+        }
+
+        public void WriteError(string text)
+        {
+            ConsoleHelper.WriteLineError(text);
+        }
+
+        #endregion
+
+        #region Application Main Loop
+
         public void WriteWelcomeMessage()
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
@@ -19,15 +35,23 @@ namespace Lisimba.Cmd.Presentation
             Console.WriteLine("See you soon!");
         }
 
-        public void WriteUnknownCommand()
+        public void WriteGateInfo(string gateName)
+        {
+            Console.WriteLine("DefaultGate: {0}", gateName);
+        }
+
+        #endregion
+
+        #region Unknown Flow
+
+        public void DisplayUnknownCommandError()
         {
             ConsoleHelper.WriteLineError("Unknown command");
         }
 
-        public void WriteError(string text)
-        {
-            ConsoleHelper.WriteLineError(text);
-        }
+        #endregion
+
+        #region Open Flow
 
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
         {
@@ -35,31 +59,37 @@ namespace Lisimba.Cmd.Presentation
             ConsoleHelper.WriteLineSuccess(message);
         }
 
-        public void WriteGateInfo(string gateName)
-        {
-            Console.WriteLine("DefaultGate: {0}", gateName);
-        }
+        #endregion
+
+        #region Close Flow
 
         public void DisplayAddressBookCloseSuccess()
         {
             ConsoleHelper.WriteLineSuccess("Address book was closed.");
         }
 
-        public void DisplayNoAddressBookMessage()
-        {
-            ConsoleHelper.WriteLineError("No address book is oppened.");
-        }
+        #endregion
+
+        #region New Flow
 
         public void DisplayAddressBookCreateSuccess()
         {
             ConsoleHelper.WriteLineSuccess("New address book successfully created.");
         }
 
+        #endregion
+
+        #region NextBirthdays Flow
+
         public void DisplayContactWithBirthday(Contact contact)
         {
             string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
             Console.WriteLine(text);
         }
+
+        #endregion
+
+        #region Show Flow
 
         public void DisplayContactDetails(Contact contact)
         {
@@ -71,15 +101,23 @@ namespace Lisimba.Cmd.Presentation
             Console.WriteLine(contact.ToString());
         }
 
-        public void DisplayAddressBookNameChangeSuccess()
-        {
-            ConsoleHelper.WriteLineSuccess("Address book name successfully changed.");
-        }
+        #endregion
+
+        #region Update Flow
 
         public void DisplayInvalidUpdateActionError()
         {
             ConsoleHelper.WriteLineError("Invalid update action.");
         }
+
+        public void DisplayAddressBookNameChangeSuccess()
+        {
+            ConsoleHelper.WriteLineSuccess("Address book name successfully changed.");
+        }
+
+        #endregion
+
+        #region Info Flow
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
@@ -94,6 +132,10 @@ namespace Lisimba.Cmd.Presentation
             ConsoleHelper.WriteEmphasize("Contacts: ");
             Console.WriteLine(addressBook.Contacts.Count);
         }
+
+        #endregion
+
+        #region Gate Flow
 
         public void DisplayGate(IGate gate)
         {
@@ -111,33 +153,15 @@ namespace Lisimba.Cmd.Presentation
             ConsoleHelper.WriteLineSuccess("The gate was successfully changed.");
         }
 
-        public bool? AskToSaveAddressBook()
+        #endregion
+
+        #region Save Flow
+
+        public void DisplayAddressBookSaveSuccess()
         {
-            Console.WriteLine("Do you want to save current address book? [y-yes; n-no; c-cancel] ");
-            ConsoleKeyInfo key = Console.ReadKey(false);
-
-            switch (key.Key)
-            {
-                case ConsoleKey.Y:
-                    return true;
-
-                case ConsoleKey.N:
-                    return false;
-
-                default:
-                    return null;
-            }
+            ConsoleHelper.WriteSuccess("Address book was successfully saved.");
         }
 
-        public string AskForLocation()
-        {
-            Console.WriteLine("Address book file name [empty string to cancel]: ");
-            return Console.ReadLine();
-        }
-
-        public string ReadCommand()
-        {
-            return Console.ReadLine();
-        }
+        #endregion
     }
 }

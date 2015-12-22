@@ -1,10 +1,9 @@
 using System;
-using System.Text;
 using Lisimba.Cmd.Common;
 
 namespace Lisimba.Cmd.Presentation
 {
-    class PrompterView
+    class PrompterConsole
     {
         public void DisplayPrompter(string addressBookName, bool isSaved)
         {
@@ -24,14 +23,8 @@ namespace Lisimba.Cmd.Presentation
 
         private static string BuildAddressBookName(string addressBookName, bool isSaved)
         {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append("[").Append(addressBookName).Append("]");
-
-            if (!isSaved)
-                sb.Append("*");
-
-            return sb.ToString();
+            string notSavedMarker = isSaved ? string.Empty : "*";
+            return string.Format("[{0}]{1}", addressBookName, notSavedMarker);
         }
 
         public string ReadCommand()

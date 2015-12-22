@@ -10,7 +10,7 @@ namespace Lisimba.Cmd.Data
 
         private readonly ApplicationConfiguration config;
         private readonly Gates gates;
-        private readonly ConsoleView consoleView;
+        private readonly AddressBookGuarder guarder;
 
         public AddressBook AddressBook { get; private set; }
         public string AddressBookLocation { get; private set; }
@@ -22,15 +22,15 @@ namespace Lisimba.Cmd.Data
 
         public bool IsAddressBookSaved { get; private set; }
 
-        public AddressBooks(ApplicationConfiguration config, Gates gates, ConsoleView consoleView)
+        public AddressBooks(ApplicationConfiguration config, Gates gates, AddressBookGuarder guarder)
         {
             if (config == null) throw new ArgumentNullException("config");
             if (gates == null) throw new ArgumentNullException("gates");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (guarder == null) throw new ArgumentNullException("guarder");
 
             this.config = config;
             this.gates = gates;
-            this.consoleView = consoleView;
+            this.guarder = guarder;
 
             IsAddressBookSaved = true;
         }
@@ -55,7 +55,7 @@ namespace Lisimba.Cmd.Data
 
         public void CloseAddressBook()
         {
-            bool allowToContinue = EnsureSave();
+            bool allowToContinue = guarder.EnsureSave();
 
             if (!allowToContinue)
                 return;
@@ -66,36 +66,6 @@ namespace Lisimba.Cmd.Data
             AddressBook = null;
             AddressBookLocation = null;
             IsAddressBookSaved = true;
-        }
-
-        private bool EnsureSave()
-        {
-            if (IsAddressBookSaved)
-                return true;
-
-            bool? needSave = consoleView.AskToSaveAddressBook();
-
-            if (needSave == null)
-                return false;
-
-            if (!needSave.Value)
-                return true;
-
-            if (AddressBookLocation == null)
-            {
-                string newLocation = consoleView.AskForLocation();
-
-                if (newLocation == null)
-                    return false;
-
-                SaveAddressBookAs(newLocation);
-            }
-            else
-            {
-                SaveAddressBook();
-            }
-
-            return true;
         }
 
         public void NewAddressBook(string name)

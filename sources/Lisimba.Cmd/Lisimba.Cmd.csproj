@@ -56,6 +56,8 @@
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="ApplicationLoop.cs" />
     <Compile Include="Common\CommandParser.cs" />
+    <Compile Include="Data\AddressBookGuarder.cs" />
+    <Compile Include="Data\AddressBookGuarderConsole.cs" />
     <Compile Include="Flows\FlowProvider.cs" />
     <Compile Include="Presentation\Prompter.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="Flows\NewFlow.cs" />
     <Compile Include="Flows\SaveFlow.cs" />
     <Compile Include="Flows\UpdateFlow.cs" />
-    <Compile Include="Presentation\PrompterView.cs" />
+    <Compile Include="Presentation\PrompterConsole.cs" />
     <Compile Include="Presentation\ConsoleView.cs" />
     <Compile Include="Common\ConsoleHelper.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
