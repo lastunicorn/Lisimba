@@ -1,6 +1,6 @@
 ﻿using System;
+using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
@@ -8,15 +8,15 @@ namespace Lisimba.Cmd.Flows
     class GateFlow : IFlow
     {
         private readonly Gates gates;
-        private readonly ConsoleView consoleView;
+        private readonly GateFlowConsole console;
 
-        public GateFlow(Gates gates, ConsoleView consoleView)
+        public GateFlow(Gates gates, GateFlowConsole console)
         {
             if (gates == null) throw new ArgumentNullException("gates");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
 
             this.gates = gates;
-            this.consoleView = consoleView;
+            this.console = console;
         }
 
         public void Execute(Command command)
@@ -25,13 +25,13 @@ namespace Lisimba.Cmd.Flows
 
             if (command.ParameterCount == 0)
             {
-                consoleView.DisplayGate(gates.DefaultGate);
+                console.DisplayGate(gates.DefaultGate);
             }
             else
             {
                 gates.SetDefaultGate(command[1]);
 
-                consoleView.DisplayGateChangeSuccess();
+                console.DisplayGateChangeSuccess();
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System;
+using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Flows;
 using Lisimba.Cmd.Presentation;
 
@@ -10,32 +10,32 @@ namespace Lisimba.Cmd
     {
         private readonly Gates gates;
         private readonly FlowProvider flowProvider;
-        private readonly ConsoleView consoleView;
+        private readonly ApplicationLoopConsole console;
         private readonly Prompter prompter;
 
         public bool ExitRequested { get; set; }
 
-        public ApplicationLoop(Gates gates, FlowProvider flowProvider, ConsoleView consoleView, Prompter prompter)
+        public ApplicationLoop(Gates gates, FlowProvider flowProvider, ApplicationLoopConsole console, Prompter prompter)
         {
             if (gates == null) throw new ArgumentNullException("gates");
             if (flowProvider == null) throw new ArgumentNullException("flowProvider");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
             if (prompter == null) throw new ArgumentNullException("prompter");
 
             this.gates = gates;
             this.flowProvider = flowProvider;
-            this.consoleView = consoleView;
+            this.console = console;
             this.prompter = prompter;
         }
 
         public void Run()
         {
-            consoleView.WriteWelcomeMessage();
-            consoleView.WriteGateInfo(gates.DefaultGateName);
+            console.WriteWelcomeMessage();
+            console.WriteGateInfo(gates.DefaultGateName);
 
             RunMainLoop();
 
-            consoleView.WriteGoodByeMessage();
+            console.WriteGoodByeMessage();
         }
 
         private void RunMainLoop()
@@ -51,12 +51,12 @@ namespace Lisimba.Cmd
         {
             try
             {
-                IFlow flow = flowProvider.CreateCommand(command.Name);
+                IFlow flow = flowProvider.CreateFlow(command.Name);
                 flow.Execute(command);
             }
             catch (Exception ex)
             {
-                consoleView.WriteError(ex.Message);
+                console.WriteError(ex.Message);
             }
         }
     }

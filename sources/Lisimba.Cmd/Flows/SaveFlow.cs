@@ -1,6 +1,6 @@
 ﻿using System;
+using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
@@ -8,9 +8,9 @@ namespace Lisimba.Cmd.Flows
     class SaveFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
-        private readonly ConsoleView consoleView;
+        private readonly SaveFlowConsole consoleView;
 
-        public SaveFlow(AddressBooks addressBooks, ConsoleView consoleView)
+        public SaveFlow(AddressBooks addressBooks, SaveFlowConsole consoleView)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lisimba.Cmd.Data
+namespace Lisimba.Cmd.Business
 {
     class AddressBookGuarderConsole
     {

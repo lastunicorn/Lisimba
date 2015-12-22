@@ -6,20 +6,20 @@ namespace Lisimba.Cmd.Flows
 {
     class UnknownFlow : IFlow
     {
-        private readonly ConsoleView consoleView;
+        private readonly UnknownFlowConsole console;
 
-        public UnknownFlow(ConsoleView consoleView)
+        public UnknownFlow(UnknownFlowConsole console)
         {
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
 
-            this.consoleView = consoleView;
+            this.console = console;
         }
 
         public void Execute(Command command)
         {
             if (command == null) throw new ArgumentNullException("command");
 
-            consoleView.DisplayUnknownCommandError();
+            console.DisplayUnknownCommandError();
         }
     }
 }

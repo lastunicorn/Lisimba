@@ -1,6 +1,6 @@
 ﻿using System;
+using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
@@ -8,15 +8,15 @@ namespace Lisimba.Cmd.Flows
     class InfoFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
-        private readonly ConsoleView consoleView;
+        private readonly InfoFlowConsole console;
 
-        public InfoFlow(AddressBooks addressBooks, ConsoleView consoleView)
+        public InfoFlow(AddressBooks addressBooks, InfoFlowConsole console)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
 
             this.addressBooks = addressBooks;
-            this.consoleView = consoleView;
+            this.console = console;
         }
 
         public void Execute(Command command)
@@ -24,9 +24,9 @@ namespace Lisimba.Cmd.Flows
             if (command == null) throw new ArgumentNullException("command");
 
             if (addressBooks.AddressBook == null)
-                consoleView.DisplayNoAddressBookMessage();
+                console.DisplayNoAddressBookMessage();
             else
-                consoleView.DisplayAddressBookInfo(addressBooks.AddressBook, addressBooks.AddressBookLocation);
+                console.DisplayAddressBookInfo(addressBooks.AddressBook, addressBooks.AddressBookLocation);
         }
     }
 }

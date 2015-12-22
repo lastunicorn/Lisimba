@@ -14,7 +14,7 @@ namespace Lisimba.Cmd.Flows
             this.unityContainer = unityContainer;
         }
 
-        public IFlow CreateCommand(string commandName)
+        public IFlow CreateFlow(string commandName)
         {
             switch (commandName)
             {

@@ -1,8 +1,7 @@
 using System;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Business
 {
     /// <summary>
     /// Reads a command from the console and parses it.

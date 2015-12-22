@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.IO;
 using System.Reflection;
-using Lisimba.Cmd.Data;
+using Lisimba.Cmd.Business;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 

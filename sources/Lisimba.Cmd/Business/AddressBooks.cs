@@ -1,8 +1,7 @@
 using System;
 using DustInTheWind.Lisimba.Egg.Book;
-using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Data
+namespace Lisimba.Cmd.Business
 {
     class AddressBooks
     {

@@ -1,7 +1,7 @@
 using System;
 using Lisimba.Cmd.Common;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Business
 {
     class PrompterConsole
     {

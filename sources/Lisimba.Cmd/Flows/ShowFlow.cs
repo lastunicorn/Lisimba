@@ -2,8 +2,8 @@
 using System.Globalization;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
+using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Data;
 using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
@@ -11,9 +11,9 @@ namespace Lisimba.Cmd.Flows
     class ShowFlow : IFlow
     {
         private readonly AddressBooks addressBooks;
-        private readonly ConsoleView consoleView;
+        private readonly ShowFlowConsole consoleView;
 
-        public ShowFlow(AddressBooks addressBooks, ConsoleView consoleView)
+        public ShowFlow(AddressBooks addressBooks, ShowFlowConsole consoleView)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
