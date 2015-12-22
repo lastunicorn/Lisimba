@@ -48,6 +48,8 @@ namespace Lisimba.Cmd.Business
             this.gates = gates;
             this.guarder = guarder;
 
+            guarder.AddressBooks = this;
+
             IsAddressBookSaved = true;
         }
 
@@ -56,7 +58,12 @@ namespace Lisimba.Cmd.Business
             if (gates.DefaultGate == null)
                 throw new ApplicationException(Resources.NoDefaultGateError);
 
-            CloseAddressBook();
+            bool allowToContinue = guarder.EnsureSave();
+
+            if (!allowToContinue)
+                return;
+
+            CloseAddressBookInternal();
 
             string addressBookLocation = fileName ?? config.DefaultAddressBookFileName;
 
@@ -76,6 +83,11 @@ namespace Lisimba.Cmd.Business
             if (!allowToContinue)
                 return;
 
+            CloseAddressBookInternal();
+        }
+
+        private void CloseAddressBookInternal()
+        {
             if (AddressBook != null)
                 AddressBook.Changed -= HandleAddressBookChanged;
 
@@ -86,7 +98,12 @@ namespace Lisimba.Cmd.Business
 
         public void NewAddressBook(string name)
         {
-            CloseAddressBook();
+            bool allowToContinue = guarder.EnsureSave();
+
+            if (!allowToContinue)
+                return;
+
+            CloseAddressBookInternal();
 
             string addressBookName = name ?? DefaultAddressBookName;
             AddressBook = new AddressBook { Name = addressBookName };

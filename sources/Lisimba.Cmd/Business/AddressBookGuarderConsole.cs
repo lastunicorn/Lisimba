@@ -23,8 +23,10 @@ namespace Lisimba.Cmd.Business
     {
         public bool? AskToSaveAddressBook()
         {
-            Console.WriteLine(Resources.AskToSaveAddressBook);
+            Console.Write(Resources.AskToSaveAddressBook);
+            
             ConsoleKeyInfo key = Console.ReadKey(false);
+            Console.WriteLine();
 
             switch (key.Key)
             {

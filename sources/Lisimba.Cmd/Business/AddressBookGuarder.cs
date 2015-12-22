@@ -20,21 +20,20 @@ namespace Lisimba.Cmd.Business
 {
     class AddressBookGuarder
     {
-        private readonly AddressBooks addressBooks;
         private readonly AddressBookGuarderConsole consoleView;
 
-        public AddressBookGuarder(AddressBooks addressBooks, AddressBookGuarderConsole consoleView)
+        public AddressBooks AddressBooks { get; set; }
+
+        public AddressBookGuarder(AddressBookGuarderConsole consoleView)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
         public bool EnsureSave()
         {
-            if (addressBooks.IsAddressBookSaved)
+            if (AddressBooks == null || AddressBooks.IsAddressBookSaved)
                 return true;
 
             bool? needSave = consoleView.AskToSaveAddressBook();
@@ -45,18 +44,18 @@ namespace Lisimba.Cmd.Business
             if (!needSave.Value)
                 return true;
 
-            if (addressBooks.AddressBookLocation == null)
+            if (AddressBooks.AddressBookLocation == null)
             {
                 string newLocation = consoleView.AskForNewLocation();
 
                 if (newLocation == null)
                     return false;
 
-                addressBooks.SaveAddressBookAs(newLocation);
+                AddressBooks.SaveAddressBookAs(newLocation);
             }
             else
             {
-                addressBooks.SaveAddressBook();
+                AddressBooks.SaveAddressBook();
             }
 
             return true;
