@@ -17,6 +17,7 @@
 using System;
 using System.Reflection;
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -25,17 +26,18 @@ namespace Lisimba.Cmd.Presentation
         public void WriteWelcomeMessage()
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
-            ConsoleHelper.WriteLineEmphasize("Lisimba ver. " + version);
+            string title = string.Format(Resources.LisimbaTitle, version);
+            ConsoleHelper.WriteLineEmphasize(title);
         }
 
         public void WriteGoodByeMessage()
         {
-            Console.WriteLine("See you soon!");
+            Console.WriteLine(Resources.GoodByeMessage);
         }
 
         public void WriteGateInfo(string gateName)
         {
-            Console.WriteLine("DefaultGate: {0}", gateName);
+            Console.WriteLine(Resources.DefaultGateMessage, gateName);
         }
 
         public void WriteError(string text)

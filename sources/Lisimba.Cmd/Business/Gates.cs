@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Business
 {
@@ -62,7 +63,7 @@ namespace Lisimba.Cmd.Business
             }
             catch (Exception ex)
             {
-                string message = string.Format("There is no gate with id = {0}", gateId);
+                string message = string.Format(Resources.GateNotFoundError, gateId);
                 throw new Exception(message, ex);
             }
         }

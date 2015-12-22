@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Business
 {
@@ -22,7 +23,7 @@ namespace Lisimba.Cmd.Business
     {
         public bool? AskToSaveAddressBook()
         {
-            Console.WriteLine("Do you want to save current address book? [y-yes; n-no; c-cancel] ");
+            Console.WriteLine(Resources.AskToSaveAddressBook);
             ConsoleKeyInfo key = Console.ReadKey(false);
 
             switch (key.Key)
@@ -38,9 +39,9 @@ namespace Lisimba.Cmd.Business
             }
         }
 
-        public string AskForLocation()
+        public string AskForNewLocation()
         {
-            Console.WriteLine("Address book file name [empty string to cancel]: ");
+            Console.WriteLine(Resources.AskForNewLocation);
             return Console.ReadLine();
         }
     }

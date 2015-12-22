@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -22,13 +23,13 @@ namespace Lisimba.Cmd.Presentation
     {
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
         {
-            string message = string.Format("Successfully loaded {0} contacts from file '{1}'.", contactsCount, addressBookFileName);
+            string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
             ConsoleHelper.WriteLineSuccess(message);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError("No address book is oppened.");
+            ConsoleHelper.WriteLineError(Resources.OpenAddressBookUnknownError);
         }
     }
 }

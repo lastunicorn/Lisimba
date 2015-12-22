@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -22,17 +23,17 @@ namespace Lisimba.Cmd.Presentation
     {
         public void DisplayInvalidUpdateActionError()
         {
-            ConsoleHelper.WriteLineError("Invalid update action.");
+            ConsoleHelper.WriteLineError(Resources.InvalidUpdateActionError);
         }
 
         public void DisplayAddressBookNameChangeSuccess()
         {
-            ConsoleHelper.WriteLineSuccess("Address book name successfully changed.");
+            ConsoleHelper.WriteLineSuccess(Resources.AddressBookChangedSuccess);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError("No address book is oppened.");
+            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

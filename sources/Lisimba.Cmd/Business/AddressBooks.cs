@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg.Book;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Business
 {
@@ -53,7 +54,7 @@ namespace Lisimba.Cmd.Business
         public void OpenAddressBook(string fileName)
         {
             if (gates.DefaultGate == null)
-                throw new Exception("No default gate is set.");
+                throw new ApplicationException(Resources.NoDefaultGateError);
 
             CloseAddressBook();
 
@@ -100,13 +101,13 @@ namespace Lisimba.Cmd.Business
         public void SaveAddressBook()
         {
             if (AddressBook == null)
-                throw new Exception("No address book is opened.");
+                throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
             if (gates.DefaultGate == null)
-                throw new Exception("No default gate is set.");
+                throw new ApplicationException(Resources.NoDefaultGateError);
 
             if (AddressBookLocation == null)
-                throw new Exception("A location has to be specified.");
+                throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
 
             gates.DefaultGate.Save(AddressBook, AddressBookLocation);
             IsAddressBookSaved = true;
@@ -117,10 +118,10 @@ namespace Lisimba.Cmd.Business
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
             if (AddressBook == null)
-                throw new Exception("No address book is opened.");
+                throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
             if (gates.DefaultGate == null)
-                throw new Exception("No default gate is set.");
+                throw new ApplicationException(Resources.NoDefaultGateError);
 
             gates.DefaultGate.Save(AddressBook, newLocation);
             AddressBookLocation = newLocation;

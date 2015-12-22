@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -22,7 +23,7 @@ namespace Lisimba.Cmd.Presentation
     {
         public void DisplayUnknownCommandError()
         {
-            ConsoleHelper.WriteLineError("Unknown command");
+            ConsoleHelper.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }

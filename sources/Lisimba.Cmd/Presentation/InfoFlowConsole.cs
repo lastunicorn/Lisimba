@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Egg.Book;
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -38,7 +39,7 @@ namespace Lisimba.Cmd.Presentation
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError("No address book is oppened.");
+            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

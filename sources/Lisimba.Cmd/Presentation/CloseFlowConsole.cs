@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -22,12 +23,12 @@ namespace Lisimba.Cmd.Presentation
     {
         public void DisplayAddressBookCloseSuccess()
         {
-            ConsoleHelper.WriteLineSuccess("Address book was closed.");
+            ConsoleHelper.WriteLineSuccess(Resources.AddressBookClosedSuccess);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError("No address book is oppened.");
+            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

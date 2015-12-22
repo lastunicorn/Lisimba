@@ -47,7 +47,7 @@ namespace Lisimba.Cmd.Business
 
             if (addressBooks.AddressBookLocation == null)
             {
-                string newLocation = consoleView.AskForLocation();
+                string newLocation = consoleView.AskForNewLocation();
 
                 if (newLocation == null)
                     return false;

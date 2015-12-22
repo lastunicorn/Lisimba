@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Presentation
 {
@@ -35,7 +36,7 @@ namespace Lisimba.Cmd.Presentation
 
         public void DisplayGateChangeSuccess()
         {
-            ConsoleHelper.WriteLineSuccess("The gate was successfully changed.");
+            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
         }
     }
 }
