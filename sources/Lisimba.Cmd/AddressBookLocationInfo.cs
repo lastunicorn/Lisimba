@@ -21,7 +21,7 @@ namespace Lisimba.Cmd
 
         private void Parse(string text)
         {
-            var parts = text.Split(';');
+            string[] parts = text.Split(';');
             if (parts.Length == 0)
                 throw new ApplicationException("Invalid 'LastAddressBook' value in configuration file.");
 

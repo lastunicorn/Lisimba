@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
@@ -50,7 +51,7 @@ namespace Lisimba.Cmd.Flows
 
         private void DisplayContactDetails(string contactName)
         {
-            var contacts = addressBooks.AddressBook.Contacts
+            IEnumerable<Contact> contacts = addressBooks.AddressBook.Contacts
                 .Where(x =>
                     (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||

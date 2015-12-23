@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
@@ -47,7 +48,7 @@ namespace Lisimba.Cmd.Flows
 
         private void DisplayNextBirthdays()
         {
-            var contacts = addressBooks.AddressBook.Contacts
+            IEnumerable<Contact> contacts = addressBooks.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())
