@@ -15,19 +15,44 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 
 namespace Lisimba.Cmd
 {
-    class ApplicationConfiguration
+    internal class ApplicationConfiguration
     {
-        public string DefaultGateName
+        private readonly Configuration config;
+
+        public ApplicationConfiguration()
         {
-            get { return ConfigurationManager.AppSettings["DefaultGate"]; }
+            string appFilePath = Assembly.GetEntryAssembly().Location;
+            string configFilePath = appFilePath + ".config";
+            ExeConfigurationFileMap configFileMap = new ExeConfigurationFileMap { ExeConfigFilename = configFilePath };
+            config = ConfigurationManager.OpenMappedExeConfiguration(configFileMap, ConfigurationUserLevel.None);
         }
 
-        public string DefaultAddressBookFileName
+        public string DefaultGateName
         {
-            get { return ConfigurationManager.AppSettings["DefaultAddressBook"]; }
+            get { return config.AppSettings.Settings["DefaultGate"].Value; }
+        }
+
+        public AddressBookLocationInfo LastAddressBook
+        {
+            get
+            {
+                string text = config.AppSettings.Settings["LastAddressBook"].Value;
+
+                if (text == null)
+                    return null;
+
+                return new AddressBookLocationInfo(text);
+            }
+            set
+            {
+                config.AppSettings.Settings["LastAddressBook"].Value = value.ToString();
+                config.Save();
+            }
         }
     }
 }

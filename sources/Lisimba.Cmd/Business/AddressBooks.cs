@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using Lisimba.Cmd.Properties;
 
@@ -53,11 +54,8 @@ namespace Lisimba.Cmd.Business
             IsAddressBookSaved = true;
         }
 
-        public void OpenAddressBook(string fileName)
+        public void OpenAddressBook(string fileName, IGate gate)
         {
-            if (gates.DefaultGate == null)
-                throw new ApplicationException(Resources.NoDefaultGateError);
-
             bool allowToContinue = guarder.EnsureSave();
 
             if (!allowToContinue)
@@ -65,15 +63,16 @@ namespace Lisimba.Cmd.Business
 
             CloseAddressBookInternal();
 
-            string addressBookLocation = fileName ?? config.DefaultAddressBookFileName;
-
-            if (addressBookLocation == null)
-                return;
-
-            AddressBook = gates.DefaultGate.Load(addressBookLocation);
+            AddressBook = gate.Load(fileName);
             AddressBook.Changed += HandleAddressBookChanged;
 
-            AddressBookLocation = addressBookLocation;
+            AddressBookLocation = fileName;
+
+            config.LastAddressBook = new AddressBookLocationInfo
+            {
+                FileName = fileName,
+                GateId = gate.Id
+            };
         }
 
         public void CloseAddressBook()

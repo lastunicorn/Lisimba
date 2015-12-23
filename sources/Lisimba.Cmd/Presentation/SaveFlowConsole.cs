@@ -23,7 +23,7 @@ namespace Lisimba.Cmd.Presentation
     {
         public void DisplayAddressBookSaveSuccess()
         {
-            ConsoleHelper.WriteSuccess(Resources.SaveAddressBookSuccess);
+            ConsoleHelper.WriteLineSuccess(Resources.SaveAddressBookSuccess);
         }
     }
 }

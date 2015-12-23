@@ -15,36 +15,110 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Presentation;
+using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Flows
 {
     class OpenFlow : IFlow
     {
+        private readonly OpenFlowConsole console;
         private readonly AddressBooks addressBooks;
-        private readonly OpenFlowConsole consoleView;
+        private readonly Gates gates;
+        private readonly ApplicationConfiguration config;
 
-        public OpenFlow(AddressBooks addressBooks, OpenFlowConsole consoleView)
+        public OpenFlow(OpenFlowConsole console, AddressBooks addressBooks, Gates gates, ApplicationConfiguration config)
         {
+            if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (gates == null) throw new ArgumentNullException("gates");
+            if (config == null) throw new ArgumentNullException("config");
 
+            this.console = console;
             this.addressBooks = addressBooks;
-            this.consoleView = consoleView;
+            this.gates = gates;
+            this.config = config;
         }
 
         public void Execute(Command command)
         {
             if (command == null) throw new ArgumentNullException("command");
 
-            addressBooks.OpenAddressBook(command[1]);
-
-            if (addressBooks.AddressBook == null)
-                consoleView.DisplayNoAddressBookMessage();
+            if (command.HasParameters)
+                OpenAddressBookFromCommand(command);
             else
-                consoleView.DisplayAddressBookOpenSuccess(addressBooks.AddressBookLocation, addressBooks.AddressBook.Contacts.Count);
+                OpenLastAddressBook();
+
+            DisplayResultMessage();
+        }
+
+        private void OpenAddressBookFromCommand(Command command)
+        {
+            IGate gate = GetGate(command);
+            addressBooks.OpenAddressBook(command[1], gate);
+        }
+
+        private IGate GetGate(Command command)
+        {
+            if (command.ParameterCount >= 2)
+            {
+                string gateId = command[2];
+                return gates.GetGate(gateId);
+            }
+
+            if (gates.DefaultGate == null)
+                throw new ApplicationException(Resources.NoDefaultGateError);
+
+            return gates.DefaultGate;
+        }
+
+        private void OpenLastAddressBook()
+        {
+            AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
+
+            if (addressBookLocationInfo == null)
+                throw new ApplicationException(Resources.NoAddressBookInConfigFile);
+
+            string fileName = addressBookLocationInfo.FileName;
+
+            IGate gate;
+
+            if (addressBookLocationInfo.GateId != null)
+            {
+                gate = gates.GetGate(addressBookLocationInfo.GateId);
+            }
+            else
+            {
+                if (gates.DefaultGate == null)
+                {
+                    string message = string.Format(Resources.OpenAddressBookNoGateError, fileName);
+                    throw new ApplicationException(message);
+                }
+
+                console.DisplayUsingDefaultGateWarning(fileName, gates.DefaultGate.Name);
+
+                gate = gates.DefaultGate;
+            }
+
+            addressBooks.OpenAddressBook(fileName, gate);
+        }
+
+        private void DisplayResultMessage()
+        {
+            if (addressBooks.AddressBook == null)
+            {
+                console.DisplayNoAddressBookMessage();
+            }
+            else
+            {
+                string addressBookFileName = addressBooks.AddressBookLocation;
+                int contactsCount = addressBooks.AddressBook.Contacts.Count;
+
+                console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
+            }
         }
     }
 }

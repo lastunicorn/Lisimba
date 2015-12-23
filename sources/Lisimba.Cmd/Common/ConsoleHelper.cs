@@ -26,6 +26,7 @@ namespace Lisimba.Cmd.Common
     {
         private const ConsoleColor DefaultColor = ConsoleColor.White;
         private const ConsoleColor SuccessColor = ConsoleColor.Green;
+        private const ConsoleColor WarningColor = ConsoleColor.Yellow;
         private const ConsoleColor ErrorColor = ConsoleColor.Red;
 
         public static void WriteSuccess(string text)
@@ -36,6 +37,16 @@ namespace Lisimba.Cmd.Common
         public static void WriteLineSuccess(string text)
         {
             WriteLine(text, SuccessColor);
+        }
+
+        public static void WriteWarning(string text)
+        {
+            Write(text, WarningColor);
+        }
+
+        public static void WriteLineWarning(string text)
+        {
+            WriteLine(text, WarningColor);
         }
 
         public static void WriteError(string text)

@@ -31,5 +31,11 @@ namespace Lisimba.Cmd.Presentation
         {
             ConsoleHelper.WriteLineError(Resources.OpenAddressBookUnknownError);
         }
+
+        public void DisplayUsingDefaultGateWarning(string addressBookFileName, string gateId)
+        {
+            string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
+            ConsoleHelper.WriteLineWarning(message);
+        }
     }
 }

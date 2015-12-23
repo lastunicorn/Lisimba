@@ -171,4 +171,13 @@
     <data name="AddressBookChangedSuccess" xml:space="preserve">
     <value>Address book name successfully changed.</value>
   </data>
+    <data name="AddressBookOpenUseDefaultGateWarning" xml:space="preserve">
+    <value>No gate is specified for '{0}'. Using default gate '{1}'.</value>
+  </data>
+    <data name="NoAddressBookInConfigFile" xml:space="preserve">
+    <value>There is no record of an address book being opened. Please specify a file.</value>
+  </data>
+    <data name="OpenAddressBookNoGateError" xml:space="preserve">
+    <value>No gate is specified for address book '{0}' and no default gate is set.</value>
+  </data>
 </root>

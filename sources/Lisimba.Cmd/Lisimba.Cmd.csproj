@@ -53,6 +53,7 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="AddressBookLocationInfo.cs" />
     <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="ApplicationLoop.cs" />
     <Compile Include="Common\CommandParser.cs" />

@@ -48,6 +48,7 @@ namespace Lisimba.Cmd.Flows
                 gates.SetDefaultGate(command[1]);
 
                 console.DisplayGateChangeSuccess();
+                console.DisplayGate(gates.DefaultGate);
             }
         }
     }

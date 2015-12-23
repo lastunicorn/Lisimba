@@ -29,7 +29,12 @@ namespace Lisimba.Cmd.Business
 
         public string DefaultGateName
         {
-            get { return DefaultGate == null ? string.Empty : DefaultGate.Id; }
+            get
+            {
+                return DefaultGate == null
+                    ? string.Empty
+                    : string.Format("{0} ({1})", DefaultGate.Name, DefaultGate.Id);
+            }
         }
 
         public Gates(ApplicationConfiguration config, GateProvider gateProvider)
@@ -60,6 +65,19 @@ namespace Lisimba.Cmd.Business
             try
             {
                 DefaultGate = gateProvider.GetGate(gateId);
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format(Resources.GateNotFoundError, gateId);
+                throw new Exception(message, ex);
+            }
+        }
+
+        public IGate GetGate(string gateId)
+        {
+            try
+            {
+                return gateProvider.GetGate(gateId);
             }
             catch (Exception ex)
             {
