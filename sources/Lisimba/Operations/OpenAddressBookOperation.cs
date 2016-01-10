@@ -15,11 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -61,41 +57,12 @@ namespace DustInTheWind.Lisimba.Operations
                         return;
                 }
 
-                AddressBookOpenResult result = openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
-
-                if (!result.Success)
-                    return;
-
-                DisplayBirthdays();
+                openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        private void DisplayBirthdays()
-        {
-            DateTime startDate = DateTime.Today;
-            DateTime endDate = DateTime.Today.AddDays(7);
-            List<Contact> contacts = openedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate).ToList();
-
-            if (contacts.Count <= 0)
-                return;
-
-            StringBuilder sb = new StringBuilder();
-
-            double totalDays = (endDate - startDate).TotalDays;
-            sb.AppendLine("The birthdays for the next " + totalDays + " days are:");
-            sb.AppendLine();
-
-            foreach (Contact contact in contacts)
-            {
-                string line = string.Format("{0} - {1}", contact.Name, contact.Birthday.ToShortString());
-                sb.AppendLine(line);
-            }
-
-            userInterface.DisplayInfo(sb.ToString());
         }
     }
 }

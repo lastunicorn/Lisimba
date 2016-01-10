@@ -57,19 +57,11 @@ namespace DustInTheWind.Lisimba.Operations
                     throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
                 openedAddressBooks.Current.SaveAddressBook();
-
-                DisplaySuccessStatusText();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        private void DisplaySuccessStatusText()
-        {
-            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }
 }

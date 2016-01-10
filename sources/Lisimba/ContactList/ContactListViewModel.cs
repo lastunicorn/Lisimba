@@ -91,16 +91,16 @@ namespace DustInTheWind.Lisimba.ContactList
         {
             if (e.OldAddressBook != null)
             {
-                openedAddressBooks.Current.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-                openedAddressBooks.Current.AddressBook.ContactContentChanged -= HandleContactContentChanged;
-                openedAddressBooks.Current.Saved -= HandleCurrentAddressBookSaved;
+                e.OldAddressBook.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                e.OldAddressBook.AddressBook.ContactContentChanged -= HandleContactContentChanged;
+                e.OldAddressBook.Saved -= HandleCurrentAddressBookSaved;
             }
 
             if (e.NewAddressBook != null)
             {
-                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                openedAddressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
-                openedAddressBooks.Current.Saved += HandleCurrentAddressBookSaved;
+                e.NewAddressBook.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                e.NewAddressBook.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                e.NewAddressBook.Saved += HandleCurrentAddressBookSaved;
             }
 
             searchedText = string.Empty;

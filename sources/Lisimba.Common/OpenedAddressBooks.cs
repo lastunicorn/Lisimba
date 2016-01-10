@@ -156,7 +156,7 @@ namespace DustInTheWind.Lisimba.Common
             OnAddressBookSaved(EventArgs.Empty);
         }
 
-        public AddressBookOpenResult OpenAddressBook(string fileName, IGate gate)
+        public void OpenAddressBook(string fileName, IGate gate)
         {
             if (fileName == null) throw new ArgumentNullException("fileName");
             if (gate == null) throw new ArgumentNullException("gate");
@@ -164,7 +164,7 @@ namespace DustInTheWind.Lisimba.Common
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
-                return new AddressBookOpenResult { Success = false };
+                return;
 
             AddressBook addressBook = gate.Load(fileName);
             AddressBookShell addressBookShell = new AddressBookShell(addressBook, gate, fileName);
@@ -181,8 +181,6 @@ namespace DustInTheWind.Lisimba.Common
             };
 
             OnOpened(new AddressBookOpenedEventArgs(result));
-
-            return result;
         }
 
         private void AddFileToRecentFileList(string fileName, IGate gate)

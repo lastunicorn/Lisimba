@@ -35,7 +35,9 @@ namespace DustInTheWind.Lisimba.Services
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
             observers.Add(unityContainer.Resolve<AddressBookOpenObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookSaveObserver>());
             observers.Add(unityContainer.Resolve<AddressBookEnsureSaveObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());
         }
 
         public void Start()

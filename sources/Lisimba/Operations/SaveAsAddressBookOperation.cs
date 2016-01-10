@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.IO;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
@@ -63,31 +62,11 @@ namespace DustInTheWind.Lisimba.Operations
 
                 string newLocation = userInterface.AskToSaveLsbFile();
                 openedAddressBooks.Current.SaveAddressBook(newLocation);
-
-                AddFileToRecentFileList(newLocation);
-
-                openedAddressBooks.Current.SaveAddressBook(newLocation);
-
-                //OnAddressBookSaved(EventArgs.Empty);
-                
-                DisplaySuccessStatusText();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        private void AddFileToRecentFileList(string fileName)
-        {
-            string fileFullPath = Path.GetFullPath(fileName);
-            recentFiles.AddRecentFile(fileFullPath, null);
-        }
-
-        private void DisplaySuccessStatusText()
-        {
-            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }
 }
