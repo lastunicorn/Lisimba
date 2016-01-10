@@ -142,13 +142,13 @@
     <value>Lisimba ver. {0}</value>
   </data>
   <data name="AddressBookClosedSuccess" xml:space="preserve">
-    <value>Address book was closed.</value>
+    <value>Address book '{0}' was closed.</value>
   </data>
   <data name="GateChangesSuccess" xml:space="preserve">
     <value>The gate was successfully changed.</value>
   </data>
   <data name="NewAddressBookCreatedSuccess" xml:space="preserve">
-    <value>New address book successfully created.</value>
+    <value>Address book '{0}' successfully created.</value>
   </data>
   <data name="AddressBookOpenSuccess" xml:space="preserve">
     <value>Successfully loaded {0} contacts from file '{1}'.</value>
@@ -157,7 +157,7 @@
     <value>No address book was oppened because of unknown error.</value>
   </data>
   <data name="SaveAddressBookSuccess" xml:space="preserve">
-    <value>Address book {0} was successfully saved in file {1}.</value>
+    <value>Address book '{0}' was successfully saved in file '{1}'.</value>
   </data>
   <data name="UnknownCommandError" xml:space="preserve">
     <value>Unknown command</value>

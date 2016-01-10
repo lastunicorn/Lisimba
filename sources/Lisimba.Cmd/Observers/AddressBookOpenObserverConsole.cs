@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,45 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookGuarderConsole
+    class AddressBookOpenObserverConsole
     {
-        public bool? AskToSaveAddressBook()
-        {
-            Console.Write(Resources.AskToSaveAddressBook);
-
-            ConsoleKeyInfo key = Console.ReadKey(false);
-            Console.WriteLine();
-
-            switch (key.Key)
-            {
-                case ConsoleKey.Y:
-                    return true;
-
-                case ConsoleKey.N:
-                    return false;
-
-                default:
-                    return null;
-            }
-        }
-
-        public string AskForNewLocation()
-        {
-            Console.Write(Resources.AskForNewLocation);
-            return Console.ReadLine();
-        }
-
-        public void DisplayAddressBookSaveSuccess(string addressBookName, string addressBookLocation)
-        {
-            string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
-            ConsoleHelper.WriteLineSuccess(text);
-        }
 
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
         {
@@ -64,11 +32,12 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         {
             ConsoleHelper.WriteLineError(Resources.OpenAddressBookUnknownError);
         }
-        public void DisplayAddressBookCreateSuccess()
+        public void DisplayAddressBookCreateSuccess(string addressBookName)
         {
-            ConsoleHelper.WriteLineSuccess(Resources.NewAddressBookCreatedSuccess);
+            string text = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
+            ConsoleHelper.WriteLineSuccess(text);
         }
-        
+
         public void DisplayWarning(string text)
         {
             ConsoleHelper.WriteLineWarning(text);

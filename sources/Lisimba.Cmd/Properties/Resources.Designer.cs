@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address book was closed..
+        ///   Looks up a localized string similar to Address book &apos;{0}&apos; was closed..
         /// </summary>
         internal static string AddressBookClosedSuccess {
             get {
@@ -160,7 +160,7 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New address book successfully created..
+        ///   Looks up a localized string similar to Address book &apos;{0}&apos; successfully created..
         /// </summary>
         internal static string NewAddressBookCreatedSuccess {
             get {
@@ -223,7 +223,7 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address book {0} was successfully saved in file {1}..
+        ///   Looks up a localized string similar to Address book &apos;{0}&apos; was successfully saved in file &apos;{1}&apos;..
         /// </summary>
         internal static string SaveAddressBookSuccess {
             get {

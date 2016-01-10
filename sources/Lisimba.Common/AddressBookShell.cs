@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Common
             Gate = gate;
             Location = location;
 
-            Status = AddressBookStatus.New;
+            status = location == null ? AddressBookStatus.New : AddressBookStatus.Saved;
 
             AddressBook.Changed += HandleAddressBookChanged;
         }

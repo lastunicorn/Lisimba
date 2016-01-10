@@ -29,7 +29,6 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
-        private readonly RecentFiles recentFiles;
         private readonly AvailableGates availableGates;
 
         public override string ShortDescription
@@ -38,17 +37,15 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
-            ApplicationStatus applicationStatus, RecentFiles recentFiles, AvailableGates availableGates)
+            ApplicationStatus applicationStatus, AvailableGates availableGates)
             : base(applicationStatus)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
-            this.recentFiles = recentFiles;
             this.availableGates = availableGates;
         }
 
@@ -69,36 +66,12 @@ namespace DustInTheWind.Lisimba.Operations
                 if (!result.Success)
                     return;
 
-                DisplaySuccessStatusText();
-                DisplayWarnings(result.Warnings);
                 DisplayBirthdays();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        private void DisplaySuccessStatusText()
-        {
-            int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
-        }
-
-        private void DisplayWarnings(IEnumerable<Exception> warnings)
-        {
-            if (!warnings.Any())
-                return;
-
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Exception warning in warnings)
-            {
-                sb.AppendLine(warning.Message);
-                sb.AppendLine();
-            }
-
-            userInterface.DisplayWarning(sb.ToString());
         }
 
         private void DisplayBirthdays()

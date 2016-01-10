@@ -14,16 +14,37 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.ConsoleCommon;
+using System;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class CloseFlowConsole
+    class AddressBookEnsureSaveObserverConsole
     {
-        public void DisplayNoAddressBookMessage()
+        public bool? AskToSaveAddressBook()
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            Console.Write(Resources.AskToSaveAddressBook);
+
+            ConsoleKeyInfo key = Console.ReadKey(false);
+            Console.WriteLine();
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Y:
+                    return true;
+
+                case ConsoleKey.N:
+                    return false;
+
+                default:
+                    return null;
+            }
+        }
+
+        public string AskForNewLocation()
+        {
+            Console.Write(Resources.AskForNewLocation);
+            return Console.ReadLine();
         }
     }
 }

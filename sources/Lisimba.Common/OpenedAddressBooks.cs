@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Common
         public event EventHandler<AddressBookOpenedEventArgs> AddressBookOpened;
         public event EventHandler AddressBookSaved;
         public event CancelEventHandler AddressBookClosing;
-        public event EventHandler AddressBookClosed;
+        public event EventHandler<AddressBookClosedEventArgs> AddressBookClosed;
 
         public AddressBookShell Current
         {
@@ -109,12 +109,12 @@ namespace DustInTheWind.Lisimba.Common
                 handler(this, e);
         }
 
-        protected virtual void OnClosed()
+        protected virtual void OnClosed(AddressBookClosedEventArgs e)
         {
-            EventHandler handler = AddressBookClosed;
+            EventHandler<AddressBookClosedEventArgs> handler = AddressBookClosed;
 
             if (handler != null)
-                handler(this, EventArgs.Empty);
+                handler(this, e);
         }
 
         protected virtual void OnOpened(AddressBookOpenedEventArgs e)
@@ -125,12 +125,12 @@ namespace DustInTheWind.Lisimba.Common
                 handler(this, e);
         }
 
-        public AddressBookOpenResult CreateNewAddressBook(string name)
+        public void CreateNewAddressBook(string name)
         {
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
-                return new AddressBookOpenResult { Success = false };
+                return;
 
             string addressBookName = name ?? Resources.DefaultAddressBookName;
             AddressBook addressBook = new AddressBook { Name = addressBookName };
@@ -142,8 +142,6 @@ namespace DustInTheWind.Lisimba.Common
             AddressBookOpenResult result = new AddressBookOpenResult { Success = true };
 
             OnOpened(new AddressBookOpenedEventArgs(result));
-
-            return result;
         }
 
         private void HandleAddressBookShellSaved(object sender, EventArgs e)
@@ -204,13 +202,14 @@ namespace DustInTheWind.Lisimba.Common
             if (eva.Cancel)
                 return false;
 
-            if (Current != null)
-                Current.Saved -= HandleAddressBookShellSaved;
+            AddressBookShell oldAddressBookShell = Current;
+
+            oldAddressBookShell.Saved -= HandleAddressBookShellSaved;
 
             Contact = null;
             Current = null;
 
-            OnClosed();
+            OnClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
 
             return true;
         }

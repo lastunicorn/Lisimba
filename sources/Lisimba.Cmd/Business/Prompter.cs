@@ -28,6 +28,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly PrompterConsole console;
         private readonly FlowProvider flowProvider;
+        private bool stopRequested;
 
         public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowProvider flowProvider)
         {
@@ -42,7 +43,9 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public void Run()
         {
-            while (!LisimbaApplication.ExitRequested)
+            stopRequested = false;
+
+            while (!stopRequested)
             {
                 DisplayPrompter();
                 Command command = ReadCommand();
@@ -75,6 +78,11 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             {
                 console.WriteError(ex.Message);
             }
+        }
+
+        public void Stop()
+        {
+            stopRequested = true;
         }
     }
 }

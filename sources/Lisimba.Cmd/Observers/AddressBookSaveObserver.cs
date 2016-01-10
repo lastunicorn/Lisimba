@@ -15,31 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class CloseFlow : IFlow
+    class AddressBookSaveObserver : AddressBookObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly CloseFlowConsole console;
+        private readonly AddressBookSaveObserverConsole console;
 
-        public CloseFlow(OpenedAddressBooks openedAddressBooks, CloseFlowConsole console)
+        public AddressBookSaveObserver(OpenedAddressBooks openedAddressBooks, AddressBookSaveObserverConsole console)
+            : base(openedAddressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute()
+        public override void Start()
         {
-            if (openedAddressBooks.Current != null)
-                openedAddressBooks.CloseAddressBook();
-            else
-                console.DisplayNoAddressBookMessage();
+            OpenedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+        }
+
+        private void HandleAddressBookSaved(object sender, EventArgs e)
+        {
+            console.DisplayAddressBookSaveSuccess(OpenedAddressBooks.Current.GetFriendlyName(), OpenedAddressBooks.Current.Location);
         }
     }
 }

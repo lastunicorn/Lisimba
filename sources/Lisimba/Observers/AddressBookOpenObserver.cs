@@ -1,0 +1,85 @@
+// Lisimba
+// Copyright (C) 2007-2015 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
+
+namespace DustInTheWind.Lisimba.Observers
+{
+    class AddressBookOpenObserver : AddressBookObserver
+    {
+        private readonly ApplicationStatus applicationStatus;
+        private readonly UserInterface userInterface;
+
+        public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
+            : base(openedAddressBooks)
+        {
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.applicationStatus = applicationStatus;
+            this.userInterface = userInterface;
+        }
+
+        public override void Start()
+        {
+            OpenedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
+        }
+
+        private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
+        {
+            DisplayOpenSuccessMessage();
+            DisplayWarnings(e.Result.Warnings);
+        }
+
+        private void DisplayOpenSuccessMessage()
+        {
+            if (OpenedAddressBooks.Current != null)
+            {
+                if (OpenedAddressBooks.Current.Status == AddressBookStatus.New)
+                {
+                    applicationStatus.StatusText = "A new address book was created.";
+                }
+                else
+                {
+                    int contactsCount = OpenedAddressBooks.Current.AddressBook.Contacts.Count;
+                    applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
+                }
+            }
+        }
+
+        private void DisplayWarnings(IEnumerable<Exception> warnings)
+        {
+            if (warnings == null)
+                return;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Exception warning in warnings)
+            {
+                sb.AppendLine(warning.Message);
+                sb.AppendLine();
+            }
+
+            if (sb.Length > 0)
+                userInterface.DisplayWarning(sb.ToString());
+        }
+    }
+}

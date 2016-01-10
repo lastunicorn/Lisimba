@@ -14,16 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.ConsoleCommon;
-using DustInTheWind.Lisimba.Cmd.Properties;
+using System;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Common
 {
-    class CloseFlowConsole
+    public class AddressBookClosedEventArgs : EventArgs
     {
-        public void DisplayNoAddressBookMessage()
+        public AddressBookShell AddressBookShell { get; private set; }
+
+        public AddressBookClosedEventArgs(AddressBookShell addressBookShell)
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            
+            AddressBookShell = addressBookShell;
         }
     }
 }

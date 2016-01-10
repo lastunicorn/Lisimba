@@ -97,6 +97,8 @@
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
     <Compile Include="DependencyContainerSetup.cs" />
+    <Compile Include="Observers\AddressBookEnsureSaveObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
     <Compile Include="Services\AddressBookGuarder.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">

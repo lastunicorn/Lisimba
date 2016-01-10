@@ -15,9 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Observers;
+using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
 {
@@ -27,62 +28,22 @@ namespace DustInTheWind.Lisimba.Services
     /// </summary>
     class AddressBookGuarder
     {
-        private readonly UserInterface userInterface;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly List<AddressBookObserver> observers = new List<AddressBookObserver>();
 
-        public AddressBookGuarder(UserInterface userInterface, OpenedAddressBooks openedAddressBooks)
+        public AddressBookGuarder(IUnityContainer unityContainer)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
-            this.userInterface = userInterface;
-            this.openedAddressBooks = openedAddressBooks;
+            observers.Add(unityContainer.Resolve<AddressBookOpenObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookEnsureSaveObserver>());
         }
 
         public void Start()
         {
-            openedAddressBooks.AddressBookClosing += HandleAddressBooksClosing;
-        }
-
-        private void HandleAddressBooksClosing(object sender, CancelEventArgs e)
-        {
-            bool allowToContinue = EnsureAddressBookIsSaved();
-
-            if (!allowToContinue)
-                e.Cancel = true;
-        }
-
-        public bool EnsureAddressBookIsSaved()
-        {
-            if (openedAddressBooks.Current == null || openedAddressBooks.Current.Status != AddressBookStatus.Modified)
-                return true;
-
-            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
-            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
-
-            bool? needToSave = userInterface.DisplayYesNoCancelQuestion(text, title);
-
-            if (needToSave == null)
-                return false;
-
-            if (!needToSave.Value)
-                return true;
-
-            if (openedAddressBooks.Current.Location == null)
+            foreach (AddressBookObserver observer in observers)
             {
-                string newLocation = userInterface.AskToSaveLsbFile();
-
-                if (newLocation == null)
-                    return false;
-
-                openedAddressBooks.Current.SaveAddressBook(newLocation);
+                observer.Start();
             }
-            else
-            {
-                openedAddressBooks.Current.SaveAddressBook();
-            }
-
-            return true;
         }
     }
 }

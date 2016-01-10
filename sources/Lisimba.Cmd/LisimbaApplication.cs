@@ -27,8 +27,6 @@ namespace DustInTheWind.Lisimba.Cmd
         private readonly Prompter prompter;
         private readonly AddressBookGuarder addressBookGuarder;
 
-        public static bool ExitRequested { get; set; }
-
         public LisimbaApplication(AvailableGates availableGates, LisimbaApplicationConsole console,
             Prompter prompter, AddressBookGuarder addressBookGuarder)
         {
@@ -56,7 +54,7 @@ namespace DustInTheWind.Lisimba.Cmd
 
         public void Exit()
         {
-            ExitRequested = true;
+            prompter.Stop();
         }
     }
 }

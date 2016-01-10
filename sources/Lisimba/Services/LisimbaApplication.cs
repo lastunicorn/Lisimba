@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Services
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UserInterface userInterface;
-        private readonly AddressBookGuarder addressBookGuarder;
+        private readonly AddressBookGuarder1 addressBookGuarder;
 
         public event EventHandler<CancelEventArgs> Exiting;
         public event EventHandler BeforeExiting;
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments,
             ConfigurationService configurationService, RecentFiles recentFiles, CommandPool commandPool,
-            UserInterface userInterface, AddressBookGuarder addressBookGuarder)
+            UserInterface userInterface, AddressBookGuarder1 addressBookGuarder)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");

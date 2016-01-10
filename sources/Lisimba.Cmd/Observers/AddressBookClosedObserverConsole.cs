@@ -16,14 +16,17 @@
 
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class CloseFlowConsole
+    class AddressBookClosedObserverConsole
     {
-        public void DisplayNoAddressBookMessage()
+        public void DisplayAddressBookCloseSuccess(AddressBookShell addressBookShell)
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            string addressBookName = addressBookShell.GetFriendlyName();
+            string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
+            ConsoleHelper.WriteLineSuccess(text);
         }
     }
 }
