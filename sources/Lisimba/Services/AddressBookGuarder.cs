@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void Start()
         {
-            openedAddressBooks.Closing += HandleAddressBooksClosing;
+            openedAddressBooks.AddressBookClosing += HandleAddressBooksClosing;
         }
 
         private void HandleAddressBooksClosing(object sender, CancelEventArgs e)

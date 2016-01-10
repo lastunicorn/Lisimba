@@ -223,7 +223,7 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address book was successfully saved..
+        ///   Looks up a localized string similar to Address book {0} was successfully saved in file {1}..
         /// </summary>
         internal static string SaveAddressBookSuccess {
             get {

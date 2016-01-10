@@ -157,7 +157,7 @@
     <value>No address book was oppened because of unknown error.</value>
   </data>
   <data name="SaveAddressBookSuccess" xml:space="preserve">
-    <value>Address book was successfully saved.</value>
+    <value>Address book {0} was successfully saved in file {1}.</value>
   </data>
   <data name="UnknownCommandError" xml:space="preserve">
     <value>Unknown command</value>

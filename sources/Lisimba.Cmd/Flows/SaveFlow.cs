@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
@@ -24,17 +25,17 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly Command command;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly SaveFlowConsole consoleView;
+        private readonly AvailableGates availableGates;
 
-        public SaveFlow(Command command, OpenedAddressBooks openedAddressBooks, SaveFlowConsole consoleView)
+        public SaveFlow(Command command, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
             if (command == null) throw new ArgumentNullException("command");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.command = command;
             this.openedAddressBooks = openedAddressBooks;
-            this.consoleView = consoleView;
+            this.availableGates = availableGates;
         }
 
         public void Execute()
@@ -42,12 +43,22 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             if (openedAddressBooks.Current == null)
                 return;
 
-            if (command[1] != null)
-                openedAddressBooks.Current.SaveAddressBook(command[1]);
+            if (command.ParameterCount >= 1)
+            {
+                if (command.ParameterCount >= 2)
+                {
+                    IGate gate = availableGates.GetGate(command[2]);
+                    openedAddressBooks.Current.SaveAddressBook(command[1], gate);
+                }
+                else
+                {
+                    openedAddressBooks.Current.SaveAddressBook(command[1]);
+                }
+            }
             else
+            {
                 openedAddressBooks.Current.SaveAddressBook();
-
-            consoleView.DisplayAddressBookSaveSuccess();
+            }
         }
     }
 }

@@ -24,25 +24,19 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly Command command;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly NewFlowConsole console;
 
-        public NewFlow(Command command, OpenedAddressBooks openedAddressBooks, NewFlowConsole console)
+        public NewFlow(Command command, OpenedAddressBooks openedAddressBooks)
         {
             if (command == null) throw new ArgumentNullException("command");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (console == null) throw new ArgumentNullException("console");
 
             this.command = command;
             this.openedAddressBooks = openedAddressBooks;
-            this.console = console;
         }
 
         public void Execute()
         {
-            bool succeeded = openedAddressBooks.CreateNewAddressBook(command[1]);
-
-            if (succeeded)
-                console.DisplayAddressBookCreateSuccess();
+            openedAddressBooks.CreateNewAddressBook(command[1]);
         }
     }
 }

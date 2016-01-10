@@ -45,9 +45,9 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                bool succeeded = openedAddressBooks.CreateNewAddressBook(null);
+                AddressBookOpenResult result = openedAddressBooks.CreateNewAddressBook(null);
 
-                if (succeeded)
+                if (result.Success)
                     applicationStatus.StatusText = "A new address book was created.";
             }
             catch (Exception ex)

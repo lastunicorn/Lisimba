@@ -14,15 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.ConsoleCommon;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class ExitFlow : IFlow
     {
+        private readonly LisimbaApplication lisimbaApplication;
+
+        public ExitFlow(LisimbaApplication lisimbaApplication)
+        {
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+
+            this.lisimbaApplication = lisimbaApplication;
+        }
+
         public void Execute()
         {
-            LisimbaApplication.ExitRequested = true;
+            lisimbaApplication.Exit();
         }
     }
 }

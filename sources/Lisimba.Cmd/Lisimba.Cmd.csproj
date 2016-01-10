@@ -70,10 +70,8 @@
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
     <Compile Include="Flows\GateFlowConsole.cs" />
     <Compile Include="Flows\InfoFlowConsole.cs" />
-    <Compile Include="Flows\NewFlowConsole.cs" />
     <Compile Include="Flows\NextBirthdaysFlowConsole.cs" />
     <Compile Include="Flows\OpenFlowConsole.cs" />
-    <Compile Include="Flows\SaveFlowConsole.cs" />
     <Compile Include="Flows\ShowFlowConsole.cs" />
     <Compile Include="Flows\UnknownFlowConsole.cs" />
     <Compile Include="Flows\UpdateFlowConsole.cs" />

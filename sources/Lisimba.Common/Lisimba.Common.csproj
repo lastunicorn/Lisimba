@@ -40,8 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBookChangedEventArgs.cs" />
-    <Compile Include="AddressBookLoadResult.cs" />
+    <Compile Include="AddressBookOpenResult.cs" />
     <Compile Include="AddressBookLocationInfo.cs" />
+    <Compile Include="AddressBookOpenedEventArgs.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="OpenedAddressBooks.cs" />
     <Compile Include="AddressBookShell.cs" />

@@ -21,26 +21,10 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlowConsole
     {
-        public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
-        {
-            string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
-            ConsoleHelper.WriteLineSuccess(message);
-        }
-
-        public void DisplayNoAddressBookMessage()
-        {
-            ConsoleHelper.WriteLineError(Resources.OpenAddressBookUnknownError);
-        }
-
         public void DisplayUsingDefaultGateWarning(string addressBookFileName, string gateId)
         {
             string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
             ConsoleHelper.WriteLineWarning(message);
-        }
-
-        public void DisplayWarning(string text)
-        {
-            ConsoleHelper.WriteLineWarning(text);
         }
     }
 }

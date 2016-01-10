@@ -53,5 +53,10 @@ namespace DustInTheWind.Lisimba.Cmd
 
             console.WriteGoodByeMessage();
         }
+
+        public void Exit()
+        {
+            ExitRequested = true;
+        }
     }
 }

@@ -33,13 +33,12 @@ namespace DustInTheWind.Lisimba.Common
         private Contact contact;
 
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
-
-        public event CancelEventHandler Closing;
-        public event EventHandler Closed;
-        public event EventHandler Opened;
-
-        public event EventHandler AddressBookSaved;
         public event EventHandler ContactChanged;
+
+        public event EventHandler<AddressBookOpenedEventArgs> AddressBookOpened;
+        public event EventHandler AddressBookSaved;
+        public event CancelEventHandler AddressBookClosing;
+        public event EventHandler AddressBookClosed;
 
         public AddressBookShell Current
         {
@@ -104,7 +103,7 @@ namespace DustInTheWind.Lisimba.Common
 
         protected virtual void OnClosing(CancelEventArgs e)
         {
-            CancelEventHandler handler = Closing;
+            CancelEventHandler handler = AddressBookClosing;
 
             if (handler != null)
                 handler(this, e);
@@ -112,39 +111,54 @@ namespace DustInTheWind.Lisimba.Common
 
         protected virtual void OnClosed()
         {
-            EventHandler handler = Closed;
+            EventHandler handler = AddressBookClosed;
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
         }
 
-        protected virtual void OnOpened()
+        protected virtual void OnOpened(AddressBookOpenedEventArgs e)
         {
-            EventHandler handler = Opened;
+            EventHandler<AddressBookOpenedEventArgs> handler = AddressBookOpened;
 
             if (handler != null)
-                handler(this, EventArgs.Empty);
+                handler(this, e);
         }
 
-        public bool CreateNewAddressBook(string name)
+        public AddressBookOpenResult CreateNewAddressBook(string name)
         {
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
-                return false;
-
-            Contact = null;
+                return new AddressBookOpenResult { Success = false };
 
             string addressBookName = name ?? Resources.DefaultAddressBookName;
             AddressBook addressBook = new AddressBook { Name = addressBookName };
-            Current = new AddressBookShell(addressBook);
+            AddressBookShell addressBookShell = new AddressBookShell(addressBook);
+            addressBookShell.Saved += HandleAddressBookShellSaved;
 
-            OnOpened();
+            Current = addressBookShell;
 
-            return true;
+            AddressBookOpenResult result = new AddressBookOpenResult { Success = true };
+
+            OnOpened(new AddressBookOpenedEventArgs(result));
+
+            return result;
         }
 
-        public AddressBookLoadResult OpenAddressBook(string fileName, IGate gate)
+        private void HandleAddressBookShellSaved(object sender, EventArgs e)
+        {
+            AddressBookShell addressBookShell = sender as AddressBookShell;
+
+            if (addressBookShell == null)
+                return;
+
+            AddFileToRecentFileList(addressBookShell.Location, addressBookShell.Gate);
+
+            OnAddressBookSaved(EventArgs.Empty);
+        }
+
+        public AddressBookOpenResult OpenAddressBook(string fileName, IGate gate)
         {
             if (fileName == null) throw new ArgumentNullException("fileName");
             if (gate == null) throw new ArgumentNullException("gate");
@@ -152,23 +166,25 @@ namespace DustInTheWind.Lisimba.Common
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
-                return new AddressBookLoadResult
-                {
-                    Success = false
-                };
+                return new AddressBookOpenResult { Success = false };
 
             AddressBook addressBook = gate.Load(fileName);
-            Current = new AddressBookShell(addressBook, gate, fileName);
+            AddressBookShell addressBookShell = new AddressBookShell(addressBook, gate, fileName);
+            addressBookShell.Saved += HandleAddressBookShellSaved;
+
+            Current = addressBookShell;
 
             AddFileToRecentFileList(fileName, gate);
 
-            OnOpened();
-
-            return new AddressBookLoadResult
+            AddressBookOpenResult result = new AddressBookOpenResult
             {
                 Success = true,
                 Warnings = gate.Warnings
             };
+
+            OnOpened(new AddressBookOpenedEventArgs(result));
+
+            return result;
         }
 
         private void AddFileToRecentFileList(string fileName, IGate gate)
@@ -187,6 +203,9 @@ namespace DustInTheWind.Lisimba.Common
 
             if (eva.Cancel)
                 return false;
+
+            if (Current != null)
+                Current.Saved -= HandleAddressBookShellSaved;
 
             Contact = null;
             Current = null;

@@ -103,8 +103,8 @@ namespace DustInTheWind.Lisimba.Main
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
-            openedAddressBooks.Closing += HandleAddressBooksClosing;
-            openedAddressBooks.Opened += HandleAddressBooksOpened;
+            openedAddressBooks.AddressBookClosing += HandleAddressBooksClosing;
+            openedAddressBooks.AddressBookOpened += HandleAddressBooksOpened;
 
             if (openedAddressBooks.Current != null)
                 openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
@@ -123,7 +123,7 @@ namespace DustInTheWind.Lisimba.Main
             openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
         }
 
-        private void HandleAddressBooksClosing(object sender, CancelEventArgs e)
+        private void HandleAddressBooksClosing(object sender, EventArgs e)
         {
             openedAddressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
         }

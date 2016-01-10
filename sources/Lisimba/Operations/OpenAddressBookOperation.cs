@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Operations
                         return;
                 }
 
-                AddressBookLoadResult result = openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
+                AddressBookOpenResult result = openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
 
                 if (!result.Success)
                     return;

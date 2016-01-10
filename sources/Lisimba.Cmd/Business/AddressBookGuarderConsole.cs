@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
@@ -24,7 +25,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         public bool? AskToSaveAddressBook()
         {
             Console.Write(Resources.AskToSaveAddressBook);
-            
+
             ConsoleKeyInfo key = Console.ReadKey(false);
             Console.WriteLine();
 
@@ -45,6 +46,32 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         {
             Console.Write(Resources.AskForNewLocation);
             return Console.ReadLine();
+        }
+
+        public void DisplayAddressBookSaveSuccess(string addressBookName, string addressBookLocation)
+        {
+            string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
+            ConsoleHelper.WriteLineSuccess(text);
+        }
+
+        public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
+        {
+            string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
+            ConsoleHelper.WriteLineSuccess(message);
+        }
+
+        public void DisplayNoAddressBookMessage()
+        {
+            ConsoleHelper.WriteLineError(Resources.OpenAddressBookUnknownError);
+        }
+        public void DisplayAddressBookCreateSuccess()
+        {
+            ConsoleHelper.WriteLineSuccess(Resources.NewAddressBookCreatedSuccess);
+        }
+        
+        public void DisplayWarning(string text)
+        {
+            ConsoleHelper.WriteLineWarning(text);
         }
     }
 }

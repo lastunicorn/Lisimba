@@ -15,9 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Cmd.Properties;
@@ -51,21 +48,16 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
-            var result = command.HasParameters
-                ? OpenAddressBookFromCommand()
-                : OpenLastAddressBook();
-
-            if (!result.Success)
-                return;
-
-            DisplaySuccessMessage();
-            DisplayWarnings(result.Warnings);
+            if (command.HasParameters)
+                OpenAddressBook();
+            else
+                OpenLastAddressBook();
         }
 
-        private AddressBookLoadResult OpenAddressBookFromCommand()
+        private void OpenAddressBook()
         {
             IGate gate = GetGate();
-            return openedAddressBooks.OpenAddressBook(command[1], gate);
+            openedAddressBooks.OpenAddressBook(command[1], gate);
         }
 
         private IGate GetGate()
@@ -82,7 +74,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             return availableGates.DefaultGate;
         }
 
-        private AddressBookLoadResult OpenLastAddressBook()
+        private void OpenLastAddressBook()
         {
             AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
 
@@ -91,7 +83,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             IGate gate = ChooseGate(addressBookLocationInfo);
 
-            return openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+            openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
         }
 
         private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
@@ -108,37 +100,6 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, availableGates.DefaultGate.Name);
 
             return availableGates.DefaultGate;
-        }
-
-        private void DisplaySuccessMessage()
-        {
-            if (openedAddressBooks.Current != null)
-            {
-                string addressBookFileName = openedAddressBooks.Current.Location;
-                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-
-                console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
-            }
-            else
-            {
-                console.DisplayNoAddressBookMessage();
-            }
-        }
-
-        private void DisplayWarnings(IEnumerable<Exception> warnings)
-        {
-            if (!warnings.Any())
-                return;
-
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Exception warning in warnings)
-            {
-                sb.AppendLine(warning.Message);
-                sb.AppendLine();
-            }
-
-            console.DisplayWarning(sb.ToString());
         }
     }
 }
