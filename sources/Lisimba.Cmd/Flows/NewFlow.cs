@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
@@ -24,23 +23,23 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class NewFlow : IFlow
     {
         private readonly Command command;
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly NewFlowConsole console;
 
-        public NewFlow(Command command, AddressBooks addressBooks, NewFlowConsole console)
+        public NewFlow(Command command, OpenedAddressBooks openedAddressBooks, NewFlowConsole console)
         {
             if (command == null) throw new ArgumentNullException("command");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
             this.command = command;
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
         public void Execute()
         {
-            bool succeeded = addressBooks.CreateNewAddressBook(command[1]);
+            bool succeeded = openedAddressBooks.CreateNewAddressBook(command[1]);
 
             if (succeeded)
                 console.DisplayAddressBookCreateSuccess();

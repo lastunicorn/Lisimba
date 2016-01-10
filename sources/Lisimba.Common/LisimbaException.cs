@@ -17,12 +17,11 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Common
 {
-    internal class LisimbaException : ApplicationException
+    public class LisimbaException : ApplicationException
     {
         public LisimbaException()
-            : base()
         {
         }
 

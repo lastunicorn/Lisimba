@@ -16,17 +16,15 @@
 
 using System;
 using System.IO;
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
-using AddressBooks = DustInTheWind.Lisimba.BookShell.AddressBooks;
 
 namespace DustInTheWind.Lisimba.Operations
 {
     internal class SaveAsAddressBookOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
         private readonly RecentFiles recentFiles;
 
@@ -35,40 +33,40 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface,
+        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
             ApplicationStatus applicationStatus, RecentFiles recentFiles)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
             this.recentFiles = recentFiles;
 
-            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.Current != null;
+            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = addressBooks.Current != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                if (addressBooks.Current == null)
-                    throw new ApplicationException(LocalizedResources.NoAddessBookOpenedError);
+                if (openedAddressBooks.Current == null)
+                    throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
                 string newLocation = userInterface.AskToSaveLsbFile();
-                addressBooks.Current.SaveAddressBook(newLocation);
+                openedAddressBooks.Current.SaveAddressBook(newLocation);
 
                 AddFileToRecentFileList(newLocation);
 
-                addressBooks.Current.SaveAddressBook(newLocation);
+                openedAddressBooks.Current.SaveAddressBook(newLocation);
 
                 //OnAddressBookSaved(EventArgs.Empty);
                 
@@ -88,7 +86,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplaySuccessStatusText()
         {
-            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
+            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
             applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }

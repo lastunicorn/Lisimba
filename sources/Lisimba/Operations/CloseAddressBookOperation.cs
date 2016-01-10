@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -23,32 +23,32 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class CloseAddressBookOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.CloseCurrentAddressBookOperationDescription; }
         }
 
-        public CloseAddressBookOperation(AddressBooks addressBooks, ApplicationStatus applicationStatus)
+        public CloseAddressBookOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.addressBooks = addressBooks;
-            addressBooks.AddressBookChanged += HandleAddressBookChanged;
+            this.openedAddressBooks = openedAddressBooks;
+            openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
 
-            IsEnabled = addressBooks.Current != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         private void HandleAddressBookChanged(object sender, EventArgs e)
         {
-            IsEnabled = addressBooks.Current != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            addressBooks.CloseAddressBook();
+            openedAddressBooks.CloseAddressBook();
         }
     }
 }

@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.Forms;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -24,7 +23,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class CreateNewContactOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -32,22 +31,22 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public CreateNewContactOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public CreateNewContactOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
 
-            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.Current != null;
+            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = addressBooks.Current != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)

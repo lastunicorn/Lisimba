@@ -16,13 +16,13 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Cmd.Common
+namespace DustInTheWind.ConsoleCommon
 {
     /// <summary>
     /// It is a wrapper over the System.Console class.
     /// Offers functionality to write colored texts.
     /// </summary>
-    static class ConsoleHelper
+    public static class ConsoleHelper
     {
         private const ConsoleColor DefaultColor = ConsoleColor.White;
         private const ConsoleColor SuccessColor = ConsoleColor.Green;

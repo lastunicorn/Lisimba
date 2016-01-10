@@ -63,9 +63,9 @@ namespace DustInTheWind.Lisimba.Cmd
             container.RegisterInstance(container);
             
             container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
-            container.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
+            container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
-            container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
+            container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
             
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
         }

@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
@@ -24,17 +23,17 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     internal class UpdateFlow : IFlow
     {
         private readonly Command command;
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UpdateFlowConsole consoleView;
 
-        public UpdateFlow(Command command, AddressBooks addressBooks, UpdateFlowConsole consoleView)
+        public UpdateFlow(Command command, OpenedAddressBooks openedAddressBooks, UpdateFlowConsole consoleView)
         {
             if (command == null) throw new ArgumentNullException("command");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
             this.command = command;
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.consoleView = consoleView;
         }
 
@@ -80,9 +79,9 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         private void UpdateAddressBookName(string newAddressBookName)
         {
-            if (addressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
-                addressBooks.Current.AddressBook.Name = newAddressBookName;
+                openedAddressBooks.Current.AddressBook.Name = newAddressBookName;
                 consoleView.DisplayAddressBookNameChangeSuccess();
             }
             else

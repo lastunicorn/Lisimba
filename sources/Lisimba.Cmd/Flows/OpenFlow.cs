@@ -18,8 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg;
@@ -30,22 +30,22 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly Command command;
         private readonly OpenFlowConsole console;
-        private readonly AddressBooks addressBooks;
-        private readonly Gates gates;
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(Command command, OpenFlowConsole console, AddressBooks addressBooks, Gates gates, ApplicationConfiguration config)
+        public OpenFlow(Command command, OpenFlowConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates, ApplicationConfiguration config)
         {
             if (command == null) throw new ArgumentNullException("command");
             if (console == null) throw new ArgumentNullException("console");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (gates == null) throw new ArgumentNullException("gates");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (config == null) throw new ArgumentNullException("config");
 
             this.command = command;
             this.console = console;
-            this.addressBooks = addressBooks;
-            this.gates = gates;
+            this.openedAddressBooks = openedAddressBooks;
+            this.availableGates = availableGates;
             this.config = config;
         }
 
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         private AddressBookLoadResult OpenAddressBookFromCommand()
         {
             IGate gate = GetGate();
-            return addressBooks.OpenAddressBook(command[1], gate);
+            return openedAddressBooks.OpenAddressBook(command[1], gate);
         }
 
         private IGate GetGate()
@@ -73,13 +73,13 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             if (command.ParameterCount >= 2)
             {
                 string gateId = command[2];
-                return gates.GetGate(gateId);
+                return availableGates.GetGate(gateId);
             }
 
-            if (gates.DefaultGate == null)
-                throw new ApplicationException(Resources.NoDefaultGateError);
+            if (availableGates.DefaultGate == null)
+                throw new LisimbaException(Resources.NoDefaultGateError);
 
-            return gates.DefaultGate;
+            return availableGates.DefaultGate;
         }
 
         private AddressBookLoadResult OpenLastAddressBook()
@@ -87,35 +87,35 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
 
             if (addressBookLocationInfo == null)
-                throw new ApplicationException(Resources.NoAddressBookInConfigFile);
+                throw new LisimbaException(Resources.NoAddressBookInConfigFile);
 
             IGate gate = ChooseGate(addressBookLocationInfo);
 
-            return addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+            return openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
         }
 
         private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
         {
             if (addressBookLocationInfo.GateId != null)
-                return gates.GetGate(addressBookLocationInfo.GateId);
+                return availableGates.GetGate(addressBookLocationInfo.GateId);
 
-            if (gates.DefaultGate == null)
+            if (availableGates.DefaultGate == null)
             {
                 string message = string.Format(Resources.OpenAddressBookNoGateError, addressBookLocationInfo.FileName);
-                throw new ApplicationException(message);
+                throw new LisimbaException(message);
             }
 
-            console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, gates.DefaultGate.Name);
+            console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, availableGates.DefaultGate.Name);
 
-            return gates.DefaultGate;
+            return availableGates.DefaultGate;
         }
 
         private void DisplaySuccessMessage()
         {
-            if (addressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
-                string addressBookFileName = addressBooks.Current.Location;
-                int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
+                string addressBookFileName = openedAddressBooks.Current.Location;
+                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
 
                 console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
             }

@@ -39,14 +39,14 @@ namespace DustInTheWind.Lisimba.Common
         {
             string[] parts = text.Split(';');
             if (parts.Length == 0)
-                throw new ApplicationException("Invalid 'LastAddressBook' value in configuration file.");
+                throw new LisimbaException("Invalid 'LastAddressBook' value in configuration file.");
 
             if (parts.Length >= 1)
             {
                 FileName = parts[0].Trim();
 
                 if (FileName.Length == 0)
-                    throw new ApplicationException("Invalid 'LastAddressBook' value in configuration file.");
+                    throw new LisimbaException("Invalid 'LastAddressBook' value in configuration file.");
             }
 
             if (parts.Length >= 2)
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Common
                 GateId = parts[1].Trim();
 
                 if (GateId.Length == 0)
-                    throw new ApplicationException("Invalid 'LastAddressBook' value in configuration file.");
+                    throw new LisimbaException("Invalid 'LastAddressBook' value in configuration file.");
             }
         }
 

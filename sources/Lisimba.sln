@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Cmd", "Lisimba.Cmd\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Common", "Lisimba.Common\Lisimba.Common.csproj", "{878C348A-8754-4CAD-AB41-B63B3E157256}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCommon", "ConsoleCommon\ConsoleCommon.csproj", "{BDFCAD78-775A-478D-8BFF-6A986704AA0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{878C348A-8754-4CAD-AB41-B63B3E157256}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{878C348A-8754-4CAD-AB41-B63B3E157256}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{878C348A-8754-4CAD-AB41-B63B3E157256}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDFCAD78-775A-478D-8BFF-6A986704AA0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDFCAD78-775A-478D-8BFF-6A986704AA0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDFCAD78-775A-478D-8BFF-6A986704AA0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDFCAD78-775A-478D-8BFF-6A986704AA0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

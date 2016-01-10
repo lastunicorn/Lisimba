@@ -18,7 +18,7 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Biorhythm
 {
     public partial class BiorythmForm : Form
     {

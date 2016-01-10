@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
@@ -32,7 +31,7 @@ namespace DustInTheWind.Lisimba
             unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
 

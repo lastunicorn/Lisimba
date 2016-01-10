@@ -16,32 +16,31 @@
 
 using System;
 using System.IO;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class InfoFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly InfoFlowConsole console;
 
-        public InfoFlow(AddressBooks addressBooks, InfoFlowConsole console)
+        public InfoFlow(OpenedAddressBooks openedAddressBooks, InfoFlowConsole console)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
         public void Execute()
         {
-            if (addressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
-                string addressBookLocation = Path.GetFullPath(addressBooks.Current.Location);
-                console.DisplayAddressBookInfo(addressBooks.Current.AddressBook, addressBookLocation);
+                string addressBookLocation = Path.GetFullPath(openedAddressBooks.Current.Location);
+                console.DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
             }
             else
             {

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
@@ -25,17 +25,17 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     /// </summary>
     class Prompter
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly PrompterConsole console;
         private readonly FlowProvider flowProvider;
 
-        public Prompter(AddressBooks addressBooks, PrompterConsole console, FlowProvider flowProvider)
+        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowProvider flowProvider)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
             if (flowProvider == null) throw new ArgumentNullException("flowProvider");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
             this.flowProvider = flowProvider;
         }
@@ -52,8 +52,8 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         private void DisplayPrompter()
         {
-            string addressBookName = addressBooks.Current == null ? null : addressBooks.Current.AddressBook.Name;
-            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
+            string addressBookName = openedAddressBooks.Current == null ? null : openedAddressBooks.Current.AddressBook.Name;
+            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
 
             console.DisplayPrompter(addressBookName, isModified);
         }

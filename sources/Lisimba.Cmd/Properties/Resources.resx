@@ -132,9 +132,6 @@
   <data name="NoLocationWasSpecifiedError" xml:space="preserve">
     <value>A location has to be specified.</value>
   </data>
-  <data name="GateNotFoundError" xml:space="preserve">
-    <value>There is no gate with id = {0}</value>
-  </data>
   <data name="GoodByeMessage" xml:space="preserve">
     <value>See you soon!</value>
   </data>

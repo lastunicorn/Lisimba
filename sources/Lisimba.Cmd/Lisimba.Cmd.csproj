@@ -53,19 +53,16 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Configuration\ApplicationConfiguration.cs" />
+    <Compile Include="Business\ApplicationConfiguration.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="LisimbaApplication.cs" />
-    <Compile Include="Common\CommandParser.cs" />
     <Compile Include="Business\AddressBookGuarder.cs" />
     <Compile Include="Business\AddressBookGuarderConsole.cs" />
     <Compile Include="Business\FlowProvider.cs" />
     <Compile Include="Business\Prompter.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
-    <Compile Include="Common\Command.cs" />
     <Compile Include="Flows\EmptyFlow.cs" />
     <Compile Include="Flows\GateFlow.cs" />
-    <Compile Include="Common\IFlow.cs" />
     <Compile Include="Flows\InfoFlow.cs" />
     <Compile Include="Flows\NewFlow.cs" />
     <Compile Include="Flows\SaveFlow.cs" />
@@ -73,12 +70,10 @@
     <Compile Include="Business\PrompterConsole.cs" />
     <Compile Include="LisimbaApplicationConsole.cs" />
     <Compile Include="Flows\CloseFlowConsole.cs" />
-    <Compile Include="Common\ConsoleHelper.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Business\Gates.cs" />
     <Compile Include="Flows\GateFlowConsole.cs" />
     <Compile Include="Flows\InfoFlowConsole.cs" />
     <Compile Include="Flows\NewFlowConsole.cs" />
@@ -110,6 +105,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleCommon\ConsoleCommon.csproj">
+      <Project>{BDFCAD78-775A-478D-8BFF-6A986704AA0C}</Project>
+      <Name>ConsoleCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Common\Lisimba.Common.csproj">
       <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
       <Name>Lisimba.Common</Name>
@@ -125,6 +124,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

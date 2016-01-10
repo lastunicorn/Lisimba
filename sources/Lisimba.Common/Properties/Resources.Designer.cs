@@ -70,6 +70,15 @@ namespace DustInTheWind.Lisimba.Common.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no gate with id = {0}.
+        /// </summary>
+        internal static string GateNotFoundError {
+            get {
+                return ResourceManager.GetString("GateNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No gate is associated with the address book..
         /// </summary>
         internal static string NoGateWasSpecifiedError {

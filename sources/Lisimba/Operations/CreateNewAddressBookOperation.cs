@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class CreateNewAddressBookOperation : ExecutableViewModelBase<string>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -31,13 +31,13 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewAddressBookOperationDescription; }
         }
 
-        public CreateNewAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public CreateNewAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
         }
 
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                bool succeeded = addressBooks.CreateNewAddressBook(null);
+                bool succeeded = openedAddressBooks.CreateNewAddressBook(null);
 
                 if (succeeded)
                     applicationStatus.StatusText = "A new address book was created.";

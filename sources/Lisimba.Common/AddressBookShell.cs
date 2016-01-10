@@ -90,10 +90,10 @@ namespace DustInTheWind.Lisimba.Common
         public void SaveAddressBook()
         {
             if (Gate == null)
-                throw new ApplicationException(Resources.NoGateWasSpecifiedError);
+                throw new LisimbaException(Resources.NoGateWasSpecifiedError);
 
             if (Location == null)
-                throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
+                throw new LisimbaException(Resources.NoLocationWasSpecifiedError);
 
             Gate.Save(AddressBook, Location);
             Status = AddressBookStatus.Saved;
@@ -106,7 +106,7 @@ namespace DustInTheWind.Lisimba.Common
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
             if (Gate == null)
-                throw new ApplicationException(Resources.NoGateWasSpecifiedError);
+                throw new LisimbaException(Resources.NoGateWasSpecifiedError);
 
             Gate.Save(AddressBook, newLocation);
             Location = newLocation;

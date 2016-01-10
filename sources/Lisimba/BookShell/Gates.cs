@@ -18,7 +18,6 @@ using System;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.BookShell
 {
@@ -27,7 +26,7 @@ namespace DustInTheWind.Lisimba.BookShell
     /// </summary>
     class Gates
     {
-        private readonly ConfigurationService config;
+        private readonly IApplicationConfiguration config;
         private readonly GateProvider gateProvider;
 
         public IGate DefaultGate { get; set; }
@@ -42,7 +41,7 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public Gates(ConfigurationService config, GateProvider gateProvider)
+        public Gates(IApplicationConfiguration config, GateProvider gateProvider)
         {
             if (config == null) throw new ArgumentNullException("config");
             if (gateProvider == null) throw new ArgumentNullException("gateProvider");
@@ -57,7 +56,7 @@ namespace DustInTheWind.Lisimba.BookShell
         {
             try
             {
-                DefaultGate = gateProvider.GetGate(config.LisimbaConfigSection.Gates.Default);
+                DefaultGate = gateProvider.GetGate(config.DefaultGateName);
             }
             catch
             {

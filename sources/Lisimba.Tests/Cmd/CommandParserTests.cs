@@ -1,4 +1,4 @@
-﻿using DustInTheWind.Lisimba.Cmd.Common;
+﻿using DustInTheWind.ConsoleCommon;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Cmd

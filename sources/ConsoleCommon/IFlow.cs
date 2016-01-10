@@ -14,12 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Cmd.Common
+namespace DustInTheWind.ConsoleCommon
 {
     /// <summary>
     /// Represents a flow that is executed at the user's request
     /// </summary>
-    internal interface IFlow
+    public interface IFlow
     {
         void Execute();
     }

@@ -15,18 +15,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Properties;
-using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Common
 {
     /// <summary>
     /// Manages the gates available in the application.
     /// </summary>
-    class Gates
+    public class AvailableGates
     {
-        private readonly ApplicationConfiguration config;
+        private readonly IApplicationConfiguration config;
         private readonly GateProvider gateProvider;
 
         public IGate DefaultGate { get; set; }
@@ -41,7 +40,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
         }
 
-        public Gates(ApplicationConfiguration config, GateProvider gateProvider)
+        public AvailableGates(IApplicationConfiguration config, GateProvider gateProvider)
         {
             if (config == null) throw new ArgumentNullException("config");
             if (gateProvider == null) throw new ArgumentNullException("gateProvider");

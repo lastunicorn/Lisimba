@@ -16,7 +16,6 @@
 
 using System;
 using System.ComponentModel;
-using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
@@ -28,7 +27,7 @@ namespace DustInTheWind.Lisimba.Main
 {
     internal class LisimbaViewModel : ViewModelBase
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
         private readonly LisimbaApplication lisimbaApplication;
 
@@ -84,36 +83,36 @@ namespace DustInTheWind.Lisimba.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, AddressBooks addressBooks, CommandPool commandPool)
+            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
             this.lisimbaApplication = lisimbaApplication;
             this.applicationStatus = applicationStatus;
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
             CreateNewAddressBookOperation = commandPool.CreateNewAddressBookOperation;
             OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
 
-            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            addressBooks.ContactChanged += HandleContactChanged;
-            addressBooks.Closing += HandleAddressBooksClosing;
-            addressBooks.Opened += HandleAddressBooksOpened;
+            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            openedAddressBooks.ContactChanged += HandleContactChanged;
+            openedAddressBooks.Closing += HandleAddressBooksClosing;
+            openedAddressBooks.Opened += HandleAddressBooksOpened;
 
-            if (addressBooks.Current != null)
-                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+            if (openedAddressBooks.Current != null)
+                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
-            IsContactEditVisible = addressBooks.Contact != null;
-            IsAddressBookViewVisible = addressBooks.Current != null;
+            IsContactEditVisible = openedAddressBooks.Contact != null;
+            IsAddressBookViewVisible = openedAddressBooks.Current != null;
 
             StatusText = applicationStatus.StatusText;
             Title = BuildFormTitle();
@@ -121,18 +120,18 @@ namespace DustInTheWind.Lisimba.Main
 
         private void HandleAddressBooksOpened(object sender, EventArgs e)
         {
-            addressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+            openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
         }
 
         private void HandleAddressBooksClosing(object sender, CancelEventArgs e)
         {
-            addressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
+            openedAddressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            IsContactEditVisible = addressBooks.Contact != null;
-            ContactEditorViewModel.Contact = addressBooks.Contact;
+            IsContactEditVisible = openedAddressBooks.Contact != null;
+            ContactEditorViewModel.Contact = openedAddressBooks.Contact;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
@@ -144,7 +143,7 @@ namespace DustInTheWind.Lisimba.Main
                 e.NewAddressBook.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             Title = BuildFormTitle();
-            IsAddressBookViewVisible = addressBooks.Current != null;
+            IsAddressBookViewVisible = openedAddressBooks.Current != null;
         }
 
         private void HandleAddressBookStatusChanged(object sender, EventArgs e)
@@ -164,11 +163,11 @@ namespace DustInTheWind.Lisimba.Main
 
         private string BuildFormTitle()
         {
-            if (addressBooks.Current == null)
+            if (openedAddressBooks.Current == null)
                 return lisimbaApplication.ProgramName;
 
-            string addressBookName = addressBooks.Current.GetFriendlyName();
-            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
+            string addressBookName = openedAddressBooks.Current.GetFriendlyName();
+            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
             string unsavedSign = isModified ? " *" : string.Empty;
             string programName = lisimbaApplication.ProgramName;
 
@@ -177,7 +176,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public bool WindowIsClosing()
         {
-            return addressBooks.CloseAddressBook();
+            return openedAddressBooks.CloseAddressBook();
         }
     }
 }

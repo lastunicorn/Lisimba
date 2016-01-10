@@ -16,27 +16,28 @@
 
 using System;
 using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
     internal class LisimbaApplication
     {
         private readonly LisimbaApplicationConsole console;
-        private readonly Gates gates;
+        private readonly AvailableGates availableGates;
         private readonly Prompter prompter;
         private readonly AddressBookGuarder addressBookGuarder;
 
         public static bool ExitRequested { get; set; }
 
-        public LisimbaApplication(Gates gates, LisimbaApplicationConsole console,
+        public LisimbaApplication(AvailableGates availableGates, LisimbaApplicationConsole console,
             Prompter prompter, AddressBookGuarder addressBookGuarder)
         {
-            if (gates == null) throw new ArgumentNullException("gates");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (console == null) throw new ArgumentNullException("console");
             if (prompter == null) throw new ArgumentNullException("prompter");
             if (addressBookGuarder == null) throw new ArgumentNullException("addressBookGuarder");
 
-            this.gates = gates;
+            this.availableGates = availableGates;
             this.console = console;
             this.prompter = prompter;
             this.addressBookGuarder = addressBookGuarder;
@@ -45,7 +46,7 @@ namespace DustInTheWind.Lisimba.Cmd
         public void Run()
         {
             console.WriteWelcomeMessage();
-            console.WriteGateInfo(gates.DefaultGateName);
+            console.WriteGateInfo(availableGates.DefaultGateName);
 
             addressBookGuarder.Start();
             prompter.Run();

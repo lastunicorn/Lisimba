@@ -88,8 +88,6 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="BookShell\AddressBooks.cs" />
-    <Compile Include="BookShell\Gates.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Config\GatesConfigElement.cs" />
     <Compile Include="ContactEdit\BirthDateEditForm.cs">
@@ -147,7 +145,6 @@
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\TrayIconPresenter.cs" />
-    <Compile Include="LisimbaException.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\ExecutableViewModelBase.cs" />

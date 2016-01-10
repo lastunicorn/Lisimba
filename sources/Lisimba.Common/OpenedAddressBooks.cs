@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Common
     /// <summary>
     /// Contains and manages the opened address books.
     /// </summary>
-    public class AddressBooks
+    public class OpenedAddressBooks
     {
         private readonly RecentFiles recentFiles;
         private AddressBookShell current;
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Common
             }
         }
 
-        public AddressBooks(RecentFiles recentFiles)
+        public OpenedAddressBooks(RecentFiles recentFiles)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 

@@ -18,7 +18,7 @@ using System.Configuration;
 using System.Reflection;
 using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     internal class ApplicationConfiguration : IApplicationConfiguration
     {

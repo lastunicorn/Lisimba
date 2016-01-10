@@ -18,8 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -28,23 +27,23 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class ShowFlow : IFlow
     {
         private readonly Command command;
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ShowFlowConsole console;
 
-        public ShowFlow(Command command, AddressBooks addressBooks, ShowFlowConsole console)
+        public ShowFlow(Command command, OpenedAddressBooks openedAddressBooks, ShowFlowConsole console)
         {
             if (command == null) throw new ArgumentNullException("command");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
             this.command = command;
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
         public void Execute()
         {
-            if (addressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
                 if (command.HasParameters)
                     DisplayContactDetails(command[1]);
@@ -69,7 +68,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         private IEnumerable<Contact> GetContacts(string contactName)
         {
-            return addressBooks.Current.AddressBook.Contacts
+            return openedAddressBooks.Current.AddressBook.Contacts
                 .Where(x =>
                     (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||
@@ -79,7 +78,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         private void DisplayAllContacts()
         {
-            foreach (Contact contact in addressBooks.Current.AddressBook.Contacts)
+            foreach (Contact contact in openedAddressBooks.Current.AddressBook.Contacts)
             {
                 console.DisplayContactShort(contact);
             }

@@ -17,8 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
@@ -27,15 +26,15 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NextBirthdaysFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly NextBirthdaysFlowConsole console;
 
-        public NextBirthdaysFlow(AddressBooks addressBooks, NextBirthdaysFlowConsole console)
+        public NextBirthdaysFlow(OpenedAddressBooks openedAddressBooks, NextBirthdaysFlowConsole console)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
@@ -46,7 +45,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         private void DisplayNextBirthdays()
         {
-            if (addressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
                 IEnumerable<Contact> contacts = GetContacts();
 
@@ -63,7 +62,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         private IEnumerable<Contact> GetContacts()
         {
-            return addressBooks.Current.AddressBook.Contacts
+            return openedAddressBooks.Current.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())

@@ -18,13 +18,12 @@ using System;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
-using AddressBooks = DustInTheWind.Lisimba.BookShell.AddressBooks;
 
 namespace DustInTheWind.Lisimba.Operations
 {
     internal class SaveAddressBookOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -32,32 +31,32 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public SaveAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
 
-            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.Current != null;
+            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = addressBooks.Current != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                if (addressBooks.Current == null)
-                    throw new ApplicationException(LocalizedResources.NoAddessBookOpenedError);
+                if (openedAddressBooks.Current == null)
+                    throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
-                addressBooks.Current.SaveAddressBook();
+                openedAddressBooks.Current.SaveAddressBook();
 
                 DisplaySuccessStatusText();
             }
@@ -69,7 +68,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplaySuccessStatusText()
         {
-            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
+            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
             applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }

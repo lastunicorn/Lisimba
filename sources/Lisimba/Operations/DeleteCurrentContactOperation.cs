@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class DeleteCurrentContactOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -32,23 +32,23 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(AddressBooks addressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public DeleteCurrentContactOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
 
-            addressBooks.ContactChanged += HandleCurrentContactChanged;
+            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
 
-            IsEnabled = addressBooks.Contact != null;
+            IsEnabled = openedAddressBooks.Contact != null;
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
-            IsEnabled = addressBooks.Contact != null;
+            IsEnabled = openedAddressBooks.Contact != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public void DeleteCurrentContact()
         {
-            Contact contactToDelete = addressBooks.Contact;
+            Contact contactToDelete = openedAddressBooks.Contact;
 
             if (contactToDelete == null)
                 return;
@@ -67,10 +67,10 @@ namespace DustInTheWind.Lisimba.Operations
 
             if (allowToContinue)
             {
-                addressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
+                openedAddressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
 
-                if (ReferenceEquals(contactToDelete, addressBooks.Contact))
-                    addressBooks.Contact = null;
+                if (ReferenceEquals(contactToDelete, openedAddressBooks.Contact))
+                    openedAddressBooks.Contact = null;
             }
         }
 

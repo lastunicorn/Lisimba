@@ -18,9 +18,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Cmd.Common
+namespace DustInTheWind.ConsoleCommon
 {
-    class Command : IEnumerable<string>
+    public class Command : IEnumerable<string>
     {
         private readonly List<string> parameters;
 

@@ -17,9 +17,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Cmd.Common
+namespace DustInTheWind.ConsoleCommon
 {
-    class CommandParser
+    public class CommandParser
     {
         private readonly string commandText;
         private int index;

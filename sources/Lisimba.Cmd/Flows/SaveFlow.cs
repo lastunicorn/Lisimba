@@ -15,8 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
@@ -24,29 +23,29 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class SaveFlow : IFlow
     {
         private readonly Command command;
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly SaveFlowConsole consoleView;
 
-        public SaveFlow(Command command, AddressBooks addressBooks, SaveFlowConsole consoleView)
+        public SaveFlow(Command command, OpenedAddressBooks openedAddressBooks, SaveFlowConsole consoleView)
         {
             if (command == null) throw new ArgumentNullException("command");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
             this.command = command;
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.consoleView = consoleView;
         }
 
         public void Execute()
         {
-            if (addressBooks.Current == null)
+            if (openedAddressBooks.Current == null)
                 return;
 
             if (command[1] != null)
-                addressBooks.Current.SaveAddressBook(command[1]);
+                openedAddressBooks.Current.SaveAddressBook(command[1]);
             else
-                addressBooks.Current.SaveAddressBook();
+                openedAddressBooks.Current.SaveAddressBook();
 
             consoleView.DisplayAddressBookSaveSuccess();
         }

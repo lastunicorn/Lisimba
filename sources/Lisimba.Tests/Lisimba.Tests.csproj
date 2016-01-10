@@ -64,6 +64,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleCommon\ConsoleCommon.csproj">
+      <Project>{BDFCAD78-775A-478D-8BFF-6A986704AA0C}</Project>
+      <Name>ConsoleCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Cmd\Lisimba.Cmd.csproj">
       <Project>{afe9db0d-d0d6-433c-abbf-e58c9fa61276}</Project>
       <Name>Lisimba.Cmd</Name>
