@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,13 +15,25 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
+using DustInTheWind.Lisimba.Egg;
+using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.BookShell
+namespace DustInTheWind.Lisimba.Common
 {
-    internal class AddressBookLoadResult
+    public class GateProvider
     {
-        public bool Success { get; set; }
-        public IEnumerable<Exception> Warnings { get; set; }
+        private readonly UnityContainer unityContainer;
+
+        public GateProvider(UnityContainer unityContainer)
+        {
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+
+            this.unityContainer = unityContainer;
+        }
+
+        public IGate GetGate(string gateId)
+        {
+            return unityContainer.Resolve<IGate>(gateId);
+        }
     }
 }

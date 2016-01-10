@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,18 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
-namespace DustInTheWind.Lisimba.BookShell
+namespace DustInTheWind.Lisimba.Common
 {
-    public class AddressBookChangingEventArgs : EventArgs
+    public interface IApplicationConfiguration
     {
-        private bool cancel;
-
-        public bool Cancel
-        {
-            get { return cancel; }
-            set { cancel = cancel || value; }
-        }
+        string DefaultGateName { get; }
+        AddressBookLocationInfo LastAddressBook { get; set; }
+        AddressBookLocationInfo[] RecentFilesList { get; }
     }
 }

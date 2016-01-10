@@ -117,67 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AskToSaveAddressBook" xml:space="preserve">
-    <value>Save current address book? [y-yes; n-no; c-cancel] </value>
+  <data name="DefaultAddressBookName" xml:space="preserve">
+    <value>New Address Book</value>
   </data>
-  <data name="AskForNewLocation" xml:space="preserve">
-    <value>Address book new file name [empty string to cancel]: </value>
-  </data>
-  <data name="NoDefaultGateError" xml:space="preserve">
-    <value>No default gate is set.</value>
-  </data>
-  <data name="NoAddessBookOpenedError" xml:space="preserve">
-    <value>No address book is opened.</value>
+  <data name="NoGateWasSpecifiedError" xml:space="preserve">
+    <value>No gate is associated with the address book.</value>
   </data>
   <data name="NoLocationWasSpecifiedError" xml:space="preserve">
     <value>A location has to be specified.</value>
-  </data>
-  <data name="GateNotFoundError" xml:space="preserve">
-    <value>There is no gate with id = {0}</value>
-  </data>
-  <data name="GoodByeMessage" xml:space="preserve">
-    <value>See you soon!</value>
-  </data>
-  <data name="DefaultGateMessage" xml:space="preserve">
-    <value>DefaultGate: {0}</value>
-  </data>
-  <data name="LisimbaTitle" xml:space="preserve">
-    <value>Lisimba ver. {0}</value>
-  </data>
-  <data name="AddressBookClosedSuccess" xml:space="preserve">
-    <value>Address book was closed.</value>
-  </data>
-  <data name="GateChangesSuccess" xml:space="preserve">
-    <value>The gate was successfully changed.</value>
-  </data>
-  <data name="NewAddressBookCreatedSuccess" xml:space="preserve">
-    <value>New address book successfully created.</value>
-  </data>
-  <data name="AddressBookOpenSuccess" xml:space="preserve">
-    <value>Successfully loaded {0} contacts from file '{1}'.</value>
-  </data>
-  <data name="OpenAddressBookUnknownError" xml:space="preserve">
-    <value>No address book was oppened because of unknown error.</value>
-  </data>
-  <data name="SaveAddressBookSuccess" xml:space="preserve">
-    <value>Address book was successfully saved.</value>
-  </data>
-  <data name="UnknownCommandError" xml:space="preserve">
-    <value>Unknown command</value>
-  </data>
-  <data name="InvalidUpdateActionError" xml:space="preserve">
-    <value>Invalid update action.</value>
-  </data>
-  <data name="AddressBookChangedSuccess" xml:space="preserve">
-    <value>Address book name successfully changed.</value>
-  </data>
-  <data name="AddressBookOpenUseDefaultGateWarning" xml:space="preserve">
-    <value>No gate is specified for '{0}'. Using default gate '{1}'.</value>
-  </data>
-  <data name="NoAddressBookInConfigFile" xml:space="preserve">
-    <value>There is no record of an address book being opened. Please specify a file.</value>
-  </data>
-  <data name="OpenAddressBookNoGateError" xml:space="preserve">
-    <value>No gate is specified for address book '{0}' and no default gate is set.</value>
   </data>
 </root>

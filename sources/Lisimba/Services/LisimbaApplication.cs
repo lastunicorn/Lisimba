@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
@@ -126,7 +127,7 @@ namespace DustInTheWind.Lisimba.Services
                     return null;
 
                 case "last":
-                    return recentFiles.GetMostRecentFileName();
+                    return recentFiles.GetMostRecentFile().FileName;
 
                 case "specified":
                     return configurationService.LisimbaConfigSection.LoadFileAtStart.FileName;

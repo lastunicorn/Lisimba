@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;

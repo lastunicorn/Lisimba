@@ -211,16 +211,10 @@ Do you wanna save it before proceedeing?</value>
   <data name="GateNotFoundError" xml:space="preserve">
     <value>There is no gate with id = {0}</value>
   </data>
-  <data name="NoLocationWasSpecifiedError" xml:space="preserve">
-    <value>A location has to be specified.</value>
-  </data>
-  <data name="NoGateWasSpecifiedError" xml:space="preserve">
-    <value>No gate is associated with the address book.</value>
-  </data>
   <data name="NoAddessBookOpenedError" xml:space="preserve">
     <value>No address book is opened.</value>
   </data>
-    <data name="DefaultAddressBookName" xml:space="preserve">
+  <data name="DefaultAddressBookName" xml:space="preserve">
     <value>New Address Book</value>
   </data>
 </root>

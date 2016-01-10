@@ -17,8 +17,10 @@
 using System;
 using System.IO;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
+using AddressBooks = DustInTheWind.Lisimba.BookShell.AddressBooks;
 
 namespace DustInTheWind.Lisimba.Operations
 {

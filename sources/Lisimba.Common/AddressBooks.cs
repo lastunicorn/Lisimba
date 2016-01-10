@@ -17,24 +17,59 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Common
 {
     /// <summary>
     /// Contains and manages the opened address books.
     /// </summary>
-    class AddressBooks
+    public class AddressBooks
     {
         private readonly RecentFiles recentFiles;
+        private AddressBookShell current;
+        private Contact contact;
 
-        public AddressBookShell Current { get; private set; }
+        public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
 
         public event CancelEventHandler Closing;
         public event EventHandler Closed;
         public event EventHandler Opened;
+
+        public event EventHandler AddressBookSaved;
+        public event EventHandler ContactChanged;
+
+        public AddressBookShell Current
+        {
+            get { return current; }
+            private set
+            {
+                if (current == value)
+                    return;
+
+                AddressBookShell oldAddressBook = current;
+
+                current = value;
+                Contact = null;
+
+                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, current));
+            }
+        }
+
+        public Contact Contact
+        {
+            get { return contact; }
+            set
+            {
+                if (ReferenceEquals(contact, value))
+                    return;
+
+                contact = value;
+                OnContactChanged();
+            }
+        }
 
         public AddressBooks(RecentFiles recentFiles)
         {
@@ -43,12 +78,62 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             this.recentFiles = recentFiles;
         }
 
+        protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
+        {
+            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnAddressBookSaved(EventArgs e)
+        {
+            EventHandler handler = AddressBookSaved;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnContactChanged()
+        {
+            EventHandler handler = ContactChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnClosing(CancelEventArgs e)
+        {
+            CancelEventHandler handler = Closing;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnClosed()
+        {
+            EventHandler handler = Closed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnOpened()
+        {
+            EventHandler handler = Opened;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
         public bool CreateNewAddressBook(string name)
         {
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
                 return false;
+
+            Contact = null;
 
             string addressBookName = name ?? Resources.DefaultAddressBookName;
             AddressBook addressBook = new AddressBook { Name = addressBookName };
@@ -103,34 +188,12 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             if (eva.Cancel)
                 return false;
 
+            Contact = null;
             Current = null;
+
             OnClosed();
 
             return true;
-        }
-
-        protected virtual void OnClosing(CancelEventArgs e)
-        {
-            CancelEventHandler handler = Closing;
-            
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnClosed()
-        {
-            EventHandler handler = Closed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnOpened()
-        {
-            EventHandler handler = Opened;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
     }
 }

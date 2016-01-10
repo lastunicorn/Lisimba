@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
@@ -29,9 +30,9 @@ namespace DustInTheWind.Lisimba.BookShell
     /// </summary>
     internal class AddressBooks
     {
+        private readonly RecentFiles recentFiles;
         private AddressBookShell current;
         private Contact contact;
-        private readonly RecentFiles recentFiles;
 
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
 
@@ -41,19 +42,6 @@ namespace DustInTheWind.Lisimba.BookShell
 
         public event EventHandler AddressBookSaved;
         public event EventHandler ContactChanged;
-
-        public Contact Contact
-        {
-            get { return contact; }
-            set
-            {
-                if (ReferenceEquals(contact, value))
-                    return;
-
-                contact = value;
-                OnContactChanged();
-            }
-        }
 
         public AddressBookShell Current
         {
@@ -69,6 +57,19 @@ namespace DustInTheWind.Lisimba.BookShell
                 Contact = null;
 
                 OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, current));
+            }
+        }
+
+        public Contact Contact
+        {
+            get { return contact; }
+            set
+            {
+                if (ReferenceEquals(contact, value))
+                    return;
+
+                contact = value;
+                OnContactChanged();
             }
         }
 

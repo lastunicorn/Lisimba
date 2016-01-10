@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,9 +17,9 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Common
 {
-    internal class AddressBookLoadResult
+    public class AddressBookLoadResult
     {
         public bool Success { get; set; }
         public IEnumerable<Exception> Warnings { get; set; }

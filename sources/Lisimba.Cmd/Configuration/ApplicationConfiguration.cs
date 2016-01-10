@@ -16,10 +16,11 @@
 
 using System.Configuration;
 using System.Reflection;
+using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
-    internal class ApplicationConfiguration
+    internal class ApplicationConfiguration : IApplicationConfiguration
     {
         private readonly Configuration config;
 
@@ -51,6 +52,14 @@ namespace DustInTheWind.Lisimba.Cmd
             {
                 config.AppSettings.Settings["LastAddressBook"].Value = value.ToString();
                 config.Save();
+            }
+        }
+
+        public AddressBookLocationInfo[] RecentFilesList
+        {
+            get
+            {
+                return new[] { LastAddressBook };
             }
         }
     }

@@ -53,13 +53,8 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Business\AddressBookLoadResult.cs" />
-    <Compile Include="Business\AddressBookStatus.cs" />
-    <Compile Include="Business\RecentFiles.cs" />
-    <Compile Include="Configuration\AddressBookLocationInfo.cs" />
     <Compile Include="Configuration\ApplicationConfiguration.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Business\AddressBookShell.cs" />
     <Compile Include="LisimbaApplication.cs" />
     <Compile Include="Common\CommandParser.cs" />
     <Compile Include="Business\AddressBookGuarder.cs" />
@@ -80,11 +75,9 @@
     <Compile Include="Flows\CloseFlowConsole.cs" />
     <Compile Include="Common\ConsoleHelper.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
-    <Compile Include="Business\AddressBooks.cs" />
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Business\GateProvider.cs" />
     <Compile Include="Business\Gates.cs" />
     <Compile Include="Flows\GateFlowConsole.cs" />
     <Compile Include="Flows\InfoFlowConsole.cs" />
@@ -117,6 +110,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lisimba.Common\Lisimba.Common.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
       <Name>Lisimba.Egg</Name>

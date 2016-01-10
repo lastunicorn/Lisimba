@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services

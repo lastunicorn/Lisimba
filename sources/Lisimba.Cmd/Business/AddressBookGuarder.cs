@@ -16,6 +16,7 @@
 
 using System;
 using System.ComponentModel;
+using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {

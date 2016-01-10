@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Config;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
@@ -45,9 +46,9 @@ namespace DustInTheWind.Lisimba.MainMenu
 
             int j = 0; // index for the list of menu items (this.recentFilesMenuItems)
 
-            RecentFilesConfigElementCollection recentFiles = RecentFiles.GetAllFiles();
+            AddressBookLocationInfo[] recentFiles = RecentFiles.GetAllFiles();
 
-            for (int i = 0; i < recentFiles.Count; i++)
+            for (int i = 0; i < recentFiles.Length; i++)
             {
                 CommandedMenuItem menuItem;
 

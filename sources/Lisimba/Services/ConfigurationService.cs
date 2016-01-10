@@ -14,12 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Configuration;
 using DustInTheWind.Lisimba.Config;
+using System.Linq;
+using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    internal class ConfigurationService
+    internal class ConfigurationService : IApplicationConfiguration
     {
         private Configuration config;
 
@@ -64,6 +67,50 @@ namespace DustInTheWind.Lisimba.Services
         public void Save()
         {
             config.Save(ConfigurationSaveMode.Full);
+        }
+
+        public string DefaultGateName
+        {
+            get { return LisimbaConfigSection.Gates.Default; }
+        }
+
+        public AddressBookLocationInfo LastAddressBook
+        {
+            get
+            {
+                RecentFilesConfigElementCollection recentFiles = LisimbaConfigSection.RecentFilesList;
+
+                if (recentFiles.Count == 0)
+                    return null;
+
+                RecentFilesConfigElement lastFile = recentFiles[0];
+
+                return new AddressBookLocationInfo
+                {
+                    FileName = lastFile.FileName,
+                    GateId = null
+                };
+            }
+            set
+            {
+                LisimbaConfigSection.RecentFilesList.AddNewRecentFile(value.FileName);
+                config.Save();
+            }
+        }
+
+        public AddressBookLocationInfo[] RecentFilesList
+        {
+            get
+            {
+                return LisimbaConfigSection.RecentFilesList
+                    .Cast<RecentFilesConfigElement>()
+                    .Select(x => new AddressBookLocationInfo
+                    {
+                        FileName = x.FileName,
+                        GateId = null
+                    })
+                    .ToArray();
+            }
         }
     }
 }

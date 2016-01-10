@@ -15,17 +15,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba.BookShell
+namespace DustInTheWind.Lisimba.Common
 {
     /// <summary>
     /// Contains an opened address book and metainformation about it like the location
     /// from where it was openes and the gate used.
     /// </summary>
-    class AddressBookShell
+    public class AddressBookShell
     {
         private AddressBookStatus status;
 
@@ -90,10 +90,10 @@ namespace DustInTheWind.Lisimba.BookShell
         public void SaveAddressBook()
         {
             if (Gate == null)
-                throw new ApplicationException(LocalizedResources.NoGateWasSpecifiedError);
+                throw new ApplicationException(Resources.NoGateWasSpecifiedError);
 
             if (Location == null)
-                throw new ApplicationException(LocalizedResources.NoLocationWasSpecifiedError);
+                throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
 
             Gate.Save(AddressBook, Location);
             Status = AddressBookStatus.Saved;
@@ -106,7 +106,7 @@ namespace DustInTheWind.Lisimba.BookShell
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
             if (Gate == null)
-                throw new ApplicationException(LocalizedResources.NoGateWasSpecifiedError);
+                throw new ApplicationException(Resources.NoGateWasSpecifiedError);
 
             Gate.Save(AddressBook, newLocation);
             Location = newLocation;

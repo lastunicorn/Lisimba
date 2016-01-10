@@ -206,24 +206,6 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No gate is associated with the address book..
-        /// </summary>
-        internal static string NoGateWasSpecifiedError {
-            get {
-                return ResourceManager.GetString("NoGateWasSpecifiedError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to A location has to be specified..
-        /// </summary>
-        internal static string NoLocationWasSpecifiedError {
-            get {
-                return ResourceManager.GetString("NoLocationWasSpecifiedError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Open address book from file..
         /// </summary>
         internal static string OpenAddressBookOperationDescription {

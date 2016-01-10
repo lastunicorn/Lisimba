@@ -17,11 +17,11 @@
 using System;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Common
 {
-    class RecentFiles
+    public class RecentFiles
     {
-        private readonly ApplicationConfiguration config;
+        private readonly IApplicationConfiguration config;
 
         public event EventHandler<EventArgs> FileNameAdded;
 
@@ -33,14 +33,14 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 handler(this, e);
         }
 
-        public RecentFiles(ApplicationConfiguration config)
+        public RecentFiles(IApplicationConfiguration config)
         {
             if (config == null) throw new ArgumentNullException("config");
 
             this.config = config;
         }
 
-        public AddressBookLocationInfo GetMostRecentFileName()
+        public AddressBookLocationInfo GetMostRecentFile()
         {
             return config.LastAddressBook;
         }
@@ -52,6 +52,13 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 FileName = fileName,
                 GateId = gate.Id
             };
+
+            OnFileNameAdded(EventArgs.Empty);
+        }
+
+        public AddressBookLocationInfo[] GetAllFiles()
+        {
+            return config.RecentFilesList;
         }
     }
 }

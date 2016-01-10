@@ -16,9 +16,9 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.BookShell
+namespace DustInTheWind.Lisimba.Common
 {
-    internal class AddressBookChangedEventArgs : EventArgs
+    public class AddressBookChangedEventArgs : EventArgs
     {
         public AddressBookShell NewAddressBook { get; private set; }
         public AddressBookShell OldAddressBook { get; private set; }
