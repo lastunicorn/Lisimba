@@ -14,16 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Egg.Book;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class CloseFlowConsole
+    class NextBirthdaysFlowConsole
     {
-        public void DisplayAddressBookCloseSuccess()
+        public void DisplayContactWithBirthday(Contact contact)
         {
-            ConsoleHelper.WriteLineSuccess(Resources.AddressBookClosedSuccess);
+            string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
+            Console.WriteLine(text);
         }
 
         public void DisplayNoAddressBookMessage()

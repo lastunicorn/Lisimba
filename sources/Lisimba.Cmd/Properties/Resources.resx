@@ -180,4 +180,7 @@
     <data name="OpenAddressBookNoGateError" xml:space="preserve">
     <value>No gate is specified for address book '{0}' and no default gate is set.</value>
   </data>
+    <data name="DefaultAddressBookName" xml:space="preserve">
+    <value>New Address Book</value>
+  </data>
 </root>

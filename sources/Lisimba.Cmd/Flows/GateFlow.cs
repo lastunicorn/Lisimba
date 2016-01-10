@@ -17,28 +17,28 @@
 using System;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
     class GateFlow : IFlow
     {
+        private readonly Command command;
         private readonly Gates gates;
         private readonly GateFlowConsole console;
 
-        public GateFlow(Gates gates, GateFlowConsole console)
+        public GateFlow(Command command, Gates gates, GateFlowConsole console)
         {
+            if (command == null) throw new ArgumentNullException("command");
             if (gates == null) throw new ArgumentNullException("gates");
             if (console == null) throw new ArgumentNullException("console");
 
+            this.command = command;
             this.gates = gates;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             if (command.ParameterCount == 0)
             {
                 console.DisplayGate(gates.DefaultGate);

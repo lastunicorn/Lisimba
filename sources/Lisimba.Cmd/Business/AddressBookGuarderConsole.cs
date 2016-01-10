@@ -43,7 +43,7 @@ namespace Lisimba.Cmd.Business
 
         public string AskForNewLocation()
         {
-            Console.WriteLine(Resources.AskForNewLocation);
+            Console.Write(Resources.AskForNewLocation);
             return Console.ReadLine();
         }
     }

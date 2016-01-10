@@ -17,7 +17,6 @@
 using System;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
@@ -35,11 +34,9 @@ namespace Lisimba.Cmd.Flows
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
-            if (addressBooks.AddressBook != null)
+            if (addressBooks.Current != null)
             {
                 addressBooks.CloseAddressBook();
                 console.DisplayAddressBookCloseSuccess();

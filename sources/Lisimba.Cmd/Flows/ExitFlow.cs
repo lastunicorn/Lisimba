@@ -14,27 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using Lisimba.Cmd.Common;
 
 namespace Lisimba.Cmd.Flows
 {
     class ExitFlow : IFlow
     {
-        private readonly ApplicationLoop applicationLoop;
-
-        public ExitFlow(ApplicationLoop applicationLoop)
+        public void Execute()
         {
-            if (applicationLoop == null) throw new ArgumentNullException("applicationLoop");
-
-            this.applicationLoop = applicationLoop;
-        }
-
-        public void Execute(Command command)
-        {
-            if (command == null) throw new ArgumentNullException("command");
-
-            applicationLoop.ExitRequested = true;
+            LisimbaApplication.ExitRequested = true;
         }
     }
 }

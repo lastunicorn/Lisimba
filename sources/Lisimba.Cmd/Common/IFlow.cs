@@ -21,6 +21,6 @@ namespace Lisimba.Cmd.Common
     /// </summary>
     internal interface IFlow
     {
-        void Execute(Command command);
+        void Execute();
     }
 }

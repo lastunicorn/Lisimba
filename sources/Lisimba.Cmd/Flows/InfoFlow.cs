@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
@@ -35,14 +35,17 @@ namespace Lisimba.Cmd.Flows
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
-            if (addressBooks.AddressBook == null)
-                console.DisplayNoAddressBookMessage();
+            if (addressBooks.Current != null)
+            {
+                string addressBookLocation = Path.GetFullPath(addressBooks.Current.Location);
+                console.DisplayAddressBookInfo(addressBooks.Current.AddressBook, addressBookLocation);
+            }
             else
-                console.DisplayAddressBookInfo(addressBooks.AddressBook, addressBooks.AddressBookLocation);
+            {
+                console.DisplayNoAddressBookMessage();
+            }
         }
     }
 }

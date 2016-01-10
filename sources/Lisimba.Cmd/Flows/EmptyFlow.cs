@@ -20,7 +20,7 @@ namespace Lisimba.Cmd.Flows
 {
     internal class EmptyFlow : IFlow
     {
-        public void Execute(Command command)
+        public void Execute()
         {
         }
     }

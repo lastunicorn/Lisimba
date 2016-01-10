@@ -19,16 +19,16 @@ using Microsoft.Practices.Unity;
 
 namespace Lisimba.Cmd
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
                 UnityContainer container = DependencyContainerSetup.CreateContainer();
 
-                ApplicationLoop applicationLoop = container.Resolve<ApplicationLoop>();
-                applicationLoop.Run();
+                LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
+                lisimbaApplication.Run();
             }
             catch (Exception ex)
             {

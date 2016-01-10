@@ -17,13 +17,18 @@
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class UnknownFlowConsole
+    class CloseFlowConsole
     {
-        public void DisplayUnknownCommandError()
+        public void DisplayAddressBookCloseSuccess()
         {
-            ConsoleHelper.WriteLineError(Resources.UnknownCommandError);
+            ConsoleHelper.WriteLineSuccess(Resources.AddressBookClosedSuccess);
+        }
+
+        public void DisplayNoAddressBookMessage()
+        {
+            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

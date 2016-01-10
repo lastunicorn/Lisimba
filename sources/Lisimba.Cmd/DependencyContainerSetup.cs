@@ -60,7 +60,7 @@ namespace Lisimba.Cmd
         private static void RegisterAdditionalTypes(UnityContainer container)
         {
             container.RegisterInstance(container);
-            container.RegisterType<ApplicationLoop>(new ContainerControlledLifetimeManager());
+            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
             container.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<Gates>(new ContainerControlledLifetimeManager());

@@ -16,11 +16,12 @@
 
 using System;
 using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Flows;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd.Flows
+namespace Lisimba.Cmd.Business
 {
-    class FlowProvider
+    internal class FlowProvider
     {
         private readonly UnityContainer unityContainer;
 
@@ -30,47 +31,49 @@ namespace Lisimba.Cmd.Flows
             this.unityContainer = unityContainer;
         }
 
-        public IFlow CreateFlow(string commandName)
+        public IFlow CreateFlow(Command command)
         {
-            switch (commandName)
+            var dependencyOverride = new DependencyOverride(typeof (Command), command);
+
+            switch (command.Name)
             {
                 case "new":
-                    return unityContainer.Resolve<NewFlow>();
+                    return unityContainer.Resolve<NewFlow>(dependencyOverride);
 
                 case "update":
-                    return unityContainer.Resolve<UpdateFlow>();
+                    return unityContainer.Resolve<UpdateFlow>(dependencyOverride);
 
                 case "open":
-                    return unityContainer.Resolve<OpenFlow>();
+                    return unityContainer.Resolve<OpenFlow>(dependencyOverride);
 
                 case "save":
-                    return unityContainer.Resolve<SaveFlow>();
+                    return unityContainer.Resolve<SaveFlow>(dependencyOverride);
 
                 case "show":
-                    return unityContainer.Resolve<ShowFlow>();
+                    return unityContainer.Resolve<ShowFlow>(dependencyOverride);
 
                 case "next-birthdays":
-                    return unityContainer.Resolve<NextBirthdaysFlow>();
+                    return unityContainer.Resolve<NextBirthdaysFlow>(dependencyOverride);
 
                 case "close":
-                    return unityContainer.Resolve<CloseFlow>();
+                    return unityContainer.Resolve<CloseFlow>(dependencyOverride);
 
                 case "info":
-                    return unityContainer.Resolve<InfoFlow>();
+                    return unityContainer.Resolve<InfoFlow>(dependencyOverride);
 
                 case "gate":
-                    return unityContainer.Resolve<GateFlow>();
+                    return unityContainer.Resolve<GateFlow>(dependencyOverride);
 
                 case "exit":
                 case "bye":
                 case "goodbye":
-                    return unityContainer.Resolve<ExitFlow>();
+                    return unityContainer.Resolve<ExitFlow>(dependencyOverride);
 
                 case "":
-                    return unityContainer.Resolve<EmptyFlow>();
+                    return unityContainer.Resolve<EmptyFlow>(dependencyOverride);
 
                 default:
-                    return unityContainer.Resolve<UnknownFlow>();
+                    return unityContainer.Resolve<UnknownFlow>(dependencyOverride);
             }
         }
     }

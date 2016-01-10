@@ -14,21 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Egg.Book;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class UpdateFlowConsole
+    class InfoFlowConsole
     {
-        public void DisplayInvalidUpdateActionError()
+        public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            ConsoleHelper.WriteLineError(Resources.InvalidUpdateActionError);
-        }
+            Console.WriteLine();
 
-        public void DisplayAddressBookNameChangeSuccess()
-        {
-            ConsoleHelper.WriteLineSuccess(Resources.AddressBookChangedSuccess);
+            ConsoleHelper.WriteEmphasize("Address book: ");
+            Console.WriteLine(addressBook.Name);
+
+            ConsoleHelper.WriteEmphasize("Location: ");
+            Console.WriteLine(addressBookLocation);
+
+            ConsoleHelper.WriteEmphasize("Contacts: ");
+            Console.WriteLine(addressBook.Contacts.Count);
         }
 
         public void DisplayNoAddressBookMessage()

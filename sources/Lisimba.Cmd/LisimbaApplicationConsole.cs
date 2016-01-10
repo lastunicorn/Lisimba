@@ -14,16 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Reflection;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd
 {
-    class NewFlowConsole
+    class LisimbaApplicationConsole
     {
-        public void DisplayAddressBookCreateSuccess()
+        public void WriteWelcomeMessage()
         {
-            ConsoleHelper.WriteLineSuccess(Resources.NewAddressBookCreatedSuccess);
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            string title = string.Format(Resources.LisimbaTitle, version);
+            ConsoleHelper.WriteLineEmphasize(title);
+        }
+
+        public void WriteGoodByeMessage()
+        {
+            Console.WriteLine(Resources.GoodByeMessage);
+        }
+
+        public void WriteGateInfo(string gateName)
+        {
+            Console.WriteLine(Resources.DefaultGateMessage, gateName);
         }
     }
 }

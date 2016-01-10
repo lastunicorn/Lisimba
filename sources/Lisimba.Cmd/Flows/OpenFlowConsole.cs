@@ -17,7 +17,7 @@
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
     class OpenFlowConsole
     {

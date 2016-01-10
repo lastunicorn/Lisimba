@@ -17,28 +17,28 @@
 using System;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
     internal class UpdateFlow : IFlow
     {
+        private readonly Command command;
         private readonly AddressBooks addressBooks;
         private readonly UpdateFlowConsole consoleView;
 
-        public UpdateFlow(AddressBooks addressBooks, UpdateFlowConsole consoleView)
+        public UpdateFlow(Command command, AddressBooks addressBooks, UpdateFlowConsole consoleView)
         {
+            if (command == null) throw new ArgumentNullException("command");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
+            this.command = command;
             this.addressBooks = addressBooks;
             this.consoleView = consoleView;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-            
             foreach (string actionText in command)
             {
                 ProcessAction(actionText);
@@ -79,9 +79,9 @@ namespace Lisimba.Cmd.Flows
 
         private void UpdateAddressBookName(string newAddressBookName)
         {
-            if (addressBooks.AddressBook != null)
+            if (addressBooks.Current != null)
             {
-                addressBooks.AddressBook.Name = newAddressBookName;
+                addressBooks.Current.AddressBook.Name = newAddressBookName;
                 consoleView.DisplayAddressBookNameChangeSuccess();
             }
             else

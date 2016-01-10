@@ -14,17 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.Egg.Book;
+using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class NextBirthdaysFlowConsole
+    class UnknownFlowConsole
     {
-        public void DisplayContactWithBirthday(Contact contact)
+        public void DisplayUnknownCommandError()
         {
-            string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
-            Console.WriteLine(text);
+            ConsoleHelper.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }

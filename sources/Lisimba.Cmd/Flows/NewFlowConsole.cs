@@ -14,29 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class GateFlowConsole
+    class NewFlowConsole
     {
-        public void DisplayGate(IGate gate)
+        public void DisplayAddressBookCreateSuccess()
         {
-            Console.WriteLine();
-
-            ConsoleHelper.WriteEmphasize("DefaultGate: ");
-            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
-
-            ConsoleHelper.WriteEmphasize("Description: ");
-            Console.WriteLine(gate.Description);
-        }
-
-        public void DisplayGateChangeSuccess()
-        {
-            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
+            ConsoleHelper.WriteLineSuccess(Resources.NewAddressBookCreatedSuccess);
         }
     }
 }

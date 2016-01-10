@@ -19,22 +19,18 @@ using DustInTheWind.Lisimba.Egg.Book;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class InfoFlowConsole
+    class ShowFlowConsole
     {
-        public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
+        public void DisplayContactDetails(Contact contact)
         {
-            Console.WriteLine();
+            Console.WriteLine(contact.Name.ToString());
+        }
 
-            ConsoleHelper.WriteEmphasize("Address book: ");
-            Console.WriteLine(addressBook.Name);
-
-            ConsoleHelper.WriteEmphasize("Location: ");
-            Console.WriteLine(addressBookLocation);
-
-            ConsoleHelper.WriteEmphasize("Contacts: ");
-            Console.WriteLine(addressBook.Contacts.Count);
+        public void DisplayContactShort(Contact contact)
+        {
+            Console.WriteLine(contact.ToString());
         }
 
         public void DisplayNoAddressBookMessage()

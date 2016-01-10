@@ -21,7 +21,6 @@ using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
@@ -39,25 +38,35 @@ namespace Lisimba.Cmd.Flows
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             DisplayNextBirthdays();
         }
 
         private void DisplayNextBirthdays()
         {
-            IEnumerable<Contact> contacts = addressBooks.AddressBook.Contacts
+            if (addressBooks.Current != null)
+            {
+                IEnumerable<Contact> contacts = GetContacts();
+
+                foreach (Contact contact in contacts)
+                {
+                    console.DisplayContactWithBirthday(contact);
+                }
+            }
+            else
+            {
+                console.DisplayNoAddressBookMessage();
+            }
+        }
+
+        private IEnumerable<Contact> GetContacts()
+        {
+            return addressBooks.Current.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())
                 .Take(10);
-
-            foreach (Contact contact in contacts)
-            {
-                console.DisplayContactWithBirthday(contact);
-            }
         }
     }
 }

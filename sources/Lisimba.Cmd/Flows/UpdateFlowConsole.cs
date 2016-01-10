@@ -14,21 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.Egg.Book;
+using Lisimba.Cmd.Common;
+using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class ShowFlowConsole
+    class UpdateFlowConsole
     {
-        public void DisplayContactDetails(Contact contact)
+        public void DisplayInvalidUpdateActionError()
         {
-            Console.WriteLine(contact.Name.ToString());
+            ConsoleHelper.WriteLineError(Resources.InvalidUpdateActionError);
         }
 
-        public void DisplayContactShort(Contact contact)
+        public void DisplayAddressBookNameChangeSuccess()
         {
-            Console.WriteLine(contact.ToString());
+            ConsoleHelper.WriteLineSuccess(Resources.AddressBookChangedSuccess);
+        }
+
+        public void DisplayNoAddressBookMessage()
+        {
+            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

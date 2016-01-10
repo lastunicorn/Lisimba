@@ -23,50 +23,31 @@ namespace Lisimba.Cmd.Business
 {
     class AddressBooks
     {
-        private const string DefaultAddressBookName = "New Address Book";
-
         private readonly ApplicationConfiguration config;
-        private readonly Gates gates;
         private readonly AddressBookGuarder guarder;
 
-        public AddressBook AddressBook { get; private set; }
-        public string AddressBookLocation { get; private set; }
+        public AddressBookShell Current { get; private set; }
 
-        public string AddressBookName
-        {
-            get { return AddressBook == null ? null : AddressBook.Name; }
-        }
+        public event EventHandler Saved;
+        public event EventHandler Closed;
 
-        public bool IsAddressBookSaved { get; private set; }
-
-        public AddressBooks(ApplicationConfiguration config, Gates gates, AddressBookGuarder guarder)
+        public AddressBooks(ApplicationConfiguration config, AddressBookGuarder guarder)
         {
             if (config == null) throw new ArgumentNullException("config");
-            if (gates == null) throw new ArgumentNullException("gates");
             if (guarder == null) throw new ArgumentNullException("guarder");
 
             this.config = config;
-            this.gates = gates;
             this.guarder = guarder;
 
             guarder.AddressBooks = this;
-
-            IsAddressBookSaved = true;
         }
 
         public void OpenAddressBook(string fileName, IGate gate)
         {
-            bool allowToContinue = guarder.EnsureSave();
+            CloseAddressBook();
 
-            if (!allowToContinue)
-                return;
-
-            CloseAddressBookInternal();
-
-            AddressBook = gate.Load(fileName);
-            AddressBook.Changed += HandleAddressBookChanged;
-
-            AddressBookLocation = fileName;
+            AddressBook addressBook = gate.Load(fileName);
+            Current = new AddressBookShell(addressBook, gate, fileName);
 
             config.LastAddressBook = new AddressBookLocationInfo
             {
@@ -82,66 +63,53 @@ namespace Lisimba.Cmd.Business
             if (!allowToContinue)
                 return;
 
-            CloseAddressBookInternal();
-        }
-
-        private void CloseAddressBookInternal()
-        {
-            if (AddressBook != null)
-                AddressBook.Changed -= HandleAddressBookChanged;
-
-            AddressBook = null;
-            AddressBookLocation = null;
-            IsAddressBookSaved = true;
+            Current = null;
+            OnClosed();
         }
 
         public void NewAddressBook(string name)
         {
-            bool allowToContinue = guarder.EnsureSave();
+            CloseAddressBook();
 
-            if (!allowToContinue)
-                return;
-
-            CloseAddressBookInternal();
-
-            string addressBookName = name ?? DefaultAddressBookName;
-            AddressBook = new AddressBook { Name = addressBookName };
-            AddressBook.Changed += HandleAddressBookChanged;
-        }
-
-        private void HandleAddressBookChanged(object sender, EventArgs eventArgs)
-        {
-            IsAddressBookSaved = false;
+            string addressBookName = name ?? Resources.DefaultAddressBookName;
+            AddressBook addressBook = new AddressBook { Name = addressBookName };
+            Current = new AddressBookShell(addressBook);
         }
 
         public void SaveAddressBook()
         {
-            if (AddressBook == null)
+            if (Current == null)
                 throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
-            if (gates.DefaultGate == null)
-                throw new ApplicationException(Resources.NoDefaultGateError);
-
-            if (AddressBookLocation == null)
-                throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
-
-            gates.DefaultGate.Save(AddressBook, AddressBookLocation);
-            IsAddressBookSaved = true;
+            Current.SaveAddressBook();
+            OnSaved();
         }
 
         public void SaveAddressBookAs(string newLocation)
         {
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
-            if (AddressBook == null)
+            if (Current == null)
                 throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
-            if (gates.DefaultGate == null)
-                throw new ApplicationException(Resources.NoDefaultGateError);
+            Current.SaveAddressBook(newLocation);
+            OnSaved();
+        }
 
-            gates.DefaultGate.Save(AddressBook, newLocation);
-            AddressBookLocation = newLocation;
-            IsAddressBookSaved = true;
+        protected virtual void OnSaved()
+        {
+            EventHandler handler = Saved;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnClosed()
+        {
+            EventHandler handler = Closed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

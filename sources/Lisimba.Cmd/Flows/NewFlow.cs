@@ -17,28 +17,28 @@
 using System;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
 namespace Lisimba.Cmd.Flows
 {
     class NewFlow : IFlow
     {
+        private readonly Command command;
         private readonly AddressBooks addressBooks;
         private readonly NewFlowConsole console;
 
-        public NewFlow(AddressBooks addressBooks, NewFlowConsole console)
+        public NewFlow(Command command, AddressBooks addressBooks, NewFlowConsole console)
         {
+            if (command == null) throw new ArgumentNullException("command");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
+            this.command = command;
             this.addressBooks = addressBooks;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             addressBooks.NewAddressBook(command[1]);
             console.DisplayAddressBookCreateSuccess();
         }

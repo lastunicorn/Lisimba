@@ -47,5 +47,10 @@ namespace Lisimba.Cmd.Business
         {
             return Console.ReadLine();
         }
+
+        public void WriteError(string text)
+        {
+            ConsoleHelper.WriteLineError(text);
+        }
     }
 }

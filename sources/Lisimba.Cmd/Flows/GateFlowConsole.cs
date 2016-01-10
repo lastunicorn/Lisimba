@@ -15,34 +15,28 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Reflection;
+using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Common;
 using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Presentation
+namespace Lisimba.Cmd.Flows
 {
-    class ApplicationLoopConsole
+    class GateFlowConsole
     {
-        public void WriteWelcomeMessage()
+        public void DisplayGate(IGate gate)
         {
-            Version version = Assembly.GetEntryAssembly().GetName().Version;
-            string title = string.Format(Resources.LisimbaTitle, version);
-            ConsoleHelper.WriteLineEmphasize(title);
+            Console.WriteLine();
+
+            ConsoleHelper.WriteEmphasize("DefaultGate: ");
+            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
+
+            ConsoleHelper.WriteEmphasize("Description: ");
+            Console.WriteLine(gate.Description);
         }
 
-        public void WriteGoodByeMessage()
+        public void DisplayGateChangeSuccess()
         {
-            Console.WriteLine(Resources.GoodByeMessage);
-        }
-
-        public void WriteGateInfo(string gateName)
-        {
-            Console.WriteLine(Resources.DefaultGateMessage, gateName);
-        }
-
-        public void WriteError(string text)
-        {
-            ConsoleHelper.WriteLineError(text);
+            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
         }
     }
 }

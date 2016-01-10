@@ -20,33 +20,34 @@ namespace Lisimba.Cmd.Business
 {
     class AddressBookGuarder
     {
-        private readonly AddressBookGuarderConsole consoleView;
+        private readonly AddressBookGuarderConsole console;
 
         public AddressBooks AddressBooks { get; set; }
 
-        public AddressBookGuarder(AddressBookGuarderConsole consoleView)
+        public AddressBookGuarder(AddressBookGuarderConsole console)
         {
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
 
-            this.consoleView = consoleView;
+            this.console = console;
         }
 
+        /// <returns><c>true</c> if it is allowed to continue; false otherwise.</returns>
         public bool EnsureSave()
         {
-            if (AddressBooks == null || AddressBooks.IsAddressBookSaved)
+            if (AddressBooks == null || AddressBooks.Current == null || AddressBooks.Current.IsAddressBookSaved)
                 return true;
 
-            bool? needSave = consoleView.AskToSaveAddressBook();
+            bool? needToSave = console.AskToSaveAddressBook();
 
-            if (needSave == null)
+            if (needToSave == null)
                 return false;
 
-            if (!needSave.Value)
+            if (!needToSave.Value)
                 return true;
 
-            if (AddressBooks.AddressBookLocation == null)
+            if (AddressBooks.Current.Location == null)
             {
-                string newLocation = consoleView.AskForNewLocation();
+                string newLocation = console.AskForNewLocation();
 
                 if (newLocation == null)
                     return false;

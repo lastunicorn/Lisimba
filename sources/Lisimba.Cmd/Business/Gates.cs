@@ -20,6 +20,9 @@ using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Business
 {
+    /// <summary>
+    /// Manages the gates available in the application.
+    /// </summary>
     class Gates
     {
         private readonly ApplicationConfiguration config;

@@ -115,6 +115,15 @@ namespace Lisimba.Cmd.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Address Book.
+        /// </summary>
+        internal static string DefaultAddressBookName {
+            get {
+                return ResourceManager.GetString("DefaultAddressBookName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DefaultGate: {0}.
         /// </summary>
         internal static string DefaultGateMessage {

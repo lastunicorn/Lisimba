@@ -18,50 +18,50 @@ using System;
 using DustInTheWind.Lisimba.Egg;
 using Lisimba.Cmd.Business;
 using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 using Lisimba.Cmd.Properties;
 
 namespace Lisimba.Cmd.Flows
 {
     class OpenFlow : IFlow
     {
+        private readonly Command command;
         private readonly OpenFlowConsole console;
         private readonly AddressBooks addressBooks;
         private readonly Gates gates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(OpenFlowConsole console, AddressBooks addressBooks, Gates gates, ApplicationConfiguration config)
+        public OpenFlow(Command command, OpenFlowConsole console, AddressBooks addressBooks, Gates gates, ApplicationConfiguration config)
         {
+            if (command == null) throw new ArgumentNullException("command");
             if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
             if (config == null) throw new ArgumentNullException("config");
 
+            this.command = command;
             this.console = console;
             this.addressBooks = addressBooks;
             this.gates = gates;
             this.config = config;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             if (command.HasParameters)
-                OpenAddressBookFromCommand(command);
+                OpenAddressBookFromCommand();
             else
                 OpenLastAddressBook();
 
             DisplayResultMessage();
         }
 
-        private void OpenAddressBookFromCommand(Command command)
+        private void OpenAddressBookFromCommand()
         {
-            IGate gate = GetGate(command);
+            IGate gate = GetGate();
             addressBooks.OpenAddressBook(command[1], gate);
         }
 
-        private IGate GetGate(Command command)
+        private IGate GetGate()
         {
             if (command.ParameterCount >= 2)
             {
@@ -82,42 +82,39 @@ namespace Lisimba.Cmd.Flows
             if (addressBookLocationInfo == null)
                 throw new ApplicationException(Resources.NoAddressBookInConfigFile);
 
-            string fileName = addressBookLocationInfo.FileName;
+            IGate gate = ChooseGate(addressBookLocationInfo);
 
-            IGate gate;
+            addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+        }
 
+        private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
+        {
             if (addressBookLocationInfo.GateId != null)
-            {
-                gate = gates.GetGate(addressBookLocationInfo.GateId);
-            }
-            else
-            {
-                if (gates.DefaultGate == null)
-                {
-                    string message = string.Format(Resources.OpenAddressBookNoGateError, fileName);
-                    throw new ApplicationException(message);
-                }
+                return gates.GetGate(addressBookLocationInfo.GateId);
 
-                console.DisplayUsingDefaultGateWarning(fileName, gates.DefaultGate.Name);
-
-                gate = gates.DefaultGate;
+            if (gates.DefaultGate == null)
+            {
+                string message = string.Format(Resources.OpenAddressBookNoGateError, addressBookLocationInfo.FileName);
+                throw new ApplicationException(message);
             }
 
-            addressBooks.OpenAddressBook(fileName, gate);
+            console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, gates.DefaultGate.Name);
+
+            return gates.DefaultGate;
         }
 
         private void DisplayResultMessage()
         {
-            if (addressBooks.AddressBook == null)
+            if (addressBooks.Current != null)
             {
-                console.DisplayNoAddressBookMessage();
+                string addressBookFileName = addressBooks.Current.Location;
+                int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
+
+                console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
             }
             else
             {
-                string addressBookFileName = addressBooks.AddressBookLocation;
-                int contactsCount = addressBooks.AddressBook.Contacts.Count;
-
-                console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
+                console.DisplayNoAddressBookMessage();
             }
         }
     }
