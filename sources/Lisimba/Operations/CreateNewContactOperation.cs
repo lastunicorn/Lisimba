@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class CreateNewContactOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly AddressBooks addressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -32,22 +32,22 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public CreateNewContactOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public CreateNewContactOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBookShell = addressBookShell;
+            this.addressBooks = addressBooks;
             this.userInterface = userInterface;
 
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBookShell.AddressBook != null;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBooks.AddressBook != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = addressBookShell.AddressBook != null;
+            IsEnabled = addressBooks.AddressBook != null;
         }
 
         protected override void DoExecute(object parameter)

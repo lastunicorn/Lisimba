@@ -15,28 +15,25 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Common;
-using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
+using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.BookShell
 {
-    class GateFlowConsole
+    class GateProvider
     {
-        public void DisplayGate(IGate gate)
+        private readonly UnityContainer unityContainer;
+
+        public GateProvider(UnityContainer unityContainer)
         {
-            Console.WriteLine();
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
-            ConsoleHelper.WriteEmphasize("DefaultGate: ");
-            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
-
-            ConsoleHelper.WriteEmphasize("Description: ");
-            Console.WriteLine(gate.Description);
+            this.unityContainer = unityContainer;
         }
 
-        public void DisplayGateChangeSuccess()
+        public IGate GetGate(string gateId)
         {
-            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
+            return unityContainer.Resolve<IGate>(gateId);
         }
     }
 }

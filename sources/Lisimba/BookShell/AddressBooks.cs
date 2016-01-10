@@ -17,15 +17,13 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.BookShell
 {
-    internal class AddressBookShell
+    internal class AddressBooks
     {
         private readonly UserInterface userInterface;
         private readonly CommandPool commandPool;
@@ -34,6 +32,7 @@ namespace DustInTheWind.Lisimba.BookShell
         private Contact contact;
         private readonly AddressBookSaver addressBookSaver;
         private readonly RecentFiles recentFiles;
+        private readonly Gates gates;
 
         public event EventHandler<AddressBookChangingEventArgs> AddressBookChanging;
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
@@ -45,8 +44,6 @@ namespace DustInTheWind.Lisimba.BookShell
         /// Gets the full file name of the address book or null if it's a new one.
         /// </summary>
         public string FileName { get; private set; }
-
-        public IGate DefaultGate { get; set; }
 
         public AddressBookStatus Status
         {
@@ -100,23 +97,23 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public AddressBookShell(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool,
-            AddressBookSaver addressBookSaver, RecentFiles recentFiles)
+        public AddressBooks(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool,
+            AddressBookSaver addressBookSaver, RecentFiles recentFiles, Gates gates)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (addressBookSaver == null) throw new ArgumentNullException("addressBookSaver");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.userInterface = userInterface;
             this.commandPool = commandPool;
             this.addressBookSaver = addressBookSaver;
             this.recentFiles = recentFiles;
+            this.gates = gates;
 
             status = AddressBookStatus.New;
-
-            DefaultGate = new ZipXmlGate();
 
             lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
         }
@@ -225,14 +222,14 @@ namespace DustInTheWind.Lisimba.BookShell
             }
 
             Contact = null;
-            AddressBook = DefaultGate.Load(fileName);
+            AddressBook = gates.DefaultGate.Load(fileName);
             FileName = fileName;
             Status = AddressBookStatus.Saved;
 
             return new AddressBookLoadResult
             {
                 Success = true,
-                Warnings = DefaultGate.Warnings
+                Warnings = gates.DefaultGate.Warnings
             };
         }
 
@@ -248,7 +245,7 @@ namespace DustInTheWind.Lisimba.BookShell
 
         private AddressBookSaverResult SaveInternal(string fileName)
         {
-            addressBookSaver.Gate = DefaultGate;
+            addressBookSaver.Gate = gates.DefaultGate;
             addressBookSaver.FileName = fileName;
             addressBookSaver.AddressBook = AddressBook;
 

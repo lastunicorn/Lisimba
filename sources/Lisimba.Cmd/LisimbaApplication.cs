@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using DustInTheWind.Lisimba.Cmd.Business;
 
 namespace DustInTheWind.Lisimba.Cmd
@@ -24,18 +25,22 @@ namespace DustInTheWind.Lisimba.Cmd
         private readonly LisimbaApplicationConsole console;
         private readonly Gates gates;
         private readonly Prompter prompter;
+        private readonly AddressBookGuarder addressBookGuarder;
 
         public static bool ExitRequested { get; set; }
 
-        public LisimbaApplication(Gates gates, LisimbaApplicationConsole console, Prompter prompter)
+        public LisimbaApplication(Gates gates, LisimbaApplicationConsole console,
+            Prompter prompter, AddressBookGuarder addressBookGuarder)
         {
             if (gates == null) throw new ArgumentNullException("gates");
             if (console == null) throw new ArgumentNullException("console");
             if (prompter == null) throw new ArgumentNullException("prompter");
+            if (addressBookGuarder == null) throw new ArgumentNullException("addressBookGuarder");
 
             this.gates = gates;
             this.console = console;
             this.prompter = prompter;
+            this.addressBookGuarder = addressBookGuarder;
         }
 
         public void Run()
@@ -43,6 +48,7 @@ namespace DustInTheWind.Lisimba.Cmd
             console.WriteWelcomeMessage();
             console.WriteGateInfo(gates.DefaultGateName);
 
+            addressBookGuarder.Start();
             prompter.Run();
 
             console.WriteGoodByeMessage();

@@ -23,33 +23,33 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class DeleteCurrentContactOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+        public DeleteCurrentContactOperation(AddressBooks addressBooks, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.addressBookShell = addressBookShell;
+            this.addressBooks = addressBooks;
 
-            addressBookShell.ContactChanged += HandleCurrentContactChanged;
+            addressBooks.ContactChanged += HandleCurrentContactChanged;
 
-            IsEnabled = addressBookShell.Contact != null;
+            IsEnabled = addressBooks.Contact != null;
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
-            IsEnabled = addressBookShell.Contact != null;
+            IsEnabled = addressBooks.Contact != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            addressBookShell.DeleteCurrentContact();
+            addressBooks.DeleteCurrentContact();
         }
     }
 }

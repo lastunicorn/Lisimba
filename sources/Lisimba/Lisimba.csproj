@@ -83,9 +83,12 @@
     <Compile Include="BookShell\AddressBookLoadResult.cs" />
     <Compile Include="BookShell\AddressBookSaver.cs" />
     <Compile Include="BookShell\AddressBookSaverResult.cs" />
-    <Compile Include="BookShell\AddressBookShell.cs" />
+    <Compile Include="BookShell\AddressBooks.cs" />
     <Compile Include="BookShell\AddressBookStatus.cs" />
+    <Compile Include="BookShell\GateProvider.cs" />
+    <Compile Include="BookShell\Gates.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Config\GatesConfigElement.cs" />
     <Compile Include="ContactEdit\BirthDateEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +107,7 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="DependencyContainerSetup.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>

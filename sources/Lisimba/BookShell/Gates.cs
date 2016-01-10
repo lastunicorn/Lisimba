@@ -15,17 +15,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.BookShell
 {
     /// <summary>
     /// Manages the gates available in the application.
     /// </summary>
     class Gates
     {
-        private readonly ApplicationConfiguration config;
+        private readonly ConfigurationService config;
         private readonly GateProvider gateProvider;
 
         public IGate DefaultGate { get; set; }
@@ -40,7 +41,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
         }
 
-        public Gates(ApplicationConfiguration config, GateProvider gateProvider)
+        public Gates(ConfigurationService config, GateProvider gateProvider)
         {
             if (config == null) throw new ArgumentNullException("config");
             if (gateProvider == null) throw new ArgumentNullException("gateProvider");
@@ -55,7 +56,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         {
             try
             {
-                DefaultGate = gateProvider.GetGate(config.DefaultGateName);
+                DefaultGate = gateProvider.GetGate(config.LisimbaConfigSection.Gates.Default);
             }
             catch
             {
@@ -71,7 +72,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
             catch (Exception ex)
             {
-                string message = string.Format(Resources.GateNotFoundError, gateId);
+                string message = string.Format(LocalizedResources.GateNotFoundError, gateId);
                 throw new Exception(message, ex);
             }
         }
@@ -84,7 +85,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
             catch (Exception ex)
             {
-                string message = string.Format(Resources.GateNotFoundError, gateId);
+                string message = string.Format(LocalizedResources.GateNotFoundError, gateId);
                 throw new Exception(message, ex);
             }
         }

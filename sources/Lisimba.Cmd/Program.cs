@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
@@ -25,10 +24,8 @@ namespace DustInTheWind.Lisimba.Cmd
         {
             try
             {
-                UnityContainer container = DependencyContainerSetup.CreateContainer();
-
-                LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
-                lisimbaApplication.Run();
+                Bootstrapper bootstrapper = new Bootstrapper();
+                bootstrapper.Run(args);
             }
             catch (Exception ex)
             {

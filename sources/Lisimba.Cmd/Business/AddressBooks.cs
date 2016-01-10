@@ -15,64 +15,93 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
+    /// <summary>
+    /// Contains and manages the opened address books.
+    /// </summary>
     class AddressBooks
     {
-        private readonly ApplicationConfiguration config;
-        private readonly AddressBookGuarder guarder;
+        private readonly RecentFiles recentFiles;
 
         public AddressBookShell Current { get; private set; }
 
         public event EventHandler Saved;
+        public event CancelEventHandler Closing;
         public event EventHandler Closed;
 
-        public AddressBooks(ApplicationConfiguration config, AddressBookGuarder guarder)
+        public AddressBooks(RecentFiles recentFiles)
         {
-            if (config == null) throw new ArgumentNullException("config");
-            if (guarder == null) throw new ArgumentNullException("guarder");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.config = config;
-            this.guarder = guarder;
-
-            guarder.AddressBooks = this;
+            this.recentFiles = recentFiles;
         }
 
         public void OpenAddressBook(string fileName, IGate gate)
         {
-            CloseAddressBook();
+            CancelEventArgs eva = new CancelEventArgs();
+            OnClosing(eva);
+
+            if (eva.Cancel)
+                return;
+
+            CloseAddressBookInternal();
 
             AddressBook addressBook = gate.Load(fileName);
             Current = new AddressBookShell(addressBook, gate, fileName);
 
-            config.LastAddressBook = new AddressBookLocationInfo
-            {
-                FileName = fileName,
-                GateId = gate.Id
-            };
+            recentFiles.AddRecentFile(fileName, gate);
+
+            if (Current != null)
+                Current.Saved += HandleCurrentSaved;
         }
 
         public void CloseAddressBook()
         {
-            bool allowToContinue = guarder.EnsureSave();
+            CancelEventArgs eva = new CancelEventArgs();
+            OnClosing(eva);
 
-            if (!allowToContinue)
+            if (eva.Cancel)
                 return;
+
+            CloseAddressBookInternal();
+        }
+
+        private void CloseAddressBookInternal()
+        {
+            if (Current != null)
+                Current.Saved -= HandleCurrentSaved;
 
             Current = null;
             OnClosed();
         }
 
+        private void HandleCurrentSaved(object sender, EventArgs eventArgs)
+        {
+            OnSaved();
+        }
+
         public void NewAddressBook(string name)
         {
-            CloseAddressBook();
+            CancelEventArgs eva = new CancelEventArgs();
+            OnClosing(eva);
+
+            if (eva.Cancel)
+                return;
+
+            CloseAddressBookInternal();
 
             string addressBookName = name ?? Resources.DefaultAddressBookName;
             AddressBook addressBook = new AddressBook { Name = addressBookName };
             Current = new AddressBookShell(addressBook);
+
+            if (Current != null)
+                Current.Saved += HandleCurrentSaved;
         }
 
         public void SaveAddressBook()
@@ -81,7 +110,6 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
             Current.SaveAddressBook();
-            OnSaved();
         }
 
         public void SaveAddressBookAs(string newLocation)
@@ -92,7 +120,6 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 throw new ApplicationException(Resources.NoAddessBookOpenedError);
 
             Current.SaveAddressBook(newLocation);
-            OnSaved();
         }
 
         protected virtual void OnSaved()
@@ -101,6 +128,14 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnClosing(CancelEventArgs e)
+        {
+            CancelEventHandler handler = Closing;
+            
+            if (handler != null)
+                handler(this, e);
         }
 
         protected virtual void OnClosed()

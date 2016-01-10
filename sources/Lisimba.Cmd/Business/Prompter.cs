@@ -52,9 +52,9 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         private void DisplayPrompter()
         {
             string addressBookName = addressBooks.Current == null ? null : addressBooks.Current.AddressBook.Name;
-            bool isSaved = addressBooks.Current == null || addressBooks.Current.IsAddressBookSaved;
+            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
 
-            console.DisplayPrompter(addressBookName, isSaved);
+            console.DisplayPrompter(addressBookName, isModified);
         }
 
         private Command ReadCommand()

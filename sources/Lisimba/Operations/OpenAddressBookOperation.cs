@@ -21,7 +21,6 @@ using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Egg.Book;
-using DustInTheWind.Lisimba.Gating;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -29,7 +28,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class OpenAddressBookOperation : ExecutableViewModelBase<string>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly AddressBooks addressBooks;
         private readonly UserInterface userInterface;
         private readonly RecentFiles recentFiles;
 
@@ -38,14 +37,14 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
+        public OpenAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus, RecentFiles recentFiles)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.addressBookShell = addressBookShell;
+            this.addressBooks = addressBooks;
             this.userInterface = userInterface;
             this.recentFiles = recentFiles;
         }
@@ -54,7 +53,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                AddressBookLoadResult result = addressBookShell.LoadFrom(fileName);
+                AddressBookLoadResult result = addressBooks.LoadFrom(fileName);
 
                 if (!result.Success)
                     return;
@@ -72,13 +71,13 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplaySuccessStatusText()
         {
-            int contactsCount = addressBookShell.AddressBook.Contacts.Count;
+            int contactsCount = addressBooks.AddressBook.Contacts.Count;
             applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
         }
 
         private void AddFileToRecentFileList()
         {
-            string fileFullPath = Path.GetFullPath(addressBookShell.FileName);
+            string fileFullPath = Path.GetFullPath(addressBooks.FileName);
             recentFiles.AddRecentFile(fileFullPath);
         }
 
@@ -102,7 +101,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             DateTime startDate = DateTime.Today;
             DateTime endDate = DateTime.Today.AddDays(7);
-            List<Contact> contacts = addressBookShell.AddressBook.GetBirthdays(startDate, endDate).ToList();
+            List<Contact> contacts = addressBooks.AddressBook.GetBirthdays(startDate, endDate).ToList();
 
             if (contacts.Count <= 0)
                 return;

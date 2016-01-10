@@ -205,4 +205,10 @@ Do you wanna save it before proceedeing?</value>
   <data name="ContactDelete_ConfirmationTitle" xml:space="preserve">
     <value>Delete</value>
   </data>
+    <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+    <data name="GateNotFoundError" xml:space="preserve">
+    <value>There is no gate with id = {0}</value>
+  </data>
 </root>

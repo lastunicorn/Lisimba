@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Forms
 {
     internal class AddressBookPropertiesViewModel : ViewModelBase
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly AddressBooks addressBooks;
 
         private string bookName;
         private bool bookNameEnabled;
@@ -71,13 +71,13 @@ namespace DustInTheWind.Lisimba.Forms
             }
         }
 
-        public AddressBookPropertiesViewModel(AddressBookShell addressBookShell)
+        public AddressBookPropertiesViewModel(AddressBooks addressBooks)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.addressBookShell = addressBookShell;
+            this.addressBooks = addressBooks;
 
-            this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;
+            this.addressBooks.AddressBookChanged += HandleAddressBookChanged;
             RefreshModel();
         }
 
@@ -88,7 +88,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void RefreshModel()
         {
-            if (addressBookShell.AddressBook == null)
+            if (addressBooks.AddressBook == null)
                 ClearModel();
             else
                 PopulateModel();
@@ -104,10 +104,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void PopulateModel()
         {
-            BookName = addressBookShell.AddressBook.Name;
+            BookName = addressBooks.AddressBook.Name;
             BookNameEnabled = true;
-            FileLocation = GetFullFileLocationForDisplay(addressBookShell.FileName);
-            ContactsCount = addressBookShell.AddressBook.Contacts.Count;
+            FileLocation = GetFullFileLocationForDisplay(addressBooks.FileName);
+            ContactsCount = addressBooks.AddressBook.Contacts.Count;
         }
 
         private static string GetFullFileLocationForDisplay(string fileName)
@@ -119,13 +119,13 @@ namespace DustInTheWind.Lisimba.Forms
 
         public void OkButtonWasClicked()
         {
-            if (addressBookShell.AddressBook == null)
+            if (addressBooks.AddressBook == null)
                 return;
 
-            bool nameIsChanged = addressBookShell.AddressBook.Name != BookName;
+            bool nameIsChanged = addressBooks.AddressBook.Name != BookName;
 
             if (nameIsChanged)
-                addressBookShell.AddressBook.Name = BookName;
+                addressBooks.AddressBook.Name = BookName;
         }
     }
 }

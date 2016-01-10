@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {

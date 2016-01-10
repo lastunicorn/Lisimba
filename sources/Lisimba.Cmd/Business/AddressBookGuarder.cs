@@ -15,26 +15,41 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class AddressBookGuarder
     {
         private readonly AddressBookGuarderConsole console;
+        private readonly AddressBooks addressBooks;
 
-        public AddressBooks AddressBooks { get; set; }
-
-        public AddressBookGuarder(AddressBookGuarderConsole console)
+        public AddressBookGuarder(AddressBookGuarderConsole console, AddressBooks addressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
             this.console = console;
+            this.addressBooks = addressBooks;
+        }
+
+        public void Start()
+        {
+            addressBooks.Closing += HandleAddressBooksClosing;
+        }
+
+        private void HandleAddressBooksClosing(object sender, CancelEventArgs e)
+        {
+            bool allowToContinue = EnsureAddressBookIsSaved();
+
+            if (!allowToContinue)
+                e.Cancel = true;
         }
 
         /// <returns><c>true</c> if it is allowed to continue; false otherwise.</returns>
-        public bool EnsureSave()
+        public bool EnsureAddressBookIsSaved()
         {
-            if (AddressBooks == null || AddressBooks.Current == null || AddressBooks.Current.IsAddressBookSaved)
+            if (addressBooks.Current == null || addressBooks.Current.Status != AddressBookStatus.Modified)
                 return true;
 
             bool? needToSave = console.AskToSaveAddressBook();
@@ -45,18 +60,18 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             if (!needToSave.Value)
                 return true;
 
-            if (AddressBooks.Current.Location == null)
+            if (addressBooks.Current.Location == null)
             {
                 string newLocation = console.AskForNewLocation();
 
                 if (newLocation == null)
                     return false;
 
-                AddressBooks.SaveAddressBookAs(newLocation);
+                addressBooks.SaveAddressBookAs(newLocation);
             }
             else
             {
-                AddressBooks.SaveAddressBook();
+                addressBooks.SaveAddressBook();
             }
 
             return true;

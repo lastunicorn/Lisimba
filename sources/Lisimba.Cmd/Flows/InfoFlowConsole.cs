@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows

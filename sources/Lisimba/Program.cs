@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba
 {
@@ -34,7 +35,7 @@ namespace DustInTheWind.Lisimba
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, LocalizedResources.ErrorTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

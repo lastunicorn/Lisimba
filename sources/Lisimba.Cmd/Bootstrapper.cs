@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,29 +14,18 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.Cmd.Common;
-using DustInTheWind.Lisimba.Cmd.Properties;
-using DustInTheWind.Lisimba.Egg;
+using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd
 {
-    class GateFlowConsole
+    internal class Bootstrapper
     {
-        public void DisplayGate(IGate gate)
+        public void Run(string[] args)
         {
-            Console.WriteLine();
+            UnityContainer container = DependencyContainerSetup.CreateContainer();
 
-            ConsoleHelper.WriteEmphasize("DefaultGate: ");
-            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
-
-            ConsoleHelper.WriteEmphasize("Description: ");
-            Console.WriteLine(gate.Description);
-        }
-
-        public void DisplayGateChangeSuccess()
-        {
-            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
+            LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
+            lisimbaApplication.Run();
         }
     }
 }

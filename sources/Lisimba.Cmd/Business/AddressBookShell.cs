@@ -1,16 +1,50 @@
+// Lisimba
+// Copyright (C) 2007-2015 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 using System;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
+    /// <summary>
+    /// Contains an opened address book and metainformation about it like the location
+    /// from where it was openes and the gate used.
+    /// </summary>
     class AddressBookShell
     {
+        private AddressBookStatus status;
+
         public AddressBook AddressBook { get; private set; }
         public IGate Gate { get; set; }
         public string Location { get; set; }
 
-        public bool IsAddressBookSaved { get; private set; }
+        public AddressBookStatus Status
+        {
+            get { return status; }
+            private set
+            {
+                status = value;
+                OnStatusChanged();
+            }
+        }
+
+        public event EventHandler Saved;
+        public event EventHandler StatusChanged;
 
         public AddressBookShell(AddressBook addressBook)
             : this(addressBook, null, null)
@@ -30,14 +64,14 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             Gate = gate;
             Location = location;
 
-            IsAddressBookSaved = true;
+            Status = AddressBookStatus.New;
 
             AddressBook.Changed += HandleAddressBookChanged;
         }
 
         private void HandleAddressBookChanged(object sender, EventArgs e)
         {
-            IsAddressBookSaved = false;
+            Status = AddressBookStatus.Modified;
         }
 
         public void SaveAddressBook()
@@ -49,7 +83,9 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
 
             Gate.Save(AddressBook, Location);
-            IsAddressBookSaved = true;
+            Status = AddressBookStatus.Saved;
+
+            OnSaved();
         }
 
         public void SaveAddressBook(string newLocation)
@@ -61,7 +97,9 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
             Gate.Save(AddressBook, newLocation);
             Location = newLocation;
-            IsAddressBookSaved = true;
+            Status = AddressBookStatus.Saved;
+
+            OnSaved();
         }
 
         public void SaveAddressBook(string newLocation, IGate gate)
@@ -72,7 +110,25 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             gate.Save(AddressBook, newLocation);
             Location = newLocation;
             Gate = gate;
-            IsAddressBookSaved = true;
+            Status = AddressBookStatus.Saved;
+
+            OnSaved();
+        }
+
+        protected virtual void OnSaved()
+        {
+            EventHandler handler = Saved;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnStatusChanged()
+        {
+            EventHandler handler = StatusChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

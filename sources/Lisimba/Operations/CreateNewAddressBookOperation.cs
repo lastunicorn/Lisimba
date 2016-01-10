@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class CreateNewAddressBookOperation : ExecutableViewModelBase<string>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly AddressBooks addressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -31,13 +31,13 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewAddressBookOperationDescription; }
         }
 
-        public CreateNewAddressBookOperation(AddressBookShell addressBookShell, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public CreateNewAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBookShell = addressBookShell;
+            this.addressBooks = addressBooks;
             this.userInterface = userInterface;
         }
 
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Operations
         {
             try
             {
-                bool succeeded = addressBookShell.LoadNew();
+                bool succeeded = addressBooks.LoadNew();
 
                 if (succeeded)
                     applicationStatus.StatusText = "A new address book was created.";

@@ -17,6 +17,7 @@
 using System;
 using System.Reflection;
 using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
@@ -37,6 +38,31 @@ namespace DustInTheWind.Lisimba.Cmd
         public void WriteGateInfo(string gateName)
         {
             Console.WriteLine(Resources.DefaultGateMessage, gateName);
+        }
+        public bool? AskToSaveAddressBook()
+        {
+            Console.Write(Resources.AskToSaveAddressBook);
+
+            ConsoleKeyInfo key = Console.ReadKey(false);
+            Console.WriteLine();
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Y:
+                    return true;
+
+                case ConsoleKey.N:
+                    return false;
+
+                default:
+                    return null;
+            }
+        }
+
+        public string AskForNewLocation()
+        {
+            Console.Write(Resources.AskForNewLocation);
+            return Console.ReadLine();
         }
     }
 }
