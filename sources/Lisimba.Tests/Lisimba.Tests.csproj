@@ -68,10 +68,6 @@
       <Project>{BDFCAD78-775A-478D-8BFF-6A986704AA0C}</Project>
       <Name>ConsoleCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lisimba.Cmd\Lisimba.Cmd.csproj">
-      <Project>{afe9db0d-d0d6-433c-abbf-e58c9fa61276}</Project>
-      <Name>Lisimba.Cmd</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>

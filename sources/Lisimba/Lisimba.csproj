@@ -62,27 +62,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ref\BiorhythmControls.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -491,14 +479,6 @@
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lisimba.YahooGate\Lisimba.YahooGate.csproj">
-      <Project>{D2568067-DBF2-49A5-9672-9A76271CC6C3}</Project>
-      <Name>Lisimba.YahooGate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lisimba.ZipXmlGate\Lisimba.ZipXmlGate.csproj">
-      <Project>{652744F3-B7FA-43AD-80A9-6EFC86537817}</Project>
-      <Name>Lisimba.ZipXmlGate</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
       <Project>{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}</Project>
