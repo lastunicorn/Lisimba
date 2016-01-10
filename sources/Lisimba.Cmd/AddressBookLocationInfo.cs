@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     internal class AddressBookLocationInfo
     {

@@ -16,9 +16,8 @@
 
 using System;
 using DustInTheWind.Lisimba.Egg;
-using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     /// <summary>
     /// Manages the gates available in the application.

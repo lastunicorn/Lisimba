@@ -16,10 +16,10 @@
 
 using System;
 using System.IO;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class InfoFlow : IFlow
     {

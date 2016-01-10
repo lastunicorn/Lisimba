@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Flows;
+using DustInTheWind.Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Flows;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     internal class FlowProvider
     {

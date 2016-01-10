@@ -16,7 +16,7 @@
 
 using System;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class AddressBookGuarder
     {

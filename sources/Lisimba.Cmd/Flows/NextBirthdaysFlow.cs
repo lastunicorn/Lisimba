@@ -17,12 +17,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NextBirthdaysFlow : IFlow
     {

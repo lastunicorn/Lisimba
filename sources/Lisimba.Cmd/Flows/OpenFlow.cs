@@ -15,12 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Common;
 using DustInTheWind.Lisimba.Egg;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlow : IFlow
     {

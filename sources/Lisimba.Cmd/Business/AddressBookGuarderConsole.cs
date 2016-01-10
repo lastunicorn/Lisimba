@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Properties;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class AddressBookGuarderConsole
     {

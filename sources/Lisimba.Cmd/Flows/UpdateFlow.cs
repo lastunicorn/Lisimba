@@ -15,10 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     internal class UpdateFlow : IFlow
     {

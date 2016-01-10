@@ -17,11 +17,11 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Business;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     static class DependencyContainerSetup
     {

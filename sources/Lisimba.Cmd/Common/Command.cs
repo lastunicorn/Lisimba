@@ -18,7 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Lisimba.Cmd.Common
+namespace DustInTheWind.Lisimba.Cmd.Common
 {
     class Command : IEnumerable<string>
     {

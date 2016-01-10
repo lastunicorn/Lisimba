@@ -18,7 +18,7 @@ using System;
 using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class GateProvider
     {

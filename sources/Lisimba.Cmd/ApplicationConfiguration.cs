@@ -17,7 +17,7 @@
 using System.Configuration;
 using System.Reflection;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     internal class ApplicationConfiguration
     {

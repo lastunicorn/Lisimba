@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Lisimba.Cmd.Common
+namespace DustInTheWind.Lisimba.Cmd.Common
 {
     class CommandParser
     {

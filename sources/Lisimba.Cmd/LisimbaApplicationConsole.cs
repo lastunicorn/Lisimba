@@ -16,10 +16,9 @@
 
 using System;
 using System.Reflection;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.Cmd.Common;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     class LisimbaApplicationConsole
     {

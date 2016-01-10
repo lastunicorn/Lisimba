@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Business;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     internal class LisimbaApplication
     {

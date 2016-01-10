@@ -17,7 +17,7 @@
 using System;
 using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
     internal class Program
     {

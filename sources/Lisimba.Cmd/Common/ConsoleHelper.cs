@@ -16,7 +16,7 @@
 
 using System;
 
-namespace Lisimba.Cmd.Common
+namespace DustInTheWind.Lisimba.Cmd.Common
 {
     /// <summary>
     /// It is a wrapper over the System.Console class.
