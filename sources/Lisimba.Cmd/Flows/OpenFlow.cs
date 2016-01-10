@@ -15,6 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Cmd.Common;
 using DustInTheWind.Lisimba.Cmd.Properties;
@@ -47,18 +50,21 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
-            if (command.HasParameters)
-                OpenAddressBookFromCommand();
-            else
-                OpenLastAddressBook();
+            var result = command.HasParameters
+                ? OpenAddressBookFromCommand()
+                : OpenLastAddressBook();
 
-            DisplayResultMessage();
+            if (!result.Success)
+                return;
+
+            DisplaySuccessMessage();
+            DisplayWarnings(result.Warnings);
         }
 
-        private void OpenAddressBookFromCommand()
+        private AddressBookLoadResult OpenAddressBookFromCommand()
         {
             IGate gate = GetGate();
-            addressBooks.OpenAddressBook(command[1], gate);
+            return addressBooks.OpenAddressBook(command[1], gate);
         }
 
         private IGate GetGate()
@@ -75,7 +81,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             return gates.DefaultGate;
         }
 
-        private void OpenLastAddressBook()
+        private AddressBookLoadResult OpenLastAddressBook()
         {
             AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
 
@@ -84,7 +90,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             IGate gate = ChooseGate(addressBookLocationInfo);
 
-            addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+            return addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
         }
 
         private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
@@ -103,7 +109,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             return gates.DefaultGate;
         }
 
-        private void DisplayResultMessage()
+        private void DisplaySuccessMessage()
         {
             if (addressBooks.Current != null)
             {
@@ -116,6 +122,22 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             {
                 console.DisplayNoAddressBookMessage();
             }
+        }
+
+        private void DisplayWarnings(IEnumerable<Exception> warnings)
+        {
+            if (!warnings.Any())
+                return;
+
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Exception warning in warnings)
+            {
+                sb.AppendLine(warning.Message);
+                sb.AppendLine();
+            }
+
+            console.DisplayWarning(sb.ToString());
         }
     }
 }

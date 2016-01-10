@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -24,18 +25,21 @@ namespace DustInTheWind.Lisimba.Operations
     internal class DeleteCurrentContactOperation : ExecutableViewModelBase<object>
     {
         private readonly AddressBooks addressBooks;
+        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(AddressBooks addressBooks, ApplicationStatus applicationStatus)
+        public DeleteCurrentContactOperation(AddressBooks addressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.addressBooks = addressBooks;
+            this.userInterface = userInterface;
 
             addressBooks.ContactChanged += HandleCurrentContactChanged;
 
@@ -49,7 +53,33 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            addressBooks.DeleteCurrentContact();
+            DeleteCurrentContact();
+        }
+
+        public void DeleteCurrentContact()
+        {
+            Contact contactToDelete = addressBooks.Contact;
+
+            if (contactToDelete == null)
+                return;
+
+            bool allowToContinue = ConfirmDeleteContact(contactToDelete);
+
+            if (allowToContinue)
+            {
+                addressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
+
+                if (ReferenceEquals(contactToDelete, addressBooks.Contact))
+                    addressBooks.Contact = null;
+            }
+        }
+
+        private bool ConfirmDeleteContact(Contact contactToDelete)
+        {
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
+
+            return userInterface.DisplayYesNoExclamation(text, title);
         }
     }
 }

@@ -41,24 +41,35 @@ namespace DustInTheWind.Lisimba.Operations
             this.userInterface = userInterface;
 
             addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                addressBooks.Save();
+                if (addressBooks.Current == null)
+                    throw new ApplicationException(LocalizedResources.NoAddessBookOpenedError);
+
+                addressBooks.Current.SaveAddressBook();
+
+                DisplaySuccessStatusText();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
+        }
+
+        private void DisplaySuccessStatusText()
+        {
+            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
+            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }
 }

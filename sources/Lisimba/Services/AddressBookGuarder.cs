@@ -16,8 +16,10 @@
 
 using System;
 using System.ComponentModel;
+using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Services
 {
     /// <summary>
     /// Listens for any address book that is being closed and asks the user if
@@ -25,15 +27,15 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     /// </summary>
     class AddressBookGuarder
     {
-        private readonly AddressBookGuarderConsole console;
+        private readonly UserInterface userInterface;
         private readonly AddressBooks addressBooks;
 
-        public AddressBookGuarder(AddressBookGuarderConsole console, AddressBooks addressBooks)
+        public AddressBookGuarder(UserInterface userInterface, AddressBooks addressBooks)
         {
-            if (console == null) throw new ArgumentNullException("console");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.console = console;
+            this.userInterface = userInterface;
             this.addressBooks = addressBooks;
         }
 
@@ -50,13 +52,15 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 e.Cancel = true;
         }
 
-        /// <returns><c>true</c> if it is allowed to continue; false otherwise.</returns>
         public bool EnsureAddressBookIsSaved()
         {
             if (addressBooks.Current == null || addressBooks.Current.Status != AddressBookStatus.Modified)
                 return true;
 
-            bool? needToSave = console.AskToSaveAddressBook();
+            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
+            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
+
+            bool? needToSave = userInterface.DisplayYesNoCancelQuestion(text, title);
 
             if (needToSave == null)
                 return false;
@@ -66,7 +70,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
             if (addressBooks.Current.Location == null)
             {
-                string newLocation = console.AskForNewLocation();
+                string newLocation = userInterface.AskToSaveLsbFile();
 
                 if (newLocation == null)
                     return false;

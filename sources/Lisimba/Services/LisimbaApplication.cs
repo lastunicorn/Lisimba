@@ -30,6 +30,7 @@ namespace DustInTheWind.Lisimba.Services
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UserInterface userInterface;
+        private readonly AddressBookGuarder addressBookGuarder;
 
         public event EventHandler<CancelEventArgs> Exiting;
         public event EventHandler BeforeExiting;
@@ -52,7 +53,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments,
             ConfigurationService configurationService, RecentFiles recentFiles, CommandPool commandPool,
-            UserInterface userInterface)
+            UserInterface userInterface, AddressBookGuarder addressBookGuarder)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
@@ -60,6 +61,7 @@ namespace DustInTheWind.Lisimba.Services
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (addressBookGuarder == null) throw new ArgumentNullException("addressBookGuarder");
 
             this.applicationStatus = applicationStatus;
             this.programArguments = programArguments;
@@ -67,6 +69,7 @@ namespace DustInTheWind.Lisimba.Services
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
             this.userInterface = userInterface;
+            this.addressBookGuarder = addressBookGuarder;
         }
 
         protected virtual void OnExiting(CancelEventArgs e)
@@ -96,6 +99,8 @@ namespace DustInTheWind.Lisimba.Services
         public void Start()
         {
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
+
+            addressBookGuarder.Start();
 
             OpenInitialCatalog();
         }

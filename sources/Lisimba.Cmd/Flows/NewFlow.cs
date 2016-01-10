@@ -39,8 +39,10 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
-            addressBooks.NewAddressBook(command[1]);
-            console.DisplayAddressBookCreateSuccess();
+            bool succeeded = addressBooks.CreateNewAddressBook(command[1]);
+
+            if (succeeded)
+                console.DisplayAddressBookCreateSuccess();
         }
     }
 }

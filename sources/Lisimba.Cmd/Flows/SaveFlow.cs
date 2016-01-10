@@ -39,10 +39,13 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
+            if (addressBooks.Current == null)
+                return;
+
             if (command[1] != null)
-                addressBooks.SaveAddressBookAs(command[1]);
+                addressBooks.Current.SaveAddressBook(command[1]);
             else
-                addressBooks.SaveAddressBook();
+                addressBooks.Current.SaveAddressBook();
 
             consoleView.DisplayAddressBookSaveSuccess();
         }

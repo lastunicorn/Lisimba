@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
@@ -101,22 +102,33 @@ namespace DustInTheWind.Lisimba.Main
             OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
 
             addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            addressBooks.StatusChanged += HandleAddressBookStatusChanged;
             addressBooks.ContactChanged += HandleContactChanged;
+            addressBooks.Closing += HandleAddressBooksClosing;
+            addressBooks.Opened += HandleAddressBooksOpened;
 
-            if (addressBooks.AddressBook != null)
-                addressBooks.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+            if (addressBooks.Current != null)
+                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
             IsContactEditVisible = addressBooks.Contact != null;
-            IsAddressBookViewVisible = addressBooks.AddressBook != null;
+            IsAddressBookViewVisible = addressBooks.Current != null;
 
             StatusText = applicationStatus.StatusText;
             Title = BuildFormTitle();
         }
 
-        private void HandleContactChanged(object sender, EventArgs eventArgs)
+        private void HandleAddressBooksOpened(object sender, EventArgs e)
+        {
+            addressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+        }
+
+        private void HandleAddressBooksClosing(object sender, CancelEventArgs e)
+        {
+            addressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
+        }
+
+        private void HandleContactChanged(object sender, EventArgs e)
         {
             IsContactEditVisible = addressBooks.Contact != null;
             ContactEditorViewModel.Contact = addressBooks.Contact;
@@ -125,21 +137,21 @@ namespace DustInTheWind.Lisimba.Main
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             if (e.OldAddressBook != null)
-                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                e.OldAddressBook.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
 
             if (e.NewAddressBook != null)
-                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                e.NewAddressBook.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
 
             Title = BuildFormTitle();
-            IsAddressBookViewVisible = addressBooks.AddressBook != null;
+            IsAddressBookViewVisible = addressBooks.Current != null;
         }
 
-        private void HandleAddressBookStatusChanged(object sender, EventArgs eventArgs)
+        private void HandleAddressBookStatusChanged(object sender, EventArgs e)
         {
             Title = BuildFormTitle();
         }
 
-        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
+        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs e)
         {
             Title = BuildFormTitle();
         }
@@ -151,11 +163,12 @@ namespace DustInTheWind.Lisimba.Main
 
         private string BuildFormTitle()
         {
-            if (addressBooks.AddressBook == null)
+            if (addressBooks.Current == null)
                 return lisimbaApplication.ProgramName;
 
-            string addressBookName = addressBooks.GetFriendlyName();
-            string unsavedSign = addressBooks.IsModified ? " *" : string.Empty;
+            string addressBookName = addressBooks.Current.GetFriendlyName();
+            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
+            string unsavedSign = isModified ? " *" : string.Empty;
             string programName = lisimbaApplication.ProgramName;
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
@@ -163,7 +176,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public bool WindowIsClosing()
         {
-            return addressBooks.EnsureIsSaved();
+            return addressBooks.CloseAddressBook();
         }
     }
 }

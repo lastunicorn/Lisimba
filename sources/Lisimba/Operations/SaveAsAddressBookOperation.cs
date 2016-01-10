@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using DustInTheWind.Lisimba.BookShell;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
@@ -25,40 +26,68 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly AddressBooks addressBooks;
         private readonly UserInterface userInterface;
+        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public SaveAsAddressBookOperation(AddressBooks addressBooks, UserInterface userInterface,
+            ApplicationStatus applicationStatus, RecentFiles recentFiles)
             : base(applicationStatus)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.addressBooks = addressBooks;
             this.userInterface = userInterface;
+            this.recentFiles = recentFiles;
 
             addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
             try
             {
-                addressBooks.SaveNew();
+                if (addressBooks.Current == null)
+                    throw new ApplicationException(LocalizedResources.NoAddessBookOpenedError);
+
+                string newLocation = userInterface.AskToSaveLsbFile();
+                addressBooks.Current.SaveAddressBook(newLocation);
+
+                AddFileToRecentFileList(newLocation);
+
+                addressBooks.Current.SaveAddressBook(newLocation);
+
+                //OnAddressBookSaved(EventArgs.Empty);
+                
+                DisplaySuccessStatusText();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
+        }
+
+        private void AddFileToRecentFileList(string fileName)
+        {
+            string fileFullPath = Path.GetFullPath(fileName);
+            recentFiles.AddRecentFile(fileFullPath, null);
+        }
+
+        private void DisplaySuccessStatusText()
+        {
+            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
+            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }
 }

@@ -37,5 +37,10 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
             ConsoleHelper.WriteLineWarning(message);
         }
+
+        public void DisplayWarning(string text)
+        {
+            ConsoleHelper.WriteLineWarning(text);
+        }
     }
 }

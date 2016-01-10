@@ -42,12 +42,12 @@ namespace DustInTheWind.Lisimba.Operations
             this.userInterface = userInterface;
 
             addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            IsEnabled = addressBooks.AddressBook != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)

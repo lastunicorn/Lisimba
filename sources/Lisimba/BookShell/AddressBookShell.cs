@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.BookShell
 {
     /// <summary>
     /// Contains an opened address book and metainformation about it like the location
@@ -74,13 +74,26 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             Status = AddressBookStatus.Modified;
         }
 
+        public string GetFriendlyName()
+        {
+            bool hasName = !string.IsNullOrWhiteSpace(AddressBook.Name);
+            if (hasName)
+                return AddressBook.Name;
+
+            bool hasFileName = !string.IsNullOrWhiteSpace(Location);
+            if (hasFileName)
+                return Location;
+
+            return "< Unnamed >";
+        }
+
         public void SaveAddressBook()
         {
             if (Gate == null)
-                throw new ApplicationException("No gate is associated with the address book.");
+                throw new ApplicationException(LocalizedResources.NoGateWasSpecifiedError);
 
             if (Location == null)
-                throw new ApplicationException(Resources.NoLocationWasSpecifiedError);
+                throw new ApplicationException(LocalizedResources.NoLocationWasSpecifiedError);
 
             Gate.Save(AddressBook, Location);
             Status = AddressBookStatus.Saved;
@@ -93,7 +106,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
             if (Gate == null)
-                throw new ApplicationException("No gate is associated with the address book.");
+                throw new ApplicationException(LocalizedResources.NoGateWasSpecifiedError);
 
             Gate.Save(AddressBook, newLocation);
             Location = newLocation;

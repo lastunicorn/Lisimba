@@ -16,6 +16,7 @@
 
 using System;
 using System.ComponentModel;
+using System.IO;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
@@ -31,9 +32,9 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public AddressBookShell Current { get; private set; }
 
-        public event EventHandler Saved;
         public event CancelEventHandler Closing;
         public event EventHandler Closed;
+        public event EventHandler Opened;
 
         public AddressBooks(RecentFiles recentFiles)
         {
@@ -42,92 +43,70 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             this.recentFiles = recentFiles;
         }
 
-        public void OpenAddressBook(string fileName, IGate gate)
+        public bool CreateNewAddressBook(string name)
         {
-            CancelEventArgs eva = new CancelEventArgs();
-            OnClosing(eva);
+            bool allowToContinue = CloseAddressBook();
 
-            if (eva.Cancel)
-                return;
-
-            CloseAddressBookInternal();
-
-            AddressBook addressBook = gate.Load(fileName);
-            Current = new AddressBookShell(addressBook, gate, fileName);
-
-            recentFiles.AddRecentFile(fileName, gate);
-
-            if (Current != null)
-                Current.Saved += HandleCurrentSaved;
-        }
-
-        public void CloseAddressBook()
-        {
-            CancelEventArgs eva = new CancelEventArgs();
-            OnClosing(eva);
-
-            if (eva.Cancel)
-                return;
-
-            CloseAddressBookInternal();
-        }
-
-        private void CloseAddressBookInternal()
-        {
-            if (Current != null)
-                Current.Saved -= HandleCurrentSaved;
-
-            Current = null;
-            OnClosed();
-        }
-
-        private void HandleCurrentSaved(object sender, EventArgs eventArgs)
-        {
-            OnSaved();
-        }
-
-        public void NewAddressBook(string name)
-        {
-            CancelEventArgs eva = new CancelEventArgs();
-            OnClosing(eva);
-
-            if (eva.Cancel)
-                return;
-
-            CloseAddressBookInternal();
+            if (!allowToContinue)
+                return false;
 
             string addressBookName = name ?? Resources.DefaultAddressBookName;
             AddressBook addressBook = new AddressBook { Name = addressBookName };
             Current = new AddressBookShell(addressBook);
 
-            if (Current != null)
-                Current.Saved += HandleCurrentSaved;
+            OnOpened();
+
+            return true;
         }
 
-        public void SaveAddressBook()
+        public AddressBookLoadResult OpenAddressBook(string fileName, IGate gate)
+        {
+            if (fileName == null) throw new ArgumentNullException("fileName");
+            if (gate == null) throw new ArgumentNullException("gate");
+
+            bool allowToContinue = CloseAddressBook();
+
+            if (!allowToContinue)
+                return new AddressBookLoadResult
+                {
+                    Success = false
+                };
+
+            AddressBook addressBook = gate.Load(fileName);
+            Current = new AddressBookShell(addressBook, gate, fileName);
+
+            AddFileToRecentFileList(fileName, gate);
+
+            OnOpened();
+
+            return new AddressBookLoadResult
+            {
+                Success = true,
+                Warnings = gate.Warnings
+            };
+        }
+
+        private void AddFileToRecentFileList(string fileName, IGate gate)
+        {
+            string fileFullPath = Path.GetFullPath(fileName);
+            recentFiles.AddRecentFile(fileFullPath, gate);
+        }
+
+        public bool CloseAddressBook()
         {
             if (Current == null)
-                throw new ApplicationException(Resources.NoAddessBookOpenedError);
+                return true;
 
-            Current.SaveAddressBook();
-        }
+            CancelEventArgs eva = new CancelEventArgs();
+            OnClosing(eva);
 
-        public void SaveAddressBookAs(string newLocation)
-        {
-            if (newLocation == null) throw new ArgumentNullException("newLocation");
+            if (eva.Cancel)
+                return false;
 
-            if (Current == null)
-                throw new ApplicationException(Resources.NoAddessBookOpenedError);
+            Current = null;
+            OnClosed();
 
-            Current.SaveAddressBook(newLocation);
-        }
-
-        protected virtual void OnSaved()
-        {
-            EventHandler handler = Saved;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            return true;
         }
 
         protected virtual void OnClosing(CancelEventArgs e)
@@ -141,6 +120,14 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         protected virtual void OnClosed()
         {
             EventHandler handler = Closed;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnOpened()
+        {
+            EventHandler handler = Opened;
 
             if (handler != null)
                 handler(this, EventArgs.Empty);

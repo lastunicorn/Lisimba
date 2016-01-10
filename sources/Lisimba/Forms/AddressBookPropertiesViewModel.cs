@@ -88,7 +88,7 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void RefreshModel()
         {
-            if (addressBooks.AddressBook == null)
+            if (addressBooks.Current == null)
                 ClearModel();
             else
                 PopulateModel();
@@ -104,10 +104,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void PopulateModel()
         {
-            BookName = addressBooks.AddressBook.Name;
+            BookName = addressBooks.Current.AddressBook.Name;
             BookNameEnabled = true;
-            FileLocation = GetFullFileLocationForDisplay(addressBooks.FileName);
-            ContactsCount = addressBooks.AddressBook.Contacts.Count;
+            FileLocation = GetFullFileLocationForDisplay(addressBooks.Current.Location);
+            ContactsCount = addressBooks.Current.AddressBook.Contacts.Count;
         }
 
         private static string GetFullFileLocationForDisplay(string fileName)
@@ -119,13 +119,13 @@ namespace DustInTheWind.Lisimba.Forms
 
         public void OkButtonWasClicked()
         {
-            if (addressBooks.AddressBook == null)
+            if (addressBooks.Current == null)
                 return;
 
-            bool nameIsChanged = addressBooks.AddressBook.Name != BookName;
+            bool nameIsChanged = addressBooks.Current.AddressBook.Name != BookName;
 
             if (nameIsChanged)
-                addressBooks.AddressBook.Name = BookName;
+                addressBooks.Current.AddressBook.Name = BookName;
         }
     }
 }

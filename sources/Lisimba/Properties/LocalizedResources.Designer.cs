@@ -115,6 +115,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Address Book.
+        /// </summary>
+        internal static string DefaultAddressBookName {
+            get {
+                return ResourceManager.GetString("DefaultAddressBookName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string DefaultStatusText {
@@ -184,6 +193,33 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string ImportYahooCsvOperationDescription {
             get {
                 return ResourceManager.GetString("ImportYahooCsvOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No address book is opened..
+        /// </summary>
+        internal static string NoAddessBookOpenedError {
+            get {
+                return ResourceManager.GetString("NoAddessBookOpenedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No gate is associated with the address book..
+        /// </summary>
+        internal static string NoGateWasSpecifiedError {
+            get {
+                return ResourceManager.GetString("NoGateWasSpecifiedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A location has to be specified..
+        /// </summary>
+        internal static string NoLocationWasSpecifiedError {
+            get {
+                return ResourceManager.GetString("NoLocationWasSpecifiedError", resourceCulture);
             }
         }
         

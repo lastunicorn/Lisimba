@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.BookShell;
@@ -75,29 +76,37 @@ namespace DustInTheWind.Lisimba.ContactList
 
             SelectedSortingMethod = GetSortingType();
 
-            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            addressBooks.AddressBookSaved += HandleCurrentAddressBookSaved;
             addressBooks.ContactChanged += HandleCurrentContactChanged;
+            addressBooks.Opened += HandleAddressBooksOpened;
+            addressBooks.Closing += HandleAddressBooksClosing;
 
-            if (addressBooks.AddressBook != null)
+            if (addressBooks.Current != null)
             {
-                addressBooks.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                addressBooks.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                addressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
             }
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
+        private void HandleAddressBooksClosing(object sender, CancelEventArgs cancelEventArgs)
         {
-            if (e.OldAddressBook != null)
+            if (addressBooks.Current != null)
             {
-                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-                e.OldAddressBook.ContactContentChanged -= HandleContactContentChanged;
+                addressBooks.Current.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                addressBooks.Current.AddressBook.ContactContentChanged -= HandleContactContentChanged;
+                addressBooks.Current.Saved -= HandleCurrentAddressBookSaved;
             }
 
-            if (e.NewAddressBook != null)
+            searchedText = string.Empty;
+            RepopulateFromCurrentAddressBook();
+        }
+
+        private void HandleAddressBooksOpened(object sender, EventArgs eventArgs)
+        {
+            if (addressBooks.Current != null)
             {
-                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                e.NewAddressBook.ContactContentChanged += HandleContactContentChanged;
+                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                addressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                addressBooks.Current.Saved += HandleCurrentAddressBookSaved;
             }
 
             searchedText = string.Empty;
@@ -168,11 +177,11 @@ namespace DustInTheWind.Lisimba.ContactList
         {
             bool currentDataContainsContacts =
                 addressBooks != null &&
-                addressBooks.AddressBook != null &&
-                addressBooks.AddressBook.Contacts != null;
+                addressBooks.Current != null &&
+                addressBooks.Current.AddressBook.Contacts != null;
 
             ContactCollection contacts = currentDataContainsContacts
-                ? addressBooks.AddressBook.Contacts
+                ? addressBooks.Current.AddressBook.Contacts
                 : null;
 
             ContactsToTreeViewBinder.Contacts = contacts;
@@ -213,7 +222,7 @@ namespace DustInTheWind.Lisimba.ContactList
             try
             {
                 TreeNode selectedNode = View.GetSelecteContact();
-                Contact selectedContact = selectedNode != null ? (Contact) selectedNode.Tag : null;
+                Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
 
                 addressBooks.Contact = selectedContact;
             }

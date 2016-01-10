@@ -17,43 +17,30 @@
 using System;
 using System.ComponentModel;
 using System.IO;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.BookShell
 {
+    /// <summary>
+    /// Contains and manages the opened address books.
+    /// </summary>
     internal class AddressBooks
     {
-        private readonly UserInterface userInterface;
-        private readonly CommandPool commandPool;
-        private AddressBookStatus status;
-        private AddressBook addressBook;
+        private AddressBookShell current;
         private Contact contact;
-        private readonly AddressBookSaver addressBookSaver;
         private readonly RecentFiles recentFiles;
-        private readonly Gates gates;
 
-        public event EventHandler<AddressBookChangingEventArgs> AddressBookChanging;
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
+
+        public event CancelEventHandler Closing;
+        public event EventHandler Closed;
+        public event EventHandler Opened;
+
         public event EventHandler AddressBookSaved;
-        public event EventHandler StatusChanged;
         public event EventHandler ContactChanged;
-
-        /// <summary>
-        /// Gets the full file name of the address book or null if it's a new one.
-        /// </summary>
-        public string FileName { get; private set; }
-
-        public AddressBookStatus Status
-        {
-            get { return status; }
-            private set
-            {
-                status = value;
-                OnStatusChanged();
-            }
-        }
 
         public Contact Contact
         {
@@ -68,70 +55,28 @@ namespace DustInTheWind.Lisimba.BookShell
             }
         }
 
-        public AddressBook AddressBook
+        public AddressBookShell Current
         {
-            get { return addressBook; }
+            get { return current; }
             private set
             {
-                if (addressBook == value)
+                if (current == value)
                     return;
 
-                AddressBookChangingEventArgs eva = new AddressBookChangingEventArgs();
-                OnAddressBookChanging(eva);
+                AddressBookShell oldAddressBook = current;
 
-                if (eva.Cancel)
-                    return;
-
-                if (addressBook != null)
-                    addressBook.Changed -= HandleAddressBookChanged;
-
-                AddressBook oldAddressBook = addressBook;
-
-                addressBook = value;
-
-                if (addressBook != null)
-                    addressBook.Changed += HandleAddressBookChanged;
-
-                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, addressBook));
+                current = value;
                 Contact = null;
+
+                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, current));
             }
         }
 
-        public AddressBooks(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool,
-            AddressBookSaver addressBookSaver, RecentFiles recentFiles, Gates gates)
+        public AddressBooks(RecentFiles recentFiles)
         {
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
-            if (addressBookSaver == null) throw new ArgumentNullException("addressBookSaver");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (gates == null) throw new ArgumentNullException("gates");
 
-            this.userInterface = userInterface;
-            this.commandPool = commandPool;
-            this.addressBookSaver = addressBookSaver;
             this.recentFiles = recentFiles;
-            this.gates = gates;
-
-            status = AddressBookStatus.New;
-
-            lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
-        }
-
-        private void HandleLisimbaApplicationExiting(object sender, CancelEventArgs e)
-        {
-            bool allowToContinue = CloseAddressBook();
-
-            if (!allowToContinue)
-                e.Cancel = true;
-        }
-
-        protected virtual void OnAddressBookChanging(AddressBookChangingEventArgs e)
-        {
-            EventHandler<AddressBookChangingEventArgs> handler = AddressBookChanging;
-
-            if (handler != null)
-                handler(this, e);
         }
 
         protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
@@ -150,14 +95,6 @@ namespace DustInTheWind.Lisimba.BookShell
                 handler(this, e);
         }
 
-        protected virtual void OnStatusChanged()
-        {
-            EventHandler handler = StatusChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
         protected virtual void OnContactChanged()
         {
             EventHandler handler = ContactChanged;
@@ -166,26 +103,31 @@ namespace DustInTheWind.Lisimba.BookShell
                 handler(this, EventArgs.Empty);
         }
 
-        private void HandleAddressBookChanged(object sender, EventArgs e)
+        protected virtual void OnClosing(CancelEventArgs e)
         {
-            Status = AddressBookStatus.Modified;
+            CancelEventHandler handler = Closing;
+
+            if (handler != null)
+                handler(this, e);
         }
 
-        public string GetFriendlyName()
+        protected virtual void OnClosed()
         {
-            bool hasName = addressBook != null && !string.IsNullOrWhiteSpace(addressBook.Name);
-            if (hasName)
-                return addressBook.Name;
+            EventHandler handler = Closed;
 
-            bool hasFileName = !string.IsNullOrWhiteSpace(FileName);
-            if (hasFileName)
-                return
-                    FileName;
-
-            return "< Unnamed >";
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
-        public bool LoadNew()
+        protected virtual void OnOpened()
+        {
+            EventHandler handler = Opened;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        public bool CreateNewAddressBook(string name)
         {
             bool allowToContinue = CloseAddressBook();
 
@@ -193,15 +135,21 @@ namespace DustInTheWind.Lisimba.BookShell
                 return false;
 
             Contact = null;
-            AddressBook = new AddressBook();
-            FileName = null;
-            Status = AddressBookStatus.New;
+
+            string addressBookName = name ?? LocalizedResources.DefaultAddressBookName;
+            AddressBook addressBook = new AddressBook { Name = addressBookName };
+            Current = new AddressBookShell(addressBook);
+
+            OnOpened();
 
             return true;
         }
 
-        public AddressBookLoadResult LoadFrom(string fileName)
+        public AddressBookLoadResult OpenAddressBook(string fileName, IGate gate)
         {
+            if (fileName == null) throw new ArgumentNullException("fileName");
+            if (gate == null) throw new ArgumentNullException("gate");
+
             bool allowToContinue = CloseAddressBook();
 
             if (!allowToContinue)
@@ -210,133 +158,43 @@ namespace DustInTheWind.Lisimba.BookShell
                     Success = false
                 };
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                fileName = userInterface.AskToOpenLsbFile();
+            AddressBook addressBook = gate.Load(fileName);
+            Current = new AddressBookShell(addressBook, gate, fileName);
 
-                if (fileName == null)
-                    return new AddressBookLoadResult
-                    {
-                        Success = false
-                    };
-            }
+            AddFileToRecentFileList(fileName, gate);
 
-            Contact = null;
-            AddressBook = gates.DefaultGate.Load(fileName);
-            FileName = fileName;
-            Status = AddressBookStatus.Saved;
+            OnOpened();
 
             return new AddressBookLoadResult
             {
                 Success = true,
-                Warnings = gates.DefaultGate.Warnings
+                Warnings = gate.Warnings
             };
         }
 
-        public AddressBookSaverResult Save()
-        {
-            return SaveInternal(FileName);
-        }
-
-        public AddressBookSaverResult SaveNew()
-        {
-            return SaveInternal(null);
-        }
-
-        private AddressBookSaverResult SaveInternal(string fileName)
-        {
-            addressBookSaver.Gate = gates.DefaultGate;
-            addressBookSaver.FileName = fileName;
-            addressBookSaver.AddressBook = AddressBook;
-
-            AddressBookSaverResult result = addressBookSaver.Save();
-
-            if (result.Success)
-            {
-                FileName = addressBookSaver.FileName;
-                Status = AddressBookStatus.Saved;
-
-                OnAddressBookSaved(EventArgs.Empty);
-
-                if (result.IsSavedInNewLocation)
-                    AddFileToRecentFileList(result.FileName);
-            }
-
-            return result;
-        }
-
-        private void AddFileToRecentFileList(string fileName)
+        private void AddFileToRecentFileList(string fileName, IGate gate)
         {
             string fileFullPath = Path.GetFullPath(fileName);
-            recentFiles.AddRecentFile(fileFullPath);
-        }
-
-        public bool IsModified
-        {
-            get { return AddressBook != null && Status == AddressBookStatus.Modified; }
+            recentFiles.AddRecentFile(fileFullPath, gate);
         }
 
         public bool CloseAddressBook()
         {
-            bool allowToContinue = EnsureIsSaved();
+            if (Current == null)
+                return true;
 
-            if (!allowToContinue)
+            CancelEventArgs eva = new CancelEventArgs();
+            OnClosing(eva);
+
+            if (eva.Cancel)
                 return false;
 
             Contact = null;
-            AddressBook = null;
-            FileName = null;
-            Status = AddressBookStatus.None;
+            Current = null;
+
+            OnClosed();
 
             return true;
-        }
-
-        public bool EnsureIsSaved()
-        {
-            if (!IsModified)
-                return true;
-
-            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
-            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
-
-            bool? response = userInterface.DisplayYesNoCancelQuestion(text, title);
-
-            if (response == null)
-                return false;
-
-            if (response.Value)
-            {
-                commandPool.SaveAddressBookOperation.Execute();
-                return Status == AddressBookStatus.Saved;
-            }
-
-            return true;
-        }
-
-        public void DeleteCurrentContact()
-        {
-            Contact contactToDelete = Contact;
-
-            if (contactToDelete == null)
-                return;
-
-            bool allowToContinue = ConfirmDeleteContact(contactToDelete);
-
-            if (allowToContinue)
-            {
-                AddressBook.Contacts.Remove(contactToDelete);
-
-                if (ReferenceEquals(contactToDelete, Contact))
-                    Contact = null;
-            }
-        }
-
-        private bool ConfirmDeleteContact(Contact contactToDelete)
-        {
-            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
-            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
-
-            return userInterface.DisplayYesNoExclamation(text, title);
         }
     }
 }

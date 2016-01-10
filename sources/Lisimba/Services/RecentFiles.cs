@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Config;
+using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Services
 {
@@ -49,7 +50,7 @@ namespace DustInTheWind.Lisimba.Services
                 : null;
         }
 
-        public void AddRecentFile(string fileName)
+        public void AddRecentFile(string fileName, IGate gate)
         {
             configurationService.LisimbaConfigSection.RecentFilesList.AddNewRecentFile(fileName);
 

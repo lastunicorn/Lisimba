@@ -15,18 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.BookShell
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
-    internal class AddressBookChangedEventArgs : EventArgs
+    internal class AddressBookLoadResult
     {
-        public AddressBookShell NewAddressBook { get; private set; }
-        public AddressBookShell OldAddressBook { get; private set; }
-
-        public AddressBookChangedEventArgs(AddressBookShell oldAddressBook, AddressBookShell newAddressBook)
-        {
-            OldAddressBook = oldAddressBook;
-            NewAddressBook = newAddressBook;
-        }
+        public bool Success { get; set; }
+        public IEnumerable<Exception> Warnings { get; set; }
     }
 }

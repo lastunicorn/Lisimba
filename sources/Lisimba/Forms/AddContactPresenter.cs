@@ -48,10 +48,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         public void ViewWasLoaded()
         {
-            if (addressBooks.AddressBook == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
-            addressBook = addressBooks.AddressBook;
+            addressBook = addressBooks.Current.AddressBook;
             EditedContact = new Contact();
 
             ContactEditorViewModel.Contact = EditedContact;
