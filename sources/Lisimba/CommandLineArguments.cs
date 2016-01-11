@@ -14,8 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba
 {
@@ -66,7 +66,7 @@ namespace DustInTheWind.Lisimba
                 if (arg[0] == '-')
                 {
                     if (arg.Length == 1)
-                        throw new ApplicationException("Invalid arguments.");
+                        throw new LisimbaException("Invalid arguments.");
 
                     int pos = arg.IndexOf(":");
                     if (pos == -1)
@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba
                     }
                     else
                     {
-                        throw new ApplicationException("Invalid arguments.");
+                        throw new LisimbaException("Invalid arguments.");
                     }
                 }
 

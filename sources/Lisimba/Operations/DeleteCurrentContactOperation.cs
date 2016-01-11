@@ -15,7 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -23,33 +24,62 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class DeleteCurrentContactOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus)
+        public DeleteCurrentContactOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBookShell = addressBookShell;
+            this.openedAddressBooks = openedAddressBooks;
+            this.userInterface = userInterface;
 
-            addressBookShell.ContactChanged += HandleCurrentContactChanged;
+            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
 
-            IsEnabled = addressBookShell.Contact != null;
+            IsEnabled = openedAddressBooks.Contact != null;
         }
 
         private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
-            IsEnabled = addressBookShell.Contact != null;
+            IsEnabled = openedAddressBooks.Contact != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            addressBookShell.DeleteCurrentContact();
+            DeleteCurrentContact();
+        }
+
+        public void DeleteCurrentContact()
+        {
+            Contact contactToDelete = openedAddressBooks.Contact;
+
+            if (contactToDelete == null)
+                return;
+
+            bool allowToContinue = ConfirmDeleteContact(contactToDelete);
+
+            if (allowToContinue)
+            {
+                openedAddressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
+
+                if (ReferenceEquals(contactToDelete, openedAddressBooks.Contact))
+                    openedAddressBooks.Contact = null;
+            }
+        }
+
+        private bool ConfirmDeleteContact(Contact contactToDelete)
+        {
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
+
+            return userInterface.DisplayYesNoExclamation(text, title);
         }
     }
 }

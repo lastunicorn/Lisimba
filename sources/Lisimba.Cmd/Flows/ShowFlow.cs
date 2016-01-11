@@ -15,59 +15,72 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class ShowFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
-        private readonly ShowFlowConsole consoleView;
+        private readonly Command command;
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly ShowFlowConsole console;
 
-        public ShowFlow(AddressBooks addressBooks, ShowFlowConsole consoleView)
-        {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
-
-            this.addressBooks = addressBooks;
-            this.consoleView = consoleView;
-        }
-
-        public void Execute(Command command)
+        public ShowFlow(Command command, OpenedAddressBooks openedAddressBooks, ShowFlowConsole console)
         {
             if (command == null) throw new ArgumentNullException("command");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (console == null) throw new ArgumentNullException("console");
 
-            if (command.HasParameters)
-                DisplayContactDetails(command[1]);
+            this.command = command;
+            this.openedAddressBooks = openedAddressBooks;
+            this.console = console;
+        }
+
+        public void Execute()
+        {
+            if (openedAddressBooks.Current != null)
+            {
+                if (command.HasParameters)
+                    DisplayContactDetails(command[1]);
+                else
+                    DisplayAllContacts();
+            }
             else
-                DisplayAllContacts();
+            {
+                console.DisplayNoAddressBookMessage();
+            }
         }
 
         private void DisplayContactDetails(string contactName)
         {
-            var contacts = addressBooks.AddressBook.Contacts
+            IEnumerable<Contact> contacts = GetContacts(contactName);
+
+            foreach (Contact contact in contacts)
+            {
+                console.DisplayContactDetails(contact);
+            }
+        }
+
+        private IEnumerable<Contact> GetContacts(string contactName)
+        {
+            return openedAddressBooks.Current.AddressBook.Contacts
                 .Where(x =>
                     (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.LastName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.LastName, contactName, CompareOptions.IgnoreCase) >= 0) ||
                     (x.Name.Nickname != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.Nickname, contactName, CompareOptions.IgnoreCase) >= 0));
-
-            foreach (Contact contact in contacts)
-            {
-                consoleView.DisplayContactDetails(contact);
-            }
         }
 
         private void DisplayAllContacts()
         {
-            foreach (Contact contact in addressBooks.AddressBook.Contacts)
+            foreach (Contact contact in openedAddressBooks.Current.AddressBook.Contacts)
             {
-                consoleView.DisplayContactShort(contact);
+                console.DisplayContactShort(contact);
             }
         }
     }

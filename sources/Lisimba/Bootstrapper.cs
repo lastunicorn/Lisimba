@@ -14,9 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.BookShell;
-using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
 
@@ -28,30 +25,10 @@ namespace DustInTheWind.Lisimba
 
         public void Run(string[] args)
         {
-            unityContainer = CreateUnityContainer();
+            unityContainer = DependencyContainerSetup.CreateContainer();
             InitializeProgramArgumentsService(args);
             StartApplicationMainService();
             InitializeAndStartUi();
-        }
-
-        private static UnityContainer CreateUnityContainer()
-        {
-            UnityContainer unityContainer = new UnityContainer();
-
-            unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<AddressBookShell>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
-
-            unityContainer.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
-            //unityContainer.RegisterType<ImportYahooCsvOperation>(new ContainerControlledLifetimeManager());
-            //unityContainer.RegisterType<ExportYahooCsvOperation>(new ContainerControlledLifetimeManager());
-
-
-            return unityContainer;
         }
 
         private void InitializeProgramArgumentsService(string[] args)

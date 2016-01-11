@@ -15,39 +15,40 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class GateFlow : IFlow
     {
-        private readonly Gates gates;
+        private readonly Command command;
+        private readonly AvailableGates availableGates;
         private readonly GateFlowConsole console;
 
-        public GateFlow(Gates gates, GateFlowConsole console)
+        public GateFlow(Command command, AvailableGates availableGates, GateFlowConsole console)
         {
-            if (gates == null) throw new ArgumentNullException("gates");
+            if (command == null) throw new ArgumentNullException("command");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.gates = gates;
+            this.command = command;
+            this.availableGates = availableGates;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             if (command.ParameterCount == 0)
             {
-                console.DisplayGate(gates.DefaultGate);
+                console.DisplayGate(availableGates.DefaultGate);
             }
             else
             {
-                gates.SetDefaultGate(command[1]);
+                availableGates.SetDefaultGate(command[1]);
 
                 console.DisplayGateChangeSuccess();
+                console.DisplayGate(availableGates.DefaultGate);
             }
         }
     }

@@ -15,10 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UnknownFlow : IFlow
     {
@@ -31,10 +30,8 @@ namespace Lisimba.Cmd.Flows
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             console.DisplayUnknownCommandError();
         }
     }

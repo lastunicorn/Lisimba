@@ -15,36 +15,91 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Egg;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
-        private readonly OpenFlowConsole consoleView;
+        private readonly Command command;
+        private readonly OpenFlowConsole console;
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
+        private readonly ApplicationConfiguration config;
 
-        public OpenFlow(AddressBooks addressBooks, OpenFlowConsole consoleView)
-        {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
-
-            this.addressBooks = addressBooks;
-            this.consoleView = consoleView;
-        }
-
-        public void Execute(Command command)
+        public OpenFlow(Command command, OpenFlowConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates, ApplicationConfiguration config)
         {
             if (command == null) throw new ArgumentNullException("command");
+            if (console == null) throw new ArgumentNullException("console");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (config == null) throw new ArgumentNullException("config");
 
-            addressBooks.OpenAddressBook(command[1]);
+            this.command = command;
+            this.console = console;
+            this.openedAddressBooks = openedAddressBooks;
+            this.availableGates = availableGates;
+            this.config = config;
+        }
 
-            if (addressBooks.AddressBook == null)
-                consoleView.DisplayNoAddressBookMessage();
+        public void Execute()
+        {
+            if (command.HasParameters)
+                OpenAddressBook();
             else
-                consoleView.DisplayAddressBookOpenSuccess(addressBooks.AddressBookLocation, addressBooks.AddressBook.Contacts.Count);
+                OpenLastAddressBook();
+        }
+
+        private void OpenAddressBook()
+        {
+            IGate gate = GetGate();
+            openedAddressBooks.OpenAddressBook(command[1], gate);
+        }
+
+        private IGate GetGate()
+        {
+            if (command.ParameterCount >= 2)
+            {
+                string gateId = command[2];
+                return availableGates.GetGate(gateId);
+            }
+
+            if (availableGates.DefaultGate == null)
+                throw new LisimbaException(Resources.NoDefaultGateError);
+
+            return availableGates.DefaultGate;
+        }
+
+        private void OpenLastAddressBook()
+        {
+            AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
+
+            if (addressBookLocationInfo == null)
+                throw new LisimbaException(Resources.NoAddressBookInConfigFile);
+
+            IGate gate = ChooseGate(addressBookLocationInfo);
+
+            openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+        }
+
+        private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
+        {
+            if (addressBookLocationInfo.GateId != null)
+                return availableGates.GetGate(addressBookLocationInfo.GateId);
+
+            if (availableGates.DefaultGate == null)
+            {
+                string message = string.Format(Resources.OpenAddressBookNoGateError, addressBookLocationInfo.FileName);
+                throw new LisimbaException(message);
+            }
+
+            console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, availableGates.DefaultGate.Name);
+
+            return availableGates.DefaultGate;
         }
     }
 }

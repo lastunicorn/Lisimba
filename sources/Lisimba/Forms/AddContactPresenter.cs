@@ -16,7 +16,7 @@
 
 using System;
 using System.Linq;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Services;
@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Forms
 {
     internal class AddContactPresenter : ViewModelBase
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public Contact EditedContact { get; private set; }
@@ -36,22 +36,22 @@ namespace DustInTheWind.Lisimba.Forms
         public ContactEditorViewModel ContactEditorViewModel { get; set; }
 
         public AddContactPresenter(ContactEditorViewModel contactEditorViewModel,
-            AddressBookShell addressBookShell, UserInterface userInterface)
+            OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             ContactEditorViewModel = contactEditorViewModel;
-            this.addressBookShell = addressBookShell;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
         }
 
         public void ViewWasLoaded()
         {
-            if (addressBookShell.AddressBook == null)
+            if (openedAddressBooks.Current == null)
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
-            addressBook = addressBookShell.AddressBook;
+            addressBook = openedAddressBooks.Current.AddressBook;
             EditedContact = new Contact();
 
             ContactEditorViewModel.Contact = EditedContact;

@@ -15,39 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class CloseFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly CloseFlowConsole console;
 
-        public CloseFlow(AddressBooks addressBooks, CloseFlowConsole console)
+        public CloseFlow(OpenedAddressBooks openedAddressBooks, CloseFlowConsole console)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
-            if (addressBooks.AddressBook != null)
-            {
-                addressBooks.CloseAddressBook();
-                console.DisplayAddressBookCloseSuccess();
-            }
+            if (openedAddressBooks.Current != null)
+                openedAddressBooks.CloseAddressBook();
             else
-            {
                 console.DisplayNoAddressBookMessage();
-            }
         }
     }
 }

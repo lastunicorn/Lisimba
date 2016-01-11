@@ -15,34 +15,37 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using System.IO;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class InfoFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly InfoFlowConsole console;
 
-        public InfoFlow(AddressBooks addressBooks, InfoFlowConsole console)
+        public InfoFlow(OpenedAddressBooks openedAddressBooks, InfoFlowConsole console)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
-            if (addressBooks.AddressBook == null)
-                console.DisplayNoAddressBookMessage();
+            if (openedAddressBooks.Current != null)
+            {
+                string addressBookLocation = Path.GetFullPath(openedAddressBooks.Current.Location);
+                console.DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
+            }
             else
-                console.DisplayAddressBookInfo(addressBooks.AddressBook, addressBooks.AddressBookLocation);
+            {
+                console.DisplayNoAddressBookMessage();
+            }
         }
     }
 }

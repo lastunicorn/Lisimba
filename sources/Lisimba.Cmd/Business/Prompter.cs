@@ -15,37 +15,74 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     /// <summary>
-    /// Reads a command from the console and parses it.
+    /// Provides a loop for reading commands from the console, parsing them and run the needed flow.
     /// </summary>
     class Prompter
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly PrompterConsole console;
+        private readonly FlowProvider flowProvider;
+        private bool stopRequested;
 
-        public Prompter(AddressBooks addressBooks, PrompterConsole console)
+        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowProvider flowProvider)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
+            if (flowProvider == null) throw new ArgumentNullException("flowProvider");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
+            this.flowProvider = flowProvider;
         }
 
-        public Command Read()
+        public void Run()
         {
-            string addressBookName = addressBooks.AddressBookName;
-            bool isSaved = addressBooks.IsAddressBookSaved;
+            stopRequested = false;
 
-            console.DisplayPrompter(addressBookName, isSaved);
+            while (!stopRequested)
+            {
+                DisplayPrompter();
+                Command command = ReadCommand();
+                ProcessCommand(command);
+            }
+        }
 
+        private void DisplayPrompter()
+        {
+            string addressBookName = openedAddressBooks.Current == null ? null : openedAddressBooks.Current.AddressBook.Name;
+            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
+
+            console.DisplayPrompter(addressBookName, isModified);
+        }
+
+        private Command ReadCommand()
+        {
             string commandText = console.ReadCommand();
-
             return new Command(commandText);
+        }
+
+        private void ProcessCommand(Command command)
+        {
+            try
+            {
+                IFlow flow = flowProvider.CreateFlow(command);
+                flow.Execute();
+            }
+            catch (Exception ex)
+            {
+                console.WriteError(ex.Message);
+            }
+        }
+
+        public void Stop()
+        {
+            stopRequested = true;
         }
     }
 }

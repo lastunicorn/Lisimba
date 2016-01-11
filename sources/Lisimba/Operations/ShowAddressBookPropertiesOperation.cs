@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
     {
-        private readonly AddressBookShell addressBookShell;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
@@ -32,22 +32,22 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesOperation(AddressBookShell addressBookShell, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public ShowAddressBookPropertiesOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.addressBookShell = addressBookShell;
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
-            this.addressBookShell.AddressBookChanged += HandleAddressBookChanged;
+            this.openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
 
-            IsEnabled = addressBookShell.AddressBook != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs addressBookChangedEventArgs)
         {
-            IsEnabled = addressBookShell.AddressBook != null;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -57,7 +57,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplayAddressBookPropertiesWindow()
         {
-            AddressBookPropertiesViewModel viewModel = new AddressBookPropertiesViewModel(addressBookShell);
+            AddressBookPropertiesViewModel viewModel = new AddressBookPropertiesViewModel(openedAddressBooks);
             userInterface.DisplayAddressBookProperties(viewModel);
         }
     }

@@ -15,50 +15,37 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using DustInTheWind.Lisimba.Cmd.Observers;
+using DustInTheWind.Lisimba.Common;
+using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
+    /// <summary>
+    /// Listens for any address book that is being closed and asks the user if
+    /// he wants to save it betfore closing.
+    /// </summary>
     class AddressBookGuarder
     {
-        private readonly AddressBookGuarderConsole consoleView;
+        private readonly List<AddressBookObserver> observers = new List<AddressBookObserver>();
 
-        public AddressBooks AddressBooks { get; set; }
-
-        public AddressBookGuarder(AddressBookGuarderConsole consoleView)
+        public AddressBookGuarder(IUnityContainer unityContainer)
         {
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
-            this.consoleView = consoleView;
+            observers.Add(unityContainer.Resolve<AddressBookOpenObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookSaveObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookEnsureSaveObserver>());
+            observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());
         }
 
-        public bool EnsureSave()
+        public void Start()
         {
-            if (AddressBooks == null || AddressBooks.IsAddressBookSaved)
-                return true;
-
-            bool? needSave = consoleView.AskToSaveAddressBook();
-
-            if (needSave == null)
-                return false;
-
-            if (!needSave.Value)
-                return true;
-
-            if (AddressBooks.AddressBookLocation == null)
+            foreach (AddressBookObserver observer in observers)
             {
-                string newLocation = consoleView.AskForNewLocation();
-
-                if (newLocation == null)
-                    return false;
-
-                AddressBooks.SaveAddressBookAs(newLocation);
+                observer.Start();
             }
-            else
-            {
-                AddressBooks.SaveAddressBook();
-            }
-
-            return true;
         }
     }
 }

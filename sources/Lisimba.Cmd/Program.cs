@@ -15,20 +15,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Microsoft.Practices.Unity;
 
-namespace Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             try
             {
-                UnityContainer container = DependencyContainerSetup.CreateContainer();
-
-                ApplicationLoop applicationLoop = container.Resolve<ApplicationLoop>();
-                applicationLoop.Run();
+                Bootstrapper bootstrapper = new Bootstrapper();
+                bootstrapper.Run(args);
             }
             catch (Exception ex)
             {

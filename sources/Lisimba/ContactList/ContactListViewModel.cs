@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.BookShell;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Operations;
@@ -14,7 +15,7 @@ namespace DustInTheWind.Lisimba.ContactList
     internal class ContactListViewModel : ViewModelBase
     {
         private readonly ConfigurationService configurationService;
-        private readonly AddressBookShell addressBookShell;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private ContactsSortingType selectedSortingMethod;
         private string searchedText;
 
@@ -51,14 +52,14 @@ namespace DustInTheWind.Lisimba.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ConfigurationService configurationService, AddressBookShell addressBookShell, CommandPool commandPool)
+        public ContactListViewModel(ConfigurationService configurationService, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
         {
             if (configurationService == null) throw new ArgumentNullException("configurationService");
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
             this.configurationService = configurationService;
-            this.addressBookShell = addressBookShell;
+            this.openedAddressBooks = openedAddressBooks;
 
             CreateNewContactOperation = commandPool.CreateNewContactOperation;
             DeleteCurrentContactOperation = commandPool.DeleteCurrentContactOperation;
@@ -75,29 +76,31 @@ namespace DustInTheWind.Lisimba.ContactList
 
             SelectedSortingMethod = GetSortingType();
 
-            addressBookShell.AddressBookChanged += HandleCurrentAddressBookChanged;
-            addressBookShell.AddressBookSaved += HandleCurrentAddressBookSaved;
-            addressBookShell.ContactChanged += HandleCurrentContactChanged;
+            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
+            openedAddressBooks.AddressBookChanged += HandleOpenedAddressBookChanged;
 
-            if (addressBookShell.AddressBook != null)
+            if (openedAddressBooks.Current != null)
             {
-                addressBookShell.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                addressBookShell.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                openedAddressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                openedAddressBooks.Current.Saved += HandleCurrentAddressBookSaved;
             }
         }
 
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
+        private void HandleOpenedAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             if (e.OldAddressBook != null)
             {
-                e.OldAddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-                e.OldAddressBook.ContactContentChanged -= HandleContactContentChanged;
+                e.OldAddressBook.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
+                e.OldAddressBook.AddressBook.ContactContentChanged -= HandleContactContentChanged;
+                e.OldAddressBook.Saved -= HandleCurrentAddressBookSaved;
             }
 
             if (e.NewAddressBook != null)
             {
-                e.NewAddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                e.NewAddressBook.ContactContentChanged += HandleContactContentChanged;
+                e.NewAddressBook.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                e.NewAddressBook.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                e.NewAddressBook.Saved += HandleCurrentAddressBookSaved;
             }
 
             searchedText = string.Empty;
@@ -138,7 +141,7 @@ namespace DustInTheWind.Lisimba.ContactList
             if (ignoreCurrentContactChange || View == null)
                 return;
 
-            Contact contactToSelect = addressBookShell.Contact;
+            Contact contactToSelect = openedAddressBooks.Contact;
 
             TreeNode treeNodeToSelect = (contactToSelect == null || !ContactsToTreeViewBinder.treeNodesByContact.ContainsKey(contactToSelect))
                 ? null
@@ -167,12 +170,12 @@ namespace DustInTheWind.Lisimba.ContactList
         private void RepopulateFromCurrentAddressBook()
         {
             bool currentDataContainsContacts =
-                addressBookShell != null &&
-                addressBookShell.AddressBook != null &&
-                addressBookShell.AddressBook.Contacts != null;
+                openedAddressBooks != null &&
+                openedAddressBooks.Current != null &&
+                openedAddressBooks.Current.AddressBook.Contacts != null;
 
             ContactCollection contacts = currentDataContainsContacts
-                ? addressBookShell.AddressBook.Contacts
+                ? openedAddressBooks.Current.AddressBook.Contacts
                 : null;
 
             ContactsToTreeViewBinder.Contacts = contacts;
@@ -213,9 +216,9 @@ namespace DustInTheWind.Lisimba.ContactList
             try
             {
                 TreeNode selectedNode = View.GetSelecteContact();
-                Contact selectedContact = selectedNode != null ? (Contact) selectedNode.Tag : null;
+                Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
 
-                addressBookShell.Contact = selectedContact;
+                openedAddressBooks.Contact = selectedContact;
             }
             finally
             {

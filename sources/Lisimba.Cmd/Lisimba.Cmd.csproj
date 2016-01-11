@@ -7,8 +7,8 @@
     <ProjectGuid>{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Lisimba.Cmd</RootNamespace>
-    <AssemblyName>Lisimba.Cmd</AssemblyName>
+    <RootNamespace>DustInTheWind.Lisimba.Cmd</RootNamespace>
+    <AssemblyName>DustInTheWind.Lisimba.Cmd</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,17 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.Unity">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -53,42 +47,41 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="ApplicationConfiguration.cs" />
-    <Compile Include="ApplicationLoop.cs" />
-    <Compile Include="Common\CommandParser.cs" />
+    <Compile Include="Business\ApplicationConfiguration.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="LisimbaApplication.cs" />
     <Compile Include="Business\AddressBookGuarder.cs" />
-    <Compile Include="Business\AddressBookGuarderConsole.cs" />
-    <Compile Include="Flows\FlowProvider.cs" />
+    <Compile Include="Business\FlowProvider.cs" />
     <Compile Include="Business\Prompter.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
-    <Compile Include="Common\Command.cs" />
     <Compile Include="Flows\EmptyFlow.cs" />
     <Compile Include="Flows\GateFlow.cs" />
-    <Compile Include="Common\IFlow.cs" />
     <Compile Include="Flows\InfoFlow.cs" />
     <Compile Include="Flows\NewFlow.cs" />
     <Compile Include="Flows\SaveFlow.cs" />
     <Compile Include="Flows\UpdateFlow.cs" />
     <Compile Include="Business\PrompterConsole.cs" />
-    <Compile Include="Presentation\ApplicationLoopConsole.cs" />
-    <Compile Include="Presentation\CloseFlowConsole.cs" />
-    <Compile Include="Common\ConsoleHelper.cs" />
+    <Compile Include="LisimbaApplicationConsole.cs" />
+    <Compile Include="Flows\CloseFlowConsole.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
-    <Compile Include="Business\AddressBooks.cs" />
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Business\GateProvider.cs" />
-    <Compile Include="Business\Gates.cs" />
-    <Compile Include="Presentation\GateFlowConsole.cs" />
-    <Compile Include="Presentation\InfoFlowConsole.cs" />
-    <Compile Include="Presentation\NewFlowConsole.cs" />
-    <Compile Include="Presentation\NextBirthdaysFlowConsole.cs" />
-    <Compile Include="Presentation\OpenFlowConsole.cs" />
-    <Compile Include="Presentation\SaveFlowConsole.cs" />
-    <Compile Include="Presentation\ShowFlowConsole.cs" />
-    <Compile Include="Presentation\UnknownFlowConsole.cs" />
-    <Compile Include="Presentation\UpdateFlowConsole.cs" />
+    <Compile Include="Flows\GateFlowConsole.cs" />
+    <Compile Include="Flows\InfoFlowConsole.cs" />
+    <Compile Include="Flows\NextBirthdaysFlowConsole.cs" />
+    <Compile Include="Flows\OpenFlowConsole.cs" />
+    <Compile Include="Flows\ShowFlowConsole.cs" />
+    <Compile Include="Flows\UnknownFlowConsole.cs" />
+    <Compile Include="Flows\UpdateFlowConsole.cs" />
+    <Compile Include="Observers\AddressBookClosedObserver.cs" />
+    <Compile Include="Observers\AddressBookClosedObserverConsole.cs" />
+    <Compile Include="Observers\AddressBookEnsureSaveObserver.cs" />
+    <Compile Include="Observers\AddressBookEnsureSaveObserverConsole.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserverConsole.cs" />
+    <Compile Include="Observers\AddressBookSaveObserver.cs" />
+    <Compile Include="Observers\AddressBookSaveObserverConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />
@@ -111,6 +104,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ConsoleCommon\ConsoleCommon.csproj">
+      <Project>{BDFCAD78-775A-478D-8BFF-6A986704AA0C}</Project>
+      <Name>ConsoleCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.Common\Lisimba.Common.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
       <Name>Lisimba.Egg</Name>
@@ -122,6 +123,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

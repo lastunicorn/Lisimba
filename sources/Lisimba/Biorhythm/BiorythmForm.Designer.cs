@@ -1,6 +1,4 @@
-using DustInTheWind.Lisimba.Biorhythm;
-
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.Biorhythm
 {
     partial class BiorythmForm
     {

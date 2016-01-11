@@ -15,26 +15,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class ExitFlow : IFlow
     {
-        private readonly ApplicationLoop applicationLoop;
+        private readonly LisimbaApplication lisimbaApplication;
 
-        public ExitFlow(ApplicationLoop applicationLoop)
+        public ExitFlow(LisimbaApplication lisimbaApplication)
         {
-            if (applicationLoop == null) throw new ArgumentNullException("applicationLoop");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
-            this.applicationLoop = applicationLoop;
+            this.lisimbaApplication = lisimbaApplication;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
-            applicationLoop.ExitRequested = true;
+            lisimbaApplication.Exit();
         }
     }
 }

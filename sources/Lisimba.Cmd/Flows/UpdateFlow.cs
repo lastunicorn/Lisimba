@@ -15,30 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     internal class UpdateFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly Command command;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UpdateFlowConsole consoleView;
 
-        public UpdateFlow(AddressBooks addressBooks, UpdateFlowConsole consoleView)
+        public UpdateFlow(Command command, OpenedAddressBooks openedAddressBooks, UpdateFlowConsole consoleView)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (command == null) throw new ArgumentNullException("command");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (consoleView == null) throw new ArgumentNullException("consoleView");
 
-            this.addressBooks = addressBooks;
+            this.command = command;
+            this.openedAddressBooks = openedAddressBooks;
             this.consoleView = consoleView;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-            
             foreach (string actionText in command)
             {
                 ProcessAction(actionText);
@@ -79,9 +79,9 @@ namespace Lisimba.Cmd.Flows
 
         private void UpdateAddressBookName(string newAddressBookName)
         {
-            if (addressBooks.AddressBook != null)
+            if (openedAddressBooks.Current != null)
             {
-                addressBooks.AddressBook.Name = newAddressBookName;
+                openedAddressBooks.Current.AddressBook.Name = newAddressBookName;
                 consoleView.DisplayAddressBookNameChangeSuccess();
             }
             else

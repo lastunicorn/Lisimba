@@ -14,13 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     internal class EmptyFlow : IFlow
     {
-        public void Execute(Command command)
+        public void Execute()
         {
         }
     }

@@ -15,13 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Common;
+using DustInTheWind.ConsoleCommon;
 
-namespace Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class PrompterConsole
     {
-        public void DisplayPrompter(string addressBookName, bool isSaved)
+        public void DisplayPrompter(string addressBookName, bool isModified)
         {
             Console.WriteLine();
             ConsoleHelper.WriteEmphasize("lisimba");
@@ -30,22 +30,27 @@ namespace Lisimba.Cmd.Business
             {
                 Console.Write(" ");
 
-                string formattedAddressBookName = BuildAddressBookName(addressBookName, isSaved);
+                string formattedAddressBookName = BuildAddressBookName(addressBookName, isModified);
                 Console.Write(formattedAddressBookName);
             }
 
             ConsoleHelper.WriteEmphasize(" > ");
         }
 
-        private static string BuildAddressBookName(string addressBookName, bool isSaved)
+        private static string BuildAddressBookName(string addressBookName, bool isModified)
         {
-            string notSavedMarker = isSaved ? string.Empty : "*";
+            string notSavedMarker = isModified ? "*" : string.Empty;
             return string.Format("[{0}]{1}", addressBookName, notSavedMarker);
         }
 
         public string ReadCommand()
         {
             return Console.ReadLine();
+        }
+
+        public void WriteError(string text)
+        {
+            ConsoleHelper.WriteLineError(text);
         }
     }
 }

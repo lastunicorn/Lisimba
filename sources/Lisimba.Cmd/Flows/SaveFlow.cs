@@ -15,36 +15,50 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Egg;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class SaveFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
-        private readonly SaveFlowConsole consoleView;
+        private readonly Command command;
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
 
-        public SaveFlow(AddressBooks addressBooks, SaveFlowConsole consoleView)
-        {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
-
-            this.addressBooks = addressBooks;
-            this.consoleView = consoleView;
-        }
-
-        public void Execute(Command command)
+        public SaveFlow(Command command, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
             if (command == null) throw new ArgumentNullException("command");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            if (command[1] != null)
-                addressBooks.SaveAddressBookAs(command[1]);
+            this.command = command;
+            this.openedAddressBooks = openedAddressBooks;
+            this.availableGates = availableGates;
+        }
+
+        public void Execute()
+        {
+            if (openedAddressBooks.Current == null)
+                return;
+
+            if (command.ParameterCount >= 1)
+            {
+                if (command.ParameterCount >= 2)
+                {
+                    IGate gate = availableGates.GetGate(command[2]);
+                    openedAddressBooks.Current.SaveAddressBook(command[1], gate);
+                }
+                else
+                {
+                    openedAddressBooks.Current.SaveAddressBook(command[1]);
+                }
+            }
             else
-                addressBooks.SaveAddressBook();
-
-            consoleView.DisplayAddressBookSaveSuccess();
+            {
+                openedAddressBooks.Current.SaveAddressBook();
+            }
         }
     }
 }

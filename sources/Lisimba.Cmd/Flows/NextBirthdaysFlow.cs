@@ -15,48 +15,58 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
-using Lisimba.Cmd.Business;
-using Lisimba.Cmd.Common;
-using Lisimba.Cmd.Presentation;
 
-namespace Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NextBirthdaysFlow : IFlow
     {
-        private readonly AddressBooks addressBooks;
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly NextBirthdaysFlowConsole console;
 
-        public NextBirthdaysFlow(AddressBooks addressBooks, NextBirthdaysFlowConsole console)
+        public NextBirthdaysFlow(OpenedAddressBooks openedAddressBooks, NextBirthdaysFlowConsole console)
         {
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.addressBooks = addressBooks;
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute(Command command)
+        public void Execute()
         {
-            if (command == null) throw new ArgumentNullException("command");
-
             DisplayNextBirthdays();
         }
 
         private void DisplayNextBirthdays()
         {
-            var contacts = addressBooks.AddressBook.Contacts
+            if (openedAddressBooks.Current != null)
+            {
+                IEnumerable<Contact> contacts = GetContacts();
+
+                foreach (Contact contact in contacts)
+                {
+                    console.DisplayContactWithBirthday(contact);
+                }
+            }
+            else
+            {
+                console.DisplayNoAddressBookMessage();
+            }
+        }
+
+        private IEnumerable<Contact> GetContacts()
+        {
+            return openedAddressBooks.Current.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())
                 .Take(10);
-
-            foreach (Contact contact in contacts)
-            {
-                console.DisplayContactWithBirthday(contact);
-            }
         }
     }
 }

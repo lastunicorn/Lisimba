@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,7 +16,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -62,30 +62,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ref\BiorhythmControls.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="BookShell\AddressBookChangedEventArgs.cs" />
-    <Compile Include="BookShell\AddressBookChangingEventArgs.cs" />
-    <Compile Include="BookShell\AddressBookLoadResult.cs" />
-    <Compile Include="BookShell\AddressBookSaver.cs" />
-    <Compile Include="BookShell\AddressBookSaverResult.cs" />
-    <Compile Include="BookShell\AddressBookShell.cs" />
-    <Compile Include="BookShell\AddressBookStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Config\GatesConfigElement.cs" />
     <Compile Include="ContactEdit\BirthDateEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +96,12 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="DependencyContainerSetup.cs" />
+    <Compile Include="Observers\AddressBookClosedObserver.cs" />
+    <Compile Include="Observers\AddressBookEnsureSaveObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
+    <Compile Include="Observers\AddressBookSaveObserver.cs" />
+    <Compile Include="Services\AddressBookGuarder.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>
@@ -139,7 +137,6 @@
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\TrayIconPresenter.cs" />
-    <Compile Include="LisimbaException.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\ExecutableViewModelBase.cs" />
@@ -210,7 +207,6 @@
     </Compile>
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\LisimbaApplication.cs" />
-    <Compile Include="Services\RecentFiles.cs" />
     <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />
     <Compile Include="Services\UserInterface.cs" />
@@ -480,17 +476,13 @@
     <Content Include="Lion.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lisimba.Common\Lisimba.Common.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lisimba.YahooGate\Lisimba.YahooGate.csproj">
-      <Project>{D2568067-DBF2-49A5-9672-9A76271CC6C3}</Project>
-      <Name>Lisimba.YahooGate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lisimba.ZipXmlGate\Lisimba.ZipXmlGate.csproj">
-      <Project>{652744F3-B7FA-43AD-80A9-6EFC86537817}</Project>
-      <Name>Lisimba.ZipXmlGate</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
       <Project>{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}</Project>

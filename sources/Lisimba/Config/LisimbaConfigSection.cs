@@ -47,6 +47,12 @@ namespace DustInTheWind.Lisimba.Config
             get { return (SortByConfigElement) this["sortBy"] ?? new SortByConfigElement(); }
         }
 
+        [ConfigurationProperty("gates")]
+        public GatesConfigElement Gates
+        {
+            get { return (GatesConfigElement)this["gates"] ?? new GatesConfigElement(); }
+        }
+
         //protected override ConfigurationElement CreateNewElement()
         //{
         //    return new RecentFileConfigSection();
