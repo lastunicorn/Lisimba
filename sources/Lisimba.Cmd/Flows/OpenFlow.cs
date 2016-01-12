@@ -25,21 +25,21 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlow : IFlow
     {
-        private readonly Command command;
+        private readonly ConsoleCommand consoleCommand;
         private readonly OpenFlowConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(Command command, OpenFlowConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates, ApplicationConfiguration config)
+        public OpenFlow(ConsoleCommand consoleCommand, OpenFlowConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates, ApplicationConfiguration config)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (config == null) throw new ArgumentNullException("config");
 
-            this.command = command;
+            this.consoleCommand = consoleCommand;
             this.console = console;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
-            if (command.HasParameters)
+            if (consoleCommand.HasParameters)
                 OpenAddressBook();
             else
                 OpenLastAddressBook();
@@ -57,14 +57,14 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         private void OpenAddressBook()
         {
             IGate gate = GetGate();
-            openedAddressBooks.OpenAddressBook(command[1], gate);
+            openedAddressBooks.OpenAddressBook(consoleCommand[1], gate);
         }
 
         private IGate GetGate()
         {
-            if (command.ParameterCount >= 2)
+            if (consoleCommand.ParameterCount >= 2)
             {
-                string gateId = command[2];
+                string gateId = consoleCommand[2];
                 return availableGates.GetGate(gateId);
             }
 

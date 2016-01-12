@@ -23,17 +23,17 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class SaveFlow : IFlow
     {
-        private readonly Command command;
+        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
 
-        public SaveFlow(Command command, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public SaveFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            this.command = command;
+            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
         }
@@ -43,16 +43,16 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             if (openedAddressBooks.Current == null)
                 return;
 
-            if (command.ParameterCount >= 1)
+            if (consoleCommand.ParameterCount >= 1)
             {
-                if (command.ParameterCount >= 2)
+                if (consoleCommand.ParameterCount >= 2)
                 {
-                    IGate gate = availableGates.GetGate(command[2]);
-                    openedAddressBooks.Current.SaveAddressBook(command[1], gate);
+                    IGate gate = availableGates.GetGate(consoleCommand[2]);
+                    openedAddressBooks.Current.SaveAddressBook(consoleCommand[1], gate);
                 }
                 else
                 {
-                    openedAddressBooks.Current.SaveAddressBook(command[1]);
+                    openedAddressBooks.Current.SaveAddressBook(consoleCommand[1]);
                 }
             }
             else

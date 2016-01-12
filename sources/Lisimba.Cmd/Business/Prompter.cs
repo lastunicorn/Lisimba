@@ -27,18 +27,18 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly PrompterConsole console;
-        private readonly FlowProvider flowProvider;
+        private readonly FlowFactory flowFactory;
         private bool stopRequested;
 
-        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowProvider flowProvider)
+        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowFactory flowFactory)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
-            if (flowProvider == null) throw new ArgumentNullException("flowProvider");
+            if (flowFactory == null) throw new ArgumentNullException("flowFactory");
 
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
-            this.flowProvider = flowProvider;
+            this.flowFactory = flowFactory;
         }
 
         public void Run()
@@ -48,8 +48,8 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             while (!stopRequested)
             {
                 DisplayPrompter();
-                Command command = ReadCommand();
-                ProcessCommand(command);
+                ConsoleCommand consoleCommand = ReadCommand();
+                ProcessCommand(consoleCommand);
             }
         }
 
@@ -61,17 +61,17 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             console.DisplayPrompter(addressBookName, isModified);
         }
 
-        private Command ReadCommand()
+        private ConsoleCommand ReadCommand()
         {
             string commandText = console.ReadCommand();
-            return new Command(commandText);
+            return new ConsoleCommand(commandText);
         }
 
-        private void ProcessCommand(Command command)
+        private void ProcessCommand(ConsoleCommand consoleCommand)
         {
             try
             {
-                IFlow flow = flowProvider.CreateFlow(command);
+                IFlow flow = flowFactory.CreateFlow(consoleCommand);
                 flow.Execute();
             }
             catch (Exception ex)

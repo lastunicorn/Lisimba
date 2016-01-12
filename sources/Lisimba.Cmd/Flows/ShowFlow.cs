@@ -26,17 +26,17 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class ShowFlow : IFlow
     {
-        private readonly Command command;
+        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ShowFlowConsole console;
 
-        public ShowFlow(Command command, OpenedAddressBooks openedAddressBooks, ShowFlowConsole console)
+        public ShowFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, ShowFlowConsole console)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.command = command;
+            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
@@ -45,8 +45,8 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         {
             if (openedAddressBooks.Current != null)
             {
-                if (command.HasParameters)
-                    DisplayContactDetails(command[1]);
+                if (consoleCommand.HasParameters)
+                    DisplayContactDetails(consoleCommand[1]);
                 else
                     DisplayAllContacts();
             }

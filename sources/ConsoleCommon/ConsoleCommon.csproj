@@ -34,7 +34,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
+    <Compile Include="ConsoleCommand.cs" />
     <Compile Include="CommandParser.cs" />
     <Compile Include="ConsoleHelper.cs" />
     <Compile Include="IFlow.cs" />

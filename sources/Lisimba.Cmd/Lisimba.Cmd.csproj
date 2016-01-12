@@ -51,7 +51,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="LisimbaApplication.cs" />
     <Compile Include="Business\AddressBookGuarder.cs" />
-    <Compile Include="Business\FlowProvider.cs" />
+    <Compile Include="Business\FlowFactory.cs" />
     <Compile Include="Business\Prompter.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
     <Compile Include="Flows\EmptyFlow.cs" />

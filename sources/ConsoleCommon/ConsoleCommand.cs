@@ -20,7 +20,10 @@ using System.Linq;
 
 namespace DustInTheWind.ConsoleCommon
 {
-    public class Command : IEnumerable<string>
+    /// <summary>
+    /// Represents a command written by the user in the console.
+    /// </summary>
+    public class ConsoleCommand : IEnumerable<string>
     {
         private readonly List<string> parameters;
 
@@ -50,7 +53,7 @@ namespace DustInTheWind.ConsoleCommon
             }
         }
 
-        public Command(string commandText)
+        public ConsoleCommand(string commandText)
         {
             if (commandText == null)
             {

@@ -19,6 +19,9 @@ using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Common
 {
+    /// <summary>
+    /// Manages a list of n most recent files opened by the application.
+    /// </summary>
     public class RecentFiles
     {
         private readonly IApplicationConfiguration config;

@@ -39,7 +39,10 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         {
             if (openedAddressBooks.Current != null)
             {
-                string addressBookLocation = Path.GetFullPath(openedAddressBooks.Current.Location);
+                string addressBookLocation = openedAddressBooks.Current.Location == null
+                    ? "< not saved yet >"
+                    : Path.GetFullPath(openedAddressBooks.Current.Location);
+
                 console.DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
             }
             else

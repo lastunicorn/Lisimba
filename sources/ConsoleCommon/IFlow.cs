@@ -17,7 +17,7 @@
 namespace DustInTheWind.ConsoleCommon
 {
     /// <summary>
-    /// Represents a flow that is executed at the user's request
+    /// Represents a flow that is executed at the user's request.
     /// </summary>
     public interface IFlow
     {

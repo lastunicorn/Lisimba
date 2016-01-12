@@ -22,30 +22,30 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class GateFlow : IFlow
     {
-        private readonly Command command;
+        private readonly ConsoleCommand consoleCommand;
         private readonly AvailableGates availableGates;
         private readonly GateFlowConsole console;
 
-        public GateFlow(Command command, AvailableGates availableGates, GateFlowConsole console)
+        public GateFlow(ConsoleCommand consoleCommand, AvailableGates availableGates, GateFlowConsole console)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.command = command;
+            this.consoleCommand = consoleCommand;
             this.availableGates = availableGates;
             this.console = console;
         }
 
         public void Execute()
         {
-            if (command.ParameterCount == 0)
+            if (consoleCommand.ParameterCount == 0)
             {
                 console.DisplayGate(availableGates.DefaultGate);
             }
             else
             {
-                availableGates.SetDefaultGate(command[1]);
+                availableGates.SetDefaultGate(consoleCommand[1]);
 
                 console.DisplayGateChangeSuccess();
                 console.DisplayGate(availableGates.DefaultGate);

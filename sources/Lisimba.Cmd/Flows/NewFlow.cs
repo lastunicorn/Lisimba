@@ -22,21 +22,21 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NewFlow : IFlow
     {
-        private readonly Command command;
+        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public NewFlow(Command command, OpenedAddressBooks openedAddressBooks)
+        public NewFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks)
         {
-            if (command == null) throw new ArgumentNullException("command");
+            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.command = command;
+            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
         }
 
         public void Execute()
         {
-            openedAddressBooks.CreateNewAddressBook(command[1]);
+            openedAddressBooks.CreateNewAddressBook(consoleCommand[1]);
         }
     }
 }
