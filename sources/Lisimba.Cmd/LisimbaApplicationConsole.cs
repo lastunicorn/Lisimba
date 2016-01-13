@@ -39,30 +39,5 @@ namespace DustInTheWind.Lisimba.Cmd
         {
             Console.WriteLine(Resources.DefaultGateMessage, gateName);
         }
-        public bool? AskToSaveAddressBook()
-        {
-            Console.Write(Resources.AskToSaveAddressBook);
-
-            ConsoleKeyInfo key = Console.ReadKey(false);
-            Console.WriteLine();
-
-            switch (key.Key)
-            {
-                case ConsoleKey.Y:
-                    return true;
-
-                case ConsoleKey.N:
-                    return false;
-
-                default:
-                    return null;
-            }
-        }
-
-        public string AskForNewLocation()
-        {
-            Console.Write(Resources.AskForNewLocation);
-            return Console.ReadLine();
-        }
     }
 }
