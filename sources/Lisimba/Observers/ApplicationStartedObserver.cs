@@ -27,21 +27,25 @@ namespace DustInTheWind.Lisimba.Observers
         private readonly ProgramArguments programArguments;
         private readonly ApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
+        private readonly AvailableGates availableGates;
 
         public ApplicationStartedObserver(LisimbaApplication lisimbaApplication, CommandPool commandPool,
-            ProgramArguments programArguments, ApplicationConfiguration applicationConfiguration, RecentFiles recentFiles)
+            ProgramArguments programArguments, ApplicationConfiguration applicationConfiguration, RecentFiles recentFiles,
+            AvailableGates availableGates)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.lisimbaApplication = lisimbaApplication;
             this.commandPool = commandPool;
             this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
+            this.availableGates = availableGates;
         }
 
         public void Start()
@@ -56,18 +60,22 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void OpenInitialCatalog()
         {
-            string fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
+            AddressBookLocationInfo fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
 
-            if (string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
+            if (fileNameToOpenAtLoad == null)
                 commandPool.NewAddressBookOperation.Execute();
             else
                 commandPool.OpenAddressBookOperation.Execute(fileNameToOpenAtLoad);
         }
 
-        private string CalculateInitiallyOpenedFileName()
+        private AddressBookLocationInfo CalculateInitiallyOpenedFileName()
         {
             if (!string.IsNullOrEmpty(programArguments.FileName))
-                return programArguments.FileName;
+                return new AddressBookLocationInfo
+                {
+                    FileName = programArguments.FileName,
+                    GateId = availableGates.DefaultGate.Id
+                };
 
             switch (applicationConfiguration.LoadFileAtStart)
             {
@@ -75,10 +83,10 @@ namespace DustInTheWind.Lisimba.Observers
                     return null;
 
                 case "last":
-                    return recentFiles.GetMostRecentFile().FileName;
+                    return recentFiles.GetMostRecentFile();
 
                 case "specified":
-                    return applicationConfiguration.FileToLoadAtStart.FileName;
+                    return applicationConfiguration.FileToLoadAtStart;
 
                 default:
                     return null;
