@@ -14,14 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Common
+using System;
+using System.Reflection;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Properties;
+
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    public interface IApplicationConfiguration
+    class ApplicationStartedObserverConsole
     {
-        string DefaultGateName { get; }
-        AddressBookLocationInfo LastAddressBook { get; set; }
-        AddressBookLocationInfo[] RecentFilesList { get; }
-        string LoadFileAtStart { get; }
-        AddressBookLocationInfo FileToLoadAtStart { get; }
+        public void WriteWelcomeMessage()
+        {
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            string title = string.Format(Resources.LisimbaTitle, version);
+            ConsoleHelper.WriteLineEmphasize(title);
+        }
+
+        public void WriteGateInfo(string gateName)
+        {
+            Console.WriteLine(Resources.DefaultGateMessage, gateName);
+        }
     }
 }

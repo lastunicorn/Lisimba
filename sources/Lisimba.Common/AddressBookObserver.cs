@@ -18,7 +18,12 @@ using System;
 
 namespace DustInTheWind.Lisimba.Common
 {
-    public abstract class AddressBookObserver
+    public interface IObserver
+    {
+        void Start();
+    }
+
+    public abstract class AddressBookObserver : IObserver
     {
         protected readonly OpenedAddressBooks OpenedAddressBooks;
 

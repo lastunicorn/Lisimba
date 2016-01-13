@@ -16,36 +16,48 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Cmd.Observers;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Observers;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.Services
 {
     /// <summary>
     /// Listens for any address book that is being closed and asks the user if
     /// he wants to save it betfore closing.
     /// </summary>
-    class AddressBookGuarder
+    class ActiveObservers
     {
-        private readonly List<AddressBookObserver> observers = new List<AddressBookObserver>();
+        private readonly IUnityContainer unityContainer;
+        private List<IObserver> observers;
 
-        public AddressBookGuarder(IUnityContainer unityContainer)
+        public ActiveObservers(IUnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
-            observers.Add(unityContainer.Resolve<AddressBookOpenObserver>());
-            observers.Add(unityContainer.Resolve<AddressBookSaveObserver>());
-            observers.Add(unityContainer.Resolve<AddressBookEnsureSaveObserver>());
-            observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());
+            this.unityContainer = unityContainer;
         }
 
         public void Start()
         {
-            foreach (AddressBookObserver observer in observers)
+            if (observers == null)
+                observers = CreateObservers();
+
+            foreach (IObserver observer in observers)
             {
                 observer.Start();
             }
+        }
+
+        private List<IObserver> CreateObservers()
+        {
+            return new List<IObserver>
+            {
+                unityContainer.Resolve<AddressBookOpenObserver>(), 
+                unityContainer.Resolve<AddressBookSaveObserver>(),
+                unityContainer.Resolve<AddressBookEnsureSaveObserver>(),
+                unityContainer.Resolve<AddressBookClosedObserver>()
+            };
         }
     }
 }

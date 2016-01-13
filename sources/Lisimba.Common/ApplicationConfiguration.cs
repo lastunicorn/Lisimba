@@ -77,9 +77,9 @@ namespace DustInTheWind.Lisimba.Common
             get { return configurationFile.LisimbaConfigSection.LoadFileAtStart.Type; }
         }
 
-        public string FileToLoadAtStart
+        public AddressBookLocationInfo FileToLoadAtStart
         {
-            get { return configurationFile.LisimbaConfigSection.LoadFileAtStart.FileName; }
+            get { return new AddressBookLocationInfo(configurationFile.LisimbaConfigSection.LoadFileAtStart.FileName); }
         }
 
         public string DefaultContactSort

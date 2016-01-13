@@ -16,45 +16,56 @@
 
 using System;
 using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
     internal class LisimbaApplication
     {
-        private readonly LisimbaApplicationConsole console;
-        private readonly AvailableGates availableGates;
         private readonly Prompter prompter;
-        private readonly AddressBookGuarder addressBookGuarder;
+        private readonly ActiveObservers activeObservers;
 
-        public LisimbaApplication(AvailableGates availableGates, LisimbaApplicationConsole console,
-            Prompter prompter, AddressBookGuarder addressBookGuarder)
+        public event EventHandler Started;
+        public event EventHandler Ended;
+
+        public LisimbaApplication(Prompter prompter, ActiveObservers activeObservers)
         {
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
-            if (console == null) throw new ArgumentNullException("console");
             if (prompter == null) throw new ArgumentNullException("prompter");
-            if (addressBookGuarder == null) throw new ArgumentNullException("addressBookGuarder");
+            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
 
-            this.availableGates = availableGates;
-            this.console = console;
             this.prompter = prompter;
-            this.addressBookGuarder = addressBookGuarder;
+            this.activeObservers = activeObservers;
         }
 
         public void Run()
         {
-            console.WriteWelcomeMessage();
-            console.WriteGateInfo(availableGates.DefaultGateName);
+            activeObservers.Start();
 
-            addressBookGuarder.Start();
+            OnStarted();
+
             prompter.Run();
 
-            console.WriteGoodByeMessage();
+            OnEnded();
         }
 
         public void Exit()
         {
             prompter.Stop();
+        }
+
+        protected virtual void OnStarted()
+        {
+            EventHandler handler = Started;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnded()
+        {
+            EventHandler handler = Ended;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

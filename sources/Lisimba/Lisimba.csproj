@@ -100,7 +100,8 @@
     <Compile Include="Observers\AddressBookEnsureSaveObserver.cs" />
     <Compile Include="Observers\AddressBookOpenObserver.cs" />
     <Compile Include="Observers\AddressBookSaveObserver.cs" />
-    <Compile Include="Services\AddressBookGuarder.cs" />
+    <Compile Include="Observers\ApplicationStartedObserver.cs" />
+    <Compile Include="Services\ActiveObservers.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>

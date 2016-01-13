@@ -15,29 +15,15 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Reflection;
-using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd
+namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class LisimbaApplicationConsole
+    class ApplicationEndedObserverConsole
     {
-        public void WriteWelcomeMessage()
-        {
-            Version version = Assembly.GetEntryAssembly().GetName().Version;
-            string title = string.Format(Resources.LisimbaTitle, version);
-            ConsoleHelper.WriteLineEmphasize(title);
-        }
-
         public void WriteGoodByeMessage()
         {
             Console.WriteLine(Resources.GoodByeMessage);
-        }
-
-        public void WriteGateInfo(string gateName)
-        {
-            Console.WriteLine(Resources.DefaultGateMessage, gateName);
         }
     }
 }

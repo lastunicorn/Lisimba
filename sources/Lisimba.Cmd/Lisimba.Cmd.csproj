@@ -49,7 +49,7 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="LisimbaApplication.cs" />
-    <Compile Include="Business\AddressBookGuarder.cs" />
+    <Compile Include="Business\ActiveObservers.cs" />
     <Compile Include="Business\FlowFactory.cs" />
     <Compile Include="Business\Prompter.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
@@ -60,7 +60,6 @@
     <Compile Include="Flows\SaveFlow.cs" />
     <Compile Include="Flows\UpdateFlow.cs" />
     <Compile Include="Business\PrompterConsole.cs" />
-    <Compile Include="LisimbaApplicationConsole.cs" />
     <Compile Include="Flows\CloseFlowConsole.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
     <Compile Include="Flows\ExitFlow.cs" />
@@ -81,6 +80,10 @@
     <Compile Include="Observers\AddressBookOpenObserverConsole.cs" />
     <Compile Include="Observers\AddressBookSaveObserver.cs" />
     <Compile Include="Observers\AddressBookSaveObserverConsole.cs" />
+    <Compile Include="Observers\ApplicationEndedObserver.cs" />
+    <Compile Include="Observers\ApplicationEndedObserverConsole.cs" />
+    <Compile Include="Observers\ApplicationStartedObserver.cs" />
+    <Compile Include="Observers\ApplicationStartedObserverConsole.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />

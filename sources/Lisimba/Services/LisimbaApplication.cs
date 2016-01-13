@@ -18,7 +18,6 @@ using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
@@ -26,13 +25,10 @@ namespace DustInTheWind.Lisimba.Services
     internal class LisimbaApplication
     {
         private readonly ApplicationStatus applicationStatus;
-        private readonly ProgramArguments programArguments;
-        private readonly ApplicationConfiguration applicationConfiguration;
-        private readonly RecentFiles recentFiles;
-        private readonly CommandPool commandPool;
         private readonly UserInterface userInterface;
-        private readonly AddressBookGuarder addressBookGuarder;
+        private readonly ActiveObservers activeObservers;
 
+        public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Exiting;
         public event EventHandler BeforeExiting;
         public event EventHandler ExitCanceled;
@@ -52,25 +48,23 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments,
-            ApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, CommandPool commandPool,
-            UserInterface userInterface, AddressBookGuarder addressBookGuarder)
+        public LisimbaApplication(ApplicationStatus applicationStatus, UserInterface userInterface, ActiveObservers activeObservers)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (programArguments == null) throw new ArgumentNullException("programArguments");
-            if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (addressBookGuarder == null) throw new ArgumentNullException("addressBookGuarder");
+            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
 
             this.applicationStatus = applicationStatus;
-            this.programArguments = programArguments;
-            this.applicationConfiguration = applicationConfiguration;
-            this.recentFiles = recentFiles;
-            this.commandPool = commandPool;
             this.userInterface = userInterface;
-            this.addressBookGuarder = addressBookGuarder;
+            this.activeObservers = activeObservers;
+        }
+
+        protected virtual void OnStarted()
+        {
+            EventHandler handler = Started;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         protected virtual void OnExiting(CancelEventArgs e)
@@ -101,40 +95,9 @@ namespace DustInTheWind.Lisimba.Services
         {
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
 
-            addressBookGuarder.Start();
+            activeObservers.Start();
 
-            OpenInitialCatalog();
-        }
-
-        private void OpenInitialCatalog()
-        {
-            string fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
-
-            if (string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
-                commandPool.NewAddressBookOperation.Execute();
-            else
-                commandPool.OpenAddressBookOperation.Execute(fileNameToOpenAtLoad);
-        }
-
-        private string CalculateInitiallyOpenedFileName()
-        {
-            if (!string.IsNullOrEmpty(programArguments.FileName))
-                return programArguments.FileName;
-
-            switch (applicationConfiguration.LoadFileAtStart)
-            {
-                case "new":
-                    return null;
-
-                case "last":
-                    return recentFiles.GetMostRecentFile().FileName;
-
-                case "specified":
-                    return applicationConfiguration.FileToLoadAtStart;
-
-                default:
-                    return null;
-            }
+            OnStarted();
         }
 
         public bool Exit()
