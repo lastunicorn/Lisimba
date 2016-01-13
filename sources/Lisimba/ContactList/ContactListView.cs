@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.ContactList
                     comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
                     textBoxSearch.Bind(x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
 
-                    toolStripMenuItem_List_Add.ViewModel = ViewModel.CreateNewContactOperation;
+                    toolStripMenuItem_List_Add.ViewModel = ViewModel.NewContactOperation;
                     toolStripMenuItem_List_Delete.ViewModel = ViewModel.DeleteCurrentContactOperation;
                 }
             }

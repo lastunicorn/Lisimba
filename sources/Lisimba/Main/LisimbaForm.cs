@@ -98,7 +98,7 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
 
-            buttonNewAddressBook.ViewModel = viewModel.CreateNewAddressBookOperation;
+            buttonNewAddressBook.ViewModel = viewModel.NewAddressBookOperation;
             buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookOperation;
         }
 

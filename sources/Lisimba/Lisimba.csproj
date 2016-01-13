@@ -77,7 +77,6 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Config\GatesConfigElement.cs" />
     <Compile Include="ContactEdit\BirthDateEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -140,10 +139,10 @@
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\ExecutableViewModelBase.cs" />
-    <Compile Include="Operations\CreateNewContactOperation.cs" />
+    <Compile Include="Operations\NewContactOperation.cs" />
     <Compile Include="Operations\DeleteCurrentContactOperation.cs" />
     <Compile Include="Operations\ShowAddressBookPropertiesOperation.cs" />
-    <Compile Include="Operations\CreateNewAddressBookOperation.cs" />
+    <Compile Include="Operations\NewAddressBookOperation.cs" />
     <Compile Include="Operations\IExecutableViewModel.cs" />
     <Compile Include="Operations\IExecutableViewModel1.cs" />
     <Compile Include="Operations\ShowAboutOperation.cs" />
@@ -163,9 +162,6 @@
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
     <Compile Include="Operations\SaveAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeByNicknameOrNameComparer.cs" />
-    <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
-    <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
-    <Compile Include="Config\SortByConfigElement.cs" />
     <Compile Include="ctrl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -178,8 +174,6 @@
     <Compile Include="Biorhythm\BiorythmForm.Designer.cs">
       <DependentUpon>BiorythmForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Config\RecentFilesConfigElement.cs" />
-    <Compile Include="Config\LisimbaConfigSection.cs" />
     <Compile Include="CommandLineArguments.cs" />
     <Compile Include="ContactEdit\EditBaseForm.cs">
       <SubType>Form</SubType>
@@ -205,7 +199,6 @@
     <Compile Include="ContactEdit\WebSiteEditForm.Designer.cs">
       <DependentUpon>WebSiteEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\LisimbaApplication.cs" />
     <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />

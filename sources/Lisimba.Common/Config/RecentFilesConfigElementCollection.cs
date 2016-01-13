@@ -16,7 +16,7 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Config
+namespace DustInTheWind.Lisimba.Common.Config
 {
     [ConfigurationCollection(typeof (RecentFilesConfigElement), AddItemName = "file")]
     public class RecentFilesConfigElementCollection : ConfigurationElementCollection
@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Config
             get { return BaseGet(index) as RecentFilesConfigElement; }
         }
 
-        public void AddNewRecentFile(string fileName)
+        public void AddNewRecentFile(string fileName, string gateId)
         {
             int i = 0;
             while (i < Count)
@@ -43,6 +43,7 @@ namespace DustInTheWind.Lisimba.Config
 
             RecentFilesConfigElement element = CreateNewElement() as RecentFilesConfigElement;
             element.FileName = fileName;
+            element.Gate = gateId;
 
             BaseAdd(0, element);
         }

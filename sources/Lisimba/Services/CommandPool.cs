@@ -24,9 +24,9 @@ namespace DustInTheWind.Lisimba.Services
     {
         private readonly IUnityContainer servicePrvider;
 
-        public CreateNewAddressBookOperation CreateNewAddressBookOperation
+        public NewAddressBookOperation NewAddressBookOperation
         {
-            get { return servicePrvider.Resolve<CreateNewAddressBookOperation>(); }
+            get { return servicePrvider.Resolve<NewAddressBookOperation>(); }
         }
 
         public OpenAddressBookOperation OpenAddressBookOperation
@@ -74,9 +74,9 @@ namespace DustInTheWind.Lisimba.Services
             get { return servicePrvider.Resolve<DeleteCurrentContactOperation>(); }
         }
 
-        public CreateNewContactOperation CreateNewContactOperation
+        public NewContactOperation NewContactOperation
         {
-            get { return servicePrvider.Resolve<CreateNewContactOperation>(); }
+            get { return servicePrvider.Resolve<NewContactOperation>(); }
         }
 
         public ApplicationExitOperation ApplicationExitOperation

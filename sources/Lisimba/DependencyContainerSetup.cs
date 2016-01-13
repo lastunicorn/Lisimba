@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba
             UnityContainer unityContainer = new UnityContainer();
 
             unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ConfigurationService>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba
             //unityContainer.RegisterType<ImportYahooCsvOperation>(new ContainerControlledLifetimeManager());
             //unityContainer.RegisterType<ExportYahooCsvOperation>(new ContainerControlledLifetimeManager());
             
-            unityContainer.RegisterType<IApplicationConfiguration, ConfigurationService>();
+            unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             
             return unityContainer;
         }

@@ -16,7 +16,7 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Config
+namespace DustInTheWind.Lisimba.Common.Config
 {
     public class LisimbaConfigSection : ConfigurationSection
     {
@@ -32,15 +32,6 @@ namespace DustInTheWind.Lisimba.Config
             get { return (LoadFileAtStartConfigElement) this["loadFileAtStart"] ?? new LoadFileAtStartConfigElement(); }
         }
 
-        //[ConfigurationProperty("sortBy")]
-        //public string SortBy
-        //{
-        //    get
-        //    {
-        //        return (string)this["sortBy"] ?? string.Empty;
-        //    }
-        //}
-
         [ConfigurationProperty("sortBy")]
         public SortByConfigElement SortBy
         {
@@ -52,33 +43,5 @@ namespace DustInTheWind.Lisimba.Config
         {
             get { return (GatesConfigElement)this["gates"] ?? new GatesConfigElement(); }
         }
-
-        //protected override ConfigurationElement CreateNewElement()
-        //{
-        //    return new RecentFileConfigSection();
-        //}
-
-        //protected override object GetElementKey(ConfigurationElement element)
-        //{
-        //    return null;
-        //}
-
-        //[ConfigurationProperty("recentFile", IsRequired = false, IsKey = false)]
-        //public RecentFileConfigSection RecentFile
-        //{
-        //    get
-        //    {
-        //        return (RecentFileConfigSection)this["recentFile"] ?? new RecentFileConfigSection();
-        //    }
-        //    set
-        //    {
-        //        this["recentFile"] = value;
-        //    }
-        //}
-
-        //public static LisimbaConfigSection GetSection()
-        //{
-        //    return this.config.GetSection("lisimba") as LisimbaConfigSection;
-        //}
     }
 }

@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg;

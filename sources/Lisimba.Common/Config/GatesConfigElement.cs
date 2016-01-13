@@ -16,7 +16,7 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Config
+namespace DustInTheWind.Lisimba.Common.Config
 {
     public class GatesConfigElement : ConfigurationElement
     {

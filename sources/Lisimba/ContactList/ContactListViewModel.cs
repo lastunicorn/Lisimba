@@ -14,7 +14,7 @@ namespace DustInTheWind.Lisimba.ContactList
 {
     internal class ContactListViewModel : ViewModelBase
     {
-        private readonly ConfigurationService configurationService;
+        private readonly ApplicationConfiguration applicationConfiguration;
         private readonly OpenedAddressBooks openedAddressBooks;
         private ContactsSortingType selectedSortingMethod;
         private string searchedText;
@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.ContactList
         private bool ignoreCurrentContactChange;
 
         public List<SortingComboBoxItem> SortingMethods { get; private set; }
-        public CreateNewContactOperation CreateNewContactOperation { get; private set; }
+        public NewContactOperation NewContactOperation { get; private set; }
         public DeleteCurrentContactOperation DeleteCurrentContactOperation { get; private set; }
 
         public ContactListView View { get; set; }
@@ -52,16 +52,16 @@ namespace DustInTheWind.Lisimba.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ConfigurationService configurationService, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
+        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
         {
-            if (configurationService == null) throw new ArgumentNullException("configurationService");
+            if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
-            this.configurationService = configurationService;
+            this.applicationConfiguration = applicationConfiguration;
             this.openedAddressBooks = openedAddressBooks;
 
-            CreateNewContactOperation = commandPool.CreateNewContactOperation;
+            NewContactOperation = commandPool.NewContactOperation;
             DeleteCurrentContactOperation = commandPool.DeleteCurrentContactOperation;
 
             SortingMethods = new List<SortingComboBoxItem>
@@ -183,10 +183,10 @@ namespace DustInTheWind.Lisimba.ContactList
 
         private ContactsSortingType GetSortingType()
         {
-            if (configurationService == null)
+            if (applicationConfiguration == null)
                 return ContactsSortingType.Birthday;
 
-            switch (configurationService.LisimbaConfigSection.SortBy.Value)
+            switch (applicationConfiguration.DefaultContactSort)
             {
                 default:
                 case "Birthday":

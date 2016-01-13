@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Services
     {
         private readonly ApplicationStatus applicationStatus;
         private readonly ProgramArguments programArguments;
-        private readonly ConfigurationService configurationService;
+        private readonly ApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
         private readonly CommandPool commandPool;
         private readonly UserInterface userInterface;
@@ -53,12 +53,12 @@ namespace DustInTheWind.Lisimba.Services
         }
 
         public LisimbaApplication(ApplicationStatus applicationStatus, ProgramArguments programArguments,
-            ConfigurationService configurationService, RecentFiles recentFiles, CommandPool commandPool,
+            ApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, CommandPool commandPool,
             UserInterface userInterface, AddressBookGuarder addressBookGuarder)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
-            if (configurationService == null) throw new ArgumentNullException("configurationService");
+            if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
@@ -66,7 +66,7 @@ namespace DustInTheWind.Lisimba.Services
 
             this.applicationStatus = applicationStatus;
             this.programArguments = programArguments;
-            this.configurationService = configurationService;
+            this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
             this.commandPool = commandPool;
             this.userInterface = userInterface;
@@ -111,7 +111,7 @@ namespace DustInTheWind.Lisimba.Services
             string fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
 
             if (string.IsNullOrWhiteSpace(fileNameToOpenAtLoad))
-                commandPool.CreateNewAddressBookOperation.Execute();
+                commandPool.NewAddressBookOperation.Execute();
             else
                 commandPool.OpenAddressBookOperation.Execute(fileNameToOpenAtLoad);
         }
@@ -121,7 +121,7 @@ namespace DustInTheWind.Lisimba.Services
             if (!string.IsNullOrEmpty(programArguments.FileName))
                 return programArguments.FileName;
 
-            switch (configurationService.LisimbaConfigSection.LoadFileAtStart.Type)
+            switch (applicationConfiguration.LoadFileAtStart)
             {
                 case "new":
                     return null;
@@ -130,7 +130,7 @@ namespace DustInTheWind.Lisimba.Services
                     return recentFiles.GetMostRecentFile().FileName;
 
                 case "specified":
-                    return configurationService.LisimbaConfigSection.LoadFileAtStart.FileName;
+                    return applicationConfiguration.FileToLoadAtStart;
 
                 default:
                     return null;

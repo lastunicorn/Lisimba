@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
-        public CreateNewAddressBookOperation CreateNewAddressBookOperation { get; private set; }
+        public NewAddressBookOperation NewAddressBookOperation { get; private set; }
         public OpenAddressBookOperation OpenAddressBookOperation { get; private set; }
 
         public string Title
@@ -98,7 +98,7 @@ namespace DustInTheWind.Lisimba.Main
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
-            CreateNewAddressBookOperation = commandPool.CreateNewAddressBookOperation;
+            NewAddressBookOperation = commandPool.NewAddressBookOperation;
             OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;

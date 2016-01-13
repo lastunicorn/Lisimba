@@ -21,17 +21,17 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class CreateNewAddressBookOperation : ExecutableViewModelBase<string>
+    internal class NewContactOperation : ExecutableViewModelBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
-            get { return LocalizedResources.CreateNewAddressBookOperationDescription; }
+            get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public CreateNewAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public NewContactOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -39,18 +39,19 @@ namespace DustInTheWind.Lisimba.Operations
 
             this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
+
+            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = openedAddressBooks.Current != null;
         }
 
-        protected override void DoExecute(string fileName)
+        private void HandleCurrentAddressBookChanged(object sender, EventArgs eventArgs)
         {
-            try
-            {
-                openedAddressBooks.CreateNewAddressBook(null);
-            }
-            catch (Exception ex)
-            {
-                userInterface.DisplayError(ex.Message);
-            }
+            IsEnabled = openedAddressBooks.Current != null;
+        }
+
+        protected override void DoExecute(object parameter)
+        {
+            userInterface.DisplayAddContactWindow();
         }
     }
 }

@@ -36,6 +36,7 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
@@ -45,6 +46,14 @@
     <Compile Include="AddressBookOpenResult.cs" />
     <Compile Include="AddressBookLocationInfo.cs" />
     <Compile Include="AddressBookOpenedEventArgs.cs" />
+    <Compile Include="ApplicationConfiguration.cs" />
+    <Compile Include="ConfigurationFile.cs" />
+    <Compile Include="Config\GatesConfigElement.cs" />
+    <Compile Include="Config\LisimbaConfigSection.cs" />
+    <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
+    <Compile Include="Config\RecentFilesConfigElement.cs" />
+    <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
+    <Compile Include="Config\SortByConfigElement.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="OpenedAddressBooks.cs" />
     <Compile Include="AddressBookShell.cs" />
