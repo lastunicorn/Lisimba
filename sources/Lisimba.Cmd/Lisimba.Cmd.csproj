@@ -39,9 +39,17 @@
     <Reference Include="Microsoft.Practices.Unity.Configuration">
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.7.6\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -59,7 +67,7 @@
     <Compile Include="Flows\NewFlow.cs" />
     <Compile Include="Flows\SaveFlow.cs" />
     <Compile Include="Flows\UpdateFlow.cs" />
-    <Compile Include="Business\PrompterConsole.cs" />
+    <Compile Include="Business\PrompterUi.cs" />
     <Compile Include="Flows\CloseFlowConsole.cs" />
     <Compile Include="DependencyContainerSetup.cs" />
     <Compile Include="Flows\ExitFlow.cs" />
@@ -95,7 +103,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Templates\GateInfo.t" />
     <None Include="App.config" />
+    <EmbeddedResource Include="Templates\AddressBookInfo.t" />
     <None Include="Unity.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>

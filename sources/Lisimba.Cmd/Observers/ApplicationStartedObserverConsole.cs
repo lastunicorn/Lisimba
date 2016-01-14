@@ -23,11 +23,20 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class ApplicationStartedObserverConsole
     {
+        private readonly UserInterface userInterface;
+
+        public ApplicationStartedObserverConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void WriteWelcomeMessage()
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             string title = string.Format(Resources.LisimbaTitle, version);
-            ConsoleHelper.WriteLineEmphasize(title);
+            userInterface.WriteLineEmphasize(title);
         }
 
         public void WriteGateInfo(string gateName)

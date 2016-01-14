@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
@@ -23,20 +24,30 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class GateFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public GateFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayGate(IGate gate)
         {
-            Console.WriteLine();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "DefaultGate", string.Format("{0} ({1})", gate.Name, gate.Id) },
+                { "Description", gate.Description }
+            };
 
-            ConsoleHelper.WriteEmphasize("DefaultGate: ");
-            Console.WriteLine("{0} ({1})", gate.Name, gate.Id);
-
-            ConsoleHelper.WriteEmphasize("Description: ");
-            Console.WriteLine(gate.Description);
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromFile("GateInfo.t", parameters);
+            userInterface.DisplayTemplate(consoleTemplate);
         }
 
         public void DisplayGateChangeSuccess()
         {
-            ConsoleHelper.WriteLineSuccess(Resources.GateChangesSuccess);
+            userInterface.WriteLineSuccess(Resources.GateChangesSuccess);
         }
     }
 }

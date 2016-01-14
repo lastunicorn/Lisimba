@@ -15,31 +15,41 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
-    class InfoFlowConsole
+    internal class InfoFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public InfoFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            Console.WriteLine();
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "AddressBookName", addressBook.Name },
+                { "AddressBookLocation", addressBookLocation },
+                { "ContactCount", addressBook.Contacts.Count }
+            };
 
-            ConsoleHelper.WriteEmphasize("Address book: ");
-            Console.WriteLine(addressBook.Name);
-
-            ConsoleHelper.WriteEmphasize("Location: ");
-            Console.WriteLine(addressBookLocation);
-
-            ConsoleHelper.WriteEmphasize("Contacts: ");
-            Console.WriteLine(addressBook.Contacts.Count);
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromFile("AddressBookInfo.t", parameters);
+            userInterface.DisplayTemplate(consoleTemplate);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }
+

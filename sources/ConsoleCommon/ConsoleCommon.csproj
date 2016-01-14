@@ -32,13 +32,18 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsoleCommand.cs" />
-    <Compile Include="CommandParser.cs" />
-    <Compile Include="ConsoleHelper.cs" />
+    <Compile Include="CommandSplitter.cs" />
+    <Compile Include="ConsoleTemplate.cs" />
     <Compile Include="IFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateElement.cs" />
+    <Compile Include="TemplateElementType.cs" />
+    <Compile Include="TextColorType.cs" />
+    <Compile Include="UserInterface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

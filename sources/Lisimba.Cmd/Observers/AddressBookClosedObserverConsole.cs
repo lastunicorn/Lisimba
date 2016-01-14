@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
@@ -22,11 +23,20 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookClosedObserverConsole
     {
+        private readonly UserInterface userInterface;
+
+        public AddressBookClosedObserverConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayAddressBookCloseSuccess(AddressBookShell addressBookShell)
         {
             string addressBookName = addressBookShell.GetFriendlyName();
             string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
-            ConsoleHelper.WriteLineSuccess(text);
+            userInterface.WriteLineSuccess(text);
         }
     }
 }

@@ -26,18 +26,18 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     class Prompter
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly PrompterConsole console;
+        private readonly PrompterUi ui;
         private readonly FlowFactory flowFactory;
         private bool stopRequested;
 
-        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterConsole console, FlowFactory flowFactory)
+        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterUi ui, FlowFactory flowFactory)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (console == null) throw new ArgumentNullException("console");
+            if (ui == null) throw new ArgumentNullException("ui");
             if (flowFactory == null) throw new ArgumentNullException("flowFactory");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.console = console;
+            this.ui = ui;
             this.flowFactory = flowFactory;
         }
 
@@ -58,12 +58,12 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             string addressBookName = openedAddressBooks.Current == null ? null : openedAddressBooks.Current.AddressBook.Name;
             bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
 
-            console.DisplayPrompter(addressBookName, isModified);
+            ui.DisplayPrompter(addressBookName, isModified);
         }
 
         private ConsoleCommand ReadCommand()
         {
-            string commandText = console.ReadCommand();
+            string commandText = ui.ReadCommand();
             return new ConsoleCommand(commandText);
         }
 
@@ -76,7 +76,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
             catch (Exception ex)
             {
-                console.WriteError(ex.Message);
+                ui.WriteError(ex.Message);
             }
         }
 

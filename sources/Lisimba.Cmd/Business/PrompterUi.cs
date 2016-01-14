@@ -19,12 +19,21 @@ using DustInTheWind.ConsoleCommon;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
-    class PrompterConsole
+    class PrompterUi
     {
+        private readonly UserInterface userInterface;
+
+        public PrompterUi(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayPrompter(string addressBookName, bool isModified)
         {
             Console.WriteLine();
-            ConsoleHelper.WriteEmphasize("lisimba");
+            userInterface.WriteEmphasize("lisimba");
 
             if (addressBookName != null)
             {
@@ -34,7 +43,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 Console.Write(formattedAddressBookName);
             }
 
-            ConsoleHelper.WriteEmphasize(" > ");
+            userInterface.WriteEmphasize(" > ");
         }
 
         private static string BuildAddressBookName(string addressBookName, bool isModified)
@@ -50,7 +59,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public void WriteError(string text)
         {
-            ConsoleHelper.WriteLineError(text);
+            userInterface.WriteLineError(text);
         }
     }
 }

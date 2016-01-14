@@ -15,15 +15,25 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookEnsureSaveObserverConsole
     {
+        private readonly UserInterface userInterface;
+
+        public AddressBookEnsureSaveObserverConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public bool? AskToSaveAddressBook()
         {
-            Console.Write(Resources.AskToSaveAddressBook);
+            userInterface.WriteNormal(Resources.AskToSaveAddressBook);
 
             ConsoleKeyInfo key = Console.ReadKey(false);
             Console.WriteLine();
@@ -43,7 +53,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         public string AskForNewLocation()
         {
-            Console.Write(Resources.AskForNewLocation);
+            userInterface.WriteNormal(Resources.AskForNewLocation);
             return Console.ReadLine();
         }
     }

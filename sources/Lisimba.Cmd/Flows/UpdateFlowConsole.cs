@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
@@ -21,19 +22,28 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UpdateFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public UpdateFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayInvalidUpdateActionError()
         {
-            ConsoleHelper.WriteLineError(Resources.InvalidUpdateActionError);
+            userInterface.WriteLineError(Resources.InvalidUpdateActionError);
         }
 
         public void DisplayAddressBookNameChangeSuccess()
         {
-            ConsoleHelper.WriteLineSuccess(Resources.AddressBookChangedSuccess);
+            userInterface.WriteLineSuccess(Resources.AddressBookChangedSuccess);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

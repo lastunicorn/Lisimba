@@ -18,6 +18,7 @@ namespace DustInTheWind.ConsoleCommon
 {
     /// <summary>
     /// Represents a flow that is executed at the user's request.
+    /// Usually it is based on a <see cref="ConsoleCommand"/>.
     /// </summary>
     public interface IFlow
     {

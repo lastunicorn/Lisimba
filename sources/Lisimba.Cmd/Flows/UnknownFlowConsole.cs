@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
@@ -21,9 +22,18 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UnknownFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public UnknownFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayUnknownCommandError()
         {
-            ConsoleHelper.WriteLineError(Resources.UnknownCommandError);
+            userInterface.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }

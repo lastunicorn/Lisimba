@@ -23,19 +23,28 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class ShowFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public ShowFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayContactDetails(Contact contact)
         {
-            Console.WriteLine(contact.Name.ToString());
+            userInterface.WriteLineNormal(contact.Name.ToString());
         }
 
         public void DisplayContactShort(Contact contact)
         {
-            Console.WriteLine(contact.ToString());
+            userInterface.WriteLineNormal(contact.ToString());
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

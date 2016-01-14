@@ -62,8 +62,8 @@ namespace DustInTheWind.ConsoleCommon
             }
             else
             {
-                CommandParser commandParser = new CommandParser(commandText);
-                string[] items = commandParser.Items;
+                CommandSplitter commandSplitter = new CommandSplitter(commandText);
+                string[] items = commandSplitter.Items;
 
                 Name = items.Length > 0 ? items[0] : string.Empty;
 

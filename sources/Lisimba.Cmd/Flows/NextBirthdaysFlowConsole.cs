@@ -23,6 +23,15 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NextBirthdaysFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public NextBirthdaysFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayContactWithBirthday(Contact contact)
         {
             string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
@@ -31,7 +40,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void DisplayNoAddressBookMessage()
         {
-            ConsoleHelper.WriteLineError(Resources.NoAddessBookOpenedError);
+            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

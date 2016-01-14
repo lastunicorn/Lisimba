@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
 
@@ -21,10 +22,19 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlowConsole
     {
+        private readonly UserInterface userInterface;
+
+        public OpenFlowConsole(UserInterface userInterface)
+        {
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
+        }
+
         public void DisplayUsingDefaultGateWarning(string addressBookFileName, string gateId)
         {
             string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
-            ConsoleHelper.WriteLineWarning(message);
+            userInterface.WriteLineWarning(message);
         }
     }
 }

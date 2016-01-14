@@ -14,26 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.ConsoleCommon;
-using DustInTheWind.Lisimba.Cmd.Properties;
-
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.ConsoleCommon
 {
-    class CloseFlowConsole
+    public enum TemplateElementType
     {
-        private readonly UserInterface userInterface;
-
-        public CloseFlowConsole(UserInterface userInterface)
-        {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-
-            this.userInterface = userInterface;
-        }
-
-        public void DisplayNoAddressBookMessage()
-        {
-            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
-        }
+        Text,
+        Action,
+        EndAction
     }
 }
