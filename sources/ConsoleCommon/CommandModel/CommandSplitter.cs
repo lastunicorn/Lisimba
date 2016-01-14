@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.ConsoleCommon
+namespace DustInTheWind.ConsoleCommon.CommandModel
 {
     /// <summary>
     /// Splitts a console command into components based on spaces.

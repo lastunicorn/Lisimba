@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 
@@ -35,13 +35,14 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void DisplayGate(IGate gate)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>
+            const string fileName = "DustInTheWind.Lisimba.Cmd.Templates.GateInfo.t";
+            var parameters = new
             {
-                { "DefaultGate", string.Format("{0} ({1})", gate.Name, gate.Id) },
-                { "Description", gate.Description }
+                DefaultGate = string.Format("{0} ({1})", gate.Name, gate.Id),
+                Description = gate.Description
             };
 
-            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromFile("GateInfo.t", parameters);
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
             userInterface.DisplayTemplate(consoleTemplate);
         }
 

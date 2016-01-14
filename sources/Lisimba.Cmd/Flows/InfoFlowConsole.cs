@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -35,14 +35,15 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            Dictionary<string, object> parameters = new Dictionary<string, object>
+            const string fileName = "DustInTheWind.Lisimba.Cmd.Templates.AddressBookInfo.t";
+            var parameters = new
             {
-                { "AddressBookName", addressBook.Name },
-                { "AddressBookLocation", addressBookLocation },
-                { "ContactCount", addressBook.Contacts.Count }
+                AddressBookName = addressBook.Name,
+                AddressBookLocation = addressBookLocation,
+                ContactCount = addressBook.Contacts.Count
             };
 
-            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromFile("AddressBookInfo.t", parameters);
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
             userInterface.DisplayTemplate(consoleTemplate);
         }
 
@@ -52,4 +53,3 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         }
     }
 }
-

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -21,14 +22,14 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 
-namespace DustInTheWind.ConsoleCommon
+namespace DustInTheWind.ConsoleCommon.Templating
 {
     public class ConsoleTemplate : IEnumerable<TemplateElement>
     {
         private readonly string template;
-        private readonly Dictionary<string, object> parameters;
+        private readonly IDictionary<string, object> parameters;
 
-        public ConsoleTemplate(string template, Dictionary<string, object> parameters)
+        public ConsoleTemplate(string template, IDictionary<string, object> parameters)
         {
             this.template = "<template>" + template + "</template>";
             this.parameters = parameters;
@@ -39,7 +40,7 @@ namespace DustInTheWind.ConsoleCommon
             get { return template; }
         }
 
-        public Dictionary<string, object> Parameters
+        public IDictionary<string, object> Parameters
         {
             get { return parameters; }
         }
@@ -96,7 +97,7 @@ namespace DustInTheWind.ConsoleCommon
             }
         }
 
-        private static string ApplyParameters(string template, Dictionary<string, object> parameters)
+        private static string ApplyParameters(string template, IDictionary<string, object> parameters)
         {
             foreach (KeyValuePair<string, object> parameter in parameters)
             {
@@ -111,22 +112,34 @@ namespace DustInTheWind.ConsoleCommon
             return GetEnumerator();
         }
 
-        public static ConsoleTemplate CreateFromString(string templateText, Dictionary<string, object> parameters)
+        public static ConsoleTemplate CreateFromString(string templateText, IDictionary<string, object> parameters)
         {
             return new ConsoleTemplate(templateText, parameters);
         }
 
-        public static ConsoleTemplate CreateFromFile(string fileName, Dictionary<string, object> parameters)
+        public static ConsoleTemplate CreateFromEmbeddedFile(string fileName, dynamic parameters)
         {
+            Dictionary<string, object> parametersDictionary = ToDictionary(parameters);
+
+
             Assembly assembly = Assembly.GetCallingAssembly();
             string template = GetTemplate(fileName, assembly);
-            return new ConsoleTemplate(template, parameters);
+            return new ConsoleTemplate(template, parametersDictionary);
+        }
+
+        private static Dictionary<string, object> ToDictionary(dynamic parameters)
+        {
+            return ((object)parameters).GetType().GetProperties()
+                .ToDictionary(x => x.Name, x => x.GetValue(parameters));
         }
 
         private static string GetTemplate(string templateFileName, Assembly assembly)
         {
-            string templateFullFileName = "DustInTheWind.Lisimba.Cmd.Templates." + templateFileName;
-            Stream manifestResourceStream = assembly.GetManifestResourceStream(templateFullFileName);
+            Stream manifestResourceStream = assembly.GetManifestResourceStream(templateFileName);
+
+            if (manifestResourceStream == null)
+                throw new ApplicationException("The template '" + templateFileName + "' cannot be found.");
+
             using (StreamReader textStreamReader = new StreamReader(manifestResourceStream))
             {
                 return textStreamReader.ReadToEnd();

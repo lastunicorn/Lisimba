@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.CommandModel;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {

@@ -14,12 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.ConsoleCommon
+namespace DustInTheWind.ConsoleCommon.CommandModel
 {
-    public enum TemplateElementType
+    /// <summary>
+    /// Represents a flow that is executed at the user's request.
+    /// Usually it is based on a <see cref="ConsoleCommand"/>.
+    /// </summary>
+    public interface IFlow
     {
-        Text,
-        Action,
-        EndAction
+        void Execute();
     }
 }

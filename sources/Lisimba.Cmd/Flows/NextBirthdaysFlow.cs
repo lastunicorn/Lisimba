@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;

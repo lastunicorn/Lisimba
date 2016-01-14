@@ -14,25 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.ConsoleCommon.CommandModel;
-
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.ConsoleCommon.Templating
 {
-    class UnknownFlow : IFlow
+    public enum TemplateElementType
     {
-        private readonly UnknownFlowConsole console;
-
-        public UnknownFlow(UnknownFlowConsole console)
-        {
-            if (console == null) throw new ArgumentNullException("console");
-
-            this.console = console;
-        }
-
-        public void Execute()
-        {
-            console.DisplayUnknownCommandError();
-        }
+        Text,
+        Action,
+        EndAction
     }
 }

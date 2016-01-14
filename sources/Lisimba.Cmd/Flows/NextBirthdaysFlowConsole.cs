@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         public void DisplayContactWithBirthday(Contact contact)
         {
             string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
-            Console.WriteLine(text);
+            userInterface.WriteLineNormal(text);
         }
 
         public void DisplayNoAddressBookMessage()

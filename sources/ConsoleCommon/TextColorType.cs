@@ -16,9 +16,12 @@
 
 namespace DustInTheWind.ConsoleCommon
 {
-    public struct TemplateElement
+    enum TextColorType
     {
-        public TemplateElementType Type { get; set; }
-        public string Value { get; set; }
+        Normal,
+        Success,
+        Warning,
+        Error,
+        Emphasies
     }
 }
