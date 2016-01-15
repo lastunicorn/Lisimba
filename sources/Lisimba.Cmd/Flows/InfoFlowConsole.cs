@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.Templating;
+using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -35,7 +36,8 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            const string fileName = "DustInTheWind.Lisimba.Cmd.Templates.AddressBookInfo.t";
+            string fileName = GetViewTemplateFullFileName("AddressBookInfo.t");
+
             var parameters = new
             {
                 AddressBookName = addressBook.Name,
@@ -45,6 +47,11 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
             enhancedConsole.DisplayTemplate(consoleTemplate);
+        }
+
+        private static string GetViewTemplateFullFileName(string fileName)
+        {
+            return Constants.ViewTemplatesLocation + "." + fileName;
         }
 
         public void DisplayNoAddressBookMessage()

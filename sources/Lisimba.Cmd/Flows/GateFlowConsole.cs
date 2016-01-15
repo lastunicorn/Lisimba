@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.Templating;
+using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Egg;
 
@@ -35,7 +36,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void DisplayGate(IGate gate)
         {
-            const string fileName = "DustInTheWind.Lisimba.Cmd.Templates.GateInfo.t";
+            string fileName = GetViewTemplateFullFileName("GateInfo.t");
             var parameters = new
             {
                 DefaultGate = string.Format("{0} ({1})", gate.Name, gate.Id),
@@ -44,6 +45,11 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
             enhancedConsole.DisplayTemplate(consoleTemplate);
+        }
+
+        private static string GetViewTemplateFullFileName(string fileName)
+        {
+            return Constants.ViewTemplatesLocation + "." + fileName;
         }
 
         public void DisplayGateChangeSuccess()

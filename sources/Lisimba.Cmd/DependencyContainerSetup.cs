@@ -20,7 +20,6 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
