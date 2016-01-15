@@ -16,29 +16,32 @@
 
 using System;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookSaveObserver : AddressBookObserver
+    class AddressBookSaveObserver : IObserver
     {
         private readonly AddressBookSaveObserverConsole console;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public AddressBookSaveObserver(OpenedAddressBooks openedAddressBooks, AddressBookSaveObserverConsole console)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+            openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
         }
 
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
-            console.DisplayAddressBookSaveSuccess(OpenedAddressBooks.Current.GetFriendlyName(), OpenedAddressBooks.Current.Location);
+            console.DisplayAddressBookSaveSuccess(openedAddressBooks.Current.GetFriendlyName(), openedAddressBooks.Current.Location);
         }
     }
 }

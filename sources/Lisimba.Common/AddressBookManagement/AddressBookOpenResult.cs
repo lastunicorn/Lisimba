@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,24 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Configuration;
+using System;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
-    public class LoadFileAtStartConfigElement : ConfigurationElement
+    public class AddressBookOpenResult
     {
-        [ConfigurationProperty("type", DefaultValue = "last", IsRequired = true, IsKey = false)]
-        public string Type
-        {
-            get { return (string) this["type"]; }
-            set { this["type"] = value; }
-        }
-
-        [ConfigurationProperty("fileName", IsRequired = false, IsKey = false)]
-        public string FileName
-        {
-            get { return (string) this["fileName"]; }
-            set { this["fileName"] = value; }
-        }
+        public bool Success { get; set; }
+        public IEnumerable<Exception> Warnings { get; set; }
     }
 }

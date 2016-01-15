@@ -18,23 +18,27 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookOpenObserver : AddressBookObserver
+    class AddressBookOpenObserver : IObserver
     {
         private readonly AddressBookOpenObserverConsole console;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, AddressBookOpenObserverConsole console)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
+
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
+            openedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
         }
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
@@ -45,17 +49,17 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         private void DisplayOpenSuccessMessage()
         {
-            if (OpenedAddressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
-                if (OpenedAddressBooks.Current.Status == AddressBookStatus.New)
+                if (openedAddressBooks.Current.Status == AddressBookStatus.New)
                 {
-                    string addressBookName = OpenedAddressBooks.Current.GetFriendlyName();
+                    string addressBookName = openedAddressBooks.Current.GetFriendlyName();
                     console.DisplayAddressBookCreateSuccess(addressBookName);
                 }
                 else
                 {
-                    string addressBookFileName = OpenedAddressBooks.Current.Location;
-                    int contactsCount = OpenedAddressBooks.Current.AddressBook.Contacts.Count;
+                    string addressBookFileName = openedAddressBooks.Current.Location;
+                    int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
 
                     console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
                 }

@@ -18,6 +18,7 @@ using System;
 using System.IO;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {

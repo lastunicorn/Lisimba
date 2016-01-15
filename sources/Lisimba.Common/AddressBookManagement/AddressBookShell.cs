@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
     /// <summary>
     /// Contains an opened address book and metainformation about it like the location

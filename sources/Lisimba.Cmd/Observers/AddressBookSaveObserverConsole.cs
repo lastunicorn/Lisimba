@@ -22,19 +22,19 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookSaveObserverConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public AddressBookSaveObserverConsole(UserInterface userInterface)
+        public AddressBookSaveObserverConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayAddressBookSaveSuccess(string addressBookName, string addressBookLocation)
         {
             string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
-            userInterface.WriteLineSuccess(text);
+            enhancedConsole.WriteLineSuccess(text);
         }
     }
 }

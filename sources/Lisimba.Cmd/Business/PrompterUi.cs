@@ -21,19 +21,19 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class PrompterUi
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public PrompterUi(UserInterface userInterface)
+        public PrompterUi(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayPrompter(string addressBookName, bool isModified)
         {
             Console.WriteLine();
-            userInterface.WriteEmphasize("lisimba");
+            enhancedConsole.WriteEmphasize("lisimba");
 
             if (addressBookName != null)
             {
@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 Console.Write(formattedAddressBookName);
             }
 
-            userInterface.WriteEmphasize(" > ");
+            enhancedConsole.WriteEmphasize(" > ");
         }
 
         private static string BuildAddressBookName(string addressBookName, bool isModified)
@@ -59,7 +59,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public void WriteError(string text)
         {
-            userInterface.WriteLineError(text);
+            enhancedConsole.WriteLineError(text);
         }
     }
 }

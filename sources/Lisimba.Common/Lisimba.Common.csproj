@@ -40,27 +40,27 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressBookChangedEventArgs.cs" />
-    <Compile Include="AddressBookClosedEventArgs.cs" />
-    <Compile Include="AddressBookObserver.cs" />
-    <Compile Include="AddressBookOpenResult.cs" />
+    <Compile Include="AddressBookManagement\AddressBookChangedEventArgs.cs" />
+    <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
+    <Compile Include="AddressBookManagement\AddressBookOpenResult.cs" />
     <Compile Include="AddressBookLocationInfo.cs" />
-    <Compile Include="AddressBookOpenedEventArgs.cs" />
-    <Compile Include="ApplicationConfiguration.cs" />
-    <Compile Include="ConfigurationFile.cs" />
-    <Compile Include="Config\GatesConfigElement.cs" />
-    <Compile Include="Config\LisimbaConfigSection.cs" />
-    <Compile Include="Config\LoadFileAtStartConfigElement.cs" />
-    <Compile Include="Config\RecentFilesConfigElement.cs" />
-    <Compile Include="Config\RecentFilesConfigElementCollection.cs" />
-    <Compile Include="Config\SortByConfigElement.cs" />
+    <Compile Include="AddressBookManagement\AddressBookOpenedEventArgs.cs" />
+    <Compile Include="Config\ApplicationConfiguration.cs" />
+    <Compile Include="Config\ConfigurationFile.cs" />
+    <Compile Include="ConfigSection\GatesConfigElement.cs" />
+    <Compile Include="ConfigSection\LisimbaConfigSection.cs" />
+    <Compile Include="ConfigSection\LoadFileAtStartConfigElement.cs" />
+    <Compile Include="ConfigSection\RecentFilesConfigElement.cs" />
+    <Compile Include="ConfigSection\RecentFilesConfigElementCollection.cs" />
+    <Compile Include="ConfigSection\SortByConfigElement.cs" />
+    <Compile Include="IObserver.cs" />
     <Compile Include="LisimbaException.cs" />
-    <Compile Include="OpenedAddressBooks.cs" />
-    <Compile Include="AddressBookShell.cs" />
-    <Compile Include="AddressBookStatus.cs" />
-    <Compile Include="GateProvider.cs" />
-    <Compile Include="AvailableGates.cs" />
-    <Compile Include="IApplicationConfiguration.cs" />
+    <Compile Include="AddressBookManagement\OpenedAddressBooks.cs" />
+    <Compile Include="AddressBookManagement\AddressBookShell.cs" />
+    <Compile Include="AddressBookManagement\AddressBookStatus.cs" />
+    <Compile Include="GateManagement\GateProvider.cs" />
+    <Compile Include="GateManagement\AvailableGates.cs" />
+    <Compile Include="Config\IApplicationConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -84,6 +84,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

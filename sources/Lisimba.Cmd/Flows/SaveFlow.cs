@@ -17,6 +17,8 @@
 using System;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows

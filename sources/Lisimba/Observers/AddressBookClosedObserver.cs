@@ -16,25 +16,28 @@
 
 using System;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookClosedObserver : AddressBookObserver
+    class AddressBookClosedObserver : IObserver
     {
         private readonly ApplicationStatus applicationStatus;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public AddressBookClosedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
+            this.openedAddressBooks = openedAddressBooks;
             this.applicationStatus = applicationStatus;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
+            openedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)

@@ -14,17 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Configuration;
+using System;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
-    public class GatesConfigElement : ConfigurationElement
+    public class AddressBookClosedEventArgs : EventArgs
     {
-        [ConfigurationProperty("default", IsRequired = true, IsKey = false)]
-        public string Default
+        public AddressBookShell AddressBookShell { get; private set; }
+
+        public AddressBookClosedEventArgs(AddressBookShell addressBookShell)
         {
-            get { return (string)this["default"]; }
-            set { this["default"] = value; }
+            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
+            
+            AddressBookShell = addressBookShell;
         }
     }
 }

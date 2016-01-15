@@ -22,34 +22,34 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookOpenObserverConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public AddressBookOpenObserverConsole(UserInterface userInterface)
+        public AddressBookOpenObserverConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayAddressBookOpenSuccess(string addressBookFileName, int contactsCount)
         {
             string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
-            userInterface.WriteLineSuccess(message);
+            enhancedConsole.WriteLineSuccess(message);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            userInterface.WriteLineError(Resources.OpenAddressBookUnknownError);
+            enhancedConsole.WriteLineError(Resources.OpenAddressBookUnknownError);
         }
         public void DisplayAddressBookCreateSuccess(string addressBookName)
         {
             string text = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
-            userInterface.WriteLineSuccess(text);
+            enhancedConsole.WriteLineSuccess(text);
         }
 
         public void DisplayWarning(string text)
         {
-            userInterface.WriteLineWarning(text);
+            enhancedConsole.WriteLineWarning(text);
         }
     }
 }

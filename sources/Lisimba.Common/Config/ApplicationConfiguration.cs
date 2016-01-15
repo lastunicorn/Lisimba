@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
-using DustInTheWind.Lisimba.Common.Config;
+using DustInTheWind.Lisimba.Common.ConfigSection;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.Config
 {
     public class ApplicationConfiguration : IApplicationConfiguration
     {

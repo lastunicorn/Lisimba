@@ -16,7 +16,7 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Common.ConfigSection
 {
     [ConfigurationCollection(typeof (RecentFilesConfigElement), AddItemName = "file")]
     public class RecentFilesConfigElementCollection : ConfigurationElementCollection

@@ -15,10 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.GateManagement
 {
     /// <summary>
     /// Manages the gates available in the application.

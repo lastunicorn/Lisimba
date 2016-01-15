@@ -16,6 +16,8 @@
 
 using System;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.Config;
+using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers

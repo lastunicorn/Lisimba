@@ -17,26 +17,29 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookEnsureSaveObserver : AddressBookObserver
+    class AddressBookEnsureSaveObserver : IObserver
     {
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
         public AddressBookEnsureSaveObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
+            this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
+            openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
         }
 
         private void HandleAddressBookClosing(object sender, CancelEventArgs e)
@@ -49,7 +52,7 @@ namespace DustInTheWind.Lisimba.Observers
 
         public bool EnsureAddressBookIsSaved()
         {
-            if (OpenedAddressBooks.Current == null || OpenedAddressBooks.Current.Status != AddressBookStatus.Modified)
+            if (openedAddressBooks.Current == null || openedAddressBooks.Current.Status != AddressBookStatus.Modified)
                 return true;
 
             string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
@@ -63,18 +66,18 @@ namespace DustInTheWind.Lisimba.Observers
             if (!needToSave.Value)
                 return true;
 
-            if (OpenedAddressBooks.Current.Location == null)
+            if (openedAddressBooks.Current.Location == null)
             {
                 string newLocation = userInterface.AskToSaveLsbFile();
 
                 if (newLocation == null)
                     return false;
 
-                OpenedAddressBooks.Current.SaveAddressBook(newLocation);
+                openedAddressBooks.Current.SaveAddressBook(newLocation);
             }
             else
             {
-                OpenedAddressBooks.Current.SaveAddressBook();
+                openedAddressBooks.Current.SaveAddressBook();
             }
 
             return true;

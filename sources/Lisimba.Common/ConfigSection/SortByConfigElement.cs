@@ -16,22 +16,15 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Common.ConfigSection
 {
-    public class RecentFilesConfigElement : ConfigurationElement
+    public class SortByConfigElement : ConfigurationElement
     {
-        [ConfigurationProperty("fileName", IsRequired = true, IsKey = false)]
-        public string FileName
+        [ConfigurationProperty("value", DefaultValue = "NicknameOrName", IsRequired = true, IsKey = false)]
+        public string Value
         {
-            get { return (string) this["fileName"]; }
-            set { this["fileName"] = value; }
-        }
-
-        [ConfigurationProperty("gate", IsRequired = true, IsKey = false)]
-        public string Gate
-        {
-            get { return (string)this["gate"]; }
-            set { this["gate"] = value; }
+            get { return (string) this["value"]; }
+            set { this["value"] = value; }
         }
     }
 }

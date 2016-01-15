@@ -22,28 +22,28 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UpdateFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public UpdateFlowConsole(UserInterface userInterface)
+        public UpdateFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayInvalidUpdateActionError()
         {
-            userInterface.WriteLineError(Resources.InvalidUpdateActionError);
+            enhancedConsole.WriteLineError(Resources.InvalidUpdateActionError);
         }
 
         public void DisplayAddressBookNameChangeSuccess()
         {
-            userInterface.WriteLineSuccess(Resources.AddressBookChangedSuccess);
+            enhancedConsole.WriteLineSuccess(Resources.AddressBookChangedSuccess);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
+            enhancedConsole.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

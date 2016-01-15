@@ -23,24 +23,24 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class NextBirthdaysFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public NextBirthdaysFlowConsole(UserInterface userInterface)
+        public NextBirthdaysFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayContactWithBirthday(Contact contact)
         {
             string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
-            userInterface.WriteLineNormal(text);
+            enhancedConsole.WriteLineNormal(text);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
+            enhancedConsole.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

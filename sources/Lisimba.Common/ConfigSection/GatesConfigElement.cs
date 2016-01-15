@@ -16,15 +16,15 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Common.ConfigSection
 {
-    public class SortByConfigElement : ConfigurationElement
+    public class GatesConfigElement : ConfigurationElement
     {
-        [ConfigurationProperty("value", DefaultValue = "NicknameOrName", IsRequired = true, IsKey = false)]
-        public string Value
+        [ConfigurationProperty("default", IsRequired = true, IsKey = false)]
+        public string Default
         {
-            get { return (string) this["value"]; }
-            set { this["value"] = value; }
+            get { return (string)this["default"]; }
+            set { this["default"] = value; }
         }
     }
 }

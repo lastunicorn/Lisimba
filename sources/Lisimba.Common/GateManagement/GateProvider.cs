@@ -18,7 +18,7 @@ using System;
 using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.GateManagement
 {
     public class GateProvider
     {

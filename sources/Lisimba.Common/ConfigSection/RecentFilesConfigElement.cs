@@ -14,19 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
+using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.ConfigSection
 {
-    public class AddressBookChangedEventArgs : EventArgs
+    public class RecentFilesConfigElement : ConfigurationElement
     {
-        public AddressBookShell NewAddressBook { get; private set; }
-        public AddressBookShell OldAddressBook { get; private set; }
-
-        public AddressBookChangedEventArgs(AddressBookShell oldAddressBook, AddressBookShell newAddressBook)
+        [ConfigurationProperty("fileName", IsRequired = true, IsKey = false)]
+        public string FileName
         {
-            OldAddressBook = oldAddressBook;
-            NewAddressBook = newAddressBook;
+            get { return (string) this["fileName"]; }
+            set { this["fileName"] = value; }
+        }
+
+        [ConfigurationProperty("gate", IsRequired = true, IsKey = false)]
+        public string Gate
+        {
+            get { return (string)this["gate"]; }
+            set { this["gate"] = value; }
         }
     }
 }

@@ -22,18 +22,18 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookEnsureSaveObserverConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public AddressBookEnsureSaveObserverConsole(UserInterface userInterface)
+        public AddressBookEnsureSaveObserverConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public bool? AskToSaveAddressBook()
         {
-            userInterface.WriteNormal(Resources.AskToSaveAddressBook);
+            enhancedConsole.WriteNormal(Resources.AskToSaveAddressBook);
 
             ConsoleKeyInfo key = Console.ReadKey(false);
             Console.WriteLine();
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         public string AskForNewLocation()
         {
-            userInterface.WriteNormal(Resources.AskForNewLocation);
+            enhancedConsole.WriteNormal(Resources.AskForNewLocation);
             return Console.ReadLine();
         }
     }

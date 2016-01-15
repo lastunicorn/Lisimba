@@ -19,30 +19,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookOpenObserver : AddressBookObserver
+    class AddressBookOpenObserver : IObserver
     {
+        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
         private readonly UserInterface userInterface;
 
         public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
+            this.openedAddressBooks = openedAddressBooks;
             this.applicationStatus = applicationStatus;
             this.userInterface = userInterface;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
+            openedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
         }
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
@@ -54,15 +57,15 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void DisplayOpenSuccessMessage()
         {
-            if (OpenedAddressBooks.Current != null)
+            if (openedAddressBooks.Current != null)
             {
-                if (OpenedAddressBooks.Current.Status == AddressBookStatus.New)
+                if (openedAddressBooks.Current.Status == AddressBookStatus.New)
                 {
                     applicationStatus.StatusText = "A new address book was created.";
                 }
                 else
                 {
-                    int contactsCount = OpenedAddressBooks.Current.AddressBook.Contacts.Count;
+                    int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
                     applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
                 }
             }
@@ -89,7 +92,7 @@ namespace DustInTheWind.Lisimba.Observers
         {
             DateTime startDate = DateTime.Today;
             DateTime endDate = DateTime.Today.AddDays(7);
-            List<Contact> contacts = OpenedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate).ToList();
+            List<Contact> contacts = openedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate).ToList();
 
             if (contacts.Count <= 0)
                 return;

@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,12 +16,8 @@
 
 namespace DustInTheWind.Lisimba.Common
 {
-    public interface IApplicationConfiguration
+    public interface IObserver
     {
-        string DefaultGateName { get; }
-        AddressBookLocationInfo LastAddressBook { get; set; }
-        AddressBookLocationInfo[] RecentFilesList { get; }
-        string LoadFileAtStart { get; }
-        AddressBookLocationInfo FileToLoadAtStart { get; }
+        void Start();
     }
 }

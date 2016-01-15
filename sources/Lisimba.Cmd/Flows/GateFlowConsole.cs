@@ -24,13 +24,13 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class GateFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public GateFlowConsole(UserInterface userInterface)
+        public GateFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayGate(IGate gate)
@@ -43,12 +43,12 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             };
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
-            userInterface.DisplayTemplate(consoleTemplate);
+            enhancedConsole.DisplayTemplate(consoleTemplate);
         }
 
         public void DisplayGateChangeSuccess()
         {
-            userInterface.WriteLineSuccess(Resources.GateChangesSuccess);
+            enhancedConsole.WriteLineSuccess(Resources.GateChangesSuccess);
         }
     }
 }

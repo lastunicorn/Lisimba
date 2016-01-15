@@ -17,6 +17,7 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
 using DustInTheWind.Lisimba.Operations;

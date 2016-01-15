@@ -17,26 +17,31 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Common.GateManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookEnsureSaveObserver : AddressBookObserver
+    class AddressBookEnsureSaveObserver : IObserver
     {
         private readonly AddressBookEnsureSaveObserverConsole console;
         private readonly AvailableGates availableGates;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public AddressBookEnsureSaveObserver(OpenedAddressBooks openedAddressBooks, AddressBookEnsureSaveObserverConsole console, AvailableGates availableGates)
-            : base(openedAddressBooks)
         {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
+
+            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
             this.availableGates = availableGates;
         }
 
-        public override void Start()
+        public void Start()
         {
-            OpenedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
+            openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
         }
 
         private void HandleAddressBookClosing(object sender, CancelEventArgs e)
@@ -50,7 +55,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         /// <returns><c>true</c> if it is allowed to continue; false otherwise.</returns>
         public bool EnsureAddressBookIsSaved()
         {
-            if (OpenedAddressBooks.Current == null || OpenedAddressBooks.Current.Status != AddressBookStatus.Modified)
+            if (openedAddressBooks.Current == null || openedAddressBooks.Current.Status != AddressBookStatus.Modified)
                 return true;
 
             bool? needToSave = console.AskToSaveAddressBook();
@@ -61,21 +66,21 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             if (!needToSave.Value)
                 return true;
 
-            if (OpenedAddressBooks.Current.Location == null)
+            if (openedAddressBooks.Current.Location == null)
             {
                 string newLocation = console.AskForNewLocation();
 
                 if (newLocation == null)
                     return false;
 
-                if (OpenedAddressBooks.Current.Gate == null)
-                    OpenedAddressBooks.Current.SaveAddressBook(newLocation, availableGates.DefaultGate);
+                if (openedAddressBooks.Current.Gate == null)
+                    openedAddressBooks.Current.SaveAddressBook(newLocation, availableGates.DefaultGate);
                 else
-                    OpenedAddressBooks.Current.SaveAddressBook(newLocation);
+                    openedAddressBooks.Current.SaveAddressBook(newLocation);
             }
             else
             {
-                OpenedAddressBooks.Current.SaveAddressBook();
+                openedAddressBooks.Current.SaveAddressBook();
             }
 
             return true;

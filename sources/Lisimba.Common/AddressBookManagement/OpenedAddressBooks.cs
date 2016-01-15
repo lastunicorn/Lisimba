@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.Book;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
     /// <summary>
     /// Contains and manages the opened address books.

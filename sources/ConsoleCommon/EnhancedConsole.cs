@@ -19,7 +19,7 @@ using DustInTheWind.ConsoleCommon.Templating;
 
 namespace DustInTheWind.ConsoleCommon
 {
-    public class UserInterface
+    public class EnhancedConsole
     {
         public ConsoleColor NormalColor { get; set; }
         public ConsoleColor SuccessColor { get; set; }
@@ -27,7 +27,7 @@ namespace DustInTheWind.ConsoleCommon
         public ConsoleColor ErrorColor { get; set; }
         public ConsoleColor EmphasizeColor { get; set; }
 
-        public UserInterface()
+        public EnhancedConsole()
         {
             NormalColor = ConsoleColor.Gray;
             SuccessColor = ConsoleColor.Green;

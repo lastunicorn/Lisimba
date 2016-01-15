@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,19 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.Config
 {
-    public class AddressBookOpenedEventArgs : EventArgs
+    public interface IApplicationConfiguration
     {
-        public AddressBookOpenResult Result { get; private set; }
-
-        public AddressBookOpenedEventArgs(AddressBookOpenResult result)
-        {
-            if (result == null) throw new ArgumentNullException("result");
-
-            Result = result;
-        }
+        string DefaultGateName { get; }
+        AddressBookLocationInfo LastAddressBook { get; set; }
+        AddressBookLocationInfo[] RecentFilesList { get; }
+        string LoadFileAtStart { get; }
+        AddressBookLocationInfo FileToLoadAtStart { get; }
     }
 }

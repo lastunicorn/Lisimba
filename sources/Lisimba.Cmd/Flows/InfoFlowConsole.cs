@@ -24,13 +24,13 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     internal class InfoFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public InfoFlowConsole(UserInterface userInterface)
+        public InfoFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
@@ -44,12 +44,12 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             };
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
-            userInterface.DisplayTemplate(consoleTemplate);
+            enhancedConsole.DisplayTemplate(consoleTemplate);
         }
 
         public void DisplayNoAddressBookMessage()
         {
-            userInterface.WriteLineError(Resources.NoAddessBookOpenedError);
+            enhancedConsole.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

@@ -22,18 +22,18 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UnknownFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public UnknownFlowConsole(UserInterface userInterface)
+        public UnknownFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayUnknownCommandError()
         {
-            userInterface.WriteLineError(Resources.UnknownCommandError);
+            enhancedConsole.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }

@@ -16,24 +16,17 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
-    public interface IObserver
+    public class AddressBookChangedEventArgs : EventArgs
     {
-        void Start();
-    }
+        public AddressBookShell NewAddressBook { get; private set; }
+        public AddressBookShell OldAddressBook { get; private set; }
 
-    public abstract class AddressBookObserver : IObserver
-    {
-        protected readonly OpenedAddressBooks OpenedAddressBooks;
-
-        protected AddressBookObserver(OpenedAddressBooks openedAddressBooks)
+        public AddressBookChangedEventArgs(AddressBookShell oldAddressBook, AddressBookShell newAddressBook)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-
-            OpenedAddressBooks = openedAddressBooks;
+            OldAddressBook = oldAddressBook;
+            NewAddressBook = newAddressBook;
         }
-
-        public abstract void Start();
     }
 }

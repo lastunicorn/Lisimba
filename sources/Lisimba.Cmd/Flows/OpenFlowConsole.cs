@@ -22,19 +22,19 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class OpenFlowConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public OpenFlowConsole(UserInterface userInterface)
+        public OpenFlowConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayUsingDefaultGateWarning(string addressBookFileName, string gateId)
         {
             string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
-            userInterface.WriteLineWarning(message);
+            enhancedConsole.WriteLineWarning(message);
         }
     }
 }

@@ -17,26 +17,26 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Properties;
-using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookClosedObserverConsole
     {
-        private readonly UserInterface userInterface;
+        private readonly EnhancedConsole enhancedConsole;
 
-        public AddressBookClosedObserverConsole(UserInterface userInterface)
+        public AddressBookClosedObserverConsole(EnhancedConsole enhancedConsole)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
-            this.userInterface = userInterface;
+            this.enhancedConsole = enhancedConsole;
         }
 
         public void DisplayAddressBookCloseSuccess(AddressBookShell addressBookShell)
         {
             string addressBookName = addressBookShell.GetFriendlyName();
             string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
-            userInterface.WriteLineSuccess(text);
+            enhancedConsole.WriteLineSuccess(text);
         }
     }
 }

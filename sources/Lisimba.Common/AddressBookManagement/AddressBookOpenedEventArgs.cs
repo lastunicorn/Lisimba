@@ -16,17 +16,17 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {
-    public class AddressBookClosedEventArgs : EventArgs
+    public class AddressBookOpenedEventArgs : EventArgs
     {
-        public AddressBookShell AddressBookShell { get; private set; }
+        public AddressBookOpenResult Result { get; private set; }
 
-        public AddressBookClosedEventArgs(AddressBookShell addressBookShell)
+        public AddressBookOpenedEventArgs(AddressBookOpenResult result)
         {
-            if (addressBookShell == null) throw new ArgumentNullException("addressBookShell");
-            
-            AddressBookShell = addressBookShell;
+            if (result == null) throw new ArgumentNullException("result");
+
+            Result = result;
         }
     }
 }
