@@ -15,41 +15,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
 
 namespace DustInTheWind.Lisimba.Cmd
 {
     internal class LisimbaApplication
     {
-        private readonly Prompter prompter;
-        private readonly ActiveObservers activeObservers;
-
         public event EventHandler Started;
         public event EventHandler Ended;
 
-        public LisimbaApplication(Prompter prompter, ActiveObservers activeObservers)
+        public void Start()
         {
-            if (prompter == null) throw new ArgumentNullException("prompter");
-            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
-
-            this.prompter = prompter;
-            this.activeObservers = activeObservers;
-        }
-
-        public void Run()
-        {
-            activeObservers.Start();
-
             OnStarted();
-
-            prompter.Run();
 
             OnEnded();
         }
 
         public void Exit()
         {
-            prompter.Stop();
+            OnEnded();
         }
 
         protected virtual void OnStarted()

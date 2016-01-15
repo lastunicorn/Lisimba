@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
@@ -23,14 +24,17 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
     {
         private readonly ApplicationEndedObserverConsole console;
         private readonly LisimbaApplication lisimbaApplication;
+        private readonly Prompter prompter;
 
-        public ApplicationEndedObserver(ApplicationEndedObserverConsole console, LisimbaApplication lisimbaApplication)
+        public ApplicationEndedObserver(ApplicationEndedObserverConsole console, LisimbaApplication lisimbaApplication, Prompter prompter)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (prompter == null) throw new ArgumentNullException("prompter");
 
             this.console = console;
             this.lisimbaApplication = lisimbaApplication;
+            this.prompter = prompter;
         }
 
         public void Start()
@@ -40,6 +44,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         private void HandleLisimbaApplicationEnded(object sender, EventArgs eventArgs)
         {
+            prompter.Stop();
             console.WriteGoodByeMessage();
         }
     }
