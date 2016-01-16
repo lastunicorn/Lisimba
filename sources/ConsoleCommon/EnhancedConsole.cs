@@ -120,24 +120,24 @@ namespace DustInTheWind.ConsoleCommon
 
         public void DisplayTemplate(ConsoleTemplate consoleTemplate)
         {
-            TextColorType textColorType = TextColorType.Normal;
+            TextType textType = TextType.Normal;
 
             foreach (TemplateElement templateElement in consoleTemplate)
             {
                 switch (templateElement.Type)
                 {
                     case TemplateElementType.Text:
-                        DisplayText(templateElement.Value, textColorType);
+                        DisplayText(templateElement.Value, textType);
                         break;
 
                     case TemplateElementType.Action:
                         if (templateElement.Value == "emp")
-                            textColorType = TextColorType.Emphasies;
+                            textType = TextType.Emphasies;
                         break;
 
                     case TemplateElementType.EndAction:
                         if (templateElement.Value == "emp")
-                            textColorType = TextColorType.Normal;
+                            textType = TextType.Normal;
                         break;
 
                     default:
@@ -146,27 +146,27 @@ namespace DustInTheWind.ConsoleCommon
             }
         }
 
-        private void DisplayText(string text, TextColorType textColorType)
+        private void DisplayText(string text, TextType textType)
         {
-            switch (textColorType)
+            switch (textType)
             {
-                case TextColorType.Normal:
+                case TextType.Normal:
                     WriteNormal(text);
                     break;
 
-                case TextColorType.Success:
+                case TextType.Success:
                     WriteSuccess(text);
                     break;
 
-                case TextColorType.Warning:
+                case TextType.Warning:
                     WriteWarning(text);
                     break;
 
-                case TextColorType.Error:
+                case TextType.Error:
                     WriteError(text);
                     break;
 
-                case TextColorType.Emphasies:
+                case TextType.Emphasies:
                     WriteEmphasize(text);
                     break;
 

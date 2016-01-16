@@ -72,9 +72,9 @@
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lisimba\Lisimba.csproj">
+    <ProjectReference Include="..\Lisimba.WinForms\Lisimba.WinForms.csproj">
       <Project>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</Project>
-      <Name>Lisimba</Name>
+      <Name>Lisimba.WinForms</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
