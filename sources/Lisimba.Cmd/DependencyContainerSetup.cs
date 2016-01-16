@@ -20,6 +20,8 @@ using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
@@ -99,6 +101,8 @@ namespace DustInTheWind.Lisimba.Cmd
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
+            container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
+            // RecentFiles?
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
         }

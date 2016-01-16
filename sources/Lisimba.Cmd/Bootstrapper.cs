@@ -14,7 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Common;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Cmd
@@ -25,14 +27,17 @@ namespace DustInTheWind.Lisimba.Cmd
         {
             UnityContainer container = DependencyContainerSetup.CreateContainer();
 
-            ActiveObservers activeObservers = container.Resolve<ActiveObservers>();
-            activeObservers.Start();
+            UserInterface userInterface = container.Resolve<UserInterface>();
+            userInterface.Initialize();
 
             LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
             lisimbaApplication.Start();
 
-            Prompter prompter = container.Resolve<Prompter>();
-            prompter.Run();
+            userInterface.RunPrompter();
+
+            GC.Collect();
+            GC.Collect();
+            GC.Collect();
         }
     }
 }

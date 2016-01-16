@@ -21,11 +21,11 @@ using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class ApplicationStartedObserverConsole
+    class ApplicationStartingObserverConsole
     {
         private readonly EnhancedConsole enhancedConsole;
 
-        public ApplicationStartedObserverConsole(EnhancedConsole enhancedConsole)
+        public ApplicationStartingObserverConsole(EnhancedConsole enhancedConsole)
         {
             if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 
@@ -41,7 +41,8 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         public void WriteGateInfo(string gateName)
         {
-            Console.WriteLine(Resources.DefaultGateMessage, gateName);
+            string text = string.Format(Resources.DefaultGateMessage, gateName);
+            enhancedConsole.WriteLineNormal(text);
         }
     }
 }

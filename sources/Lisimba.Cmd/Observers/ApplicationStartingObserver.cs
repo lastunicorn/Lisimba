@@ -15,42 +15,42 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Common.GateManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class ApplicationEndedObserver : IObserver
+    class ApplicationStartingObserver : IObserver
     {
-        private readonly ApplicationEndedObserverConsole console;
+        private readonly ApplicationStartingObserverConsole console;
         private readonly LisimbaApplication lisimbaApplication;
-        private readonly UserInterface userInterface;
+        private readonly AvailableGates availableGates;
 
-        public ApplicationEndedObserver(ApplicationEndedObserverConsole console, LisimbaApplication lisimbaApplication, UserInterface userInterface)
+        public ApplicationStartingObserver(ApplicationStartingObserverConsole console, LisimbaApplication lisimbaApplication,
+            AvailableGates availableGates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.console = console;
             this.lisimbaApplication = lisimbaApplication;
-            this.userInterface = userInterface;
+            this.availableGates = availableGates;
         }
 
         public void Start()
         {
-            lisimbaApplication.Ended += HandleLisimbaApplicationEnded;
+            lisimbaApplication.Starting += HandleLisimbaApplicationStarting;
         }
 
         public void Stop()
         {
-            lisimbaApplication.Ended -= HandleLisimbaApplicationEnded;
+            lisimbaApplication.Starting -= HandleLisimbaApplicationStarting;
         }
 
-        private void HandleLisimbaApplicationEnded(object sender, EventArgs eventArgs)
+        private void HandleLisimbaApplicationStarting(object sender, EventArgs eventArgs)
         {
-            userInterface.Stop();
-            console.WriteGoodByeMessage();
+            console.WriteWelcomeMessage();
+            console.WriteGateInfo(availableGates.DefaultGateName);
         }
     }
 }

@@ -55,6 +55,11 @@ namespace DustInTheWind.Lisimba.Observers
             lisimbaApplication.Started += HandleLisimbaApplicationStarted;
         }
 
+        public void Stop()
+        {
+            lisimbaApplication.Started -= HandleLisimbaApplicationStarted;
+        }
+
         private void HandleLisimbaApplicationStarted(object sender, EventArgs eventArgs)
         {
             OpenInitialCatalog();

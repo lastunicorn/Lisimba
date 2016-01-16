@@ -44,6 +44,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
         }
 
+        public void Stop()
+        {
+            openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
+        }
+
         private void HandleAddressBookClosing(object sender, CancelEventArgs e)
         {
             bool allowToContinue = EnsureAddressBookIsSaved();

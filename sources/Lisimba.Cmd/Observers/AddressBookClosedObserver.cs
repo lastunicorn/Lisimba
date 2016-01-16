@@ -39,6 +39,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             openedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
+        public void Stop()
+        {
+            openedAddressBooks.AddressBookClosed -= HandleAddressBookClosed;
+        }
+
         private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
         {
             console.DisplayAddressBookCloseSuccess(e.AddressBookShell);

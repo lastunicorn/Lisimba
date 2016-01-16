@@ -29,7 +29,9 @@ namespace DustInTheWind.Lisimba.Cmd
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex);
+
                 Console.ReadKey(true);
             }
         }

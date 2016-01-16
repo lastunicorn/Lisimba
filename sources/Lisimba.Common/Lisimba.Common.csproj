@@ -43,7 +43,7 @@
     <Compile Include="AddressBookManagement\AddressBookChangedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenResult.cs" />
-    <Compile Include="AddressBookLocationInfo.cs" />
+    <Compile Include="RecentFilesManagement\AddressBookLocationInfo.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenedEventArgs.cs" />
     <Compile Include="Config\ApplicationConfiguration.cs" />
     <Compile Include="Config\ConfigurationFile.cs" />
@@ -54,6 +54,7 @@
     <Compile Include="ConfigSection\RecentFilesConfigElementCollection.cs" />
     <Compile Include="ConfigSection\SortByConfigElement.cs" />
     <Compile Include="IObserver.cs" />
+    <Compile Include="LisimbaApplication.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="AddressBookManagement\OpenedAddressBooks.cs" />
     <Compile Include="AddressBookManagement\AddressBookShell.cs" />
@@ -67,7 +68,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="RecentFiles.cs" />
+    <Compile Include="RecentFilesManagement\RecentFiles.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">

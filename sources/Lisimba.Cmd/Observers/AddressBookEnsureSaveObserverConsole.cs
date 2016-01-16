@@ -35,8 +35,8 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         {
             enhancedConsole.WriteNormal(Resources.AskToSaveAddressBook);
 
-            ConsoleKeyInfo key = Console.ReadKey(false);
-            Console.WriteLine();
+            ConsoleKeyInfo key = enhancedConsole.ReadKey();
+            enhancedConsole.WriteLine();
 
             switch (key.Key)
             {
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         public string AskForNewLocation()
         {
             enhancedConsole.WriteNormal(Resources.AskForNewLocation);
-            return Console.ReadLine();
+            return enhancedConsole.ReadLine();
         }
     }
 }

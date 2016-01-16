@@ -39,6 +39,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
         }
 
+        public void Stop()
+        {
+            openedAddressBooks.AddressBookSaved -= HandleAddressBookSaved;
+        }
+
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
             console.DisplayAddressBookSaveSuccess(openedAddressBooks.Current.GetFriendlyName(), openedAddressBooks.Current.Location);

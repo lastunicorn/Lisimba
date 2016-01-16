@@ -32,15 +32,15 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public void DisplayPrompter(string addressBookName, bool isModified)
         {
-            Console.WriteLine();
+            enhancedConsole.WriteLine();
             enhancedConsole.WriteEmphasize("lisimba");
 
             if (addressBookName != null)
             {
-                Console.Write(" ");
+                enhancedConsole.WriteNormal(" ");
 
                 string formattedAddressBookName = BuildAddressBookName(addressBookName, isModified);
-                Console.Write(formattedAddressBookName);
+                enhancedConsole.WriteNormal(formattedAddressBookName);
             }
 
             enhancedConsole.WriteEmphasize(" > ");
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public string ReadCommand()
         {
-            return Console.ReadLine();
+            return enhancedConsole.ReadLine();
         }
 
         public void WriteError(string text)

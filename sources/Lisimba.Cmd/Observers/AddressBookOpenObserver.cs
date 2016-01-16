@@ -41,6 +41,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             openedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
         }
 
+        public void Stop()
+        {
+            openedAddressBooks.AddressBookOpened -= HandleAddressBookOpened;
+        }
+
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
         {
             DisplayOpenSuccessMessage();

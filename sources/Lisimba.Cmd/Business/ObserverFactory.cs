@@ -22,30 +22,18 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
-    class ActiveObservers
+    class ObserverFactory
     {
         private readonly IUnityContainer unityContainer;
-        private List<IObserver> observers;
 
-        public ActiveObservers(IUnityContainer unityContainer)
+        public ObserverFactory(IUnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
             this.unityContainer = unityContainer;
         }
 
-        public void Start()
-        {
-            if (observers == null)
-                observers = CreateObservers();
-
-            foreach (IObserver observer in observers)
-            {
-                observer.Start();
-            }
-        }
-
-        private List<IObserver> CreateObservers()
+        public List<IObserver> CreateObservers()
         {
             return new List<IObserver>
             {
@@ -53,7 +41,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 unityContainer.Resolve<AddressBookSaveObserver>(),
                 unityContainer.Resolve<AddressBookEnsureSaveObserver>(),
                 unityContainer.Resolve<AddressBookClosedObserver>(),
-                unityContainer.Resolve<ApplicationStartedObserver>(),
+                unityContainer.Resolve<ApplicationStartingObserver>(),
                 unityContainer.Resolve<ApplicationEndedObserver>()
             };
         }

@@ -19,5 +19,6 @@ namespace DustInTheWind.Lisimba.Common
     public interface IObserver
     {
         void Start();
+        void Stop();
     }
 }

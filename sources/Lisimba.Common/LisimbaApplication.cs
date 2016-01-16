@@ -15,34 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Cmd.Observers
+namespace DustInTheWind.Lisimba.Common
 {
-    class ApplicationStartedObserver : IObserver
+    public class LisimbaApplication
     {
-        private readonly ApplicationStartedObserverConsole console;
-        private readonly LisimbaApplication lisimbaApplication;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly IApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
         private readonly AvailableGates availableGates;
 
-        public ApplicationStartedObserver(ApplicationStartedObserverConsole console, LisimbaApplication lisimbaApplication, OpenedAddressBooks openedAddressBooks,
+        public event EventHandler Starting;
+        public event EventHandler Started;
+        public event EventHandler Ended;
+
+        public LisimbaApplication(OpenedAddressBooks openedAddressBooks,
             IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
         {
-            if (console == null) throw new ArgumentNullException("console");
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.console = console;
-            this.lisimbaApplication = lisimbaApplication;
             this.openedAddressBooks = openedAddressBooks;
             this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
@@ -51,15 +48,40 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         public void Start()
         {
-            lisimbaApplication.Started += HandleLisimbaApplicationStarted;
-        }
-
-        private void HandleLisimbaApplicationStarted(object sender, EventArgs eventArgs)
-        {
-            console.WriteWelcomeMessage();
-            console.WriteGateInfo(availableGates.DefaultGateName);
+            OnStarting();
 
             OpenInitialCatalog();
+
+            OnStarted();
+        }
+
+        public void Exit()
+        {
+            OnEnded();
+        }
+
+        protected virtual void OnStarting()
+        {
+            EventHandler handler = Starting;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnStarted()
+        {
+            EventHandler handler = Started;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnded()
+        {
+            EventHandler handler = Ended;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         private void OpenInitialCatalog()

@@ -85,6 +85,21 @@ namespace DustInTheWind.ConsoleCommon
             WriteLine(text, EmphasizeColor);
         }
 
+        public void WriteLine()
+        {
+            Console.WriteLine();
+        }
+
+        public string ReadLine()
+        {
+            return Console.ReadLine();
+        }
+
+        public ConsoleKeyInfo ReadKey()
+        {
+            return Console.ReadKey(false);
+        }
+
         private static void Write(string text, ConsoleColor color)
         {
             ConsoleColor oldColor = Console.ForegroundColor;
