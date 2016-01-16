@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 
@@ -34,6 +35,11 @@ namespace DustInTheWind.Lisimba.Common.GateManagement
         public IGate GetGate(string gateId)
         {
             return unityContainer.Resolve<IGate>(gateId);
+        }
+
+        public IEnumerable<IGate> GetAllGates()
+        {
+            return unityContainer.ResolveAll<IGate>();
         }
     }
 }

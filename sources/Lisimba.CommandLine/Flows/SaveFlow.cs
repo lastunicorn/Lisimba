@@ -15,7 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
@@ -24,16 +27,19 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class SaveFlow : IFlow
     {
+        private readonly EnhancedConsole console;
         private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
 
-        public SaveFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public SaveFlow(EnhancedConsole console, ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
+            if (console == null) throw new ArgumentNullException("console");
             if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
+            this.console = console;
             this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
@@ -58,7 +64,29 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             }
             else
             {
-                openedAddressBooks.Current.SaveAddressBook();
+                if (openedAddressBooks.Current.Gate == null)
+                {
+                    if (availableGates.DefaultGate == null)
+                        throw new LisimbaException(Resources.NoDefaultGateError);
+
+                    var gate = availableGates.DefaultGate;
+
+                    console.WriteNormal(Resources.AskForNewLocation);
+                    string newLocation = console.ReadLine();
+
+                    openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
+                }
+                else if (openedAddressBooks.Current.Location == null)
+                {
+                    console.WriteNormal(Resources.AskForNewLocation);
+                    string newLocation = console.ReadLine();
+
+                    openedAddressBooks.Current.SaveAddressBook(newLocation);
+                }
+                else
+                {
+                    openedAddressBooks.Current.SaveAddressBook();
+                }
             }
         }
     }

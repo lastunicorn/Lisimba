@@ -37,6 +37,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 { "close", typeof(CloseFlow) },
                 { "info", typeof(InfoFlow) },
                 { "gate", typeof(GateFlow) },
+                { "gates", typeof(GatesFlow) },
                 { "exit", typeof(ExitFlow) },
                 { "bye", typeof(ExitFlow) },
                 { "goodbye", typeof(ExitFlow) },

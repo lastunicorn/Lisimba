@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
@@ -88,6 +89,11 @@ namespace DustInTheWind.Lisimba.Common.GateManagement
                 string message = string.Format(Resources.GateNotFoundError, gateId);
                 throw new Exception(message, ex);
             }
+        }
+
+        public IEnumerable<IGate> GetAllGates()
+        {
+            return gateProvider.GetAllGates();
         }
     }
 }

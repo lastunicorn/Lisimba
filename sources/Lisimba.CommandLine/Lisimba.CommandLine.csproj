@@ -57,6 +57,7 @@
     <Compile Include="Flows\CloseFlow.cs" />
     <Compile Include="Flows\EmptyFlow.cs" />
     <Compile Include="Flows\GateFlow.cs" />
+    <Compile Include="Flows\GatesFlow.cs" />
     <Compile Include="Flows\InfoFlow.cs" />
     <Compile Include="Flows\NewFlow.cs" />
     <Compile Include="Flows\SaveFlow.cs" />

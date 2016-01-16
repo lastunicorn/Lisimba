@@ -95,6 +95,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             catch (Exception ex)
             {
                 console.WriteError(ex.Message);
+                console.WriteLine();
             }
         }
 
