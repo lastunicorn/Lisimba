@@ -43,6 +43,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         {
             string text = string.Format(Resources.DefaultGateMessage, gateName);
             enhancedConsole.WriteLineNormal(text);
+            enhancedConsole.WriteLine();
         }
     }
 }

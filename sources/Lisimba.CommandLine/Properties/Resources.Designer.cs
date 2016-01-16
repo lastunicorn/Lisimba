@@ -88,15 +88,6 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No gate is specified for &apos;{0}&apos;. Using default gate &apos;{1}&apos;..
-        /// </summary>
-        internal static string AddressBookOpenUseDefaultGateWarning {
-            get {
-                return ResourceManager.GetString("AddressBookOpenUseDefaultGateWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Address book new file name [empty string to cancel]: .
         /// </summary>
         internal static string AskForNewLocation {
@@ -178,15 +169,6 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no record of an address book being opened. Please specify a file..
-        /// </summary>
-        internal static string NoAddressBookInConfigFile {
-            get {
-                return ResourceManager.GetString("NoAddressBookInConfigFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No default gate is set..
         /// </summary>
         internal static string NoDefaultGateError {
@@ -205,11 +187,29 @@ namespace DustInTheWind.Lisimba.Cmd.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No gate is specified for address book &apos;{0}&apos; and no default gate is set..
+        ///   Looks up a localized string similar to The gate &apos;{0}&apos; can no longer be found in the system. Address book &apos;{1}&apos; cannot be opened..
         /// </summary>
-        internal static string OpenAddressBookNoGateError {
+        internal static string OpenAddressBook_GateNotFoundError {
             get {
-                return ResourceManager.GetString("OpenAddressBookNoGateError", resourceCulture);
+                return ResourceManager.GetString("OpenAddressBook_GateNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address book &apos;{0}&apos; has no associated gate..
+        /// </summary>
+        internal static string OpenAddressBook_NoGateError {
+            get {
+                return ResourceManager.GetString("OpenAddressBook_NoGateError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no record of an address book being previously opened. Please specify a file to open..
+        /// </summary>
+        internal static string OpenAddressBook_NoLastAddressBook {
+            get {
+                return ResourceManager.GetString("OpenAddressBook_NoLastAddressBook", resourceCulture);
             }
         }
         

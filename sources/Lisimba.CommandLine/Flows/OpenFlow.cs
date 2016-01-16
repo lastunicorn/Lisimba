@@ -28,21 +28,19 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class OpenFlow : IFlow
     {
         private readonly ConsoleCommand consoleCommand;
-        private readonly OpenFlowConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(ConsoleCommand consoleCommand, OpenFlowConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates, ApplicationConfiguration config)
+        public OpenFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks,
+            AvailableGates availableGates, ApplicationConfiguration config)
         {
             if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
-            if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (config == null) throw new ArgumentNullException("config");
 
             this.consoleCommand = consoleCommand;
-            this.console = console;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
             this.config = config;
@@ -51,18 +49,20 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         public void Execute()
         {
             if (consoleCommand.HasParameters)
-                OpenAddressBook();
+                OpenAddressBookFromCommand();
             else
                 OpenLastAddressBook();
         }
 
-        private void OpenAddressBook()
+        private void OpenAddressBookFromCommand()
         {
-            IGate gate = GetGate();
-            openedAddressBooks.OpenAddressBook(consoleCommand[1], gate);
+            string fileName = consoleCommand[1];
+            IGate gate = GetGateFromCommand();
+
+            openedAddressBooks.OpenAddressBook(fileName, gate);
         }
 
-        private IGate GetGate()
+        private IGate GetGateFromCommand()
         {
             if (consoleCommand.ParameterCount >= 2)
             {
@@ -81,27 +81,30 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             AddressBookLocationInfo addressBookLocationInfo = config.LastAddressBook;
 
             if (addressBookLocationInfo == null)
-                throw new LisimbaException(Resources.NoAddressBookInConfigFile);
+                throw new LisimbaException(Resources.OpenAddressBook_NoLastAddressBook);
 
-            IGate gate = ChooseGate(addressBookLocationInfo);
+            IGate gate = GetGate(addressBookLocationInfo);
 
             openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
         }
 
-        private IGate ChooseGate(AddressBookLocationInfo addressBookLocationInfo)
+        private IGate GetGate(AddressBookLocationInfo addressBookLocationInfo)
         {
-            if (addressBookLocationInfo.GateId != null)
-                return availableGates.GetGate(addressBookLocationInfo.GateId);
-
-            if (availableGates.DefaultGate == null)
+            if (addressBookLocationInfo.GateId == null)
             {
-                string message = string.Format(Resources.OpenAddressBookNoGateError, addressBookLocationInfo.FileName);
+                string message = string.Format(Resources.OpenAddressBook_NoGateError, addressBookLocationInfo.FileName);
                 throw new LisimbaException(message);
             }
 
-            console.DisplayUsingDefaultGateWarning(addressBookLocationInfo.FileName, availableGates.DefaultGate.Name);
+            IGate gate = availableGates.GetGate(addressBookLocationInfo.GateId);
 
-            return availableGates.DefaultGate;
+            if (gate == null)
+            {
+                string message = string.Format(Resources.OpenAddressBook_GateNotFoundError, addressBookLocationInfo.GateId, addressBookLocationInfo.FileName);
+                throw new LisimbaException(message);
+            }
+
+            return gate;
         }
     }
 }

@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.Common.Config
                 return new AddressBookLocationInfo
                 {
                     FileName = lastFile.FileName,
-                    GateId = null
+                    GateId = lastFile.Gate
                 };
             }
             set

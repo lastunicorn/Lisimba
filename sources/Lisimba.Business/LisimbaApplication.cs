@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Common
 
         private void OpenInitialCatalog()
         {
-            AddressBookLocationInfo fileNameToOpenAtLoad = CalculateInitiallyOpenedFileName();
+            AddressBookLocationInfo fileNameToOpenAtLoad = GetFileInfoToInitiallyOpen();
 
             if (fileNameToOpenAtLoad == null)
             {
@@ -82,12 +82,18 @@ namespace DustInTheWind.Lisimba.Common
             }
             else
             {
+                if (fileNameToOpenAtLoad.GateId == null)
+                {
+                    string message = string.Format("No gate is associated with address book '{0}'.", fileNameToOpenAtLoad.FileName);
+                    throw new LisimbaException(message);
+                }
+
                 IGate gate = availableGates.GetGate(fileNameToOpenAtLoad.GateId);
                 openedAddressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
             }
         }
 
-        private AddressBookLocationInfo CalculateInitiallyOpenedFileName()
+        private AddressBookLocationInfo GetFileInfoToInitiallyOpen()
         {
             if (!string.IsNullOrEmpty(programArguments.FileName))
                 return new AddressBookLocationInfo

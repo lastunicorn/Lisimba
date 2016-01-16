@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.Exceptions;
 
 namespace DustInTheWind.Lisimba.Egg
 {
@@ -30,11 +31,12 @@ namespace DustInTheWind.Lisimba.Egg
 
         public AddressBook Load(string fileName)
         {
-            return new AddressBook();
+            throw new EggException("EmptyGate cannot open anything.");
         }
 
         public void Save(AddressBook addressBook, string fileName)
         {
+            throw new EggException("EmptyGate cannot save anything.");
         }
     }
 }

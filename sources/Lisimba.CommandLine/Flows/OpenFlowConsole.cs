@@ -30,11 +30,5 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             this.enhancedConsole = enhancedConsole;
         }
-
-        public void DisplayUsingDefaultGateWarning(string addressBookFileName, string gateId)
-        {
-            string message = string.Format(Resources.AddressBookOpenUseDefaultGateWarning, addressBookFileName, gateId);
-            enhancedConsole.WriteLineWarning(message);
-        }
     }
 }
