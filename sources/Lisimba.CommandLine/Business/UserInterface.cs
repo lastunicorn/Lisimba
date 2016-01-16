@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Cmd.Observers;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
@@ -24,20 +25,25 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     {
         private readonly Prompter prompter;
         private readonly ObserverFactory observerFactory;
+        private readonly Welcomer welcomer;
 
         private List<IObserver> observers;
 
-        public UserInterface(Prompter prompter, ObserverFactory observerFactory)
+        public UserInterface(Prompter prompter, ObserverFactory observerFactory, Welcomer welcomer)
         {
             if (prompter == null) throw new ArgumentNullException("prompter");
             if (observerFactory == null) throw new ArgumentNullException("observerFactory");
+            if (welcomer == null) throw new ArgumentNullException("welcomer");
 
             this.prompter = prompter;
             this.observerFactory = observerFactory;
+            this.welcomer = welcomer;
         }
 
         public void Initialize()
         {
+            welcomer.Welcome();
+
             if (observers == null)
                 observers = observerFactory.CreateObservers();
 
