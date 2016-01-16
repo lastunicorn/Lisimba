@@ -26,6 +26,7 @@ namespace DustInTheWind.Lisimba
         public void Run(string[] args)
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
+
             InitializeProgramArgumentsService(args);
             StartApplicationMainService();
             InitializeAndStartUi();

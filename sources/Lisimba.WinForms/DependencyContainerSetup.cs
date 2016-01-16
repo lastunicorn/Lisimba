@@ -20,6 +20,7 @@ using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
+using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba
 {
