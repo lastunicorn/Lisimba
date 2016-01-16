@@ -21,15 +21,11 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
-using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
     internal class LisimbaApplication
     {
-        private readonly ApplicationStatus applicationStatus;
-        private readonly UserInterface userInterface;
-        private readonly ActiveObservers activeObservers;
         private readonly CommandPool commandPool;
         private readonly ProgramArguments programArguments;
         private readonly ApplicationConfiguration applicationConfiguration;
@@ -37,9 +33,9 @@ namespace DustInTheWind.Lisimba.Services
         private readonly AvailableGates availableGates;
 
         public event EventHandler Started;
-        public event EventHandler<CancelEventArgs> Exiting;
-        public event EventHandler BeforeExiting;
-        public event EventHandler ExitCanceled;
+        public event EventHandler<CancelEventArgs> Ending;
+        public event EventHandler EndCanceled;
+        public event EventHandler Ended;
 
         public string ProgramName
         {
@@ -56,21 +52,16 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        public LisimbaApplication(ApplicationStatus applicationStatus, UserInterface userInterface, ActiveObservers activeObservers, CommandPool commandPool,
-            ProgramArguments programArguments, ApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
+        public LisimbaApplication(CommandPool commandPool,
+            ProgramArguments programArguments, ApplicationConfiguration applicationConfiguration,
+            RecentFiles recentFiles, AvailableGates availableGates)
         {
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            this.applicationStatus = applicationStatus;
-            this.userInterface = userInterface;
-            this.activeObservers = activeObservers;
             this.commandPool = commandPool;
             this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
@@ -78,62 +69,22 @@ namespace DustInTheWind.Lisimba.Services
             this.availableGates = availableGates;
         }
 
-        protected virtual void OnStarted()
-        {
-            EventHandler handler = Started;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnExiting(CancelEventArgs e)
-        {
-            EventHandler<CancelEventArgs> handler = Exiting;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnBeforeExiting()
-        {
-            EventHandler handler = BeforeExiting;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnExitCanceled()
-        {
-            EventHandler handler = ExitCanceled;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
         public void Start()
         {
-            applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
-
-            activeObservers.Start();
-
             OpenInitialCatalog();
 
             OnStarted();
         }
 
-        public bool Exit()
+        public void Exit()
         {
-            OnBeforeExiting();
-
             CancelEventArgs args = new CancelEventArgs();
-            OnExiting(args);
+            OnEnding(args);
 
-            if (!args.Cancel)
-                userInterface.Exit();
+            if (args.Cancel)
+                OnEndCanceled();
             else
-                OnExitCanceled();
-
-            return !args.Cancel;
+                OnEnded();
         }
 
         private void OpenInitialCatalog()
@@ -169,6 +120,38 @@ namespace DustInTheWind.Lisimba.Services
                 default:
                     return null;
             }
+        }
+
+        protected virtual void OnStarted()
+        {
+            EventHandler handler = Started;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnding(CancelEventArgs e)
+        {
+            EventHandler<CancelEventArgs> handler = Ending;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnEndCanceled()
+        {
+            EventHandler handler = EndCanceled;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnded()
+        {
+            EventHandler handler = Ended;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

@@ -26,6 +26,7 @@ namespace DustInTheWind.Lisimba.Services
     internal class UserInterface
     {
         private readonly UiFactory uiFactory;
+        private readonly ActiveObservers activeObservers;
         private Form mainWindow;
         private TrayIcon trayIcon;
 
@@ -49,19 +50,25 @@ namespace DustInTheWind.Lisimba.Services
             MainWindow = null;
         }
 
-        public UserInterface(UiFactory uiFactory)
+        public UserInterface(UiFactory uiFactory, ActiveObservers activeObservers, ApplicationStatus applicationStatus)
         {
             if (uiFactory == null) throw new ArgumentNullException("uiFactory");
+            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.uiFactory = uiFactory;
+            this.activeObservers = activeObservers;
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
         }
 
         public void RunAsWindowApp()
         {
             CreateMainWindow();
+            activeObservers.Start();
             Application.Run(MainWindow);
         }
 
@@ -69,6 +76,7 @@ namespace DustInTheWind.Lisimba.Services
         {
             CreateTrayIcon();
             DisplayMainWindow();
+            activeObservers.Start();
             Application.Run();
         }
 

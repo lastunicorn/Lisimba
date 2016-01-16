@@ -42,15 +42,15 @@ namespace DustInTheWind.Lisimba.Observers
 
         public void Start()
         {
-            lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
+            lisimbaApplication.Ending += HandleLisimbaApplicationEnding;
         }
 
         public void Stop()
         {
-            lisimbaApplication.Exiting -= HandleLisimbaApplicationExiting;
+            lisimbaApplication.Ending -= HandleLisimbaApplicationEnding;
         }
 
-        private void HandleLisimbaApplicationExiting(object sender, CancelEventArgs e)
+        private void HandleLisimbaApplicationEnding(object sender, CancelEventArgs e)
         {
             userInterface.Exit();
         }

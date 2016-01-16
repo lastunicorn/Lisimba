@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Lisimba
 {
-    internal class ProgramArguments
+    public class ProgramArguments
     {
         public string FileName { get; private set; }
 

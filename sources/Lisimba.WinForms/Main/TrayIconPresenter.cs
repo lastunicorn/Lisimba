@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Main
             {
                 trayIcon = value;
 
-                lisimbaApplication.Exiting += HandleLisimbaApplicationExiting;
+                lisimbaApplication.Ending += HandleLisimbaApplicationEnding;
                 TrayIcon.Visible = true;
             }
         }
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Main
             ApplicationExitOperation = commandPool.ApplicationExitOperation;
         }
 
-        private void HandleLisimbaApplicationExiting(object sender, CancelEventArgs cancelEventArgs)
+        private void HandleLisimbaApplicationEnding(object sender, CancelEventArgs cancelEventArgs)
         {
             TrayIcon.Visible = false;
         }

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
@@ -25,22 +26,27 @@ namespace DustInTheWind.Lisimba.Common
     public class LisimbaApplication
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly ProgramArguments programArguments;
         private readonly IApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
         private readonly AvailableGates availableGates;
 
         public event EventHandler Starting;
         public event EventHandler Started;
+        public event EventHandler<CancelEventArgs> Ending;
+        public event EventHandler EndCanceled;
         public event EventHandler Ended;
 
-        public LisimbaApplication(OpenedAddressBooks openedAddressBooks,
+        public LisimbaApplication(OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
             IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.openedAddressBooks = openedAddressBooks;
+            this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
             this.availableGates = availableGates;
@@ -57,31 +63,13 @@ namespace DustInTheWind.Lisimba.Common
 
         public void Exit()
         {
-            OnEnded();
-        }
+            CancelEventArgs args = new CancelEventArgs();
+            OnEnding(args);
 
-        protected virtual void OnStarting()
-        {
-            EventHandler handler = Starting;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnStarted()
-        {
-            EventHandler handler = Started;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnEnded()
-        {
-            EventHandler handler = Ended;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            if (args.Cancel)
+                OnEndCanceled();
+            else
+                OnEnded();
         }
 
         private void OpenInitialCatalog()
@@ -101,6 +89,13 @@ namespace DustInTheWind.Lisimba.Common
 
         private AddressBookLocationInfo CalculateInitiallyOpenedFileName()
         {
+            if (!string.IsNullOrEmpty(programArguments.FileName))
+                return new AddressBookLocationInfo
+                {
+                    FileName = programArguments.FileName,
+                    GateId = availableGates.DefaultGate.Id
+                };
+
             switch (applicationConfiguration.LoadFileAtStart)
             {
                 case "new":
@@ -115,6 +110,46 @@ namespace DustInTheWind.Lisimba.Common
                 default:
                     return null;
             }
+        }
+
+        protected virtual void OnStarting()
+        {
+            EventHandler handler = Starting;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnStarted()
+        {
+            EventHandler handler = Started;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnding(CancelEventArgs e)
+        {
+            EventHandler<CancelEventArgs> handler = Ending;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnEndCanceled()
+        {
+            EventHandler handler = EndCanceled;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnEnded()
+        {
+            EventHandler handler = Ended;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }
