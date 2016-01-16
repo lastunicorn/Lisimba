@@ -53,11 +53,11 @@ namespace DustInTheWind.Lisimba.Services
         {
             return new List<IObserver>
             {
-                unityContainer.Resolve<AddressBookOpenObserver>(), 
-                unityContainer.Resolve<AddressBookSaveObserver>(),
-                unityContainer.Resolve<AddressBookEnsureSaveObserver>(),
+                unityContainer.Resolve<AddressBookOpenedObserver>(), 
+                unityContainer.Resolve<AddressBookSavedObserver>(),
+                unityContainer.Resolve<AddressBookClosingObserver>(),
                 unityContainer.Resolve<AddressBookClosedObserver>(),
-                unityContainer.Resolve<ApplicationExitingObserver>()
+                unityContainer.Resolve<ApplicationEndingObserver>()
             };
         }
     }

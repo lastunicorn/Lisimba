@@ -20,11 +20,11 @@ using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookOpenObserverConsole
+    class AddressBookOpenedObserverConsole
     {
         private readonly EnhancedConsole enhancedConsole;
 
-        public AddressBookOpenObserverConsole(EnhancedConsole enhancedConsole)
+        public AddressBookOpenedObserverConsole(EnhancedConsole enhancedConsole)
         {
             if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
 

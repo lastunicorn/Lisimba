@@ -20,18 +20,18 @@ using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookSaveObserver : IObserver
+    class AddressBookSavedObserver : IObserver
     {
-        private readonly AddressBookSaveObserverConsole console;
+        private readonly AddressBookSavedObserverConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public AddressBookSaveObserver(OpenedAddressBooks openedAddressBooks, AddressBookSaveObserverConsole console)
+        public AddressBookSavedObserver(AddressBookSavedObserverConsole console, OpenedAddressBooks openedAddressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
+            this.openedAddressBooks = openedAddressBooks;
         }
 
         public void Start()

@@ -17,26 +17,21 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class ApplicationExitingObserver : IObserver
+    class ApplicationEndingObserver : IObserver
     {
         private readonly LisimbaApplication lisimbaApplication;
-        private readonly ApplicationStatus applicationStatus;
         private readonly UserInterface userInterface;
 
-        public ApplicationExitingObserver(LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public ApplicationEndingObserver(LisimbaApplication lisimbaApplication, UserInterface userInterface)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.lisimbaApplication = lisimbaApplication;
-            this.applicationStatus = applicationStatus;
             this.userInterface = userInterface;
         }
 

@@ -23,12 +23,12 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookEnsureSaveObserver : IObserver
+    class AddressBookClosingObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
 
-        public AddressBookEnsureSaveObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
+        public AddressBookClosingObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

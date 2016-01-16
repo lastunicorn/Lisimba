@@ -217,4 +217,10 @@ Do you wanna save it before proceedeing?</value>
   <data name="DefaultAddressBookName" xml:space="preserve">
     <value>New Address Book</value>
   </data>
+    <data name="AddressBookClosedSuccessStatus" xml:space="preserve">
+    <value>Address book was successfully closed.</value>
+  </data>
+    <data name="NewAddressBook_SuccessStatusText" xml:space="preserve">
+    <value>A new address book was created.</value>
+  </data>
 </root>

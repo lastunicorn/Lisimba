@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
@@ -47,7 +48,7 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
         {
-            applicationStatus.StatusText = "Address book was successfully closed.";
+            applicationStatus.StatusText = LocalizedResources.AddressBookClosedSuccessStatus;
         }
     }
 }

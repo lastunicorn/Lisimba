@@ -22,20 +22,20 @@ using DustInTheWind.Lisimba.Common.GateManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
-    class AddressBookEnsureSaveObserver : IObserver
+    class AddressBookClosingObserver : IObserver
     {
-        private readonly AddressBookEnsureSaveObserverConsole console;
-        private readonly AvailableGates availableGates;
+        private readonly AddressBookClosingObserverConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
 
-        public AddressBookEnsureSaveObserver(OpenedAddressBooks openedAddressBooks, AddressBookEnsureSaveObserverConsole console, AvailableGates availableGates)
+        public AddressBookClosingObserver(AddressBookClosingObserverConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
+            this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
         }
 

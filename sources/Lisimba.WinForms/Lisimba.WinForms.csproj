@@ -97,10 +97,10 @@
     </Compile>
     <Compile Include="DependencyContainerSetup.cs" />
     <Compile Include="Observers\AddressBookClosedObserver.cs" />
-    <Compile Include="Observers\AddressBookEnsureSaveObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenObserver.cs" />
-    <Compile Include="Observers\ApplicationExitingObserver.cs" />
-    <Compile Include="Observers\AddressBookSaveObserver.cs" />
+    <Compile Include="Observers\AddressBookClosingObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenedObserver.cs" />
+    <Compile Include="Observers\ApplicationEndingObserver.cs" />
+    <Compile Include="Observers\AddressBookSavedObserver.cs" />
     <Compile Include="Services\ActiveObservers.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">

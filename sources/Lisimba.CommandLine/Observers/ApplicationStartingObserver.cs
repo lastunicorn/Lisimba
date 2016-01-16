@@ -26,11 +26,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         private readonly LisimbaApplication lisimbaApplication;
         private readonly AvailableGates availableGates;
 
-        public ApplicationStartingObserver(ApplicationStartingObserverConsole console, LisimbaApplication lisimbaApplication,
-            AvailableGates availableGates)
+        public ApplicationStartingObserver(ApplicationStartingObserverConsole console, LisimbaApplication lisimbaApplication, AvailableGates availableGates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.console = console;
             this.lisimbaApplication = lisimbaApplication;

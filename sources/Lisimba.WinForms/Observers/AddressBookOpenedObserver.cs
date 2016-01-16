@@ -26,13 +26,13 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookOpenObserver : IObserver
+    class AddressBookOpenedObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
         private readonly UserInterface userInterface;
 
-        public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
@@ -66,7 +66,7 @@ namespace DustInTheWind.Lisimba.Observers
             {
                 if (openedAddressBooks.Current.Status == AddressBookStatus.New)
                 {
-                    applicationStatus.StatusText = "A new address book was created.";
+                    applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
                 }
                 else
                 {

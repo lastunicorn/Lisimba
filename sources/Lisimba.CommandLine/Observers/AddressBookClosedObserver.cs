@@ -25,13 +25,13 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         private readonly AddressBookClosedObserverConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public AddressBookClosedObserver(OpenedAddressBooks openedAddressBooks, AddressBookClosedObserverConsole console)
+        public AddressBookClosedObserver(AddressBookClosedObserverConsole console, OpenedAddressBooks openedAddressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
+            this.openedAddressBooks = openedAddressBooks;
         }
 
         public void Start()
