@@ -15,7 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
@@ -23,9 +25,9 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class CloseFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly CloseFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public CloseFlow(OpenedAddressBooks openedAddressBooks, CloseFlowConsole console)
+        public CloseFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
@@ -39,7 +41,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             if (openedAddressBooks.Current != null)
                 openedAddressBooks.CloseAddressBook();
             else
-                console.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.NoAddessBookOpenedError);
         }
     }
 }

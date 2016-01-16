@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
@@ -22,10 +24,10 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookClosedObserver : IObserver
     {
-        private readonly AddressBookClosedObserverConsole console;
+        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public AddressBookClosedObserver(AddressBookClosedObserverConsole console, OpenedAddressBooks openedAddressBooks)
+        public AddressBookClosedObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -46,7 +48,10 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
         {
-            console.DisplayAddressBookCloseSuccess(e.AddressBookShell);
+            string addressBookName = e.AddressBookShell.GetFriendlyName();
+            string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
+            
+            console.WriteLineSuccess(text);
         }
     }
 }

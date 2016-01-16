@@ -17,7 +17,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.Book;
 using DustInTheWind.Lisimba.Egg.Comparers;
@@ -27,9 +29,9 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     class NextBirthdaysFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly NextBirthdaysFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public NextBirthdaysFlow(OpenedAddressBooks openedAddressBooks, NextBirthdaysFlowConsole console)
+        public NextBirthdaysFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
@@ -51,12 +53,13 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
                 foreach (Contact contact in contacts)
                 {
-                    console.DisplayContactWithBirthday(contact);
+                    string text = string.Format("{0} : {1}", contact.Name, contact.Birthday);
+                    console.WriteLineNormal(text);
                 }
             }
             else
             {
-                console.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.NoAddessBookOpenedError);
             }
         }
 

@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
@@ -22,10 +24,10 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookSavedObserver : IObserver
     {
-        private readonly AddressBookSavedObserverConsole console;
+        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public AddressBookSavedObserver(AddressBookSavedObserverConsole console, OpenedAddressBooks openedAddressBooks)
+        public AddressBookSavedObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -46,7 +48,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
-            console.DisplayAddressBookSaveSuccess(openedAddressBooks.Current.GetFriendlyName(), openedAddressBooks.Current.Location);
+            string addressBookName = openedAddressBooks.Current.GetFriendlyName();
+            string addressBookLocation = openedAddressBooks.Current.Location;
+            string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
+
+            console.WriteLineSuccess(text);
         }
     }
 }

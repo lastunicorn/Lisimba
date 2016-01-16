@@ -18,7 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.Book;
 
@@ -28,9 +30,9 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly ShowFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public ShowFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, ShowFlowConsole console)
+        public ShowFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
             if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -52,7 +54,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             }
             else
             {
-                console.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.NoAddessBookOpenedError);
             }
         }
 
@@ -62,7 +64,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
             foreach (Contact contact in contacts)
             {
-                console.DisplayContactDetails(contact);
+                console.WriteLineNormal(contact.Name.ToString());
             }
         }
 
@@ -80,7 +82,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         {
             foreach (Contact contact in openedAddressBooks.Current.AddressBook.Contacts)
             {
-                console.DisplayContactShort(contact);
+                console.WriteLineNormal(contact.ToString());
             }
         }
     }

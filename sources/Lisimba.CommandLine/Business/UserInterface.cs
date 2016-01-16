@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Cmd.Observers;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Business

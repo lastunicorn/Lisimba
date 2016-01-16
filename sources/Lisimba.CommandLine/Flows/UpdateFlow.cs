@@ -15,7 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
@@ -24,17 +26,17 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UpdateFlowConsole consoleView;
+        private readonly EnhancedConsole console;
 
-        public UpdateFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, UpdateFlowConsole consoleView)
+        public UpdateFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
             if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (consoleView == null) throw new ArgumentNullException("consoleView");
+            if (console == null) throw new ArgumentNullException("console");
 
             this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
-            this.consoleView = consoleView;
+            this.console = console;
         }
 
         public void Execute()
@@ -56,7 +58,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
                     break;
 
                 default:
-                    consoleView.DisplayInvalidUpdateActionError();
+                    console.WriteLineError(Resources.InvalidUpdateActionError);
                     break;
             }
         }
@@ -82,11 +84,11 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
             if (openedAddressBooks.Current != null)
             {
                 openedAddressBooks.Current.AddressBook.Name = newAddressBookName;
-                consoleView.DisplayAddressBookNameChangeSuccess();
+                console.WriteLineSuccess(Resources.AddressBookChangedSuccess);
             }
             else
             {
-                consoleView.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.NoAddessBookOpenedError);
             }
         }
     }

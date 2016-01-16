@@ -17,6 +17,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
@@ -24,10 +26,10 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookOpenedObserver : IObserver
     {
-        private readonly AddressBookOpenedObserverConsole console;
+        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public AddressBookOpenedObserver(AddressBookOpenedObserverConsole console, OpenedAddressBooks openedAddressBooks)
+        public AddressBookOpenedObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -59,19 +61,22 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
                 if (openedAddressBooks.Current.Status == AddressBookStatus.New)
                 {
                     string addressBookName = openedAddressBooks.Current.GetFriendlyName();
-                    console.DisplayAddressBookCreateSuccess(addressBookName);
+                    string message = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
+                    
+                    console.WriteLineSuccess(message);
                 }
                 else
                 {
                     string addressBookFileName = openedAddressBooks.Current.Location;
                     int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+                    string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
 
-                    console.DisplayAddressBookOpenSuccess(addressBookFileName, contactsCount);
+                    console.WriteLineSuccess(message);
                 }
             }
             else
             {
-                console.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.OpenAddressBookUnknownError);
             }
         }
 
@@ -89,7 +94,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             }
 
             if (sb.Length > 0)
-                console.DisplayWarning(sb.ToString());
+                console.WriteLineWarning(sb.ToString());
         }
     }
 }

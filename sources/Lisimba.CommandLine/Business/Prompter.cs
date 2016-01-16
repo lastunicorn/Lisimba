@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
@@ -26,18 +27,18 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     class Prompter
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly PrompterUi ui;
+        private readonly EnhancedConsole console;
         private readonly FlowFactory flowFactory;
         private bool stopRequested;
 
-        public Prompter(OpenedAddressBooks openedAddressBooks, PrompterUi ui, FlowFactory flowFactory)
+        public Prompter(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, FlowFactory flowFactory)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (ui == null) throw new ArgumentNullException("ui");
+            if (console == null) throw new ArgumentNullException("console");
             if (flowFactory == null) throw new ArgumentNullException("flowFactory");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.ui = ui;
+            this.console = console;
             this.flowFactory = flowFactory;
         }
 
@@ -58,12 +59,29 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             string addressBookName = openedAddressBooks.Current == null ? null : openedAddressBooks.Current.AddressBook.Name;
             bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
 
-            ui.DisplayPrompter(addressBookName, isModified);
+            console.WriteLine();
+            console.WriteEmphasize("lisimba");
+
+            if (addressBookName != null)
+            {
+                console.WriteNormal(" ");
+
+                string formattedAddressBookName = BuildAddressBookName(addressBookName, isModified);
+                console.WriteNormal(formattedAddressBookName);
+            }
+
+            console.WriteEmphasize(" > ");
+        }
+
+        private static string BuildAddressBookName(string addressBookName, bool isModified)
+        {
+            string notSavedMarker = isModified ? "*" : string.Empty;
+            return string.Format("[{0}]{1}", addressBookName, notSavedMarker);
         }
 
         private ConsoleCommand ReadCommand()
         {
-            string commandText = ui.ReadCommand();
+            string commandText = console.ReadLine();
             return new ConsoleCommand(commandText);
         }
 
@@ -76,7 +94,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
             }
             catch (Exception ex)
             {
-                ui.WriteError(ex.Message);
+                console.WriteError(ex.Message);
             }
         }
 

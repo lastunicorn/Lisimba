@@ -15,18 +15,20 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class ApplicationEndedObserver : IObserver
     {
-        private readonly ApplicationEndedObserverConsole console;
+        private readonly EnhancedConsole console;
         private readonly LisimbaApplication lisimbaApplication;
         private readonly UserInterface userInterface;
 
-        public ApplicationEndedObserver(ApplicationEndedObserverConsole console, LisimbaApplication lisimbaApplication, UserInterface userInterface)
+        public ApplicationEndedObserver(EnhancedConsole console, LisimbaApplication lisimbaApplication, UserInterface userInterface)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
@@ -50,7 +52,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
         private void HandleLisimbaApplicationEnded(object sender, EventArgs eventArgs)
         {
             userInterface.Stop();
-            console.WriteGoodByeMessage();
+            console.WriteLineNormal(Resources.GoodByeMessage);
         }
     }
 }

@@ -15,15 +15,17 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Cmd.Properties;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class UnknownFlow : IFlow
     {
-        private readonly UnknownFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public UnknownFlow(UnknownFlowConsole console)
+        public UnknownFlow(EnhancedConsole console)
         {
             if (console == null) throw new ArgumentNullException("console");
 
@@ -32,7 +34,7 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
 
         public void Execute()
         {
-            console.DisplayUnknownCommandError();
+            console.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }

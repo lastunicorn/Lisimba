@@ -8,15 +8,15 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 {
     class Welcomer
     {
-        private readonly EnhancedConsole enhancedConsole;
+        private readonly EnhancedConsole console;
         private readonly AvailableGates availableGates;
 
-        public Welcomer(EnhancedConsole enhancedConsole, AvailableGates availableGates)
+        public Welcomer(EnhancedConsole console, AvailableGates availableGates)
         {
-            if (enhancedConsole == null) throw new ArgumentNullException("enhancedConsole");
+            if (console == null) throw new ArgumentNullException("console");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            this.enhancedConsole = enhancedConsole;
+            this.console = console;
             this.availableGates = availableGates;
         }
 
@@ -30,14 +30,16 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             string title = string.Format(Resources.LisimbaTitle, version);
-            enhancedConsole.WriteLineEmphasize(title);
+
+            console.WriteLineEmphasize(title);
         }
 
         private void WriteGateInfo(string gateName)
         {
             string text = string.Format(Resources.DefaultGateMessage, gateName);
-            enhancedConsole.WriteLineNormal(text);
-            enhancedConsole.WriteLine();
+            console.WriteLineNormal(text);
+
+            console.WriteLine();
         }
     }
 }

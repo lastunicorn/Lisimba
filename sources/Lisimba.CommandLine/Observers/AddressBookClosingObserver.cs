@@ -16,6 +16,8 @@
 
 using System;
 using System.ComponentModel;
+using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.GateManagement;
@@ -24,11 +26,11 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class AddressBookClosingObserver : IObserver
     {
-        private readonly AddressBookClosingObserverConsole console;
+        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
 
-        public AddressBookClosingObserver(AddressBookClosingObserverConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public AddressBookClosingObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -63,7 +65,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             if (openedAddressBooks.Current == null || openedAddressBooks.Current.Status != AddressBookStatus.Modified)
                 return true;
 
-            bool? needToSave = console.AskToSaveAddressBook();
+            bool? needToSave = AskToSaveAddressBook();
 
             if (needToSave == null)
                 return false;
@@ -73,7 +75,7 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
 
             if (openedAddressBooks.Current.Location == null)
             {
-                string newLocation = console.AskForNewLocation();
+                string newLocation = AskForNewLocation();
 
                 if (newLocation == null)
                     return false;
@@ -89,6 +91,32 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
             }
 
             return true;
+        }
+
+        public bool? AskToSaveAddressBook()
+        {
+            console.WriteNormal(Resources.AskToSaveAddressBook);
+
+            ConsoleKeyInfo key = console.ReadKey();
+            console.WriteLine();
+
+            switch (key.Key)
+            {
+                case ConsoleKey.Y:
+                    return true;
+
+                case ConsoleKey.N:
+                    return false;
+
+                default:
+                    return null;
+            }
+        }
+
+        public string AskForNewLocation()
+        {
+            console.WriteNormal(Resources.AskForNewLocation);
+            return console.ReadLine();
         }
     }
 }

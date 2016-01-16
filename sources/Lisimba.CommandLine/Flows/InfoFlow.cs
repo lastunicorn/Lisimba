@@ -16,17 +16,22 @@
 
 using System;
 using System.IO;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.Templating;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Egg.Book;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
     class InfoFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly InfoFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public InfoFlow(OpenedAddressBooks openedAddressBooks, InfoFlowConsole console)
+        public InfoFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
@@ -43,12 +48,32 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
                     ? "< not saved yet >"
                     : Path.GetFullPath(openedAddressBooks.Current.Location);
 
-                console.DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
+                DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
             }
             else
             {
-                console.DisplayNoAddressBookMessage();
+                console.WriteLineError(Resources.NoAddessBookOpenedError);
             }
+        }
+
+        public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
+        {
+            string fileName = GetViewTemplateFullFileName("AddressBookInfo.t");
+
+            var parameters = new
+            {
+                AddressBookName = addressBook.Name,
+                AddressBookLocation = addressBookLocation,
+                ContactCount = addressBook.Contacts.Count
+            };
+
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
+            console.DisplayTemplate(consoleTemplate);
+        }
+
+        private static string GetViewTemplateFullFileName(string fileName)
+        {
+            return Constants.ViewTemplatesLocation + "." + fileName;
         }
     }
 }

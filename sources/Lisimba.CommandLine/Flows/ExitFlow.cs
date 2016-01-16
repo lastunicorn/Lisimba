@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.ConsoleCommon.CommandModel;
-using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows

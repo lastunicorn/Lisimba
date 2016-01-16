@@ -15,8 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.Templating;
+using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common.GateManagement;
+using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Cmd.Flows
 {
@@ -24,9 +29,9 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
     {
         private readonly ConsoleCommand consoleCommand;
         private readonly AvailableGates availableGates;
-        private readonly GateFlowConsole console;
+        private readonly EnhancedConsole console;
 
-        public GateFlow(ConsoleCommand consoleCommand, AvailableGates availableGates, GateFlowConsole console)
+        public GateFlow(ConsoleCommand consoleCommand, AvailableGates availableGates, EnhancedConsole console)
         {
             if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
@@ -41,15 +46,38 @@ namespace DustInTheWind.Lisimba.Cmd.Flows
         {
             if (consoleCommand.ParameterCount == 0)
             {
-                console.DisplayGate(availableGates.DefaultGate);
+                DisplayGate(availableGates.DefaultGate);
             }
             else
             {
                 availableGates.SetDefaultGate(consoleCommand[1]);
 
-                console.DisplayGateChangeSuccess();
-                console.DisplayGate(availableGates.DefaultGate);
+                DisplayGateChangeSuccess();
+                DisplayGate(availableGates.DefaultGate);
             }
+        }
+
+        public void DisplayGateChangeSuccess()
+        {
+            console.WriteLineSuccess(Resources.GateChangesSuccess);
+        }
+
+        public void DisplayGate(IGate gate)
+        {
+            string fileName = GetViewTemplateFullFileName("GateInfo.t");
+            var parameters = new
+            {
+                DefaultGate = string.Format("{0} ({1})", gate.Name, gate.Id),
+                Description = gate.Description
+            };
+
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
+            console.DisplayTemplate(consoleTemplate);
+        }
+
+        private static string GetViewTemplateFullFileName(string fileName)
+        {
+            return Constants.ViewTemplatesLocation + "." + fileName;
         }
     }
 }
