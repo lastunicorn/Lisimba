@@ -21,7 +21,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Exceptions;
 using DustInTheWind.Lisimba.Gating.Entities;
 using ICSharpCode.SharpZipLib.Zip;

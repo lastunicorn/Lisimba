@@ -42,6 +42,7 @@ namespace DustInTheWind.Lisimba.Common.Config
                 if (recentFiles.Count == 0)
                     return null;
 
+
                 RecentFilesConfigElement lastFile = recentFiles[0];
 
                 return new AddressBookLocationInfo

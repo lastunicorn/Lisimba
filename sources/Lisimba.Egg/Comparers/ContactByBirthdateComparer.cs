@@ -17,7 +17,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.Comparers
 {

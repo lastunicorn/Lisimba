@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,15 +16,10 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class ItemChangedEventArgs<T> : EventArgs
+    public interface IObservableEntity
     {
-        public T Item { get; private set; }
-
-        public ItemChangedEventArgs(T item)
-        {
-            Item = item;
-        }
+        event EventHandler Changed;
     }
 }

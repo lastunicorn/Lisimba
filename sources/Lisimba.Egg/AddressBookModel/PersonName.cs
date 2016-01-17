@@ -17,7 +17,7 @@
 using System;
 using System.Text;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class PersonName : IEquatable<PersonName>
     {

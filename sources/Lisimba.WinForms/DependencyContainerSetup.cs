@@ -14,12 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Configuration;
+using System.IO;
+using System.Reflection;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba
@@ -30,21 +34,49 @@ namespace DustInTheWind.Lisimba
         {
             UnityContainer unityContainer = new UnityContainer();
 
-            unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
+            LoadFromConfigurationFile(unityContainer);
+            RegisterAdditionalTypes(unityContainer);
 
-            unityContainer.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
-            //unityContainer.RegisterType<ImportYahooCsvOperation>(new ContainerControlledLifetimeManager());
-            //unityContainer.RegisterType<ExportYahooCsvOperation>(new ContainerControlledLifetimeManager());
-            
-            unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
-            
             return unityContainer;
+        }
+
+        private static void LoadFromConfigurationFile(IUnityContainer container)
+        {
+            UnityConfigurationSection unitySection = GetUnityConfigurationSection();
+            container.LoadConfiguration(unitySection);
+        }
+
+        private static UnityConfigurationSection GetUnityConfigurationSection()
+        {
+            string unityConfigFilePath = GetUnityConfigFilePath();
+
+            ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap { ExeConfigFilename = unityConfigFilePath };
+            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
+            return (UnityConfigurationSection)configuration.GetSection("unity");
+        }
+
+        private static string GetUnityConfigFilePath()
+        {
+            Assembly entryAssembly = Assembly.GetEntryAssembly();
+            string applicationDirectory = Path.GetDirectoryName(entryAssembly.Location);
+            return Path.Combine(applicationDirectory, "Unity.config");
+        }
+
+        private static void RegisterAdditionalTypes(UnityContainer container)
+        {
+            container.RegisterInstance(container);
+
+            container.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
+            container.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
+            container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
+            container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
+            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
+
+            container.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
+
+            container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
         }
     }
 }

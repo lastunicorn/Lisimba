@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
 using zcsv;
 

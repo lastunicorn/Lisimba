@@ -16,25 +16,25 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     /// <summary>
-    /// Class containing information about an e-mail
+    /// Class containing information about a social profile id.
     /// </summary>
-    public class Email : IObservableEntity, IEquatable<Email>
+    public class SocialProfile : IObservableEntity, IEquatable<SocialProfile>
     {
-        private string address;
+        private string id;
         private string description;
 
         /// <summary>
-        /// The e-mail address.
+        /// The social profile id.
         /// </summary>
-        public string Address
+        public string Id
         {
-            get { return address; }
+            get { return id; }
             set
             {
-                address = value;
+                id = value;
                 OnChanged();
             }
         }
@@ -63,71 +63,76 @@ namespace DustInTheWind.Lisimba.Egg.Book
         }
 
         /// <summary>
-        /// Creates a new empty <see cref="Email"/> object.
+        /// Creates a new empty <see cref="SocialProfile"/> object.
         /// </summary>
-        public Email()
+        public SocialProfile()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new <see cref="Email"/> object with the address and description specified.
+        /// Creates a new <see cref="SocialProfile"/> object with the id and description specified.
         /// </summary>
-        /// <param name="address">The e-mail address</param>
-        /// <param name="description">A short description of the email address.</param>
-        public Email(string address, string description)
+        public SocialProfile(string id, string description)
         {
-            this.address = address;
+            this.id = id;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new <see cref="Email"/> object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="SocialProfile"/> object with the data copied from the one passed as parameter.
         /// </summary>
-        /// <param name="email"></param>
-        public Email(Email email)
+        public SocialProfile(SocialProfile socialProfile)
         {
-            CopyFrom(email);
+            CopyFrom(socialProfile);
         }
 
         /// <summary>
-        /// Copy the data from the Email object passed as parameter into the current object.
+        /// Removes the data from all the fields
         /// </summary>
-        /// <param name="email"></param>
-        private void CopyFrom(Email email)
+        public void Clear()
         {
-            address = email.address;
-            description = email.description;
+            id = string.Empty;
+            description = string.Empty;
+        }
+
+        /// <summary>
+        /// Copy the data from the <see cref="SocialProfile"/> object passed as parameter into the current object.
+        /// </summary>
+        public void CopyFrom(SocialProfile socialProfile)
+        {
+            id = socialProfile.id;
+            description = socialProfile.description;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Email)) return false;
+            if (obj.GetType() != typeof (SocialProfile)) return false;
 
-            return Equals((Email) obj);
+            return Equals((SocialProfile) obj);
         }
 
-        public bool Equals(Email email)
+        public bool Equals(SocialProfile socialProfile)
         {
-            if (ReferenceEquals(null, email)) return false;
-            if (ReferenceEquals(this, email)) return true;
+            if (ReferenceEquals(null, socialProfile)) return false;
+            if (ReferenceEquals(this, socialProfile)) return true;
 
-            return string.Equals(address, email.address) && string.Equals(description, email.description);
+            return string.Equals(id, socialProfile.id) && string.Equals(description, socialProfile.description);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((address != null ? address.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((id != null ? id.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return address + (description.Length > 0 ? (" - " + description) : string.Empty);
+            return id + (description.Length > 0 ? " - " + description : string.Empty);
         }
     }
 }

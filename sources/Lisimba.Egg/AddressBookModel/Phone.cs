@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class Phone : IObservableEntity, IEquatable<Phone>
     {

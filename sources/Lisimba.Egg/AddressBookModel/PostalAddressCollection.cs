@@ -14,23 +14,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class SocialProfileIdCollection : CustomObservableCollection<SocialProfile>
+    public class PostalAddressCollection : CustomObservableCollection<PostalAddress>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (SocialProfile socialProfileId in this)
+            foreach (PostalAddress address in this)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = socialProfileId.Id;
-                dr[1] = socialProfileId.Description;
+                dr[0] = address;
+                dr[1] = address.Description;
                 dt.Rows.Add(dr);
             }
 
@@ -39,54 +40,56 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public static DataTable GetEmptyDataTable()
         {
-            DataTable dt = new DataTable("SocialProfileIds");
+            DataTable dt = new DataTable("Addresses");
 
-            dt.Columns.Add(new DataColumn("Id", typeof (string)));
+            dt.Columns.Add(new DataColumn("Address", typeof (string)));
             dt.Columns.Add(new DataColumn("Comment", typeof (string)));
 
             return dt;
         }
 
-        public void CopyFrom(SocialProfileIdCollection values)
+        public void CopyFrom(PostalAddressCollection values)
         {
             Clear();
 
-            for (int i = 0; i < values.Count; i++)
+            IEnumerable<PostalAddress> newAddresses = values.Select(address => new PostalAddress(address));
+
+            foreach (PostalAddress newAddress in newAddresses)
             {
-                Add(new SocialProfile(values[i]));
+                Add(newAddress);
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="SocialProfile"/> object that match the description.
+        /// Returns the <see cref="PostalAddress"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="SocialProfile"/> object that match or <c>null</c>.</returns>
-        public SocialProfile SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="PostalAddress"/> object that match or <c>null</c>.</returns>
+        public PostalAddress SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (SocialProfile socialProfileId in Items)
+            foreach (PostalAddress address in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (socialProfileId.Description.CompareTo(text) == 0)
-                            return socialProfileId;
+                        if (address.Description.CompareTo(text) == 0)
+                            return address;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (socialProfileId.Description.StartsWith(text))
-                            return socialProfileId;
+                        if (address.Description.StartsWith(text))
+                            return address;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (socialProfileId.Description.EndsWith(text))
-                            return socialProfileId;
+                        if (address.Description.EndsWith(text))
+                            return address;
                         break;
 
                     case SearchMode.Containing:
-                        if (socialProfileId.Description.IndexOf(text) > 0)
-                            return socialProfileId;
+                        if (address.Description.IndexOf(text) > 0)
+                            return address;
                         break;
                 }
             }
@@ -96,22 +99,22 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            SocialProfileIdCollection socialProfileIds = obj as SocialProfileIdCollection;
+            PostalAddressCollection postalAddresses = obj as PostalAddressCollection;
 
-            return Equals(socialProfileIds);
+            return Equals(postalAddresses);
         }
 
-        public bool Equals(SocialProfileIdCollection socialProfileIds)
+        public bool Equals(PostalAddressCollection postalAddresses)
         {
-            if (socialProfileIds == null)
+            if (postalAddresses == null)
                 return false;
 
-            if (socialProfileIds.Count != Count)
+            if (postalAddresses.Count != Count)
                 return false;
 
-            for (int i = 0; i < socialProfileIds.Count; i++)
+            foreach (PostalAddress address in postalAddresses)
             {
-                bool exists = Enumerable.Contains(Items, socialProfileIds[i]);
+                bool exists = Enumerable.Contains(Items, address);
 
                 if (!exists)
                     return false;

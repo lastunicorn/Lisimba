@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;

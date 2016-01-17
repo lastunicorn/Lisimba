@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Egg.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class ContactCollection : CustomObservableCollection<Contact>
     {

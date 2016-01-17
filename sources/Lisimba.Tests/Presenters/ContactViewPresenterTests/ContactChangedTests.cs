@@ -16,7 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.ContactEdit;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Services;
 using Moq;
 using NUnit.Framework;

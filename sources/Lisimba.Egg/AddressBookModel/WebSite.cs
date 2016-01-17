@@ -16,25 +16,25 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     /// <summary>
-    /// Class containing information about a social profile id.
+    /// Class containing information about an e-mail
     /// </summary>
-    public class SocialProfile : IObservableEntity, IEquatable<SocialProfile>
+    public class WebSite : IObservableEntity, IEquatable<WebSite>
     {
-        private string id;
+        private string address;
         private string description;
 
         /// <summary>
-        /// The social profile id.
+        /// The e-mail address.
         /// </summary>
-        public string Id
+        public string Address
         {
-            get { return id; }
+            get { return address; }
             set
             {
-                id = value;
+                address = value;
                 OnChanged();
             }
         }
@@ -52,6 +52,8 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
+        #region Event Changed
+
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -62,77 +64,92 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 handler(this, EventArgs.Empty);
         }
 
+        #endregion
+
         /// <summary>
-        /// Creates a new empty <see cref="SocialProfile"/> object.
+        /// Creates a new empty WebSite object.
         /// </summary>
-        public SocialProfile()
+        public WebSite()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfile"/> object with the id and description specified.
+        /// Creates a new WebSite object with the address and description specified.
         /// </summary>
-        public SocialProfile(string id, string description)
+        /// <param name="address">The web site address</param>
+        /// <param name="description">A short description of the web site address.</param>
+        public WebSite(string address, string description)
         {
-            this.id = id;
+            this.address = address;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfile"/> object with the data copied from the one passed as parameter.
+        /// Creates a new WebSite object with the data copied from the one passed as parameter.
         /// </summary>
-        public SocialProfile(SocialProfile socialProfile)
+        /// <param name="webSite"></param>
+        public WebSite(WebSite webSite)
         {
-            CopyFrom(socialProfile);
+            CopyFrom(webSite);
         }
 
         /// <summary>
-        /// Removes the data from all the fields
+        /// Removes the data from all the fields.
         /// </summary>
         public void Clear()
         {
-            id = string.Empty;
+            address = string.Empty;
             description = string.Empty;
         }
 
-        /// <summary>
-        /// Copy the data from the <see cref="SocialProfile"/> object passed as parameter into the current object.
-        /// </summary>
-        public void CopyFrom(SocialProfile socialProfile)
+        public void CopyFrom(WebSite webSite)
         {
-            id = socialProfile.id;
-            description = socialProfile.description;
+            address = webSite.address;
+            description = webSite.description;
         }
+
+        //public override bool Equals(object obj)
+        //{
+        //    WebSite webSite = obj as WebSite;
+
+        //    if (webSite == null)
+        //        return false;
+
+        //    if (!address.Equals(webSite.address)) return false;
+        //    if (!description.Equals(webSite.description)) return false;
+
+        //    return true;
+        //}
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (SocialProfile)) return false;
+            if (obj.GetType() != typeof (WebSite)) return false;
 
-            return Equals((SocialProfile) obj);
+            return Equals((WebSite) obj);
         }
 
-        public bool Equals(SocialProfile socialProfile)
+        public bool Equals(WebSite webSite)
         {
-            if (ReferenceEquals(null, socialProfile)) return false;
-            if (ReferenceEquals(this, socialProfile)) return true;
+            if (ReferenceEquals(null, webSite)) return false;
+            if (ReferenceEquals(this, webSite)) return true;
 
-            return string.Equals(id, socialProfile.id) && string.Equals(description, socialProfile.description);
+            return string.Equals(address, webSite.address) && string.Equals(description, webSite.description);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((id != null ? id.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((address != null ? address.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 
         public override string ToString()
         {
-            return id + (description.Length > 0 ? " - " + description : string.Empty);
+            return address + (description.Length > 0 ? " - " + description : string.Empty);
         }
     }
 }

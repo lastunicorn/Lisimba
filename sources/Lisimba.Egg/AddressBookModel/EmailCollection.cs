@@ -18,19 +18,19 @@ using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class PhoneCollection : CustomObservableCollection<Phone>
+    public class EmailCollection : CustomObservableCollection<Email>
     {
         public DataTable ToDataTable()
         {
             DataTable dt = GetEmptyDataTable();
 
-            foreach (Phone phone in this)
+            foreach (Email email in this)
             {
                 DataRow dr = dt.NewRow();
-                dr[0] = phone.Number;
-                dr[1] = phone.Description;
+                dr[0] = email.Address;
+                dr[1] = email.Description;
                 dt.Rows.Add(dr);
             }
 
@@ -39,54 +39,54 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public static DataTable GetEmptyDataTable()
         {
-            DataTable dt = new DataTable("Phones");
+            DataTable dt = new DataTable("Emails");
 
-            dt.Columns.Add(new DataColumn("Phone", typeof (string)));
+            dt.Columns.Add(new DataColumn("Email", typeof (string)));
             dt.Columns.Add(new DataColumn("Comment", typeof (string)));
 
             return dt;
         }
 
-        public void CopyFrom(PhoneCollection values)
+        public void CopyFrom(EmailCollection values)
         {
             Clear();
 
             for (int i = 0; i < values.Count; i++)
             {
-                Add(new Phone(values[i]));
+                Add(new Email(values[i]));
             }
         }
 
         /// <summary>
-        /// Returns the <see cref="Phone"/> object that match the description.
+        /// Returns the <see cref="Email"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="Phone"/> object that match or <c>null</c>.</returns>
-        public Phone SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="Email"/> object that match or <c>null</c>.</returns>
+        public Email SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (Phone phone in Items)
+            foreach (Email email in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (phone.Description.CompareTo(text) == 0)
-                            return phone;
+                        if (email.Description.CompareTo(text) == 0)
+                            return email;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (phone.Description.StartsWith(text))
-                            return phone;
+                        if (email.Description.StartsWith(text))
+                            return email;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (phone.Description.EndsWith(text))
-                            return phone;
+                        if (email.Description.EndsWith(text))
+                            return email;
                         break;
 
                     case SearchMode.Containing:
-                        if (phone.Description.IndexOf(text) > 0)
-                            return phone;
+                        if (email.Description.IndexOf(text) > 0)
+                            return email;
                         break;
                 }
             }
@@ -96,22 +96,22 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override bool Equals(object obj)
         {
-            PhoneCollection phones = obj as PhoneCollection;
+            EmailCollection emails = obj as EmailCollection;
 
-            return Equals(phones);
+            return Equals(emails);
         }
 
-        public bool Equals(PhoneCollection phones)
+        public bool Equals(EmailCollection emails)
         {
-            if (phones == null)
+            if (emails == null)
                 return false;
 
-            if (phones.Count != Count)
+            if (emails.Count != Count)
                 return false;
 
-            for (int i = 0; i < phones.Count; i++)
+            for (int i = 0; i < emails.Count; i++)
             {
-                bool exists = Enumerable.Contains(Items, phones[i]);
+                bool exists = Enumerable.Contains(Items, emails[i]);
 
                 if (!exists)
                     return false;

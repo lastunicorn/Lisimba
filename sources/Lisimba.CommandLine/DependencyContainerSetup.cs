@@ -44,32 +44,32 @@ namespace DustInTheWind.Lisimba.Cmd
             return container;
         }
 
-        private static void LoadGates(IUnityContainer container)
-        {
-            string applicationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            string gateDirectory = Path.Combine(applicationDirectory, "Gates");
+        //private static void LoadGates(IUnityContainer container)
+        //{
+        //    string applicationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+        //    string gateDirectory = Path.Combine(applicationDirectory, "Gates");
 
-            if (!Directory.Exists(gateDirectory))
-                return;
+        //    if (!Directory.Exists(gateDirectory))
+        //        return;
 
-            string[] assemblyPaths = Directory.GetFiles(gateDirectory, "*.dll");
+        //    string[] assemblyPaths = Directory.GetFiles(gateDirectory, "*.dll");
 
-            IEnumerable<Assembly> assemblies = assemblyPaths
-                .Select(Assembly.Load);
+        //    IEnumerable<Assembly> assemblies = assemblyPaths
+        //        .Select(Assembly.Load);
 
-            foreach (Assembly assembly in assemblies)
-            {
-                IEnumerable<Type> gateTypes = assembly.GetExportedTypes()
-                    .Where(t => typeof(IGate).IsAssignableFrom(t));
+        //    foreach (Assembly assembly in assemblies)
+        //    {
+        //        IEnumerable<Type> gateTypes = assembly.GetExportedTypes()
+        //            .Where(t => typeof(IGate).IsAssignableFrom(t));
 
-                foreach (Type gateType in gateTypes)
-                {
-                    IGate gate = (IGate)Activator.CreateInstanceFrom(assembly.Location, gateType.FullName).Unwrap();
+        //        foreach (Type gateType in gateTypes)
+        //        {
+        //            IGate gate = (IGate)Activator.CreateInstanceFrom(assembly.Location, gateType.FullName).Unwrap();
 
-                    container.RegisterType(typeof(IGate), gateType, gate.Id);
-                }
-            }
-        }
+        //            container.RegisterType(typeof(IGate), gateType, gate.Id);
+        //        }
+        //    }
+        //}
 
         private static void LoadFromConfigurationFile(IUnityContainer container)
         {

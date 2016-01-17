@@ -18,7 +18,7 @@ using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class WebSiteCollection : CustomObservableCollection<WebSite>
     {

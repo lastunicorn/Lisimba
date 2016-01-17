@@ -20,7 +20,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class AddressBook
     {

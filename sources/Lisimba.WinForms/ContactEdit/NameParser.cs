@@ -16,7 +16,7 @@
 
 using System;
 using System.Text.RegularExpressions;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {

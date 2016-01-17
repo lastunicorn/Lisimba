@@ -16,7 +16,7 @@
 
 using System;
 using System.Drawing;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 

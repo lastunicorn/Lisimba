@@ -19,7 +19,7 @@ using System.ComponentModel;
 using System.IO;
 using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 {

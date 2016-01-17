@@ -16,12 +16,12 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.Book
+namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    public class WebSite : IObservableEntity, IEquatable<WebSite>
+    public class Email : IObservableEntity, IEquatable<Email>
     {
         private string address;
         private string description;
@@ -52,8 +52,6 @@ namespace DustInTheWind.Lisimba.Egg.Book
             }
         }
 
-        #region Event Changed
-
         public event EventHandler Changed;
 
         protected virtual void OnChanged()
@@ -64,79 +62,59 @@ namespace DustInTheWind.Lisimba.Egg.Book
                 handler(this, EventArgs.Empty);
         }
 
-        #endregion
-
         /// <summary>
-        /// Creates a new empty WebSite object.
+        /// Creates a new empty <see cref="Email"/> object.
         /// </summary>
-        public WebSite()
+        public Email()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new WebSite object with the address and description specified.
+        /// Creates a new <see cref="Email"/> object with the address and description specified.
         /// </summary>
-        /// <param name="address">The web site address</param>
-        /// <param name="description">A short description of the web site address.</param>
-        public WebSite(string address, string description)
+        /// <param name="address">The e-mail address</param>
+        /// <param name="description">A short description of the email address.</param>
+        public Email(string address, string description)
         {
             this.address = address;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new WebSite object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="Email"/> object with the data copied from the one passed as parameter.
         /// </summary>
-        /// <param name="webSite"></param>
-        public WebSite(WebSite webSite)
+        /// <param name="email"></param>
+        public Email(Email email)
         {
-            CopyFrom(webSite);
+            CopyFrom(email);
         }
 
         /// <summary>
-        /// Removes the data from all the fields.
+        /// Copy the data from the Email object passed as parameter into the current object.
         /// </summary>
-        public void Clear()
+        /// <param name="email"></param>
+        private void CopyFrom(Email email)
         {
-            address = string.Empty;
-            description = string.Empty;
+            address = email.address;
+            description = email.description;
         }
-
-        public void CopyFrom(WebSite webSite)
-        {
-            address = webSite.address;
-            description = webSite.description;
-        }
-
-        //public override bool Equals(object obj)
-        //{
-        //    WebSite webSite = obj as WebSite;
-
-        //    if (webSite == null)
-        //        return false;
-
-        //    if (!address.Equals(webSite.address)) return false;
-        //    if (!description.Equals(webSite.description)) return false;
-
-        //    return true;
-        //}
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (WebSite)) return false;
+            if (obj.GetType() != typeof (Email)) return false;
 
-            return Equals((WebSite) obj);
+            return Equals((Email) obj);
         }
 
-        public bool Equals(WebSite webSite)
+        public bool Equals(Email email)
         {
-            if (ReferenceEquals(null, webSite)) return false;
-            if (ReferenceEquals(this, webSite)) return true;
+            if (ReferenceEquals(null, email)) return false;
+            if (ReferenceEquals(this, email)) return true;
 
-            return string.Equals(address, webSite.address) && string.Equals(description, webSite.description);
+            return string.Equals(address, email.address) && string.Equals(description, email.description);
         }
 
         public override int GetHashCode()
@@ -149,7 +127,7 @@ namespace DustInTheWind.Lisimba.Egg.Book
 
         public override string ToString()
         {
-            return address + (description.Length > 0 ? " - " + description : string.Empty);
+            return address + (description.Length > 0 ? (" - " + description) : string.Empty);
         }
     }
 }
