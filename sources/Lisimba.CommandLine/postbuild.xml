@@ -5,17 +5,21 @@
         <SolutionDir>.</SolutionDir>
     </PropertyGroup>
 
+    <!-- A list with all the plug-ins to be copied localy. -->
     <ItemGroup>
         <GateFiles Include="$(SolutionDir)\Publish\ZipXmlGate\*.*" />
         <GateFiles Include="$(SolutionDir)\Publish\YahooCsvGate\*.*" />
     </ItemGroup>
 
+    <!-- The main target. -->
     <Target Name="Default" DependsOnTargets="RetrieveGates;CleanUp"></Target>
 
+    <!-- Copies locally the gates. -->
     <Target Name="RetrieveGates">
         <Copy SourceFiles="@(GateFiles)" DestinationFolder="." />
     </Target>
 
+    <!-- Removed the current file. -->
     <Target Name="CleanUp">
         <Delete Files="postbuild.xml" />
     </Target>

@@ -14,18 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using DustInTheWind.Lisimba.Cmd.Business;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
-using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 

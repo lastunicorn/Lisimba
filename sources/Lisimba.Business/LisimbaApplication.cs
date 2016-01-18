@@ -15,48 +15,33 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Common.Config;
-using DustInTheWind.Lisimba.Common.GateManagement;
-using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Common
 {
+    /// <summary>
+    /// - announces start/stop
+    /// - does some action when app starts.
+    /// </summary>
     public class LisimbaApplication
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly ProgramArguments programArguments;
-        private readonly IApplicationConfiguration applicationConfiguration;
-        private readonly RecentFiles recentFiles;
-        private readonly AvailableGates availableGates;
-
-        public event EventHandler Starting;
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
         public event EventHandler EndCanceled;
         public event EventHandler Ended;
 
-        public LisimbaApplication(OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
-            IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
-        {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (programArguments == null) throw new ArgumentNullException("programArguments");
-            if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
+        public List<IObserver> Observers { get; private set; }
 
-            this.openedAddressBooks = openedAddressBooks;
-            this.programArguments = programArguments;
-            this.applicationConfiguration = applicationConfiguration;
-            this.recentFiles = recentFiles;
-            this.availableGates = availableGates;
+        public LisimbaApplication()
+        {
+            Observers = new List<IObserver>();
         }
 
         public void Start()
         {
-            OnStarting();
-
-            OpenInitialCatalog();
+            foreach (IObserver observer in Observers)
+                observer.Start();
 
             OnStarted();
         }
@@ -67,63 +52,16 @@ namespace DustInTheWind.Lisimba.Common
             OnEnding(args);
 
             if (args.Cancel)
+            {
                 OnEndCanceled();
+            }
             else
+            {
+                foreach (IObserver observer in Observers)
+                    observer.Stop();
+
                 OnEnded();
-        }
-
-        private void OpenInitialCatalog()
-        {
-            AddressBookLocationInfo fileNameToOpenAtLoad = GetFileInfoToInitiallyOpen();
-
-            if (fileNameToOpenAtLoad == null)
-            {
-                openedAddressBooks.CreateNewAddressBook(null);
             }
-            else
-            {
-                if (fileNameToOpenAtLoad.GateId == null)
-                {
-                    string message = string.Format("No gate is associated with address book '{0}'.", fileNameToOpenAtLoad.FileName);
-                    throw new LisimbaException(message);
-                }
-
-                IGate gate = availableGates.GetGate(fileNameToOpenAtLoad.GateId);
-                openedAddressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
-            }
-        }
-
-        private AddressBookLocationInfo GetFileInfoToInitiallyOpen()
-        {
-            if (!string.IsNullOrEmpty(programArguments.FileName))
-                return new AddressBookLocationInfo
-                {
-                    FileName = programArguments.FileName,
-                    GateId = availableGates.DefaultGate.Id
-                };
-
-            switch (applicationConfiguration.LoadFileAtStart)
-            {
-                case "new":
-                    return null;
-
-                case "last":
-                    return recentFiles.GetMostRecentFile();
-
-                case "specified":
-                    return applicationConfiguration.FileToLoadAtStart;
-
-                default:
-                    return null;
-            }
-        }
-
-        protected virtual void OnStarting()
-        {
-            EventHandler handler = Starting;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         protected virtual void OnStarted()

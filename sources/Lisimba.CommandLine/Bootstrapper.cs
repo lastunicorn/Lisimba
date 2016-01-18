@@ -33,11 +33,11 @@ namespace DustInTheWind.Lisimba.Cmd
             LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
             lisimbaApplication.Start();
 
-            userInterface.RunPrompter();
+            GC.Collect();
+            GC.Collect();
+            GC.Collect();
 
-            GC.Collect();
-            GC.Collect();
-            GC.Collect();
+            userInterface.RunPrompter();
         }
     }
 }

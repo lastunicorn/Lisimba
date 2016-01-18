@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -22,11 +22,11 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Cmd.Business
 {
-    class ObserverFactory
+    internal class ObserverFactory
     {
-        private readonly IUnityContainer unityContainer;
+        private readonly UnityContainer unityContainer;
 
-        public ObserverFactory(IUnityContainer unityContainer)
+        public ObserverFactory(UnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
 
@@ -41,6 +41,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 unityContainer.Resolve<AddressBookSavedObserver>(),
                 unityContainer.Resolve<AddressBookClosingObserver>(),
                 unityContainer.Resolve<AddressBookClosedObserver>(),
+                unityContainer.Resolve<ApplicationStartedObserver>(),
                 unityContainer.Resolve<ApplicationEndedObserver>()
             };
         }

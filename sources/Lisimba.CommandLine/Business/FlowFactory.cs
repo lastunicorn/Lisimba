@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Cmd.Flows;
 using Microsoft.Practices.Unity;
@@ -25,24 +24,6 @@ namespace DustInTheWind.Lisimba.Cmd.Business
     internal class FlowFactory
     {
         private readonly UnityContainer unityContainer;
-
-        private readonly Dictionary<string, Type> knownFlows = new Dictionary<string, Type>
-            {
-                { "new", typeof(NewFlow) },
-                { "update", typeof(UpdateFlow) },
-                { "open", typeof(OpenFlow) },
-                { "save", typeof(SaveFlow) },
-                { "show", typeof(ShowFlow) },
-                { "next-birthdays", typeof(NextBirthdaysFlow) },
-                { "close", typeof(CloseFlow) },
-                { "info", typeof(InfoFlow) },
-                { "gate", typeof(GateFlow) },
-                { "gates", typeof(GatesFlow) },
-                { "exit", typeof(ExitFlow) },
-                { "bye", typeof(ExitFlow) },
-                { "goodbye", typeof(ExitFlow) },
-                { "", typeof(EmptyFlow) }
-            };
 
         public FlowFactory(UnityContainer unityContainer)
         {
@@ -54,11 +35,11 @@ namespace DustInTheWind.Lisimba.Cmd.Business
         {
             var dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
 
-            bool existsFlow = knownFlows.ContainsKey(consoleCommand.Name);
+            bool existsFlow = ApplicationFlows.Flows.ContainsKey(consoleCommand.Name);
             if (!existsFlow)
                 return unityContainer.Resolve<UnknownFlow>(dependencyOverride);
 
-            Type flowType = knownFlows[consoleCommand.Name];
+            Type flowType = ApplicationFlows.Flows[consoleCommand.Name];
             return (IFlow)unityContainer.Resolve(flowType, dependencyOverride);
         }
     }

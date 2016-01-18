@@ -49,8 +49,9 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Business\Constants.cs" />
-    <Compile Include="Business\ObserverFactory.cs" />
+    <Compile Include="Business\ApplicationFlows.cs" />
     <Compile Include="Business\FlowFactory.cs" />
+    <Compile Include="Business\ObserverFactory.cs" />
     <Compile Include="Business\Prompter.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Business\Welcomer.cs" />
