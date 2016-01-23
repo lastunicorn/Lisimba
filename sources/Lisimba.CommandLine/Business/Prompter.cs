@@ -19,7 +19,7 @@ using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     /// <summary>
     /// Provides a loop for reading commands from the console, parsing them and run the needed flow.

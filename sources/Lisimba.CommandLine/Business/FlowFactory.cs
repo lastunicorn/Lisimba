@@ -16,10 +16,10 @@
 
 using System;
 using DustInTheWind.ConsoleCommon.CommandModel;
-using DustInTheWind.Lisimba.Cmd.Flows;
+using DustInTheWind.Lisimba.CommandLine.Flows;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     internal class FlowFactory
     {

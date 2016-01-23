@@ -16,7 +16,7 @@
 
 using DustInTheWind.ConsoleCommon.CommandModel;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class EmptyFlow : IFlow
     {

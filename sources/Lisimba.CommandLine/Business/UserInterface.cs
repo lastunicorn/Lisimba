@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     class UserInterface
     {

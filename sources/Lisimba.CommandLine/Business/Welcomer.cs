@@ -20,7 +20,7 @@ using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common.GateManagement;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     class Welcomer
     {

@@ -19,7 +19,7 @@ using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     class UnknownFlow : IFlow
     {

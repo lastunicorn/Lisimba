@@ -16,9 +16,9 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Cmd.Flows;
+using DustInTheWind.Lisimba.CommandLine.Flows;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     internal class ApplicationFlows
     {

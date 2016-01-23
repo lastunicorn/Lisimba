@@ -20,7 +20,7 @@ using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class UpdateFlow : IFlow
     {

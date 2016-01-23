@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Cmd
+namespace DustInTheWind.Lisimba.CommandLine
 {
     internal class Program
     {

@@ -17,7 +17,7 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Common.Config;
@@ -25,7 +25,7 @@ using DustInTheWind.Lisimba.Common.GateManagement;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace DustInTheWind.Lisimba.Cmd
+namespace DustInTheWind.Lisimba.CommandLine
 {
     static class DependencyContainerSetup
     {

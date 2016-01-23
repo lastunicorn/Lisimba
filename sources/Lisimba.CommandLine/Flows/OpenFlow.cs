@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Common.Config;
 using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     class OpenFlow : IFlow
     {

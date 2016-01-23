@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
-namespace DustInTheWind.Lisimba.Cmd.Observers
+namespace DustInTheWind.Lisimba.CommandLine.Observers
 {
     class AddressBookClosingObserver : IObserver
     {

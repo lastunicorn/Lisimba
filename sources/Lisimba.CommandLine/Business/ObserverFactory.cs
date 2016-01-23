@@ -16,11 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Cmd.Observers;
+using DustInTheWind.Lisimba.CommandLine.Observers;
 using DustInTheWind.Lisimba.Common;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Cmd.Business
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     internal class ObserverFactory
     {

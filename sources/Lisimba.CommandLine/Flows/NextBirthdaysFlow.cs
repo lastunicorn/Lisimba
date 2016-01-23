@@ -24,7 +24,7 @@ using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Comparers;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     class NextBirthdaysFlow : IFlow
     {

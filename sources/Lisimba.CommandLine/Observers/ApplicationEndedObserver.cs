@@ -15,10 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Cmd.Business;
+using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba.Cmd.Observers
+namespace DustInTheWind.Lisimba.CommandLine.Observers
 {
     class ApplicationEndedObserver : IObserver
     {

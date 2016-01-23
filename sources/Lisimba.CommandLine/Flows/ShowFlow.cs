@@ -24,7 +24,7 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Cmd.Flows
+namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     class ShowFlow : IFlow
     {
