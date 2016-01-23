@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2015 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -22,25 +22,22 @@ using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Common
 {
-    public class ApplicationStartedObserver : IObserver
+    public class InitialCatalogOpener
     {
-        private readonly LisimbaApplication lisimbaApplication;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ProgramArguments programArguments;
         private readonly IApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
         private readonly AvailableGates availableGates;
 
-        public ApplicationStartedObserver(LisimbaApplication lisimbaApplication, OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
+        public InitialCatalogOpener(OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
             IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
         {
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.lisimbaApplication = lisimbaApplication;
             this.openedAddressBooks = openedAddressBooks;
             this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
@@ -48,22 +45,7 @@ namespace DustInTheWind.Lisimba.Common
             this.availableGates = availableGates;
         }
 
-        public void Start()
-        {
-            lisimbaApplication.Started += HandleLisimbaApplicationStarted;
-        }
-
-        public void Stop()
-        {
-            lisimbaApplication.Started -= HandleLisimbaApplicationStarted;
-        }
-
-        private void HandleLisimbaApplicationStarted(object sender, EventArgs eventArgs)
-        {
-            OpenInitialCatalog();
-        }
-
-        private void OpenInitialCatalog()
+        public void OpenInitialCatalog()
         {
             AddressBookLocationInfo fileNameToOpenAtLoad = GetFileInfoToInitiallyOpen();
 

@@ -25,19 +25,23 @@ namespace DustInTheWind.Lisimba.Cmd
     {
         public void Run(string[] args)
         {
+            // Create dependency container.
             UnityContainer container = DependencyContainerSetup.CreateContainer();
-
+            
+            // Initialize the user interface.
             UserInterface userInterface = container.Resolve<UserInterface>();
             userInterface.Initialize();
 
-            LisimbaApplication lisimbaApplication = container.Resolve<LisimbaApplication>();
-            lisimbaApplication.Start();
+            // Start the back end.
+            ApplicationBackEnd applicationBackEnd = container.Resolve<ApplicationBackEnd>();
+            applicationBackEnd.Start();
 
             GC.Collect();
             GC.Collect();
             GC.Collect();
 
-            userInterface.RunPrompter();
+            // Wait for user input.
+            userInterface.Start();
         }
     }
 }

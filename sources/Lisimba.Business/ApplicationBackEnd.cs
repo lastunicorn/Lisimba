@@ -22,10 +22,10 @@ namespace DustInTheWind.Lisimba.Common
 {
     /// <summary>
     /// - announces start/stop
-    /// - does some action when app starts.
     /// </summary>
-    public class LisimbaApplication
+    public class ApplicationBackEnd
     {
+        private readonly InitialCatalogOpener initialCatalogOpener;
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
         public event EventHandler EndCanceled;
@@ -33,8 +33,12 @@ namespace DustInTheWind.Lisimba.Common
 
         public List<IObserver> Observers { get; private set; }
 
-        public LisimbaApplication()
+        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener)
         {
+            if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
+
+            this.initialCatalogOpener = initialCatalogOpener;
+
             Observers = new List<IObserver>();
         }
 
@@ -42,6 +46,8 @@ namespace DustInTheWind.Lisimba.Common
         {
             foreach (IObserver observer in Observers)
                 observer.Start();
+
+            initialCatalogOpener.OpenInitialCatalog();
 
             OnStarted();
         }

@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.Cmd.Business
 
         public void Initialize()
         {
-            welcomer.Welcome();
+            welcomer.SayWelcome();
 
             if (observers == null)
                 observers = observerFactory.CreateObservers();
@@ -50,11 +50,17 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 observer.Start();
         }
 
-        public void RunPrompter()
+        /// <summary>
+        /// Starts to process the user input.
+        /// </summary>
+        public void Start()
         {
             prompter.Run();
         }
 
+        /// <summary>
+        /// Stops processing the user input.
+        /// </summary>
         public void Stop()
         {
             prompter.Stop();
@@ -64,6 +70,8 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 foreach (IObserver observer in observers)
                     observer.Stop();
             }
+
+            welcomer.SayGoodBye();
         }
     }
 }

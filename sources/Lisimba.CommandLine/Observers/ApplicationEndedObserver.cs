@@ -15,44 +15,38 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Properties;
 using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
     class ApplicationEndedObserver : IObserver
     {
-        private readonly EnhancedConsole console;
-        private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationBackEnd applicationBackEnd;
         private readonly UserInterface userInterface;
 
-        public ApplicationEndedObserver(EnhancedConsole console, LisimbaApplication lisimbaApplication, UserInterface userInterface)
+        public ApplicationEndedObserver(ApplicationBackEnd applicationBackEnd, UserInterface userInterface)
         {
-            if (console == null) throw new ArgumentNullException("console");
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.console = console;
-            this.lisimbaApplication = lisimbaApplication;
+            this.applicationBackEnd = applicationBackEnd;
             this.userInterface = userInterface;
         }
 
         public void Start()
         {
-            lisimbaApplication.Ended += HandleLisimbaApplicationEnded;
+            applicationBackEnd.Ended += HandleApplicationBackEndEnded;
         }
 
         public void Stop()
         {
-            lisimbaApplication.Ended -= HandleLisimbaApplicationEnded;
+            applicationBackEnd.Ended -= HandleApplicationBackEndEnded;
         }
 
-        private void HandleLisimbaApplicationEnded(object sender, EventArgs eventArgs)
+        private void HandleApplicationBackEndEnded(object sender, EventArgs eventArgs)
         {
             userInterface.Stop();
-            console.WriteLineNormal(Resources.GoodByeMessage);
         }
     }
 }

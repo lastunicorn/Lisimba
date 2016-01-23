@@ -41,7 +41,6 @@ namespace DustInTheWind.Lisimba.Cmd.Business
                 unityContainer.Resolve<AddressBookSavedObserver>(),
                 unityContainer.Resolve<AddressBookClosingObserver>(),
                 unityContainer.Resolve<AddressBookClosedObserver>(),
-                unityContainer.Resolve<ApplicationStartedObserver>(),
                 unityContainer.Resolve<ApplicationEndedObserver>()
             };
         }

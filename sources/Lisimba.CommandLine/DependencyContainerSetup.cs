@@ -93,7 +93,7 @@ namespace DustInTheWind.Lisimba.Cmd
         {
             container.RegisterInstance(container);
 
-            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationBackEnd>(new ContainerControlledLifetimeManager());
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
