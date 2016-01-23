@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
 using System.IO;
+using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Common.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -29,6 +29,7 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
     public class OpenedAddressBooks
     {
         private readonly RecentFiles recentFiles;
+        private readonly AvailableGates availableGates;
         private AddressBookShell current;
         private Contact contact;
 
@@ -37,8 +38,9 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
 
         public event EventHandler<AddressBookOpenedEventArgs> AddressBookOpened;
         public event EventHandler AddressBookSaved;
-        public event CancelEventHandler AddressBookClosing;
+        public event EventHandler<AddressBookClosingEventArgs> AddressBookClosing;
         public event EventHandler<AddressBookClosedEventArgs> AddressBookClosed;
+        public event EventHandler<NewLocationNeededEventArgs> NewLocationNeeded;
 
         public AddressBookShell Current
         {
@@ -70,11 +72,13 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
             }
         }
 
-        public OpenedAddressBooks(RecentFiles recentFiles)
+        public OpenedAddressBooks(RecentFiles recentFiles, AvailableGates availableGates)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.recentFiles = recentFiles;
+            this.availableGates = availableGates;
         }
 
         protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
@@ -101,9 +105,9 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
                 handler(this, EventArgs.Empty);
         }
 
-        protected virtual void OnClosing(CancelEventArgs e)
+        protected virtual void OnClosing(AddressBookClosingEventArgs e)
         {
-            CancelEventHandler handler = AddressBookClosing;
+            EventHandler<AddressBookClosingEventArgs> handler = AddressBookClosing;
 
             if (handler != null)
                 handler(this, e);
@@ -189,16 +193,51 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
             recentFiles.AddRecentFile(fileFullPath, gate);
         }
 
+        //public bool CloseAddressBook()
+        //{
+        //    if (Current == null)
+        //        return true;
+
+        //    CancelEventArgs eva = new CancelEventArgs();
+        //    OnClosing(eva);
+
+        //    if (eva.Cancel)
+        //        return false;
+
+        //    AddressBookShell oldAddressBookShell = Current;
+
+        //    oldAddressBookShell.Saved -= HandleAddressBookShellSaved;
+
+        //    Contact = null;
+        //    Current = null;
+
+        //    OnClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
+
+        //    return true;
+        //}
+
         public bool CloseAddressBook()
         {
             if (Current == null)
                 return true;
 
-            CancelEventArgs eva = new CancelEventArgs();
+            bool addressBookNeedsSave = Current.Status == AddressBookStatus.Modified;
+            AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(addressBookNeedsSave, Current);
             OnClosing(eva);
 
             if (eva.Cancel)
                 return false;
+
+            if (eva.SaveAddressBook == null)
+                throw new LisimbaException("Cannot close current address book. It has unsaved modifications.");
+
+            if (eva.SaveAddressBook.Value)
+            {
+                bool allowToContinue = TrySaveAddressBook();
+
+                if (!allowToContinue)
+                    return false;
+            }
 
             AddressBookShell oldAddressBookShell = Current;
 
@@ -210,6 +249,39 @@ namespace DustInTheWind.Lisimba.Common.AddressBookManagement
             OnClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
 
             return true;
+        }
+
+        private bool TrySaveAddressBook()
+        {
+            if (Current.Location == null)
+            {
+                NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs { AddressBook = current };
+                OnNewLocationNeeded(eva);
+
+                string newLocation = eva.NewLocation;
+
+                if (eva.Cancel)
+                    return false;
+
+                if (Current.Gate == null)
+                    Current.SaveAddressBook(newLocation, availableGates.DefaultGate);
+                else
+                    Current.SaveAddressBook(newLocation);
+            }
+            else
+            {
+                Current.SaveAddressBook();
+            }
+
+            return true;
+        }
+
+        protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
+        {
+            EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
+
+            if (handler != null)
+                handler(this, e);
         }
     }
 }

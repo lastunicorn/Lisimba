@@ -19,7 +19,7 @@ using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Cmd.Business;
-using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 

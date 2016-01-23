@@ -7,8 +7,8 @@
     <ProjectGuid>{AFE9DB0D-D0D6-433C-ABBF-E58C9FA61276}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DustInTheWind.Lisimba.Cmd</RootNamespace>
-    <AssemblyName>DustInTheWind.Lisimba.Cmd</AssemblyName>
+    <RootNamespace>DustInTheWind.Lisimba.CommandLine</RootNamespace>
+    <AssemblyName>DustInTheWind.Lisimba.CommandLine</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="AddressBookManagement\AddressBookChangedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
+    <Compile Include="AddressBookManagement\AddressBookClosingEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenResult.cs" />
+    <Compile Include="AddressBookManagement\NewLocationNeededEventArgs.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="InitialCatalogOpener.cs" />

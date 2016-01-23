@@ -15,12 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Common.GateManagement;
 
 namespace DustInTheWind.Lisimba.Cmd.Observers
 {
@@ -28,69 +26,47 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
     {
         private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
 
-        public AddressBookClosingObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public AddressBookClosingObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.console = console;
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
         }
 
         public void Start()
         {
             openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
+            openedAddressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
         }
 
         public void Stop()
         {
             openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
+            openedAddressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
         }
 
-        private void HandleAddressBookClosing(object sender, CancelEventArgs e)
+        private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
         {
-            bool allowToContinue = EnsureAddressBookIsSaved();
-
-            if (!allowToContinue)
-                e.Cancel = true;
-        }
-
-        /// <returns><c>true</c> if it is allowed to continue; false otherwise.</returns>
-        public bool EnsureAddressBookIsSaved()
-        {
-            if (openedAddressBooks.Current == null || openedAddressBooks.Current.Status != AddressBookStatus.Modified)
-                return true;
-
-            bool? needToSave = AskToSaveAddressBook();
-
-            if (needToSave == null)
-                return false;
-
-            if (!needToSave.Value)
-                return true;
-
-            if (openedAddressBooks.Current.Location == null)
+            if (e.AddressBook.Status == AddressBookStatus.Modified)
             {
-                string newLocation = AskForNewLocation();
+                bool? needToSave = AskToSaveAddressBook();
 
-                if (newLocation == null)
-                    return false;
-
-                if (openedAddressBooks.Current.Gate == null)
-                    openedAddressBooks.Current.SaveAddressBook(newLocation, availableGates.DefaultGate);
+                if (needToSave == null)
+                {
+                    e.Cancel = true;
+                }
                 else
-                    openedAddressBooks.Current.SaveAddressBook(newLocation);
+                {
+                    e.SaveAddressBook = needToSave.Value;
+                }
             }
             else
             {
-                openedAddressBooks.Current.SaveAddressBook();
+                e.SaveAddressBook = false;
             }
-
-            return true;
         }
 
         public bool? AskToSaveAddressBook()
@@ -111,6 +87,16 @@ namespace DustInTheWind.Lisimba.Cmd.Observers
                 default:
                     return null;
             }
+        }
+
+        private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
+        {
+            string newLocation = AskForNewLocation();
+
+            if (string.IsNullOrEmpty(newLocation))
+                e.Cancel = true;
+            else
+                e.NewLocation = newLocation;
         }
 
         public string AskForNewLocation()

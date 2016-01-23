@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.Lisimba.Cmd.Properties;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Common;
 using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
