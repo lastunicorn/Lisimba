@@ -15,27 +15,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     class UserInterface
     {
         private readonly Prompter prompter;
-        private readonly ObserverFactory observerFactory;
+        private readonly ActiveObservers activeObservers;
         private readonly Welcomer welcomer;
 
-        private List<IObserver> observers;
-
-        public UserInterface(Prompter prompter, ObserverFactory observerFactory, Welcomer welcomer)
+        public UserInterface(Prompter prompter, ActiveObservers activeObservers, Welcomer welcomer)
         {
             if (prompter == null) throw new ArgumentNullException("prompter");
-            if (observerFactory == null) throw new ArgumentNullException("observerFactory");
+            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
             if (welcomer == null) throw new ArgumentNullException("welcomer");
 
             this.prompter = prompter;
-            this.observerFactory = observerFactory;
+            this.activeObservers = activeObservers;
             this.welcomer = welcomer;
         }
 
@@ -43,11 +39,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         {
             welcomer.SayWelcome();
 
-            if (observers == null)
-                observers = observerFactory.CreateObservers();
-
-            foreach (IObserver observer in observers)
-                observer.Start();
+            activeObservers.Start();
         }
 
         /// <summary>
@@ -64,12 +56,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         public void Stop()
         {
             prompter.Stop();
-
-            if (observers != null)
-            {
-                foreach (IObserver observer in observers)
-                    observer.Stop();
-            }
+            activeObservers.Stop();
 
             welcomer.SayGoodBye();
         }
