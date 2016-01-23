@@ -40,6 +40,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="AddressBookManagement\AddressBookChangedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosingEventArgs.cs" />

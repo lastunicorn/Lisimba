@@ -22,7 +22,7 @@ using System.Reflection;
 
 [assembly: AssemblyCompany("Dust in the Wind")]
 [assembly: AssemblyProduct("Lisimba")]
-[assembly: AssemblyCopyright("Copyright © Dust in the Wind 2007-2015")]
+[assembly: AssemblyCopyright("Copyright © Dust in the Wind 2007-2016")]
 [assembly: AssemblyTrademark("")]
 
 // Version information for an assembly consists of the following four values:
