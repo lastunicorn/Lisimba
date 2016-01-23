@@ -31,22 +31,15 @@ namespace DustInTheWind.Lisimba.Common
         public event EventHandler EndCanceled;
         public event EventHandler Ended;
 
-        public List<IObserver> Observers { get; private set; }
-
         public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
 
             this.initialCatalogOpener = initialCatalogOpener;
-
-            Observers = new List<IObserver>();
         }
 
         public void Start()
         {
-            foreach (IObserver observer in Observers)
-                observer.Start();
-
             initialCatalogOpener.OpenInitialCatalog();
 
             OnStarted();
@@ -58,16 +51,9 @@ namespace DustInTheWind.Lisimba.Common
             OnEnding(args);
 
             if (args.Cancel)
-            {
                 OnEndCanceled();
-            }
             else
-            {
-                foreach (IObserver observer in Observers)
-                    observer.Stop();
-
                 OnEnded();
-            }
         }
 
         protected virtual void OnStarted()
