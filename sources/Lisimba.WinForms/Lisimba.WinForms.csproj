@@ -98,15 +98,15 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="DependencyContainerSetup.cs" />
-    <Compile Include="ObserversSetup.cs" />
+    <Compile Include="Setup\DependencyContainerSetup.cs" />
+    <Compile Include="Setup\ObserversSetup.cs" />
     <Compile Include="Observers\AddressBookClosedObserver.cs" />
     <Compile Include="Observers\AddressBookClosingObserver.cs" />
     <Compile Include="Observers\AddressBookOpenedObserver.cs" />
     <Compile Include="Observers\ApplicationEndingObserver.cs" />
     <Compile Include="Observers\AddressBookSavedObserver.cs" />
-    <Compile Include="Observers\BirthdaysInfo.cs" />
-    <Compile Include="Services\ActiveObservers.cs" />
+    <Compile Include="Services\BirthdaysInfo.cs" />
+    <Compile Include="Setup\OperationsSetup.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>
@@ -164,7 +164,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\CommandPool.cs" />
+    <Compile Include="Services\AvailableOperations.cs" />
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
     <Compile Include="Operations\SaveAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeByNicknameOrNameComparer.cs" />

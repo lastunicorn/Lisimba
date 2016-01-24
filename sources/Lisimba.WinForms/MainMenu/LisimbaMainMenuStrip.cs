@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.MainMenu
@@ -28,29 +29,29 @@ namespace DustInTheWind.Lisimba.MainMenu
             InitializeComponent();
         }
 
-        public void Initialize(CommandPool commandPool, RecentFiles recentFiles)
+        public void Initialize(AvailableOperations availableOperations, RecentFiles recentFiles)
         {
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             recentFiles.FileNameAdded += HandleRecentFileNameAdded;
 
-            toolStripMenuItem_File_New.ViewModel = commandPool.NewAddressBookOperation;
-            toolStripMenuItem_File_Open.ViewModel = commandPool.OpenAddressBookOperation;
-            toolStripMenuItem_File_Save.ViewModel = commandPool.SaveAddressBookOperation;
-            toolStripMenuItem_File_SaveAs.ViewModel = commandPool.SaveAsAddressBookOperation;
-            toolStripMenuItem_File_Close.ViewModel = commandPool.CloseAddressBookOperation;
+            toolStripMenuItem_File_New.ViewModel = availableOperations.GetOperation<NewAddressBookOperation>();
+            toolStripMenuItem_File_Open.ViewModel = availableOperations.GetOperation<OpenAddressBookOperation>();
+            toolStripMenuItem_File_Save.ViewModel = availableOperations.GetOperation<SaveAddressBookOperation>();
+            toolStripMenuItem_File_SaveAs.ViewModel = availableOperations.GetOperation<SaveAsAddressBookOperation>();
+            toolStripMenuItem_File_Close.ViewModel = availableOperations.GetOperation<CloseAddressBookOperation>();
             toolStripMenuItem_File_Export.ShortDescription = "Export current opened address book in another format.";
-            //toolStripMenuItem_ExportToYahooCSV.ViewModel = commandPool.ExportYahooCsvOperation;
+            //toolStripMenuItem_ExportToYahooCSV.ViewModel = AvailableOperations.ExportYahooCsvOperation;
             toolStripMenuItem_File_Import.ShortDescription = "Import address book from another format.";
-            //toolStripMenuItem_ImportFromYahooCSV.ViewModel = commandPool.ImportYahooCsvOperation;
-            toolStripMenuItem_File_Exit.ViewModel = commandPool.ApplicationExitOperation;
-            toolStripMenuItem_AddressBook_AddContact.ViewModel = commandPool.NewContactOperation;
-            toolStripMenuItem_AddressBook_DeleteContact.ViewModel = commandPool.DeleteCurrentContactOperation;
-            toolStripMenuItem_AddressBook_Properties.ViewModel = commandPool.ShowAddressBookPropertiesOperation;
-            toolStripMenuItem_Help_About.ViewModel = commandPool.ShowAboutOperation;
+            //toolStripMenuItem_ImportFromYahooCSV.ViewModel = AvailableOperations.ImportYahooCsvOperation;
+            toolStripMenuItem_File_Exit.ViewModel = availableOperations.GetOperation<ApplicationExitOperation>();
+            toolStripMenuItem_AddressBook_AddContact.ViewModel = availableOperations.GetOperation<NewContactOperation>();
+            toolStripMenuItem_AddressBook_DeleteContact.ViewModel = availableOperations.GetOperation<DeleteCurrentContactOperation>();
+            toolStripMenuItem_AddressBook_Properties.ViewModel = availableOperations.GetOperation<ShowAddressBookPropertiesOperation>();
+            toolStripMenuItem_Help_About.ViewModel = availableOperations.GetOperation<ShowAboutOperation>();
 
-            toolStripMenuItem_File_RecentFiles.ChildrenOpertion = commandPool.OpenAddressBookOperation;
+            toolStripMenuItem_File_RecentFiles.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
             toolStripMenuItem_File_RecentFiles.RecentFiles = recentFiles;
             toolStripMenuItem_File_RecentFiles.RefreshRecentFilesMenu();
         }

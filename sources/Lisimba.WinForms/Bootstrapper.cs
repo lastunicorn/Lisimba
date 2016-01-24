@@ -17,6 +17,7 @@
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Setup;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba
@@ -31,6 +32,9 @@ namespace DustInTheWind.Lisimba
 
             ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
             ObserversSetup.Configure(activeObservers, unityContainer);
+
+            AvailableOperations availableOperations = unityContainer.Resolve<AvailableOperations>();
+            OperationsSetup.Configure(availableOperations, unityContainer);
 
             InitializeProgramArguments(args);
             StartBackEnd();

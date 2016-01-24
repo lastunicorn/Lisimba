@@ -229,15 +229,18 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (eva.Cancel)
                 return false;
 
-            if (eva.SaveAddressBook == null)
-                throw new LisimbaException("Cannot close current address book. It has unsaved modifications.");
-
-            if (eva.SaveAddressBook.Value)
+            if (addressBookNeedsSave)
             {
-                bool allowToContinue = TrySaveAddressBook();
+                if (eva.SaveAddressBook == null)
+                    throw new LisimbaException("Cannot close current address book. It has unsaved modifications.");
 
-                if (!allowToContinue)
-                    return false;
+                if (eva.SaveAddressBook.Value)
+                {
+                    bool allowToContinue = TrySaveAddressBook();
+
+                    if (!allowToContinue)
+                        return false;
+                }
             }
 
             AddressBookShell oldAddressBookShell = Current;

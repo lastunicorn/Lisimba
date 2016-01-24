@@ -22,12 +22,11 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Setup
 {
     static class DependencyContainerSetup
     {
@@ -74,8 +73,8 @@ namespace DustInTheWind.Lisimba
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationBackEnd>(new ContainerControlledLifetimeManager());
-
-            container.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
+            container.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
         }

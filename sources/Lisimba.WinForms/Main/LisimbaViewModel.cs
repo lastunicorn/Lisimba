@@ -97,14 +97,14 @@ namespace DustInTheWind.Lisimba.Main
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
-            CommandPool commandPool, AvailableGates availableGates)
+            AvailableOperations availableOperations, AvailableGates availableGates)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.applicationBackEnd = applicationBackEnd;
@@ -114,8 +114,8 @@ namespace DustInTheWind.Lisimba.Main
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
-            NewAddressBookOperation = commandPool.NewAddressBookOperation;
-            OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
+            NewAddressBookOperation = availableOperations.GetOperation<NewAddressBookOperation>();
+            OpenAddressBookOperation = availableOperations.GetOperation<OpenAddressBookOperation>();
 
             availableGates.GateChanged += HandleDefaultGateChanged;
 

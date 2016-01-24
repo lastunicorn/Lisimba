@@ -24,18 +24,21 @@ namespace DustInTheWind.Lisimba.Operations
     internal class CloseAddressBookOperation : ExecutableViewModelBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.CloseCurrentAddressBookOperationDescription; }
         }
 
-        public CloseAddressBookOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus)
+        public CloseAddressBookOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
             : base(applicationStatus)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.openedAddressBooks = openedAddressBooks;
+            this.userInterface = userInterface;
             openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
 
             IsEnabled = openedAddressBooks.Current != null;
@@ -48,7 +51,14 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.CloseAddressBook();
+            try
+            {
+                openedAddressBooks.CloseAddressBook();
+            }
+            catch (Exception ex)
+            {
+                userInterface.DisplayError(ex.Message);
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, CommandPool commandPool)
+        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, AvailableOperations availableOperations)
         {
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
@@ -51,7 +51,7 @@ namespace DustInTheWind.Lisimba.Main
             this.applicationBackEnd = applicationBackEnd;
             this.userInterface = userInterface;
 
-            ApplicationExitOperation = commandPool.ApplicationExitOperation;
+            ApplicationExitOperation = availableOperations.GetOperation<ApplicationExitOperation>();
         }
 
         private void HandleApplicationBackEndEnding(object sender, CancelEventArgs cancelEventArgs)

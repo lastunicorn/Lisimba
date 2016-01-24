@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -27,17 +26,14 @@ namespace DustInTheWind.Lisimba.Observers
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
-        private readonly AvailableGates availableGates;
 
-        public AddressBookClosingObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, AvailableGates availableGates)
+        public AddressBookClosingObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
-            this.availableGates = availableGates;
         }
 
         public void Start()

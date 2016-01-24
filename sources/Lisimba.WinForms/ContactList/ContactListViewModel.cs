@@ -69,17 +69,17 @@ namespace DustInTheWind.Lisimba.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
+        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, AvailableOperations availableOperations)
         {
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
 
             this.applicationConfiguration = applicationConfiguration;
             this.openedAddressBooks = openedAddressBooks;
 
-            NewContactOperation = commandPool.NewContactOperation;
-            DeleteCurrentContactOperation = commandPool.DeleteCurrentContactOperation;
+            NewContactOperation = availableOperations.GetOperation<NewContactOperation>();
+            DeleteCurrentContactOperation = availableOperations.GetOperation<DeleteCurrentContactOperation>();
 
             SortingMethods = new List<SortingComboBoxItem>
             {

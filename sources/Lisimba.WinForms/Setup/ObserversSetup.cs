@@ -18,7 +18,7 @@ using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Observers;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Setup
 {
     internal class ObserversSetup
     {

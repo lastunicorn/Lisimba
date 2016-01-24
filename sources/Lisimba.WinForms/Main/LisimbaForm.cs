@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Main
         // Lisimba - male name meaning "lion" in Zulu language.
 
         private readonly RecentFiles recentFiles;
-        private readonly CommandPool commandPool;
+        private readonly AvailableOperations availableOperations;
 
         private LisimbaViewModel viewModel;
 
@@ -48,15 +48,15 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public LisimbaForm(RecentFiles recentFiles, CommandPool commandPool)
+        public LisimbaForm(RecentFiles recentFiles, AvailableOperations availableOperations)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
 
             InitializeComponent();
 
             this.recentFiles = recentFiles;
-            this.commandPool = commandPool;
+            this.availableOperations = availableOperations;
         }
 
         private void RemoveBindings()
@@ -90,7 +90,7 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
             contactEditor1.ViewModel.View = contactEditor1;
 
-            menuStripMain.Initialize(commandPool, recentFiles);
+            menuStripMain.Initialize(availableOperations, recentFiles);
 
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatus.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
