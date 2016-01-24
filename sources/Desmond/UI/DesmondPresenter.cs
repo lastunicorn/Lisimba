@@ -23,8 +23,6 @@ namespace DustInTheWind.Desmond.UI
         private readonly IDesmondView view;
         private readonly RedEye redEye;
 
-        #region Constructor
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DesmondPresenter"/> class.
         /// </summary>
@@ -38,10 +36,6 @@ namespace DustInTheWind.Desmond.UI
             this.view = view;
             redEye = new RedEye();
         }
-
-        #endregion
-
-        #region public void StartClicked()
 
         public void StartClicked()
         {
@@ -58,10 +52,6 @@ namespace DustInTheWind.Desmond.UI
             }
         }
 
-        #endregion
-
-        #region public void StopClicked()
-
         public void StopClicked()
         {
             try
@@ -77,10 +67,6 @@ namespace DustInTheWind.Desmond.UI
             }
         }
 
-        #endregion
-
-        #region public void DisplayStarting()
-
         public void DisplayStarting()
         {
             view.ButtonStartEnabled = false;
@@ -88,10 +74,6 @@ namespace DustInTheWind.Desmond.UI
             view.LedState = LedState.Yellow;
             view.StatusText = "Starting...";
         }
-
-        #endregion
-
-        #region public void DisplayStarted()
 
         public void DisplayStarted()
         {
@@ -101,10 +83,6 @@ namespace DustInTheWind.Desmond.UI
             view.StatusText = "Started";
         }
 
-        #endregion
-
-        #region public void DisplayStopping()
-
         public void DisplayStopping()
         {
             view.ButtonStartEnabled = false;
@@ -113,10 +91,6 @@ namespace DustInTheWind.Desmond.UI
             view.StatusText = "Stopping...";
         }
 
-        #endregion
-
-        #region public void DisplayStopped()
-
         public void DisplayStopped()
         {
             view.ButtonStartEnabled = true;
@@ -124,7 +98,5 @@ namespace DustInTheWind.Desmond.UI
             view.LedState = LedState.Red;
             view.StatusText = "Stopped";
         }
-
-        #endregion
     }
 }
