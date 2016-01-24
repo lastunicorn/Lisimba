@@ -36,14 +36,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationFlows.cs" />
     <Compile Include="CommandModel\ConsoleCommand.cs" />
     <Compile Include="CommandModel\CommandSplitter.cs" />
+    <Compile Include="IFlowFactory.cs" />
     <Compile Include="Templating\ConsoleTemplate.cs" />
     <Compile Include="CommandModel\IFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Templating\TemplateElement.cs" />
     <Compile Include="Templating\TemplateElementType.cs" />
-    <Compile Include="TextColorType.cs" />
+    <Compile Include="TextType.cs" />
     <Compile Include="EnhancedConsole.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

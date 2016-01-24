@@ -1,0 +1,73 @@
+﻿// Lisimba
+// Copyright (C) 2007-2016 Dust in the Wind
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace DustInTheWind.Lisimba.ContactEdit
+{
+    public partial class ContactDetailsListItem : UserControl
+    {
+        public Image Image
+        {
+            get { return pictureBox1.Image; }
+            set { pictureBox1.Image = value; }
+        }
+        public Image AddButtonImage
+        {
+            get { return buttonAdd.Image; }
+            set { buttonAdd.Image = value; }
+        }
+
+        public string Title
+        {
+            get { return labelTitle.Text; }
+            set { labelTitle.Text = value; }
+        }
+
+        public event EventHandler AddButtonClicked
+        {
+            add { buttonAdd.Click += value; }
+            remove { buttonAdd.Click -= value; }
+        }
+
+        public ContactDetailsListItem()
+        {
+            InitializeComponent();
+        }
+
+        public void AddItem()
+        {
+            Label label1 = new Label
+            {
+                Text = "some text here",
+                Dock = DockStyle.Top,
+                BackColor = Color.DarkSalmon,
+                Size = new Size(1, 1),
+                AutoSize = true
+            };
+
+            Controls.Add(label1);
+            Controls.SetChildIndex(label1, 0);
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            AddItem();
+        }
+    }
+}

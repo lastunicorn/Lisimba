@@ -1,5 +1,5 @@
 ﻿// Lisimba
-// Copyright (C) 2007-2015 Dust in the Wind
+// Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
 
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.Book;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using Lisimba.ZodiacSigns.Properties;
 
 namespace Lisimba.ZodiacSigns
