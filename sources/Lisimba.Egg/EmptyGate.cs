@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Exceptions;
+using DustInTheWind.Lisimba.Egg.Properties;
 
 namespace DustInTheWind.Lisimba.Egg
 {
@@ -37,7 +38,7 @@ namespace DustInTheWind.Lisimba.Egg
 
         public string Description
         {
-            get { return "A Gate that knows nothing, does nothing. It just exists."; }
+            get { return Resources.EmptyGate_Description; }
         }
 
         public EmptyGate()
@@ -47,12 +48,12 @@ namespace DustInTheWind.Lisimba.Egg
 
         public AddressBook Load(string fileName)
         {
-            throw new EggException("EmptyGate cannot open anything.");
+            throw new EggException(Resources.EmptyGate_LoadError);
         }
 
         public void Save(AddressBook addressBook, string fileName)
         {
-            throw new EggException("EmptyGate cannot save anything.");
+            throw new EggException(Resources.EmptyGate_SaveError);
         }
     }
 }
