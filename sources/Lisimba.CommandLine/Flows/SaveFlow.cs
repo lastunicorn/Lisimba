@@ -17,10 +17,10 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Common.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

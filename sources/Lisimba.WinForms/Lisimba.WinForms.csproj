@@ -202,7 +202,6 @@
     <Compile Include="ContactEdit\WebSiteEditForm.Designer.cs">
       <DependentUpon>WebSiteEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\LisimbaApplication.cs" />
     <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />
     <Compile Include="Services\UserInterface.cs" />

@@ -16,8 +16,10 @@
 
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Reflection;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Business
 {
     /// <summary>
     /// - announces start/stop
@@ -25,10 +27,28 @@ namespace DustInTheWind.Lisimba.Common
     public class ApplicationBackEnd
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
+
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
         public event EventHandler EndCanceled;
         public event EventHandler Ended;
+
+        public string ProgramName
+        {
+            get
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                AssemblyName assemblyName = assembly.GetName();
+
+                string version = assemblyName.Version.Build == 0
+                    ? assemblyName.Version.ToString(2)
+                    : assemblyName.Version.ToString(3);
+
+                FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
+
+                return string.Format("{0} {1}", fileVersionInfo.ProductName, version);
+            }
+        }
 
         public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener)
         {

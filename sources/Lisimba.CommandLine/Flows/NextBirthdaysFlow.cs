@@ -19,8 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Comparers;
 

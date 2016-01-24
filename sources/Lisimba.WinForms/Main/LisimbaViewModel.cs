@@ -15,15 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
-using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
-using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba.Main
 {
@@ -31,7 +29,7 @@ namespace DustInTheWind.Lisimba.Main
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
-        private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationBackEnd applicationBackEnd;
 
         private string title;
         private string statusText;
@@ -85,16 +83,16 @@ namespace DustInTheWind.Lisimba.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
+            ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
 
-            this.lisimbaApplication = lisimbaApplication;
+            this.applicationBackEnd = applicationBackEnd;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
 
@@ -166,12 +164,12 @@ namespace DustInTheWind.Lisimba.Main
         private string BuildFormTitle()
         {
             if (openedAddressBooks.Current == null)
-                return lisimbaApplication.ProgramName;
+                return applicationBackEnd.ProgramName;
 
             string addressBookName = openedAddressBooks.Current.GetFriendlyName();
             bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
             string unsavedSign = isModified ? " *" : string.Empty;
-            string programName = lisimbaApplication.ProgramName;
+            string programName = applicationBackEnd.ProgramName;
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
         }

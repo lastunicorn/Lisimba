@@ -15,10 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Common.Config;
+using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Business.RecentFilesManagement
 {
     /// <summary>
     /// Manages a list of n most recent files opened by the application.

@@ -15,9 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Configuration;
-using DustInTheWind.Lisimba.Common.ConfigSection;
+using DustInTheWind.Lisimba.Business.ConfigSection;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Business.Config
 {
     internal class ConfigurationFile
     {

@@ -15,12 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Common.Config;
-using DustInTheWind.Lisimba.Common.GateManagement;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.ArgumentsManagement;
+using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Business
 {
     public class InitialCatalogOpener
     {

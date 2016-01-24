@@ -16,7 +16,7 @@
 
 using System.Configuration;
 
-namespace DustInTheWind.Lisimba.Common.ConfigSection
+namespace DustInTheWind.Lisimba.Business.ConfigSection
 {
     public class LoadFileAtStartConfigElement : ConfigurationElement
     {

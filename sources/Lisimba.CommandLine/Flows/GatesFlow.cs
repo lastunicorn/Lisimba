@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
-using DustInTheWind.Lisimba.Common.GateManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

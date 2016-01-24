@@ -16,9 +16,9 @@
 
 using System;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
 {

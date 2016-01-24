@@ -15,32 +15,57 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
-using DustInTheWind.Lisimba.Common;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine
 {
     internal class Bootstrapper
     {
+        private UnityContainer unityContainer;
+        private UserInterface userInterface;
+
         public void Run(string[] args)
         {
-            // Create dependency container.
-            UnityContainer container = DependencyContainerSetup.CreateContainer();
-            
-            // Initialize the user interface.
-            UserInterface userInterface = container.Resolve<UserInterface>();
-            userInterface.Initialize();
+            unityContainer = DependencyContainerSetup.CreateContainer();
 
-            // Start the back end.
-            ApplicationBackEnd applicationBackEnd = container.Resolve<ApplicationBackEnd>();
+            InitializeProgramArguments(args);
+
+            userInterface = CreatreAndInitializeUserInterface();
+
+            StartBackEnd();
+
+            GC.Collect();
+            GC.Collect();
+            GC.Collect();
+
+            WaitForUserInput();
+        }
+
+        private void InitializeProgramArguments(string[] args)
+        {
+            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
+            programArguments.Initialize(args);
+        }
+
+        private UserInterface CreatreAndInitializeUserInterface()
+        {
+            UserInterface newUserInterface = unityContainer.Resolve<UserInterface>();
+            newUserInterface.Initialize();
+
+            return newUserInterface;
+        }
+
+        private void StartBackEnd()
+        {
+            ApplicationBackEnd applicationBackEnd = unityContainer.Resolve<ApplicationBackEnd>();
             applicationBackEnd.Start();
+        }
 
-            GC.Collect();
-            GC.Collect();
-            GC.Collect();
-
-            // Wait for user input.
+        private void WaitForUserInput()
+        {
             userInterface.Start();
         }
     }

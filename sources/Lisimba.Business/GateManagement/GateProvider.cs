@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Common.GateManagement
+namespace DustInTheWind.Lisimba.Business.GateManagement
 {
     public class GateProvider
     {

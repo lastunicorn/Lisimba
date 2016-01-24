@@ -15,9 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
-using DustInTheWind.Lisimba.Common.ConfigSection;
+using DustInTheWind.Lisimba.Business.ConfigSection;
+using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 
-namespace DustInTheWind.Lisimba.Common.Config
+namespace DustInTheWind.Lisimba.Business.Config
 {
     public class ApplicationConfiguration : IApplicationConfiguration
     {

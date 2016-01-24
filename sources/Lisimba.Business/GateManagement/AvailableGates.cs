@@ -16,11 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Common.Config;
-using DustInTheWind.Lisimba.Common.Properties;
+using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg;
 
-namespace DustInTheWind.Lisimba.Common.GateManagement
+namespace DustInTheWind.Lisimba.Business.GateManagement
 {
     /// <summary>
     /// Manages the gates available in the application.

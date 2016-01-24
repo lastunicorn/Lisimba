@@ -16,8 +16,8 @@
 
 using System;
 using System.Linq;
-using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Services;

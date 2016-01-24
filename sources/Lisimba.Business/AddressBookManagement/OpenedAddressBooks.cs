@@ -16,12 +16,13 @@
 
 using System;
 using System.IO;
-using DustInTheWind.Lisimba.Common.GateManagement;
-using DustInTheWind.Lisimba.Common.Properties;
+using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.Properties;
+using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Common.AddressBookManagement
+namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     /// <summary>
     /// Contains and manages the opened address books.

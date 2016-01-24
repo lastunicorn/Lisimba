@@ -19,9 +19,9 @@ using System.IO;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.ConsoleCommon.Templating;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

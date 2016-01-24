@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Common;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.Business.ArgumentsManagement
 {
     internal class CommandLineArguments
     {

@@ -17,14 +17,15 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
-using DustInTheWind.Lisimba.Common;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
-using DustInTheWind.Lisimba.Common.Config;
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.ArgumentsManagement;
+using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
-using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba
 {
@@ -72,7 +73,7 @@ namespace DustInTheWind.Lisimba
             container.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
-            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationBackEnd>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<OpenAddressBookOperation>(new ContainerControlledLifetimeManager());
 

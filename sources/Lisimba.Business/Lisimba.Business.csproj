@@ -7,8 +7,8 @@
     <ProjectGuid>{878C348A-8754-4CAD-AB41-B63B3E157256}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DustInTheWind.Lisimba.Common</RootNamespace>
-    <AssemblyName>DustInTheWind.Lisimba.Common</AssemblyName>
+    <RootNamespace>DustInTheWind.Lisimba.Business</RootNamespace>
+    <AssemblyName>DustInTheWind.Lisimba.Business</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

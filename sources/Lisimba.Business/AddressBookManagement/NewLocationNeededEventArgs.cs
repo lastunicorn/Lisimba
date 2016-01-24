@@ -16,7 +16,7 @@
 
 using System.ComponentModel;
 
-namespace DustInTheWind.Lisimba.Common.AddressBookManagement
+namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     public class NewLocationNeededEventArgs : CancelEventArgs
     {

@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
 
@@ -27,21 +29,21 @@ namespace DustInTheWind.Lisimba
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
-            InitializeProgramArgumentsService(args);
-            StartApplicationMainService();
+            InitializeProgramArguments(args);
+            StartBackEnd();
             InitializeAndStartUi();
         }
 
-        private void InitializeProgramArgumentsService(string[] args)
+        private void InitializeProgramArguments(string[] args)
         {
             ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
         }
 
-        private void StartApplicationMainService()
+        private void StartBackEnd()
         {
-            LisimbaApplication lisimbaApplication = unityContainer.Resolve<LisimbaApplication>();
-            lisimbaApplication.Start();
+            ApplicationBackEnd applicationBackEnd = unityContainer.Resolve<ApplicationBackEnd>();
+            applicationBackEnd.Start();
         }
 
         private void InitializeAndStartUi()

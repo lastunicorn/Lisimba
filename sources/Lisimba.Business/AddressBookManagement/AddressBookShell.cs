@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Common.Properties;
+using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Common.AddressBookManagement
+namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     /// <summary>
     /// Contains an opened address book and metainformation about it like the location

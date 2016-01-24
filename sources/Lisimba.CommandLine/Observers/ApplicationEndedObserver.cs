@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Business;
-using DustInTheWind.Lisimba.Common;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
 {

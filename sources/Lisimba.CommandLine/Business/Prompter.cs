@@ -17,7 +17,7 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
-using DustInTheWind.Lisimba.Common.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {

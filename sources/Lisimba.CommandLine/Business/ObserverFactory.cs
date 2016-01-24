@@ -16,8 +16,8 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Observers;
-using DustInTheWind.Lisimba.Common;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business

@@ -16,36 +16,35 @@
 
 using System;
 using System.ComponentModel;
-using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Services;
-using LisimbaApplication = DustInTheWind.Lisimba.Services.LisimbaApplication;
 
 namespace DustInTheWind.Lisimba.Observers
 {
     class ApplicationEndingObserver : IObserver
     {
-        private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationBackEnd applicationBackEnd;
         private readonly UserInterface userInterface;
 
-        public ApplicationEndingObserver(LisimbaApplication lisimbaApplication, UserInterface userInterface)
+        public ApplicationEndingObserver(ApplicationBackEnd applicationBackEnd, UserInterface userInterface)
         {
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
 
-            this.lisimbaApplication = lisimbaApplication;
+            this.applicationBackEnd = applicationBackEnd;
             this.userInterface = userInterface;
         }
 
         public void Start()
         {
-            lisimbaApplication.Ending += HandleLisimbaApplicationEnding;
+            applicationBackEnd.Ending += HandleApplicationBackEndEnding;
         }
 
         public void Stop()
         {
-            lisimbaApplication.Ending -= HandleLisimbaApplicationEnding;
+            applicationBackEnd.Ending -= HandleApplicationBackEndEnding;
         }
 
-        private void HandleLisimbaApplicationEnding(object sender, CancelEventArgs e)
+        private void HandleApplicationBackEndEnding(object sender, CancelEventArgs e)
         {
             userInterface.Exit();
         }

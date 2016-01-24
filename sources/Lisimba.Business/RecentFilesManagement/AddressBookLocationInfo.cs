@@ -17,7 +17,7 @@
 using System;
 using System.Text;
 
-namespace DustInTheWind.Lisimba.Common
+namespace DustInTheWind.Lisimba.Business.RecentFilesManagement
 {
     public class AddressBookLocationInfo
     {

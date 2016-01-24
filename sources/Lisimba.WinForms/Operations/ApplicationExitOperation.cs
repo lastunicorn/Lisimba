@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -22,24 +23,24 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class ApplicationExitOperation : ExecutableViewModelBase<object>
     {
-        private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationBackEnd applicationBackEnd;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus)
+        public ApplicationExitOperation(ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus)
             : base(applicationStatus)
         {
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
 
-            this.lisimbaApplication = lisimbaApplication;
+            this.applicationBackEnd = applicationBackEnd;
         }
 
         protected override void DoExecute(object parameter)
         {
-            lisimbaApplication.Exit();
+            applicationBackEnd.Exit();
         }
     }
 }

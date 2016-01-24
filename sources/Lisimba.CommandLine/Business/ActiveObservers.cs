@@ -16,7 +16,7 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Common;
+using DustInTheWind.Lisimba.Business;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {

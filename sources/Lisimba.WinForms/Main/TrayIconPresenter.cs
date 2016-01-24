@@ -16,6 +16,7 @@
 
 using System;
 using System.ComponentModel;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
@@ -24,7 +25,7 @@ namespace DustInTheWind.Lisimba.Main
 {
     internal class TrayIconPresenter : ViewModelBase
     {
-        private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationBackEnd applicationBackEnd;
         private readonly UserInterface userInterface;
         private TrayIcon trayIcon;
 
@@ -37,23 +38,23 @@ namespace DustInTheWind.Lisimba.Main
             {
                 trayIcon = value;
 
-                lisimbaApplication.Ending += HandleLisimbaApplicationEnding;
+                applicationBackEnd.Ending += HandleApplicationBackEndEnding;
                 TrayIcon.Visible = true;
             }
         }
 
-        public TrayIconPresenter(LisimbaApplication lisimbaApplication, UserInterface userInterface, CommandPool commandPool)
+        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, CommandPool commandPool)
         {
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.lisimbaApplication = lisimbaApplication;
+            this.applicationBackEnd = applicationBackEnd;
             this.userInterface = userInterface;
 
             ApplicationExitOperation = commandPool.ApplicationExitOperation;
         }
 
-        private void HandleLisimbaApplicationEnding(object sender, CancelEventArgs cancelEventArgs)
+        private void HandleApplicationBackEndEnding(object sender, CancelEventArgs cancelEventArgs)
         {
             TrayIcon.Visible = false;
         }

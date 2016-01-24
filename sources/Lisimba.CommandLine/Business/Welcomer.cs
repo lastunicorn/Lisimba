@@ -17,8 +17,8 @@
 using System;
 using System.Reflection;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Common.GateManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
