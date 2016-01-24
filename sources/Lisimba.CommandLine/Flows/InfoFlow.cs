@@ -22,6 +22,7 @@ using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Properties;
+using DustInTheWind.Lisimba.CommandLine.Setup;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

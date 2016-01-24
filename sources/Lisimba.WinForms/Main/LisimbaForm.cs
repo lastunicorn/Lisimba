@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Main
         private void RemoveBindings()
         {
             DataBindings.Clear();
-            toolStripStatusLabel1.DataBindings.Clear();
+            toolStripStatus.DataBindings.Clear();
             contactEditor1.DataBindings.Clear();
             panelAddressBookView.DataBindings.Clear();
 
@@ -93,7 +93,8 @@ namespace DustInTheWind.Lisimba.Main
             menuStripMain.Initialize(commandPool, recentFiles);
 
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
-            toolStripStatusLabel1.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
+            toolStripStatus.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
+            toolStripDefaultGate.Bind(x => x.Text, viewModel, x => x.DefaultGate, false, DataSourceUpdateMode.Never);
 
             contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);

@@ -21,6 +21,7 @@ using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Properties;
+using DustInTheWind.Lisimba.CommandLine.Setup;
 using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

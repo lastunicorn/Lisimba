@@ -29,8 +29,17 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     {
         private readonly IApplicationConfiguration config;
         private readonly GateProvider gateProvider;
+        private IGate defaultGate;
 
-        public IGate DefaultGate { get; set; }
+        public IGate DefaultGate
+        {
+            get { return defaultGate; }
+            set
+            {
+                defaultGate = value;
+                OnGateChanged();
+            }
+        }
 
         public string DefaultGateName
         {
@@ -41,6 +50,18 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
                     : string.Format("{0} ({1})", DefaultGate.Name, DefaultGate.Id);
             }
         }
+
+        public string DefaultGateId
+        {
+            get
+            {
+                return DefaultGate == null
+                    ? string.Empty
+                    : DefaultGate.Id;
+            }
+        }
+
+        public event EventHandler GateChanged;
 
         public AvailableGates(IApplicationConfiguration config, GateProvider gateProvider)
         {
@@ -94,6 +115,14 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
         public IEnumerable<IGate> GetAllGates()
         {
             return gateProvider.GetAllGates();
+        }
+
+        protected virtual void OnGateChanged()
+        {
+            EventHandler handler = GateChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
 using DustInTheWind.Lisimba.Operations;
@@ -28,6 +29,7 @@ namespace DustInTheWind.Lisimba.Main
     internal class LisimbaViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
         private readonly ApplicationStatus applicationStatus;
         private readonly ApplicationBackEnd applicationBackEnd;
 
@@ -36,6 +38,7 @@ namespace DustInTheWind.Lisimba.Main
 
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
+        private string defaultGate;
 
         public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
@@ -82,8 +85,19 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
+        public string DefaultGate
+        {
+            get { return defaultGate; }
+            set
+            {
+                defaultGate = value;
+                OnPropertyChanged();
+            }
+        }
+
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks, CommandPool commandPool)
+            ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
+            CommandPool commandPool, AvailableGates availableGates)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
@@ -91,15 +105,19 @@ namespace DustInTheWind.Lisimba.Main
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (commandPool == null) throw new ArgumentNullException("commandPool");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.applicationBackEnd = applicationBackEnd;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
+            this.availableGates = availableGates;
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
             NewAddressBookOperation = commandPool.NewAddressBookOperation;
             OpenAddressBookOperation = commandPool.OpenAddressBookOperation;
+
+            availableGates.GateChanged += HandleDefaultGateChanged;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
@@ -114,8 +132,19 @@ namespace DustInTheWind.Lisimba.Main
             IsContactEditVisible = openedAddressBooks.Contact != null;
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
 
+            DefaultGate = availableGates.DefaultGate == null
+                ? string.Empty
+                : availableGates.DefaultGate.Name;
+
             StatusText = applicationStatus.StatusText;
             Title = BuildFormTitle();
+        }
+
+        private void HandleDefaultGateChanged(object sender, EventArgs e)
+        {
+            DefaultGate = availableGates.DefaultGate == null
+                ? string.Empty
+                : availableGates.DefaultGate.Name;
         }
 
         private void HandleAddressBooksOpened(object sender, EventArgs e)

@@ -36,8 +36,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationFlows.cs" />
     <Compile Include="CommandModel\ConsoleCommand.cs" />
     <Compile Include="CommandModel\CommandSplitter.cs" />
+    <Compile Include="IFlowFactory.cs" />
     <Compile Include="Templating\ConsoleTemplate.cs" />
     <Compile Include="CommandModel\IFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

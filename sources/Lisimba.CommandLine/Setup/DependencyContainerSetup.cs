@@ -17,6 +17,7 @@
 using System.Configuration;
 using System.IO;
 using System.Reflection;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
@@ -26,7 +27,7 @@ using DustInTheWind.Lisimba.CommandLine.Business;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.Configuration;
 
-namespace DustInTheWind.Lisimba.CommandLine
+namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
     static class DependencyContainerSetup
     {
@@ -100,8 +101,11 @@ namespace DustInTheWind.Lisimba.CommandLine
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
             container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
+            container.RegisterType<ApplicationFlows>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
+            container.RegisterType<IFlowFactory, FlowFactory>();
         }
     }
 }

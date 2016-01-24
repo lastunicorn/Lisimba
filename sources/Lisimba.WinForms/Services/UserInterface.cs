@@ -17,6 +17,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.Properties;
@@ -36,16 +37,16 @@ namespace DustInTheWind.Lisimba.Services
             set
             {
                 if (mainWindow != null)
-                    mainWindow.Closed -= NandleMainWindowClosed;
+                    mainWindow.Closed -= HandleMainWindowClosed;
 
                 mainWindow = value;
 
                 if (mainWindow != null)
-                    mainWindow.Closed += NandleMainWindowClosed;
+                    mainWindow.Closed += HandleMainWindowClosed;
             }
         }
 
-        private void NandleMainWindowClosed(object sender, EventArgs args)
+        private void HandleMainWindowClosed(object sender, EventArgs args)
         {
             MainWindow = null;
         }

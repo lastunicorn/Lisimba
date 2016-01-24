@@ -16,11 +16,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -31,16 +29,20 @@ namespace DustInTheWind.Lisimba.Observers
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
         private readonly UserInterface userInterface;
+        private readonly BirthdaysInfo birthdaysInfo;
 
-        public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus,
+            UserInterface userInterface, BirthdaysInfo birthdaysInfo)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
             this.openedAddressBooks = openedAddressBooks;
             this.applicationStatus = applicationStatus;
             this.userInterface = userInterface;
+            this.birthdaysInfo = birthdaysInfo;
         }
 
         public void Start()
@@ -57,7 +59,7 @@ namespace DustInTheWind.Lisimba.Observers
         {
             DisplayOpenSuccessMessage();
             DisplayWarnings(e.Result.Warnings);
-            DisplayBirthdays();
+            birthdaysInfo.Show();
         }
 
         private void DisplayOpenSuccessMessage()
@@ -91,30 +93,6 @@ namespace DustInTheWind.Lisimba.Observers
 
             if (sb.Length > 0)
                 userInterface.DisplayWarning(sb.ToString());
-        }
-
-        private void DisplayBirthdays()
-        {
-            DateTime startDate = DateTime.Today;
-            DateTime endDate = DateTime.Today.AddDays(7);
-            List<Contact> contacts = openedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate).ToList();
-
-            if (contacts.Count <= 0)
-                return;
-
-            StringBuilder sb = new StringBuilder();
-
-            double totalDays = (endDate - startDate).TotalDays;
-            sb.AppendLine("The birthdays for the next " + totalDays + " days are:");
-            sb.AppendLine();
-
-            foreach (Contact contact in contacts)
-            {
-                string line = string.Format("{0} - {1}", contact.Name, contact.Birthday.ToShortString());
-                sb.AppendLine(line);
-            }
-
-            userInterface.DisplayInfo(sb.ToString());
         }
     }
 }

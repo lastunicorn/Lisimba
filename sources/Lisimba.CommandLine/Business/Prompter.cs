@@ -28,18 +28,18 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
-        private readonly FlowFactory flowFactory;
+        private readonly ApplicationFlows applicationFlows;
         private bool stopRequested;
 
-        public Prompter(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, FlowFactory flowFactory)
+        public Prompter(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, ApplicationFlows applicationFlows)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
-            if (flowFactory == null) throw new ArgumentNullException("flowFactory");
+            if (applicationFlows == null) throw new ArgumentNullException("applicationFlows");
 
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
-            this.flowFactory = flowFactory;
+            this.applicationFlows = applicationFlows;
         }
 
         public void Run()
@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         {
             try
             {
-                IFlow flow = flowFactory.CreateFlow(consoleCommand);
+                IFlow flow = applicationFlows.CreateFlow(consoleCommand);
                 flow.Execute();
             }
             catch (Exception ex)

@@ -15,31 +15,40 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Flows;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    internal class FlowFactory
+    internal class FlowFactory : IFlowFactory
     {
         private readonly UnityContainer unityContainer;
 
         public FlowFactory(UnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+
             this.unityContainer = unityContainer;
         }
 
-        public IFlow CreateFlow(ConsoleCommand consoleCommand)
+        public IFlow CreateUnknownFlow(ConsoleCommand consoleCommand)
         {
             var dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
+            return unityContainer.Resolve<UnknownFlow>(dependencyOverride);
+        }
 
-            bool existsFlow = ApplicationFlows.Flows.ContainsKey(consoleCommand.Name);
-            if (!existsFlow)
-                return unityContainer.Resolve<UnknownFlow>(dependencyOverride);
+        public IFlow CreateFlow(Type flowType, ConsoleCommand consoleCommand)
+        {
+            if (!typeof(IFlow).IsAssignableFrom(flowType))
+            {
+                string message = string.Format("Type {0} does not inherit {1}.", flowType.FullName, typeof(IFlow).FullName);
+                throw new LisimbaException(message);
+            }
 
-            Type flowType = ApplicationFlows.Flows[consoleCommand.Name];
+            var dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
             return (IFlow)unityContainer.Resolve(flowType, dependencyOverride);
         }
     }

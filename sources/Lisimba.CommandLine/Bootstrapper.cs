@@ -15,9 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
+using DustInTheWind.Lisimba.CommandLine.Setup;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine
@@ -30,6 +32,12 @@ namespace DustInTheWind.Lisimba.CommandLine
         public void Run(string[] args)
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
+
+            ApplicationFlows applicationFlows = unityContainer.Resolve<ApplicationFlows>();
+            FlowsSetup.Configure(applicationFlows);
+
+            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            ObserversSetup.Configure(activeObservers, unityContainer);
 
             InitializeProgramArguments(args);
 

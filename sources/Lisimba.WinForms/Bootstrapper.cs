@@ -29,6 +29,9 @@ namespace DustInTheWind.Lisimba
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
+            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            ObserversSetup.Configure(activeObservers, unityContainer);
+
             InitializeProgramArguments(args);
             StartBackEnd();
             InitializeAndStartUi();

@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,10 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.CommandLine.Business
+using System;
+using DustInTheWind.ConsoleCommon.CommandModel;
+
+namespace DustInTheWind.ConsoleCommon
 {
-    static class Constants
+    public interface IFlowFactory
     {
-        public const string ViewTemplatesLocation = "DustInTheWind.Lisimba.CommandLine.ViewTemplates";
+        IFlow CreateUnknownFlow(ConsoleCommand consoleCommand);
+        IFlow CreateFlow(Type flowType, ConsoleCommand consoleCommand);
     }
 }
