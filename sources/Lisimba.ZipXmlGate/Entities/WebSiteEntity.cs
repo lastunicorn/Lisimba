@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Gating.Entities
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    [Serializable()]
+    [Serializable]
     [XmlRoot("WebSite")]
     public class WebSiteEntity
     {

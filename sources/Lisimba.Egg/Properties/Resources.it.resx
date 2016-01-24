@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ContactComparer_XIsNotContact" xml:space="preserve">
+    <value>x non è un oggetto Contact.</value>
+  </data>
+  <data name="ContactComparer_YIsNotContact" xml:space="preserve">
+    <value>y non è un oggetto Contact.</value>
+  </data>
   <data name="EmptyGate_Description" xml:space="preserve">
     <value>Un Gate che non sa nulla, non fa nulla. E 'appena esiste.</value>
   </data>

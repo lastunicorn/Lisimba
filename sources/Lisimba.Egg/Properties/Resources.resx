@@ -126,4 +126,10 @@
     <data name="EmptyGate_SaveError" xml:space="preserve">
     <value>EmptyGate cannot save anything.</value>
   </data>
+    <data name="ContactComparer_XIsNotContact" xml:space="preserve">
+    <value>x is not a Contact object.</value>
+  </data>
+    <data name="ContactComparer_YIsNotContact" xml:space="preserve">
+    <value>y is not a Contact object.</value>
+  </data>
 </root>

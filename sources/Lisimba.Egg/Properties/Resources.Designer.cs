@@ -61,6 +61,24 @@ namespace DustInTheWind.Lisimba.Egg.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to x is not a Contact object..
+        /// </summary>
+        internal static string ContactComparer_XIsNotContact {
+            get {
+                return ResourceManager.GetString("ContactComparer_XIsNotContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to y is not a Contact object..
+        /// </summary>
+        internal static string ContactComparer_YIsNotContact {
+            get {
+                return ResourceManager.GetString("ContactComparer_YIsNotContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to A Gate that knows nothing, does nothing. It just exists..
         /// </summary>
         internal static string EmptyGate_Description {

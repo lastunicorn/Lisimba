@@ -18,6 +18,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Egg.Properties;
 
 namespace DustInTheWind.Lisimba.Egg.Comparers
 {
@@ -32,10 +33,10 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
             Contact contactY = y as Contact;
 
             if (contactX == null)
-                throw new ArgumentException("Argument x is not Contact.", "x");
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
 
             if (contactY == null)
-                throw new ArgumentException("Argument y is not Contact.", "y");
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
 
             return Date.CompareWithoutYear(contactX.Birthday, contactY.Birthday);
         }
@@ -43,10 +44,10 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
         public int Compare(Contact contactX, Contact contactY)
         {
             if (contactX == null)
-                throw new ArgumentException("Argument x is not Contact.", "x");
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
 
             if (contactY == null)
-                throw new ArgumentException("Argument y is not Contact.", "y");
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
 
             return Date.CompareWithoutYear(contactX.Birthday, contactY.Birthday);
         }
