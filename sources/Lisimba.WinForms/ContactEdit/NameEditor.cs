@@ -96,6 +96,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             if (e.KeyCode == Keys.Enter)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 NameParser nameParser = new NameParser(textBoxName.Text);
 
@@ -106,10 +107,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
                 LeaveEditMode();
             }
-
-            if (e.KeyCode == Keys.Escape)
+            else if (e.KeyCode == Keys.Escape)
             {
                 e.Handled = true;
+                e.SuppressKeyPress = true;
 
                 LeaveEditMode();
             }
@@ -159,6 +160,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void HandleTextBoxNameLeave(object sender, EventArgs e)
         {
+            NameParser nameParser = new NameParser(textBoxName.Text);
+
+            if (!nameParser.Success)
+                return;
+
+            PersonName.CopyFrom(nameParser.Result);
+
             LeaveEditMode();
         }
 

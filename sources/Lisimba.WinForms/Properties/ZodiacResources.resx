@@ -117,74 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EnsureAddressBookIsSaved_Question" xml:space="preserve">
-    <value>Current address book is not saved.
-Do you wanna save it before proceedeing?</value>
+  <data name="ZodiacSign_Aquarius" xml:space="preserve">
+    <value>Aquarius</value>
   </data>
-  <data name="EnsureAddressBookIsSaved_Title" xml:space="preserve">
-    <value>Save?</value>
+  <data name="ZodiacSign_Aries" xml:space="preserve">
+    <value>Aries</value>
   </data>
-  <data name="DefaultStatusText" xml:space="preserve">
-    <value>Ready</value>
+  <data name="ZodiacSign_Cancer" xml:space="preserve">
+    <value>Cancer</value>
   </data>
-  <data name="ApplicationExitOperationDescription" xml:space="preserve">
-    <value>Exit the program.</value>
+  <data name="ZodiacSign_Capricorn" xml:space="preserve">
+    <value>Capricorn</value>
   </data>
-  <data name="CreateNewAddressBookOperationDescription" xml:space="preserve">
-    <value>Create a new address book.</value>
+  <data name="ZodiacSign_Gemini" xml:space="preserve">
+    <value>Gemini</value>
   </data>
-  <data name="CreateNewContactOperationDescription" xml:space="preserve">
-    <value>Create a new contact.</value>
+  <data name="ZodiacSign_Leo" xml:space="preserve">
+    <value>Leo</value>
   </data>
-  <data name="DeleteCurrentContactOperationDescription" xml:space="preserve">
-    <value>Delete the currently selected contact.</value>
+  <data name="ZodiacSign_Libra" xml:space="preserve">
+    <value>Libra</value>
   </data>
-  <data name="ExportYahooCsvOperationDescription" xml:space="preserve">
-    <value>Export current opened address book in Yahoo! csv format.</value>
+  <data name="ZodiacSign_Pisces" xml:space="preserve">
+    <value>Pisces</value>
   </data>
-  <data name="ImportYahooCsvOperationDescription" xml:space="preserve">
-    <value>Import address book from Yahoo! csv format.</value>
+  <data name="ZodiacSign_Sagittarius" xml:space="preserve">
+    <value>Sagittarius</value>
   </data>
-  <data name="OpenAddressBookOperationDescription" xml:space="preserve">
-    <value>Open address book from file.</value>
+  <data name="ZodiacSign_Scorpio" xml:space="preserve">
+    <value>Scorpio</value>
   </data>
-  <data name="SaveAddressBookOperationDescription" xml:space="preserve">
-    <value>Save current opened address book.</value>
+  <data name="ZodiacSign_Taurus" xml:space="preserve">
+    <value>Taurus</value>
   </data>
-  <data name="SaveAsAddressBookOperationDescription" xml:space="preserve">
-    <value>Save current opened address book with another name.</value>
-  </data>
-  <data name="ShowAboutOperationDescription" xml:space="preserve">
-    <value>Displays info about Lisimba.</value>
-  </data>
-  <data name="ShowAddressBookPropertiesOperationDescription" xml:space="preserve">
-    <value>Display the address book properties.</value>
-  </data>
-  <data name="CloseCurrentAddressBookOperationDescription" xml:space="preserve">
-    <value>Close the currently opened address book.</value>
-  </data>
-  <data name="ContactDelete_ConfirametionQuestion" xml:space="preserve">
-    <value>Are you sure you wanna delete the contact {0} ?</value>
-  </data>
-  <data name="ContactDelete_ConfirmationTitle" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="GateNotFoundError" xml:space="preserve">
-    <value>There is no gate with id = {0}</value>
-  </data>
-  <data name="NoAddessBookOpenedError" xml:space="preserve">
-    <value>No address book is opened.</value>
-  </data>
-  <data name="DefaultAddressBookName" xml:space="preserve">
-    <value>New Address Book</value>
-  </data>
-  <data name="AddressBookClosedSuccessStatus" xml:space="preserve">
-    <value>Address book was successfully closed.</value>
-  </data>
-  <data name="NewAddressBook_SuccessStatusText" xml:space="preserve">
-    <value>A new address book was created.</value>
+  <data name="ZodiacSign_Virgo" xml:space="preserve">
+    <value>Virgo</value>
   </data>
 </root>

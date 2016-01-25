@@ -54,6 +54,7 @@
             // 
             // textBoxName
             // 
+            this.textBoxName.AcceptsReturn = true;
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxName.Location = new System.Drawing.Point(33, 19);

@@ -40,40 +40,40 @@ namespace DustInTheWind.Lisimba.Services
             switch (zodiacSign)
             {
                 case ZodiacSign.Aquarius:
-                    return LocalizedResources.ZodiacSign_Aquarius;
+                    return ZodiacResources.ZodiacSign_Aquarius;
 
                 case ZodiacSign.Pisces:
-                    return LocalizedResources.ZodiacSign_Pisces;
+                    return ZodiacResources.ZodiacSign_Pisces;
 
                 case ZodiacSign.Aries:
-                    return LocalizedResources.ZodiacSign_Aries;
+                    return ZodiacResources.ZodiacSign_Aries;
 
                 case ZodiacSign.Taurus:
-                    return LocalizedResources.ZodiacSign_Taurus;
+                    return ZodiacResources.ZodiacSign_Taurus;
 
                 case ZodiacSign.Gemini:
-                    return LocalizedResources.ZodiacSign_Gemini;
+                    return ZodiacResources.ZodiacSign_Gemini;
 
                 case ZodiacSign.Cancer:
-                    return LocalizedResources.ZodiacSign_Cancer;
+                    return ZodiacResources.ZodiacSign_Cancer;
 
                 case ZodiacSign.Leo:
-                    return LocalizedResources.ZodiacSign_Leo;
+                    return ZodiacResources.ZodiacSign_Leo;
 
                 case ZodiacSign.Virgo:
-                    return LocalizedResources.ZodiacSign_Virgo;
+                    return ZodiacResources.ZodiacSign_Virgo;
 
                 case ZodiacSign.Libra:
-                    return LocalizedResources.ZodiacSign_Libra;
+                    return ZodiacResources.ZodiacSign_Libra;
 
                 case ZodiacSign.Scorpio:
-                    return LocalizedResources.ZodiacSign_Scorpio;
+                    return ZodiacResources.ZodiacSign_Scorpio;
 
                 case ZodiacSign.Sagittarius:
-                    return LocalizedResources.ZodiacSign_Sagittarius;
+                    return ZodiacResources.ZodiacSign_Sagittarius;
 
                 case ZodiacSign.Capricorn:
-                    return LocalizedResources.ZodiacSign_Capricorn;
+                    return ZodiacResources.ZodiacSign_Capricorn;
 
                 default:
                     return string.Empty;
