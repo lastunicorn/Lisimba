@@ -29,57 +29,25 @@ namespace DustInTheWind.Lisimba.Main
     {
         // Lisimba - male name meaning "lion" in Zulu language.
 
+        private LisimbaViewModel viewModel;
+
         private readonly RecentFiles recentFiles;
         private readonly AvailableOperations availableOperations;
 
-        private LisimbaViewModel viewModel;
-
-        public LisimbaViewModel ViewModel
-        {
-            get { return viewModel; }
-            set
-            {
-                RemoveBindings();
-
-                viewModel = value;
-
-                if (viewModel != null)
-                    CreateBindings();
-            }
-        }
-
-        public LisimbaForm(RecentFiles recentFiles, AvailableOperations availableOperations)
+        public LisimbaForm(LisimbaViewModel viewModel, RecentFiles recentFiles, AvailableOperations availableOperations)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
 
             InitializeComponent();
 
             this.recentFiles = recentFiles;
             this.availableOperations = availableOperations;
-        }
 
-        private void RemoveBindings()
-        {
-            DataBindings.Clear();
-            toolStripStatus.DataBindings.Clear();
-            contactEditor1.DataBindings.Clear();
-            panelAddressBookView.DataBindings.Clear();
+            this.viewModel = viewModel;
 
-            buttonNewAddressBook.ViewModel = null;
-            buttonOpenAddressBook.ViewModel = null;
-
-            if (contactListView1.ViewModel != null)
-            {
-                contactListView1.ViewModel.View = null;
-                contactListView1.ViewModel = null;
-            }
-
-            if (contactEditor1.ViewModel != null)
-            {
-                contactEditor1.ViewModel.View = null;
-                contactEditor1.ViewModel = null;
-            }
+            CreateBindings();
         }
 
         private void CreateBindings()
@@ -105,12 +73,12 @@ namespace DustInTheWind.Lisimba.Main
 
         private void LisimbaForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ViewModel = null;
+            viewModel = null;
         }
 
         private void LisimbaForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bool allowToContinue = ViewModel.WindowIsClosing();
+            bool allowToContinue = viewModel.WindowIsClosing();
             e.Cancel = !allowToContinue;
         }
     }

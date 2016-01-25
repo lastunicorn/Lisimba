@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
@@ -21,18 +22,7 @@ namespace DustInTheWind.Lisimba.Main
 {
     partial class TrayIcon : Component
     {
-        private TrayIconPresenter presenter;
-
-        public TrayIconPresenter Presenter
-        {
-            get { return presenter; }
-            set
-            {
-                presenter = value;
-
-                toolStripMenuItem_Exit.ViewModel = presenter.ApplicationExitOperation;
-            }
-        }
+        private readonly TrayIconPresenter presenter;
 
         public bool Visible
         {
@@ -40,21 +30,22 @@ namespace DustInTheWind.Lisimba.Main
             set { notifyIcon1.Visible = value; }
         }
 
-        public TrayIcon()
+        public TrayIcon(TrayIconPresenter presenter)
         {
-            InitializeComponent();
-        }
-
-        public TrayIcon(IContainer container)
-        {
-            container.Add(this);
+            if (presenter == null) throw new ArgumentNullException("presenter");
 
             InitializeComponent();
+
+            this.presenter = presenter;
+            
+            toolStripMenuItem_Exit.ViewModel = presenter.ApplicationExitOperation;
+            toolStripMenuItem_About.ViewModel = presenter.ShowAboutOperation;
+            toolStripMenuItem_Show.ViewModel = presenter.ShowMainOperation;
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
         {
-            Presenter.IconWasDoubleClicked();
+            presenter.IconWasDoubleClicked();
         }
     }
 }

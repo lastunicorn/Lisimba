@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,32 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
-using System.Windows.Forms;
-using Microsoft.Practices.Unity;
+using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.Operations
 {
-    class UiFactory
+    internal class ShowMainOperation : ExecutableViewModelBase<object>
     {
-        private readonly IUnityContainer unityContainer;
+        private readonly UserInterface userInterface;
 
-        public UiFactory(IUnityContainer unityContainer)
+        public override string ShortDescription
         {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-            this.unityContainer = unityContainer;
+            get { return LocalizedResources.ShowAboutOperationDescription; }
         }
 
-        public T GetForm<T>()
-            where T : Form
+        public ShowMainOperation(ApplicationStatus applicationStatus, UserInterface userInterface)
+            : base(applicationStatus)
         {
-            return unityContainer.Resolve<T>();
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
+            this.userInterface = userInterface;
         }
 
-        public T GetComponent<T>()
-            where T : Component
+        protected override void DoExecute(object parameter)
         {
-            return unityContainer.Resolve<T>();
+            userInterface.DisplayMainWindow();
         }
     }
 }

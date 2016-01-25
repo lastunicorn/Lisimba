@@ -178,15 +178,18 @@ namespace DustInTheWind.Lisimba.Services
 
         public void ShowAbout()
         {
-            using (AboutForm form = new AboutForm())
+            using (AboutForm form = uiFactory.GetForm<AboutForm>())
             {
+                if (mainWindow == null)
+                    form.StartPosition = FormStartPosition.CenterScreen;
+
                 form.ShowDialog(MainWindow);
             }
         }
 
-        public void DisplayAddressBookProperties(AddressBookPropertiesViewModel viewModel)
+        public void DisplayAddressBookProperties()
         {
-            using (AddressBookPropertiesForm form = new AddressBookPropertiesForm { ViewModel = viewModel })
+            using (AddressBookPropertiesForm form = uiFactory.GetForm<AddressBookPropertiesForm>())
             {
                 form.ShowDialog(MainWindow);
             }
@@ -205,31 +208,17 @@ namespace DustInTheWind.Lisimba.Services
             if (MainWindow != null)
                 return;
 
-            LisimbaForm form = uiFactory.GetForm<LisimbaForm>();
-            form.ViewModel = uiFactory.GetViewModel<LisimbaViewModel>();
-
-            MainWindow = form;
+            MainWindow = uiFactory.GetForm<LisimbaForm>();
         }
 
         private void CreateTrayIcon()
         {
-            TrayIcon trayIcon = new TrayIcon();
-            TrayIconPresenter trayIconPresenter = uiFactory.GetViewModel<TrayIconPresenter>();
-
-            trayIcon.Presenter = trayIconPresenter;
-            trayIconPresenter.TrayIcon = trayIcon;
-
-            this.trayIcon = trayIcon;
+            trayIcon = uiFactory.GetComponent<TrayIcon>();
         }
 
         public void DisplayAddContactWindow()
         {
-            AddContactPresenter presenter = uiFactory.GetViewModel<AddContactPresenter>();
             AddContactForm form = uiFactory.GetForm<AddContactForm>();
-
-            form.ViewModel = presenter;
-            presenter.View = form;
-            
             form.Show(MainWindow);
         }
     }

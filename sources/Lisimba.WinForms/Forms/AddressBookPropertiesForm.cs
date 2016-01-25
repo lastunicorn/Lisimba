@@ -22,39 +22,16 @@ namespace DustInTheWind.Lisimba.Forms
 {
     partial class AddressBookPropertiesForm : Form
     {
-        private AddressBookPropertiesViewModel viewModel;
+        private readonly AddressBookPropertiesViewModel viewModel;
 
-        public AddressBookPropertiesViewModel ViewModel
+        public AddressBookPropertiesForm(AddressBookPropertiesViewModel viewModel)
         {
-            set
-            {
-                ClearAllBindings();
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
 
-                viewModel = value;
-
-                if (viewModel != null)
-                    CreateBindings();
-            }
-        }
-
-        private void ClearAllBindings()
-        {
-            textBoxBookName.DataBindings.Clear();
-            textBoxFileLocation.DataBindings.Clear();
-            textBoxContactsCount.DataBindings.Clear();
-        }
-
-        private void CreateBindings()
-        {
-            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
-            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
-            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
-        }
-
-        public AddressBookPropertiesForm()
-        {
             InitializeComponent();
+
+            this.viewModel = viewModel;
+            CreateBindings();
         }
 
         private void HandleButtonOkayClick(object sender, EventArgs e)
@@ -68,6 +45,14 @@ namespace DustInTheWind.Lisimba.Forms
         private void HandleFormShown(object sender, EventArgs e)
         {
             textBoxBookName.Focus();
+        }
+
+        private void CreateBindings()
+        {
+            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
         }
     }
 }

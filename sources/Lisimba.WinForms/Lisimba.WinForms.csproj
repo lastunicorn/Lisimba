@@ -98,6 +98,7 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />
     <Compile Include="Observers\AddressBookClosedObserver.cs" />

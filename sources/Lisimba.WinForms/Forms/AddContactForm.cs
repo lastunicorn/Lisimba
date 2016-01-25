@@ -21,34 +21,18 @@ namespace DustInTheWind.Lisimba.Forms
 {
     partial class AddContactForm : Form, IAddContactView
     {
-        private AddContactPresenter viewModel;
+        private readonly AddContactPresenter viewModel;
 
-        public AddContactPresenter ViewModel
+        public AddContactForm(AddContactPresenter viewModel)
         {
-            private get { return viewModel; }
-            set
-            {
-                RemoveBindings();
-
-                viewModel = value;
-
-                if (viewModel != null)
-                    CreateBindings();
-            }
-        }
-
-        public AddContactForm()
-        {
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
+            
             InitializeComponent();
-        }
 
-        private void RemoveBindings()
-        {
-            if (contactEditor1.ViewModel != null)
-            {
-                contactEditor1.ViewModel.View = null;
-                contactEditor1.ViewModel = null;
-            }
+            this.viewModel = viewModel;
+            viewModel.View = this;
+
+            CreateBindings();
         }
 
         private void CreateBindings()
@@ -59,17 +43,17 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void HandleButtonOkayClick(object sender, EventArgs e)
         {
-            ViewModel.OkButtonWasClicked();
+            viewModel.OkButtonWasClicked();
         }
 
         private void HandleButtonCancelClick(object sender, EventArgs e)
         {
-            ViewModel.CloseButtonWasClicked();
+            viewModel.CloseButtonWasClicked();
         }
 
         private void HandleFormLoad(object sender, EventArgs e)
         {
-            ViewModel.ViewWasLoaded();
+            viewModel.ViewWasLoaded();
         }
     }
 }

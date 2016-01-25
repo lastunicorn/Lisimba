@@ -57,8 +57,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplayAddressBookPropertiesWindow()
         {
-            AddressBookPropertiesViewModel viewModel = new AddressBookPropertiesViewModel(openedAddressBooks);
-            userInterface.DisplayAddressBookProperties(viewModel);
+            userInterface.DisplayAddressBookProperties();
         }
     }
 }

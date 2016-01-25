@@ -24,6 +24,7 @@ namespace DustInTheWind.Lisimba.Setup
     {
         public static void Configure(AvailableOperations availableOperations, UnityContainer unityContainer)
         {
+            availableOperations.Add(unityContainer.Resolve<ShowMainOperation>());
             availableOperations.Add(unityContainer.Resolve<NewAddressBookOperation>());
             availableOperations.Add(unityContainer.Resolve<OpenAddressBookOperation>());
             availableOperations.Add(unityContainer.Resolve<SaveAddressBookOperation>());

@@ -35,7 +35,6 @@ namespace DustInTheWind.Lisimba.Main
 
         private string title;
         private string statusText;
-
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
         private string defaultGate;
@@ -205,7 +204,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public bool WindowIsClosing()
         {
-            return openedAddressBooks.CloseAddressBook();
+            return true;
         }
     }
 }

@@ -25,11 +25,12 @@ namespace DustInTheWind.Lisimba.Main
 {
     internal class TrayIconPresenter : ViewModelBase
     {
-        private readonly ApplicationBackEnd applicationBackEnd;
         private readonly UserInterface userInterface;
         private TrayIcon trayIcon;
 
         public ApplicationExitOperation ApplicationExitOperation { get; private set; }
+        public ShowAboutOperation ShowAboutOperation { get; private set; }
+        public ShowMainOperation ShowMainOperation { get; private set; }
 
         public TrayIcon TrayIcon
         {
@@ -37,9 +38,7 @@ namespace DustInTheWind.Lisimba.Main
             set
             {
                 trayIcon = value;
-
-                applicationBackEnd.Ending += HandleApplicationBackEndEnding;
-                TrayIcon.Visible = true;
+                trayIcon.Visible = true;
             }
         }
 
@@ -48,15 +47,26 @@ namespace DustInTheWind.Lisimba.Main
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.applicationBackEnd = applicationBackEnd;
             this.userInterface = userInterface;
 
             ApplicationExitOperation = availableOperations.GetOperation<ApplicationExitOperation>();
+            ShowAboutOperation = availableOperations.GetOperation<ShowAboutOperation>();
+            ShowMainOperation = availableOperations.GetOperation<ShowMainOperation>();
+
+            applicationBackEnd.Ending += HandleApplicationBackEndEnding;
+            applicationBackEnd.EndCanceled += HandleApplicationBackEndExitCanceled;
         }
 
         private void HandleApplicationBackEndEnding(object sender, CancelEventArgs cancelEventArgs)
         {
-            TrayIcon.Visible = false;
+            if (TrayIcon != null)
+                TrayIcon.Visible = false;
+        }
+
+        private void HandleApplicationBackEndExitCanceled(object sender, EventArgs eventArgs)
+        {
+            if (TrayIcon != null)
+                TrayIcon.Visible = true;
         }
 
         public void IconWasDoubleClicked()
