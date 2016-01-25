@@ -33,15 +33,11 @@ namespace DustInTheWind.Lisimba.CommandLine
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
-            ApplicationFlows applicationFlows = unityContainer.Resolve<ApplicationFlows>();
-            FlowsSetup.Configure(applicationFlows);
-
-            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
-            ObserversSetup.Configure(activeObservers, unityContainer);
-
+            ConfigureApplicationFlows();
+            ConfigureObservers();
             InitializeProgramArguments(args);
 
-            userInterface = CreatreAndInitializeUserInterface();
+            userInterface = CreateAndInitializeUserInterface();
 
             StartBackEnd();
 
@@ -52,13 +48,25 @@ namespace DustInTheWind.Lisimba.CommandLine
             WaitForUserInput();
         }
 
+        private void ConfigureApplicationFlows()
+        {
+            ApplicationFlows applicationFlows = unityContainer.Resolve<ApplicationFlows>();
+            FlowsSetup.Configure(applicationFlows);
+        }
+
+        private void ConfigureObservers()
+        {
+            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            ObserversSetup.Configure(activeObservers, unityContainer);
+        }
+
         private void InitializeProgramArguments(string[] args)
         {
             ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
         }
 
-        private UserInterface CreatreAndInitializeUserInterface()
+        private UserInterface CreateAndInitializeUserInterface()
         {
             UserInterface newUserInterface = unityContainer.Resolve<UserInterface>();
             newUserInterface.Initialize();
