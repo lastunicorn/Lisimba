@@ -21,7 +21,6 @@ using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.CommandLine.Setup;
 using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
@@ -65,20 +64,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         public void DisplayGate(IGate gate)
         {
-            string fileName = GetViewTemplateFullFileName("GateInfo.t");
+            string templateFileName = ViewTemplates.GetFullFileName("GateInfo.t");
             var parameters = new
             {
                 DefaultGate = string.Format("{0} ({1})", gate.Name, gate.Id),
                 Description = gate.Description
             };
 
-            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(templateFileName, parameters);
             console.DisplayTemplate(consoleTemplate);
-        }
-
-        private static string GetViewTemplateFullFileName(string fileName)
-        {
-            return Constants.ViewTemplatesLocation + "." + fileName;
         }
     }
 }

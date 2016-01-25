@@ -40,6 +40,8 @@
     <Compile Include="ConsoleCommandHandling\ConsoleCommand.cs" />
     <Compile Include="ConsoleCommandHandling\CommandSplitter.cs" />
     <Compile Include="ConsoleCommandHandling\IFlowFactory.cs" />
+    <Compile Include="ConsoleCommandHandling\IPrompterTextBuilder.cs" />
+    <Compile Include="ConsoleCommandHandling\Prompter.cs" />
     <Compile Include="Templating\ConsoleTemplate.cs" />
     <Compile Include="ConsoleCommandHandling\IFlow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,10 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.CommandLine.Setup
+namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    static class Constants
+    static class ViewTemplates
     {
         public const string ViewTemplatesLocation = "DustInTheWind.Lisimba.CommandLine.ViewTemplates";
+
+        public static string GetFullFileName(string fileName)
+        {
+            return ViewTemplatesLocation + "." + fileName;
+        }
     }
 }

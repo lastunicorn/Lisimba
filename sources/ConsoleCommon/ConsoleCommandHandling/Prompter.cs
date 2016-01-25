@@ -15,31 +15,30 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
-using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.ConsoleCommon.Templating;
 
-namespace DustInTheWind.Lisimba.CommandLine.Business
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     /// <summary>
     /// Provides a loop for reading commands from the console, parsing them and run the needed flow.
     /// </summary>
-    class Prompter
+    public class Prompter
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
         private readonly ApplicationFlows applicationFlows;
+        private readonly IPrompterTextBuilder prompterTextBuilder;
         private bool stopRequested;
 
-        public Prompter(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, ApplicationFlows applicationFlows)
+        public Prompter(EnhancedConsole console, ApplicationFlows applicationFlows, IPrompterTextBuilder prompterTextBuilder)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
             if (applicationFlows == null) throw new ArgumentNullException("applicationFlows");
+            if (prompterTextBuilder == null) throw new ArgumentNullException("prompterTextBuilder");
 
-            this.openedAddressBooks = openedAddressBooks;
             this.console = console;
             this.applicationFlows = applicationFlows;
+            this.prompterTextBuilder = prompterTextBuilder;
         }
 
         public void Run()
@@ -56,27 +55,10 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
 
         private void DisplayPrompter()
         {
-            string addressBookName = openedAddressBooks.Current == null ? null : openedAddressBooks.Current.AddressBook.Name;
-            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
+            ConsoleTemplate consoleTemplate = prompterTextBuilder.BuildTemplate();
 
             console.WriteLine();
-            console.WriteEmphasize("lisimba");
-
-            if (addressBookName != null)
-            {
-                console.WriteNormal(" ");
-
-                string formattedAddressBookName = BuildAddressBookName(addressBookName, isModified);
-                console.WriteNormal(formattedAddressBookName);
-            }
-
-            console.WriteEmphasize(" > ");
-        }
-
-        private static string BuildAddressBookName(string addressBookName, bool isModified)
-        {
-            string notSavedMarker = isModified ? "*" : string.Empty;
-            return string.Format("[{0}]{1}", addressBookName, notSavedMarker);
+            console.DisplayTemplate(consoleTemplate);
         }
 
         private ConsoleCommand ReadCommand()

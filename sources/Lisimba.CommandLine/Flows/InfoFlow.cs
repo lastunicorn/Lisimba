@@ -59,7 +59,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         public void DisplayAddressBookInfo(AddressBook addressBook, string addressBookLocation)
         {
-            string fileName = GetViewTemplateFullFileName("AddressBookInfo.t");
+            string fileName = ViewTemplates.GetFullFileName("AddressBookInfo.t");
 
             var parameters = new
             {
@@ -70,11 +70,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(fileName, parameters);
             console.DisplayTemplate(consoleTemplate);
-        }
-
-        private static string GetViewTemplateFullFileName(string fileName)
-        {
-            return Constants.ViewTemplatesLocation + "." + fileName;
         }
     }
 }

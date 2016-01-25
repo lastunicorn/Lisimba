@@ -18,6 +18,7 @@ using System.Configuration;
 using System.IO;
 using System.Reflection;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
@@ -106,6 +107,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             container.RegisterType<IFlowFactory, FlowFactory>();
+            container.RegisterType<IPrompterTextBuilder, PrompterTextBuilder>();
         }
     }
 }
