@@ -1,2 +1,25 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=DustInTheWind_002ELisimba_002EAnnotations/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/CodeInspection/CodeAnnotations/NamespacesWithAnnotations/=DustInTheWind_002ELisimba_002EAnnotations/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Applicability/=Live/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Description/@EntryValue">License file header</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Reformat/@EntryValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Scope/=C3001E7C0DA78E4487072B7E050D86C5/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Scope/=C3001E7C0DA78E4487072B7E050D86C5/CustomProperties/=minimumLanguageVersion/@EntryIndexedValue">2.0</s:String>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Scope/=C3001E7C0DA78E4487072B7E050D86C5/Type/@EntryValue">InCSharpFile</s:String>
+	<s:Boolean x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/ShortenQualifiedReferences/@EntryValue">True</s:Boolean>
+	<s:String x:Key="/Default/PatternsAndTemplates/LiveTemplates/Template/=B52D249708705948A05591ADFDC0FE65/Text/@EntryValue">// Lisimba&#xD;
+// Copyright (C) 2007-2016 Dust in the Wind&#xD;
+// &#xD;
+// This program is free software: you can redistribute it and/or modify&#xD;
+// it under the terms of the GNU General Public License as published by&#xD;
+// the Free Software Foundation, either version 3 of the License, or&#xD;
+// (at your option) any later version.&#xD;
+// &#xD;
+// This program is distributed in the hope that it will be useful,&#xD;
+// but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;
+// GNU General Public License for more details.&#xD;
+// &#xD;
+// You should have received a copy of the GNU General Public License&#xD;
+// along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</s:String></wpf:ResourceDictionary>

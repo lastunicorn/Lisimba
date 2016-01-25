@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.Business
 {
@@ -27,6 +28,7 @@ namespace DustInTheWind.Lisimba.Business
     public class ApplicationBackEnd
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
+        private readonly OpenedAddressBooks openedAddressBooks;
 
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
@@ -50,11 +52,13 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
 
-        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener)
+        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
             this.initialCatalogOpener = initialCatalogOpener;
+            this.openedAddressBooks = openedAddressBooks;
         }
 
         public void Start()
@@ -66,6 +70,10 @@ namespace DustInTheWind.Lisimba.Business
 
         public void Exit()
         {
+            bool allowToContinue = openedAddressBooks.CloseAddressBook();
+            if (!allowToContinue)
+                return;
+
             CancelEventArgs args = new CancelEventArgs();
             OnEnding(args);
 

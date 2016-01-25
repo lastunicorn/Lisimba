@@ -33,6 +33,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             applicationFlows.AddFlow("info", typeof(InfoFlow));
             applicationFlows.AddFlow("gate", typeof(GateFlow));
             applicationFlows.AddFlow("gates", typeof(GatesFlow));
+            applicationFlows.AddFlow("lang", typeof(LangFlow));
             applicationFlows.AddFlow("exit", typeof(ExitFlow));
             applicationFlows.AddFlow("bye", typeof(ExitFlow));
             applicationFlows.AddFlow("goodbye", typeof(ExitFlow));

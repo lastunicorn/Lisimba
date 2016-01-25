@@ -194,29 +194,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             recentFiles.AddRecentFile(fileFullPath, gate);
         }
 
-        //public bool CloseAddressBook()
-        //{
-        //    if (Current == null)
-        //        return true;
-
-        //    CancelEventArgs eva = new CancelEventArgs();
-        //    OnClosing(eva);
-
-        //    if (eva.Cancel)
-        //        return false;
-
-        //    AddressBookShell oldAddressBookShell = Current;
-
-        //    oldAddressBookShell.Saved -= HandleAddressBookShellSaved;
-
-        //    Contact = null;
-        //    Current = null;
-
-        //    OnClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
-
-        //    return true;
-        //}
-
         public bool CloseAddressBook()
         {
             if (Current == null)

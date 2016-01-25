@@ -27,7 +27,6 @@ namespace DustInTheWind.Lisimba.CommandLine
     internal class Bootstrapper
     {
         private UnityContainer unityContainer;
-        private UserInterface userInterface;
 
         public void Run(string[] args)
         {
@@ -37,13 +36,9 @@ namespace DustInTheWind.Lisimba.CommandLine
             ConfigureObservers();
             InitializeProgramArguments(args);
 
-            userInterface = CreateAndInitializeUserInterface();
+            CreateAndInitializeUserInterface();
 
             StartBackEnd();
-
-            GC.Collect();
-            GC.Collect();
-            GC.Collect();
 
             WaitForUserInput();
         }
@@ -66,12 +61,10 @@ namespace DustInTheWind.Lisimba.CommandLine
             programArguments.Initialize(args);
         }
 
-        private UserInterface CreateAndInitializeUserInterface()
+        private void CreateAndInitializeUserInterface()
         {
-            UserInterface newUserInterface = unityContainer.Resolve<UserInterface>();
-            newUserInterface.Initialize();
-
-            return newUserInterface;
+            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
+            userInterface.Initialize();
         }
 
         private void StartBackEnd()
@@ -82,6 +75,7 @@ namespace DustInTheWind.Lisimba.CommandLine
 
         private void WaitForUserInput()
         {
+            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
             userInterface.Start();
         }
     }

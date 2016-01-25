@@ -50,6 +50,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Business\PrompterTextBuilder.cs" />
     <Compile Include="Business\ViewTemplates.cs" />
+    <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Setup\FlowsSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />
     <Compile Include="Business\FlowFactory.cs" />
@@ -83,6 +84,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ro.resx" />
     <EmbeddedResource Include="ViewTemplates\GateInfo.t" />
     <None Include="App.config" />
     <EmbeddedResource Include="ViewTemplates\AddressBookInfo.t" />
