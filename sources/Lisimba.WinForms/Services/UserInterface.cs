@@ -221,5 +221,11 @@ namespace DustInTheWind.Lisimba.Services
             AddContactForm form = uiFactory.GetForm<AddContactForm>();
             form.Show(MainWindow);
         }
+
+        public void ShowGateSelector()
+        {
+            GateSelectorForm form = uiFactory.GetForm<GateSelectorForm>();
+            form.Show();
+        }
     }
 }

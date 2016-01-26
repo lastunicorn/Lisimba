@@ -81,5 +81,10 @@ namespace DustInTheWind.Lisimba.Main
             bool allowToContinue = viewModel.WindowIsClosing();
             e.Cancel = !allowToContinue;
         }
+
+        private void toolStripDefaultGate_Click(object sender, EventArgs e)
+        {
+            viewModel.DefaultGateWasClicked();
+        }
     }
 }

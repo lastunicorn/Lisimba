@@ -30,6 +30,7 @@ namespace DustInTheWind.Lisimba.Main
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
+        private readonly UserInterface userInterface;
         private readonly ApplicationStatus applicationStatus;
         private readonly ApplicationBackEnd applicationBackEnd;
 
@@ -96,7 +97,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
-            AvailableOperations availableOperations, AvailableGates availableGates)
+            AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
@@ -105,11 +106,13 @@ namespace DustInTheWind.Lisimba.Main
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.applicationBackEnd = applicationBackEnd;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
+            this.userInterface = userInterface;
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
@@ -205,6 +208,11 @@ namespace DustInTheWind.Lisimba.Main
         public bool WindowIsClosing()
         {
             return true;
+        }
+
+        public void DefaultGateWasClicked()
+        {
+            userInterface.ShowGateSelector();
         }
     }
 }

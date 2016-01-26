@@ -159,6 +159,7 @@ namespace DustInTheWind.Lisimba.Main
             this.toolStripDefaultGate.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.toolStripDefaultGate.Size = new System.Drawing.Size(76, 19);
             this.toolStripDefaultGate.Text = "Default Gate";
+            this.toolStripDefaultGate.Click += new System.EventHandler(this.toolStripDefaultGate_Click);
             // 
             // panelAddressBookView
             // 

@@ -1,3 +1,3 @@
 ﻿
-<emp>DefaultGate:</emp> {DefaultGate}
+<emp>Default Gate:</emp> {DefaultGate}
 <emp>Description:</emp> {Description}
