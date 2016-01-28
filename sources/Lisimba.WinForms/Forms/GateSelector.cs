@@ -48,6 +48,8 @@ namespace DustInTheWind.Lisimba.Forms
 
         public AvailableGates AvailableGates { get; set; }
 
+        public event EventHandler GateSelected;
+
         public GateSelector()
         {
             InitializeComponent();
@@ -107,6 +109,16 @@ namespace DustInTheWind.Lisimba.Forms
 
             if (control != null && AvailableGates != null)
                 AvailableGates.SetDefaultGate(control.Tag as string);
+
+            OnGateSelected();
+        }
+
+        protected virtual void OnGateSelected()
+        {
+            EventHandler handler = GateSelected;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

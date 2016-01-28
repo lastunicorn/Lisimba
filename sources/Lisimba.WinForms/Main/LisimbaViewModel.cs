@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
@@ -210,9 +211,9 @@ namespace DustInTheWind.Lisimba.Main
             return true;
         }
 
-        public void DefaultGateWasClicked()
+        public void DefaultGateWasClicked(Point point)
         {
-            userInterface.ShowGateSelector();
+            userInterface.ShowGateSelector(point);
         }
     }
 }

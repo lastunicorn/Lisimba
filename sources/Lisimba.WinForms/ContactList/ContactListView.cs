@@ -19,7 +19,6 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Biorhythm;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactList

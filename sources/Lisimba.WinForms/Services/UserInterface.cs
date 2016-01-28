@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
@@ -222,9 +223,14 @@ namespace DustInTheWind.Lisimba.Services
             form.Show(MainWindow);
         }
 
-        public void ShowGateSelector()
+        public void ShowGateSelector(Point point)
         {
             GateSelectorForm form = uiFactory.GetForm<GateSelectorForm>();
+
+            int x = point.X - form.Width;
+            int y = point.Y - form.Height;
+            form.Location = new Point(x, y);
+
             form.Show();
         }
     }

@@ -24,6 +24,8 @@ namespace DustInTheWind.Lisimba.Forms
     {
         public GateSelectorForm(GateSelectorViewModel viewModel)
         {
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
+
             InitializeComponent();
 
             gateSelector1.AvailableGates = viewModel.AvailableGates;
@@ -31,6 +33,11 @@ namespace DustInTheWind.Lisimba.Forms
         }
 
         private void GateSelectorForm_Deactivate(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void gateSelector1_GateSelected(object sender, EventArgs e)
         {
             Close();
         }

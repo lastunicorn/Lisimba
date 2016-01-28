@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Services;
@@ -84,7 +85,12 @@ namespace DustInTheWind.Lisimba.Main
 
         private void toolStripDefaultGate_Click(object sender, EventArgs e)
         {
-            viewModel.DefaultGateWasClicked();
+            int x = statusStripMain.Location.X + statusStripMain.Size.Width;
+            int y = statusStripMain.Location.Y;
+            Point point = new Point(x, y);
+            Point screenPoint = PointToScreen(point);
+
+            viewModel.DefaultGateWasClicked(screenPoint);
         }
     }
 }
