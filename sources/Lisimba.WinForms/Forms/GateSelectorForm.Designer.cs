@@ -38,7 +38,7 @@
             this.gateSelector1.Gates = null;
             this.gateSelector1.Location = new System.Drawing.Point(0, 0);
             this.gateSelector1.Name = "gateSelector1";
-            this.gateSelector1.Size = new System.Drawing.Size(239, 279);
+            this.gateSelector1.Size = new System.Drawing.Size(213, 279);
             this.gateSelector1.TabIndex = 0;
             this.gateSelector1.GateSelected += new System.EventHandler(this.gateSelector1_GateSelected);
             // 
@@ -46,7 +46,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(239, 279);
+            this.ClientSize = new System.Drawing.Size(213, 279);
             this.ControlBox = false;
             this.Controls.Add(this.gateSelector1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;

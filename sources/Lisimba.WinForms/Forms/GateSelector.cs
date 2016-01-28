@@ -72,35 +72,29 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void ClearItems()
         {
-            tableLayoutPanel1.Controls.Clear();
-            tableLayoutPanel1.RowStyles.Clear();
-            tableLayoutPanel1.RowCount = 1;
+            Controls.Clear();
         }
 
         private void AddItems()
         {
-            IEnumerable<Control> controls = gates.Select(x =>
-            {
-                Button button = new Button
+            IEnumerable<Control> controls = gates
+                .Select(x =>
                 {
-                    Anchor = AnchorStyles.Left | AnchorStyles.Right,
-                    Text = x.Name,
-                    Tag = x.Id
-                };
+                    Button button = new Button
+                    {
+                        Dock = DockStyle.Top,
+                        Text = x.Name,
+                        Tag = x.Id,
+                        AutoEllipsis = true
+                    };
 
-                button.Click += HandleButtonClick;
+                    button.Click += HandleButtonClick;
 
-                return button;
-            });
+                    return button;
+                })
+                .Reverse();
 
-            foreach (Control control in controls)
-            {
-                if (tableLayoutPanel1.HasChildren)
-                    tableLayoutPanel1.RowCount++;
-
-                tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.AutoSize));
-                tableLayoutPanel1.Controls.Add(control, 0, tableLayoutPanel1.RowCount - 1);
-            }
+            Controls.AddRange(controls.ToArray());
         }
 
         private void HandleButtonClick(object sender, EventArgs e)
