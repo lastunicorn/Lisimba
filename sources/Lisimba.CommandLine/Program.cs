@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Threading;
 
 namespace DustInTheWind.Lisimba.CommandLine
 {
@@ -29,6 +30,8 @@ namespace DustInTheWind.Lisimba.CommandLine
             {
                 Bootstrapper bootstrapper = new Bootstrapper();
                 bootstrapper.Run(args);
+
+                Thread.Sleep(1000);
             }
             catch (Exception ex)
             {

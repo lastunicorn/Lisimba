@@ -8,12 +8,12 @@
     <ItemGroup>
         <GateFiles Include="DustInTheWind.Lisimba.ZipXmlGate.dll" />
         <GateFiles Include="ICSharpCode.SharpZipLib.dll" />
-        <GateFiles Include="DustInTheWind.Lisimba.Egg.dll" />
     </ItemGroup>
 
     <Target Name="Default" DependsOnTargets="Publish;CleanUp"></Target>
 
     <Target Name="Publish">
+        <RemoveDir Directories="$(SolutionDir)\Publish\ZipXmlGate"/>
         <Copy SourceFiles="@(GateFiles)" DestinationFolder="$(SolutionDir)\Publish\ZipXmlGate" />
     </Target>
 

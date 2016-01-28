@@ -17,6 +17,7 @@
 using System;
 using System.Reflection;
 using DustInTheWind.ConsoleCommon;
+using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
@@ -38,28 +39,26 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
 
         public void SayWelcome()
         {
-            WriteWelcomeMessage();
-            WriteGateInfo(availableGates.DefaultGateName);
+            string templateFileName = ViewTemplates.GetFullFileName("Welcome.t");
+            var parameters = new
+            {
+                Title = GetTitle(),
+                GateInfo = string.Format(Resources.DefaultGateMessage, availableGates.DefaultGateName)
+            };
+
+            ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(templateFileName, parameters);
+            console.DisplayTemplate(consoleTemplate);
         }
 
-        private void WriteWelcomeMessage()
+        private static string GetTitle()
         {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
-            string title = string.Format(Resources.LisimbaTitle, version);
-
-            console.WriteLineEmphasize(title);
-        }
-
-        private void WriteGateInfo(string gateName)
-        {
-            string text = string.Format(Resources.DefaultGateMessage, gateName);
-            console.WriteLineNormal(text);
-
-            console.WriteLine();
+            return string.Format(Resources.LisimbaTitle, version);
         }
 
         public void SayGoodBye()
         {
+            console.WriteLine();
             console.WriteLineNormal(Resources.GoodByeMessage);
         }
     }

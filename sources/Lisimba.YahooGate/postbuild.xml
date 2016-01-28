@@ -8,12 +8,12 @@
     <ItemGroup>
         <GateFiles Include="DustInTheWind.Lisimba.YahooGate.dll" />
         <GateFiles Include="zcsv.dll" />
-        <GateFiles Include="DustInTheWind.Lisimba.Egg.dll" />
     </ItemGroup>
 
     <Target Name="Default" DependsOnTargets="Publish;CleanUp"></Target>
 
     <Target Name="Publish">
+        <RemoveDir Directories="$(SolutionDir)\Publish\YahooCsvGate"/>
         <Copy SourceFiles="@(GateFiles)" DestinationFolder="$(SolutionDir)\Publish\YahooCsvGate" />
     </Target>
 

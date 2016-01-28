@@ -16,7 +16,7 @@
 
     <!-- Copies locally the gates. -->
     <Target Name="RetrieveGates">
-        <Copy SourceFiles="@(GateFiles)" DestinationFolder="." />
+        <Copy SourceFiles="@(GateFiles)" DestinationFolder=".\Gates" />
     </Target>
 
     <!-- Removed the current file. -->

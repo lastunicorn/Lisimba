@@ -98,6 +98,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="ViewTemplates\Prompter.default.t" />
     <EmbeddedResource Include="ViewTemplates\Prompter.addressbook.t" />
+    <EmbeddedResource Include="ViewTemplates\Welcome.t" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ConsoleCommon\ConsoleCommon.csproj">
