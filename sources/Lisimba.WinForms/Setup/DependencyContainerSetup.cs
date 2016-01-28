@@ -14,8 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
@@ -23,9 +26,9 @@ using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 
 namespace DustInTheWind.Lisimba.Setup
 {
@@ -35,32 +38,37 @@ namespace DustInTheWind.Lisimba.Setup
         {
             UnityContainer unityContainer = new UnityContainer();
 
-            LoadFromConfigurationFile(unityContainer);
+            LoadGates(unityContainer);
             RegisterAdditionalTypes(unityContainer);
 
             return unityContainer;
         }
 
-        private static void LoadFromConfigurationFile(IUnityContainer container)
+        private static void LoadGates(IUnityContainer container)
         {
-            UnityConfigurationSection unitySection = GetUnityConfigurationSection();
-            container.LoadConfiguration(unitySection);
-        }
+            string applicationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string gateDirectory = Path.Combine(applicationDirectory, "Gates");
 
-        private static UnityConfigurationSection GetUnityConfigurationSection()
-        {
-            string unityConfigFilePath = GetUnityConfigFilePath();
+            if (!Directory.Exists(gateDirectory))
+                return;
 
-            ExeConfigurationFileMap fileMap = new ExeConfigurationFileMap { ExeConfigFilename = unityConfigFilePath };
-            Configuration configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
-            return (UnityConfigurationSection)configuration.GetSection("unity");
-        }
+            string[] assemblyPaths = Directory.GetFiles(gateDirectory, "*.dll");
 
-        private static string GetUnityConfigFilePath()
-        {
-            Assembly entryAssembly = Assembly.GetEntryAssembly();
-            string applicationDirectory = Path.GetDirectoryName(entryAssembly.Location);
-            return Path.Combine(applicationDirectory, "Unity.config");
+            IEnumerable<Assembly> assemblies = assemblyPaths
+                .Select(Assembly.LoadFrom);
+
+            foreach (Assembly assembly in assemblies)
+            {
+                IEnumerable<Type> gateTypes = assembly.GetExportedTypes()
+                    .Where(x => x.IsClass && typeof(IGate).IsAssignableFrom(x));
+
+                foreach (Type gateType in gateTypes)
+                {
+                    IGate gate = (IGate)Activator.CreateInstanceFrom(assembly.Location, gateType.FullName).Unwrap();
+
+                    container.RegisterType(typeof(IGate), gateType, gate.Id);
+                }
+            }
         }
 
         private static void RegisterAdditionalTypes(UnityContainer container)
