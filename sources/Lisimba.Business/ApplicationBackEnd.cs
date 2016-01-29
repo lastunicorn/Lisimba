@@ -15,10 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.GateManagement;
 
 namespace DustInTheWind.Lisimba.Business
 {
@@ -29,11 +32,15 @@ namespace DustInTheWind.Lisimba.Business
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableGates availableGates;
+        private readonly ApplicationConfiguration config;
 
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
         public event EventHandler EndCanceled;
         public event EventHandler Ended;
+
+        private List<Exception> Warnings = new List<Exception>();
 
         public string ProgramName
         {
@@ -52,17 +59,32 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
 
-        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks)
+        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks,
+            AvailableGates availableGates, ApplicationConfiguration config)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (config == null) throw new ArgumentNullException("config");
 
             this.initialCatalogOpener = initialCatalogOpener;
             this.openedAddressBooks = openedAddressBooks;
+            this.availableGates = availableGates;
+            this.config = config;
         }
 
         public void Start()
         {
+            try
+            {
+                availableGates.SetDefaultGate(config.DefaultGateName);
+            }
+            catch (Exception ex)
+            {
+                availableGates.SetDefaultGate(config.DefaultGateName);
+                Warnings.Add(ex);
+            }
+
             initialCatalogOpener.OpenInitialCatalog();
 
             OnStarted();

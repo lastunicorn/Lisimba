@@ -16,6 +16,7 @@
 
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Setup;
 using Microsoft.Practices.Unity;
@@ -30,15 +31,31 @@ namespace DustInTheWind.Lisimba
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
-            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
-            ObserversSetup.Configure(activeObservers, unityContainer);
-
-            AvailableOperations availableOperations = unityContainer.Resolve<AvailableOperations>();
-            OperationsSetup.Configure(availableOperations, unityContainer);
+            ConfigureObservers();
+            ConfigureOperations();
+            ConfigureGates();
 
             InitializeProgramArguments(args);
             StartBackEnd();
             InitializeAndStartUi();
+        }
+
+        private void ConfigureObservers()
+        {
+            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            ObserversSetup.Configure(activeObservers, unityContainer);
+        }
+
+        private void ConfigureOperations()
+        {
+            AvailableOperations availableOperations = unityContainer.Resolve<AvailableOperations>();
+            OperationsSetup.Configure(availableOperations, unityContainer);
+        }
+
+        private void ConfigureGates()
+        {
+            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
+            GatesSetup.Configure(availableGates, unityContainer);
         }
 
         private void InitializeProgramArguments(string[] args)

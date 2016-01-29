@@ -1,3 +1,2 @@
 ﻿<emp>{Title}</emp>
-{GateInfo}
 
