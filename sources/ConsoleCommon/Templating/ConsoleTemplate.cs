@@ -101,7 +101,13 @@ namespace DustInTheWind.ConsoleCommon.Templating
         {
             foreach (KeyValuePair<string, object> parameter in parameters)
             {
-                template = template.Replace("{" + parameter.Key + "}", parameter.Value.ToString());
+                string key = "{" + parameter.Key + "}";
+
+                string value = parameter.Value == null
+                    ? string.Empty
+                    : parameter.Value.ToString();
+
+                template = template.Replace(key, value);
             }
 
             return template;

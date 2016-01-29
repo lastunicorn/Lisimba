@@ -16,30 +16,59 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using DustInTheWind.Lisimba.Egg;
-using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Business.GateManagement
 {
     public class GateProvider
     {
-        private readonly UnityContainer unityContainer;
-
-        public GateProvider(UnityContainer unityContainer)
-        {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-
-            this.unityContainer = unityContainer;
-        }
-
-        public IGate GetGate(string gateId)
-        {
-            return unityContainer.Resolve<IGate>(gateId);
-        }
+        public const string GatesDirectory = "Gates";
 
         public IEnumerable<IGate> GetAllGates()
         {
-            return unityContainer.ResolveAll<IGate>();
+            string gateDirectory = GetGateDirectory();
+
+            if (gateDirectory == null || !Directory.Exists(gateDirectory))
+                yield break;
+
+            IEnumerable<Assembly> assemblies = GetAllAssembliesFrom(gateDirectory);
+
+            foreach (Assembly assembly in assemblies)
+            {
+                IEnumerable<IGate> gates = GetAllGatesFrom(assembly);
+
+                foreach (IGate gate in gates)
+                    yield return gate;
+            }
+        }
+
+        private static string GetGateDirectory()
+        {
+            string applicationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+            return applicationDirectory == null
+                ? null
+                : Path.Combine(applicationDirectory, GatesDirectory);
+        }
+
+        private static IEnumerable<Assembly> GetAllAssembliesFrom(string gateDirectory)
+        {
+            string[] assemblyPaths = Directory.GetFiles(gateDirectory, "*.dll");
+
+            return assemblyPaths
+                .Select(Assembly.LoadFrom);
+        }
+
+        private static IEnumerable<IGate> GetAllGatesFrom(Assembly assembly)
+        {
+            IEnumerable<Type> gateTypes = assembly.GetExportedTypes()
+                .Where(x => x.IsClass && typeof(IGate).IsAssignableFrom(x));
+
+            return gateTypes
+                .Select(x => (IGate)Activator.CreateInstanceFrom(assembly.Location, x.FullName).Unwrap());
         }
     }
 }

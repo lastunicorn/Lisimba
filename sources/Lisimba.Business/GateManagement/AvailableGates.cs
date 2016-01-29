@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     public class AvailableGates
     {
         private readonly IApplicationConfiguration config;
-        private readonly GateProvider gateProvider;
+        private readonly Dictionary<string, IGate> gates;
         private IGate defaultGate;
 
         public IGate DefaultGate
@@ -61,60 +61,58 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
             }
         }
 
-        public event EventHandler GateChanged;
-
-        public AvailableGates(IApplicationConfiguration config, GateProvider gateProvider)
+        public void Add(IGate gate)
         {
-            if (config == null) throw new ArgumentNullException("config");
-            if (gateProvider == null) throw new ArgumentNullException("gateProvider");
+            if (gate == null) throw new ArgumentNullException("gate");
 
-            this.config = config;
-            this.gateProvider = gateProvider;
-
-            InitializeDefaultGate();
+            gates.Add(gate.Id, gate);
         }
 
-        private void InitializeDefaultGate()
+        public event EventHandler GateChanged;
+
+        public AvailableGates(IApplicationConfiguration config)
         {
-            try
-            {
-                DefaultGate = gateProvider.GetGate(config.DefaultGateName);
-            }
-            catch
-            {
-                DefaultGate = new EmptyGate();
-            }
+            if (config == null) throw new ArgumentNullException("config");
+
+            this.config = config;
+
+            gates = new Dictionary<string, IGate>();
         }
 
         public void SetDefaultGate(string gateId)
         {
             try
             {
-                DefaultGate = gateProvider.GetGate(gateId);
+                DefaultGate = gates[gateId];
             }
             catch (Exception ex)
             {
                 string message = string.Format(Resources.GateNotFoundError, gateId);
-                throw new Exception(message, ex);
+                throw new LisimbaException(message, ex);
             }
+        }
+
+        public void SetEmptyGate()
+        {
+            DefaultGate = new EmptyGate();
         }
 
         public IGate GetGate(string gateId)
         {
             try
             {
-                return gateProvider.GetGate(gateId);
+                return gates[gateId];
             }
             catch (Exception ex)
             {
                 string message = string.Format(Resources.GateNotFoundError, gateId);
-                throw new Exception(message, ex);
+                throw new LisimbaException(message, ex);
             }
         }
 
         public IEnumerable<IGate> GetAllGates()
         {
-            return gateProvider.GetAllGates();
+            return gates.Values;
         }
 
         protected virtual void OnGateChanged()

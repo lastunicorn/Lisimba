@@ -122,6 +122,7 @@
     <Compile Include="Observers\ApplicationEndingObserver.cs" />
     <Compile Include="Observers\AddressBookSavedObserver.cs" />
     <Compile Include="Services\BirthdaysInfo.cs" />
+    <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\OperationsSetup.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
