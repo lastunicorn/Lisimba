@@ -30,8 +30,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         private AddressBookStatus status;
 
         public AddressBook AddressBook { get; private set; }
-        public IGate Gate { get; set; }
-        public string Location { get; set; }
+        public IGate Gate { get; private set; }
+        public string Location { get; private set; }
 
         public AddressBookStatus Status
         {
@@ -110,6 +110,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             Gate.Save(AddressBook, newLocation);
             Location = newLocation;
+
             Status = AddressBookStatus.Saved;
 
             OnSaved();
@@ -121,11 +122,21 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (gate == null) throw new ArgumentNullException("gate");
 
             gate.Save(AddressBook, newLocation);
+
             Location = newLocation;
             Gate = gate;
+
             Status = AddressBookStatus.Saved;
 
             OnSaved();
+        }
+
+        public void Export(string location, IGate gate)
+        {
+            if (location == null) throw new ArgumentNullException("location");
+            if (gate == null) throw new ArgumentNullException("gate");
+
+            gate.Save(AddressBook, location);
         }
 
         protected virtual void OnSaved()

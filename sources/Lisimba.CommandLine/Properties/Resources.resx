@@ -180,4 +180,10 @@
   <data name="LanguageChangeSuccess" xml:space="preserve">
     <value>Language successfully changed. New language: {1} - {2}</value>
   </data>
+    <data name="AskForNewGate" xml:space="preserve">
+    <value>Choose a gate to use [enter for cancel]: </value>
+  </data>
+    <data name="GateListTitle" xml:space="preserve">
+    <value>Available Gates:</value>
+  </data>
 </root>

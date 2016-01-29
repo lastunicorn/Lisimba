@@ -22,6 +22,7 @@ using System.Reflection;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Business
 {
@@ -81,7 +82,7 @@ namespace DustInTheWind.Lisimba.Business
             }
             catch (Exception ex)
             {
-                availableGates.SetDefaultGate(config.DefaultGateName);
+                availableGates.SetEmptyGate();
                 Warnings.Add(ex);
             }
 

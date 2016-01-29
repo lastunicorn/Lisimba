@@ -25,6 +25,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
         public static void Configure(ActiveObservers activeObservers, UnityContainer unityContainer)
         {
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookOpenedObserver>());
+            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavingObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavedObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosingObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());

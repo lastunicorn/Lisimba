@@ -126,6 +126,9 @@
   <data name="AddressBookOpenSuccess" xml:space="preserve">
     <value>Au fost încărcate cu success {0} contacte din fișierul '{1}'.</value>
   </data>
+  <data name="AskForNewGate" xml:space="preserve">
+    <value>Alege un Gate [enter pentru a anula]: </value>
+  </data>
   <data name="AskForNewLocation" xml:space="preserve">
     <value>Introduceți un nou nume [enter pentru a anula]: </value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="GateChangesSuccess" xml:space="preserve">
     <value>Gate-ul a fost schimbat cu success.</value>
+  </data>
+  <data name="GateListTitle" xml:space="preserve">
+    <value>Gate-uri disponibile:</value>
   </data>
   <data name="GoodByeMessage" xml:space="preserve">
     <value>Pe curând!</value>

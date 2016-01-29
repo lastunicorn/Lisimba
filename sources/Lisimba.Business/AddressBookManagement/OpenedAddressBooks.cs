@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using System.Net.Mail;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
@@ -42,6 +43,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         public event EventHandler<AddressBookClosingEventArgs> AddressBookClosing;
         public event EventHandler<AddressBookClosedEventArgs> AddressBookClosed;
         public event EventHandler<NewLocationNeededEventArgs> NewLocationNeeded;
+        public event EventHandler<GateNeededEventArgs> GateNeeded;
 
         public AddressBookShell Current
         {
@@ -194,6 +196,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             recentFiles.AddRecentFile(fileFullPath, gate);
         }
 
+        public void SaveAddressBook()
+        {
+            if (Current == null)
+                return;
+
+            TrySaveAddressBook();
+        }
+
         public bool CloseAddressBook()
         {
             if (Current == null)
@@ -234,20 +244,29 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         private bool TrySaveAddressBook()
         {
-            if (Current.Location == null)
+            if (Current.Gate == null)
             {
-                NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs { AddressBook = current };
-                OnNewLocationNeeded(eva);
+                IGate gate = GetGateForSave();
 
-                string newLocation = eva.NewLocation;
-
-                if (eva.Cancel)
+                if (gate == null)
                     return false;
 
-                if (Current.Gate == null)
-                    Current.SaveAddressBook(newLocation, availableGates.DefaultGate);
-                else
-                    Current.SaveAddressBook(newLocation);
+                string location = GetLocationForSave();
+
+                if (location == null)
+                    return false;
+
+                Current.SaveAddressBook(location, gate);
+            }
+            else if (Current.Location == null)
+            {
+
+                string location = GetLocationForSave();
+
+                if (location == null)
+                    return false;
+
+                Current.SaveAddressBook(location);
             }
             else
             {
@@ -257,9 +276,42 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             return true;
         }
 
+        private string GetLocationForSave()
+        {
+            NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs(Current);
+            OnNewLocationNeeded(eva);
+
+            return eva.Cancel
+                ? null
+                : eva.NewLocation;
+        }
+
+        private IGate GetGateForSave()
+        {
+            if (availableGates.DefaultGate == null || availableGates.DefaultGate.GetType() == typeof(EmptyGate))
+            {
+                GateNeededEventArgs eva = new GateNeededEventArgs(Current);
+                OnGateNeeded(eva);
+
+                return eva.Cancel
+                    ? null
+                    : eva.Gate;
+            }
+
+            return availableGates.DefaultGate;
+        }
+
         protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
         {
             EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnGateNeeded(GateNeededEventArgs e)
+        {
+            EventHandler<GateNeededEventArgs> handler = GateNeeded;
 
             if (handler != null)
                 handler(this, e);

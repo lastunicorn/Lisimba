@@ -17,6 +17,8 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -26,20 +28,24 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly UserInterface userInterface;
+        private readonly AvailableGates availableGates;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+        public SaveAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
+            ApplicationStatus applicationStatus, AvailableGates availableGates)
             : base(applicationStatus)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.openedAddressBooks = openedAddressBooks;
             this.userInterface = userInterface;
+            this.availableGates = availableGates;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = openedAddressBooks.Current != null;
@@ -57,7 +63,7 @@ namespace DustInTheWind.Lisimba.Operations
                 if (openedAddressBooks.Current == null)
                     throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
-                openedAddressBooks.Current.SaveAddressBook();
+                openedAddressBooks.SaveAddressBook();
             }
             catch (Exception ex)
             {

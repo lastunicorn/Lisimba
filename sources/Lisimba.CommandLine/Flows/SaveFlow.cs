@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
         public void Execute()
         {
             if (openedAddressBooks.Current == null)
-                return;
+                throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
             if (consoleCommand.ParameterCount >= 1)
             {
@@ -64,29 +64,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             }
             else
             {
-                if (openedAddressBooks.Current.Gate == null)
-                {
-                    if (availableGates.DefaultGate == null)
-                        throw new LisimbaException(Resources.NoDefaultGateError);
-
-                    var gate = availableGates.DefaultGate;
-
-                    console.WriteNormal(Resources.AskForNewLocation);
-                    string newLocation = console.ReadLine();
-
-                    openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
-                }
-                else if (openedAddressBooks.Current.Location == null)
-                {
-                    console.WriteNormal(Resources.AskForNewLocation);
-                    string newLocation = console.ReadLine();
-
-                    openedAddressBooks.Current.SaveAddressBook(newLocation);
-                }
-                else
-                {
-                    openedAddressBooks.Current.SaveAddressBook();
-                }
+                openedAddressBooks.SaveAddressBook();
             }
         }
     }

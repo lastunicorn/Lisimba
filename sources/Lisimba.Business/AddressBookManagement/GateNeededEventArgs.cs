@@ -15,15 +15,16 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
+using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
-    public class NewLocationNeededEventArgs : CancelEventArgs
+    public class GateNeededEventArgs : CancelEventArgs
     {
         public AddressBookShell AddressBook { get; private set; }
-        public string NewLocation { get; set; }
+        public IGate Gate { get; set; }
 
-        public NewLocationNeededEventArgs(AddressBookShell addressBookShell)
+        public GateNeededEventArgs(AddressBookShell addressBookShell)
         {
             AddressBook = addressBookShell;
         }

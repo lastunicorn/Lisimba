@@ -88,6 +88,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose a gate to use [enter for cancel]: .
+        /// </summary>
+        internal static string AskForNewGate {
+            get {
+                return ResourceManager.GetString("AskForNewGate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address book new file name [empty string to cancel]: .
         /// </summary>
         internal static string AskForNewLocation {
@@ -120,6 +129,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Properties {
         internal static string GateChangesSuccess {
             get {
                 return ResourceManager.GetString("GateChangesSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available Gates:.
+        /// </summary>
+        internal static string GateListTitle {
+            get {
+                return ResourceManager.GetString("GateListTitle", resourceCulture);
             }
         }
         

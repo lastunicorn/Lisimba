@@ -113,6 +113,7 @@
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GateSelectorViewModel.cs" />
+    <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />

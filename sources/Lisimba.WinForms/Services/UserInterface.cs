@@ -19,6 +19,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.Properties;

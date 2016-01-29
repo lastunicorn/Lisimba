@@ -39,13 +39,11 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
         public void Start()
         {
             openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
-            openedAddressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
         }
 
         public void Stop()
         {
             openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
-            openedAddressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
@@ -87,22 +85,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
                 default:
                     return null;
             }
-        }
-
-        private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
-        {
-            string newLocation = AskForNewLocation();
-
-            if (string.IsNullOrEmpty(newLocation))
-                e.Cancel = true;
-            else
-                e.NewLocation = newLocation;
-        }
-
-        public string AskForNewLocation()
-        {
-            console.WriteNormal(Resources.AskForNewLocation);
-            return console.ReadLine();
         }
     }
 }
