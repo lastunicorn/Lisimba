@@ -1,0 +1,4 @@
+Lisimba important flows:
+
+- When the application starts, it checks the loadFileAtStart configuration element in app.config file. It will open the specified file. (winforms, cmd)
+- exit flow - closes the 
