@@ -64,26 +64,60 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             foreach (Contact contact in contacts)
             {
-                console.WriteLineNormal(contact.Name.ToString());
+                console.WriteLineNormal("Name: " + contact.Name);
+                console.WriteLineNormal("Birthday: " + contact.Birthday.ToShortString() + " - " + contact.ZodiacSign + " " + ToChar(contact.ZodiacSign));
+            }
+        }
+
+        private char ToChar(ZodiacSign zodiacSign)
+        {
+            switch (zodiacSign)
+            {
+                case ZodiacSign.NotSpecified:
+                    return ' ';
+                case ZodiacSign.Aquarius:
+                    return '♒'; // &#9810;
+                case ZodiacSign.Pisces:
+                    return '♓'; // &#9811
+                case ZodiacSign.Aries:
+                    return '♈'; // &#9800
+                case ZodiacSign.Taurus:
+                    return '♉'; // &#9801
+                case ZodiacSign.Gemini:
+                    return '♊'; // &#9802
+                case ZodiacSign.Cancer:
+                    return '♋'; // &#9803
+                case ZodiacSign.Leo:
+                    return '♌'; // &#9804
+                case ZodiacSign.Virgo:
+                    return '♍'; // &#9805
+                case ZodiacSign.Libra:
+                    return '♎'; // &#9806
+                case ZodiacSign.Scorpio:
+                    return '♏'; // &#9807
+                case ZodiacSign.Sagittarius:
+                    return '♐'; // &#9808
+                case ZodiacSign.Capricorn:
+                    return '♑'; // &#9809
+                default:
+                    throw new ArgumentOutOfRangeException("zodiacSign", zodiacSign, null);
             }
         }
 
         private IEnumerable<Contact> GetContacts(string contactName)
         {
-            return openedAddressBooks.Current.AddressBook.Contacts
-                .Where(x =>
-                    (x.Name.FirstName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.FirstName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.MiddleName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.MiddleName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.LastName != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.LastName, contactName, CompareOptions.IgnoreCase) >= 0) ||
-                    (x.Name.Nickname != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(x.Name.Nickname, contactName, CompareOptions.IgnoreCase) >= 0));
+            return openedAddressBooks.Current.AddressBook.Contacts.Where(x => MatchName(x.Name.FirstName, contactName) || MatchName(x.Name.MiddleName, contactName) || MatchName(x.Name.LastName, contactName) || MatchName(x.Name.Nickname, contactName));
+        }
+
+        private static bool MatchName(string name, string contactName)
+        {
+            return name != null && CultureInfo.InvariantCulture.CompareInfo.IndexOf(name, contactName, CompareOptions.IgnoreCase) >= 0;
         }
 
         private void DisplayAllContacts()
         {
             foreach (Contact contact in openedAddressBooks.Current.AddressBook.Contacts)
-            {
                 console.WriteLineNormal(contact.ToString());
-            }
         }
     }
 }
