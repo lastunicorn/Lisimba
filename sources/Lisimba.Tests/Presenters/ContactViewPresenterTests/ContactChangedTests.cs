@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Birthday = birthday
             };
 
-            Assert.That(contactEditorViewModel.Birthday, Is.EqualTo(birthday.ToString()));
+            Assert.That(contactEditorViewModel.Birthday, Is.EqualTo(birthday.ToShortString()));
         }
 
         [Test]
