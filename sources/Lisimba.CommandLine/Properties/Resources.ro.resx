@@ -133,7 +133,7 @@
     <value>Introduceți un nou nume [enter pentru a anula]: </value>
   </data>
   <data name="AskToSaveAddressBook" xml:space="preserve">
-    <value>Doriți să salvați agenda curentă? [y-yes; n-no; c-cancel] </value>
+    <value>Doriți să salvați agenda curentă?</value>
   </data>
   <data name="DefaultGateMessage" xml:space="preserve">
     <value>Gate-ul default: {0}</value>

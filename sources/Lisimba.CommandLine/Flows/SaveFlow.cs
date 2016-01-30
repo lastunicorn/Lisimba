@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.IO;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Business;
@@ -52,14 +53,24 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             if (consoleCommand.ParameterCount >= 1)
             {
+                string newLocation = consoleCommand[1];
+
+                if (File.Exists(newLocation))
+                {
+                    bool? allowToOverwrite = console.AskYesNoCancelQuestion(Resources.OverwriteFileQuestion);
+
+                    if (allowToOverwrite == null || allowToOverwrite == false)
+                        return;
+                }
+
                 if (consoleCommand.ParameterCount >= 2)
                 {
                     IGate gate = availableGates.GetGate(consoleCommand[2]);
-                    openedAddressBooks.Current.SaveAddressBook(consoleCommand[1], gate);
+                    openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
                 }
                 else
                 {
-                    openedAddressBooks.Current.SaveAddressBook(consoleCommand[1]);
+                    openedAddressBooks.Current.SaveAddressBook(newLocation);
                 }
             }
             else

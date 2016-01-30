@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AskToSaveAddressBook" xml:space="preserve">
-    <value>Save current address book? [y-yes; n-no; c-cancel] </value>
+    <value>Save current address book?</value>
   </data>
   <data name="AskForNewLocation" xml:space="preserve">
     <value>Address book new file name [empty string to cancel]: </value>
@@ -180,10 +180,13 @@
   <data name="LanguageChangeSuccess" xml:space="preserve">
     <value>Language successfully changed. New language: {1} - {2}</value>
   </data>
-    <data name="AskForNewGate" xml:space="preserve">
+  <data name="AskForNewGate" xml:space="preserve">
     <value>Choose a gate to use [enter for cancel]: </value>
   </data>
-    <data name="GateListTitle" xml:space="preserve">
+  <data name="GateListTitle" xml:space="preserve">
     <value>Available Gates:</value>
+  </data>
+    <data name="OverwriteFileQuestion" xml:space="preserve">
+    <value>File already exists. Overwrite?</value>
   </data>
 </root>

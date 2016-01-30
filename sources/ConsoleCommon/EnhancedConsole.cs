@@ -174,5 +174,18 @@ namespace DustInTheWind.ConsoleCommon
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        public bool? AskYesNoCancelQuestion(string question)
+        {
+            YesNoCancel ync = new YesNoCancel();
+
+            string text = ync.FormatQuestion(question);
+            WriteNormal(text);
+
+            ConsoleKeyInfo key = Console.ReadKey(false);
+            Console.WriteLine();
+
+            return ync.Interpret(key.Key);
+        }
     }
 }

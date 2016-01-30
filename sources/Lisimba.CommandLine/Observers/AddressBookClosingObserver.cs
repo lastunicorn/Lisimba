@@ -50,7 +50,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
         {
             if (e.AddressBook.Status == AddressBookStatus.Modified)
             {
-                bool? needToSave = AskToSaveAddressBook();
+                bool? needToSave = console.AskYesNoCancelQuestion(Resources.AskToSaveAddressBook);
 
                 if (needToSave == null)
                 {
@@ -64,26 +64,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
             else
             {
                 e.SaveAddressBook = false;
-            }
-        }
-
-        public bool? AskToSaveAddressBook()
-        {
-            console.WriteNormal(Resources.AskToSaveAddressBook);
-
-            ConsoleKeyInfo key = console.ReadKey();
-            console.WriteLine();
-
-            switch (key.Key)
-            {
-                case ConsoleKey.Y:
-                    return true;
-
-                case ConsoleKey.N:
-                    return false;
-
-                default:
-                    return null;
             }
         }
     }

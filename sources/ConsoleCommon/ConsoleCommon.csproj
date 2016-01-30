@@ -49,6 +49,8 @@
     <Compile Include="Templating\TemplateElementType.cs" />
     <Compile Include="TextType.cs" />
     <Compile Include="EnhancedConsole.cs" />
+    <Compile Include="YesNoCancel.cs" />
+    <Compile Include="YesNoCancelItem.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

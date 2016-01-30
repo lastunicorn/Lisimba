@@ -133,7 +133,7 @@
     <value>&lt; Fără nume &gt;</value>
   </data>
   <data name="NoGateWasSpecifiedError" xml:space="preserve">
-    <value>Nu există nici un Gate acosiat cu agenda.</value>
+    <value>Nu există nici un Gate asociat cu agenda.</value>
   </data>
   <data name="NoLocationWasSpecifiedError" xml:space="preserve">
     <value>E nevoie să se specifice o locație.</value>
