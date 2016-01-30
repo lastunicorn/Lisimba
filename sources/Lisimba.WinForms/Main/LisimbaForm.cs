@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
@@ -70,6 +71,11 @@ namespace DustInTheWind.Lisimba.Main
 
             buttonNewAddressBook.ViewModel = viewModel.NewAddressBookOperation;
             buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookOperation;
+
+            toolStripButtonNew.ViewModel = availableOperations.GetOperation<NewAddressBookOperation>();
+            toolStripButtonOpen.ViewModel = availableOperations.GetOperation<OpenAddressBookOperation>();
+            toolStripButtonSave.ViewModel = availableOperations.GetOperation<SaveAddressBookOperation>();
+            toolStripButtonAbout.ViewModel = availableOperations.GetOperation<ShowAboutOperation>();
         }
 
         private void LisimbaForm_FormClosed(object sender, FormClosedEventArgs e)

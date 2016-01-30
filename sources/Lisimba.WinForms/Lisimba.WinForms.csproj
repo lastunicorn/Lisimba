@@ -125,6 +125,12 @@
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\OperationsSetup.cs" />
+    <Compile Include="Utils\CustomToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\CustomToolStripButton.Designer.cs">
+      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>

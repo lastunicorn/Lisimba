@@ -76,7 +76,7 @@ namespace DustInTheWind.Lisimba.Business
         public void Start()
         {
             ChooseDefaultGate();
-            initialCatalogOpener.OpenInitialCatalog();
+            OpenInitialAddressBook();
 
             OnStarted();
         }
@@ -90,6 +90,18 @@ namespace DustInTheWind.Lisimba.Business
             catch (Exception ex)
             {
                 availableGates.SetEmptyGate();
+                warnings.Add(ex);
+            }
+        }
+
+        private void OpenInitialAddressBook()
+        {
+            try
+            {
+                initialCatalogOpener.OpenInitialCatalog();
+            }
+            catch (Exception ex)
+            {
                 warnings.Add(ex);
             }
         }

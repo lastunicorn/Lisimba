@@ -18,7 +18,6 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {

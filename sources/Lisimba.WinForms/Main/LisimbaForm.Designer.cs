@@ -1,8 +1,3 @@
-using DustInTheWind.Lisimba.ContactEdit;
-using DustInTheWind.Lisimba.ContactList;
-using DustInTheWind.Lisimba.MainMenu;
-using DustInTheWind.Lisimba.Utils;
-
 namespace DustInTheWind.Lisimba.Main
 {
     partial class LisimbaForm
@@ -33,6 +28,7 @@ namespace DustInTheWind.Lisimba.Main
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisimbaForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.contactListView1 = new DustInTheWind.Lisimba.ContactList.ContactListView();
@@ -50,6 +46,12 @@ namespace DustInTheWind.Lisimba.Main
             this.buttonNewAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
             this.buttonOpenAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
             this.menuStripMain = new DustInTheWind.Lisimba.MainMenu.LisimbaMainMenuStrip();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonNew = new DustInTheWind.Lisimba.Utils.CustomToolStripButton(this.components);
+            this.toolStripButtonOpen = new DustInTheWind.Lisimba.Utils.CustomToolStripButton(this.components);
+            this.toolStripButtonSave = new DustInTheWind.Lisimba.Utils.CustomToolStripButton(this.components);
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonAbout = new DustInTheWind.Lisimba.Utils.CustomToolStripButton(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -59,6 +61,7 @@ namespace DustInTheWind.Lisimba.Main
             this.panelFormContent.SuspendLayout();
             this.tableLayoutPanelNoAddressBook.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -76,7 +79,7 @@ namespace DustInTheWind.Lisimba.Main
             // 
             this.splitContainer1.Panel2.Controls.Add(this.contactEditor1);
             this.splitContainer1.Panel2.Controls.Add(this.labelNoContact);
-            this.splitContainer1.Size = new System.Drawing.Size(727, 488);
+            this.splitContainer1.Size = new System.Drawing.Size(727, 463);
             this.splitContainer1.SplitterDistance = 194;
             this.splitContainer1.SplitterWidth = 8;
             this.splitContainer1.TabIndex = 4;
@@ -86,7 +89,7 @@ namespace DustInTheWind.Lisimba.Main
             this.contactListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.contactListView1.Location = new System.Drawing.Point(0, 0);
             this.contactListView1.Name = "contactListView1";
-            this.contactListView1.Size = new System.Drawing.Size(194, 488);
+            this.contactListView1.Size = new System.Drawing.Size(194, 463);
             this.contactListView1.TabIndex = 9;
             this.contactListView1.ViewModel = null;
             // 
@@ -99,7 +102,7 @@ namespace DustInTheWind.Lisimba.Main
             this.contactEditor1.Location = new System.Drawing.Point(0, 0);
             this.contactEditor1.MinimumSize = new System.Drawing.Size(516, 300);
             this.contactEditor1.Name = "contactEditor1";
-            this.contactEditor1.Size = new System.Drawing.Size(525, 488);
+            this.contactEditor1.Size = new System.Drawing.Size(525, 463);
             this.contactEditor1.TabIndex = 5;
             this.contactEditor1.ViewModel = null;
             // 
@@ -109,7 +112,7 @@ namespace DustInTheWind.Lisimba.Main
             this.labelNoContact.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNoContact.Location = new System.Drawing.Point(0, 0);
             this.labelNoContact.Name = "labelNoContact";
-            this.labelNoContact.Size = new System.Drawing.Size(525, 488);
+            this.labelNoContact.Size = new System.Drawing.Size(525, 463);
             this.labelNoContact.TabIndex = 7;
             this.labelNoContact.Text = "Select a contact";
             this.labelNoContact.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -121,7 +124,7 @@ namespace DustInTheWind.Lisimba.Main
             this.labelNoAddressBook.BackColor = System.Drawing.Color.Transparent;
             this.labelNoAddressBook.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelNoAddressBook.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.labelNoAddressBook.Location = new System.Drawing.Point(218, 185);
+            this.labelNoAddressBook.Location = new System.Drawing.Point(218, 174);
             this.labelNoAddressBook.Margin = new System.Windows.Forms.Padding(10);
             this.labelNoAddressBook.Name = "labelNoAddressBook";
             this.labelNoAddressBook.Size = new System.Drawing.Size(307, 31);
@@ -149,7 +152,7 @@ namespace DustInTheWind.Lisimba.Main
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(537, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(568, 19);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripDefaultGate
@@ -168,7 +171,7 @@ namespace DustInTheWind.Lisimba.Main
             this.panelAddressBookView.Location = new System.Drawing.Point(0, 0);
             this.panelAddressBookView.Name = "panelAddressBookView";
             this.panelAddressBookView.Padding = new System.Windows.Forms.Padding(8);
-            this.panelAddressBookView.Size = new System.Drawing.Size(743, 504);
+            this.panelAddressBookView.Size = new System.Drawing.Size(743, 479);
             this.panelAddressBookView.TabIndex = 9;
             // 
             // panelFormContent
@@ -176,9 +179,9 @@ namespace DustInTheWind.Lisimba.Main
             this.panelFormContent.Controls.Add(this.panelAddressBookView);
             this.panelFormContent.Controls.Add(this.tableLayoutPanelNoAddressBook);
             this.panelFormContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelFormContent.Location = new System.Drawing.Point(0, 24);
+            this.panelFormContent.Location = new System.Drawing.Point(0, 49);
             this.panelFormContent.Name = "panelFormContent";
-            this.panelFormContent.Size = new System.Drawing.Size(743, 504);
+            this.panelFormContent.Size = new System.Drawing.Size(743, 479);
             this.panelFormContent.TabIndex = 11;
             // 
             // tableLayoutPanelNoAddressBook
@@ -193,7 +196,7 @@ namespace DustInTheWind.Lisimba.Main
             this.tableLayoutPanelNoAddressBook.RowCount = 2;
             this.tableLayoutPanelNoAddressBook.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45F));
             this.tableLayoutPanelNoAddressBook.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanelNoAddressBook.Size = new System.Drawing.Size(743, 504);
+            this.tableLayoutPanelNoAddressBook.Size = new System.Drawing.Size(743, 479);
             this.tableLayoutPanelNoAddressBook.TabIndex = 10;
             // 
             // flowLayoutPanel1
@@ -203,7 +206,7 @@ namespace DustInTheWind.Lisimba.Main
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             this.flowLayoutPanel1.Controls.Add(this.buttonNewAddressBook);
             this.flowLayoutPanel1.Controls.Add(this.buttonOpenAddressBook);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(228, 229);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(228, 218);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(286, 70);
             this.flowLayoutPanel1.TabIndex = 8;
@@ -250,6 +253,61 @@ namespace DustInTheWind.Lisimba.Main
             this.menuStripMain.TabIndex = 10;
             this.menuStripMain.Text = "menuStrip2";
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonNew,
+            this.toolStripButtonOpen,
+            this.toolStripButtonSave,
+            this.toolStripSeparator1,
+            this.toolStripButtonAbout});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(743, 25);
+            this.toolStrip1.TabIndex = 12;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButtonNew
+            // 
+            this.toolStripButtonNew.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonNew.Image = global::DustInTheWind.Lisimba.Properties.Resources.new_16;
+            this.toolStripButtonNew.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonNew.Name = "toolStripButtonNew";
+            this.toolStripButtonNew.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonNew.ViewModel = null;
+            // 
+            // toolStripButtonOpen
+            // 
+            this.toolStripButtonOpen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonOpen.Image = global::DustInTheWind.Lisimba.Properties.Resources.open_16;
+            this.toolStripButtonOpen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonOpen.Name = "toolStripButtonOpen";
+            this.toolStripButtonOpen.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonOpen.ViewModel = null;
+            // 
+            // toolStripButtonSave
+            // 
+            this.toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonSave.Image = global::DustInTheWind.Lisimba.Properties.Resources.save_16;
+            this.toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonSave.Name = "toolStripButtonSave";
+            this.toolStripButtonSave.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonSave.ViewModel = null;
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonAbout
+            // 
+            this.toolStripButtonAbout.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAbout.Image = global::DustInTheWind.Lisimba.Properties.Resources.about_16;
+            this.toolStripButtonAbout.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAbout.Name = "toolStripButtonAbout";
+            this.toolStripButtonAbout.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAbout.ViewModel = null;
+            // 
             // LisimbaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +315,7 @@ namespace DustInTheWind.Lisimba.Main
             this.ClientSize = new System.Drawing.Size(743, 552);
             this.Controls.Add(this.panelFormContent);
             this.Controls.Add(this.statusStripMain);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStripMain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "LisimbaForm";
@@ -276,6 +335,8 @@ namespace DustInTheWind.Lisimba.Main
             this.tableLayoutPanelNoAddressBook.PerformLayout();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,19 +346,25 @@ namespace DustInTheWind.Lisimba.Main
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStripMain;
-        private ContactEditor contactEditor1;
-        private BindableToolStripStatusLabel toolStripStatus;
-        private ContactListView contactListView1;
+        private DustInTheWind.Lisimba.ContactEdit.ContactEditor contactEditor1;
+        private DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel toolStripStatus;
+        private DustInTheWind.Lisimba.ContactList.ContactListView contactListView1;
         private System.Windows.Forms.Panel panelAddressBookView;
-        private LisimbaMainMenuStrip menuStripMain;
+        private DustInTheWind.Lisimba.MainMenu.LisimbaMainMenuStrip menuStripMain;
         private System.Windows.Forms.Label labelNoAddressBook;
         private System.Windows.Forms.Label labelNoContact;
         private System.Windows.Forms.Panel panelFormContent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelNoAddressBook;
-        private CustomButton buttonOpenAddressBook;
+        private DustInTheWind.Lisimba.Utils.CustomButton buttonOpenAddressBook;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton buttonNewAddressBook;
-        private BindableToolStripStatusLabel toolStripDefaultGate;
+        private DustInTheWind.Lisimba.Utils.CustomButton buttonNewAddressBook;
+        private DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel toolStripDefaultGate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private DustInTheWind.Lisimba.Utils.CustomToolStripButton toolStripButtonNew;
+        private DustInTheWind.Lisimba.Utils.CustomToolStripButton toolStripButtonSave;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private DustInTheWind.Lisimba.Utils.CustomToolStripButton toolStripButtonAbout;
+        private DustInTheWind.Lisimba.Utils.CustomToolStripButton toolStripButtonOpen;
     }
 }
