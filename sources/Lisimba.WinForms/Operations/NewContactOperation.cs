@@ -24,7 +24,6 @@ namespace DustInTheWind.Lisimba.Operations
     internal class NewContactOperation : ExecutableViewModelBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
@@ -32,13 +31,11 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public NewContactOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
-            : base(applicationStatus)
+            : base(applicationStatus, userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = openedAddressBooks.Current != null;

@@ -22,7 +22,6 @@ using System.Reflection;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg;
 
 namespace DustInTheWind.Lisimba.Business
 {
@@ -41,7 +40,7 @@ namespace DustInTheWind.Lisimba.Business
         public event EventHandler EndCanceled;
         public event EventHandler Ended;
 
-        private List<Exception> Warnings = new List<Exception>();
+        private readonly List<Exception> warnings = new List<Exception>();
 
         public string ProgramName
         {
@@ -76,6 +75,14 @@ namespace DustInTheWind.Lisimba.Business
 
         public void Start()
         {
+            ChooseDefaultGate();
+            initialCatalogOpener.OpenInitialCatalog();
+
+            OnStarted();
+        }
+
+        private void ChooseDefaultGate()
+        {
             try
             {
                 availableGates.SetDefaultGate(config.DefaultGateName);
@@ -83,12 +90,8 @@ namespace DustInTheWind.Lisimba.Business
             catch (Exception ex)
             {
                 availableGates.SetEmptyGate();
-                Warnings.Add(ex);
+                warnings.Add(ex);
             }
-
-            initialCatalogOpener.OpenInitialCatalog();
-
-            OnStarted();
         }
 
         public void Exit()

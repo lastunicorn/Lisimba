@@ -179,6 +179,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The parameter is not of type {0}.
+        /// </summary>
+        internal static string ExecutableViewModel_IncorectParameterType {
+            get {
+                return ResourceManager.GetString("ExecutableViewModel_IncorectParameterType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export current opened address book in Yahoo! csv format..
         /// </summary>
         internal static string ExportYahooCsvOperationDescription {
@@ -215,11 +224,11 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No address book is opened..
+        ///   Looks up a localized string similar to There is no default gate to be used..
         /// </summary>
-        internal static string NoAddessBookOpenedError {
+        internal static string NoDefaultGateExists {
             get {
-                return ResourceManager.GetString("NoAddessBookOpenedError", resourceCulture);
+                return ResourceManager.GetString("NoDefaultGateExists", resourceCulture);
             }
         }
         

@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
@@ -50,31 +49,13 @@ namespace DustInTheWind.Lisimba.Services
             if (!contacts.Any())
                 return;
 
-            string birthdaysInfo = BuildInfoText(contacts);
-            userInterface.DisplayInfo(birthdaysInfo);
+            userInterface.DisplayBirthdays(contacts, startDate, endDate);
         }
 
         private IEnumerable<Contact> RetrieveContacts()
         {
             return openedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate)
                 .ToList();
-        }
-
-        private string BuildInfoText(IEnumerable<Contact> contacts)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            double totalDays = (endDate - startDate).TotalDays;
-            sb.AppendLine("The birthdays for the next " + totalDays + " days are:");
-            sb.AppendLine();
-
-            foreach (Contact contact in contacts)
-            {
-                string line = string.Format("{0} - {1}", contact.Name, contact.Birthday.ToShortString());
-                sb.AppendLine(line);
-            }
-
-            return sb.ToString();
         }
     }
 }

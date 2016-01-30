@@ -175,9 +175,6 @@ Do you wanna save it before proceedeing?</value>
   <data name="GateNotFoundError" xml:space="preserve">
     <value>There is no gate with id = {0}</value>
   </data>
-  <data name="NoAddessBookOpenedError" xml:space="preserve">
-    <value>No address book is opened.</value>
-  </data>
   <data name="DefaultAddressBookName" xml:space="preserve">
     <value>New Address Book</value>
   </data>
@@ -186,5 +183,11 @@ Do you wanna save it before proceedeing?</value>
   </data>
   <data name="NewAddressBook_SuccessStatusText" xml:space="preserve">
     <value>A new address book was created.</value>
+  </data>
+  <data name="NoDefaultGateExists" xml:space="preserve">
+    <value>There is no default gate to be used.</value>
+  </data>
+    <data name="ExecutableViewModel_IncorectParameterType" xml:space="preserve">
+    <value>The parameter is not of type {0}</value>
   </data>
 </root>

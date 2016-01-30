@@ -15,12 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
@@ -66,7 +65,9 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void HandleOpenedAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
         {
-            //IGate newGate = userInterface.AskForNewGate();
+            if(availableGates.DefaultGate == null)
+                throw new LisimbaException(LocalizedResources.NoDefaultGateExists);
+
             IGate newGate = availableGates.DefaultGate;
 
             if (newGate == null)

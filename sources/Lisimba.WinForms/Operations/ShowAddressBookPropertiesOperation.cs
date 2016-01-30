@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -25,7 +24,6 @@ namespace DustInTheWind.Lisimba.Operations
     internal class ShowAddressBookPropertiesOperation : ExecutableViewModelBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
 
         public override string ShortDescription
         {
@@ -33,13 +31,11 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public ShowAddressBookPropertiesOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
-            : base(applicationStatus)
+            : base(applicationStatus, userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
             this.openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
 
             IsEnabled = openedAddressBooks.Current != null;

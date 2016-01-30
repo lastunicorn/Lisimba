@@ -79,6 +79,15 @@ namespace DustInTheWind.Lisimba.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No address book is opened..
+        /// </summary>
+        internal static string NoAddessBookOpenedError {
+            get {
+                return ResourceManager.GetString("NoAddessBookOpenedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No gate is associated with the address book..
         /// </summary>
         internal static string NoGateWasSpecifiedError {

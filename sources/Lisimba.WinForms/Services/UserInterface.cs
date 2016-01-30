@@ -15,11 +15,14 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.Properties;
@@ -233,6 +236,29 @@ namespace DustInTheWind.Lisimba.Services
             form.Location = new Point(x, y);
 
             form.Show();
+        }
+
+        public void DisplayBirthdays(IEnumerable<Contact> contacts, DateTime startDate, DateTime endDate)
+        {
+            string birthdaysInfo = BuildInfoText(contacts, startDate,endDate);
+            DisplayInfo(birthdaysInfo);
+        }
+
+        private string BuildInfoText(IEnumerable<Contact> contacts, DateTime startDate, DateTime endDate)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            double totalDays = (endDate - startDate).TotalDays;
+            sb.AppendLine("The birthdays for the next " + totalDays + " days are:");
+            sb.AppendLine();
+
+            foreach (Contact contact in contacts)
+            {
+                string line = string.Format("{0} - {1}", contact.Name, contact.Birthday.ToShortString());
+                sb.AppendLine(line);
+            }
+
+            return sb.ToString();
         }
     }
 }

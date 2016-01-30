@@ -16,7 +16,6 @@
 
 using System;
 using System.IO;
-using System.Net.Mail;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
@@ -199,7 +198,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         public void SaveAddressBook()
         {
             if (Current == null)
-                return;
+                throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
             TrySaveAddressBook();
         }

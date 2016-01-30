@@ -127,4 +127,7 @@ Vrei să o salvezi înainte de a continua?</value>
   <data name="EnsureAddressBookIsSaved_Title" xml:space="preserve">
     <value>Salvează?</value>
   </data>
+  <data name="NoDefaultGateExists" xml:space="preserve">
+    <value>Nu există un Gate default.</value>
+  </data>
 </root>

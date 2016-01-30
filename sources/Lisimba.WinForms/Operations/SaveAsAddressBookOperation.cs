@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -26,25 +25,18 @@ namespace DustInTheWind.Lisimba.Operations
     internal class SaveAsAddressBookOperation : ExecutableViewModelBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
-        private readonly RecentFiles recentFiles;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
-            ApplicationStatus applicationStatus, RecentFiles recentFiles)
-            : base(applicationStatus)
+        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
+            : base(applicationStatus, userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
-            this.recentFiles = recentFiles;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = openedAddressBooks.Current != null;
@@ -57,18 +49,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            try
-            {
-                if (openedAddressBooks.Current == null)
-                    throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
-
-                string newLocation = userInterface.AskToSaveLsbFile();
-                openedAddressBooks.Current.SaveAddressBook(newLocation);
-            }
-            catch (Exception ex)
-            {
-                userInterface.DisplayError(ex.Message);
-            }
+            openedAddressBooks.SaveAddressBook();
         }
     }
 }

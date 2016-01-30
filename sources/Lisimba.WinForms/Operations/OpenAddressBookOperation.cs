@@ -25,7 +25,6 @@ namespace DustInTheWind.Lisimba.Operations
     internal class OpenAddressBookOperation : ExecutableViewModelBase<string>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
         private readonly AvailableGates availableGates;
 
         public override string ShortDescription
@@ -35,35 +34,26 @@ namespace DustInTheWind.Lisimba.Operations
 
         public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
             ApplicationStatus applicationStatus, AvailableGates availableGates)
-            : base(applicationStatus)
+            : base(applicationStatus, userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
             this.availableGates = availableGates;
         }
 
         protected override void DoExecute(string fileName)
         {
-            try
+            if (string.IsNullOrEmpty(fileName))
             {
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    fileName = userInterface.AskToOpenLsbFile();
+                fileName = userInterface.AskToOpenLsbFile();
 
-                    if (fileName == null)
-                        return;
-                }
+                if (fileName == null)
+                    return;
+            }
 
-                openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
-            }
-            catch (Exception ex)
-            {
-                userInterface.DisplayError(ex.Message);
-            }
+            openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
         }
     }
 }

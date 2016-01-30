@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
@@ -23,6 +24,8 @@ namespace DustInTheWind.Lisimba.Operations
     internal abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
     {
         protected readonly ApplicationStatus applicationStatus;
+        protected readonly UserInterface userInterface;
+
         private bool isEnabled;
 
         public bool IsEnabled
@@ -40,9 +43,13 @@ namespace DustInTheWind.Lisimba.Operations
 
         public abstract string ShortDescription { get; }
 
-        protected ExecutableViewModelBase(ApplicationStatus applicationStatus)
+        protected ExecutableViewModelBase(ApplicationStatus applicationStatus, UserInterface userInterface)
         {
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
+
             this.applicationStatus = applicationStatus;
+            this.userInterface = userInterface;
 
             isEnabled = true;
         }
@@ -71,11 +78,21 @@ namespace DustInTheWind.Lisimba.Operations
         {
             if (parameter != null && !(parameter is T))
             {
-                string message = string.Format("The parameter is not of type {0}", typeof (T).Name);
+                string message = string.Format(LocalizedResources.ExecutableViewModel_IncorectParameterType, typeof(T).Name);
                 throw new ArgumentException(message);
             }
 
-            Execute((T) parameter);
+            if (!isEnabled)
+                return;
+
+            try
+            {
+                DoExecute((T)parameter);
+            }
+            catch (Exception ex)
+            {
+                userInterface.DisplayError(ex.Message);
+            }
         }
 
         public void Execute(T parameter)
@@ -83,7 +100,14 @@ namespace DustInTheWind.Lisimba.Operations
             if (!isEnabled)
                 return;
 
-            DoExecute(parameter);
+            try
+            {
+                DoExecute(parameter);
+            }
+            catch (Exception ex)
+            {
+                userInterface.DisplayError(ex.Message);
+            }
         }
 
         protected abstract void DoExecute(T parameter);
