@@ -49,7 +49,15 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.SaveAddressBook();
+            if (openedAddressBooks.Current == null)
+                throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
+
+            string newLocation = userInterface.AskToSaveLsbFile();
+
+            if (newLocation == null)
+                return;
+
+            openedAddressBooks.Current.SaveAddressBook(newLocation);
         }
     }
 }

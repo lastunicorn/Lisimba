@@ -83,54 +83,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             this.availableGates = availableGates;
         }
 
-        protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
-        {
-            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnAddressBookSaved(EventArgs e)
-        {
-            EventHandler handler = AddressBookSaved;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnContactChanged()
-        {
-            EventHandler handler = ContactChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        protected virtual void OnClosing(AddressBookClosingEventArgs e)
-        {
-            EventHandler<AddressBookClosingEventArgs> handler = AddressBookClosing;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnClosed(AddressBookClosedEventArgs e)
-        {
-            EventHandler<AddressBookClosedEventArgs> handler = AddressBookClosed;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
-        protected virtual void OnOpened(AddressBookOpenedEventArgs e)
-        {
-            EventHandler<AddressBookOpenedEventArgs> handler = AddressBookOpened;
-
-            if (handler != null)
-                handler(this, e);
-        }
-
         public void CreateNewAddressBook(string name)
         {
             bool allowToContinue = CloseAddressBook();
@@ -200,7 +152,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
-            TrySaveAddressBook();
+            SaveAddressBookInternal();
         }
 
         public bool CloseAddressBook()
@@ -208,26 +160,9 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (Current == null)
                 return true;
 
-            bool addressBookNeedsSave = Current.Status == AddressBookStatus.Modified;
-            AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(addressBookNeedsSave, Current);
-            OnClosing(eva);
-
-            if (eva.Cancel)
+            bool allowToContinue = PrepareForClose();
+            if (!allowToContinue)
                 return false;
-
-            if (addressBookNeedsSave)
-            {
-                if (eva.SaveAddressBook == null)
-                    throw new LisimbaException("Cannot close current address book. It has unsaved modifications.");
-
-                if (eva.SaveAddressBook.Value)
-                {
-                    bool allowToContinue = TrySaveAddressBook();
-
-                    if (!allowToContinue)
-                        return false;
-                }
-            }
 
             AddressBookShell oldAddressBookShell = Current;
 
@@ -241,7 +176,33 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             return true;
         }
 
-        private bool TrySaveAddressBook()
+        private bool PrepareForClose()
+        {
+            bool addressBookNeedsSave = Current.Status == AddressBookStatus.Modified;
+            AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(addressBookNeedsSave, Current);
+            OnClosing(eva);
+
+            if (eva.Cancel)
+                return false;
+
+            if (addressBookNeedsSave)
+            {
+                if (eva.SaveAddressBook == null)
+                    throw new LisimbaException(Resources.CloseAddressBooks_NotSavedError);
+
+                if (eva.SaveAddressBook.Value)
+                {
+                    bool allowToContinue = SaveAddressBookInternal();
+
+                    if (!allowToContinue)
+                        return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool SaveAddressBookInternal()
         {
             if (Current.Gate == null)
             {
@@ -300,6 +261,56 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             return availableGates.DefaultGate;
         }
 
+        #region Event Invocators
+
+        protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
+        {
+            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnAddressBookSaved(EventArgs e)
+        {
+            EventHandler handler = AddressBookSaved;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnContactChanged()
+        {
+            EventHandler handler = ContactChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnClosing(AddressBookClosingEventArgs e)
+        {
+            EventHandler<AddressBookClosingEventArgs> handler = AddressBookClosing;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnClosed(AddressBookClosedEventArgs e)
+        {
+            EventHandler<AddressBookClosedEventArgs> handler = AddressBookClosed;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnOpened(AddressBookOpenedEventArgs e)
+        {
+            EventHandler<AddressBookOpenedEventArgs> handler = AddressBookOpened;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
         protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
         {
             EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
@@ -315,5 +326,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (handler != null)
                 handler(this, e);
         }
+
+        #endregion
     }
 }

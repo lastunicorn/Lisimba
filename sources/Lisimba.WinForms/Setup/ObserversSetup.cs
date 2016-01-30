@@ -26,6 +26,7 @@ namespace DustInTheWind.Lisimba.Setup
         {
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookOpenedObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavedObserver>());
+            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavingObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosingObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<ApplicationEndingObserver>());

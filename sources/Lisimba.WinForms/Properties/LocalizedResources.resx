@@ -187,7 +187,10 @@ Do you wanna save it before proceedeing?</value>
   <data name="NoDefaultGateExists" xml:space="preserve">
     <value>There is no default gate to be used.</value>
   </data>
-    <data name="ExecutableViewModel_IncorectParameterType" xml:space="preserve">
+  <data name="ExecutableViewModel_IncorectParameterType" xml:space="preserve">
     <value>The parameter is not of type {0}</value>
+  </data>
+  <data name="NoAddessBookOpenedError" xml:space="preserve">
+    <value>No address book is opened.</value>
   </data>
 </root>

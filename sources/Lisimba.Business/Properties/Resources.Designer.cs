@@ -61,6 +61,15 @@ namespace DustInTheWind.Lisimba.Business.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot close current address book. It has unsaved modifications..
+        /// </summary>
+        internal static string CloseAddressBooks_NotSavedError {
+            get {
+                return ResourceManager.GetString("CloseAddressBooks_NotSavedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Address Book.
         /// </summary>
         internal static string DefaultAddressBookName {
@@ -84,6 +93,15 @@ namespace DustInTheWind.Lisimba.Business.Properties {
         internal static string NoAddessBookOpenedError {
             get {
                 return ResourceManager.GetString("NoAddessBookOpenedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt; Unnamed &gt;.
+        /// </summary>
+        internal static string NoAddressBookName {
+            get {
+                return ResourceManager.GetString("NoAddressBookName", resourceCulture);
             }
         }
         

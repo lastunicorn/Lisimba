@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CloseAddressBooks_NotSavedError" xml:space="preserve">
+    <value>Nu se poate închide agenda curentă pentru că nu este salvată.</value>
+  </data>
   <data name="DefaultAddressBookName" xml:space="preserve">
-    <value>New Address Book</value>
+    <value>Agendă nouă</value>
   </data>
   <data name="GateNotFoundError" xml:space="preserve">
-    <value>There is no gate with id = {0}</value>
+    <value>Nu există nici un Gate cu id  = {0}</value>
   </data>
   <data name="NoAddessBookOpenedError" xml:space="preserve">
-    <value>No address book is opened.</value>
-  </data>
-  <data name="NoGateWasSpecifiedError" xml:space="preserve">
-    <value>No gate is associated with the address book.</value>
-  </data>
-  <data name="NoLocationWasSpecifiedError" xml:space="preserve">
-    <value>A location has to be specified.</value>
-  </data>
-  <data name="CloseAddressBooks_NotSavedError" xml:space="preserve">
-    <value>Cannot close current address book. It has unsaved modifications.</value>
+    <value>Nu există nici o agendă deschisă.</value>
   </data>
   <data name="NoAddressBookName" xml:space="preserve">
-    <value>&lt; Unnamed &gt;</value>
+    <value>&lt; Fără nume &gt;</value>
+  </data>
+  <data name="NoGateWasSpecifiedError" xml:space="preserve">
+    <value>Nu există nici un Gate acosiat cu agenda.</value>
+  </data>
+  <data name="NoLocationWasSpecifiedError" xml:space="preserve">
+    <value>E nevoie să se specifice o locație.</value>
   </data>
 </root>

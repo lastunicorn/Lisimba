@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (hasFileName)
                 return Location;
 
-            return "< Unnamed >";
+            return Resources.NoAddressBookName;
         }
 
         public void SaveAddressBook()
