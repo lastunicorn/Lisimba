@@ -17,16 +17,38 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
     public partial class ContactDetailsListItem : UserControl
     {
+        private ContactDetailsItem item;
+
+        public ContactDetailsItem Item
+        {
+            get { return item; }
+            set
+            {
+                pictureBoxIcon.DataBindings.Clear();
+
+                item = value;
+
+                if (item != null)
+                {
+                    pictureBoxIcon.Bind(x => x.Image, item, x => x.Image, false, DataSourceUpdateMode.OnPropertyChanged);
+                    buttonAdd.Bind(x => x.Image, item, x => x.AddButtonImage, false, DataSourceUpdateMode.OnPropertyChanged);
+                    labelTitle.Bind(x => x.Text, item, x => x.Title, false, DataSourceUpdateMode.OnPropertyChanged);
+                }
+            }
+        }
+
         public Image Image
         {
-            get { return pictureBox1.Image; }
-            set { pictureBox1.Image = value; }
+            get { return pictureBoxIcon.Image; }
+            set { pictureBoxIcon.Image = value; }
         }
+
         public Image AddButtonImage
         {
             get { return buttonAdd.Image; }
@@ -61,13 +83,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 AutoSize = true
             };
 
-            Controls.Add(label1);
-            Controls.SetChildIndex(label1, 0);
+            panelItems.Controls.Add(label1);
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             AddItem();
+        }
+
+        private void ContactDetailsListItem_Resize(object sender, EventArgs e)
+        {
+            Invalidate();
+        }
+
+        private void labelTitle_Resize(object sender, EventArgs e)
+        {
+            labelTitle.Invalidate();
         }
     }
 }

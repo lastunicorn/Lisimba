@@ -35,9 +35,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.nameEditor1 = new DustInTheWind.Lisimba.ContactEdit.NameEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
+            this.contactDetailsList1 = new DustInTheWind.Lisimba.ContactEdit.ContactDetailsList();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
@@ -54,9 +57,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            this.nameEditor1 = new DustInTheWind.Lisimba.ContactEdit.NameEditor();
-            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
-            this.contactDetailsList1 = new DustInTheWind.Lisimba.ContactEdit.ContactDetailsList();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -153,6 +153,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel3.Size = new System.Drawing.Size(516, 212);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
+            // nameEditor1
+            // 
+            this.nameEditor1.AutoSize = true;
+            this.nameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nameEditor1.Location = new System.Drawing.Point(3, 3);
+            this.nameEditor1.Name = "nameEditor1";
+            this.nameEditor1.PersonName = null;
+            this.nameEditor1.Size = new System.Drawing.Size(510, 31);
+            this.nameEditor1.TabIndex = 13;
+            // 
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -199,6 +209,40 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.groupBox1.Size = new System.Drawing.Size(306, 92);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
+            // 
+            // customTreeView1
+            // 
+            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
+            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.Dates = null;
+            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTreeView1.Emails = null;
+            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.customTreeView1.FullRowSelect = true;
+            this.customTreeView1.ImageIndex = 0;
+            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
+            this.customTreeView1.Name = "customTreeView1";
+            this.customTreeView1.Phones = null;
+            this.customTreeView1.PostalAddresses = null;
+            this.customTreeView1.SelectedImageIndex = 0;
+            this.customTreeView1.ShowLines = false;
+            this.customTreeView1.ShowPlusMinus = false;
+            this.customTreeView1.ShowRootLines = false;
+            this.customTreeView1.Size = new System.Drawing.Size(298, 71);
+            this.customTreeView1.SocialProfileIds = null;
+            this.customTreeView1.TabIndex = 12;
+            this.customTreeView1.WebSites = null;
+            // 
+            // contactDetailsList1
+            // 
+            this.contactDetailsList1.AutoScroll = true;
+            this.contactDetailsList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactDetailsList1.Location = new System.Drawing.Point(4, 17);
+            this.contactDetailsList1.Name = "contactDetailsList1";
+            this.contactDetailsList1.Padding = new System.Windows.Forms.Padding(2);
+            this.contactDetailsList1.Size = new System.Drawing.Size(298, 71);
+            this.contactDetailsList1.TabIndex = 13;
+            this.contactDetailsList1.Visible = false;
             // 
             // flowLayoutPanel3
             // 
@@ -417,49 +461,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.textBoxNotes.Size = new System.Drawing.Size(510, 133);
             this.textBoxNotes.TabIndex = 5;
             this.textBoxNotes.WordWrap = false;
-            // 
-            // nameEditor1
-            // 
-            this.nameEditor1.AutoSize = true;
-            this.nameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.nameEditor1.Location = new System.Drawing.Point(3, 3);
-            this.nameEditor1.Name = "nameEditor1";
-            this.nameEditor1.PersonName = null;
-            this.nameEditor1.Size = new System.Drawing.Size(510, 31);
-            this.nameEditor1.TabIndex = 13;
-            // 
-            // customTreeView1
-            // 
-            this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
-            this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customTreeView1.Dates = null;
-            this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTreeView1.Emails = null;
-            this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.customTreeView1.FullRowSelect = true;
-            this.customTreeView1.ImageIndex = 0;
-            this.customTreeView1.Location = new System.Drawing.Point(4, 17);
-            this.customTreeView1.Name = "customTreeView1";
-            this.customTreeView1.Phones = null;
-            this.customTreeView1.PostalAddresses = null;
-            this.customTreeView1.SelectedImageIndex = 0;
-            this.customTreeView1.ShowLines = false;
-            this.customTreeView1.ShowPlusMinus = false;
-            this.customTreeView1.ShowRootLines = false;
-            this.customTreeView1.Size = new System.Drawing.Size(298, 71);
-            this.customTreeView1.SocialProfileIds = null;
-            this.customTreeView1.TabIndex = 12;
-            this.customTreeView1.Visible = false;
-            this.customTreeView1.WebSites = null;
-            // 
-            // contactDetailsList1
-            // 
-            this.contactDetailsList1.AutoScroll = true;
-            this.contactDetailsList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactDetailsList1.Location = new System.Drawing.Point(4, 17);
-            this.contactDetailsList1.Name = "contactDetailsList1";
-            this.contactDetailsList1.Size = new System.Drawing.Size(298, 71);
-            this.contactDetailsList1.TabIndex = 13;
             // 
             // ContactEditor
             // 

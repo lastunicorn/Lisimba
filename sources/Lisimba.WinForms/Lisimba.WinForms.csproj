@@ -88,6 +88,7 @@
     <Compile Include="ContactEdit\BirthDateEditForm.Designer.cs">
       <DependentUpon>BirthDateEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactEdit\ContactDetailsItem.cs" />
     <Compile Include="ContactEdit\ContactDetailsList.cs">
       <SubType>UserControl</SubType>
     </Compile>
