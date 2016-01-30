@@ -14,13 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Egg.Enums
+namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    public enum ImportType
+    public enum MergeType
     {
-        AddAsNew,
-        Combine,
-        Overwrite,
-        DoNotAdd
+        OverwriteLeft,
+        OverwriteRight,
+        MergeToLeft,
+        MergeToRight,
+        MergeBoth
     }
 }

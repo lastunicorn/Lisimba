@@ -58,8 +58,8 @@
     <Compile Include="AddressBookModel\WebSiteCollection.cs" />
     <Compile Include="AddressBookModel\WebSite.cs" />
     <Compile Include="EmptyGate.cs" />
-    <Compile Include="Entities\ImportRuleCollection.cs" />
-    <Compile Include="Enums\AddDecision.cs" />
+    <Compile Include="Importing\ImportRuleCollection.cs" />
+    <Compile Include="Importing\AddDecision.cs" />
     <Compile Include="AddressBookModel\PostalAddress.cs" />
     <Compile Include="AddressBookModel\PostalAddressCollection.cs" />
     <Compile Include="AddressBookModel\AddressBook.cs" />
@@ -81,9 +81,8 @@
     <Compile Include="AddressBookModel\PersonName.cs" />
     <Compile Include="AddressBookModel\Phone.cs" />
     <Compile Include="AddressBookModel\PhoneCollection.cs" />
-    <Compile Include="Enums\ImportType.cs" />
-    <Compile Include="Enums\FileFormat.cs" />
-    <Compile Include="Entities\ImportRule.cs" />
+    <Compile Include="Importing\MergeType.cs" />
+    <Compile Include="Importing\ImportRule.cs" />
     <Compile Include="Exceptions\EggIncorrectVersionException.cs" />
     <Compile Include="IGate.cs" />
     <Compile Include="IncorrectXmlVersionEventArgs.cs" />

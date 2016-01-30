@@ -19,6 +19,7 @@ using System.Linq;
 using DustInTheWind.Lisimba.Egg.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Egg.Importing;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
@@ -44,36 +45,36 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             int countAdded = 0;
 
-            foreach (Contact contact in contacts)
-            {
-                ImportRule rule = mergeRules[contact];
+            //foreach (Contact contact in contacts)
+            //{
+            //    ImportRule rule = mergeRules[contact];
 
-                if (rule == null)
-                    continue;
+            //    if (rule == null)
+            //        continue;
 
-                switch (rule.ImportType)
-                {
-                    case ImportType.AddAsNew:
-                        Add(contact);
-                        countAdded++;
-                        break;
+            //    switch (rule.MergeType)
+            //    {
+            //        case MergeType.AddAsNew:
+            //            Add(contact);
+            //            countAdded++;
+            //            break;
 
-                    case ImportType.Combine:
-                        //if (contacts.Contains(rule.OriginalContact))
-                        //    rule.OriginalContact.CopyFrom(rule.NewContact);
-                        countAdded++;
-                        break;
+            //        case MergeType.Combine:
+            //            //if (contacts.Contains(rule.LeftContact))
+            //            //    rule.LeftContact.CopyFrom(rule.RightContact);
+            //            countAdded++;
+            //            break;
 
-                    case ImportType.Overwrite:
-                        if (contacts.Contains(rule.OriginalContact))
-                            rule.OriginalContact.CopyFrom(rule.NewContact);
-                        countAdded++;
-                        break;
+            //        case MergeType.Overwrite:
+            //            if (contacts.Contains(rule.LeftContact))
+            //                rule.LeftContact.CopyFrom(rule.RightContact);
+            //            countAdded++;
+            //            break;
 
-                    case ImportType.DoNotAdd:
-                        break;
-                }
-            }
+            //        case MergeType.DoNotAdd:
+            //            break;
+            //    }
+            //}
 
             return countAdded;
         }
