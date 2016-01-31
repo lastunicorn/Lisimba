@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Main
 {
     partial class TrayIcon : Component
     {
-        private readonly TrayIconPresenter presenter;
+        private readonly TrayIconViewModel viewModel;
 
         public bool Visible
         {
@@ -30,22 +30,23 @@ namespace DustInTheWind.Lisimba.Main
             set { notifyIcon1.Visible = value; }
         }
 
-        public TrayIcon(TrayIconPresenter presenter)
+        public TrayIcon(TrayIconViewModel viewModel)
         {
-            if (presenter == null) throw new ArgumentNullException("presenter");
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
 
             InitializeComponent();
 
-            this.presenter = presenter;
+            this.viewModel = viewModel;
 
-            toolStripMenuItem_Exit.ViewModel = presenter.TrayIconMenuViewModels.ApplicationExitViewModel;
-            toolStripMenuItem_About.ViewModel = presenter.TrayIconMenuViewModels.AboutViewModel;
-            toolStripMenuItem_Show.ViewModel = presenter.TrayIconMenuViewModels.ShowMainViewModel;
+            TrayIconMenuViewModels trayIconMenuViewModels = viewModel.TrayIconMenuViewModels;
+            toolStripMenuItem_Exit.ViewModel = trayIconMenuViewModels.ApplicationExitViewModel;
+            toolStripMenuItem_About.ViewModel = trayIconMenuViewModels.AboutViewModel;
+            toolStripMenuItem_Show.ViewModel = trayIconMenuViewModels.ShowMainViewModel;
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)
         {
-            presenter.IconWasDoubleClicked();
+            viewModel.IconWasDoubleClicked();
         }
     }
 }

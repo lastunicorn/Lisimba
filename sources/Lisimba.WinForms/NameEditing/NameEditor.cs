@@ -17,10 +17,11 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.NameEditing
 {
     public partial class NameEditor : UserControl
     {
@@ -98,14 +99,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 e.Handled = true;
                 e.SuppressKeyPress = true;
 
-                NameParser nameParser = new NameParser(textBoxName.Text);
+                bool success = UpdatePersonName(textBoxName.Text);
 
-                if (!nameParser.Success)
-                    return;
-
-                PersonName.CopyFrom(nameParser.Result);
-
-                LeaveEditMode();
+                if (success)
+                    LeaveEditMode();
             }
             else if (e.KeyCode == Keys.Escape)
             {
@@ -118,10 +115,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void HandleLabelNameMouseMove(object sender, MouseEventArgs e)
         {
-            if (Width - e.Location.X < buttonEdit.Width + buttonEdit.Margin.Left + buttonEdit.Margin.Right)
-                buttonEdit.Visible = true;
-            else
-                buttonEdit.Visible = false;
+            buttonEdit.Visible = Width - e.Location.X < buttonEdit.Width + buttonEdit.Margin.Left + buttonEdit.Margin.Right;
 
             tableLayoutPanel1.PerformLayout();
         }
@@ -160,14 +154,25 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void HandleTextBoxNameLeave(object sender, EventArgs e)
         {
-            NameParser nameParser = new NameParser(textBoxName.Text);
+            bool success = UpdatePersonName(textBoxName.Text);
+
+            if (success)
+                LeaveEditMode();
+        }
+
+        private bool UpdatePersonName(string nameString)
+        {
+            NameParser nameParser = new NameParser(nameString);
 
             if (!nameParser.Success)
-                return;
+                return false;
 
-            PersonName.CopyFrom(nameParser.Result);
+            PersonName newPersonName = nameParser.Result;
 
-            LeaveEditMode();
+            if (!PersonName.Equals(newPersonName))
+                PersonName.CopyFrom(newPersonName);
+
+            return true;
         }
 
         private void HandleTableLayoutPanelMouseLeave(object sender, EventArgs e)

@@ -18,7 +18,7 @@ using System;
 using System.Text.RegularExpressions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.NameEditing
 {
     internal class NameParser
     {

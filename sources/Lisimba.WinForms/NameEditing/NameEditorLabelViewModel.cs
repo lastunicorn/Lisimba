@@ -14,10 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.NameEditing
 {
     internal class NameEditorLabelViewModel : ViewModelBase
     {

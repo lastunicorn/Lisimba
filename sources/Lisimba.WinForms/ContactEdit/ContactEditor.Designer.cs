@@ -1,3 +1,5 @@
+using DustInTheWind.Lisimba.NameEditing;
+
 namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class ContactEditor
@@ -35,7 +37,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.nameEditor1 = new DustInTheWind.Lisimba.ContactEdit.NameEditor();
+            this.nameEditor1 = new NameEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();

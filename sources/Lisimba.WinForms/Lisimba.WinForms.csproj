@@ -146,20 +146,20 @@
     <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\OperationsSetup.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
-    <Compile Include="ContactEdit\NameEditor.cs">
+    <Compile Include="NameEditing\NameEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContactEdit\NameEditor.Designer.cs">
+    <Compile Include="NameEditing\NameEditor.Designer.cs">
       <DependentUpon>NameEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\NameEditorLabel.cs">
+    <Compile Include="NameEditing\NameEditorLabel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ContactEdit\NameEditorLabel.Designer.cs">
+    <Compile Include="NameEditing\NameEditorLabel.Designer.cs">
       <DependentUpon>NameEditorLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\NameEditorLabelViewModel.cs" />
-    <Compile Include="ContactEdit\NameParser.cs" />
+    <Compile Include="NameEditing\NameEditorLabelViewModel.cs" />
+    <Compile Include="NameEditing\NameParser.cs" />
     <Compile Include="ContactEdit\SocialProfileEditForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,7 +178,7 @@
     <Compile Include="Main\TrayIcon.Designer.cs">
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="Main\TrayIconPresenter.cs" />
+    <Compile Include="Main\TrayIconViewModel.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
     <Compile Include="Operations\OperationBase.cs" />
@@ -347,14 +347,14 @@
     <EmbeddedResource Include="ContactEdit\ContactDetailsListItem.resx">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\NameEditor.resx">
+    <EmbeddedResource Include="NameEditing\NameEditor.resx">
       <DependentUpon>NameEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\NameEditForm.resx">
       <DependentUpon>NameEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\NameEditorLabel.resx">
+    <EmbeddedResource Include="NameEditing\NameEditorLabel.resx">
       <DependentUpon>NameEditorLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ctrl.resx">

@@ -66,10 +66,10 @@ namespace DustInTheWind.Lisimba.MainMenu
 
                 if (viewModel != null)
                 {
-                    BindingExtensions.Bind(this, x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
+                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
 
                     if (viewModel.Text != null)
-                        BindingExtensions.Bind(this, x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
+                        this.Bind(x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
                 }
             }
         }

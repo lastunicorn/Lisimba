@@ -18,12 +18,11 @@ using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Main
 {
-    internal class TrayIconPresenter : ViewModelBase
+    internal class TrayIconViewModel : ViewModelBase
     {
         private readonly UserInterface userInterface;
         private TrayIcon trayIcon;
@@ -40,7 +39,7 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
+        public TrayIconViewModel(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
         {
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

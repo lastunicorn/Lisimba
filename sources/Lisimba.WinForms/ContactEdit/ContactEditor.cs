@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Utils;
@@ -50,23 +51,23 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void CreateBindings()
         {
-            BindingExtensions.Bind(nameEditor1, x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-            BindingExtensions.Bind(labelBirthday, x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
+            nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+            labelBirthday.Bind(x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            BindingExtensions.Bind(pictureBoxZodiacSign, x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(pictureBoxZodiacSign, x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(labelZodiacSign, x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            pictureBoxZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            labelZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            BindingExtensions.Bind(textBoxNotes, x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
+            textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            BindingExtensions.Bind(customTreeView1, x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(customTreeView1, x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(customTreeView1, x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(customTreeView1, x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(customTreeView1, x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(customTreeView1, x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
-            BindingExtensions.Bind(this, x => x.Enabled, ViewModel, x => x.Enabled, false);
+            this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
         }
 
         private void label7_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -79,32 +80,32 @@ namespace DustInTheWind.Lisimba.ContactEdit
             ViewModel.BirthdayEditWasRequested();
         }
 
-        private void buttonAddAddress_Click(object sender, System.EventArgs e)
+        private void buttonAddAddress_Click(object sender, EventArgs e)
         {
             ViewModel.AddAddressWasClicked();
         }
 
-        private void buttonAddDate_Click(object sender, System.EventArgs e)
+        private void buttonAddDate_Click(object sender, EventArgs e)
         {
             ViewModel.AddDateWasClicked();
         }
 
-        private void buttonAddEmail_Click(object sender, System.EventArgs e)
+        private void buttonAddEmail_Click(object sender, EventArgs e)
         {
             ViewModel.AddEmailWasClicked();
         }
 
-        private void buttonAddSocialProfileId_Click(object sender, System.EventArgs e)
+        private void buttonAddSocialProfileId_Click(object sender, EventArgs e)
         {
             ViewModel.AddSocialProfileIdWasClicked();
         }
 
-        private void buttonAddPhone_Click(object sender, System.EventArgs e)
+        private void buttonAddPhone_Click(object sender, EventArgs e)
         {
             ViewModel.AddPhoneWasClicked();
         }
 
-        private void buttonAddWebSite_Click(object sender, System.EventArgs e)
+        private void buttonAddWebSite_Click(object sender, EventArgs e)
         {
             ViewModel.AddWebSiteClicked();
         }

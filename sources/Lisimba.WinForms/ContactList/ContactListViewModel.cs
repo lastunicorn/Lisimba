@@ -22,7 +22,6 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactList

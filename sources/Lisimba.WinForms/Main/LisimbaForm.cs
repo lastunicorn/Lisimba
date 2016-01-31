@@ -18,9 +18,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Main
@@ -63,12 +61,12 @@ namespace DustInTheWind.Lisimba.Main
 
             menuStripMain.Initialize(availableOperations, recentFiles, viewModel.MainMenusViewModels);
 
-            BindingExtensions.Bind(this, x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(toolStripStatus, x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(toolStripDefaultGate, x => x.Text, viewModel, x => x.DefaultGate, false, DataSourceUpdateMode.Never);
+            this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
+            toolStripStatus.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);
+            toolStripDefaultGate.Bind(x => x.Text, viewModel, x => x.DefaultGate, false, DataSourceUpdateMode.Never);
 
-            BindingExtensions.Bind(contactEditor1, x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
-            BindingExtensions.Bind(panelAddressBookView, x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
+            contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
+            panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
 
             buttonNewAddressBook.ViewModel = viewModel.NewAddressBookViewModel;
             buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookViewModel;

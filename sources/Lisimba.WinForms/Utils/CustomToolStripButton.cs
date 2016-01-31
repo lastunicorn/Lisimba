@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Utils
                 viewModel = value;
 
                 if (viewModel != null)
-                    BindingExtensions.Bind(this, x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
+                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
             }
         }
 

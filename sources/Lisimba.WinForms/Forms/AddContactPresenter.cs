@@ -21,7 +21,6 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Forms
@@ -37,8 +36,7 @@ namespace DustInTheWind.Lisimba.Forms
         public IAddContactView View { get; set; }
         public ContactEditorViewModel ContactEditorViewModel { get; set; }
 
-        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel,
-            OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
+        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel, OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

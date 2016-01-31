@@ -72,14 +72,12 @@ namespace DustInTheWind.Lisimba.ContactList
             // toolStripMenuItem_List_Add
             // 
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
-            this.toolStripMenuItem_List_Add.ViewModel = null;
             this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Add.Text = "&Add Contact";
             // 
             // toolStripMenuItem_List_Delete
             // 
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
-            this.toolStripMenuItem_List_Delete.ViewModel = null;
             this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
             // 
@@ -92,7 +90,6 @@ namespace DustInTheWind.Lisimba.ContactList
             // toolStripMenuItem_List_ViewBiorythm
             // 
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.ViewModel = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
             this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
