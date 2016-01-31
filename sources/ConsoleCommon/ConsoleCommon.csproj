@@ -36,6 +36,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
     <Compile Include="ConsoleCommandHandling\ApplicationFlows.cs" />
     <Compile Include="ConsoleCommandHandling\ConsoleCommand.cs" />
     <Compile Include="ConsoleCommandHandling\CommandSplitter.cs" />

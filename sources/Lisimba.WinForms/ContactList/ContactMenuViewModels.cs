@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.Main;
-using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;

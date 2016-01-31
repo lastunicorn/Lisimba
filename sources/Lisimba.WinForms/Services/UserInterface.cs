@@ -21,7 +21,6 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Main;

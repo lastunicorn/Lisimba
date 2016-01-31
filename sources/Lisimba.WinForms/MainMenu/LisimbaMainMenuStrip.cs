@@ -15,11 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Main;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.MainMenu

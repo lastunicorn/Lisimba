@@ -17,7 +17,6 @@
 using System;
 using System.Collections.ObjectModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;

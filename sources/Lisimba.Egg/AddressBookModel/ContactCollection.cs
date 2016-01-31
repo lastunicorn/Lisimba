@@ -19,7 +19,6 @@ using System.Linq;
 using DustInTheWind.Lisimba.Egg.Comparers;
 using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Egg.Importing;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
