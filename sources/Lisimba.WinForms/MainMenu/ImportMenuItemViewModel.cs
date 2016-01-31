@@ -14,55 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class RecentFileMenuItemViewModel : CustomButtonViewModel
+    class ImportMenuItemViewModel : CustomButtonViewModel
     {
-        private AddressBookLocationInfo file;
-        private int index;
+        public IGate Gate { get; set; }
 
-        public AddressBookLocationInfo File
-        {
-            get { return file; }
-            set
-            {
-                file = value;
-                UpdateText();
-            }
-        }
-
-        public int Index
-        {
-            get { return index; }
-            set
-            {
-                index = value;
-                UpdateText();
-            }
-        }
-
-        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
+        public ImportMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
             : base(applicationStatus, userInterface, operation)
         {
         }
 
         protected override object GetExecuteParameter()
         {
-            return File == null
-                ? null
-                : File.FileName;
-        }
-
-        private void UpdateText()
-        {
-            Text = file != null
-                ? string.Format("{0} {1}", index, file.FileName)
-                : string.Empty;
+            return Gate;
         }
     }
 }

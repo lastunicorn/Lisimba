@@ -35,6 +35,8 @@ namespace DustInTheWind.Lisimba.Setup
             availableOperations.Add(unityContainer.Resolve<NewContactOperation>());
             availableOperations.Add(unityContainer.Resolve<DeleteCurrentContactOperation>());
             availableOperations.Add(unityContainer.Resolve<ApplicationExitOperation>());
+            availableOperations.Add(unityContainer.Resolve<ImportOperation>());
+            availableOperations.Add(unityContainer.Resolve<ExportOperation>());
         }
     }
 }

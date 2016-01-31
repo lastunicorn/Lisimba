@@ -119,19 +119,26 @@
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GateSelectorViewModel.cs" />
-    <Compile Include="MainMenu\CustomMenuItem.cs">
+    <Compile Include="MainMenu\ExportMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\ImportMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\ImportsMenuItemViewModel.cs" />
+    <Compile Include="Operations\ExportOperation.cs" />
+    <Compile Include="Operations\ImportOperation.cs" />
+    <Compile Include="Utils\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainMenu\CustomMenuItem.Designer.cs">
+    <Compile Include="Utils\CustomMenuItem.Designer.cs">
       <DependentUpon>CustomMenuItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utils\ListMenuItemViewModel.cs" />
     <Compile Include="MainMenu\RecentFileMenuItemViewModel.cs" />
-    <Compile Include="MainMenu\RecentFilesMenuItem.Designer.cs">
-      <DependentUpon>RecentFilesMenuItem.cs</DependentUpon>
+    <Compile Include="Utils\ListMenuItem.Designer.cs">
+      <DependentUpon>ListMenuItem.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu\RecentFilesMenuItemViewModel.cs" />
-    <Compile Include="Main\MenuItemViewModelProvider.cs" />
-    <Compile Include="Main\MainMenusViewModels.cs" />
+    <Compile Include="Services\MenuItemViewModelProvider.cs" />
+    <Compile Include="MainMenu\MainMenusViewModels.cs" />
     <Compile Include="Main\TrayIconMenuViewModels.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
@@ -271,10 +278,9 @@
     <Compile Include="MainMenu\LisimbaMainMenuStrip.Designer.cs">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu\RecentFilesMenuItem.cs">
+    <Compile Include="Utils\ListMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="MainMenu\SubItemClickedEventArgs.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -387,11 +393,11 @@
     <EmbeddedResource Include="Forms\GateSelectorForm.resx">
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu\CustomMenuItem.resx">
+    <EmbeddedResource Include="Utils\CustomMenuItem.resx">
       <DependentUpon>CustomMenuItem.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenu\RecentFilesMenuItem.resx">
-      <DependentUpon>RecentFilesMenuItem.cs</DependentUpon>
+    <EmbeddedResource Include="Utils\ListMenuItem.resx">
+      <DependentUpon>ListMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>

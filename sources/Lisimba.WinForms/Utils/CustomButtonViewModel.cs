@@ -83,16 +83,26 @@ namespace DustInTheWind.Lisimba.Utils
                 applicationStatus.Reset();
         }
 
-        public virtual void Execute()
+        public void Execute()
         {
             try
             {
-                operation.Execute();
+                object parameter = GetExecuteParameter();
+
+                if (parameter == null)
+                    operation.Execute();
+                else
+                    operation.Execute(parameter);
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
+        }
+
+        protected virtual object GetExecuteParameter()
+        {
+            return null;
         }
     }
 }

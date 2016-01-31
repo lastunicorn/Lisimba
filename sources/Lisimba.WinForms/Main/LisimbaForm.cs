@@ -17,8 +17,6 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Services;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Main
@@ -32,19 +30,11 @@ namespace DustInTheWind.Lisimba.Main
 
         private LisimbaViewModel viewModel;
 
-        private readonly RecentFiles recentFiles;
-        private readonly AvailableOperations availableOperations;
-
-        public LisimbaForm(LisimbaViewModel viewModel, RecentFiles recentFiles, AvailableOperations availableOperations)
+        public LisimbaForm(LisimbaViewModel viewModel)
         {
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (viewModel == null) throw new ArgumentNullException("viewModel");
 
             InitializeComponent();
-
-            this.recentFiles = recentFiles;
-            this.availableOperations = availableOperations;
 
             this.viewModel = viewModel;
 
@@ -59,7 +49,7 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
             contactEditor1.ViewModel.View = contactEditor1;
 
-            menuStripMain.Initialize(availableOperations, recentFiles, viewModel.MainMenusViewModels);
+            menuStripMain.Initialize(viewModel.MainMenusViewModels);
 
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatus.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);

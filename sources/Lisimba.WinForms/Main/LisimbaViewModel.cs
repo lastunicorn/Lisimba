@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
+using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;

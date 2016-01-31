@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,21 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Windows.Forms;
+using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    internal class SubItemClickedEventArgs : EventArgs
+    class ExportMenuItemViewModel : CustomButtonViewModel
     {
-        public ToolStripMenuItem MenuItem { get; private set; }
+        public IGate Gate { get; set; }
 
-        public SubItemClickedEventArgs(ToolStripMenuItem menuItem)
+        public ExportMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
+            : base(applicationStatus, userInterface, operation)
         {
-            if (menuItem == null)
-                throw new ArgumentNullException("menuItem");
+        }
 
-            MenuItem = menuItem;
+        protected override object GetExecuteParameter()
+        {
+            return Gate;
         }
     }
 }

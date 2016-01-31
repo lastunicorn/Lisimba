@@ -14,11 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Main;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
@@ -29,11 +26,8 @@ namespace DustInTheWind.Lisimba.MainMenu
             InitializeComponent();
         }
 
-        public void Initialize(AvailableOperations availableOperations, RecentFiles recentFiles, MainMenusViewModels mainMenusViewModels)
+        public void Initialize(MainMenusViewModels mainMenusViewModels)
         {
-            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-
             toolStripMenuItem_File_New.ViewModel = mainMenusViewModels.NewAddressBookViewModel;
             toolStripMenuItem_File_Open.ViewModel = mainMenusViewModels.OpenAddressBookViewModel;
             toolStripMenuItem_File_Save.ViewModel = mainMenusViewModels.SaveAddressBookViewModel;
@@ -42,18 +36,14 @@ namespace DustInTheWind.Lisimba.MainMenu
             toolStripMenuItem_File_Export.ViewModel = mainMenusViewModels.ExportViewModel;
             toolStripMenuItem_File_Import.ViewModel = mainMenusViewModels.ImportViewModel;
             toolStripMenuItem_File_Exit.ViewModel = mainMenusViewModels.ApplicationExitViewModel;
-            
+
             toolStripMenuItem_AddressBook_AddContact.ViewModel = mainMenusViewModels.NewContactViewModel;
             toolStripMenuItem_AddressBook_DeleteContact.ViewModel = mainMenusViewModels.DeleteContactViewModel;
             toolStripMenuItem_AddressBook_Properties.ViewModel = mainMenusViewModels.AddressBookPropertiesViewModel;
-            
+
             toolStripMenuItem_Help_About.ViewModel = mainMenusViewModels.AboutViewModel;
 
-            toolStripRecentFilesMenuItem_File_RecentFiles.ViewModel = mainMenusViewModels.RecentFilesViewModel;
-
-            //toolStripRecentFilesMenuItem_File_RecentFiles.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
-            //toolStripRecentFilesMenuItem_File_RecentFiles.RecentFiles = recentFiles;
-            //toolStripRecentFilesMenuItem_File_RecentFiles.Items = recentFileItems;
+            toolStripListMenuItem_File_RecentFiles.ViewModel = mainMenusViewModels.RecentFilesViewModel;
         }
     }
 }

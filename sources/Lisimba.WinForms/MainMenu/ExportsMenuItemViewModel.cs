@@ -17,40 +17,33 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class RecentFilesMenuItemViewModel : ListMenuItemViewModel
+    class ExportsMenuItemViewModel : ListMenuItemViewModel
     {
-        private readonly RecentFiles recentFiles;
+        private readonly AvailableGates availableGates;
 
-        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation, RecentFiles recentFiles)
+        public ExportsMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation, AvailableGates availableGates)
             : base(applicationStatus, userInterface, operation)
         {
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
 
-            this.recentFiles = recentFiles;
-
-            recentFiles.FileNameAdded += HandleRecentFilesFileNameAdded;
+            this.availableGates = availableGates;
         }
 
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
-            return recentFiles.GetAllFiles()
-                .Select((x, i) => new RecentFileMenuItemViewModel(applicationStatus, userInterface, ChildrenOpertion)
+            return availableGates.GetAllGates()
+                .Select(x => new ImportMenuItemViewModel(applicationStatus, userInterface, ChildrenOpertion)
                 {
-                    File = x,
-                    Index = i + 1
+                    Text = x.Name,
+                    Gate = x
                 });
-        }
-
-        private void HandleRecentFilesFileNameAdded(object sender, EventArgs e)
-        {
-            RepopulateItems();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace DustInTheWind.Lisimba.MainMenu
 {
-    partial class RecentFilesMenuItem
+    partial class ListMenuItem
     {
         /// <summary>
         /// Required designer variable.

@@ -18,7 +18,7 @@ using System;
 using DustInTheWind.WinFormsCommon;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Main
+namespace DustInTheWind.Lisimba.Services
 {
     class MenuItemViewModelProvider
     {
