@@ -18,15 +18,12 @@ using System;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal interface IExecutableViewModel
+    internal interface IOperation
     {
         bool IsEnabled { get; }
         string ShortDescription { get; }
 
         event EventHandler EnableChanged;
-
-        void MouseEnter();
-        void MouseLeave();
 
         void Execute();
         void Execute(object parameter);

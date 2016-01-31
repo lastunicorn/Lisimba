@@ -69,13 +69,13 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.Bind(x => x.Visible, viewModel, x => x.IsContactEditVisible, false, DataSourceUpdateMode.Never);
             panelAddressBookView.Bind(x => x.Visible, viewModel, x => x.IsAddressBookViewVisible, false, DataSourceUpdateMode.Never);
 
-            buttonNewAddressBook.ViewModel = viewModel.NewAddressBookOperation;
-            buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookOperation;
+            buttonNewAddressBook.ViewModel = viewModel.NewAddressBookViewModel;
+            buttonOpenAddressBook.ViewModel = viewModel.OpenAddressBookViewModel;
 
-            toolStripButtonNew.ViewModel = availableOperations.GetOperation<NewAddressBookOperation>();
-            toolStripButtonOpen.ViewModel = availableOperations.GetOperation<OpenAddressBookOperation>();
-            toolStripButtonSave.ViewModel = availableOperations.GetOperation<SaveAddressBookOperation>();
-            toolStripButtonAbout.ViewModel = availableOperations.GetOperation<ShowAboutOperation>();
+            toolStripButtonNew.ViewModel = viewModel.ToolStripNewAddressBookViewModel;
+            toolStripButtonOpen.ViewModel = viewModel.ToolStripOpenAddressBookViewModel;
+            toolStripButtonSave.ViewModel = viewModel.ToolStripSaveAddressBookViewModel;
+            toolStripButtonAbout.ViewModel = viewModel.ToolStripAboutViewModel;
         }
 
         private void LisimbaForm_FormClosed(object sender, FormClosedEventArgs e)

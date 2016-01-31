@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.ContactList;
+using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
@@ -30,8 +31,10 @@ namespace DustInTheWind.Lisimba.Main
     internal class LisimbaViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AvailableOperations availableOperations;
         private readonly AvailableGates availableGates;
         private readonly UserInterface userInterface;
+        private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly ApplicationStatus applicationStatus;
         private readonly ApplicationBackEnd applicationBackEnd;
 
@@ -44,8 +47,12 @@ namespace DustInTheWind.Lisimba.Main
         public MainMenusViewModels MainMenusViewModels { get; private set; }
         public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
-        public NewAddressBookOperation NewAddressBookOperation { get; private set; }
-        public OpenAddressBookOperation OpenAddressBookOperation { get; private set; }
+        public CustomButtonViewModel NewAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel OpenAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripNewAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripOpenAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripSaveAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripAboutViewModel { get; private set; }
 
         public string Title
         {
@@ -100,7 +107,7 @@ namespace DustInTheWind.Lisimba.Main
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
             AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface,
-            MainMenusViewModels mainMenusViewModels)
+            MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
@@ -111,18 +118,27 @@ namespace DustInTheWind.Lisimba.Main
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
+            if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
 
             this.applicationBackEnd = applicationBackEnd;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
+            this.availableOperations = availableOperations;
             this.availableGates = availableGates;
             this.userInterface = userInterface;
+            this.viewModelProvider = viewModelProvider;
 
             MainMenusViewModels = mainMenusViewModels;
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
-            NewAddressBookOperation = availableOperations.GetOperation<NewAddressBookOperation>();
-            OpenAddressBookOperation = availableOperations.GetOperation<OpenAddressBookOperation>();
+
+            NewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
+            OpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
+
+            ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
+            ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
+            ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAsAddressBookOperation>();
+            ToolStripAboutViewModel = CreateViewModel<ShowAboutOperation>();
 
             availableGates.GateChanged += HandleDefaultGateChanged;
 
@@ -145,6 +161,13 @@ namespace DustInTheWind.Lisimba.Main
 
             StatusText = applicationStatus.StatusText;
             Title = BuildFormTitle();
+        }
+
+        private CustomButtonViewModel CreateViewModel<T>()
+            where T : class, IOperation
+        {
+            T newAddressBookOperation = availableOperations.GetOperation<T>();
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
         }
 
         private void HandleDefaultGateChanged(object sender, EventArgs e)

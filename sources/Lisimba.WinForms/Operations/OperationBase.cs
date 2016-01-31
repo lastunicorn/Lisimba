@@ -17,13 +17,11 @@
 using System;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
+    internal abstract class OperationBase<T> : IOperation<T>
     {
-        protected readonly ApplicationStatus applicationStatus;
         protected readonly UserInterface userInterface;
 
         private bool isEnabled;
@@ -37,7 +35,6 @@ namespace DustInTheWind.Lisimba.Operations
                     return;
 
                 isEnabled = value;
-                OnPropertyChanged();
                 OnEnableChanged();
             }
         }
@@ -46,27 +43,13 @@ namespace DustInTheWind.Lisimba.Operations
 
         public event EventHandler EnableChanged;
 
-        protected ExecutableViewModelBase(ApplicationStatus applicationStatus, UserInterface userInterface)
+        protected OperationBase(UserInterface userInterface)
         {
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
-            this.applicationStatus = applicationStatus;
             this.userInterface = userInterface;
 
             isEnabled = true;
-        }
-
-        public void MouseEnter()
-        {
-            if (applicationStatus != null)
-                applicationStatus.SetPermanentStatusText(ShortDescription);
-        }
-
-        public void MouseLeave()
-        {
-            if (applicationStatus != null)
-                applicationStatus.Reset();
         }
 
         public void Execute()

@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // CustomButton
+            // 
+            this.Click += new System.EventHandler(this.HandleClick);
+            this.MouseEnter += new System.EventHandler(this.HandleMouseEnter);
+            this.MouseLeave += new System.EventHandler(this.HandleMouseLeave);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

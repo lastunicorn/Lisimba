@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class SaveAddressBookOperation : ExecutableViewModelBase<object>
+    internal class SaveAddressBookOperation : OperationBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
 
@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public SaveAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, ApplicationStatus applicationStatus)
-            : base(applicationStatus, userInterface)
+            : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 

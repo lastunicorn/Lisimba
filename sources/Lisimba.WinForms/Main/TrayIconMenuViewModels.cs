@@ -18,6 +18,7 @@ using System;
 using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Main
 {
@@ -26,9 +27,9 @@ namespace DustInTheWind.Lisimba.Main
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
 
-        public CustomMenuItemViewModel ShowMainViewModel { get; private set; }
-        public CustomMenuItemViewModel ApplicationExitViewModel { get; private set; }
-        public CustomMenuItemViewModel AboutViewModel { get; private set; }
+        public CustomButtonViewModel ShowMainViewModel { get; private set; }
+        public CustomButtonViewModel ApplicationExitViewModel { get; private set; }
+        public CustomButtonViewModel AboutViewModel { get; private set; }
 
         public TrayIconMenuViewModels(MenuItemViewModelProvider viewModelProvider, AvailableOperations availableOperations)
         {
@@ -43,11 +44,11 @@ namespace DustInTheWind.Lisimba.Main
             AboutViewModel = CreateViewModel<ShowAboutOperation>();
         }
 
-        private CustomMenuItemViewModel CreateViewModel<T>()
-            where T : class, IExecutableViewModel
+        private CustomButtonViewModel CreateViewModel<T>()
+            where T : class, IOperation
         {
             T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(newAddressBookOperation);
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
         }
     }
 }

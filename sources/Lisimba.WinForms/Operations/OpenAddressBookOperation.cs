@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class OpenAddressBookOperation : ExecutableViewModelBase<string>
+    internal class OpenAddressBookOperation : OperationBase<string>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
             ApplicationStatus applicationStatus, AvailableGates availableGates)
-            : base(applicationStatus, userInterface)
+            : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");

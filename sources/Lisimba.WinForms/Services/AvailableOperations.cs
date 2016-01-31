@@ -22,22 +22,22 @@ namespace DustInTheWind.Lisimba.Services
 {
     internal class AvailableOperations
     {
-        private readonly Dictionary<Type, IExecutableViewModel> operations;
+        private readonly Dictionary<Type, IOperation> operations;
 
         public T GetOperation<T>()
-            where T : IExecutableViewModel
+            where T : IOperation
         {
             Type type = typeof(T);
-            IExecutableViewModel executableViewModel = operations[type];
-            return (T)executableViewModel;
+            IOperation operation = operations[type];
+            return (T)operation;
         }
 
         public AvailableOperations()
         {
-            operations = new Dictionary<Type, IExecutableViewModel>();
+            operations = new Dictionary<Type, IOperation>();
         }
 
-        public void Add(IExecutableViewModel operation)
+        public void Add(IOperation operation)
         {
             if (operation == null) throw new ArgumentNullException("operation");
 

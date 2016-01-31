@@ -18,10 +18,11 @@ using System;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class RecentFileMenuItemViewModel : CustomMenuItemViewModel
+    class RecentFileMenuItemViewModel : CustomButtonViewModel
     {
         private AddressBookLocationInfo file;
         private int index;
@@ -47,7 +48,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IExecutableViewModel operation)
+        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
             : base(applicationStatus, userInterface, operation)
         {
         }

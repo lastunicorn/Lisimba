@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class ShowAboutOperation : ExecutableViewModelBase<object>
+    internal class ShowAboutOperation : OperationBase<object>
     {
         public override string ShortDescription
         {
@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public ShowAboutOperation(ApplicationStatus applicationStatus, UserInterface userInterface)
-            : base(applicationStatus, userInterface)
+            : base(userInterface)
         {
         }
 

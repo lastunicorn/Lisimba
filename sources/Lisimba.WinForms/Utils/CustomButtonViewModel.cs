@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,15 +17,14 @@
 using System;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.MainMenu
+namespace DustInTheWind.Lisimba.Utils
 {
-    internal class CustomMenuItemViewModel : ViewModelBase
+    internal class CustomButtonViewModel : ViewModelBase
     {
         protected readonly ApplicationStatus applicationStatus;
         protected readonly UserInterface userInterface;
-        protected readonly IExecutableViewModel operation;
+        protected readonly IOperation operation;
         private bool isEnabled;
         private string text;
 
@@ -52,7 +51,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public CustomMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IExecutableViewModel operation)
+        public CustomButtonViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (userInterface == null) throw new ArgumentNullException("userInterface");

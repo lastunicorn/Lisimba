@@ -125,7 +125,6 @@
     <Compile Include="MainMenu\CustomMenuItem.Designer.cs">
       <DependentUpon>CustomMenuItem.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu\CustomMenuItemViewModel.cs" />
     <Compile Include="MainMenu\RecentFileMenuItemViewModel.cs" />
     <Compile Include="MainMenu\RecentFilesMenuItem.Designer.cs">
       <DependentUpon>RecentFilesMenuItem.cs</DependentUpon>
@@ -147,6 +146,7 @@
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\OperationsSetup.cs" />
+    <Compile Include="Utils\CustomButtonViewModel.cs" />
     <Compile Include="Utils\CustomToolStripButton.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -190,13 +190,13 @@
     <Compile Include="Main\TrayIconPresenter.cs" />
     <Compile Include="Operations\ApplicationExitOperation.cs" />
     <Compile Include="Operations\CloseAddressBookOperation.cs" />
-    <Compile Include="Operations\ExecutableViewModelBase.cs" />
+    <Compile Include="Operations\OperationBase.cs" />
     <Compile Include="Operations\NewContactOperation.cs" />
     <Compile Include="Operations\DeleteCurrentContactOperation.cs" />
     <Compile Include="Operations\ShowAddressBookPropertiesOperation.cs" />
     <Compile Include="Operations\NewAddressBookOperation.cs" />
-    <Compile Include="Operations\IExecutableViewModel.cs" />
-    <Compile Include="Operations\IExecutableViewModel1.cs" />
+    <Compile Include="Operations\IOperation.cs" />
+    <Compile Include="Operations\IOperation1.cs" />
     <Compile Include="Operations\ShowAboutOperation.cs" />
     <Compile Include="Operations\SaveAsAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeComparer.cs" />
@@ -462,6 +462,12 @@
       <LastGenOutput>ZodiacResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\ZodiacResources.ro-RO.resx" />
+    <EmbeddedResource Include="Utils\CustomButton.resx">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Utils\CustomToolStripButton.resx">
+      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />

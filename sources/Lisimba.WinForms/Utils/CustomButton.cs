@@ -15,21 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Operations;
 
 namespace DustInTheWind.Lisimba.Utils
 {
     partial class CustomButton : Button
     {
-        private IExecutableViewModel viewModel;
+        private CustomButtonViewModel viewModel;
 
-        public IExecutableViewModel ViewModel
+        public CustomButtonViewModel ViewModel
         {
             get { return viewModel; }
             set
             {
                 DataBindings.Clear();
+                Enabled = false;
 
                 viewModel = value;
 
@@ -43,28 +44,29 @@ namespace DustInTheWind.Lisimba.Utils
             InitializeComponent();
         }
 
-        protected override void OnMouseEnter(EventArgs e)
+        public CustomButton(IContainer container)
         {
-            if (ViewModel != null)
-                ViewModel.MouseEnter();
+            container.Add(this);
 
-            base.OnMouseEnter(e);
+            InitializeComponent();
         }
 
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (ViewModel != null)
-                ViewModel.MouseLeave();
-
-            base.OnMouseLeave(e);
-        }
-
-        protected override void OnClick(EventArgs e)
+        private void HandleClick(object sender, EventArgs e)
         {
             if (ViewModel != null)
                 ViewModel.Execute();
+        }
 
-            base.OnClick(e);
+        private void HandleMouseEnter(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseEnter();
+        }
+
+        private void HandleMouseLeave(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseLeave();
         }
     }
 }

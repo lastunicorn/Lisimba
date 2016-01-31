@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class ApplicationExitOperation : ExecutableViewModelBase<object>
+    internal class ApplicationExitOperation : OperationBase<object>
     {
         private readonly ApplicationBackEnd applicationBackEnd;
 
@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Operations
         }
 
         public ApplicationExitOperation(ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, UserInterface userInterface)
-            : base(applicationStatus, userInterface)
+            : base(userInterface)
         {
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
 

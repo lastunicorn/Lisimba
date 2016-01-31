@@ -18,6 +18,7 @@ using System;
 using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Main
 {
@@ -26,18 +27,18 @@ namespace DustInTheWind.Lisimba.Main
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
 
-        public CustomMenuItemViewModel NewAddressBookViewModel { get; private set; }
-        public CustomMenuItemViewModel OpenAddressBookViewModel { get; private set; }
-        public CustomMenuItemViewModel SaveAddressBookViewModel { get; private set; }
-        public CustomMenuItemViewModel SaveAsAddressBookViewModel { get; private set; }
-        public CustomMenuItemViewModel CloseAddressBookViewModel { get; private set; }
-        public CustomMenuItemViewModel ApplicationExitViewModel { get; private set; }
-        public CustomMenuItemViewModel NewContactViewModel { get; private set; }
-        public CustomMenuItemViewModel DeleteContactViewModel { get; private set; }
-        public CustomMenuItemViewModel AddressBookPropertiesViewModel { get; private set; }
-        public CustomMenuItemViewModel AboutViewModel { get; private set; }
-        public CustomMenuItemViewModel ExportViewModel { get; private set; }
-        public CustomMenuItemViewModel ImportViewModel { get; private set; }
+        public CustomButtonViewModel NewAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel OpenAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel SaveAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel SaveAsAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel CloseAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ApplicationExitViewModel { get; private set; }
+        public CustomButtonViewModel NewContactViewModel { get; private set; }
+        public CustomButtonViewModel DeleteContactViewModel { get; private set; }
+        public CustomButtonViewModel AddressBookPropertiesViewModel { get; private set; }
+        public CustomButtonViewModel AboutViewModel { get; private set; }
+        public CustomButtonViewModel ExportViewModel { get; private set; }
+        public CustomButtonViewModel ImportViewModel { get; private set; }
         public RecentFilesMenuItemViewModel RecentFilesViewModel { get; private set; }
 
         public MainMenusViewModels(MenuItemViewModelProvider viewModelProvider, AvailableOperations availableOperations)
@@ -63,25 +64,25 @@ namespace DustInTheWind.Lisimba.Main
             RecentFilesViewModel = CreateRecentFilesViewModel();
         }
 
-        private CustomMenuItemViewModel CreateViewModel<T>()
-            where T : class, IExecutableViewModel
+        private CustomButtonViewModel CreateViewModel<TOperation>()
+            where TOperation : class, IOperation
         {
-            T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(newAddressBookOperation);
+            TOperation operation = availableOperations.GetOperation<TOperation>();
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation);
         }
 
         private RecentFilesMenuItemViewModel CreateRecentFilesViewModel()
         {
-            EmptyOperation operation = new EmptyOperation { ShortDescription = "Open previously closed address books." };
+            EmptyOperation operation = new EmptyOperation("Open previously closed address books.");
             RecentFilesMenuItemViewModel viewModel = viewModelProvider.GetNewViewModel<RecentFilesMenuItemViewModel>(operation);
             viewModel.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
             return viewModel;
         }
 
-        private CustomMenuItemViewModel CreateEmptyViewModel(string description)
+        private CustomButtonViewModel CreateEmptyViewModel(string description)
         {
-            EmptyOperation operation = new EmptyOperation { ShortDescription = description };
-            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(operation);
+            EmptyOperation operation = new EmptyOperation(description);
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation);
         }
     }
 }

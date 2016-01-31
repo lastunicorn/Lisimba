@@ -51,9 +51,9 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        private CustomMenuItemViewModel viewModel;
+        private CustomButtonViewModel viewModel;
 
-        public CustomMenuItemViewModel ViewModel
+        public CustomButtonViewModel ViewModel
         {
             private get { return viewModel; }
             set
@@ -87,10 +87,8 @@ namespace DustInTheWind.Lisimba.MainMenu
 
         private void HandleClick(object sender, EventArgs e)
         {
-            if (ViewModel == null)
-                return;
-
-            ViewModel.Execute();
+            if (ViewModel != null)
+                ViewModel.Execute();
         }
 
         private void HandleMouseEnter(object sender, EventArgs e)

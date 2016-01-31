@@ -18,16 +18,15 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using DustInTheWind.Lisimba.Operations;
 
 namespace DustInTheWind.Lisimba.Utils
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip)]
     internal partial class CustomToolStripButton : ToolStripButton, IBindableComponent
     {
-        private IExecutableViewModel viewModel;
+        private CustomButtonViewModel viewModel;
 
-        public IExecutableViewModel ViewModel
+        public CustomButtonViewModel ViewModel
         {
             get { return viewModel; }
             set
@@ -81,28 +80,22 @@ namespace DustInTheWind.Lisimba.Utils
             InitializeComponent();
         }
 
-        protected override void OnMouseEnter(EventArgs e)
-        {
-            if (ViewModel != null)
-                ViewModel.MouseEnter();
-
-            base.OnMouseEnter(e);
-        }
-
-        protected override void OnMouseLeave(EventArgs e)
-        {
-            if (ViewModel != null)
-                ViewModel.MouseLeave();
-
-            base.OnMouseLeave(e);
-        }
-
-        protected override void OnClick(EventArgs e)
+        private void HandleClick(object sender, EventArgs e)
         {
             if (ViewModel != null)
                 ViewModel.Execute();
+        }
 
-            base.OnClick(e);
+        private void HandleMouseEnter(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseEnter();
+        }
+
+        private void HandleMouseLeave(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseLeave();
         }
     }
 }

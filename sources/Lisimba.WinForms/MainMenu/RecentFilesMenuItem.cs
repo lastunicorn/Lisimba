@@ -18,6 +18,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
@@ -64,7 +65,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             if (viewModel == null)
                 return;
 
-            ObservableCollection<CustomMenuItemViewModel> items = viewModel.Items;
+            ObservableCollection<CustomButtonViewModel> items = viewModel.Items;
 
             while (DropDownItems.Count < items.Count)
                 AddNewMenuItem();
@@ -89,7 +90,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             DropDownItems.RemoveAt(DropDownItems.Count - 1);
         }
 
-        private void UpdateMenuItem(int i, CustomMenuItemViewModel item)
+        private void UpdateMenuItem(int i, CustomButtonViewModel item)
         {
             CustomMenuItem menuItem = (CustomMenuItem)DropDownItems[i];
             menuItem.ViewModel = item;

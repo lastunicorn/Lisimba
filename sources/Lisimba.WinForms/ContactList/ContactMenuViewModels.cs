@@ -19,6 +19,7 @@ using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactList
 {
@@ -27,9 +28,9 @@ namespace DustInTheWind.Lisimba.ContactList
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
 
-        public CustomMenuItemViewModel AddContactViewModel { get; private set; }
-        public CustomMenuItemViewModel DeleteContactViewModel { get; private set; }
-        public CustomMenuItemViewModel BiorhythmViewModel { get; private set; }
+        public CustomButtonViewModel AddContactViewModel { get; private set; }
+        public CustomButtonViewModel DeleteContactViewModel { get; private set; }
+        public CustomButtonViewModel BiorhythmViewModel { get; private set; }
 
         public ContactMenuViewModels(MenuItemViewModelProvider viewModelProvider, AvailableOperations availableOperations)
         {
@@ -44,17 +45,17 @@ namespace DustInTheWind.Lisimba.ContactList
             BiorhythmViewModel = CreateEmptyViewModel("Display the biorhythm of the selected person.");
         }
 
-        private CustomMenuItemViewModel CreateViewModel<T>()
-            where T : class, IExecutableViewModel
+        private CustomButtonViewModel CreateViewModel<T>()
+            where T : class, IOperation
         {
             T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(newAddressBookOperation);
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
         }
 
-        private CustomMenuItemViewModel CreateEmptyViewModel(string description)
+        private CustomButtonViewModel CreateEmptyViewModel(string description)
         {
-            EmptyOperation operation = new EmptyOperation { ShortDescription = description };
-            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(operation);
+            EmptyOperation operation = new EmptyOperation(description);
+            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation);
         }
     }
 }

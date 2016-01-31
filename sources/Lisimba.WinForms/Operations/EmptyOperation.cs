@@ -18,31 +18,17 @@ using System;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class EmptyOperation : IExecutableViewModel
+    internal class EmptyOperation : IOperation
     {
-        private string shortDescription;
-
         public bool IsEnabled { get; private set; }
-
-        public string ShortDescription
-        {
-            get { return shortDescription; }
-            set { shortDescription = value ?? string.Empty; }
-        }
+        public string ShortDescription { get; private set; }
 
         public event EventHandler EnableChanged;
 
-        public EmptyOperation()
+        public EmptyOperation(string description)
         {
             IsEnabled = true;
-        }
-
-        public void MouseEnter()
-        {
-        }
-
-        public void MouseLeave()
-        {
+            ShortDescription = description ?? string.Empty;
         }
 
         public void Execute()

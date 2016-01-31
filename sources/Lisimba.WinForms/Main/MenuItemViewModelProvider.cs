@@ -33,12 +33,12 @@ namespace DustInTheWind.Lisimba.Main
             this.unityContainer = unityContainer;
         }
 
-        public TViewModel GetNewViewModel<TViewModel>(IExecutableViewModel operation)
+        public TViewModel GetNewViewModel<TViewModel>(IOperation operation)
             where TViewModel : ViewModelBase
         {
             if (operation == null) throw new ArgumentNullException("operation");
 
-            ResolverOverride resolverOverride = new DependencyOverride(typeof(IExecutableViewModel), operation);
+            ResolverOverride resolverOverride = new DependencyOverride(typeof(IOperation), operation);
             return unityContainer.Resolve<TViewModel>(resolverOverride);
         }
     }

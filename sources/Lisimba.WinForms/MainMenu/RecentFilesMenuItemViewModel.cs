@@ -19,16 +19,17 @@ using System.Collections.ObjectModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    class RecentFilesMenuItemViewModel : CustomMenuItemViewModel
+    class RecentFilesMenuItemViewModel : CustomButtonViewModel
     {
         private readonly RecentFiles recentFiles;
-        private IExecutableViewModel childrenOpertion;
-        public ObservableCollection<CustomMenuItemViewModel> Items { get; private set; }
+        private IOperation childrenOpertion;
+        public ObservableCollection<CustomButtonViewModel> Items { get; private set; }
 
-        public IExecutableViewModel ChildrenOpertion
+        public IOperation ChildrenOpertion
         {
             get { return childrenOpertion; }
             set
@@ -38,14 +39,14 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, RecentFiles recentFiles, IExecutableViewModel operation)
+        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, RecentFiles recentFiles, IOperation operation)
             : base(applicationStatus, userInterface, operation)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
             this.recentFiles = recentFiles;
 
-            Items = new ObservableCollection<CustomMenuItemViewModel>();
+            Items = new ObservableCollection<CustomButtonViewModel>();
 
             recentFiles.FileNameAdded += HandleRecentFilesFileNameAdded;
         }
