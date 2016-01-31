@@ -41,6 +41,7 @@ namespace DustInTheWind.Lisimba.Main
         private bool isAddressBookViewVisible;
         private string defaultGate;
 
+        public MenuItemViewModels MenuItemViewModels { get; private set; }
         public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
         public NewAddressBookOperation NewAddressBookOperation { get; private set; }
@@ -98,7 +99,8 @@ namespace DustInTheWind.Lisimba.Main
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
-            AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface)
+            AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface,
+            MenuItemViewModels menuItemViewModels)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
@@ -108,6 +110,7 @@ namespace DustInTheWind.Lisimba.Main
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (menuItemViewModels == null) throw new ArgumentNullException("menuItemViewModels");
 
             this.applicationBackEnd = applicationBackEnd;
             this.applicationStatus = applicationStatus;
@@ -115,6 +118,7 @@ namespace DustInTheWind.Lisimba.Main
             this.availableGates = availableGates;
             this.userInterface = userInterface;
 
+            MenuItemViewModels = menuItemViewModels;
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
             NewAddressBookOperation = availableOperations.GetOperation<NewAddressBookOperation>();

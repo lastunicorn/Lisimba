@@ -15,18 +15,19 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.MainMenu
 {
-    internal abstract class ExecutableViewModelBase<T> : ViewModelBase, IExecutableViewModel<T>
+    internal class CustomMenuItemViewModel : ViewModelBase
     {
         protected readonly ApplicationStatus applicationStatus;
         protected readonly UserInterface userInterface;
-
+        protected readonly IExecutableViewModel operation;
         private bool isEnabled;
+        private string text;
 
         public bool IsEnabled
         {
@@ -38,29 +39,43 @@ namespace DustInTheWind.Lisimba.Operations
 
                 isEnabled = value;
                 OnPropertyChanged();
-                OnEnableChanged();
             }
         }
 
-        public abstract string ShortDescription { get; }
+        public string Text
+        {
+            get { return text; }
+            set
+            {
+                text = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public event EventHandler EnableChanged;
-
-        protected ExecutableViewModelBase(ApplicationStatus applicationStatus, UserInterface userInterface)
+        public CustomMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IExecutableViewModel operation)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (operation == null) throw new ArgumentNullException("operation");
 
             this.applicationStatus = applicationStatus;
             this.userInterface = userInterface;
+            this.operation = operation;
 
-            isEnabled = true;
+            operation.EnableChanged += HandleOperationEnableChanged;
+
+            isEnabled = operation.IsEnabled;
+        }
+
+        private void HandleOperationEnableChanged(object sender, EventArgs eventArgs)
+        {
+            IsEnabled = operation.IsEnabled;
         }
 
         public void MouseEnter()
         {
             if (applicationStatus != null)
-                applicationStatus.SetPermanentStatusText(ShortDescription);
+                applicationStatus.SetPermanentStatusText(operation.ShortDescription);
         }
 
         public void MouseLeave()
@@ -69,58 +84,16 @@ namespace DustInTheWind.Lisimba.Operations
                 applicationStatus.Reset();
         }
 
-        public void Execute()
+        public virtual void Execute()
         {
-            if (!isEnabled)
-                return;
-
-            DoExecute(default(T));
-        }
-
-        public void Execute(object parameter)
-        {
-            if (parameter != null && !(parameter is T))
-            {
-                string message = string.Format(LocalizedResources.ExecutableViewModel_IncorectParameterType, typeof(T).Name);
-                throw new ArgumentException(message);
-            }
-
-            if (!isEnabled)
-                return;
-
             try
             {
-                DoExecute((T)parameter);
+                operation.Execute();
             }
             catch (Exception ex)
             {
                 userInterface.DisplayError(ex.Message);
             }
-        }
-
-        public void Execute(T parameter)
-        {
-            if (!isEnabled)
-                return;
-
-            try
-            {
-                DoExecute(parameter);
-            }
-            catch (Exception ex)
-            {
-                userInterface.DisplayError(ex.Message);
-            }
-        }
-
-        protected abstract void DoExecute(T parameter);
-
-        protected virtual void OnEnableChanged()
-        {
-            EventHandler handler = EnableChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
     }
 }

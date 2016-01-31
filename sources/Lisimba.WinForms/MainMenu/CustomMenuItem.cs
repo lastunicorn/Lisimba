@@ -17,12 +17,11 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    internal class CommandedMenuItem : ToolStripMenuItem, IBindableComponent
+    internal partial class CustomMenuItem : ToolStripMenuItem, IBindableComponent
     {
         private BindingContext bindingContext;
         private ControlBindingsCollection dataBindings;
@@ -52,66 +51,58 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public string ShortDescription { get; set; }
+        private CustomMenuItemViewModel viewModel;
 
-        private IExecutableViewModel viewModel;
-
-        public IExecutableViewModel ViewModel
+        public CustomMenuItemViewModel ViewModel
         {
             private get { return viewModel; }
             set
             {
                 DataBindings.Clear();
+                Enabled = false;
 
                 viewModel = value;
 
                 if (viewModel != null)
+                {
                     this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
+
+                    if (viewModel.Text != null)
+                        this.Bind(x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
+                }
             }
         }
 
-        [Browsable(false)]
-        public object CommandParameter { get; set; }
+        public CustomMenuItem()
+        {
+            InitializeComponent();
+        }
 
-        [Browsable(false)]
-        public Func<object> CommandParameterProvider { get; set; }
+        public CustomMenuItem(IContainer container)
+        {
+            container.Add(this);
 
-        protected override void OnMouseEnter(EventArgs e)
+            InitializeComponent();
+        }
+
+        private void HandleClick(object sender, EventArgs e)
+        {
+            if (ViewModel == null)
+                return;
+
+            ViewModel.Execute();
+        }
+
+        private void HandleMouseEnter(object sender, EventArgs e)
         {
             if (ViewModel != null)
                 ViewModel.MouseEnter();
-
-            base.OnMouseEnter(e);
         }
 
-        protected override void OnMouseLeave(EventArgs e)
+        private void HandleMouseLeave(object sender, EventArgs e)
         {
             if (ViewModel != null)
                 ViewModel.MouseLeave();
-
-            base.OnMouseLeave(e);
-        }
-
-        protected override void OnClick(EventArgs e)
-        {
-            if (ViewModel != null)
-            {
-                object commandParameter = CalculateParameterToUseWithCommand();
-
-                if (commandParameter == null)
-                    ViewModel.Execute();
-                else
-                    ViewModel.Execute(commandParameter);
-            }
-
-            base.OnClick(e);
-        }
-
-        private object CalculateParameterToUseWithCommand()
-        {
-            return CommandParameterProvider != null
-                ? CommandParameterProvider()
-                : CommandParameter;
         }
     }
 }

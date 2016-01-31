@@ -15,34 +15,42 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using DustInTheWind.Lisimba.Operations;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.Operations
 {
-    internal class AvailableOperations
+    internal class EmptyOperation : IExecutableViewModel
     {
-        private readonly Dictionary<Type, IExecutableViewModel> operations;
+        private string shortDescription;
 
-        public T GetOperation<T>()
-            where T : IExecutableViewModel
+        public bool IsEnabled { get; private set; }
+
+        public string ShortDescription
         {
-            Type type = typeof(T);
-            IExecutableViewModel executableViewModel = operations[type];
-            return (T)executableViewModel;
+            get { return shortDescription; }
+            set { shortDescription = value ?? string.Empty; }
         }
 
-        public AvailableOperations()
+        public event EventHandler EnableChanged;
+
+        public EmptyOperation()
         {
-            operations = new Dictionary<Type, IExecutableViewModel>();
+            IsEnabled = true;
         }
 
-        public void Add(IExecutableViewModel operation)
+        public void MouseEnter()
         {
-            if (operation == null) throw new ArgumentNullException("operation");
+        }
 
-            Type operationType = operation.GetType();
-            operations.Add(operationType, operation);
+        public void MouseLeave()
+        {
+        }
+
+        public void Execute()
+        {
+        }
+
+        public void Execute(object parameter)
+        {
         }
     }
 }

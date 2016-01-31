@@ -62,6 +62,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>ref\BiorhythmControls.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
@@ -114,7 +118,19 @@
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GateSelectorViewModel.cs" />
+    <Compile Include="MainMenu\CustomMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainMenu\CustomMenuItem.Designer.cs">
+      <DependentUpon>CustomMenuItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu\CustomMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\RecentFileMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\RecentFilesMenuItemViewModel.cs" />
+    <Compile Include="Main\MenuItemViewModelProvider.cs" />
+    <Compile Include="Main\MenuItemViewModels.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
+    <Compile Include="Operations\EmptyOperation.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />
@@ -267,7 +283,7 @@
     <Compile Include="MainMenu\LisimbaMainMenuStrip.Designer.cs">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainMenu\MenuItemWithChildren.cs">
+    <Compile Include="MainMenu\RecentFilesMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Utils\CustomButton.cs">
@@ -376,6 +392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GateSelectorForm.resx">
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu\CustomMenuItem.resx">
+      <DependentUpon>CustomMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>
