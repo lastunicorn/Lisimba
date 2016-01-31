@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.MainMenu
 
             EmptyOperation operation12 = new EmptyOperation("Open previously closed address books.");
             RecentFilesViewModel = viewModelProvider.GetNewViewModel<RecentFilesMenuItemViewModel>(operation12);
-            RecentFilesViewModel.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
+            RecentFilesViewModel.ChildrenOpertion = availableOperations.GetOperation<OpenRecentFileOperation>();
         }
     }
 }

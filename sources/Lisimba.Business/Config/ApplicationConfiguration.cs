@@ -68,7 +68,7 @@ namespace DustInTheWind.Lisimba.Business.Config
                     .Select(x => new AddressBookLocationInfo
                     {
                         FileName = x.FileName,
-                        GateId = null
+                        GateId = x.Gate
                     })
                     .ToArray();
             }

@@ -22,11 +22,13 @@ namespace DustInTheWind.Lisimba.Egg
 {
     public interface IGate
     {
-        AddressBook Load(string fileName);
-        void Save(AddressBook addressBook, string fileName);
-        IEnumerable<Exception> Warnings { get; }
         string Id { get; }
         string Name { get; }
         string Description { get; }
+
+        IEnumerable<Exception> Warnings { get; }
+
+        AddressBook Load(string fileName);
+        void Save(AddressBook addressBook, string fileName);
     }
 }

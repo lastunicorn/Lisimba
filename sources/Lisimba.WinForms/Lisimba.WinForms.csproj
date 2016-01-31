@@ -125,6 +125,7 @@
     <Compile Include="MainMenu\ImportsMenuItemViewModel.cs" />
     <Compile Include="Operations\ExportOperation.cs" />
     <Compile Include="Operations\ImportOperation.cs" />
+    <Compile Include="Operations\OpenRecentFileOperation.cs" />
     <Compile Include="Utils\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

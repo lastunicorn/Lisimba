@@ -53,9 +53,7 @@ namespace DustInTheWind.Lisimba.MainMenu
 
         protected override object GetExecuteParameter()
         {
-            return File == null
-                ? null
-                : File.FileName;
+            return File;
         }
 
         private void UpdateText()
