@@ -22,8 +22,6 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
-using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactList
@@ -38,8 +36,7 @@ namespace DustInTheWind.Lisimba.ContactList
         private bool ignoreCurrentContactChange;
 
         public List<SortingComboBoxItem> SortingMethods { get; private set; }
-        public NewContactOperation NewContactOperation { get; private set; }
-        public DeleteCurrentContactOperation DeleteCurrentContactOperation { get; private set; }
+        public ContactMenuViewModels ContactMenuViewModels { get; private set; }
 
         public ContactListView View { get; set; }
 
@@ -68,17 +65,16 @@ namespace DustInTheWind.Lisimba.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, AvailableOperations availableOperations)
+        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, ContactMenuViewModels contactMenuViewModels)
         {
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
+            if (contactMenuViewModels == null) throw new ArgumentNullException("contactMenuViewModels");
 
             this.applicationConfiguration = applicationConfiguration;
             this.openedAddressBooks = openedAddressBooks;
 
-            NewContactOperation = availableOperations.GetOperation<NewContactOperation>();
-            DeleteCurrentContactOperation = availableOperations.GetOperation<DeleteCurrentContactOperation>();
+            ContactMenuViewModels = contactMenuViewModels;
 
             SortingMethods = new List<SortingComboBoxItem>
             {

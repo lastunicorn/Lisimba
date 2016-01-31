@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Main
             contactEditor1.ViewModel = viewModel.ContactEditorViewModel;
             contactEditor1.ViewModel.View = contactEditor1;
 
-            menuStripMain.Initialize(availableOperations, recentFiles, viewModel.MenuItemViewModels);
+            menuStripMain.Initialize(availableOperations, recentFiles, viewModel.MainMenusViewModels);
 
             this.Bind(x => x.Text, viewModel, x => x.Title, false, DataSourceUpdateMode.Never);
             toolStripStatus.Bind(x => x.Text, viewModel, x => x.StatusText, false, DataSourceUpdateMode.Never);

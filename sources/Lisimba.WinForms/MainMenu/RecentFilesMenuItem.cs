@@ -16,11 +16,12 @@
 
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
-    internal class RecentFilesMenuItem : ToolStripMenuItem
+    internal partial class RecentFilesMenuItem : ToolStripMenuItem
     {
         private RecentFilesMenuItemViewModel viewModel;
 
@@ -39,6 +40,18 @@ namespace DustInTheWind.Lisimba.MainMenu
 
                 RefreshRecentFilesMenu();
             }
+        }
+
+        public RecentFilesMenuItem()
+        {
+            InitializeComponent();
+        }
+
+        public RecentFilesMenuItem(IContainer container)
+        {
+            container.Add(this);
+
+            InitializeComponent();
         }
 
         private void HandleRecentFileNameAdded(object sender, EventArgs e)
@@ -80,6 +93,26 @@ namespace DustInTheWind.Lisimba.MainMenu
         {
             CustomMenuItem menuItem = (CustomMenuItem)DropDownItems[i];
             menuItem.ViewModel = item;
+        }
+
+        private void HandleClick(object sender, EventArgs e)
+        {
+            if (ViewModel == null)
+                return;
+
+            ViewModel.Execute();
+        }
+
+        private void HandleMouseEnter(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseEnter();
+        }
+
+        private void HandleMouseLeave(object sender, EventArgs e)
+        {
+            if (ViewModel != null)
+                ViewModel.MouseLeave();
         }
     }
 }

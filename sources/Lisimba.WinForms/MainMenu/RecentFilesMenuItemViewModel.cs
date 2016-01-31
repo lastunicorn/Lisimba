@@ -38,8 +38,8 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, RecentFiles recentFiles)
-            : base(applicationStatus, userInterface, new EmptyOperation())
+        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, RecentFiles recentFiles, IExecutableViewModel operation)
+            : base(applicationStatus, userInterface, operation)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 

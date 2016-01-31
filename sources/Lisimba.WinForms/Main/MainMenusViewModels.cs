@@ -18,11 +18,10 @@ using System;
 using DustInTheWind.Lisimba.MainMenu;
 using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.Main
 {
-    class MenuItemViewModels
+    class MainMenusViewModels
     {
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
@@ -41,7 +40,7 @@ namespace DustInTheWind.Lisimba.Main
         public CustomMenuItemViewModel ImportViewModel { get; private set; }
         public RecentFilesMenuItemViewModel RecentFilesViewModel { get; private set; }
 
-        public MenuItemViewModels(MenuItemViewModelProvider viewModelProvider, AvailableOperations availableOperations)
+        public MainMenusViewModels(MenuItemViewModelProvider viewModelProvider, AvailableOperations availableOperations)
         {
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
@@ -61,7 +60,6 @@ namespace DustInTheWind.Lisimba.Main
             AboutViewModel = CreateViewModel<ShowAboutOperation>();
             ExportViewModel = CreateEmptyViewModel("Export current opened address book in another format.");
             ImportViewModel = CreateEmptyViewModel("Import address book from another format.");
-
             RecentFilesViewModel = CreateRecentFilesViewModel();
         }
 
@@ -69,13 +67,13 @@ namespace DustInTheWind.Lisimba.Main
             where T : class, IExecutableViewModel
         {
             T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel(newAddressBookOperation);
+            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(newAddressBookOperation);
         }
 
         private RecentFilesMenuItemViewModel CreateRecentFilesViewModel()
         {
             EmptyOperation operation = new EmptyOperation { ShortDescription = "Open previously closed address books." };
-            RecentFilesMenuItemViewModel viewModel = viewModelProvider.GetViewModel<RecentFilesMenuItemViewModel>(operation);
+            RecentFilesMenuItemViewModel viewModel = viewModelProvider.GetNewViewModel<RecentFilesMenuItemViewModel>(operation);
             viewModel.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
             return viewModel;
         }
@@ -83,7 +81,7 @@ namespace DustInTheWind.Lisimba.Main
         private CustomMenuItemViewModel CreateEmptyViewModel(string description)
         {
             EmptyOperation operation = new EmptyOperation { ShortDescription = description };
-            return viewModelProvider.GetNewViewModel(operation);
+            return viewModelProvider.GetNewViewModel<CustomMenuItemViewModel>(operation);
         }
     }
 }

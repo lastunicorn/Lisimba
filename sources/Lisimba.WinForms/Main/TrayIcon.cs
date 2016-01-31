@@ -37,10 +37,10 @@ namespace DustInTheWind.Lisimba.Main
             InitializeComponent();
 
             this.presenter = presenter;
-            
-            toolStripMenuItem_Exit.ViewModel = presenter.ApplicationExitOperation;
-            toolStripMenuItem_About.ViewModel = presenter.ShowAboutOperation;
-            toolStripMenuItem_Show.ViewModel = presenter.ShowMainOperation;
+
+            toolStripMenuItem_Exit.ViewModel = presenter.TrayIconMenuViewModels.ApplicationExitViewModel;
+            toolStripMenuItem_About.ViewModel = presenter.TrayIconMenuViewModels.AboutViewModel;
+            toolStripMenuItem_Show.ViewModel = presenter.TrayIconMenuViewModels.ShowMainViewModel;
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)

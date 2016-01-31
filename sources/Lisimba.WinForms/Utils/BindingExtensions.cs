@@ -50,14 +50,28 @@ namespace DustInTheWind.Lisimba.Utils
             return binding;
         }
 
+        public static string GetName<TSource>(Expression<Func<TSource, object>> property)
+        {
+            return GetControlPropertyName(property);
+        }
+
         private static string GetControlPropertyName<TObject, TProperty>(Expression<Func<TObject, TProperty>> property)
         {
-            MemberExpression me = property.Body as MemberExpression;
+            if (property == null) throw new ArgumentNullException("property");
 
-            if (me == null)
-                throw new ArgumentException("Invalid expression. You must pass a lambda of the form: 'x => x.Property'.");
+            MemberExpression memberExpression = property.Body as MemberExpression;
 
-            return me.Member.Name;
+            if (memberExpression == null)
+            {
+                UnaryExpression unaryExpression = (UnaryExpression)property.Body;
+
+                memberExpression = unaryExpression.Operand as MemberExpression;
+
+                if (memberExpression == null)
+                    throw new ArgumentException("Invalid expression. You must pass a lambda of the form: 'x => x.Property'.");
+            }
+
+            return memberExpression.Member.Name;
         }
     }
 }

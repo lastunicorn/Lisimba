@@ -17,7 +17,6 @@
 using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 
@@ -28,9 +27,7 @@ namespace DustInTheWind.Lisimba.Main
         private readonly UserInterface userInterface;
         private TrayIcon trayIcon;
 
-        public ApplicationExitOperation ApplicationExitOperation { get; private set; }
-        public ShowAboutOperation ShowAboutOperation { get; private set; }
-        public ShowMainOperation ShowMainOperation { get; private set; }
+        public TrayIconMenuViewModels TrayIconMenuViewModels { get; private set; }
 
         public TrayIcon TrayIcon
         {
@@ -42,16 +39,14 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, AvailableOperations availableOperations)
+        public TrayIconPresenter(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
         {
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.userInterface = userInterface;
 
-            ApplicationExitOperation = availableOperations.GetOperation<ApplicationExitOperation>();
-            ShowAboutOperation = availableOperations.GetOperation<ShowAboutOperation>();
-            ShowMainOperation = availableOperations.GetOperation<ShowMainOperation>();
+            TrayIconMenuViewModels = trayIconMenuViewModels;
 
             applicationBackEnd.Ending += HandleApplicationBackEndEnding;
             applicationBackEnd.EndCanceled += HandleApplicationBackEndExitCanceled;

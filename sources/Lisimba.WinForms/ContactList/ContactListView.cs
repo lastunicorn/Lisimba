@@ -41,14 +41,15 @@ namespace DustInTheWind.Lisimba.ContactList
                     viewModel.ContactsToTreeViewBinder = contactsToTreeViewBinder;
 
                     comboBoxSortBy.DataSource = viewModel.SortingMethods;
-                    comboBoxSortBy.DisplayMember = "Text";
-                    comboBoxSortBy.ValueMember = "SortingType";
+                    comboBoxSortBy.DisplayMember = BindingExtensions.GetName<SortingComboBoxItem>(x => x.Text);
+                    comboBoxSortBy.ValueMember = BindingExtensions.GetName<SortingComboBoxItem>(x => x.SortingType);
 
                     comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
                     textBoxSearch.Bind(x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
 
-                    toolStripMenuItem_List_Add.ViewModel = ViewModel.NewContactOperation;
-                    toolStripMenuItem_List_Delete.ViewModel = ViewModel.DeleteCurrentContactOperation;
+                    toolStripMenuItem_List_Add.ViewModel = ViewModel.ContactMenuViewModels.AddContactViewModel;
+                    toolStripMenuItem_List_Delete.ViewModel = ViewModel.ContactMenuViewModels.DeleteContactViewModel;
+                    toolStripMenuItem_List_ViewBiorythm.ViewModel = ViewModel.ContactMenuViewModels.BiorhythmViewModel;
                 }
             }
         }
@@ -58,8 +59,6 @@ namespace DustInTheWind.Lisimba.ContactList
             InitializeComponent();
 
             treeViewContacts.TreeViewNodeSorter = new TreeNodeComparer(ContactsSortingType.Nickname);
-
-            toolStripMenuItem_List_ViewBiorythm.ShortDescription = "Display the biorhythm of the selected person.";
 
             contactsToTreeViewBinder = new ContactsToTreeViewBinder(treeViewContacts);
 

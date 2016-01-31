@@ -105,6 +105,7 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactList\ContactMenuViewModels.cs" />
     <Compile Include="Forms\GateSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,9 +127,13 @@
     </Compile>
     <Compile Include="MainMenu\CustomMenuItemViewModel.cs" />
     <Compile Include="MainMenu\RecentFileMenuItemViewModel.cs" />
+    <Compile Include="MainMenu\RecentFilesMenuItem.Designer.cs">
+      <DependentUpon>RecentFilesMenuItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainMenu\RecentFilesMenuItemViewModel.cs" />
     <Compile Include="Main\MenuItemViewModelProvider.cs" />
-    <Compile Include="Main\MenuItemViewModels.cs" />
+    <Compile Include="Main\MainMenusViewModels.cs" />
+    <Compile Include="Main\TrayIconMenuViewModels.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Operations\EmptyOperation.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
@@ -265,9 +270,6 @@
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\ContactEditorViewModel.cs" />
-    <Compile Include="MainMenu\CommandedMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ContactList\ContactListViewModel.cs" />
     <Compile Include="ContactList\ContactsToTreeViewBinder.cs" />
     <Compile Include="ContactEdit\CustomTreeView.cs">
@@ -395,6 +397,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu\CustomMenuItem.resx">
       <DependentUpon>CustomMenuItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu\RecentFilesMenuItem.resx">
+      <DependentUpon>RecentFilesMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>

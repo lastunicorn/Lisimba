@@ -33,28 +33,13 @@ namespace DustInTheWind.Lisimba.Main
             this.unityContainer = unityContainer;
         }
 
-        public CustomMenuItemViewModel GetNewViewModel<T>(T operation)
-            where T : class, IExecutableViewModel
+        public TViewModel GetNewViewModel<TViewModel>(IExecutableViewModel operation)
+            where TViewModel : ViewModelBase
         {
             if (operation == null) throw new ArgumentNullException("operation");
 
             ResolverOverride resolverOverride = new DependencyOverride(typeof(IExecutableViewModel), operation);
-            return unityContainer.Resolve<CustomMenuItemViewModel>(resolverOverride);
-        }
-
-        public T GetViewModel<T>(IExecutableViewModel operation)
-            where T : ViewModelBase
-        {
-            if (operation == null) throw new ArgumentNullException("operation");
-
-            ResolverOverride resolverOverride = new DependencyOverride(typeof(IExecutableViewModel), operation);
-            return unityContainer.Resolve<T>(resolverOverride);
-        }
-
-        public T GetViewModel<T>()
-            where T : CustomMenuItemViewModel
-        {
-            return unityContainer.Resolve<T>();
+            return unityContainer.Resolve<TViewModel>(resolverOverride);
         }
     }
 }

@@ -1,5 +1,3 @@
-using DustInTheWind.Lisimba.MainMenu;
-
 namespace DustInTheWind.Lisimba.ContactList
 {
     partial class ContactListView
@@ -33,10 +31,10 @@ namespace DustInTheWind.Lisimba.ContactList
             this.components = new System.ComponentModel.Container();
             this.treeViewContacts = new System.Windows.Forms.TreeView();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_List_Add = new CommandedMenuItem();
-            this.toolStripMenuItem_List_Delete = new CommandedMenuItem();
+            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
+            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorythm = new CommandedMenuItem();
+            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -73,21 +71,15 @@ namespace DustInTheWind.Lisimba.ContactList
             // 
             // toolStripMenuItem_List_Add
             // 
-            this.toolStripMenuItem_List_Add.CommandParameter = null;
-            this.toolStripMenuItem_List_Add.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
             this.toolStripMenuItem_List_Add.ViewModel = null;
-            this.toolStripMenuItem_List_Add.ShortDescription = null;
             this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Add.Text = "&Add Contact";
             // 
             // toolStripMenuItem_List_Delete
             // 
-            this.toolStripMenuItem_List_Delete.CommandParameter = null;
-            this.toolStripMenuItem_List_Delete.CommandParameterProvider = null;
             this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
             this.toolStripMenuItem_List_Delete.ViewModel = null;
-            this.toolStripMenuItem_List_Delete.ShortDescription = null;
             this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
             // 
@@ -99,11 +91,8 @@ namespace DustInTheWind.Lisimba.ContactList
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
-            this.toolStripMenuItem_List_ViewBiorythm.CommandParameter = null;
-            this.toolStripMenuItem_List_ViewBiorythm.CommandParameterProvider = null;
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
             this.toolStripMenuItem_List_ViewBiorythm.ViewModel = null;
-            this.toolStripMenuItem_List_ViewBiorythm.ShortDescription = null;
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
             this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
@@ -161,10 +150,10 @@ namespace DustInTheWind.Lisimba.ContactList
         private System.Windows.Forms.TreeView treeViewContacts;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
-        private CommandedMenuItem toolStripMenuItem_List_Add;
-        private CommandedMenuItem toolStripMenuItem_List_Delete;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_Add;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_Delete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private CommandedMenuItem toolStripMenuItem_List_ViewBiorythm;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
     }

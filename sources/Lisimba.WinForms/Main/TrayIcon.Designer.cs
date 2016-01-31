@@ -32,9 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TrayIcon));
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_Show = new DustInTheWind.Lisimba.MainMenu.CommandedMenuItem();
-            this.toolStripMenuItem_About = new DustInTheWind.Lisimba.MainMenu.CommandedMenuItem();
-            this.toolStripMenuItem_Exit = new DustInTheWind.Lisimba.MainMenu.CommandedMenuItem();
+            this.toolStripMenuItem_Show = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
+            this.toolStripMenuItem_About = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
+            this.toolStripMenuItem_Exit = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             // 
             // notifyIcon1
@@ -70,11 +70,8 @@
             // 
             // toolStripMenuItem_Exit
             // 
-            this.toolStripMenuItem_Exit.CommandParameter = null;
-            this.toolStripMenuItem_Exit.CommandParameterProvider = null;
             this.toolStripMenuItem_Exit.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit_16;
             this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
-            this.toolStripMenuItem_Exit.ShortDescription = null;
             this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Exit.Text = "E&xit";
             this.toolStripMenuItem_Exit.ViewModel = null;
@@ -86,8 +83,8 @@
 
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private DustInTheWind.Lisimba.MainMenu.CommandedMenuItem toolStripMenuItem_Exit;
-        private DustInTheWind.Lisimba.MainMenu.CommandedMenuItem toolStripMenuItem_Show;
-        private DustInTheWind.Lisimba.MainMenu.CommandedMenuItem toolStripMenuItem_About;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_Exit;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_Show;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_About;
     }
 }

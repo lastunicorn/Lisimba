@@ -31,27 +31,27 @@ namespace DustInTheWind.Lisimba.MainMenu
             InitializeComponent();
         }
 
-        public void Initialize(AvailableOperations availableOperations, RecentFiles recentFiles, MenuItemViewModels menuItemViewModels)
+        public void Initialize(AvailableOperations availableOperations, RecentFiles recentFiles, MainMenusViewModels mainMenusViewModels)
         {
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            toolStripMenuItem_File_New.ViewModel = menuItemViewModels.NewAddressBookViewModel;
-            toolStripMenuItem_File_Open.ViewModel = menuItemViewModels.OpenAddressBookViewModel;
-            toolStripMenuItem_File_Save.ViewModel = menuItemViewModels.SaveAddressBookViewModel;
-            toolStripMenuItem_File_SaveAs.ViewModel = menuItemViewModels.SaveAsAddressBookViewModel;
-            toolStripMenuItem_File_Close.ViewModel = menuItemViewModels.CloseAddressBookViewModel;
-            toolStripMenuItem_File_Export.ViewModel = menuItemViewModels.ExportViewModel;
-            toolStripMenuItem_File_Import.ViewModel = menuItemViewModels.ImportViewModel;
-            toolStripMenuItem_File_Exit.ViewModel = menuItemViewModels.ApplicationExitViewModel;
+            toolStripMenuItem_File_New.ViewModel = mainMenusViewModels.NewAddressBookViewModel;
+            toolStripMenuItem_File_Open.ViewModel = mainMenusViewModels.OpenAddressBookViewModel;
+            toolStripMenuItem_File_Save.ViewModel = mainMenusViewModels.SaveAddressBookViewModel;
+            toolStripMenuItem_File_SaveAs.ViewModel = mainMenusViewModels.SaveAsAddressBookViewModel;
+            toolStripMenuItem_File_Close.ViewModel = mainMenusViewModels.CloseAddressBookViewModel;
+            toolStripMenuItem_File_Export.ViewModel = mainMenusViewModels.ExportViewModel;
+            toolStripMenuItem_File_Import.ViewModel = mainMenusViewModels.ImportViewModel;
+            toolStripMenuItem_File_Exit.ViewModel = mainMenusViewModels.ApplicationExitViewModel;
             
-            toolStripMenuItem_AddressBook_AddContact.ViewModel = menuItemViewModels.NewContactViewModel;
-            toolStripMenuItem_AddressBook_DeleteContact.ViewModel = menuItemViewModels.DeleteContactViewModel;
-            toolStripMenuItem_AddressBook_Properties.ViewModel = menuItemViewModels.AddressBookPropertiesViewModel;
+            toolStripMenuItem_AddressBook_AddContact.ViewModel = mainMenusViewModels.NewContactViewModel;
+            toolStripMenuItem_AddressBook_DeleteContact.ViewModel = mainMenusViewModels.DeleteContactViewModel;
+            toolStripMenuItem_AddressBook_Properties.ViewModel = mainMenusViewModels.AddressBookPropertiesViewModel;
             
-            toolStripMenuItem_Help_About.ViewModel = menuItemViewModels.AboutViewModel;
+            toolStripMenuItem_Help_About.ViewModel = mainMenusViewModels.AboutViewModel;
 
-            toolStripRecentFilesMenuItem_File_RecentFiles.ViewModel = menuItemViewModels.RecentFilesViewModel;
+            toolStripRecentFilesMenuItem_File_RecentFiles.ViewModel = mainMenusViewModels.RecentFilesViewModel;
 
             //toolStripRecentFilesMenuItem_File_RecentFiles.ChildrenOpertion = availableOperations.GetOperation<OpenAddressBookOperation>();
             //toolStripRecentFilesMenuItem_File_RecentFiles.RecentFiles = recentFiles;
