@@ -37,6 +37,7 @@ namespace DustInTheWind.Lisimba.Main
             InitializeComponent();
 
             this.viewModel = viewModel;
+            viewModel.TrayIcon = this;
 
             TrayIconMenuViewModels trayIconMenuViewModels = viewModel.TrayIconMenuViewModels;
             toolStripMenuItem_Exit.ViewModel = trayIconMenuViewModels.ApplicationExitViewModel;

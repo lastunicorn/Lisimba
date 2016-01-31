@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return "Imports a address book."; }
+            get { return "Imports an address book."; }
         }
 
         protected override void DoExecute(IGate gate)

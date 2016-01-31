@@ -74,7 +74,6 @@
             this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
             this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Exit.Text = "E&xit";
-            this.toolStripMenuItem_Exit.ViewModel = null;
             this.contextMenuStrip1.ResumeLayout(false);
 
         }

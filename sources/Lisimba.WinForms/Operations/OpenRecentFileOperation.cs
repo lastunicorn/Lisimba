@@ -51,13 +51,6 @@ namespace DustInTheWind.Lisimba.Operations
                 return;
 
             IGate gate = availableGates.GetGate(file.GateId);
-
-            if (gate == null)
-            {
-                string message = string.Format("The gate {0} does not exist.", file.GateId);
-                throw new LisimbaException(message);
-            }
-
             openedAddressBooks.OpenAddressBook(file.FileName, gate);
         }
     }

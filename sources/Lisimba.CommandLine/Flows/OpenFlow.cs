@@ -97,15 +97,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 throw new LisimbaException(message);
             }
 
-            IGate gate = availableGates.GetGate(addressBookLocationInfo.GateId);
-
-            if (gate == null)
+            try
+            {
+                return availableGates.GetGate(addressBookLocationInfo.GateId);
+            }
+            catch (Exception ex)
             {
                 string message = string.Format(Resources.OpenAddressBook_GateNotFoundError, addressBookLocationInfo.GateId, addressBookLocationInfo.FileName);
-                throw new LisimbaException(message);
+                throw new LisimbaException(message, ex);
             }
-
-            return gate;
         }
     }
 }
