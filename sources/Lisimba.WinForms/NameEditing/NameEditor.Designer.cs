@@ -43,6 +43,7 @@
             this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelName.Location = new System.Drawing.Point(3, 0);
             this.labelName.Name = "labelName";
+            this.labelName.Padding = new System.Windows.Forms.Padding(0, 4, 0, 3);
             this.labelName.Size = new System.Drawing.Size(492, 132);
             this.labelName.TabIndex = 1;
             this.labelName.Text = "Name";
