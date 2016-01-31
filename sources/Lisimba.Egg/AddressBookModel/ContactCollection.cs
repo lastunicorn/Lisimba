@@ -30,15 +30,15 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             ArrayList.Adapter((IList) Items).Sort(comparer);
         }
 
-        protected override void InsertItem(int index, Contact item)
-        {
-            bool existsContactWithSameName = Items.Any(x => PersonName.Equals(x.Name, item.Name));
+        //protected override void InsertItem(int index, Contact item)
+        //{
+        //    bool existsContactWithSameName = Items.Any(x => PersonName.Equals(x.Name, item.Name));
 
-            if (existsContactWithSameName)
-                return;
+        //    if (existsContactWithSameName)
+        //        return;
 
-            base.InsertItem(index, item);
-        }
+        //    base.InsertItem(index, item);
+        //}
 
         public int AddRange(ContactCollection contacts, ImportRuleCollection mergeRules)
         {

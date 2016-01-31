@@ -61,7 +61,10 @@ namespace DustInTheWind.Lisimba.Forms
         {
             try
             {
-                ValidateContact();
+                bool allowToContinue = ValidateContact();
+
+                if (!allowToContinue)
+                    return;
 
                 addressBook.Contacts.Add(EditedContact);
 
@@ -73,7 +76,7 @@ namespace DustInTheWind.Lisimba.Forms
             }
         }
 
-        private void ValidateContact()
+        private bool ValidateContact()
         {
             bool isNameEmpty = EditedContact.Name.IsEmpty();
 
@@ -82,8 +85,8 @@ namespace DustInTheWind.Lisimba.Forms
 
             bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
 
-            if (isAnotherContactWithSameName)
-                throw new LisimbaException("Another contact with the same name already exists.");
+            return !isAnotherContactWithSameName ||
+                userInterface.DisplayYesNoExclamation("Another contact with the same name already exists.\nIt will NOT be overwritten.\n\nContinue?", "Another contact exists");
         }
 
         public void CloseButtonWasClicked()

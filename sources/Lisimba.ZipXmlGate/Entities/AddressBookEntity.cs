@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Gating.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Gets a collection of Contact.
+        /// Gets or sets a collection of contacts.
         /// </summary>
         [XmlArray("Contacts"), XmlArrayItem("Contact")]
         public List<ContactEntity> Contacts { get; set; }

@@ -53,27 +53,5 @@ namespace DustInTheWind.Lisimba.Gating.Entities
 
         [XmlElement("Notes")]
         public string Notes { get; set; }
-
-        ///// <summary>
-        ///// Copy all the informations from the specified Contact object to the current instance. All the existing data will be lost.
-        ///// </summary>
-        ///// <param name="contact">The Contact object to be copied.</param>
-        //public void CopyFrom(Contact contact)
-        //{
-        //    name.CopyFrom(contact.name);
-
-        //    birthday.CopyFrom(contact.birthday);
-
-        //    phones.CopyFrom(contact.phones);
-        //    emails.CopyFrom(contact.emails);
-        //    webSites.CopyFrom(contact.webSites);
-        //    addresses.CopyFrom(contact.addresses);
-        //    dates.CopyFrom(contact.dates);
-        //    messengerIds.CopyFrom(contact.messengerIds);
-
-        //    notes = contact.notes;
-
-        //    OnChanged();
-        //}
     }
 }

@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
@@ -111,10 +110,10 @@ namespace DustInTheWind.Lisimba.Gating
                     using (XmlTextReader xr = new XmlTextReader(ms))
                     {
                         // Create serializer
-                        XmlSerializer serializer = new XmlSerializer(typeof (AddressBookEntity));
+                        XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
 
-                        AddressBookEntity addressBookEntity = (AddressBookEntity) serializer.Deserialize(xr);
-                        book = FromEntity(addressBookEntity);
+                        AddressBookEntity addressBookEntity = (AddressBookEntity)serializer.Deserialize(xr);
+                        book = EntityConverter.FromEntity(addressBookEntity);
                     }
                 }
             }
@@ -124,118 +123,7 @@ namespace DustInTheWind.Lisimba.Gating
             return book;
         }
 
-        private AddressBook FromEntity(AddressBookEntity addressBookEntity)
-        {
-            AddressBook addressBook = new AddressBook
-            {
-                Version = addressBookEntity.Version,
-                Name = addressBookEntity.Name
-            };
-
-            IEnumerable<Contact> contacts = addressBookEntity.Contacts.Select(FromEntity);
-            addressBook.Contacts.AddRange(contacts);
-
-            return addressBook;
-        }
-
-        private Contact FromEntity(ContactEntity contactEntity)
-        {
-            Contact contact = new Contact();
-
-            contact.Name.FirstName = contactEntity.Name.FirstName;
-            contact.Name.MiddleName = contactEntity.Name.MiddleName;
-            contact.Name.LastName = contactEntity.Name.LastName;
-            contact.Name.Nickname = contactEntity.Name.Nickname;
-
-            contact.Birthday.Day = contactEntity.Birthday.Day;
-            contact.Birthday.Month = contactEntity.Birthday.Month;
-            contact.Birthday.Year = contactEntity.Birthday.Year;
-            contact.Birthday.Description = contactEntity.Birthday.Description;
-
-            IEnumerable<Phone> phones = contactEntity.Phones.Select(FromEntity);
-            contact.Phones.AddRange(phones);
-
-            IEnumerable<Email> emails = contactEntity.Emails.Select(FromEntity);
-            contact.Emails.AddRange(emails);
-
-            IEnumerable<WebSite> webSites = contactEntity.WebSites.Select(FromEntity);
-            contact.WebSites.AddRange(webSites);
-
-            IEnumerable<PostalAddress> addresses = contactEntity.Addresses.Select(FromEntity);
-            contact.PostalAddresses.AddRange(addresses);
-
-            IEnumerable<Date> dates = contactEntity.Dates.Select(FromEntity);
-            contact.Dates.AddRange(dates);
-
-            IEnumerable<SocialProfile> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
-            contact.SocialProfileIds.AddRange(socialProfileIds);
-
-            contact.Notes = contactEntity.Notes;
-
-            return contact;
-        }
-
-        private Phone FromEntity(PhoneEntity phoneEntity)
-        {
-            return new Phone
-            {
-                Number = phoneEntity.Number,
-                Description = phoneEntity.Description
-            };
-        }
-
-        private Email FromEntity(EmailEntity emailEntity)
-        {
-            return new Email
-            {
-                Address = emailEntity.Address,
-                Description = emailEntity.Description
-            };
-        }
-
-        private WebSite FromEntity(WebSiteEntity webSiteEntity)
-        {
-            return new WebSite
-            {
-                Address = webSiteEntity.Address,
-                Description = webSiteEntity.Description
-            };
-        }
-
-        private PostalAddress FromEntity(AddressEntity addeEntity)
-        {
-            return new PostalAddress
-            {
-                Street = addeEntity.Street,
-                City = addeEntity.City,
-                State = addeEntity.State,
-                PostalCode = addeEntity.PostalCode,
-                Country = addeEntity.Country,
-                Description = addeEntity.Description
-            };
-        }
-
-        private Date FromEntity(DateEntity dateEntity)
-        {
-            return new Date
-            {
-                Day = dateEntity.Day,
-                Month = dateEntity.Month,
-                Year = dateEntity.Year,
-                Description = dateEntity.Description
-            };
-        }
-
-        private SocialProfile FromEntity(SocialProfileIdEntity socialProfileIdEntity)
-        {
-            return new SocialProfile
-            {
-                Id = socialProfileIdEntity.Id,
-                Description = socialProfileIdEntity.Description
-            };
-        }
-
-        private Version ReadLsbVersion(Stream stream)
+        private static Version ReadLsbVersion(Stream stream)
         {
             Version ver = null;
             XmlTextReader xmlTextReader = new XmlTextReader(stream);

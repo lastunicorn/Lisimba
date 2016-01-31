@@ -20,20 +20,20 @@ using System.Xml.Serialization;
 namespace DustInTheWind.Lisimba.Gating.Entities
 {
     /// <summary>
-    /// Class containing information about an e-mail
+    /// Class containing information about a web site.
     /// </summary>
     [Serializable]
     [XmlRoot("WebSite")]
     public class WebSiteEntity
     {
         /// <summary>
-        /// The e-mail address.
+        /// The web site address.
         /// </summary>
         [XmlAttribute("Address")]
         public string Address { get; set; }
 
         /// <summary>
-        /// A short description of the e-mail address.
+        /// A short description of the web site address.
         /// </summary>
         [XmlAttribute("Description")]
         public string Description { get; set; }
