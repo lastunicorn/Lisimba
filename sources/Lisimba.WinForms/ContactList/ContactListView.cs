@@ -20,6 +20,7 @@ using DustInTheWind.Lisimba.Biorhythm;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactList
 {
@@ -44,8 +45,8 @@ namespace DustInTheWind.Lisimba.ContactList
                     comboBoxSortBy.DisplayMember = BindingExtensions.GetName<SortingComboBoxItem>(x => x.Text);
                     comboBoxSortBy.ValueMember = BindingExtensions.GetName<SortingComboBoxItem>(x => x.SortingType);
 
-                    comboBoxSortBy.Bind(x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
-                    textBoxSearch.Bind(x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
+                    BindingExtensions.Bind(comboBoxSortBy, x => x.SelectedValue, ViewModel, x => x.SelectedSortingMethod, false, DataSourceUpdateMode.OnPropertyChanged);
+                    BindingExtensions.Bind(textBoxSearch, x => x.Text, viewModel, x => x.SearchedText, false, DataSourceUpdateMode.OnPropertyChanged);
 
                     toolStripMenuItem_List_Add.ViewModel = ViewModel.ContactMenuViewModels.AddContactViewModel;
                     toolStripMenuItem_List_Delete.ViewModel = ViewModel.ContactMenuViewModels.DeleteContactViewModel;

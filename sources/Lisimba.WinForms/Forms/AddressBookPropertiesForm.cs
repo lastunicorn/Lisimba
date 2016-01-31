@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Forms
 {
@@ -49,10 +50,10 @@ namespace DustInTheWind.Lisimba.Forms
 
         private void CreateBindings()
         {
-            textBoxBookName.Bind(x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
-            textBoxBookName.Bind(x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
-            textBoxFileLocation.Bind(x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
-            textBoxContactsCount.Bind(x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(textBoxBookName, x => x.Text, viewModel, x => x.BookName, false, DataSourceUpdateMode.OnPropertyChanged);
+            BindingExtensions.Bind(textBoxBookName, x => x.Enabled, viewModel, x => x.BookNameEnabled, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(textBoxFileLocation, x => x.Text, viewModel, x => x.FileLocation, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(textBoxContactsCount, x => x.Text, viewModel, x => x.ContactsCount, false, DataSourceUpdateMode.Never);
         }
     }
 }

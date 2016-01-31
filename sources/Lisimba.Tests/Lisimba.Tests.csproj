@@ -76,6 +76,10 @@
       <Project>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</Project>
       <Name>Lisimba.WinForms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WinFormsCommon\WinFormsCommon.csproj">
+      <Project>{47cdb7c5-a066-45cf-bd3e-b6ca2ff72db1}</Project>
+      <Name>WinFormsCommon</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

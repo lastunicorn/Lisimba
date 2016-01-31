@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public ApplicationExitOperation(ApplicationBackEnd applicationBackEnd, UserInterface userInterface)
             : base(userInterface)
         {
             if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");

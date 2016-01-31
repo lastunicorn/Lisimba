@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CloseCurrentAddressBookOperationDescription; }
         }
 
-        public CloseAddressBookOperation(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus, UserInterface userInterface)
+        public CloseAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
             : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");

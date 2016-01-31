@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.WinFormsCommon
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.StatusStrip)]
     public class BindableToolStripStatusLabel : ToolStripStatusLabel, IBindableComponent

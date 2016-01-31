@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ShowAboutOperationDescription; }
         }
 
-        public ShowMainOperation(ApplicationStatus applicationStatus, UserInterface userInterface)
+        public ShowMainOperation(UserInterface userInterface)
             : base(userInterface)
         {
         }

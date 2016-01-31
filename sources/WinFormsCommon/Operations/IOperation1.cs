@@ -14,18 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.WinFormsCommon
 {
-    internal interface IOperation
+    public interface IOperation<in T> : IOperation
     {
-        bool IsEnabled { get; }
-        string ShortDescription { get; }
-
-        event EventHandler EnableChanged;
-
-        void Execute();
-        void Execute(object parameter);
+        void Execute(T parameter);
     }
 }

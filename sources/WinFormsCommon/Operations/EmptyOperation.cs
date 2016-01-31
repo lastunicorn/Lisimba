@@ -16,9 +16,9 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.WinFormsCommon
 {
-    internal class EmptyOperation : IOperation
+    public class EmptyOperation : IOperation
     {
         public bool IsEnabled { get; private set; }
         public string ShortDescription { get; private set; }

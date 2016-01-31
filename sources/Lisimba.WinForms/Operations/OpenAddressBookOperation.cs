@@ -32,8 +32,7 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
-            ApplicationStatus applicationStatus, AvailableGates availableGates)
+        public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, AvailableGates availableGates)
             : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");

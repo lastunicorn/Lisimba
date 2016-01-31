@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -36,9 +37,9 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
                 if (item != null)
                 {
-                    pictureBoxIcon.Bind(x => x.Image, item, x => x.Image, false, DataSourceUpdateMode.OnPropertyChanged);
-                    buttonAdd.Bind(x => x.Image, item, x => x.AddButtonImage, false, DataSourceUpdateMode.OnPropertyChanged);
-                    labelTitle.Bind(x => x.Text, item, x => x.Title, false, DataSourceUpdateMode.OnPropertyChanged);
+                    BindingExtensions.Bind(pictureBoxIcon, x => x.Image, item, x => x.Image, false, DataSourceUpdateMode.OnPropertyChanged);
+                    BindingExtensions.Bind(buttonAdd, x => x.Image, item, x => x.AddButtonImage, false, DataSourceUpdateMode.OnPropertyChanged);
+                    BindingExtensions.Bind(labelTitle, x => x.Text, item, x => x.Title, false, DataSourceUpdateMode.OnPropertyChanged);
                 }
             }
         }

@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Utils
 {
@@ -36,7 +37,7 @@ namespace DustInTheWind.Lisimba.Utils
                 viewModel = value;
 
                 if (viewModel != null)
-                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
+                    BindingExtensions.Bind(this, x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
             }
         }
 

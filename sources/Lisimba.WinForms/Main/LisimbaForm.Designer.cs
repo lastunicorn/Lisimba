@@ -1,3 +1,5 @@
+using DustInTheWind.WinFormsCommon;
+
 namespace DustInTheWind.Lisimba.Main
 {
     partial class LisimbaForm
@@ -36,9 +38,9 @@ namespace DustInTheWind.Lisimba.Main
             this.labelNoContact = new System.Windows.Forms.Label();
             this.labelNoAddressBook = new System.Windows.Forms.Label();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatus = new DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel();
+            this.toolStripStatus = new BindableToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDefaultGate = new DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel();
+            this.toolStripDefaultGate = new BindableToolStripStatusLabel();
             this.panelAddressBookView = new System.Windows.Forms.Panel();
             this.panelFormContent = new System.Windows.Forms.Panel();
             this.tableLayoutPanelNoAddressBook = new System.Windows.Forms.TableLayoutPanel();
@@ -347,7 +349,7 @@ namespace DustInTheWind.Lisimba.Main
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.StatusStrip statusStripMain;
         private DustInTheWind.Lisimba.ContactEdit.ContactEditor contactEditor1;
-        private DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel toolStripStatus;
+        private BindableToolStripStatusLabel toolStripStatus;
         private DustInTheWind.Lisimba.ContactList.ContactListView contactListView1;
         private System.Windows.Forms.Panel panelAddressBookView;
         private DustInTheWind.Lisimba.MainMenu.LisimbaMainMenuStrip menuStripMain;
@@ -358,7 +360,7 @@ namespace DustInTheWind.Lisimba.Main
         private DustInTheWind.Lisimba.Utils.CustomButton buttonOpenAddressBook;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private DustInTheWind.Lisimba.Utils.CustomButton buttonNewAddressBook;
-        private DustInTheWind.Lisimba.Utils.BindableToolStripStatusLabel toolStripDefaultGate;
+        private BindableToolStripStatusLabel toolStripDefaultGate;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private DustInTheWind.Lisimba.Utils.CustomToolStripButton toolStripButtonNew;

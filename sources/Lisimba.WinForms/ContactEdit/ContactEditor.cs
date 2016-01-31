@@ -17,6 +17,7 @@
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -49,23 +50,23 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void CreateBindings()
         {
-            nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-            labelBirthday.Bind(x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
+            BindingExtensions.Bind(nameEditor1, x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+            BindingExtensions.Bind(labelBirthday, x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            pictureBoxZodiacSign.Bind(x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(pictureBoxZodiacSign, x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(pictureBoxZodiacSign, x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelZodiacSign, x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
 
-            textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
+            BindingExtensions.Bind(textBoxNotes, x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
-            customTreeView1.Bind(x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(customTreeView1, x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
-            this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
+            BindingExtensions.Bind(this, x => x.Enabled, ViewModel, x => x.Enabled, false);
         }
 
         private void label7_MouseDoubleClick(object sender, MouseEventArgs e)

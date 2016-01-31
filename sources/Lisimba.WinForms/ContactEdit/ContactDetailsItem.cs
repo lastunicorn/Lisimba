@@ -16,6 +16,7 @@
 
 using System.Drawing;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {

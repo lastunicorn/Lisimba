@@ -16,7 +16,7 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.Services
 {

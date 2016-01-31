@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -31,23 +32,23 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             viewModel = new NameEditorLabelViewModel();
 
-            labelError.Bind(x => x.Visible, viewModel, x => x.ErrorVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelError, x => x.Visible, viewModel, x => x.ErrorVisible, false, DataSourceUpdateMode.Never);
 
-            labelFirstLabel.Bind(x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
-            labelFirst.Bind(x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
-            labelFirst.Bind(x => x.Text, viewModel, x => x.FirstName, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelFirstLabel, x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelFirst, x => x.Visible, viewModel, x => x.FirstNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelFirst, x => x.Text, viewModel, x => x.FirstName, false, DataSourceUpdateMode.Never);
 
-            labelMiddleLabel.Bind(x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
-            labelMiddle.Bind(x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
-            labelMiddle.Bind(x => x.Text, viewModel, x => x.MiddleName, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelMiddleLabel, x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelMiddle, x => x.Visible, viewModel, x => x.MiddleNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelMiddle, x => x.Text, viewModel, x => x.MiddleName, false, DataSourceUpdateMode.Never);
 
-            labelLastLabel.Bind(x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
-            labelLast.Bind(x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
-            labelLast.Bind(x => x.Text, viewModel, x => x.LastName, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelLastLabel, x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelLast, x => x.Visible, viewModel, x => x.LastNameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelLast, x => x.Text, viewModel, x => x.LastName, false, DataSourceUpdateMode.Never);
 
-            labelNickLabel.Bind(x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
-            labelNick.Bind(x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
-            labelNick.Bind(x => x.Text, viewModel, x => x.Nickname, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelNickLabel, x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelNick, x => x.Visible, viewModel, x => x.NicknameVisible, false, DataSourceUpdateMode.Never);
+            BindingExtensions.Bind(labelNick, x => x.Text, viewModel, x => x.Nickname, false, DataSourceUpdateMode.Never);
         }
 
         public string LabelText

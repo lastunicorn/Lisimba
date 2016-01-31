@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {
@@ -65,10 +66,10 @@ namespace DustInTheWind.Lisimba.MainMenu
 
                 if (viewModel != null)
                 {
-                    this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
+                    BindingExtensions.Bind(this, x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
 
                     if (viewModel.Text != null)
-                        this.Bind(x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
+                        BindingExtensions.Bind(this, x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
                 }
             }
         }

@@ -134,7 +134,6 @@
     <Compile Include="Main\MainMenusViewModels.cs" />
     <Compile Include="Main\TrayIconMenuViewModels.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
-    <Compile Include="Operations\EmptyOperation.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />
@@ -146,13 +145,6 @@
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\OperationsSetup.cs" />
-    <Compile Include="Utils\CustomButtonViewModel.cs" />
-    <Compile Include="Utils\CustomToolStripButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomToolStripButton.Designer.cs">
-      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
-    </Compile>
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="ContactEdit\NameEditor.cs">
       <SubType>UserControl</SubType>
@@ -180,7 +172,6 @@
     <Compile Include="ContactEdit\NameEditForm.Designer.cs">
       <DependentUpon>NameEditForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Utils\BindingExtensions.cs" />
     <Compile Include="Main\TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -195,8 +186,6 @@
     <Compile Include="Operations\DeleteCurrentContactOperation.cs" />
     <Compile Include="Operations\ShowAddressBookPropertiesOperation.cs" />
     <Compile Include="Operations\NewAddressBookOperation.cs" />
-    <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="Operations\IOperation1.cs" />
     <Compile Include="Operations\ShowAboutOperation.cs" />
     <Compile Include="Operations\SaveAsAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeComparer.cs" />
@@ -254,9 +243,6 @@
     <Compile Include="Services\UiFactory.cs" />
     <Compile Include="Services\UserInterface.cs" />
     <Compile Include="Services\Zodiac.cs" />
-    <Compile Include="Utils\BindableToolStripStatusLabel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Biorhythm\BiorhythmView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -287,12 +273,6 @@
     </Compile>
     <Compile Include="MainMenu\RecentFilesMenuItem.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomButton.Designer.cs">
-      <DependentUpon>CustomButton.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu\SubItemClickedEventArgs.cs" />
     <Compile Include="Forms\AboutForm.cs">
@@ -339,11 +319,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ViewModelBase.cs" />
     <Compile Include="Properties\ZodiacResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ZodiacResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\CustomButton.Designer.cs">
+      <DependentUpon>CustomButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CustomButtonViewModel.cs" />
+    <Compile Include="Utils\CustomToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utils\CustomToolStripButton.Designer.cs">
+      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ContactEdit\BirthDateEditForm.resx">
       <DependentUpon>BirthDateEditForm.cs</DependentUpon>
@@ -557,6 +549,10 @@
     <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
       <Project>{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}</Project>
       <Name>Lisimba.ZodiacSigns</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinFormsCommon\WinFormsCommon.csproj">
+      <Project>{47CDB7C5-A066-45CF-BD3E-B6CA2FF72DB1}</Project>
+      <Name>WinFormsCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
