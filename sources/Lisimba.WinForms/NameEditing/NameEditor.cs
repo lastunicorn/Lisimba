@@ -111,6 +111,37 @@ namespace DustInTheWind.Lisimba.NameEditing
 
                 LeaveEditMode();
             }
+            else if (e.KeyCode == Keys.Back)
+            {
+                int cursorPosition = textBoxName.SelectionStart;
+
+                bool openParenthesisIsDeleted = cursorPosition != 0 && textBoxName.Text[cursorPosition - 1] == '(';
+                bool existsClosingParenthesis = cursorPosition < textBoxName.Text.Length && textBoxName.Text[cursorPosition] == ')';
+
+                if (openParenthesisIsDeleted && existsClosingParenthesis)
+                {
+                    textBoxName.Text = textBoxName.Text.Remove(cursorPosition - 1, 2);
+                    textBoxName.Select(cursorPosition - 1, 0);
+                    e.SuppressKeyPress = true;
+                }
+            }
+        }
+
+        private void HandleTextBoxNameKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == '(')
+            {
+                textBoxName.SelectedText = "()";
+                int cursorPosition = textBoxName.SelectionStart;
+                textBoxName.Select(cursorPosition - 1, 0);
+
+                e.Handled = true;
+            }
+        }
+
+        private void HandleTextBoxNameTextChanged(object sender, EventArgs e)
+        {
+            nameEditorLabel.LabelText = textBoxName.Text;
         }
 
         private void HandleLabelNameMouseMove(object sender, MouseEventArgs e)
@@ -186,11 +217,6 @@ namespace DustInTheWind.Lisimba.NameEditing
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
-        }
-
-        private void HandleTextBoxNameTextChanged(object sender, EventArgs e)
-        {
-            nameEditorLabel.LabelText = textBoxName.Text;
         }
     }
 }

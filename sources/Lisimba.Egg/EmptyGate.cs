@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Exceptions;
 using DustInTheWind.Lisimba.Egg.Properties;
@@ -24,6 +25,13 @@ namespace DustInTheWind.Lisimba.Egg
 {
     public class EmptyGate : IGate
     {
+        private static readonly Bitmap icon16;
+
+        static EmptyGate()
+        {
+            icon16 = new Bitmap(16, 16);
+        }
+
         public IEnumerable<Exception> Warnings { get; private set; }
 
         public string Id
@@ -39,6 +47,11 @@ namespace DustInTheWind.Lisimba.Egg
         public string Description
         {
             get { return Resources.EmptyGate_Description; }
+        }
+
+        public Image Icon16
+        {
+            get { return icon16; }
         }
 
         public EmptyGate()

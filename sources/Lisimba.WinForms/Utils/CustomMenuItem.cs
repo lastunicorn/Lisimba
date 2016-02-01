@@ -68,6 +68,9 @@ namespace DustInTheWind.Lisimba.MainMenu
                 {
                     this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
 
+                    if (viewModel.Image != null)
+                        this.Bind(x => x.Image, viewModel, x => x.Image, true, DataSourceUpdateMode.Never);
+
                     if (viewModel.Text != null)
                         this.Bind(x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
                 }

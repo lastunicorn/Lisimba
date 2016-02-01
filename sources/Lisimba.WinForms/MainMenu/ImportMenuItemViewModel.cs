@@ -23,7 +23,20 @@ namespace DustInTheWind.Lisimba.MainMenu
 {
     class ImportMenuItemViewModel : CustomButtonViewModel
     {
-        public IGate Gate { get; set; }
+        private IGate gate;
+
+        public IGate Gate
+        {
+            get { return gate; }
+            set
+            {
+                gate = value;
+
+                Image = gate != null
+                    ? gate.Icon16
+                    : null;
+            }
+        }
 
         public ImportMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
             : base(applicationStatus, userInterface, operation)

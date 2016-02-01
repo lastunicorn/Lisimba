@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
@@ -44,6 +45,11 @@ namespace DustInTheWind.Lisimba.Gating
         public string Description
         {
             get { return "A Gate that knows to save and load address books from a xml file that is zipped."; }
+        }
+
+        public Image Icon16
+        {
+            get { return new Bitmap(16, 16); }
         }
 
         public ZipXmlGate()

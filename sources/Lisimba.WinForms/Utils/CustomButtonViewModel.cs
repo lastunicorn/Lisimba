@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.WinFormsCommon;
 
@@ -25,8 +26,10 @@ namespace DustInTheWind.Lisimba.Utils
         protected readonly ApplicationStatus applicationStatus;
         protected readonly UserInterface userInterface;
         protected readonly IOperation operation;
+
         private bool isEnabled;
         private string text;
+        private Image image;
 
         public bool IsEnabled
         {
@@ -47,6 +50,16 @@ namespace DustInTheWind.Lisimba.Utils
             set
             {
                 text = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public Image Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
                 OnPropertyChanged();
             }
         }

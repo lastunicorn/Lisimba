@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Main;
 
 namespace DustInTheWind.Lisimba.MainMenu
 {

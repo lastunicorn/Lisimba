@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg
@@ -25,6 +26,7 @@ namespace DustInTheWind.Lisimba.Egg
         string Id { get; }
         string Name { get; }
         string Description { get; }
+        Image Icon16 { get; }
 
         IEnumerable<Exception> Warnings { get; }
 
