@@ -90,10 +90,6 @@
     <EmbeddedResource Include="ViewTemplates\GateInfo.t" />
     <None Include="App.config" />
     <EmbeddedResource Include="ViewTemplates\AddressBookInfo.t" />
-    <None Include="Unity.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

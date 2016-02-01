@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Gating.Properties;
 
 namespace DustInTheWind.Lisimba.Gating
 {
@@ -49,7 +50,7 @@ namespace DustInTheWind.Lisimba.Gating
 
         public Image Icon16
         {
-            get { return new Bitmap(16, 16); }
+            get { return Resources.lisimba_icon; }
         }
 
         public ZipXmlGate()

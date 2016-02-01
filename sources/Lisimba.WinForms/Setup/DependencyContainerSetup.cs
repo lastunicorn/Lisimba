@@ -45,29 +45,10 @@ namespace DustInTheWind.Lisimba.Setup
 
         private static void LoadGates(IUnityContainer container)
         {
-            string applicationDirectory = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-            string gateDirectory = Path.Combine(applicationDirectory, "Gates");
+            IEnumerable<IGate> gates = GatesLoader.LoadAllGates();
 
-            if (!Directory.Exists(gateDirectory))
-                return;
-
-            string[] assemblyPaths = Directory.GetFiles(gateDirectory, "*.dll");
-
-            IEnumerable<Assembly> assemblies = assemblyPaths
-                .Select(Assembly.LoadFrom);
-
-            foreach (Assembly assembly in assemblies)
-            {
-                IEnumerable<Type> gateTypes = assembly.GetExportedTypes()
-                    .Where(x => x.IsClass && typeof(IGate).IsAssignableFrom(x));
-
-                foreach (Type gateType in gateTypes)
-                {
-                    IGate gate = (IGate)Activator.CreateInstanceFrom(assembly.Location, gateType.FullName).Unwrap();
-
-                    container.RegisterType(typeof(IGate), gateType, gate.Id);
-                }
-            }
+            foreach (IGate gate in gates)
+                container.RegisterType(typeof(IGate), gate.GetType(), gate.Id);
         }
 
         private static void RegisterAdditionalTypes(UnityContainer container)
