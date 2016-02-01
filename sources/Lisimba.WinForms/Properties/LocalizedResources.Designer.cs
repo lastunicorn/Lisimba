@@ -79,6 +79,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display the biorhythm of the selected person..
+        /// </summary>
+        internal static string BiorhythmOperationDescription {
+            get {
+                return ResourceManager.GetString("BiorhythmOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close the currently opened address book..
         /// </summary>
         internal static string CloseCurrentAddressBookOperationDescription {
@@ -188,6 +197,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export current opened address book in another format..
+        /// </summary>
+        internal static string ExportsOperationDescription {
+            get {
+                return ResourceManager.GetString("ExportsOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export current opened address book in Yahoo! csv format..
         /// </summary>
         internal static string ExportYahooCsvOperationDescription {
@@ -202,6 +220,15 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string GateNotFoundError {
             get {
                 return ResourceManager.GetString("GateNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import address book from another format..
+        /// </summary>
+        internal static string ImportsOperationDescription {
+            get {
+                return ResourceManager.GetString("ImportsOperationDescription", resourceCulture);
             }
         }
         
@@ -247,6 +274,15 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string OpenAddressBookOperationDescription {
             get {
                 return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open previously closed address books..
+        /// </summary>
+        internal static string RecentFilesOperationDescription {
+            get {
+                return ResourceManager.GetString("RecentFilesOperationDescription", resourceCulture);
             }
         }
         

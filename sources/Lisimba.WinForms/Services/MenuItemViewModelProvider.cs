@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Services
             this.unityContainer = unityContainer;
         }
 
-        public TViewModel GetNewViewModel<TViewModel>(IOperation operation)
+        public TViewModel CreateNew<TViewModel>(IOperation operation)
             where TViewModel : ViewModelBase
         {
             if (operation == null) throw new ArgumentNullException("operation");

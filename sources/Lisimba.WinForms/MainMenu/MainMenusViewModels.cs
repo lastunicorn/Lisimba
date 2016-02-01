@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
@@ -55,45 +56,45 @@ namespace DustInTheWind.Lisimba.MainMenu
         private void CreateViewModels()
         {
             NewAddressBookOperation operation = availableOperations.GetOperation<NewAddressBookOperation>();
-            NewAddressBookViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation);
+            NewAddressBookViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation);
 
             OpenAddressBookOperation operation1 = availableOperations.GetOperation<OpenAddressBookOperation>();
-            OpenAddressBookViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation1);
+            OpenAddressBookViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation1);
 
             SaveAddressBookOperation operation2 = availableOperations.GetOperation<SaveAddressBookOperation>();
-            SaveAddressBookViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation2);
+            SaveAddressBookViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation2);
 
             SaveAsAddressBookOperation operation3 = availableOperations.GetOperation<SaveAsAddressBookOperation>();
-            SaveAsAddressBookViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation3);
+            SaveAsAddressBookViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation3);
 
             CloseAddressBookOperation operation4 = availableOperations.GetOperation<CloseAddressBookOperation>();
-            CloseAddressBookViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation4);
+            CloseAddressBookViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation4);
 
             ApplicationExitOperation operation5 = availableOperations.GetOperation<ApplicationExitOperation>();
-            ApplicationExitViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation5);
+            ApplicationExitViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation5);
 
             NewContactOperation operation6 = availableOperations.GetOperation<NewContactOperation>();
-            NewContactViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation6);
+            NewContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation6);
 
             DeleteCurrentContactOperation operation7 = availableOperations.GetOperation<DeleteCurrentContactOperation>();
-            DeleteContactViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation7);
+            DeleteContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation7);
 
             ShowAddressBookPropertiesOperation operation8 = availableOperations.GetOperation<ShowAddressBookPropertiesOperation>();
-            AddressBookPropertiesViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation8);
+            AddressBookPropertiesViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation8);
 
             ShowAboutOperation operation9 = availableOperations.GetOperation<ShowAboutOperation>();
-            AboutViewModel = viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation9);
+            AboutViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation9);
 
-            EmptyOperation operation10 = new EmptyOperation("Export current opened address book in another format.");
-            ExportViewModel = viewModelProvider.GetNewViewModel<ExportsMenuItemViewModel>(operation10);
+            EmptyOperation operation10 = new EmptyOperation(LocalizedResources.ExportsOperationDescription);
+            ExportViewModel = viewModelProvider.CreateNew<ExportsMenuItemViewModel>(operation10);
             ExportViewModel.ChildrenOpertion = availableOperations.GetOperation<ExportOperation>();
 
-            EmptyOperation operation11 = new EmptyOperation("Import address book from another format.");
-            ImportViewModel = viewModelProvider.GetNewViewModel<ImportsMenuItemViewModel>(operation11);
+            EmptyOperation operation11 = new EmptyOperation(LocalizedResources.ImportsOperationDescription);
+            ImportViewModel = viewModelProvider.CreateNew<ImportsMenuItemViewModel>(operation11);
             ImportViewModel.ChildrenOpertion = availableOperations.GetOperation<ImportOperation>();
 
-            EmptyOperation operation12 = new EmptyOperation("Open previously closed address books.");
-            RecentFilesViewModel = viewModelProvider.GetNewViewModel<RecentFilesMenuItemViewModel>(operation12);
+            EmptyOperation operation12 = new EmptyOperation(LocalizedResources.RecentFilesOperationDescription);
+            RecentFilesViewModel = viewModelProvider.CreateNew<RecentFilesMenuItemViewModel>(operation12);
             RecentFilesViewModel.ChildrenOpertion = availableOperations.GetOperation<OpenRecentFileOperation>();
         }
     }

@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Main;
 using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
@@ -40,22 +40,19 @@ namespace DustInTheWind.Lisimba.ContactList
             this.viewModelProvider = viewModelProvider;
             this.availableOperations = availableOperations;
 
-            AddContactViewModel = CreateViewModel<NewContactOperation>();
-            DeleteContactViewModel = CreateViewModel<DeleteCurrentContactOperation>();
-            BiorhythmViewModel = CreateEmptyViewModel("Display the biorhythm of the selected person.");
+            CreateViewModels();
         }
 
-        private CustomButtonViewModel CreateViewModel<T>()
-            where T : class, IOperation
+        private void CreateViewModels()
         {
-            T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
-        }
+            NewContactOperation operation = availableOperations.GetOperation<NewContactOperation>();
+            AddContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation);
 
-        private CustomButtonViewModel CreateEmptyViewModel(string description)
-        {
-            EmptyOperation operation = new EmptyOperation(description);
-            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(operation);
+            DeleteCurrentContactOperation operation1 = availableOperations.GetOperation<DeleteCurrentContactOperation>();
+            DeleteContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation1);
+
+            EmptyOperation operation2 = new EmptyOperation(LocalizedResources.BiorhythmOperationDescription);
+            BiorhythmViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation2);
         }
     }
 }

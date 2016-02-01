@@ -168,7 +168,7 @@ namespace DustInTheWind.Lisimba.Main
             where T : class, IOperation
         {
             T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
+            return viewModelProvider.CreateNew<CustomButtonViewModel>(newAddressBookOperation);
         }
 
         private void HandleDefaultGateChanged(object sender, EventArgs e)
