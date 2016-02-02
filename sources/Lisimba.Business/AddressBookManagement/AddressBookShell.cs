@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     /// <summary>
-    /// Contains an opened address book and metainformation about it like the location
+    /// Contains an opened address book and meta information about it like the location
     /// from where it was openes and the gate used.
     /// </summary>
     public class AddressBookShell
@@ -45,6 +45,9 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public event EventHandler Saved;
         public event EventHandler StatusChanged;
+
+        public event EventHandler<NewLocationNeededEventArgs> NewLocationNeeded;
+        public event EventHandler<GateNeededEventArgs> GateNeeded;
 
         public AddressBookShell(AddressBook addressBook)
             : this(addressBook, null, null)
@@ -87,39 +90,39 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             return Resources.NoAddressBookName;
         }
 
-        public void SaveAddressBook()
+        public bool SaveAddressBook()
         {
-            if (Gate == null)
-                throw new LisimbaException(Resources.NoGateWasSpecifiedError);
-
-            if (Location == null)
-                throw new LisimbaException(Resources.NoLocationWasSpecifiedError);
-
-            Gate.Save(AddressBook, Location);
-            Status = AddressBookStatus.Saved;
-
-            OnSaved();
+            return SaveInternal(Location, Gate);
         }
 
-        public void SaveAddressBook(string newLocation)
+        public bool SaveAddressBook(string newLocation)
         {
             if (newLocation == null) throw new ArgumentNullException("newLocation");
 
-            if (Gate == null)
-                throw new LisimbaException(Resources.NoGateWasSpecifiedError);
-
-            Gate.Save(AddressBook, newLocation);
-            Location = newLocation;
-
-            Status = AddressBookStatus.Saved;
-
-            OnSaved();
+            return SaveInternal(newLocation, Gate);
         }
 
-        public void SaveAddressBook(string newLocation, IGate gate)
+        public bool SaveAddressBook(string newLocation, IGate gate)
         {
             if (newLocation == null) throw new ArgumentNullException("newLocation");
             if (gate == null) throw new ArgumentNullException("gate");
+
+            return SaveInternal(newLocation, gate);
+        }
+
+        private bool SaveInternal(string newLocation, IGate gate)
+        {
+            if (gate == null)
+                gate = GetGateForSave();
+
+            if (gate == null)
+                return false;
+
+            if (newLocation == null)
+                newLocation = GetLocationForSave();
+
+            if (newLocation == null)
+                return false;
 
             gate.Save(AddressBook, newLocation);
 
@@ -129,6 +132,28 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             Status = AddressBookStatus.Saved;
 
             OnSaved();
+
+            return true;
+        }
+
+        private string GetLocationForSave()
+        {
+            NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs(this);
+            OnNewLocationNeeded(eva);
+
+            return eva.Cancel
+                ? null
+                : eva.NewLocation;
+        }
+
+        private IGate GetGateForSave()
+        {
+            GateNeededEventArgs eva = new GateNeededEventArgs(this);
+            OnGateNeeded(eva);
+
+            return eva.Cancel
+                ? null
+                : eva.Gate;
         }
 
         public void Export(string location, IGate gate)
@@ -153,6 +178,22 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
+        {
+            EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
+
+            if (handler != null)
+                handler(this, e);
+        }
+
+        protected virtual void OnGateNeeded(GateNeededEventArgs e)
+        {
+            EventHandler<GateNeededEventArgs> handler = GateNeeded;
+
+            if (handler != null)
+                handler(this, e);
         }
     }
 }
