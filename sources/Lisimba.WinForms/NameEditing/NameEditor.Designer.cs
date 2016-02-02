@@ -66,6 +66,7 @@
             this.textBoxName.Visible = false;
             this.textBoxName.TextChanged += new System.EventHandler(this.HandleTextBoxNameTextChanged);
             this.textBoxName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HandleTextBoxNameKeyDown);
+            this.textBoxName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HandleTextBoxNameKeyPress);
             this.textBoxName.Leave += new System.EventHandler(this.HandleTextBoxNameLeave);
             // 
             // buttonEdit

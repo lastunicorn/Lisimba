@@ -21,6 +21,8 @@ using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Enums;
 using zcsv;
+using System.Drawing;
+using DustInTheWind.Lisimba.Gating.Properties;
 
 namespace DustInTheWind.Lisimba.Gating
 {
@@ -41,6 +43,11 @@ namespace DustInTheWind.Lisimba.Gating
         public string Description
         {
             get { return "A Gate that knows to save and load address books from a Yahoo csv file."; }
+        }
+
+        public Image Icon16
+        {
+            get { return Resources.yahoo_icon; }
         }
 
         public YahooCsvGate()
