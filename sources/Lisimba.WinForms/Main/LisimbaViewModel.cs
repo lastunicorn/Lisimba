@@ -149,7 +149,10 @@ namespace DustInTheWind.Lisimba.Main
             openedAddressBooks.AddressBookOpened += HandleAddressBooksOpened;
 
             if (openedAddressBooks.Current != null)
+            {
                 openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+            }
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
