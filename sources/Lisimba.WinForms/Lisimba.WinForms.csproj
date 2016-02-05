@@ -92,6 +92,12 @@
     <Compile Include="ContactEdit\BirthDateEditForm.Designer.cs">
       <DependentUpon>BirthDateEditForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactEdit\BirthdayView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactEdit\BirthdayView.Designer.cs">
+      <DependentUpon>BirthdayView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContactEdit\ContactDetailsItem.cs" />
     <Compile Include="ContactEdit\ContactDetailsList.cs">
       <SubType>UserControl</SubType>
@@ -347,6 +353,9 @@
     <EmbeddedResource Include="ContactEdit\BirthDateEditForm.resx">
       <DependentUpon>BirthDateEditForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactEdit\BirthdayView.resx">
+      <DependentUpon>BirthdayView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\ContactDetailsList.resx">
       <DependentUpon>ContactDetailsList.cs</DependentUpon>

@@ -20,7 +20,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     public interface IContactEditorView
     {
-        void EditBirthday(Date birthday);
         void AddAddress(PostalAddressCollection postalAddresses);
         void AddDate(DateCollection dates);
         void AddEmail(EmailCollection emails);
