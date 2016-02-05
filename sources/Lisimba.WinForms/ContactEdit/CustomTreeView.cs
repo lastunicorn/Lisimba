@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -22,6 +23,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class CustomTreeView : TreeView
     {
+        private readonly List<TreeNode> categoryNodes = new List<TreeNode>();
+
         private TreeNode TreeNodePhones
         {
             get { return GetOrCreateCategoryNode("phones", "Phones", "phone"); }
@@ -68,7 +71,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 };
 
                 if (!DesignMode)
+                {
+                    categoryNodes.Add(node);
                     Nodes.Add(node);
+                }
             }
 
             return node;
@@ -405,6 +411,48 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
 
             TreeNodeSocialProfileIds.Expand();
+        }
+
+        private void CustomTreeView_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+        {
+            if (categoryNodes.Contains(e.Node))
+                e.Cancel = true;
+        }
+
+        private void CustomTreeView_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete && SelectedNode != null && !categoryNodes.Contains(SelectedNode))
+            {
+                Phone phone = SelectedNode.Tag as Phone;
+
+                if (phone != null)
+                    Phones.Remove(phone);
+
+                Email email = SelectedNode.Tag as Email;
+
+                if (email != null)
+                    Emails.Remove(email);
+
+                WebSite webSite = SelectedNode.Tag as WebSite;
+
+                if (webSite != null)
+                    WebSites.Remove(webSite);
+                
+                PostalAddress postalAddress = SelectedNode.Tag as PostalAddress;
+
+                if (postalAddress != null)
+                    PostalAddresses.Remove(postalAddress);
+
+                Date date = SelectedNode.Tag as Date;
+
+                if (date != null)
+                    Dates.Remove(date);
+
+                SocialProfile socialProfile = SelectedNode.Tag as SocialProfile;
+
+                if (socialProfile != null)
+                    SocialProfileIds.Remove(socialProfile);
+            }
         }
     }
 }
