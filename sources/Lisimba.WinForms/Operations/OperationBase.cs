@@ -18,6 +18,7 @@ using System;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.Operations
 {

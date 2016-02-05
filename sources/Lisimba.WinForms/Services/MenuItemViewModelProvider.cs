@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
