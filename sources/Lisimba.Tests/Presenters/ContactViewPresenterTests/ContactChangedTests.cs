@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Services;
 using Moq;
 using NUnit.Framework;
 
@@ -32,7 +31,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         [SetUp]
         public void SetUp()
         {
-            contactEditorViewModel = new ContactEditorViewModel(new Zodiac());
+            contactEditorViewModel = new ContactEditorViewModel();
             view = new Mock<IContactEditorView>();
         }
 

@@ -32,7 +32,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactEditor));
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.labelZodiacSign = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,9 +49,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonAddPhone = new System.Windows.Forms.Button();
             this.buttonAddWebSite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pictureBoxZodiacSign = new System.Windows.Forms.PictureBox();
             this.birthdayView1 = new DustInTheWind.Lisimba.ContactEdit.BirthdayView();
+            this.zodiacSignView1 = new DustInTheWind.Lisimba.ContactEdit.ZodiacSignView();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -70,8 +68,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.groupBox1.SuspendLayout();
             this.flowLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,17 +76,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.White;
             this.imageList1.Images.SetKeyName(0, "notes.gif");
-            // 
-            // labelZodiacSign
-            // 
-            this.labelZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.labelZodiacSign.AutoSize = true;
-            this.labelZodiacSign.Location = new System.Drawing.Point(3, 45);
-            this.labelZodiacSign.Name = "labelZodiacSign";
-            this.labelZodiacSign.Size = new System.Drawing.Size(61, 13);
-            this.labelZodiacSign.TabIndex = 11;
-            this.labelZodiacSign.Text = "ZodiacSign";
-            this.labelZodiacSign.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // toolTip1
             // 
@@ -333,8 +318,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.AutoSize = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.birthdayView1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.zodiacSignView1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -344,30 +329,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(194, 148);
             this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.flowLayoutPanel1.Controls.Add(this.pictureBoxZodiacSign);
-            this.flowLayoutPanel1.Controls.Add(this.labelZodiacSign);
-            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(63, 59);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(67, 58);
-            this.flowLayoutPanel1.TabIndex = 14;
-            this.flowLayoutPanel1.WrapContents = false;
-            // 
-            // pictureBoxZodiacSign
-            // 
-            this.pictureBoxZodiacSign.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBoxZodiacSign.Location = new System.Drawing.Point(14, 3);
-            this.pictureBoxZodiacSign.Name = "pictureBoxZodiacSign";
-            this.pictureBoxZodiacSign.Size = new System.Drawing.Size(39, 39);
-            this.pictureBoxZodiacSign.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBoxZodiacSign.TabIndex = 10;
-            this.pictureBoxZodiacSign.TabStop = false;
             // 
             // birthdayView1
             // 
@@ -379,6 +340,17 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.birthdayView1.Name = "birthdayView1";
             this.birthdayView1.Size = new System.Drawing.Size(69, 23);
             this.birthdayView1.TabIndex = 16;
+            // 
+            // zodiacSignView1
+            // 
+            this.zodiacSignView1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.zodiacSignView1.AutoSize = true;
+            this.zodiacSignView1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.zodiacSignView1.Location = new System.Drawing.Point(74, 59);
+            this.zodiacSignView1.Name = "zodiacSignView1";
+            this.zodiacSignView1.Size = new System.Drawing.Size(45, 58);
+            this.zodiacSignView1.TabIndex = 17;
+            this.zodiacSignView1.ZodiacSign = DustInTheWind.Lisimba.Egg.AddressBookModel.ZodiacSign.NotSpecified;
             // 
             // label8
             // 
@@ -460,9 +432,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel3.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxZodiacSign)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -472,15 +441,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.PictureBox pictureBoxZodiacSign;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label labelZodiacSign;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxNotes;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label8;
@@ -496,5 +462,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private NameEditor nameEditor1;
         private ContactDetailsList contactDetailsList1;
         private BirthdayView birthdayView1;
+        private ZodiacSignView zodiacSignView1;
     }
 }

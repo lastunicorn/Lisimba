@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Drawing;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
 using Lisimba.ZodiacSigns;
@@ -75,8 +76,11 @@ namespace DustInTheWind.Lisimba.Services
                 case ZodiacSign.Capricorn:
                     return ZodiacResources.ZodiacSign_Capricorn;
 
-                default:
+                case ZodiacSign.NotSpecified:
                     return string.Empty;
+
+                default:
+                    throw new LisimbaException("Invalid Zodiac Sign.");
             }
         }
     }

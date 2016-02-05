@@ -111,6 +111,12 @@
     <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactEdit\ZodiacSignView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactEdit\ZodiacSignView.Designer.cs">
+      <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    </Compile>
     <Compile Include="ContactList\ContactMenuViewModels.cs" />
     <Compile Include="Forms\GateSelector.cs">
       <SubType>UserControl</SubType>
@@ -362,6 +368,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\ContactDetailsListItem.resx">
       <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactEdit\ZodiacSignView.resx">
+      <DependentUpon>ZodiacSignView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NameEditing\NameEditor.resx">
       <DependentUpon>NameEditor.cs</DependentUpon>

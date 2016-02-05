@@ -53,10 +53,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
             birthdayView1.Bind(x => x.Birthday, ViewModel, x => x.Birthday, true, DataSourceUpdateMode.Never);
-
-            pictureBoxZodiacSign.Bind(x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
 
             textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -66,7 +63,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             customTreeView1.Bind(x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
-
 
             this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
         }
