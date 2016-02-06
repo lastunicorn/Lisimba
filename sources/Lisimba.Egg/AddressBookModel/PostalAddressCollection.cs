@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
@@ -23,31 +22,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class PostalAddressCollection : CustomObservableCollection<PostalAddress>
     {
-        public DataTable ToDataTable()
-        {
-            DataTable dt = GetEmptyDataTable();
-
-            foreach (PostalAddress address in this)
-            {
-                DataRow dr = dt.NewRow();
-                dr[0] = address;
-                dr[1] = address.Description;
-                dt.Rows.Add(dr);
-            }
-
-            return dt;
-        }
-
-        public static DataTable GetEmptyDataTable()
-        {
-            DataTable dt = new DataTable("Addresses");
-
-            dt.Columns.Add(new DataColumn("Address", typeof (string)));
-            dt.Columns.Add(new DataColumn("Comment", typeof (string)));
-
-            return dt;
-        }
-
         public void CopyFrom(PostalAddressCollection values)
         {
             Clear();

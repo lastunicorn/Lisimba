@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Data;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Enums;
 
@@ -22,31 +21,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class WebSiteCollection : CustomObservableCollection<WebSite>
     {
-        public DataTable ToDataTable()
-        {
-            DataTable dt = GetEmptyDataTable();
-
-            foreach (WebSite webSite in this)
-            {
-                DataRow dr = dt.NewRow();
-                dr[0] = webSite.Address;
-                dr[1] = webSite.Description;
-                dt.Rows.Add(dr);
-            }
-
-            return dt;
-        }
-
-        public static DataTable GetEmptyDataTable()
-        {
-            DataTable dt = new DataTable("WebSites");
-
-            dt.Columns.Add(new DataColumn("Web Site", typeof (string)));
-            dt.Columns.Add(new DataColumn("Comment", typeof (string)));
-
-            return dt;
-        }
-
         public void CopyFrom(WebSiteCollection values)
         {
             Clear();
