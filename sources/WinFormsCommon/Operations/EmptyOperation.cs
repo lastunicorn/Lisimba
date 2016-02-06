@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.WinFormsCommon
+namespace DustInTheWind.WinFormsCommon.Operations
 {
     public class EmptyOperation : IOperation
     {

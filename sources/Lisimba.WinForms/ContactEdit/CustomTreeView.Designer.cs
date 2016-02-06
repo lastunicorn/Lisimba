@@ -59,6 +59,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.ShowRootLines = false;
             this.Size = new System.Drawing.Size(250, 191);
             this.TabIndex = 12;
+            this.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.CustomTreeView_BeforeCollapse);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CustomTreeView_KeyDown);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.HandleMouseDoubleClick);
             this.ResumeLayout(false);
 

@@ -52,11 +52,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void CreateBindings()
         {
             nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
-            labelBirthday.Bind(x => x.Text, ViewModel, x => x.Birthday, false, DataSourceUpdateMode.OnPropertyChanged);
-
-            pictureBoxZodiacSign.Bind(x => x.Image, ViewModel, x => x.ZodiacSignImage, true, DataSourceUpdateMode.Never);
-            pictureBoxZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
-            labelZodiacSign.Bind(x => x.Text, ViewModel, x => x.ZodiacSignText, false, DataSourceUpdateMode.Never);
+            birthdayView1.Bind(x => x.Birthday, ViewModel, x => x.Birthday, true, DataSourceUpdateMode.Never);
+            zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
 
             textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -68,16 +65,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
             this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
-        }
-
-        private void label7_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            ViewModel.BirthdayEditWasRequested();
-        }
-
-        private void labelBirthday_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            ViewModel.BirthdayEditWasRequested();
         }
 
         private void buttonAddAddress_Click(object sender, EventArgs e)
@@ -108,18 +95,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void buttonAddWebSite_Click(object sender, EventArgs e)
         {
             ViewModel.AddWebSiteClicked();
-        }
-
-        public void EditBirthday(Date birthday)
-        {
-            BirthDateEditForm form = new BirthDateEditForm
-            {
-                Location = labelBirthday.GetBottomLeftCorner(),
-                Date = birthday
-            };
-
-            form.Show();
-            form.Focus();
         }
 
         public void AddAddress(PostalAddressCollection postalAddresses)

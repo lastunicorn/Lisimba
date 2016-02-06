@@ -15,23 +15,18 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Drawing;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Services;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
     internal class ContactEditorViewModel : ViewModelBase
     {
-        private readonly Zodiac zodiac;
-
         private Contact contact;
         private bool isInitializationMode;
-        private string birthday;
-        private string zodiacSignText;
+        private Date birthday;
+        private ZodiacSign zodiacSign;
         private string notes;
-        private Image zodiacSignImage = new Bitmap(1, 1);
         private bool enabled;
         private PhoneCollection phones;
         private EmailCollection emails;
@@ -60,7 +55,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public string Birthday
+        public Date Birthday
         {
             get { return birthday; }
             set
@@ -70,22 +65,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public Image ZodiacSignImage
+        public ZodiacSign ZodiacSign
         {
-            get { return zodiacSignImage; }
+            get { return zodiacSign; }
             set
             {
-                zodiacSignImage = value ?? new Bitmap(1, 1);
-                OnPropertyChanged();
-            }
-        }
-
-        public string ZodiacSignText
-        {
-            get { return zodiacSignText; }
-            set
-            {
-                zodiacSignText = value;
+                zodiacSign = value;
                 OnPropertyChanged();
             }
         }
@@ -186,14 +171,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public ContactEditorViewModel(Zodiac zodiac)
-        {
-            if (zodiac == null)
-                throw new ArgumentNullException("zodiac");
-
-            this.zodiac = zodiac;
-        }
-
         private void HandleContactChanged(object sender, EventArgs e)
         {
             RefreshData();
@@ -222,10 +199,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void DisplayContactInView()
         {
             Name = Contact.Name;
-            Birthday = contact.Birthday.ToShortString();
-
-            ZodiacSignImage = zodiac.GetZodiacImage(contact.ZodiacSign);
-            ZodiacSignText = zodiac.GetZodiacSignName(contact.ZodiacSign);
+            Birthday = contact.Birthday;
+            ZodiacSign = contact.ZodiacSign;
 
             Notes = contact.Notes;
 
@@ -242,10 +217,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void ClearView()
         {
             Name = null;
-            Birthday = string.Empty;
-
-            ZodiacSignImage = zodiac.GetEmptyImage();
-            ZodiacSignText = string.Empty;
+            Birthday = null;
+            ZodiacSign = ZodiacSign.NotSpecified;
 
             Notes = string.Empty;
 
@@ -257,11 +230,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             SocialProfileIds = null;
 
             Enabled = false;
-        }
-
-        public void BirthdayEditWasRequested()
-        {
-            View.EditBirthday(contact.Birthday);
         }
 
         public void AddAddressWasClicked()

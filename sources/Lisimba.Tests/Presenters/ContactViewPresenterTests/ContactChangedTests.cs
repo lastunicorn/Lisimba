@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Services;
 using Moq;
 using NUnit.Framework;
 
@@ -32,7 +31,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         [SetUp]
         public void SetUp()
         {
-            contactEditorViewModel = new ContactEditorViewModel(new Zodiac());
+            contactEditorViewModel = new ContactEditorViewModel();
             view = new Mock<IContactEditorView>();
         }
 
@@ -54,7 +53,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
                 Birthday = birthday
             };
 
-            Assert.That(contactEditorViewModel.Birthday, Is.EqualTo(birthday.ToShortString()));
+            Assert.That(contactEditorViewModel.Birthday, Is.SameAs(birthday));
         }
 
         [Test]
@@ -64,7 +63,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.Birthday, Is.EqualTo(string.Empty));
+            Assert.That(contactEditorViewModel.Birthday, Is.Null);
         }
 
         [Test]
@@ -96,7 +95,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PhoneCollection phones = new PhoneCollection {new Phone(), new Phone()};
+            PhoneCollection phones = new PhoneCollection { new Phone(), new Phone() };
             contact.Phones.AddRange(phones);
 
             contactEditorViewModel.Contact = contact;
@@ -119,7 +118,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            EmailCollection emails = new EmailCollection {new Email(), new Email()};
+            EmailCollection emails = new EmailCollection { new Email(), new Email() };
             contact.Emails.AddRange(emails);
 
             contactEditorViewModel.Contact = contact;
@@ -142,7 +141,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            WebSiteCollection webSites = new WebSiteCollection {new WebSite(), new WebSite()};
+            WebSiteCollection webSites = new WebSiteCollection { new WebSite(), new WebSite() };
             contact.WebSites.AddRange(webSites);
 
             contactEditorViewModel.Contact = contact;
@@ -165,7 +164,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PostalAddressCollection postalAddresses = new PostalAddressCollection {new PostalAddress(), new PostalAddress()};
+            PostalAddressCollection postalAddresses = new PostalAddressCollection { new PostalAddress(), new PostalAddress() };
             contact.PostalAddresses.AddRange(postalAddresses);
 
             contactEditorViewModel.Contact = contact;
@@ -188,7 +187,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            DateCollection dates = new DateCollection {new Date(), new Date()};
+            DateCollection dates = new DateCollection { new Date(), new Date() };
             contact.Dates.AddRange(dates);
 
             contactEditorViewModel.Contact = contact;
@@ -211,7 +210,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection {new SocialProfile(), new SocialProfile()};
+            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfile(), new SocialProfile() };
             contact.SocialProfileIds.AddRange(socialProfileIds);
 
             contactEditorViewModel.Contact = contact;

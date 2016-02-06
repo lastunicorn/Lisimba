@@ -26,6 +26,7 @@ using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.Main
 {
@@ -149,7 +150,10 @@ namespace DustInTheWind.Lisimba.Main
             openedAddressBooks.AddressBookOpened += HandleAddressBooksOpened;
 
             if (openedAddressBooks.Current != null)
+            {
                 openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+            }
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
