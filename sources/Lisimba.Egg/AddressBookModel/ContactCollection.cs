@@ -14,67 +14,92 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Egg.Entities;
 using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Egg.Importing;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class ContactCollection : CustomObservableCollection<Contact>
     {
+        public ContactCollection()
+        {
+        }
+
+        public ContactCollection(IEnumerable<Contact> contacts)
+            : base(contacts)
+        {
+        }
+
         public void Sort(ContactsSortingType sortField, SortDirection sortDirection)
         {
             IComparer comparer = ComparerFactory.GetComparer(sortField);
-            ArrayList.Adapter((IList) Items).Sort(comparer);
+            ArrayList.Adapter((IList)Items).Sort(comparer);
         }
 
-        //protected override void InsertItem(int index, Contact item)
-        //{
-        //    bool existsContactWithSameName = Items.Any(x => PersonName.Equals(x.Name, item.Name));
-
-        //    if (existsContactWithSameName)
-        //        return;
-
-        //    base.InsertItem(index, item);
-        //}
-
-        public int AddRange(ContactCollection contacts, ImportRuleCollection mergeRules)
+        public void AddRange(ImportRuleCollection importRules)
         {
-            int countAdded = 0;
+            foreach (ImportRule importRule in importRules)
+            {
+                switch (importRule.ImportType)
+                {
+                    case ImportType.AddAsNew:
+                        Add(importRule.Source);
+                        break;
 
-            //foreach (Contact contact in contacts)
-            //{
-            //    ImportRule rule = mergeRules[contact];
+                    case ImportType.Merge:
+                        importRule.Destination.Merge(importRule.Source);
+                        break;
 
-            //    if (rule == null)
-            //        continue;
+                    case ImportType.Replace:
+                        Remove(importRule.Destination);
+                        Add(importRule.Source);
+                        break;
 
-            //    switch (rule.MergeType)
-            //    {
-            //        case MergeType.AddAsNew:
-            //            Add(contact);
-            //            countAdded++;
-            //            break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+        }
 
-            //        case MergeType.Combine:
-            //            //if (contacts.Contains(rule.LeftContact))
-            //            //    rule.LeftContact.CopyFrom(rule.RightContact);
-            //            countAdded++;
-            //            break;
+        public ImportRuleCollection AnalyzeForImport(ContactCollection sourceContacts)
+        {
+            if (sourceContacts == null) throw new ArgumentNullException("sourceContacts");
 
-            //        case MergeType.Overwrite:
-            //            if (contacts.Contains(rule.LeftContact))
-            //                rule.LeftContact.CopyFrom(rule.RightContact);
-            //            countAdded++;
-            //            break;
+            if (sourceContacts.Count == 0)
+                return new ImportRuleCollection();
 
-            //        case MergeType.DoNotAdd:
-            //            break;
-            //    }
-            //}
+            IEnumerable<ImportRule> importRules = sourceContacts
+                .Select(CreateImportRule)
+                .Where(x => x.ImportType != ImportType.Ignore);
 
-            return countAdded;
+            return new ImportRuleCollection(importRules);
+        }
+
+        private ImportRule CreateImportRule(Contact contact)
+        {
+            if (Count == 0)
+                return new ImportRule
+                {
+                    Source = contact,
+                    ImportType = ImportType.AddAsNew
+                };
+
+            ContactMatch bestMatch = this
+                .Select(x => new ContactMatch(contact, x))
+                .Aggregate((x, y) => x.Percentage >= y.Percentage ? x : y);
+
+            return new ImportRule
+            {
+                Source = contact,
+                Destination = bestMatch.Contact2,
+                ImportType = bestMatch.Percentage == 100 ? ImportType.Ignore : ImportType.Merge
+            };
         }
     }
 }

@@ -22,11 +22,11 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     public class ContactItems : CustomObservableCollection<ContactItem>
     {
         /// <summary>
-        /// Returns the <see cref="T"/> object that match the description.
+        /// Returns the <see cref="ContactItem"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="T"/> object that match or <c>null</c>.</returns>
+        /// <returns>The <see cref="ContactItem"/> object that match or <c>null</c>.</returns>
         public ContactItem SearchByDescription(string text, SearchMode searchMode)
         {
             foreach (ContactItem item in Items)

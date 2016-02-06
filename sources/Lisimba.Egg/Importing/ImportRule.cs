@@ -15,16 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Importing;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Importing
 {
     public class ImportRule
     {
-        public MergeType MergeType { get; set; }
-
-        public Contact LeftContact { get; set; }
-
-        public Contact RightContact { get; set; }
+        public ImportType ImportType { get; set; }
+        public Contact Destination { get; set; }
+        public Contact Source { get; set; }
     }
 }

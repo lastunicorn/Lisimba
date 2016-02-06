@@ -18,7 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class Contact : IComparable, IObservableEntity, IEquatable<Contact>
+    public class Contact : IObservableEntity, IComparable, IEquatable<Contact>
     {
         private PersonName name;
 
@@ -170,6 +170,17 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         private void HandleBirthdayChanged(object sender, EventArgs e)
         {
             OnChanged();
+        }
+
+        public void Merge(Contact source)
+        {
+            // merge only the items
+
+            foreach (ContactItem contactItem in source.Items)
+            {
+                // if contact item exists (identical) - ignore
+                // if contact item exists (modified)
+            }
         }
 
         /// <summary>

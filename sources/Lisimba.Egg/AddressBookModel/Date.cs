@@ -74,6 +74,11 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
         }
 
+        public Date(int day, int month, int year)
+            : this(day, month, year, string.Empty)
+        {
+        }
+
         public Date(int day, int month, int year, string description)
         {
             SetMonthInternal(month);
@@ -497,6 +502,14 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
                 return hashCode;
             }
+        }
+
+        public static bool Equals(Date date1, Date date2)
+        {
+            if (date1 == null)
+                return date2 == null;
+
+            return date1.Equals(date2);
         }
     }
 }

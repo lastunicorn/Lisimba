@@ -99,6 +99,36 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 handler(this, EventArgs.Empty);
         }
 
+        public PersonName()
+        {
+        }
+
+        public PersonName(string firstName)
+        {
+            this.firstName = firstName;
+        }
+
+        public PersonName(string firstName, string lastName)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public PersonName(string firstName, string middleName, string lastName)
+        {
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.lastName = lastName;
+        }
+
+        public PersonName(string firstName, string middleName, string lastName, string nickname)
+        {
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.lastName = lastName;
+            this.nickname = nickname;
+        }
+
         /// <summary>
         /// Remove all the information from the current instance.
         /// </summary>
@@ -221,9 +251,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (PersonName)) return false;
+            if (obj.GetType() != typeof(PersonName)) return false;
 
-            return Equals((PersonName) obj);
+            return Equals((PersonName)obj);
         }
 
         public override int GetHashCode()
@@ -231,9 +261,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             unchecked
             {
                 var hashCode = (firstName != null ? firstName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (middleName != null ? middleName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (lastName != null ? lastName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (nickname != null ? nickname.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (middleName != null ? middleName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (lastName != null ? lastName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (nickname != null ? nickname.GetHashCode() : 0);
 
                 return hashCode;
             }

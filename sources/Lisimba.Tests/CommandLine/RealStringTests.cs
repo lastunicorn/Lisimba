@@ -17,7 +17,7 @@
 using DustInTheWind.ConsoleCommon.CommandModel;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Cmd
+namespace DustInTheWind.Lisimba.Tests.CommandLine
 {
     [TestFixture]
     public class RealStringTests

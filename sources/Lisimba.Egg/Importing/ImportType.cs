@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,17 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using NUnit.Framework;
-
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    [TestFixture]
-    public class EmailCollectionTests
+    public enum ImportType
     {
-        [Test]
-        public void Test()
-        {
-
-        }
+        AddAsNew,
+        Merge,
+        Replace,
+        Ignore
     }
 }

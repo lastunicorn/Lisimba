@@ -14,40 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.Entities
+namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    [Serializable]
     public class ImportRuleCollection : Collection<ImportRule>
     {
         public ImportRuleCollection()
         {
         }
 
-        public ImportRuleCollection(IList<ImportRule> list)
-            : base(list)
+        public ImportRuleCollection(IEnumerable<ImportRule> items)
+            : base(items.ToList())
         {
         }
 
-        public ImportRule this[Contact contact]
+        public ImportRule GetBySource(Contact contact)
         {
-            get { return Items.FirstOrDefault(x => x.RightContact == contact); }
-            set
-            {
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    if (Items[i].RightContact == contact)
-                    {
-                        Items[i] = value;
-                        return;
-                    }
-                }
-            }
+            return Items.FirstOrDefault(x => ReferenceEquals(x.Source, contact));
         }
 
         public override bool Equals(object obj)
@@ -61,26 +48,7 @@ namespace DustInTheWind.Lisimba.Egg.Entities
             if (records == null)
                 return false;
 
-            for (int i = 0; i < records.Count; i++)
-            {
-                bool b2 = false;
-
-                for (int j = 0; j < Items.Count; j++)
-                {
-                    if (records[i].Equals(Items[j]))
-                    {
-                        b2 = true;
-                        break;
-                    }
-                }
-
-                if (b2)
-                    continue;
-
-                return false;
-            }
-
-            return true;
+            return records.All(x => Enumerable.Contains(Items, x));
         }
     }
 }

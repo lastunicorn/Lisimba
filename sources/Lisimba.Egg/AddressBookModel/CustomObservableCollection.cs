@@ -29,6 +29,15 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         public event EventHandler<ItemChangedEventArgs<T>> ItemChanged;
 
+        public CustomObservableCollection()
+        {
+        }
+
+        public CustomObservableCollection(IEnumerable<T> contacts)
+            : base(contacts)
+        {
+        }
+
         protected virtual void OnItemChanged(ItemChangedEventArgs<T> e)
         {
             EventHandler<ItemChangedEventArgs<T>> handler = ItemChanged;
