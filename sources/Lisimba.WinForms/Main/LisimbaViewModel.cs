@@ -138,7 +138,7 @@ namespace DustInTheWind.Lisimba.Main
 
             ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
             ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
-            ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAsAddressBookOperation>();
+            ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookOperation>();
             ToolStripAboutViewModel = CreateViewModel<ShowAboutOperation>();
 
             availableGates.GateChanged += HandleDefaultGateChanged;

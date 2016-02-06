@@ -220,7 +220,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
             else if (Current.Location == null)
             {
-
                 string location = GetLocationForSave();
 
                 if (location == null)
