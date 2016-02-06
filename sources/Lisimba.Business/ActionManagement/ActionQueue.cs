@@ -54,6 +54,13 @@ namespace DustInTheWind.Lisimba.Business.ActionManagement
                 undoList.Push(action);
 
                 OnUndoStackChanged();
+
+                if (redoList.Count > 0)
+                {
+                    redoList.Clear();
+
+                    OnRedoStackChanged();
+                }
             }
         }
 

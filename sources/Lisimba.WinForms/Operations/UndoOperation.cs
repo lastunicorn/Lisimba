@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return LocalizedResources.SaveAddressBookOperationDescription; }
+            get { return LocalizedResources.UndoOperationDescription; }
         }
 
         public UndoOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)

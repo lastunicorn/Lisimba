@@ -39,6 +39,8 @@ namespace DustInTheWind.Lisimba.MainMenu
             toolStripMenuItem_AddressBook_AddContact.ViewModel = mainMenusViewModels.NewContactViewModel;
             toolStripMenuItem_AddressBook_DeleteContact.ViewModel = mainMenusViewModels.DeleteContactViewModel;
             toolStripMenuItem_AddressBook_Properties.ViewModel = mainMenusViewModels.AddressBookPropertiesViewModel;
+            toolStripMenuItem_AddressBook_Undo.ViewModel = mainMenusViewModels.UndoViewModel;
+            toolStripMenuItem_AddressBook_Redo.ViewModel = mainMenusViewModels.RedoViewModel;
 
             toolStripMenuItem_Help_About.ViewModel = mainMenusViewModels.AboutViewModel;
 

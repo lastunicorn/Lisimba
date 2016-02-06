@@ -305,6 +305,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Executes again the last action that was undone..
+        /// </summary>
+        internal static string RedoOperationDescription {
+            get {
+                return ResourceManager.GetString("RedoOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save current opened address book..
         /// </summary>
         internal static string SaveAddressBookOperationDescription {
@@ -337,6 +346,15 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string ShowAddressBookPropertiesOperationDescription {
             get {
                 return ResourceManager.GetString("ShowAddressBookPropertiesOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo the last executed action..
+        /// </summary>
+        internal static string UndoOperationDescription {
+            get {
+                return ResourceManager.GetString("UndoOperationDescription", resourceCulture);
             }
         }
     }

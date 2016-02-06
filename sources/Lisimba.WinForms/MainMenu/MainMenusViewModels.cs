@@ -38,6 +38,8 @@ namespace DustInTheWind.Lisimba.MainMenu
         public CustomButtonViewModel NewContactViewModel { get; private set; }
         public CustomButtonViewModel DeleteContactViewModel { get; private set; }
         public CustomButtonViewModel AddressBookPropertiesViewModel { get; private set; }
+        public CustomButtonViewModel UndoViewModel { get; private set; }
+        public CustomButtonViewModel RedoViewModel { get; private set; }
         public CustomButtonViewModel AboutViewModel { get; private set; }
         public ListMenuItemViewModel ExportViewModel { get; private set; }
         public ImportsMenuItemViewModel ImportViewModel { get; private set; }
@@ -83,8 +85,14 @@ namespace DustInTheWind.Lisimba.MainMenu
             ShowAddressBookPropertiesOperation operation8 = availableOperations.GetOperation<ShowAddressBookPropertiesOperation>();
             AddressBookPropertiesViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation8);
 
-            ShowAboutOperation operation9 = availableOperations.GetOperation<ShowAboutOperation>();
-            AboutViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation9);
+            UndoOperation operationUndo = availableOperations.GetOperation<UndoOperation>();
+            UndoViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operationUndo);
+
+            RedoOperation operationRedo = availableOperations.GetOperation<RedoOperation>();
+            RedoViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operationRedo);
+
+            ShowAboutOperation operationAbout = availableOperations.GetOperation<ShowAboutOperation>();
+            AboutViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operationAbout);
 
             EmptyOperation operation10 = new EmptyOperation(LocalizedResources.ExportsOperationDescription);
             ExportViewModel = viewModelProvider.CreateNew<ExportsMenuItemViewModel>(operation10);
