@@ -421,7 +421,7 @@
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\LocalizedResources.ro-RO.resx" />
+    <EmbeddedResource Include="Properties\LocalizedResources.ro.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -478,7 +478,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ZodiacResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\ZodiacResources.ro-RO.resx" />
+    <EmbeddedResource Include="Properties\ZodiacResources.ro.resx" />
     <EmbeddedResource Include="Utils\CustomButton.resx">
       <DependentUpon>CustomButton.cs</DependentUpon>
     </EmbeddedResource>

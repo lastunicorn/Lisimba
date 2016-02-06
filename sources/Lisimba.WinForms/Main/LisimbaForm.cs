@@ -87,5 +87,17 @@ namespace DustInTheWind.Lisimba.Main
 
             viewModel.DefaultGateWasClicked(screenPoint);
         }
+
+        private void toolStripDefaultGate_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripDefaultGate.BackColor = SystemColors.Highlight;
+            toolStripDefaultGate.ForeColor = SystemColors.HighlightText;
+        }
+
+        private void toolStripDefaultGate_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripDefaultGate.BackColor = SystemColors.Control;
+            toolStripDefaultGate.ForeColor = SystemColors.ControlText;
+        }
     }
 }

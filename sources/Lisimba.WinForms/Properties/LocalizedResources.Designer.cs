@@ -197,6 +197,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exports the current address book..
+        /// </summary>
+        internal static string ExportOperationDescription {
+            get {
+                return ResourceManager.GetString("ExportOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export current opened address book in another format..
         /// </summary>
         internal static string ExportsOperationDescription {
@@ -220,6 +229,15 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string GateNotFoundError {
             get {
                 return ResourceManager.GetString("GateNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imports an address book..
+        /// </summary>
+        internal static string ImportOperationDescription {
+            get {
+                return ResourceManager.GetString("ImportOperationDescription", resourceCulture);
             }
         }
         

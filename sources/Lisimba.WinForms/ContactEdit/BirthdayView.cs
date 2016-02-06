@@ -92,12 +92,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void HighlightOn()
         {
-            flowLayoutPanel2.BackColor = SystemColors.Info;
+            flowLayoutPanel2.BackColor = SystemColors.Highlight;
+            flowLayoutPanel2.ForeColor = SystemColors.HighlightText;
         }
 
         private void HighlightOff()
         {
             flowLayoutPanel2.BackColor = SystemColors.Control;
+            flowLayoutPanel2.ForeColor = SystemColors.ControlText;
         }
 
         private void HandleFlowLayoutPanelMouseClick(object sender, MouseEventArgs e)

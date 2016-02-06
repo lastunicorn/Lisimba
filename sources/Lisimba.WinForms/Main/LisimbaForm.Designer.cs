@@ -38,15 +38,15 @@ namespace DustInTheWind.Lisimba.Main
             this.labelNoContact = new System.Windows.Forms.Label();
             this.labelNoAddressBook = new System.Windows.Forms.Label();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatus = new BindableToolStripStatusLabel();
+            this.toolStripStatus = new DustInTheWind.WinFormsCommon.BindableToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripDefaultGate = new BindableToolStripStatusLabel();
+            this.toolStripDefaultGate = new DustInTheWind.WinFormsCommon.BindableToolStripStatusLabel();
             this.panelAddressBookView = new System.Windows.Forms.Panel();
             this.panelFormContent = new System.Windows.Forms.Panel();
             this.tableLayoutPanelNoAddressBook = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonNewAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
-            this.buttonOpenAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton();
+            this.buttonNewAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton(this.components);
+            this.buttonOpenAddressBook = new DustInTheWind.Lisimba.Utils.CustomButton(this.components);
             this.menuStripMain = new DustInTheWind.Lisimba.MainMenu.LisimbaMainMenuStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonNew = new DustInTheWind.Lisimba.Utils.CustomToolStripButton(this.components);
@@ -154,7 +154,7 @@ namespace DustInTheWind.Lisimba.Main
             // toolStripStatusLabel2
             // 
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(568, 19);
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(537, 19);
             this.toolStripStatusLabel2.Spring = true;
             // 
             // toolStripDefaultGate
@@ -165,6 +165,8 @@ namespace DustInTheWind.Lisimba.Main
             this.toolStripDefaultGate.Size = new System.Drawing.Size(76, 19);
             this.toolStripDefaultGate.Text = "Default Gate";
             this.toolStripDefaultGate.Click += new System.EventHandler(this.toolStripDefaultGate_Click);
+            this.toolStripDefaultGate.MouseEnter += new System.EventHandler(this.toolStripDefaultGate_MouseEnter);
+            this.toolStripDefaultGate.MouseLeave += new System.EventHandler(this.toolStripDefaultGate_MouseLeave);
             // 
             // panelAddressBookView
             // 
