@@ -28,12 +28,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private ZodiacSign zodiacSign;
         private string notes;
         private bool enabled;
-        private PhoneCollection phones;
-        private EmailCollection emails;
-        private WebSiteCollection webSites;
-        private PostalAddressCollection postalAddresses;
-        private DateCollection dates;
-        private SocialProfileIdCollection socialProfileIds;
+        private CustomObservableCollection<ContactItem> contactItems;
         private PersonName name;
 
         public IContactEditorView View { get; set; }
@@ -101,62 +96,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public PhoneCollection Phones
+        public CustomObservableCollection<ContactItem> ContactItems
         {
-            get { return phones; }
+            get { return contactItems; }
             set
             {
-                phones = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public EmailCollection Emails
-        {
-            get { return emails; }
-            set
-            {
-                emails = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public WebSiteCollection WebSites
-        {
-            get { return webSites; }
-            set
-            {
-                webSites = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public PostalAddressCollection PostalAddresses
-        {
-            get { return postalAddresses; }
-            set
-            {
-                postalAddresses = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public DateCollection Dates
-        {
-            get { return dates; }
-            set
-            {
-                dates = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public SocialProfileIdCollection SocialProfileIds
-        {
-            get { return socialProfileIds; }
-            set
-            {
-                socialProfileIds = value;
+                contactItems = value;
                 OnPropertyChanged();
             }
         }
@@ -204,12 +149,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             Notes = contact.Notes;
 
-            Phones = contact.Phones;
-            Emails = contact.Emails;
-            WebSites = contact.WebSites;
-            PostalAddresses = contact.PostalAddresses;
-            Dates = contact.Dates;
-            SocialProfileIds = contact.SocialProfileIds;
+            ContactItems = contact.Items;
 
             Enabled = true;
         }
@@ -222,44 +162,39 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             Notes = string.Empty;
 
-            Phones = null;
-            Emails = null;
-            WebSites = null;
-            PostalAddresses = null;
-            Dates = null;
-            SocialProfileIds = null;
+            ContactItems = null;
 
             Enabled = false;
         }
 
         public void AddAddressWasClicked()
         {
-            View.AddAddress(contact.PostalAddresses);
+            View.AddAddress(contact.Items);
         }
 
         public void AddDateWasClicked()
         {
-            View.AddDate(contact.Dates);
+            View.AddDate(contact.Items);
         }
 
         public void AddEmailWasClicked()
         {
-            View.AddEmail(contact.Emails);
+            View.AddEmail(contact.Items);
         }
 
         public void AddSocialProfileIdWasClicked()
         {
-            View.AddSocialProfileId(contact.SocialProfileIds);
+            View.AddSocialProfileId(contact.Items);
         }
 
         public void AddPhoneWasClicked()
         {
-            View.AddPhone(contact.Phones);
+            View.AddPhone(contact.Items);
         }
 
         public void AddWebSiteClicked()
         {
-            View.AddWebSite(contact.WebSites);
+            View.AddWebSite(contact.Items);
         }
     }
 }

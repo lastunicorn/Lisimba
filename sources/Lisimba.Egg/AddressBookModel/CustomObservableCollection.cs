@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
@@ -84,6 +85,19 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             Clear();
             AddRange(items);
+        }
+
+        public override bool Equals(object obj)
+        {
+            CustomObservableCollection<T> items = obj as CustomObservableCollection<T>;
+
+            if (items == null)
+                return false;
+
+            if (items.Count != Count)
+                return false;
+
+            return items.All(x => Enumerable.Contains(Items, x));
         }
     }
 }

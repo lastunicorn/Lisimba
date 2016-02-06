@@ -21,10 +21,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     /// <summary>
     /// Class containing information about a social profile id.
     /// </summary>
-    public class SocialProfile : IObservableEntity, IEquatable<SocialProfile>
+    public class SocialProfile : ContactItem, IEquatable<SocialProfile>
     {
         private string id;
-        private string description;
 
         /// <summary>
         /// The social profile id.
@@ -37,29 +36,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 id = value;
                 OnChanged();
             }
-        }
-
-        /// <summary>
-        /// A short description of the e-mail address.
-        /// </summary>
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         /// <summary>

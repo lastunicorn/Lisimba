@@ -18,14 +18,13 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class PostalAddress : IObservableEntity, IEquatable<PostalAddress>
+    public class PostalAddress : ContactItem, IEquatable<PostalAddress>
     {
         private string street;
         private string city;
         private string state;
         private string postalCode;
         private string country;
-        private string description;
 
         public string Street
         {
@@ -75,26 +74,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 country = value;
                 OnChanged();
             }
-        }
-
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         public PostalAddress()

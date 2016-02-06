@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public PostalAddressCollection PostalAddresses { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public PostalAddressEditForm()
         {
@@ -70,8 +70,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && PostalAddress != null)
-                PostalAddresses.Add(postalAddress);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(postalAddress);
         }
 
         private bool UserChangedData()

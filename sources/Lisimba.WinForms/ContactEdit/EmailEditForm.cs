@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public EmailCollection Emails { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public EmailEditForm()
         {
@@ -65,8 +65,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && Emails != null)
-                Emails.Add(Email);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(Email);
         }
 
         private bool UserChangedData()

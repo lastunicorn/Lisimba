@@ -223,12 +223,6 @@
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
     <Compile Include="Operations\SaveAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeByNicknameOrNameComparer.cs" />
-    <Compile Include="ctrl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ctrl.Designer.cs">
-      <DependentUpon>ctrl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Biorhythm\BiorythmForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -381,10 +375,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NameEditing\NameEditorLabel.resx">
       <DependentUpon>NameEditorLabel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ctrl.resx">
-      <DependentUpon>ctrl.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Biorhythm\BiorythmForm.resx">
       <SubType>Designer</SubType>

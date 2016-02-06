@@ -18,10 +18,9 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class Phone : IObservableEntity, IEquatable<Phone>
+    public class Phone : ContactItem, IEquatable<Phone>
     {
         private string number;
-        private string description;
 
         public string Number
         {
@@ -31,26 +30,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 number = value;
                 OnChanged();
             }
-        }
-
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         public Phone()

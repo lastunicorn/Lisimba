@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -19,38 +19,38 @@ using DustInTheWind.Lisimba.Egg.Enums;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class EmailCollection : CustomObservableCollection<Email>
+    public class ContactItems : CustomObservableCollection<ContactItem>
     {
         /// <summary>
-        /// Returns the <see cref="Email"/> object that match the description.
+        /// Returns the <see cref="T"/> object that match the description.
         /// </summary>
         /// <param name="text">The text to search in the description field.</param>
         /// <param name="searchMode">Indicates the search mode. (Ex: StartingWith, Containing, etc...)</param>
-        /// <returns>The <see cref="Email"/> object that match or <c>null</c>.</returns>
-        public Email SearchByDescription(string text, SearchMode searchMode)
+        /// <returns>The <see cref="T"/> object that match or <c>null</c>.</returns>
+        public ContactItem SearchByDescription(string text, SearchMode searchMode)
         {
-            foreach (Email email in Items)
+            foreach (ContactItem item in Items)
             {
                 switch (searchMode)
                 {
                     case SearchMode.Exact:
-                        if (email.Description.CompareTo(text) == 0)
-                            return email;
+                        if (item.Description.CompareTo(text) == 0)
+                            return item;
                         break;
 
                     case SearchMode.StartingWith:
-                        if (email.Description.StartsWith(text))
-                            return email;
+                        if (item.Description.StartsWith(text))
+                            return item;
                         break;
 
                     case SearchMode.EndingWith:
-                        if (email.Description.EndsWith(text))
-                            return email;
+                        if (item.Description.EndsWith(text))
+                            return item;
                         break;
 
                     case SearchMode.Containing:
-                        if (email.Description.IndexOf(text) > 0)
-                            return email;
+                        if (item.Description.IndexOf(text) > 0)
+                            return item;
                         break;
                 }
             }
@@ -60,20 +60,20 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         public override bool Equals(object obj)
         {
-            EmailCollection emails = obj as EmailCollection;
+            ContactItems webSites = obj as ContactItems;
 
-            return Equals(emails);
+            return Equals(webSites);
         }
 
-        public bool Equals(EmailCollection emails)
+        public bool Equals(ContactItems contactItems)
         {
-            if (emails == null)
+            if (contactItems == null)
                 return false;
 
-            if (emails.Count != Count)
+            if (contactItems.Count != Count)
                 return false;
 
-            return emails.All(x => Enumerable.Contains(Items, x));
+            return contactItems.All(x => Enumerable.Contains(Items, x));
         }
     }
 }

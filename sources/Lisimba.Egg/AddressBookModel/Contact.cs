@@ -33,6 +33,8 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 name.Changed -= HandleNameChanged;
                 name = value;
                 name.Changed += HandleNameChanged;
+
+                OnChanged();
             }
         }
 
@@ -118,17 +120,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
         }
 
-        public PhoneCollection Phones { get; private set; }
-
-        public EmailCollection Emails { get; private set; }
-
-        public WebSiteCollection WebSites { get; private set; }
-
-        public PostalAddressCollection PostalAddresses { get; private set; }
-
-        public DateCollection Dates { get; private set; }
-
-        public SocialProfileIdCollection SocialProfileIds { get; private set; }
+        public ContactItems Items { get; private set; }
 
         private string notes = string.Empty;
 
@@ -161,33 +153,13 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             name = new PersonName();
             birthday = new Date();
 
-            Phones = new PhoneCollection();
-            Emails = new EmailCollection();
-            WebSites = new WebSiteCollection();
-            PostalAddresses = new PostalAddressCollection();
-            Dates = new DateCollection();
-            SocialProfileIds = new SocialProfileIdCollection();
+            Items = new ContactItems();
 
             name.Changed += (sender, args) => OnChanged();
             birthday.Changed += (sender, args) => OnChanged();
 
-            Phones.CollectionChanged += (sender, e) => OnChanged();
-            Phones.ItemChanged += (sender, e) => OnChanged();
-
-            Emails.CollectionChanged += (sender, e) => OnChanged();
-            Emails.ItemChanged += (sender, e) => OnChanged();
-
-            WebSites.CollectionChanged += (sender, e) => OnChanged();
-            WebSites.ItemChanged += (sender, e) => OnChanged();
-
-            PostalAddresses.CollectionChanged += (sender, e) => OnChanged();
-            PostalAddresses.ItemChanged += (sender, e) => OnChanged();
-
-            Dates.CollectionChanged += (sender, e) => OnChanged();
-            Dates.ItemChanged += (sender, e) => OnChanged();
-
-            SocialProfileIds.CollectionChanged += (sender, e) => OnChanged();
-            SocialProfileIds.ItemChanged += (sender, e) => OnChanged();
+            Items.CollectionChanged += (sender, e) => OnChanged();
+            Items.ItemChanged += (sender, e) => OnChanged();
         }
 
         private void HandleNameChanged(object sender, EventArgs e)
@@ -197,46 +169,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         private void HandleBirthdayChanged(object sender, EventArgs e)
         {
-            OnChanged();
-        }
-
-        /// <summary>
-        /// Remove all the information from the current instance.
-        /// </summary>
-        public void Clear()
-        {
-            name.Clear();
-            birthday.Clear();
-            Phones.Clear();
-            Emails.Clear();
-            WebSites.Clear();
-            PostalAddresses.Clear();
-            Dates.Clear();
-            SocialProfileIds.Clear();
-            notes = string.Empty;
-
-            OnChanged();
-        }
-
-        /// <summary>
-        /// Copy all the informations from the specified Contact object to the current instance. All the existing data will be lost.
-        /// </summary>
-        /// <param name="contact">The Contact object to be copied.</param>
-        public void CopyFrom(Contact contact)
-        {
-            name.CopyFrom(contact.name);
-
-            birthday.CopyFrom(contact.birthday);
-
-            Phones.CopyFrom(contact.Phones);
-            Emails.CopyFrom(contact.Emails);
-            WebSites.CopyFrom(contact.WebSites);
-            PostalAddresses.CopyFrom(contact.PostalAddresses);
-            Dates.CopyFrom(contact.Dates);
-            SocialProfileIds.CopyFrom(contact.SocialProfileIds);
-
-            notes = contact.notes;
-
             OnChanged();
         }
 
@@ -276,24 +208,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             return comparisonResult;
         }
 
-        //public override bool Equals(object obj)
-        //{
-        //    Contact contact = obj as Contact;
-
-        //    if (contact == null)
-        //        return false;
-
-        //    return name.Equals(contact.name) &&
-        //           birthday == contact.birthday &&
-        //           Phones.Equals(contact.Phones) &&
-        //           Emails.Equals(contact.Emails) &&
-        //           WebSites.Equals(contact.WebSites) &&
-        //           Addresses.Equals(contact.Addresses) &&
-        //           Dates.Equals(contact.Dates) &&
-        //           MessengerIds.Equals(contact.MessengerIds) &&
-        //           notes == contact.notes;
-        //}
-
         public bool Equals(Contact other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -303,21 +217,16 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                    Equals(birthday, other.birthday) &&
                    string.Equals(category, other.category) &&
                    string.Equals(notes, other.notes) &&
-                   Equals(Phones, other.Phones) &&
-                   Equals(Emails, other.Emails) &&
-                   Equals(WebSites, other.WebSites) &&
-                   Equals(PostalAddresses, other.PostalAddresses) &&
-                   Equals(Dates, other.Dates) &&
-                   Equals(SocialProfileIds, other.SocialProfileIds);
+                   Equals(Items, other.Items);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Contact)) return false;
+            if (obj.GetType() != typeof(Contact)) return false;
 
-            return Equals((Contact) obj);
+            return Equals((Contact)obj);
         }
 
         //public override int GetHashCode()

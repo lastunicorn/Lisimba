@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public PhoneCollection Phones { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public PhoneEditForm()
         {
@@ -65,8 +65,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && Phones != null)
-                Phones.Add(phone);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(phone);
         }
 
         private bool UserChangedData()

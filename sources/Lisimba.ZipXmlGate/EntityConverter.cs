@@ -54,12 +54,12 @@ namespace DustInTheWind.Lisimba.Gating
                     Description = contact.Birthday.Description
                 },
                 Category = contact.Category,
-                Phones = contact.Phones.Select(ToEntity).ToList(),
-                Emails = contact.Emails.Select(ToEntity).ToList(),
-                WebSites = contact.WebSites.Select(ToEntity).ToList(),
-                Addresses = contact.PostalAddresses.Select(ToEntity).ToList(),
-                Dates = contact.Dates.Select(ToEntity).ToList(),
-                SocialProfileIds = contact.SocialProfileIds.Select(ToEntity).ToList(),
+                Phones = contact.Items.OfType<Phone>().Select(ToEntity).ToList(),
+                Emails = contact.Items.OfType<Email>().Select(ToEntity).ToList(),
+                WebSites = contact.Items.OfType<WebSite>().Select(ToEntity).ToList(),
+                Addresses = contact.Items.OfType<PostalAddress>().Select(ToEntity).ToList(),
+                Dates = contact.Items.OfType<Date>().Select(ToEntity).ToList(),
+                SocialProfileIds = contact.Items.OfType<SocialProfile>().Select(ToEntity).ToList(),
                 Notes = contact.Notes
             };
         }
@@ -157,22 +157,22 @@ namespace DustInTheWind.Lisimba.Gating
             contact.Birthday.Description = contactEntity.Birthday.Description;
 
             IEnumerable<Phone> phones = contactEntity.Phones.Select(FromEntity);
-            contact.Phones.AddRange(phones);
+            contact.Items.AddRange(phones);
 
             IEnumerable<Email> emails = contactEntity.Emails.Select(FromEntity);
-            contact.Emails.AddRange(emails);
+            contact.Items.AddRange(emails);
 
             IEnumerable<WebSite> webSites = contactEntity.WebSites.Select(FromEntity);
-            contact.WebSites.AddRange(webSites);
+            contact.Items.AddRange(webSites);
 
             IEnumerable<PostalAddress> addresses = contactEntity.Addresses.Select(FromEntity);
-            contact.PostalAddresses.AddRange(addresses);
+            contact.Items.AddRange(addresses);
 
             IEnumerable<Date> dates = contactEntity.Dates.Select(FromEntity);
-            contact.Dates.AddRange(dates);
+            contact.Items.AddRange(dates);
 
             IEnumerable<SocialProfile> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
-            contact.SocialProfileIds.AddRange(socialProfileIds);
+            contact.Items.AddRange(socialProfileIds);
 
             contact.Notes = contactEntity.Notes;
 

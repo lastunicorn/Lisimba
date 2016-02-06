@@ -21,10 +21,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    public class Email : IObservableEntity, IEquatable<Email>
+    public class Email : ContactItem, IEquatable<Email>
     {
         private string address;
-        private string description;
 
         /// <summary>
         /// The e-mail address.
@@ -37,29 +36,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 address = value;
                 OnChanged();
             }
-        }
-
-        /// <summary>
-        /// A short description of the e-mail address.
-        /// </summary>
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         /// <summary>
@@ -104,9 +80,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Email)) return false;
+            if (obj.GetType() != typeof(Email)) return false;
 
-            return Equals((Email) obj);
+            return Equals((Email)obj);
         }
 
         public bool Equals(Email email)
@@ -121,7 +97,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                return ((address != null ? address.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((address != null ? address.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public DateCollection Dates { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public DateEditForm()
         {
@@ -74,8 +74,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && Dates != null)
-                Dates.Add(date);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(date);
         }
 
         private void ReadDataFromView()

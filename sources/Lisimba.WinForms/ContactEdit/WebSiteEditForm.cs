@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public WebSiteCollection WebSites { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public WebSiteEditForm()
         {
@@ -66,8 +66,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && WebSites != null)
-                WebSites.Add(webSite);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(webSite);
         }
 
         private bool UserChangedData()

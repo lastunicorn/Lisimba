@@ -54,15 +54,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
             birthdayView1.Bind(x => x.Birthday, ViewModel, x => x.Birthday, true, DataSourceUpdateMode.Never);
             zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
-
+            customTreeView1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
             textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
-
-            customTreeView1.Bind(x => x.Phones, ViewModel, x => x.Phones, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Emails, ViewModel, x => x.Emails, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.WebSites, ViewModel, x => x.WebSites, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.PostalAddresses, ViewModel, x => x.PostalAddresses, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.Dates, ViewModel, x => x.Dates, true, DataSourceUpdateMode.Never);
-            customTreeView1.Bind(x => x.SocialProfileIds, ViewModel, x => x.SocialProfileIds, true, DataSourceUpdateMode.Never);
 
             this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
         }
@@ -97,12 +90,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             ViewModel.AddWebSiteClicked();
         }
 
-        public void AddAddress(PostalAddressCollection postalAddresses)
+        public void AddAddress(CustomObservableCollection<ContactItem> contactItems)
         {
             PostalAddressEditForm form = new PostalAddressEditForm
             {
                 AddMode = true,
-                PostalAddresses = postalAddresses,
+                ContactItems = contactItems,
                 Location = buttonAddAddress.GetBottomLeftCorner(),
                 PostalAddress = new PostalAddress()
             };
@@ -111,12 +104,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddDate(DateCollection dates)
+        public void AddDate(CustomObservableCollection<ContactItem> contactItems)
         {
             DateEditForm form = new DateEditForm
             {
                 AddMode = true,
-                Dates = dates,
+                ContactItems = contactItems,
                 Location = buttonAddDate.GetBottomLeftCorner(),
                 Date = new Date()
             };
@@ -125,12 +118,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddEmail(EmailCollection emails)
+        public void AddEmail(CustomObservableCollection<ContactItem> contactItems)
         {
             EmailEditForm form = new EmailEditForm
             {
                 AddMode = true,
-                Emails = emails,
+                ContactItems = contactItems,
                 Location = buttonAddEmail.GetBottomLeftCorner(),
                 Email = new Email()
             };
@@ -139,12 +132,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddSocialProfileId(SocialProfileIdCollection socialProfileIds)
+        public void AddSocialProfileId(CustomObservableCollection<ContactItem> contactItems)
         {
             SocialProfileEditForm form = new SocialProfileEditForm
             {
                 AddMode = true,
-                SocialProfiles = socialProfileIds,
+                ContactItems = contactItems,
                 Location = buttonAddSocialProfileId.GetBottomLeftCorner(),
                 SocialProfile = new SocialProfile()
             };
@@ -153,12 +146,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddPhone(PhoneCollection phones)
+        public void AddPhone(CustomObservableCollection<ContactItem> contactItems)
         {
             PhoneEditForm form = new PhoneEditForm
             {
                 AddMode = true,
-                Phones = phones,
+                ContactItems = contactItems,
                 Location = buttonAddPhone.GetBottomLeftCorner(),
                 Phone = new Phone()
             };
@@ -167,12 +160,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Focus();
         }
 
-        public void AddWebSite(WebSiteCollection webSites)
+        public void AddWebSite(CustomObservableCollection<ContactItem> contactItems)
         {
             WebSiteEditForm form = new WebSiteEditForm
             {
                 AddMode = true,
-                WebSites = webSites,
+                ContactItems = contactItems,
                 Location = buttonAddWebSite.GetBottomLeftCorner(),
                 WebSite = new WebSite()
             };

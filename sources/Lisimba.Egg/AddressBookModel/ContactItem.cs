@@ -14,36 +14,35 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Linq;
+using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class DateCollection : CustomObservableCollection<Date>
+    public class ContactItem : IObservableEntity
     {
-        public override bool Equals(object obj)
-        {
-            DateCollection dates = obj as DateCollection;
+        protected string description;
 
-            return Equals(dates);
+        /// <summary>
+        /// A short description of the contact item.
+        /// </summary>
+        public string Description
+        {
+            get { return description; }
+            set
+            {
+                description = value;
+                OnChanged();
+            }
         }
 
-        public bool Equals(DateCollection dates)
+        public event EventHandler Changed;
+
+        protected virtual void OnChanged()
         {
-            if (dates == null)
-                return false;
+            EventHandler handler = Changed;
 
-            if (dates.Count != Count)
-                return false;
-
-            for (int i = 0; i < dates.Count; i++)
-            {
-                bool exists = Enumerable.Contains(Items, dates[i]);
-
-                if (!exists)
-                    return false;
-            }
-
-            return true;
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

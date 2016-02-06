@@ -33,8 +33,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public DateCollection Dates { get; set; }
-
         public BirthDateEditForm()
         {
             InitializeComponent();
@@ -60,9 +58,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 return;
 
             ReadDataFromView();
-
-            if (Dates != null)
-                Dates.Add(date);
         }
 
         private void ReadDataFromView()

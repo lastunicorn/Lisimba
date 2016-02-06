@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using Moq;
@@ -95,12 +96,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PhoneCollection phones = new PhoneCollection { new Phone(), new Phone() };
-            contact.Phones.AddRange(phones);
+            List<Phone> phones = new List<Phone> { new Phone(), new Phone() };
+            contact.Items.AddRange(phones);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.Phones, Is.EquivalentTo(phones));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(phones));
         }
 
         [Test]
@@ -110,7 +111,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.Phones, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
 
         [Test]
@@ -118,12 +119,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            EmailCollection emails = new EmailCollection { new Email(), new Email() };
-            contact.Emails.AddRange(emails);
+            List<Email> emails = new List<Email> { new Email(), new Email() };
+            contact.Items.AddRange(emails);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.Emails, Is.EquivalentTo(emails));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(emails));
         }
 
         [Test]
@@ -133,7 +134,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.Emails, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
 
         [Test]
@@ -141,12 +142,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            WebSiteCollection webSites = new WebSiteCollection { new WebSite(), new WebSite() };
-            contact.WebSites.AddRange(webSites);
+            List<WebSite> webSites = new List<WebSite> { new WebSite(), new WebSite() };
+            contact.Items.AddRange(webSites);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.WebSites, Is.EquivalentTo(webSites));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(webSites));
         }
 
         [Test]
@@ -156,7 +157,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.WebSites, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
 
         [Test]
@@ -164,12 +165,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            PostalAddressCollection postalAddresses = new PostalAddressCollection { new PostalAddress(), new PostalAddress() };
-            contact.PostalAddresses.AddRange(postalAddresses);
+            List<PostalAddress> postalAddresses = new List<PostalAddress> { new PostalAddress(), new PostalAddress() };
+            contact.Items.AddRange(postalAddresses);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.PostalAddresses, Is.EquivalentTo(postalAddresses));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(postalAddresses));
         }
 
         [Test]
@@ -179,7 +180,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.PostalAddresses, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
 
         [Test]
@@ -187,12 +188,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            DateCollection dates = new DateCollection { new Date(), new Date() };
-            contact.Dates.AddRange(dates);
+            List<Date> dates = new List<Date> { new Date(), new Date() };
+            contact.Items.AddRange(dates);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.Dates, Is.EquivalentTo(dates));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(dates));
         }
 
         [Test]
@@ -202,7 +203,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.Dates, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
 
         [Test]
@@ -210,12 +211,12 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
         {
             contactEditorViewModel.View = view.Object;
             Contact contact = new Contact();
-            SocialProfileIdCollection socialProfileIds = new SocialProfileIdCollection { new SocialProfile(), new SocialProfile() };
-            contact.SocialProfileIds.AddRange(socialProfileIds);
+            List<SocialProfile> socialProfileIds = new List<SocialProfile> { new SocialProfile(), new SocialProfile() };
+            contact.Items.AddRange(socialProfileIds);
 
             contactEditorViewModel.Contact = contact;
 
-            Assert.That(contactEditorViewModel.SocialProfileIds, Is.EquivalentTo(socialProfileIds));
+            Assert.That(contactEditorViewModel.ContactItems, Is.EquivalentTo(socialProfileIds));
         }
 
         [Test]
@@ -225,7 +226,7 @@ namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
 
             contactEditorViewModel.Contact = null;
 
-            Assert.That(contactEditorViewModel.SocialProfileIds, Is.Null);
+            Assert.That(contactEditorViewModel.ContactItems, Is.Null);
         }
     }
 }

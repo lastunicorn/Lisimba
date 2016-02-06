@@ -20,11 +20,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 {
     public interface IContactEditorView
     {
-        void AddAddress(PostalAddressCollection postalAddresses);
-        void AddDate(DateCollection dates);
-        void AddEmail(EmailCollection emails);
-        void AddSocialProfileId(SocialProfileIdCollection socialProfileIds);
-        void AddPhone(PhoneCollection phones);
-        void AddWebSite(WebSiteCollection webSites);
+        void AddAddress(CustomObservableCollection<ContactItem> contactItems);
+        void AddDate(CustomObservableCollection<ContactItem> contactItems);
+        void AddEmail(CustomObservableCollection<ContactItem> contactItems);
+        void AddSocialProfileId(CustomObservableCollection<ContactItem> contactItems);
+        void AddPhone(CustomObservableCollection<ContactItem> contactItems);
+        void AddWebSite(CustomObservableCollection<ContactItem> contactItems);
     }
 }

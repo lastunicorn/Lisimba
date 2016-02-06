@@ -184,24 +184,18 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
             this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.customTreeView1.Dates = null;
             this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTreeView1.Emails = null;
             this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.customTreeView1.FullRowSelect = true;
             this.customTreeView1.ImageIndex = 0;
             this.customTreeView1.Location = new System.Drawing.Point(4, 17);
             this.customTreeView1.Name = "customTreeView1";
-            this.customTreeView1.Phones = null;
-            this.customTreeView1.PostalAddresses = null;
             this.customTreeView1.SelectedImageIndex = 0;
             this.customTreeView1.ShowLines = false;
             this.customTreeView1.ShowPlusMinus = false;
             this.customTreeView1.ShowRootLines = false;
             this.customTreeView1.Size = new System.Drawing.Size(298, 64);
-            this.customTreeView1.SocialProfileIds = null;
             this.customTreeView1.TabIndex = 12;
-            this.customTreeView1.WebSites = null;
             // 
             // contactDetailsList1
             // 
