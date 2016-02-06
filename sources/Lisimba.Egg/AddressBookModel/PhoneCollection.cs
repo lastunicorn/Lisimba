@@ -21,16 +21,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class PhoneCollection : CustomObservableCollection<Phone>
     {
-        public void CopyFrom(PhoneCollection values)
-        {
-            Clear();
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Add(new Phone(values[i]));
-            }
-        }
-
         /// <summary>
         /// Returns the <see cref="Phone"/> object that match the description.
         /// </summary>

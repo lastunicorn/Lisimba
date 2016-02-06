@@ -21,16 +21,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class SocialProfileIdCollection : CustomObservableCollection<SocialProfile>
     {
-        public void CopyFrom(SocialProfileIdCollection values)
-        {
-            Clear();
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Add(new SocialProfile(values[i]));
-            }
-        }
-
         /// <summary>
         /// Returns the <see cref="SocialProfile"/> object that match the description.
         /// </summary>

@@ -50,6 +50,7 @@
     </Compile>
     <Compile Include="Cmd\RealStringTests.cs" />
     <Compile Include="Cmd\CommandParserTests.cs" />
+    <Compile Include="Egg\AddressBookModel\EmailCollectionTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ConstructorTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ContactChangedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

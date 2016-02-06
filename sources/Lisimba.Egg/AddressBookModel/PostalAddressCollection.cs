@@ -22,18 +22,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class PostalAddressCollection : CustomObservableCollection<PostalAddress>
     {
-        public void CopyFrom(PostalAddressCollection values)
-        {
-            Clear();
-
-            IEnumerable<PostalAddress> newAddresses = values.Select(address => new PostalAddress(address));
-
-            foreach (PostalAddress newAddress in newAddresses)
-            {
-                Add(newAddress);
-            }
-        }
-
         /// <summary>
         /// Returns the <see cref="PostalAddress"/> object that match the description.
         /// </summary>

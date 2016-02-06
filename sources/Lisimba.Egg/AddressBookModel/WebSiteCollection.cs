@@ -21,16 +21,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class WebSiteCollection : CustomObservableCollection<WebSite>
     {
-        public void CopyFrom(WebSiteCollection values)
-        {
-            Clear();
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Add(new WebSite(values[i]));
-            }
-        }
-
         /// <summary>
         /// Returns the <see cref="WebSite"/> object that match the description.
         /// </summary>

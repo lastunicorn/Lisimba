@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 base.OnCollectionChanged(e);
         }
 
-        public virtual void AddRange(IEnumerable<T> items)
+        public void AddRange(IEnumerable<T> items)
         {
             if (items == null)
                 throw new ArgumentNullException("items");
@@ -70,9 +70,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             try
             {
                 foreach (T item in items)
-                {
                     Add(item);
-                }
             }
             finally
             {
@@ -80,6 +78,12 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
+        }
+
+        public void CopyFrom(IEnumerable<T> items)
+        {
+            Clear();
+            AddRange(items);
         }
     }
 }

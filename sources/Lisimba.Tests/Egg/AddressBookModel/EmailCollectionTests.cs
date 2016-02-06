@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,36 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Linq;
+using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
 {
-    public class DateCollection : CustomObservableCollection<Date>
+    [TestFixture]
+    public class EmailCollectionTests
     {
-        public override bool Equals(object obj)
+        [Test]
+        public void Test()
         {
-            DateCollection dates = obj as DateCollection;
 
-            return Equals(dates);
-        }
-
-        public bool Equals(DateCollection dates)
-        {
-            if (dates == null)
-                return false;
-
-            if (dates.Count != Count)
-                return false;
-
-            for (int i = 0; i < dates.Count; i++)
-            {
-                bool exists = Enumerable.Contains(Items, dates[i]);
-
-                if (!exists)
-                    return false;
-            }
-
-            return true;
         }
     }
 }

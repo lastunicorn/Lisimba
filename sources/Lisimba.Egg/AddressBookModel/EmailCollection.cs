@@ -21,16 +21,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class EmailCollection : CustomObservableCollection<Email>
     {
-        public void CopyFrom(EmailCollection values)
-        {
-            Clear();
-
-            for (int i = 0; i < values.Count; i++)
-            {
-                Add(new Email(values[i]));
-            }
-        }
-
         /// <summary>
         /// Returns the <see cref="Email"/> object that match the description.
         /// </summary>
@@ -83,15 +73,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             if (emails.Count != Count)
                 return false;
 
-            for (int i = 0; i < emails.Count; i++)
-            {
-                bool exists = Enumerable.Contains(Items, emails[i]);
-
-                if (!exists)
-                    return false;
-            }
-
-            return true;
+            return emails.All(x => Enumerable.Contains(Items, x));
         }
     }
 }
