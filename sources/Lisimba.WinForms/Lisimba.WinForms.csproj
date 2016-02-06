@@ -138,6 +138,8 @@
     <Compile Include="Operations\ExportOperation.cs" />
     <Compile Include="Operations\ImportOperation.cs" />
     <Compile Include="Operations\OpenRecentFileOperation.cs" />
+    <Compile Include="Operations\RedoOperation.cs" />
+    <Compile Include="Operations\UndoOperation.cs" />
     <Compile Include="Utils\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -494,6 +496,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\background.png" />
+    <None Include="Images\MainMenu\redo.png" />
+    <None Include="Images\MainMenu\undo.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

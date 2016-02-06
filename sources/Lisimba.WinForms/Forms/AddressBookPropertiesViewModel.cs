@@ -16,6 +16,7 @@
 
 using System;
 using System.IO;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.WinFormsCommon;
@@ -125,7 +126,11 @@ namespace DustInTheWind.Lisimba.Forms
             bool nameIsChanged = openedAddressBooks.Current.AddressBook.Name != BookName;
 
             if (nameIsChanged)
-                openedAddressBooks.Current.AddressBook.Name = BookName;
+            {
+                openedAddressBooks.Current.ActionQueue.ChangeAddressBookName(bookName);
+
+                //openedAddressBooks.Current.AddressBook.Name = BookName;
+            }
         }
     }
 }

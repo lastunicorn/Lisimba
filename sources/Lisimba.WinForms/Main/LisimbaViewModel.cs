@@ -54,6 +54,8 @@ namespace DustInTheWind.Lisimba.Main
         public CustomButtonViewModel ToolStripNewAddressBookViewModel { get; private set; }
         public CustomButtonViewModel ToolStripOpenAddressBookViewModel { get; private set; }
         public CustomButtonViewModel ToolStripSaveAddressBookViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripUndoViewModel { get; private set; }
+        public CustomButtonViewModel ToolStripRedoViewModel { get; private set; }
         public CustomButtonViewModel ToolStripAboutViewModel { get; private set; }
 
         public string Title
@@ -140,6 +142,8 @@ namespace DustInTheWind.Lisimba.Main
             ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
             ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
             ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookOperation>();
+            ToolStripUndoViewModel = CreateViewModel<UndoOperation>();
+            ToolStripRedoViewModel = CreateViewModel<RedoOperation>();
             ToolStripAboutViewModel = CreateViewModel<ShowAboutOperation>();
 
             availableGates.GateChanged += HandleDefaultGateChanged;

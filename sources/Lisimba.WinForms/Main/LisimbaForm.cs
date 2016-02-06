@@ -64,6 +64,8 @@ namespace DustInTheWind.Lisimba.Main
             toolStripButtonNew.ViewModel = viewModel.ToolStripNewAddressBookViewModel;
             toolStripButtonOpen.ViewModel = viewModel.ToolStripOpenAddressBookViewModel;
             toolStripButtonSave.ViewModel = viewModel.ToolStripSaveAddressBookViewModel;
+            toolStripButtonUndo.ViewModel = viewModel.ToolStripUndoViewModel;
+            toolStripButtonRedo.ViewModel = viewModel.ToolStripRedoViewModel;
             toolStripButtonAbout.ViewModel = viewModel.ToolStripAboutViewModel;
         }
 

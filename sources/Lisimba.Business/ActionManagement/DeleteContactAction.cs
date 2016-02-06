@@ -14,11 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
+
 namespace DustInTheWind.Lisimba.Business.ActionManagement
 {
-    public interface IAction
+    class DeleteContactAction : IAction
     {
-        void Do();
-        void Undo();
+        private readonly AddressBook addressBook;
+        private readonly Contact contact;
+
+        public DeleteContactAction(AddressBook addressBook, Contact contact)
+        {
+            if (addressBook == null) throw new ArgumentNullException("addressBook");
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            this.addressBook = addressBook;
+            this.contact = contact;
+        }
+
+        public void Do()
+        {
+            addressBook.Contacts.Remove(contact);
+        }
+
+        public void Undo()
+        {
+            addressBook.Contacts.Add(contact);
+        }
     }
 }

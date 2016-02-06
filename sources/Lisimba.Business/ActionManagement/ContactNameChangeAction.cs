@@ -14,11 +14,34 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
+
 namespace DustInTheWind.Lisimba.Business.ActionManagement
 {
-    public interface IAction
+    class ContactNameChangeAction : IAction
     {
-        void Do();
-        void Undo();
+        private readonly Contact contact;
+        private readonly PersonName name;
+        private PersonName oldName;
+
+        public ContactNameChangeAction(Contact contact, PersonName name)
+        {
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            this.contact = contact;
+            this.name = name;
+        }
+
+        public void Do()
+        {
+            oldName = contact.Name;
+            contact.Name = name;
+        }
+
+        public void Undo()
+        {
+            contact.Name = oldName;
+        }
     }
 }
