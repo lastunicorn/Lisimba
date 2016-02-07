@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Importing;
@@ -87,11 +88,11 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         {
             ContactCollection destinationContacts = new ContactCollection
             {
-                new Contact { Name = new PersonName("alexandru", "iuga") }
+                new Contact { Name = new PersonName("alexandru", "iuga", string.Empty, string.Empty) }
             };
             ContactCollection sourceContacts = new ContactCollection
             {
-                new Contact { Name = new PersonName("alexandru", "iuga") }
+                new Contact { Name = new PersonName("alexandru", "iuga", string.Empty, string.Empty) }
             };
 
             ImportRuleCollection importRules = destinationContacts.AnalyzeForImport(sourceContacts);
@@ -104,13 +105,13 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         {
             ContactCollection destinationContacts = new ContactCollection
             {
-                new Contact { Name = new PersonName("alexandru", "iuga") }
+                new Contact { Name = new PersonName("alexandru", "iuga", string.Empty, string.Empty) }
             };
             ContactCollection sourceContacts = new ContactCollection
             {
                 new Contact
                 {
-                    Name = new PersonName("alexandru", "iuga"),
+                    Name = new PersonName("alexandru", "iuga", string.Empty, string.Empty),
                     Birthday = new Date(13, 06, 1980)
                 }
             };

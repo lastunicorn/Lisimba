@@ -51,6 +51,14 @@
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Egg\AddressBookModel\ContactCollectionTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasLastNameTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasNicknameTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasFirstNameTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\NamePartsTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\ConstructorTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\CopyFromTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\ClearTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ConstructorTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ContactChangedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +90,7 @@
       <Name>WinFormsCommon</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

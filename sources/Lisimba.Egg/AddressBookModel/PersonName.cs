@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return firstName; }
             set
             {
-                firstName = value;
+                firstName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return middleName; }
             set
             {
-                middleName = value;
+                middleName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return lastName; }
             set
             {
-                lastName = value;
+                lastName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -79,7 +79,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return nickname; }
             set
             {
-                nickname = value;
+                nickname = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -101,24 +101,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         public PersonName()
         {
-        }
-
-        public PersonName(string firstName)
-        {
-            this.firstName = firstName;
-        }
-
-        public PersonName(string firstName, string lastName)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-        }
-
-        public PersonName(string firstName, string middleName, string lastName)
-        {
-            this.firstName = firstName;
-            this.middleName = middleName;
-            this.lastName = lastName;
         }
 
         public PersonName(string firstName, string middleName, string lastName, string nickname)
@@ -219,22 +201,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
             return response;
         }
-
-        //public override bool Equals(object obj)
-        //{
-        //    return Equals(obj as PersonName);
-        //}
-
-        //public bool Equals(PersonName personName)
-        //{
-        //    if (personName == null)
-        //        return false;
-
-        //    return firstName == personName.firstName &&
-        //           middleName == personName.middleName &&
-        //           lastName == personName.lastName &&
-        //           nickname == personName.nickname;
-        //}
 
         public bool Equals(PersonName other)
         {
