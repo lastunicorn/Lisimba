@@ -42,18 +42,35 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
             else
             {
-                bool name = PersonName.Equals(Contact1.Name, Contact2.Name);
-                bool birthday = Date.Equals(Contact1.Birthday, Contact2.Birthday);
-                List<ContactItem> identicalItems = Contact1.Items
-                    .Where(x => Contact2.Items.Contains(x))
-                    .ToList();
-                int itemCount = Math.Max(Contact1.Items.Count, Contact2.Items.Count);
-                bool notes = Contact1.Notes == Contact2.Notes;
+                PersonNameMatch personNameMatch = new PersonNameMatch(Contact1.Name, Contact2.Name);
 
-                Percentage = (name ? 30 : 0) +
-                             (birthday ? 30 : 0) +
-                             (itemCount == 0 ? 30 : identicalItems.Count * 30 / itemCount) +
-                             (notes ? 10 : 0);
+                switch (personNameMatch.Match)
+                {
+                    case FuzzyMatch.Equal:
+                        bool birthday = Date.Equals(Contact1.Birthday, Contact2.Birthday);
+                        List<ContactItem> identicalItems = Contact1.Items
+                            .Where(x => Contact2.Items.Contains(x))
+                            .ToList();
+                        int itemCount = Math.Max(Contact1.Items.Count, Contact2.Items.Count);
+                        bool notes = Contact1.Notes == Contact2.Notes;
+
+                        Percentage = birthday && identicalItems.Count == itemCount && notes
+                            ? 100
+                            : 90;
+                        break;
+
+                    case FuzzyMatch.AlmostEqual:
+                        Percentage = 90;
+                        break;
+
+                    case FuzzyMatch.NotEqual:
+                        Percentage = 10;
+                        break;
+
+                    default:
+                        Percentage = 0;
+                        break;
+                }
             }
         }
     }

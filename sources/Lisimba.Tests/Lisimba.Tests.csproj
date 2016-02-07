@@ -51,6 +51,7 @@
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Egg\AddressBookModel\ContactCollectionTests.cs" />
+    <Compile Include="Egg\AddressBookModel\PersonNameTests\CompareTests.cs" />
     <Compile Include="Egg\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />
     <Compile Include="Egg\AddressBookModel\PersonNameTests\HasLastNameTests.cs" />
     <Compile Include="Egg\AddressBookModel\PersonNameTests\HasNicknameTests.cs" />

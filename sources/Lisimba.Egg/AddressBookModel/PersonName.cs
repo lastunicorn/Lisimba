@@ -146,62 +146,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                    string.IsNullOrEmpty(nickname);
         }
 
-        public static int Compare(PersonName n1, PersonName n2)
-        {
-            int response = 0;
-
-            // -1 = different. At least one of the name components are different.
-            // 0 = equals
-            // 1 = almost equals. Some name components are missing (empty string) in one of the names.
-
-            // Test the first names
-            if (!n1.firstName.Equals(n2.firstName))
-            {
-                if (n1.firstName.Length == 0 || n2.firstName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the last names
-            if (!n1.lastName.Equals(n2.lastName))
-            {
-                if (n1.lastName.Length == 0 || n2.lastName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the middle names
-            if (!n1.middleName.Equals(n2.middleName))
-            {
-                if (n1.middleName.Length == 0 || n2.middleName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the nicknames
-            if (!n1.nickname.Equals(n2.nickname))
-            {
-                if (n1.nickname.Length == 0 || n2.nickname.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            return response;
-        }
-
         public bool Equals(PersonName other)
         {
             if (ReferenceEquals(null, other)) return false;

@@ -51,6 +51,8 @@
     <Compile Include="AddressBookModel\ContactItem.cs" />
     <Compile Include="AddressBookModel\ContactItems.cs" />
     <Compile Include="AddressBookModel\ContactMatch.cs" />
+    <Compile Include="AddressBookModel\FuzzyMatch.cs" />
+    <Compile Include="AddressBookModel\PersonNameMatch.cs" />
     <Compile Include="Comparers\ComparerFactory.cs" />
     <Compile Include="Comparers\MultipleComparer.cs" />
     <Compile Include="Comparers\ContactByMiddleNameComparer.cs" />
