@@ -96,6 +96,22 @@ namespace DustInTheWind.Lisimba.Business.ActionManagement
             Do(action);
         }
 
+        public void AddContact(Contact contact)
+        {
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            IAction action = new AddContactAction(addressBook, contact);
+            Do(action);
+        }
+
+        public void DeleteContact(Contact contact)
+        {
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            IAction action = new DeleteContactAction(addressBook, contact);
+            Do(action);
+        }
+
         protected virtual void OnUndoStackChanged()
         {
             EventHandler handler = UndoStackChanged;
