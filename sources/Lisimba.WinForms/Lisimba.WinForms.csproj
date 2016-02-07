@@ -498,6 +498,7 @@
     <Content Include="Images\background.png" />
     <None Include="Images\MainMenu\redo.png" />
     <None Include="Images\MainMenu\undo.png" />
+    <None Include="Images\MainMenu\search.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

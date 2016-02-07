@@ -31,14 +31,19 @@ namespace DustInTheWind.Lisimba.ContactList
             this.components = new System.ComponentModel.Container();
             this.treeViewContacts = new System.Windows.Forms.TreeView();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
-            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonClearSearch = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
             this.contextMenuStripListBox.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // treeViewContacts
@@ -67,19 +72,7 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem1,
             this.toolStripMenuItem_List_ViewBiorythm});
             this.contextMenuStripListBox.Name = "contextMenuStripList";
-            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 98);
-            // 
-            // toolStripMenuItem_List_Add
-            // 
-            this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
-            this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_Add.Text = "&Add Contact";
-            // 
-            // toolStripMenuItem_List_Delete
-            // 
-            this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
-            this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
+            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 76);
             // 
             // toolStripMenuItem1
             // 
@@ -87,21 +80,13 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             this.toolStripMenuItem1.Visible = false;
             // 
-            // toolStripMenuItem_List_ViewBiorythm
-            // 
-            this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
-            this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
-            // 
             // textBoxSearch
             // 
-            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSearch.Location = new System.Drawing.Point(0, 273);
+            this.textBoxSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSearch.Location = new System.Drawing.Point(23, 4);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(178, 20);
+            this.textBoxSearch.Size = new System.Drawing.Size(130, 20);
             this.textBoxSearch.TabIndex = 3;
             // 
             // comboBoxSortBy
@@ -125,18 +110,88 @@ namespace DustInTheWind.Lisimba.ContactList
             this.label1.TabIndex = 12;
             this.label1.Text = "Sort by:";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.AutoSize = true;
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Controls.Add(this.textBoxSearch, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.buttonClearSearch, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 265);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(178, 28);
+            this.tableLayoutPanel1.TabIndex = 13;
+            // 
+            // buttonClearSearch
+            // 
+            this.buttonClearSearch.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.buttonClearSearch.AutoSize = true;
+            this.buttonClearSearch.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonClearSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClearSearch.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit_16;
+            this.buttonClearSearch.Location = new System.Drawing.Point(153, 3);
+            this.buttonClearSearch.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.buttonClearSearch.Name = "buttonClearSearch";
+            this.buttonClearSearch.Size = new System.Drawing.Size(22, 22);
+            this.buttonClearSearch.TabIndex = 5;
+            this.buttonClearSearch.UseVisualStyleBackColor = true;
+            this.buttonClearSearch.Click += new System.EventHandler(this.HandleButtonClearSearchClick);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBox1.Image = global::DustInTheWind.Lisimba.Properties.Resources.search;
+            this.pictureBox1.InitialImage = global::DustInTheWind.Lisimba.Properties.Resources.search;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(14, 16);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
+            // toolStripMenuItem_List_Add
+            // 
+            this.toolStripMenuItem_List_Add.Name = "toolStripMenuItem_List_Add";
+            this.toolStripMenuItem_List_Add.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_Add.Text = "&Add Contact";
+            // 
+            // toolStripMenuItem_List_Delete
+            // 
+            this.toolStripMenuItem_List_Delete.Name = "toolStripMenuItem_List_Delete";
+            this.toolStripMenuItem_List_Delete.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_Delete.Text = "&Delete Contact";
+            // 
+            // toolStripMenuItem_List_ViewBiorythm
+            // 
+            this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
+            this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
+            this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
+            this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
+            // 
             // ContactListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.comboBoxSortBy);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.treeViewContacts);
-            this.Controls.Add(this.textBoxSearch);
             this.Name = "ContactListView";
             this.Size = new System.Drawing.Size(178, 293);
             this.Load += new System.EventHandler(this.ContactListView_Load);
             this.contextMenuStripListBox.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +208,8 @@ namespace DustInTheWind.Lisimba.ContactList
         private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button buttonClearSearch;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
