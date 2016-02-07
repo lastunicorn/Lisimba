@@ -20,6 +20,12 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.NameEditing
 {
+    /// <summary>
+    /// maximum 4 wards allowed
+    /// optional parantesis
+    /// allow to provide custom pattern (ex: FirstName MiddleName LastName (Nickname))
+    /// optional prefix for each name's part: f:first_name m:middle_name l:last_name n:nickname
+    /// </summary>
     internal class NameParser
     {
         private string one;

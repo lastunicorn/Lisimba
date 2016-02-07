@@ -19,13 +19,13 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.ActionManagement
 {
-    class ContactNameChangeAction : IAction
+    class ChangeContactNameAction : IAction
     {
         private readonly Contact contact;
         private readonly PersonName name;
         private PersonName oldName;
 
-        public ContactNameChangeAction(Contact contact, PersonName name)
+        public ChangeContactNameAction(Contact contact, PersonName name)
         {
             if (contact == null) throw new ArgumentNullException("contact");
 
