@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg;
 
@@ -27,7 +26,6 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     /// </summary>
     public class AvailableGates
     {
-        private readonly IApplicationConfiguration config;
         private readonly Dictionary<string, IGate> gates;
         private IGate defaultGate;
 
@@ -70,12 +68,8 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
 
         public event EventHandler GateChanged;
 
-        public AvailableGates(IApplicationConfiguration config)
+        public AvailableGates()
         {
-            if (config == null) throw new ArgumentNullException("config");
-
-            this.config = config;
-
             gates = new Dictionary<string, IGate>();
         }
 
