@@ -70,11 +70,13 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 }
                 else
                 {
+                    // todo: what happens if Current does not have a gate?
                     openedAddressBooks.Current.SaveAddressBook(newLocation);
                 }
             }
             else
             {
+                // todo: what happens if Current does not have a gate?
                 openedAddressBooks.SaveAddressBook();
             }
         }

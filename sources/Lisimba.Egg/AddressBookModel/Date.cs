@@ -18,12 +18,11 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class Date : IObservableEntity, IEquatable<Date>, IComparable, IComparable<Date>
+    public class Date : ContactItem, IEquatable<Date>, IComparable, IComparable<Date>
     {
         private int day;
         private int month;
         private int year;
-        private string description;
 
         public int Day
         {
@@ -55,29 +54,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
         }
 
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
         public bool IsCompleteDate
         {
             get { return day > 0 && month > 0 && year > 0; }
-        }
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
         }
 
         public Date()
@@ -92,6 +71,11 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         public Date(DateTime dt, string description)
             : this(dt.Day, dt.Month, dt.Year, description)
+        {
+        }
+
+        public Date(int day, int month, int year)
+            : this(day, month, year, string.Empty)
         {
         }
 
@@ -518,6 +502,14 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
                 return hashCode;
             }
+        }
+
+        public static bool Equals(Date date1, Date date2)
+        {
+            if (date1 == null)
+                return date2 == null;
+
+            return date1.Equals(date2);
         }
     }
 }

@@ -31,7 +31,6 @@ namespace DustInTheWind.Lisimba.Forms
         private readonly UserInterface userInterface;
 
         public Contact EditedContact { get; private set; }
-        private AddressBook addressBook;
 
         public IAddContactView View { get; set; }
         public ContactEditorViewModel ContactEditorViewModel { get; set; }
@@ -51,7 +50,6 @@ namespace DustInTheWind.Lisimba.Forms
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
-            addressBook = openedAddressBooks.Current.AddressBook;
             EditedContact = new Contact();
 
             ContactEditorViewModel.Contact = EditedContact;
@@ -66,7 +64,7 @@ namespace DustInTheWind.Lisimba.Forms
                 if (!allowToContinue)
                     return;
 
-                addressBook.Contacts.Add(EditedContact);
+                openedAddressBooks.Current.ActionQueue.AddContact(EditedContact);
 
                 View.Close();
             }
@@ -83,7 +81,7 @@ namespace DustInTheWind.Lisimba.Forms
             if (isNameEmpty)
                 throw new LisimbaException("Please enter a name.");
 
-            bool isAnotherContactWithSameName = addressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
+            bool isAnotherContactWithSameName = openedAddressBooks.Current.AddressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
 
             return !isAnotherContactWithSameName ||
                 userInterface.DisplayYesNoExclamation("Another contact with the same name already exists.\nIt will NOT be overwritten.\n\nContinue?", "Another contact exists");

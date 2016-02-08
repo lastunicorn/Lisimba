@@ -28,7 +28,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return firstName; }
             set
             {
-                firstName = value;
+                firstName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return middleName; }
             set
             {
-                middleName = value;
+                middleName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return lastName; }
             set
             {
-                lastName = value;
+                lastName = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -79,7 +79,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             get { return nickname; }
             set
             {
-                nickname = value;
+                nickname = value ?? string.Empty;
                 OnChanged();
             }
         }
@@ -97,6 +97,18 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        public PersonName()
+        {
+        }
+
+        public PersonName(string firstName, string middleName, string lastName, string nickname)
+        {
+            this.firstName = firstName;
+            this.middleName = middleName;
+            this.lastName = lastName;
+            this.nickname = nickname;
         }
 
         /// <summary>
@@ -134,78 +146,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                    string.IsNullOrEmpty(nickname);
         }
 
-        public static int Compare(PersonName n1, PersonName n2)
-        {
-            int response = 0;
-
-            // -1 = different. At least one of the name components are different.
-            // 0 = equals
-            // 1 = almost equals. Some name components are missing (empty string) in one of the names.
-
-            // Test the first names
-            if (!n1.firstName.Equals(n2.firstName))
-            {
-                if (n1.firstName.Length == 0 || n2.firstName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the last names
-            if (!n1.lastName.Equals(n2.lastName))
-            {
-                if (n1.lastName.Length == 0 || n2.lastName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the middle names
-            if (!n1.middleName.Equals(n2.middleName))
-            {
-                if (n1.middleName.Length == 0 || n2.middleName.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            // If different, return.
-            if (response == -1) return response;
-
-            // Test the nicknames
-            if (!n1.nickname.Equals(n2.nickname))
-            {
-                if (n1.nickname.Length == 0 || n2.nickname.Length == 0)
-                    response = 1; // almost
-                else
-                    response = -1; // different
-            }
-
-            return response;
-        }
-
-        //public override bool Equals(object obj)
-        //{
-        //    return Equals(obj as PersonName);
-        //}
-
-        //public bool Equals(PersonName personName)
-        //{
-        //    if (personName == null)
-        //        return false;
-
-        //    return firstName == personName.firstName &&
-        //           middleName == personName.middleName &&
-        //           lastName == personName.lastName &&
-        //           nickname == personName.nickname;
-        //}
-
         public bool Equals(PersonName other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -221,9 +161,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (PersonName)) return false;
+            if (obj.GetType() != typeof(PersonName)) return false;
 
-            return Equals((PersonName) obj);
+            return Equals((PersonName)obj);
         }
 
         public override int GetHashCode()
@@ -231,9 +171,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             unchecked
             {
                 var hashCode = (firstName != null ? firstName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (middleName != null ? middleName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (lastName != null ? lastName.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (nickname != null ? nickname.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (middleName != null ? middleName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (lastName != null ? lastName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (nickname != null ? nickname.GetHashCode() : 0);
 
                 return hashCode;
             }

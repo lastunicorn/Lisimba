@@ -43,7 +43,10 @@
             this.toolStripMenuItem_AddressBook = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
             this.toolStripMenuItem_AddressBook_AddContact = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
             this.toolStripMenuItem_AddressBook_DeleteContact = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_AddressBook_Separator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem_AddressBook_Undo = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
+            this.toolStripMenuItem_AddressBook_Redo = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
+            this.toolStripMenuItem_AddressBook_Separator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem_AddressBook_Properties = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
             this.toolStripMenuItem_Help = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
             this.toolStripMenuItem_Help_About = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
@@ -155,7 +158,10 @@
             this.toolStripMenuItem_AddressBook.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem_AddressBook_AddContact,
             this.toolStripMenuItem_AddressBook_DeleteContact,
-            this.toolStripMenuItem4,
+            this.toolStripMenuItem_AddressBook_Separator1,
+            this.toolStripMenuItem_AddressBook_Undo,
+            this.toolStripMenuItem_AddressBook_Redo,
+            this.toolStripMenuItem_AddressBook_Separator2,
             this.toolStripMenuItem_AddressBook_Properties});
             this.toolStripMenuItem_AddressBook.Name = "toolStripMenuItem_AddressBook";
             this.toolStripMenuItem_AddressBook.Size = new System.Drawing.Size(91, 20);
@@ -175,10 +181,31 @@
             this.toolStripMenuItem_AddressBook_DeleteContact.Size = new System.Drawing.Size(208, 22);
             this.toolStripMenuItem_AddressBook_DeleteContact.Text = "Delete Contact";
             // 
-            // toolStripMenuItem4
+            // toolStripMenuItem_AddressBook_Separator1
             // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(205, 6);
+            this.toolStripMenuItem_AddressBook_Separator1.Name = "toolStripMenuItem_AddressBook_Separator1";
+            this.toolStripMenuItem_AddressBook_Separator1.Size = new System.Drawing.Size(205, 6);
+            // 
+            // toolStripMenuItem_AddressBook_Undo
+            // 
+            this.toolStripMenuItem_AddressBook_Undo.Image = global::DustInTheWind.Lisimba.Properties.Resources.undo;
+            this.toolStripMenuItem_AddressBook_Undo.Name = "toolStripMenuItem_AddressBook_Undo";
+            this.toolStripMenuItem_AddressBook_Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
+            this.toolStripMenuItem_AddressBook_Undo.Size = new System.Drawing.Size(208, 22);
+            this.toolStripMenuItem_AddressBook_Undo.Text = "&Undo";
+            // 
+            // toolStripMenuItem_AddressBook_Redo
+            // 
+            this.toolStripMenuItem_AddressBook_Redo.Image = global::DustInTheWind.Lisimba.Properties.Resources.redo;
+            this.toolStripMenuItem_AddressBook_Redo.Name = "toolStripMenuItem_AddressBook_Redo";
+            this.toolStripMenuItem_AddressBook_Redo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
+            this.toolStripMenuItem_AddressBook_Redo.Size = new System.Drawing.Size(208, 22);
+            this.toolStripMenuItem_AddressBook_Redo.Text = "&Redo";
+            // 
+            // toolStripMenuItem_AddressBook_Separator2
+            // 
+            this.toolStripMenuItem_AddressBook_Separator2.Name = "toolStripMenuItem_AddressBook_Separator2";
+            this.toolStripMenuItem_AddressBook_Separator2.Size = new System.Drawing.Size(205, 6);
             // 
             // toolStripMenuItem_AddressBook_Properties
             // 
@@ -234,7 +261,10 @@
         private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook;
         private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook_AddContact;
         private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook_DeleteContact;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem_AddressBook_Separator1;
         private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook_Properties;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook_Undo;
+        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_AddressBook_Redo;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem_AddressBook_Separator2;
     }
 }

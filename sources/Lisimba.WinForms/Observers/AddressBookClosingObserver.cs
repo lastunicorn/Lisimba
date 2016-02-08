@@ -53,13 +53,9 @@ namespace DustInTheWind.Lisimba.Observers
                 bool? needToSave = AskToSaveAddressBook();
 
                 if (needToSave == null)
-                {
                     e.Cancel = true;
-                }
                 else
-                {
                     e.SaveAddressBook = needToSave.Value;
-                }
             }
             else
             {

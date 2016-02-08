@@ -154,6 +154,11 @@ namespace DustInTheWind.Lisimba.ContactList
                 viewModel.ViewWasLoaded();
         }
 
+        private void HandleButtonClearSearchClick(object sender, EventArgs e)
+        {
+            textBoxSearch.Clear();
+        }
+
         public void SortContacts()
         {
             treeViewContacts.Sort();

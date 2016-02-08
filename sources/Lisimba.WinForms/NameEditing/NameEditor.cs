@@ -131,9 +131,21 @@ namespace DustInTheWind.Lisimba.NameEditing
         {
             if (e.KeyChar == '(')
             {
-                textBoxName.SelectedText = "()";
                 int cursorPosition = textBoxName.SelectionStart;
-                textBoxName.Select(cursorPosition - 1, 0);
+
+                if (cursorPosition < textBoxName.Text.Length && textBoxName.Text[cursorPosition] != ' ')
+                {
+                    textBoxName.SelectedText = "(";
+                    
+                    if (textBoxName.Text.IndexOf(')', cursorPosition) == -1)
+                        textBoxName.AppendText(")");
+                }
+                else
+                {
+                    textBoxName.SelectedText = "()";
+                }
+
+                textBoxName.Select(cursorPosition + 1, 0);
 
                 e.Handled = true;
             }

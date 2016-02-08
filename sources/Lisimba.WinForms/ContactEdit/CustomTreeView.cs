@@ -80,70 +80,15 @@ namespace DustInTheWind.Lisimba.ContactEdit
             return node;
         }
 
-        private PhoneCollection phones;
-        private EmailCollection emails;
-        private WebSiteCollection webSites;
-        private PostalAddressCollection postalAddresses;
-        private DateCollection dates;
-        private SocialProfileIdCollection socialProfileIds;
+        private CustomObservableCollection<ContactItem> contactItems;
 
-        public PhoneCollection Phones
+        public CustomObservableCollection<ContactItem> ContactItems
         {
-            get { return phones; }
+            get { return contactItems; }
             set
             {
-                phones = value;
-                DisplayPhones();
-            }
-        }
-
-        public EmailCollection Emails
-        {
-            get { return emails; }
-            set
-            {
-                emails = value;
-                DisplayEmails();
-            }
-        }
-
-        public WebSiteCollection WebSites
-        {
-            get { return webSites; }
-            set
-            {
-                webSites = value;
-                DisplayWebSites();
-            }
-        }
-
-        public PostalAddressCollection PostalAddresses
-        {
-            get { return postalAddresses; }
-            set
-            {
-                postalAddresses = value;
-                DisplayAddresses();
-            }
-        }
-
-        public DateCollection Dates
-        {
-            get { return dates; }
-            set
-            {
-                dates = value;
-                DisplayDates();
-            }
-        }
-
-        public SocialProfileIdCollection SocialProfileIds
-        {
-            get { return socialProfileIds; }
-            set
-            {
-                socialProfileIds = value;
-                DisplaySocialProfileIds();
+                contactItems = value;
+                DisplayContactItems();
             }
         }
 
@@ -161,17 +106,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             if (selectedNode != GetNodeAt(e.Location))
                 return;
-
-            //if (selectedNode == treeNodePhones)
-            //{
-            //    Phone phone = new Phone("<number>", "<description>");
-            //    TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2);
-            //    phoneNode.Tag = phone;
-            //    treeNodePhones.Nodes.Add(phoneNode);
-            //    phoneNode.ImageIndex = -2;
-            //    phoneNode.SelectedImageIndex = -2;
-            //    selectedNode = phoneNode;
-            //}
 
             if (selectedNode.Tag is string)
             {
@@ -281,135 +215,44 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        private void DisplayPhones()
+        private void DisplayContactItems()
         {
             TreeNodePhones.Nodes.Clear();
+            TreeNodeEmails.Nodes.Clear();
+            TreeNodeWebSites.Nodes.Clear();
+            TreeNodeAddresses.Nodes.Clear();
+            TreeNodeDates.Nodes.Clear();
+            TreeNodeSocialProfileIds.Nodes.Clear();
 
-            if (phones == null)
+            if (contactItems == null)
                 return;
 
-            foreach (Phone phone in phones)
+            foreach (ContactItem contactItem in contactItems)
             {
-                TreeNode phoneNode = new TreeNode(phone.ToString(), -2, -2)
-                {
-                    Tag = phone
-                };
+                TreeNode treeNode = new TreeNode(contactItem.ToString(), -2, -2) { Tag = contactItem };
 
-                TreeNodePhones.Nodes.Add(phoneNode);
-                phoneNode.ImageIndex = -2;
-                phoneNode.SelectedImageIndex = -2;
+                if (contactItem is Phone)
+                    TreeNodePhones.Nodes.Add(treeNode);
+                else if (contactItem is Email)
+                    TreeNodeEmails.Nodes.Add(treeNode);
+                else if (contactItem is WebSite)
+                    TreeNodeWebSites.Nodes.Add(treeNode);
+                else if (contactItem is PostalAddress)
+                    TreeNodeAddresses.Nodes.Add(treeNode);
+                else if (contactItem is Date)
+                    TreeNodeDates.Nodes.Add(treeNode);
+                else if (contactItem is SocialProfile)
+                    TreeNodeSocialProfileIds.Nodes.Add(treeNode);
+
+                treeNode.ImageIndex = -2;
+                treeNode.SelectedImageIndex = -2;
             }
 
             TreeNodePhones.Expand();
-        }
-
-        private void DisplayEmails()
-        {
-            TreeNodeEmails.Nodes.Clear();
-
-            if (emails == null)
-                return;
-
-            foreach (Email email in emails)
-            {
-                TreeNode emailNode = new TreeNode(email.ToString(), -2, -2)
-                {
-                    Tag = email
-                };
-
-                TreeNodeEmails.Nodes.Add(emailNode);
-                emailNode.ImageIndex = -2;
-                emailNode.SelectedImageIndex = -2;
-            }
-
             TreeNodeEmails.Expand();
-        }
-
-        private void DisplayWebSites()
-        {
-            TreeNodeWebSites.Nodes.Clear();
-
-            if (webSites == null)
-                return;
-
-            foreach (WebSite webSite in webSites)
-            {
-                TreeNode webSiteNode = new TreeNode(webSite.ToString(), -2, -2)
-                {
-                    Tag = webSite
-                };
-
-                TreeNodeWebSites.Nodes.Add(webSiteNode);
-                webSiteNode.ImageIndex = -2;
-                webSiteNode.SelectedImageIndex = -2;
-            }
-
             TreeNodeWebSites.Expand();
-        }
-
-        private void DisplayAddresses()
-        {
-            TreeNodeAddresses.Nodes.Clear();
-
-            if (postalAddresses == null)
-                return;
-
-            foreach (PostalAddress address in postalAddresses)
-            {
-                TreeNode addressNode = new TreeNode(address.ToString(), -2, -2)
-                {
-                    Tag = address
-                };
-
-                TreeNodeAddresses.Nodes.Add(addressNode);
-                addressNode.ImageIndex = -2;
-                addressNode.SelectedImageIndex = -2;
-            }
-
             TreeNodeAddresses.Expand();
-        }
-
-        private void DisplayDates()
-        {
-            TreeNodeDates.Nodes.Clear();
-
-            if (dates == null)
-                return;
-
-            foreach (Date date in dates)
-            {
-                TreeNode dateNode = new TreeNode(date.ToString(), -2, -2)
-                {
-                    Tag = date
-                };
-
-                TreeNodeDates.Nodes.Add(dateNode);
-                dateNode.ImageIndex = -2;
-                dateNode.SelectedImageIndex = -2;
-            }
-
             TreeNodeDates.Expand();
-        }
-
-        private void DisplaySocialProfileIds()
-        {
-            TreeNodeSocialProfileIds.Nodes.Clear();
-
-            if (socialProfileIds == null)
-                return;
-
-            foreach (SocialProfile socialProfileId in socialProfileIds)
-            {
-                TreeNode socialProfileIdNode = new TreeNode(socialProfileId.ToString(), -2, -2)
-                {
-                    Tag = socialProfileId
-                };
-
-                TreeNodeSocialProfileIds.Nodes.Add(socialProfileIdNode);
-                socialProfileIdNode.ImageIndex = -2;
-                socialProfileIdNode.SelectedImageIndex = -2;
-            }
-
             TreeNodeSocialProfileIds.Expand();
         }
 
@@ -423,35 +266,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             if (e.KeyCode == Keys.Delete && SelectedNode != null && !categoryNodes.Contains(SelectedNode))
             {
-                Phone phone = SelectedNode.Tag as Phone;
+                ContactItem contactItem = SelectedNode.Tag as ContactItem;
 
-                if (phone != null)
-                    Phones.Remove(phone);
-
-                Email email = SelectedNode.Tag as Email;
-
-                if (email != null)
-                    Emails.Remove(email);
-
-                WebSite webSite = SelectedNode.Tag as WebSite;
-
-                if (webSite != null)
-                    WebSites.Remove(webSite);
-                
-                PostalAddress postalAddress = SelectedNode.Tag as PostalAddress;
-
-                if (postalAddress != null)
-                    PostalAddresses.Remove(postalAddress);
-
-                Date date = SelectedNode.Tag as Date;
-
-                if (date != null)
-                    Dates.Remove(date);
-
-                SocialProfile socialProfile = SelectedNode.Tag as SocialProfile;
-
-                if (socialProfile != null)
-                    SocialProfileIds.Remove(socialProfile);
+                if (contactItem != null)
+                    contactItems.Remove(contactItem);
             }
         }
     }

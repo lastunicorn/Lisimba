@@ -64,6 +64,8 @@ namespace DustInTheWind.Lisimba.Main
             toolStripButtonNew.ViewModel = viewModel.ToolStripNewAddressBookViewModel;
             toolStripButtonOpen.ViewModel = viewModel.ToolStripOpenAddressBookViewModel;
             toolStripButtonSave.ViewModel = viewModel.ToolStripSaveAddressBookViewModel;
+            toolStripButtonUndo.ViewModel = viewModel.ToolStripUndoViewModel;
+            toolStripButtonRedo.ViewModel = viewModel.ToolStripRedoViewModel;
             toolStripButtonAbout.ViewModel = viewModel.ToolStripAboutViewModel;
         }
 
@@ -86,6 +88,18 @@ namespace DustInTheWind.Lisimba.Main
             Point screenPoint = PointToScreen(point);
 
             viewModel.DefaultGateWasClicked(screenPoint);
+        }
+
+        private void toolStripDefaultGate_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripDefaultGate.BackColor = SystemColors.Highlight;
+            toolStripDefaultGate.ForeColor = SystemColors.HighlightText;
+        }
+
+        private void toolStripDefaultGate_MouseLeave(object sender, EventArgs e)
+        {
+            toolStripDefaultGate.BackColor = SystemColors.Control;
+            toolStripDefaultGate.ForeColor = SystemColors.ControlText;
         }
     }
 }

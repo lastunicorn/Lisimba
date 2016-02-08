@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 e.Gate = availableGates.DefaultGate;
             else
                 OnGateNeeded(e);
-        }
+            }
 
         private void HandleNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
         {
@@ -236,6 +236,65 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
 
             return true;
+        }
+
+        private bool SaveAddressBookInternal()
+        {
+            if (Current.Gate == null)
+            {
+                IGate gate = GetGateForSave();
+
+                if (gate == null)
+                    return false;
+
+                string location = GetLocationForSave();
+
+                if (location == null)
+                    return false;
+
+                Current.SaveAddressBook(location, gate);
+            }
+            else if (Current.Location == null)
+            {
+
+                string location = GetLocationForSave();
+
+                if (location == null)
+                    return false;
+
+                Current.SaveAddressBook(location);
+            }
+            else
+            {
+                Current.SaveAddressBook();
+            }
+
+            return true;
+        }
+
+        private string GetLocationForSave()
+        {
+            NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs(Current);
+            OnNewLocationNeeded(eva);
+
+            return eva.Cancel
+                ? null
+                : eva.NewLocation;
+        }
+
+        private IGate GetGateForSave()
+        {
+            if (availableGates.DefaultGate == null || availableGates.DefaultGate.GetType() == typeof(EmptyGate))
+            {
+                GateNeededEventArgs eva = new GateNeededEventArgs(Current);
+                OnGateNeeded(eva);
+
+                return eva.Cancel
+                    ? null
+                    : eva.Gate;
+            }
+
+            return availableGates.DefaultGate;
         }
 
         #region Event Invocators

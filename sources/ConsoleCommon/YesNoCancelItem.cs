@@ -30,7 +30,7 @@ namespace DustInTheWind.ConsoleCommon
         public string NoText { get; private set; }
         public string CancelText { get; private set; }
 
-        public YesNoCancelItem(string culture, ConsoleKey yesKey, ConsoleKey noKey, ConsoleKey cancelKey, string yesText, string noText, string cancelText)
+        public YesNoCancelItem(string culture, ConsoleKey yesKey, ConsoleKey noKey, ConsoleKey cancelKey,string yesText, string noText, string cancelText)
         {
             if (culture == null) throw new ArgumentNullException("culture");
             if (yesText == null) throw new ArgumentNullException("yesText");
@@ -48,7 +48,13 @@ namespace DustInTheWind.ConsoleCommon
 
         public override string ToString()
         {
-            return string.Format("[{0}-{1} {2}-{3} {4}-{5}]", YesKey.ToString().ToLower(), YesText, NoKey.ToString().ToLower(), NoText, CancelKey.ToString().ToLower(), CancelText);
+            return string.Format("[{0}-{1} {2}-{3} {4}-{5}]",
+                YesKey.ToString().ToLower(),
+                YesText,
+                NoKey.ToString().ToLower(),
+                NoText,
+                CancelKey.ToString().ToLower(),
+                CancelText);
         }
     }
 }

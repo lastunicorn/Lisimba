@@ -19,7 +19,6 @@ using DustInTheWind.Lisimba.Operations;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
-using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.Main
 {
@@ -40,16 +39,19 @@ namespace DustInTheWind.Lisimba.Main
             this.viewModelProvider = viewModelProvider;
             this.availableOperations = availableOperations;
 
-            ShowMainViewModel = CreateViewModel<ShowMainOperation>();
-            ApplicationExitViewModel = CreateViewModel<ApplicationExitOperation>();
-            AboutViewModel = CreateViewModel<ShowAboutOperation>();
+            CreateViewModels();
         }
 
-        private CustomButtonViewModel CreateViewModel<T>()
-            where T : class, IOperation
+        private void CreateViewModels()
         {
-            T newAddressBookOperation = availableOperations.GetOperation<T>();
-            return viewModelProvider.GetNewViewModel<CustomButtonViewModel>(newAddressBookOperation);
+            ShowMainOperation operation = availableOperations.GetOperation<ShowMainOperation>();
+            ShowMainViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation);
+
+            ApplicationExitOperation operation1 = availableOperations.GetOperation<ApplicationExitOperation>();
+            ApplicationExitViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation1);
+
+            ShowAboutOperation operation2 = availableOperations.GetOperation<ShowAboutOperation>();
+            AboutViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation2);
         }
     }
 }

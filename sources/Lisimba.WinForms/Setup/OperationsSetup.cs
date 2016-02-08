@@ -38,6 +38,8 @@ namespace DustInTheWind.Lisimba.Setup
             availableOperations.Add(unityContainer.Resolve<ImportOperation>());
             availableOperations.Add(unityContainer.Resolve<ExportOperation>());
             availableOperations.Add(unityContainer.Resolve<OpenRecentFileOperation>());
+            availableOperations.Add(unityContainer.Resolve<UndoOperation>());
+            availableOperations.Add(unityContainer.Resolve<RedoOperation>());
         }
     }
 }

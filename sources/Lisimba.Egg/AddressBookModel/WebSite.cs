@@ -21,10 +21,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     /// <summary>
     /// Class containing information about an e-mail
     /// </summary>
-    public class WebSite : IObservableEntity, IEquatable<WebSite>
+    public class WebSite : ContactItem, IEquatable<WebSite>
     {
         private string address;
-        private string description;
 
         /// <summary>
         /// The e-mail address.
@@ -38,33 +37,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 OnChanged();
             }
         }
-
-        /// <summary>
-        /// A short description of the e-mail address.
-        /// </summary>
-        public string Description
-        {
-            get { return description; }
-            set
-            {
-                description = value;
-                OnChanged();
-            }
-        }
-
-        #region Event Changed
-
-        public event EventHandler Changed;
-
-        protected virtual void OnChanged()
-        {
-            EventHandler handler = Changed;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
-        }
-
-        #endregion
 
         /// <summary>
         /// Creates a new empty WebSite object.
@@ -126,9 +98,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (WebSite)) return false;
+            if (obj.GetType() != typeof(WebSite)) return false;
 
-            return Equals((WebSite) obj);
+            return Equals((WebSite)obj);
         }
 
         public bool Equals(WebSite webSite)
@@ -143,7 +115,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                return ((address != null ? address.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((address != null ? address.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

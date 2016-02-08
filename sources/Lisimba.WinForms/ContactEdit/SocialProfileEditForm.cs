@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public SocialProfileIdCollection SocialProfiles { get; set; }
+        public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public SocialProfileEditForm()
         {
@@ -65,8 +65,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             ReadDataFromView();
 
-            if (AddMode && SocialProfiles != null)
-                SocialProfiles.Add(SocialProfile);
+            if (AddMode && ContactItems != null)
+                ContactItems.Add(SocialProfile);
         }
 
         private bool UserChangedData()

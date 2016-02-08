@@ -79,6 +79,15 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display the biorhythm of the selected person..
+        /// </summary>
+        internal static string BiorhythmOperationDescription {
+            get {
+                return ResourceManager.GetString("BiorhythmOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close the currently opened address book..
         /// </summary>
         internal static string CloseCurrentAddressBookOperationDescription {
@@ -188,6 +197,24 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exports the current address book..
+        /// </summary>
+        internal static string ExportOperationDescription {
+            get {
+                return ResourceManager.GetString("ExportOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export current opened address book in another format..
+        /// </summary>
+        internal static string ExportsOperationDescription {
+            get {
+                return ResourceManager.GetString("ExportsOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export current opened address book in Yahoo! csv format..
         /// </summary>
         internal static string ExportYahooCsvOperationDescription {
@@ -202,6 +229,24 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string GateNotFoundError {
             get {
                 return ResourceManager.GetString("GateNotFoundError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imports an address book..
+        /// </summary>
+        internal static string ImportOperationDescription {
+            get {
+                return ResourceManager.GetString("ImportOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import address book from another format..
+        /// </summary>
+        internal static string ImportsOperationDescription {
+            get {
+                return ResourceManager.GetString("ImportsOperationDescription", resourceCulture);
             }
         }
         
@@ -251,6 +296,24 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open previously closed address books..
+        /// </summary>
+        internal static string RecentFilesOperationDescription {
+            get {
+                return ResourceManager.GetString("RecentFilesOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executes again the last action that was undone..
+        /// </summary>
+        internal static string RedoOperationDescription {
+            get {
+                return ResourceManager.GetString("RedoOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save current opened address book..
         /// </summary>
         internal static string SaveAddressBookOperationDescription {
@@ -283,6 +346,15 @@ namespace DustInTheWind.Lisimba.Properties {
         internal static string ShowAddressBookPropertiesOperationDescription {
             get {
                 return ResourceManager.GetString("ShowAddressBookPropertiesOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo the last executed action..
+        /// </summary>
+        internal static string UndoOperationDescription {
+            get {
+                return ResourceManager.GetString("UndoOperationDescription", resourceCulture);
             }
         }
     }

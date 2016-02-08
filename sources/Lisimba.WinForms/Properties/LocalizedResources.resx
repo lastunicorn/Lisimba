@@ -193,4 +193,28 @@ Do you wanna save it before proceedeing?</value>
   <data name="NoAddessBookOpenedError" xml:space="preserve">
     <value>No address book is opened.</value>
   </data>
+  <data name="BiorhythmOperationDescription" xml:space="preserve">
+    <value>Display the biorhythm of the selected person.</value>
+  </data>
+  <data name="ExportsOperationDescription" xml:space="preserve">
+    <value>Export current opened address book in another format.</value>
+  </data>
+  <data name="ImportsOperationDescription" xml:space="preserve">
+    <value>Import address book from another format.</value>
+  </data>
+  <data name="RecentFilesOperationDescription" xml:space="preserve">
+    <value>Open previously closed address books.</value>
+  </data>
+  <data name="ExportOperationDescription" xml:space="preserve">
+    <value>Exports the current address book.</value>
+  </data>
+  <data name="ImportOperationDescription" xml:space="preserve">
+    <value>Imports an address book.</value>
+  </data>
+  <data name="RedoOperationDescription" xml:space="preserve">
+    <value>Executes again the last action that was undone.</value>
+  </data>
+  <data name="UndoOperationDescription" xml:space="preserve">
+    <value>Undo the last executed action.</value>
+  </data>
 </root>

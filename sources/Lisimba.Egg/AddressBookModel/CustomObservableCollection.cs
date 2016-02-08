@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
@@ -27,6 +28,15 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         private bool suppressCollectionChangedEvent;
 
         public event EventHandler<ItemChangedEventArgs<T>> ItemChanged;
+
+        public CustomObservableCollection()
+        {
+        }
+
+        public CustomObservableCollection(IEnumerable<T> contacts)
+            : base(contacts)
+        {
+        }
 
         protected virtual void OnItemChanged(ItemChangedEventArgs<T> e)
         {
@@ -60,7 +70,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 base.OnCollectionChanged(e);
         }
 
-        public virtual void AddRange(IEnumerable<T> items)
+        public void AddRange(IEnumerable<T> items)
         {
             if (items == null)
                 throw new ArgumentNullException("items");
@@ -70,9 +80,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             try
             {
                 foreach (T item in items)
-                {
                     Add(item);
-                }
             }
             finally
             {
@@ -80,6 +88,25 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
 
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
+        }
+
+        public void CopyFrom(IEnumerable<T> items)
+        {
+            Clear();
+            AddRange(items);
+        }
+
+        public override bool Equals(object obj)
+        {
+            CustomObservableCollection<T> items = obj as CustomObservableCollection<T>;
+
+            if (items == null)
+                return false;
+
+            if (items.Count != Count)
+                return false;
+
+            return items.All(x => Enumerable.Contains(Items, x));
         }
     }
 }

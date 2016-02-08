@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         public override string ShortDescription
         {
-            get { return "Exports the current address book."; }
+            get { return LocalizedResources.ExportOperationDescription; }
         }
 
         public ExportOperation(UserInterface userInterface, OpenedAddressBooks openedAddressBooks)

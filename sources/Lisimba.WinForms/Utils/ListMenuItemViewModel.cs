@@ -14,11 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using DustInTheWind.Lisimba.Services;
-using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.Utils
