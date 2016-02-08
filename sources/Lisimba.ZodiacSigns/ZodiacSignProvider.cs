@@ -17,9 +17,9 @@
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using Lisimba.ZodiacSigns.Properties;
+using DustInTheWind.Lisimba.ZodiacSigns.Properties;
 
-namespace Lisimba.ZodiacSigns
+namespace DustInTheWind.Lisimba.ZodiacSigns
 {
     public class ZodiacSignProvider : IZodiacSignProvider
     {

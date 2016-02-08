@@ -18,7 +18,7 @@ using System.Drawing;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
-using Lisimba.ZodiacSigns;
+using DustInTheWind.Lisimba.ZodiacSigns;
 
 namespace DustInTheWind.Lisimba.Services
 {
