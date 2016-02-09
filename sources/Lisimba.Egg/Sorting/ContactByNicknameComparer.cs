@@ -19,7 +19,7 @@ using System.Collections;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg.Comparers
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     /// <summary>
     /// Compares two contacts by nickname.

@@ -15,25 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Drawing;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.GateModel
 {
-    public class IncorrectXmlVersionEventArgs : EventArgs
+    public interface IGate
     {
-        public Version EggVersion { get; private set; }
+        string Id { get; }
+        string Name { get; }
+        string Description { get; }
+        Image Icon16 { get; }
 
-        public Version XmlVersion { get; private set; }
+        IEnumerable<Exception> Warnings { get; }
 
-        public string FileName { get; private set; }
-
-        public bool ContinueParsing { get; set; }
-
-        public IncorrectXmlVersionEventArgs(Version eggVersion, Version xmlVersion, string fileName)
-        {
-            EggVersion = eggVersion;
-            XmlVersion = xmlVersion;
-            FileName = fileName;
-            ContinueParsing = false;
-        }
+        AddressBook Load(string fileName);
+        void Save(AddressBook addressBook, string fileName);
     }
 }

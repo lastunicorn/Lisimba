@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Collections;
-using DustInTheWind.Lisimba.Egg.Enums;
 
-namespace DustInTheWind.Lisimba.Egg.Comparers
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     public static class ComparerFactory
     {

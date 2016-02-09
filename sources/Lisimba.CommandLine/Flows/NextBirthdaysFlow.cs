@@ -22,7 +22,7 @@ using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Comparers;
+using DustInTheWind.Lisimba.Egg.Sorting;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {

@@ -19,9 +19,10 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Enums;
 using zcsv;
 using System.Drawing;
+using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Egg.Searching;
 using DustInTheWind.Lisimba.Gating.Properties;
 
 namespace DustInTheWind.Lisimba.Gating

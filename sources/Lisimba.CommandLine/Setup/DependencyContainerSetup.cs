@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;
-using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.GateModel;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup

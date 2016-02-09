@@ -16,6 +16,7 @@
 
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {

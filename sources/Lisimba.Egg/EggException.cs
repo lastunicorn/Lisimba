@@ -14,21 +14,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.GateModel;
-using Microsoft.Practices.Unity;
+using System;
+using System.Runtime.Serialization;
 
-namespace DustInTheWind.Lisimba.CommandLine.Setup
+namespace DustInTheWind.Lisimba.Egg
 {
-    internal class GatesSetup
+    public class EggException : ApplicationException
     {
-        public static void Configure(AvailableGates availableGates, UnityContainer unityContainer)
+        public EggException()
         {
-            GateProvider gateProvider = unityContainer.Resolve<GateProvider>();
+        }
 
-            foreach (IGate gate in gateProvider.GetAllGates())
-                availableGates.Add(gate);
+        public EggException(string message)
+            : base(message)
+        {
+        }
+
+        public EggException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        protected EggException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
         }
     }
 }

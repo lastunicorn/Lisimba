@@ -22,6 +22,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Forms
 {

@@ -15,29 +15,31 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Runtime.Serialization;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.Exceptions
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
-    public class EggIncorrectVersionException : EggException
+    internal class MultipleComparer : IComparer
     {
-        public EggIncorrectVersionException()
+        private readonly List<IComparer> comparers;
+
+        public MultipleComparer(IEnumerable<IComparer> comparers)
         {
+            if (comparers == null) throw new ArgumentNullException("comparers");
+
+            this.comparers = new List<IComparer>(comparers);
         }
 
-        public EggIncorrectVersionException(string message)
-            : base(message)
+        public int Compare(object x, object y)
         {
-        }
+            if (comparers.Count == 0)
+                return 0;
 
-        public EggIncorrectVersionException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
-
-        protected EggIncorrectVersionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
+            return comparers
+                .Select(comparer => comparer.Compare(x, y))
+                .FirstOrDefault(value => value != 0);
         }
     }
 }

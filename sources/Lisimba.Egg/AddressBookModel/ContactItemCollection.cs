@@ -15,11 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.Enums;
+using DustInTheWind.Lisimba.Egg.Searching;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class ContactItems : CustomObservableCollection<ContactItem>
+    public class ContactItemCollection : CustomObservableCollection<ContactItem>
     {
         /// <summary>
         /// Returns the <see cref="ContactItem"/> object that match the description.
@@ -60,12 +60,12 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         public override bool Equals(object obj)
         {
-            ContactItems webSites = obj as ContactItems;
+            ContactItemCollection webSites = obj as ContactItemCollection;
 
             return Equals(webSites);
         }
 
-        public bool Equals(ContactItems contactItems)
+        public bool Equals(ContactItemCollection contactItems)
         {
             if (contactItems == null)
                 return false;

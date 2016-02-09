@@ -16,30 +16,28 @@
 
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg.Comparers
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
-    internal class MultipleComparer : IComparer
+    /// <summary>
+    /// Compares two contacts by last name.
+    /// </summary>
+    internal class ContactByMiddleNameComparer : IComparer
     {
-        private readonly List<IComparer> comparers;
-
-        public MultipleComparer(IEnumerable<IComparer> comparers)
-        {
-            if (comparers == null) throw new ArgumentNullException("comparers");
-
-            this.comparers = new List<IComparer>(comparers);
-        }
-
         public int Compare(object x, object y)
         {
-            if (comparers.Count == 0)
-                return 0;
+            Contact contactX = x as Contact;
+            Contact contactY = y as Contact;
 
-            return comparers
-                .Select(comparer => comparer.Compare(x, y))
-                .FirstOrDefault(value => value != 0);
+            if (contactX == null)
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
+
+            if (contactY == null)
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
+
+            return string.Compare(contactX.Name.MiddleName, contactY.Name.MiddleName);
         }
     }
 }

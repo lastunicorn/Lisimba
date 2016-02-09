@@ -15,22 +15,29 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Drawing;
+using System.Collections;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
-    public interface IGate
+    /// <summary>
+    /// Compares two contacts by first name.
+    /// </summary>
+    internal class ContactByFirstNameComparer : IComparer
     {
-        string Id { get; }
-        string Name { get; }
-        string Description { get; }
-        Image Icon16 { get; }
+        public int Compare(object x, object y)
+        {
+            Contact contactX = x as Contact;
+            Contact contactY = y as Contact;
 
-        IEnumerable<Exception> Warnings { get; }
+            if (contactX == null)
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
 
-        AddressBook Load(string fileName);
-        void Save(AddressBook addressBook, string fileName);
+            if (contactY == null)
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
+
+            return string.Compare(contactX.Name.FirstName, contactY.Name.FirstName);
+        }
     }
 }

@@ -19,12 +19,12 @@ using System.Collections;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg.Comparers
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     /// <summary>
     /// Compares two contacts by last name.
     /// </summary>
-    internal class ContactByMiddleNameComparer : IComparer
+    internal class ContactByLastNameComparer : IComparer
     {
         public int Compare(object x, object y)
         {
@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Egg.Comparers
             if (contactY == null)
                 throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
 
-            return string.Compare(contactX.Name.MiddleName, contactY.Name.MiddleName);
+            return string.Compare(contactX.Name.LastName, contactY.Name.LastName);
         }
     }
 }

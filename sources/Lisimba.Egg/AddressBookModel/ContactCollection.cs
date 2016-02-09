@@ -15,12 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using DustInTheWind.Lisimba.Egg.Comparers;
-using DustInTheWind.Lisimba.Egg.Enums;
 using DustInTheWind.Lisimba.Egg.Importing;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
@@ -34,12 +30,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         public ContactCollection(IEnumerable<Contact> contacts)
             : base(contacts)
         {
-        }
-
-        public void Sort(ContactsSortingType sortField, SortDirection sortDirection)
-        {
-            IComparer comparer = ComparerFactory.GetComparer(sortField);
-            ArrayList.Adapter((IList)Items).Sort(comparer);
         }
 
         public void AddRange(ImportRuleCollection importRules)

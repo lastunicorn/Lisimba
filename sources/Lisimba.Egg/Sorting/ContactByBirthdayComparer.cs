@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg.Comparers
+namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     /// <summary>
     /// Compares two contacts only by day and month of their birthdate. (Ignores the year)

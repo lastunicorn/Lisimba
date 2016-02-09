@@ -16,6 +16,7 @@
 
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg;
+using DustInTheWind.Lisimba.Egg.GateModel;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Setup

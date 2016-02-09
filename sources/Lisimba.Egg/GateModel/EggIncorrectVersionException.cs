@@ -17,25 +17,25 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace DustInTheWind.Lisimba.Egg.Exceptions
+namespace DustInTheWind.Lisimba.Egg.GateModel
 {
-    public class EggException : ApplicationException
+    public class EggIncorrectVersionException : EggException
     {
-        public EggException()
+        public EggIncorrectVersionException()
         {
         }
 
-        public EggException(string message)
+        public EggIncorrectVersionException(string message)
             : base(message)
         {
         }
 
-        public EggException(string message, Exception innerException)
+        public EggIncorrectVersionException(string message, Exception innerException)
             : base(message, innerException)
         {
         }
 
-        protected EggException(SerializationInfo info, StreamingContext context)
+        protected EggIncorrectVersionException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }

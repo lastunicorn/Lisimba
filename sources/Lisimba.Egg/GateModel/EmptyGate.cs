@@ -18,10 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Exceptions;
 using DustInTheWind.Lisimba.Egg.Properties;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.GateModel
 {
     public class EmptyGate : IGate
     {

@@ -120,7 +120,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
         }
 
-        public ContactItems Items { get; private set; }
+        public ContactItemCollection Items { get; private set; }
 
         private string notes = string.Empty;
 
@@ -153,7 +153,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             name = new PersonName();
             birthday = new Date();
 
-            Items = new ContactItems();
+            Items = new ContactItemCollection();
 
             name.Changed += (sender, args) => OnChanged();
             birthday.Changed += (sender, args) => OnChanged();
