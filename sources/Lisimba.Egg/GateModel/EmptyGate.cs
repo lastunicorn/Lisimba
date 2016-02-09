@@ -58,12 +58,12 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             Warnings = new List<Exception>();
         }
 
-        public AddressBook Load(string fileName)
+        public AddressBook Load(string connectionData)
         {
             throw new EggException(Resources.EmptyGate_LoadError);
         }
 
-        public void Save(AddressBook addressBook, string fileName)
+        public void Save(AddressBook addressBook, string connectionData)
         {
             throw new EggException(Resources.EmptyGate_SaveError);
         }

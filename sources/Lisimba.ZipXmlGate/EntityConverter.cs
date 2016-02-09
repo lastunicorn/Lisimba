@@ -17,9 +17,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Gating.Entities;
+using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 
-namespace DustInTheWind.Lisimba.Gating
+namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     static class EntityConverter
     {

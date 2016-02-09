@@ -53,6 +53,7 @@
     <Compile Include="AddressBookModel\ContactMatch.cs" />
     <Compile Include="AddressBookModel\FuzzyMatch.cs" />
     <Compile Include="AddressBookModel\PersonNameMatch.cs" />
+    <Compile Include="GateModel\GateException.cs" />
     <Compile Include="Sorting\ComparerFactory.cs" />
     <Compile Include="Sorting\MultipleComparer.cs" />
     <Compile Include="Sorting\ContactByMiddleNameComparer.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="AddressBookModel\Phone.cs" />
     <Compile Include="Importing\ImportType.cs" />
     <Compile Include="Importing\ImportRule.cs" />
-    <Compile Include="GateModel\EggIncorrectVersionException.cs" />
+    <Compile Include="GateModel\IncorrectEggVersionException.cs" />
     <Compile Include="GateModel\IGate.cs" />
     <Compile Include="IZodiacSignProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

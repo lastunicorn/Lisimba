@@ -17,12 +17,12 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using DustInTheWind.Lisimba.Egg;
+using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.Gating.Properties;
+using DustInTheWind.Lisimba.ZipXmlGate.Properties;
 
-namespace DustInTheWind.Lisimba.Gating
+namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     public class ZipXmlGate : IGate
     {
@@ -60,14 +60,42 @@ namespace DustInTheWind.Lisimba.Gating
             saver = new Saver();
         }
 
-        public AddressBook Load(string fileName)
+        public AddressBook Load(string connectionData)
         {
-            return loader.Load(fileName);
+            if (!File.Exists(connectionData))
+            {
+                string message = string.Format("Cannot open address book. File '{0}' does not exist.", connectionData);
+                throw new GateException(message);
+            }
+
+            try
+            {
+                using (FileStream fileStream = File.OpenRead(connectionData))
+                {
+                    return loader.Load(fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error opening address book from file '{0}'.", connectionData);
+                throw new GateException(message, ex);
+            }
         }
 
-        public void Save(AddressBook addressBook, string fileName)
+        public void Save(AddressBook addressBook, string connectionData)
         {
-            saver.Save(addressBook, fileName);
+            try
+            {
+                using (FileStream fileStream = File.OpenWrite(connectionData))
+                {
+                    saver.Save(addressBook, fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error saving address book to file '{0}'.", connectionData);
+                throw new GateException(message, ex);
+            }
         }
     }
 }

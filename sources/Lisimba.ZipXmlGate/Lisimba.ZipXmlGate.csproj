@@ -7,7 +7,7 @@
     <ProjectGuid>{652744F3-B7FA-43AD-80A9-6EFC86537817}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DustInTheWind.Lisimba.Gating</RootNamespace>
+    <RootNamespace>DustInTheWind.Lisimba.ZipXmlGate</RootNamespace>
     <AssemblyName>DustInTheWind.Lisimba.ZipXmlGate</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

@@ -15,28 +15,22 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Runtime.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg.GateModel
 {
-    public class EggIncorrectVersionException : EggException
+    public class IncorrectEggVersionException : GateException
     {
-        public EggIncorrectVersionException()
+        public IncorrectEggVersionException()
         {
         }
 
-        public EggIncorrectVersionException(string message)
+        public IncorrectEggVersionException(string message)
             : base(message)
         {
         }
 
-        public EggIncorrectVersionException(string message, Exception innerException)
+        public IncorrectEggVersionException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        protected EggIncorrectVersionException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

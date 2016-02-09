@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.Gating.Entities
+namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
 {
     [Serializable]
     [XmlRoot("Contact")]

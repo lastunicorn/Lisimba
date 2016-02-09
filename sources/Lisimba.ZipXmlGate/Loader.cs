@@ -23,10 +23,10 @@ using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.Gating.Entities;
+using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace DustInTheWind.Lisimba.Gating
+namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     internal class Loader
     {
@@ -42,7 +42,7 @@ namespace DustInTheWind.Lisimba.Gating
             warnings = new List<Exception>();
         }
 
-        public AddressBook Load(string fileName)
+        public AddressBook Load(FileStream fileStream)
         {
             warnings.Clear();
 
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.Gating
             //return book;
 
             // Create unzipper.
-            using (ZipInputStream zipInputStream = new ZipInputStream(File.OpenRead(fileName)))
+            using (ZipInputStream zipInputStream = new ZipInputStream(fileStream))
             {
                 ZipEntry zipEntry;
 
@@ -94,14 +94,14 @@ namespace DustInTheWind.Lisimba.Gating
                     // Compare versions
                     if (lsbVersion == null)
                     {
-                        string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
-                        EggIncorrectVersionException warning = new EggIncorrectVersionException(warningText);
+                        string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileStream.Name);
+                        IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
                         warnings.Add(warning);
                     }
                     else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
                     {
-                        string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileName, eggVersion.ToString(2), lsbVersion.ToString(2));
-                        EggIncorrectVersionException warning = new EggIncorrectVersionException(warningText);
+                        string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileStream.Name, eggVersion.ToString(2), lsbVersion.ToString(2));
+                        IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
                         warnings.Add(warning);
                     }
 
@@ -127,8 +127,10 @@ namespace DustInTheWind.Lisimba.Gating
         private static Version ReadLsbVersion(Stream stream)
         {
             Version ver = null;
-            XmlTextReader xmlTextReader = new XmlTextReader(stream);
-            xmlTextReader.WhitespaceHandling = WhitespaceHandling.None;
+            XmlTextReader xmlTextReader = new XmlTextReader(stream)
+            {
+                WhitespaceHandling = WhitespaceHandling.None
+            };
             xmlTextReader.MoveToContent();
 
             while (xmlTextReader.Read())

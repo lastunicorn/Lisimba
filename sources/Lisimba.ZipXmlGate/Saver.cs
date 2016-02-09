@@ -21,18 +21,18 @@ using System.Xml;
 using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Gating.Entities;
+using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace DustInTheWind.Lisimba.Gating
+namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     internal class Saver
     {
-        public void Save(AddressBook addressBook, string fileName)
+        public void Save(AddressBook addressBook, FileStream fileStream)
         {
             try
             {
-                using (ZipOutputStream zipStream = new ZipOutputStream(File.OpenWrite(fileName)))
+                using (ZipOutputStream zipStream = new ZipOutputStream(fileStream))
                 {
                     zipStream.SetLevel(9);
 

@@ -15,24 +15,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
+namespace DustInTheWind.Lisimba.Egg.GateModel
 {
-    [Serializable]
-    [XmlRoot("Name")]
-    public class PersonNameEntity
+    public class GateException : EggException
     {
-        [XmlAttribute("First")]
-        public string FirstName { get; set; }
+        public GateException()
+        {
+        }
 
-        [XmlAttribute("Middle")]
-        public string MiddleName { get; set; }
+        public GateException(string message)
+            : base(message)
+        {
+        }
 
-        [XmlAttribute("Last")]
-        public string LastName { get; set; }
-
-        [XmlAttribute("Nickname")]
-        public string Nickname { get; set; }
+        public GateException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }
