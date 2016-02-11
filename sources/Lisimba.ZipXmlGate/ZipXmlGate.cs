@@ -28,10 +28,11 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
     {
         private readonly Saver saver;
         private readonly Loader loader;
+        private List<Exception> warnings;
 
         public IEnumerable<Exception> Warnings
         {
-            get { return loader.Warnings; }
+            get { return warnings; }
         }
 
         public string Id
@@ -56,12 +57,16 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
         public ZipXmlGate()
         {
+            warnings = new List<Exception>();
+
             loader = new Loader();
             saver = new Saver();
         }
 
         public AddressBook Load(string connectionData)
         {
+            warnings.Clear();
+
             if (!File.Exists(connectionData))
             {
                 string message = string.Format("Cannot open address book. File '{0}' does not exist.", connectionData);
@@ -72,7 +77,10 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             {
                 using (FileStream fileStream = File.OpenRead(connectionData))
                 {
-                    return loader.Load(fileStream);
+                    AddressBook addressBook = loader.Load(fileStream);
+                    warnings.AddRange(loader.Warnings);
+
+                    return addressBook;
                 }
             }
             catch (Exception ex)
@@ -84,6 +92,8 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
         public void Save(AddressBook addressBook, string connectionData)
         {
+            warnings.Clear();
+
             try
             {
                 using (FileStream fileStream = File.OpenWrite(connectionData))

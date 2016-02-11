@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <GateFiles Include="DustInTheWind.Lisimba.YahooGate.dll" />
-        <GateFiles Include="zcsv.dll" />
+        <GateFiles Include="CsvHelper.dll" />
     </ItemGroup>
 
     <Target Name="Default" DependsOnTargets="Publish;CleanUp"></Target>
