@@ -17,8 +17,8 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.LocationOpening;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -27,18 +27,21 @@ namespace DustInTheWind.Lisimba.Operations
     internal class ExportOperation : OperationBase<IGate>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.ExportOperationDescription; }
         }
 
-        public ExportOperation(UserInterface userInterface, OpenedAddressBooks openedAddressBooks)
+        public ExportOperation(UserInterface userInterface, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
             : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
             this.openedAddressBooks = openedAddressBooks;
+            this.fileLocationProvider = fileLocationProvider;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = openedAddressBooks.Current != null;
@@ -54,7 +57,7 @@ namespace DustInTheWind.Lisimba.Operations
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
-            string newLocation = userInterface.AskToSaveLsbFile();
+            string newLocation = fileLocationProvider.AskToSave();
 
             if (newLocation == null)
                 return;

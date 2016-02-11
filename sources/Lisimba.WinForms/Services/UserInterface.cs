@@ -122,14 +122,71 @@ namespace DustInTheWind.Lisimba.Services
             return dialogResult == DialogResult.Yes;
         }
 
-        public string AskToSaveYahooCsvFile()
+        //public string AskToSaveYahooCsvFile()
+        //{
+        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+        //    {
+        //        saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+        //        saveFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+        //        saveFileDialog.DefaultExt = "csv";
+        //        saveFileDialog.FileName = string.Empty;
+
+        //        DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
+
+        //        return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
+        //    }
+        //}
+
+        //public string AskToOpenYahooCsvFile()
+        //{
+        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+        //    {
+        //        openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+        //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+        //        openFileDialog.DefaultExt = "csv";
+        //        openFileDialog.FileName = string.Empty;
+
+        //        DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
+
+        //        return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
+        //    }
+        //}
+
+        //public string AskToSaveLsbFile()
+        //{
+        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+        //    {
+        //        saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+        //        saveFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+        //        saveFileDialog.DefaultExt = "lsb";
+
+        //        DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
+
+        //        return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
+        //    }
+        //}
+
+        //public string AskToOpenLsbFile()
+        //{
+        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
+        //    {
+        //        openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
+        //        openFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
+        //        openFileDialog.DefaultExt = "lsb";
+
+        //        DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
+
+        //        return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
+        //    }
+        //}
+
+        public string AskToSave(string extension, string filter)
         {
             using (SaveFileDialog saveFileDialog = new SaveFileDialog())
             {
                 saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                saveFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-                saveFileDialog.DefaultExt = "csv";
-                saveFileDialog.FileName = string.Empty;
+                saveFileDialog.Filter = filter;
+                saveFileDialog.DefaultExt = extension;
 
                 DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
 
@@ -137,42 +194,13 @@ namespace DustInTheWind.Lisimba.Services
             }
         }
 
-        public string AskToOpenYahooCsvFile()
+        public string AskToOpen(string extension, string filter)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-                openFileDialog.DefaultExt = "csv";
-                openFileDialog.FileName = string.Empty;
-
-                DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
-
-                return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
-            }
-        }
-
-        public string AskToSaveLsbFile()
-        {
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-            {
-                saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                saveFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-                saveFileDialog.DefaultExt = "lsb";
-
-                DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
-
-                return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
-            }
-        }
-
-        public string AskToOpenLsbFile()
-        {
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-                openFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-                openFileDialog.DefaultExt = "lsb";
+                openFileDialog.Filter = filter;
+                openFileDialog.DefaultExt = extension;
 
                 DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
 
@@ -239,7 +267,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void DisplayBirthdays(IEnumerable<Contact> contacts, DateTime startDate, DateTime endDate)
         {
-            string birthdaysInfo = BuildInfoText(contacts, startDate,endDate);
+            string birthdaysInfo = BuildInfoText(contacts, startDate, endDate);
             DisplayInfo(birthdaysInfo);
         }
 

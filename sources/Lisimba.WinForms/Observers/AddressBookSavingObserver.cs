@@ -18,27 +18,27 @@ using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.LocationOpening;
 using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
     internal class AddressBookSavingObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
+        private readonly FileLocationProvider fileLocationProvider;
         private readonly AvailableGates availableGates;
 
-        public AddressBookSavingObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, AvailableGates availableGates)
+        public AddressBookSavingObserver(OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider,
+            AvailableGates availableGates)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
+            this.fileLocationProvider = fileLocationProvider;
             this.availableGates = availableGates;
         }
 
@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
         {
-            string newLocation = userInterface.AskToSaveLsbFile();
+            string newLocation = fileLocationProvider.AskToSave();
 
             if (string.IsNullOrEmpty(newLocation))
                 e.Cancel = true;
@@ -66,7 +66,7 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void HandleOpenedAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
         {
-            if(availableGates.DefaultGate == null)
+            if (availableGates.DefaultGate == null)
                 throw new LisimbaException(LocalizedResources.NoDefaultGateExists);
 
             IGate newGate = availableGates.DefaultGate;

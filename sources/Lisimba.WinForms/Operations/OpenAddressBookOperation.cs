@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.LocationOpening;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -26,27 +27,32 @@ namespace DustInTheWind.Lisimba.Operations
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
+        private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface, AvailableGates availableGates)
+        public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
+            AvailableGates availableGates, FileLocationProvider fileLocationProvider)
             : base(userInterface)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
+            this.fileLocationProvider = fileLocationProvider;
         }
 
         protected override void DoExecute(string fileName)
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                fileName = userInterface.AskToOpenLsbFile();
+                // todo: the FileLocationProvider should be requested from the gate itself.
+                fileName = fileLocationProvider.AskToOpen();
 
                 if (fileName == null)
                     return;

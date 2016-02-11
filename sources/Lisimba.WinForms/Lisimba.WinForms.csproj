@@ -121,6 +121,7 @@
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GateSelectorViewModel.cs" />
+    <Compile Include="LocationOpening\FileLocationProvider.cs" />
     <Compile Include="MainMenu\ExportMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportMenuItemViewModel.cs" />
