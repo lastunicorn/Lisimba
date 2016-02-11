@@ -23,9 +23,9 @@ namespace DustInTheWind.Lisimba.Gating
 {
     public class Saver
     {
-        public void Save(AddressBook addressBook, string fileName)
+        public void Save(AddressBook addressBook, FileStream fileStream)
         {
-            using (StreamWriter streamWriter = new StreamWriter(File.OpenWrite(fileName)))
+            using (StreamWriter streamWriter = new StreamWriter(fileStream))
             {
                 using (CsvWriter csvWriter = new CsvWriter(streamWriter))
                 {
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Gating
                     csvWriter.Configuration.IgnoreBlankLines = true;
                     csvWriter.Configuration.Quote = '"';
                     csvWriter.Configuration.Delimiter = ",";
-                    
+
                     WriteHeader(csvWriter);
 
                     foreach (Contact contact in addressBook.Contacts)

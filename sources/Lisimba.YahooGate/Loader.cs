@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Gating
 {
     public class Loader
     {
-        public AddressBook Load(string fileName)
+        public AddressBook Load(FileStream fileStream)
         {
             AddressBook addressBook = new AddressBook
             {
@@ -30,18 +30,21 @@ namespace DustInTheWind.Lisimba.Gating
                 Name = string.Empty
             };
 
-            using (CsvReader csvReader = new CsvReader(new StreamReader(File.OpenRead(fileName))))
+            using (StreamReader streamReader = new StreamReader(fileStream))
             {
-                csvReader.Configuration.HasHeaderRecord = true;
-                csvReader.Configuration.QuoteAllFields = true;
-                csvReader.Configuration.IgnoreBlankLines = true;
-                csvReader.Configuration.Quote = '"';
-                csvReader.Configuration.Delimiter = ",";
-
-                while (csvReader.Read())
+                using (CsvReader csvReader = new CsvReader(streamReader))
                 {
-                    Contact contact = FromCsvRecord(csvReader);
-                    addressBook.Contacts.Add(contact);
+                    csvReader.Configuration.HasHeaderRecord = true;
+                    csvReader.Configuration.QuoteAllFields = true;
+                    csvReader.Configuration.IgnoreBlankLines = true;
+                    csvReader.Configuration.Quote = '"';
+                    csvReader.Configuration.Delimiter = ",";
+
+                    while (csvReader.Read())
+                    {
+                        Contact contact = FromCsvRecord(csvReader);
+                        addressBook.Contacts.Add(contact);
+                    }
                 }
             }
 

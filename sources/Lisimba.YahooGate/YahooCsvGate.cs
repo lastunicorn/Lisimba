@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.Lisimba.Gating.Properties;
@@ -57,14 +58,54 @@ namespace DustInTheWind.Lisimba.Gating
             saver = new Saver();
         }
 
-        public AddressBook Load(string fileName)
+        //public AddressBook Load(string fileName)
+        //{
+        //    return loader.Load(fileName);
+        //}
+
+        //public void Save(AddressBook addressBook, string fileName)
+        //{
+        //    saver.Save(addressBook, fileName);
+        //}
+
+        public AddressBook Load(string connectionData)
         {
-            return loader.Load(fileName);
+            if (!File.Exists(connectionData))
+            {
+                string message = string.Format("Cannot open address book. File '{0}' does not exist.", connectionData);
+                throw new GateException(message);
+            }
+
+            try
+            {
+                using (FileStream fileStream = File.OpenRead(connectionData))
+                {
+                    AddressBook addressBook = loader.Load(fileStream);
+
+                    return addressBook;
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error opening address book from file '{0}'.", connectionData);
+                throw new GateException(message, ex);
+            }
         }
 
-        public void Save(AddressBook addressBook, string fileName)
+        public void Save(AddressBook addressBook, string connectionData)
         {
-            saver.Save(addressBook, fileName);
+            try
+            {
+                using (FileStream fileStream = File.OpenWrite(connectionData))
+                {
+                    saver.Save(addressBook, fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error saving address book to file '{0}'.", connectionData);
+                throw new GateException(message, ex);
+            }
         }
     }
 }
