@@ -16,7 +16,7 @@
 
 using System;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Business;

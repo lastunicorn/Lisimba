@@ -18,7 +18,7 @@ using System;
 using System.Text;
 using DustInTheWind.Lisimba.Services;
 
-namespace DustInTheWind.Lisimba.LocationOpening
+namespace DustInTheWind.Lisimba.LocationProviders
 {
     class FileLocationProvider
     {

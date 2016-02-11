@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon.CommandModel;
 using DustInTheWind.ConsoleCommon.Templating;
 
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling

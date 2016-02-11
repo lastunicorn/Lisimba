@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.MainMenu
+﻿namespace DustInTheWind.Lisimba.Utils
 {
     partial class ListMenuItem
     {

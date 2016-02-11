@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.LocationOpening;
+using DustInTheWind.Lisimba.LocationProviders;
 using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Observers

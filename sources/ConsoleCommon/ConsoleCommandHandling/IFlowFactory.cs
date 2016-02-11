@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon.CommandModel;
 
-namespace DustInTheWind.ConsoleCommon
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     public interface IFlowFactory
     {

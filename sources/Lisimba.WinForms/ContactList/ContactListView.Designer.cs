@@ -1,3 +1,5 @@
+using DustInTheWind.Lisimba.Utils;
+
 namespace DustInTheWind.Lisimba.ContactList
 {
     partial class ContactListView
@@ -38,9 +40,9 @@ namespace DustInTheWind.Lisimba.ContactList
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonClearSearch = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
-            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
-            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.MainMenu.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_Add = new CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_Delete = new CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_ViewBiorythm = new CustomMenuItem(this.components);
             this.contextMenuStripListBox.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -202,10 +204,10 @@ namespace DustInTheWind.Lisimba.ContactList
         private System.Windows.Forms.TreeView treeViewContacts;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
-        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_Add;
-        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_Delete;
+        private CustomMenuItem toolStripMenuItem_List_Add;
+        private CustomMenuItem toolStripMenuItem_List_Delete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private DustInTheWind.Lisimba.MainMenu.CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
+        private CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

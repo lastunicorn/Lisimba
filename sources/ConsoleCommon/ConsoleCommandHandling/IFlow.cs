@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.ConsoleCommon.CommandModel
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     /// <summary>
     /// Represents a flow that is executed at the user's request.

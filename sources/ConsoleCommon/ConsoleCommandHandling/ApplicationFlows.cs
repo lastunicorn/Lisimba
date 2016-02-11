@@ -17,9 +17,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DustInTheWind.ConsoleCommon.CommandModel;
 
-namespace DustInTheWind.ConsoleCommon
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     public class ApplicationFlows : IEnumerable<KeyValuePair<string, Type>>
     {

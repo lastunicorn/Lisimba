@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.GateModel;

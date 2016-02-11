@@ -18,7 +18,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.ConsoleCommon.CommandModel
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     /// <summary>
     /// Represents a command written by the user in the console.

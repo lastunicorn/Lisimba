@@ -17,10 +17,9 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.MainMenu
+namespace DustInTheWind.Lisimba.Utils
 {
     internal partial class CustomMenuItem : ToolStripMenuItem, IBindableComponent
     {

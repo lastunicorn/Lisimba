@@ -21,7 +21,7 @@ using System.Linq;
 using System.Resources;
 using System.Threading;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

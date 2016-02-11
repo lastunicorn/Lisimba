@@ -16,7 +16,7 @@
 
 using System;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.ConsoleCommon.CommandModel;
+using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Flows;
 using Microsoft.Practices.Unity;

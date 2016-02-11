@@ -17,7 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.LocationOpening;
+using DustInTheWind.Lisimba.LocationProviders;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
