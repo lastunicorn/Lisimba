@@ -21,7 +21,6 @@ using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.Lisimba.Services;
 using Microsoft.Practices.Unity;

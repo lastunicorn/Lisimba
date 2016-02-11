@@ -17,7 +17,6 @@
 using System;
 using System.Collections.ObjectModel;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.WinFormsCommon;
 
