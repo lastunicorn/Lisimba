@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
 
         IEnumerable<Exception> Warnings { get; }
 
-        AddressBook Load(string connectionData);
-        void Save(AddressBook addressBook, string connectionData);
+        AddressBook Load(object connectionData);
+        void Save(AddressBook addressBook, object connectionData);
     }
 }
