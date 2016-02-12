@@ -159,9 +159,6 @@
   <data name="SaveAddressBookSuccess" xml:space="preserve">
     <value>Address book '{0}' was successfully saved in file '{1}'.</value>
   </data>
-  <data name="UnknownCommandError" xml:space="preserve">
-    <value>Unknown command</value>
-  </data>
   <data name="InvalidUpdateActionError" xml:space="preserve">
     <value>Invalid update action.</value>
   </data>
@@ -186,7 +183,7 @@
   <data name="GateListTitle" xml:space="preserve">
     <value>Available Gates:</value>
   </data>
-    <data name="OverwriteFileQuestion" xml:space="preserve">
+  <data name="OverwriteFileQuestion" xml:space="preserve">
     <value>File already exists. Overwrite?</value>
   </data>
 </root>

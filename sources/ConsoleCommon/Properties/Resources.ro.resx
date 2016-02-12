@@ -117,70 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddressBookChangedSuccess" xml:space="preserve">
-    <value>Numele agendei a fost schimbat cu success.</value>
-  </data>
-  <data name="AddressBookClosedSuccess" xml:space="preserve">
-    <value>Agenda '{0}' a fost închisă.</value>
-  </data>
-  <data name="AddressBookOpenSuccess" xml:space="preserve">
-    <value>Au fost încărcate cu success {0} contacte din fișierul '{1}'.</value>
-  </data>
-  <data name="AskForNewGate" xml:space="preserve">
-    <value>Alege un Gate [enter pentru a anula]: </value>
-  </data>
-  <data name="AskForNewLocation" xml:space="preserve">
-    <value>Introduceți un nou nume [enter pentru a anula]: </value>
-  </data>
-  <data name="AskToSaveAddressBook" xml:space="preserve">
-    <value>Doriți să salvați agenda curentă?</value>
-  </data>
-  <data name="DefaultGateMessage" xml:space="preserve">
-    <value>Gate-ul default: {0}</value>
-  </data>
-  <data name="GateChangesSuccess" xml:space="preserve">
-    <value>Gate-ul a fost schimbat cu success.</value>
-  </data>
-  <data name="GateListTitle" xml:space="preserve">
-    <value>Gate-uri disponibile:</value>
-  </data>
-  <data name="GoodByeMessage" xml:space="preserve">
-    <value>Pe curând!</value>
-  </data>
-  <data name="InvalidUpdateActionError" xml:space="preserve">
-    <value>Acțiune de update invalidă.</value>
-  </data>
-  <data name="LanguageChangeSuccess" xml:space="preserve">
-    <value>Limba a fost schimbată cu success. Noua limbă: {1} - {2}</value>
-  </data>
-  <data name="LisimbaTitle" xml:space="preserve">
-    <value>Lisimba ver. {0}</value>
-  </data>
-  <data name="NewAddressBookCreatedSuccess" xml:space="preserve">
-    <value>Agenda '{0}' a fost creată cu success.</value>
-  </data>
-  <data name="NoAddessBookOpenedError" xml:space="preserve">
-    <value>Nu este deschisă nici o agendă.</value>
-  </data>
-  <data name="NoDefaultGateError" xml:space="preserve">
-    <value>Nu există un Gate default.</value>
-  </data>
-  <data name="NoLocationWasSpecifiedError" xml:space="preserve">
-    <value>Nu a fost specificată o locație.</value>
-  </data>
-  <data name="OpenAddressBookUnknownError" xml:space="preserve">
-    <value>Din motive necunoscute agenda nu a putut fi deschisă.</value>
-  </data>
-  <data name="OpenAddressBook_GateNotFoundError" xml:space="preserve">
-    <value>Gate-ul '{0}' nu mai există în sistem. Agenda '{1}' nu poate fi deschisă.</value>
-  </data>
-  <data name="OpenAddressBook_NoGateError" xml:space="preserve">
-    <value>Agenda '{0}' nu are un Gate asociat.</value>
-  </data>
-  <data name="OpenAddressBook_NoLastAddressBook" xml:space="preserve">
-    <value>Nu există o agendă care să mai fi fost deschisă. Specificați un fișier pentru a fi deschis.</value>
-  </data>
-  <data name="SaveAddressBookSuccess" xml:space="preserve">
-    <value>Agenda '{0}' a fost salvată cu success în fișierul '{1}'.</value>
+  <data name="UnknownCommandError" xml:space="preserve">
+    <value>Comandă necunoscută</value>
   </data>
 </root>

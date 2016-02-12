@@ -55,7 +55,6 @@
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Business\Welcomer.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
-    <Compile Include="Flows\EmptyFlow.cs" />
     <Compile Include="Flows\GateFlow.cs" />
     <Compile Include="Flows\GatesFlow.cs" />
     <Compile Include="Flows\InfoFlow.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />
-    <Compile Include="Flows\UnknownFlow.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

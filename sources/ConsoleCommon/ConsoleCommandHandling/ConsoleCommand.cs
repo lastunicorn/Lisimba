@@ -25,7 +25,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
     /// </summary>
     public class ConsoleCommand : IEnumerable<string>
     {
-        private readonly List<string> parameters;
+        private List<string> parameters;
 
         public string Name { get; private set; }
 
@@ -65,12 +65,22 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
                 CommandSplitter commandSplitter = new CommandSplitter(commandText);
                 string[] items = commandSplitter.Items;
 
-                Name = items.Length > 0 ? items[0] : string.Empty;
-
-                parameters = items
-                    .Skip(1)
-                    .ToList();
+                Init(items);
             }
+        }
+
+        public ConsoleCommand(IReadOnlyList<string> items)
+        {
+            Init(items);
+        }
+
+        private void Init(IReadOnlyList<string> items)
+        {
+            Name = items.Count > 0 ? items[0] : string.Empty;
+
+            parameters = items
+                .Skip(1)
+                .ToList();
         }
 
         public IEnumerator<string> GetEnumerator()
