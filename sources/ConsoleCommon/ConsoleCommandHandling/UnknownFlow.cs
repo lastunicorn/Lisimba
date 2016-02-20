@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,14 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
+using System;
+using DustInTheWind.ConsoleCommon.Properties;
 
-namespace DustInTheWind.Lisimba.CommandLine.Flows
+namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
-    internal class EmptyFlow : IFlow
+    public class UnknownFlow : IFlow
     {
+        private readonly EnhancedConsole console;
+
+        public UnknownFlow(EnhancedConsole console)
+        {
+            if (console == null) throw new ArgumentNullException("console");
+
+            this.console = console;
+        }
+
         public void Execute()
         {
+            console.WriteLineError(Resources.UnknownCommandError);
         }
     }
 }
