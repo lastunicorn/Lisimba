@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.SaveAddressBook();
+            openedAddressBooks.SaveCurrentAddressBook();
         }
     }
 }

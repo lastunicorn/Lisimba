@@ -57,7 +57,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 {
                     current.GateNeeded -= HandleGateNeeded;
                     current.NewLocationNeeded -= HandleNewLocationNeeded;
-                    current.Saved -= HandleCurrentSaved;
+                    current.Saved -= HandleCurrentAddressBookSaved;
                 }
 
                 AddressBookShell oldAddressBook = current;
@@ -65,36 +65,15 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 current = value;
                 Contact = null;
 
-                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, current));
-
                 if (current != null)
                 {
                     current.GateNeeded += HandleGateNeeded;
                     current.NewLocationNeeded += HandleNewLocationNeeded;
-                    current.Saved += HandleCurrentSaved;
+                    current.Saved += HandleCurrentAddressBookSaved;
                 }
+
+                OnAddressBookChanged(new AddressBookChangedEventArgs(oldAddressBook, current));
             }
-        }
-
-        private void HandleCurrentSaved(object sender, EventArgs e)
-        {
-            OnAddressBookSaved(EventArgs.Empty);
-        }
-
-        private void HandleGateNeeded(object sender, GateNeededEventArgs e)
-        {
-            bool existsDefaultGate = availableGates.DefaultGate != null && availableGates.DefaultGate.GetType() != typeof(EmptyGate);
-
-            if (existsDefaultGate)
-                e.Gate = availableGates.DefaultGate;
-            else
-                OnGateNeeded(e);
-            }
-
-        private void HandleNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
-        {
-
-            OnNewLocationNeeded(e);
         }
 
         public Contact Contact
@@ -119,26 +98,22 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             this.availableGates = availableGates;
         }
 
-        public void CreateNewAddressBook(string name)
+        private void HandleGateNeeded(object sender, GateNeededEventArgs e)
         {
-            bool allowToContinue = CloseAddressBook();
+            bool existsDefaultGate = availableGates.DefaultGate != null && availableGates.DefaultGate.GetType() != typeof(EmptyGate);
 
-            if (!allowToContinue)
-                return;
-
-            string addressBookName = name ?? Resources.DefaultAddressBookName;
-            AddressBook addressBook = new AddressBook { Name = addressBookName };
-            AddressBookShell addressBookShell = new AddressBookShell(addressBook);
-            addressBookShell.Saved += HandleAddressBookShellSaved;
-
-            Current = addressBookShell;
-
-            AddressBookOpenResult result = new AddressBookOpenResult { Success = true };
-
-            OnOpened(new AddressBookOpenedEventArgs(result));
+            if (existsDefaultGate)
+                e.Gate = availableGates.DefaultGate;
+            else
+                OnGateNeeded(e);
         }
 
-        private void HandleAddressBookShellSaved(object sender, EventArgs e)
+        private void HandleNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
+        {
+            OnNewLocationNeeded(e);
+        }
+
+        private void HandleCurrentAddressBookSaved(object sender, EventArgs e)
         {
             AddressBookShell addressBookShell = sender as AddressBookShell;
 
@@ -150,21 +125,32 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             OnAddressBookSaved(EventArgs.Empty);
         }
 
+        public void CreateNewAddressBook(string name)
+        {
+            bool allowToContinue = CloseCurrentAddressBook();
+            if (!allowToContinue)
+                return;
+
+            string addressBookName = name ?? Resources.DefaultAddressBookName;
+            AddressBook addressBook = new AddressBook { Name = addressBookName };
+            Current = new AddressBookShell(addressBook);
+
+            AddressBookOpenResult result = new AddressBookOpenResult { Success = true };
+
+            OnAddressBookOpened(new AddressBookOpenedEventArgs(result));
+        }
+
         public void OpenAddressBook(string fileName, IGate gate)
         {
             if (fileName == null) throw new ArgumentNullException("fileName");
             if (gate == null) throw new ArgumentNullException("gate");
 
-            bool allowToContinue = CloseAddressBook();
-
+            bool allowToContinue = CloseCurrentAddressBook();
             if (!allowToContinue)
                 return;
 
             AddressBook addressBook = gate.Load(fileName);
-            AddressBookShell addressBookShell = new AddressBookShell(addressBook, gate, fileName);
-            addressBookShell.Saved += HandleAddressBookShellSaved;
-
-            Current = addressBookShell;
+            Current = new AddressBookShell(addressBook, gate, fileName);
 
             AddFileToRecentFileList(fileName, gate);
 
@@ -174,7 +160,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 Warnings = gate.Warnings
             };
 
-            OnOpened(new AddressBookOpenedEventArgs(result));
+            OnAddressBookOpened(new AddressBookOpenedEventArgs(result));
         }
 
         private void AddFileToRecentFileList(string fileName, IGate gate)
@@ -183,7 +169,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             recentFiles.AddRecentFile(fileFullPath, gate);
         }
 
-        public void SaveAddressBook()
+        public void SaveCurrentAddressBook()
         {
             if (Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
@@ -191,7 +177,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             Current.SaveAddressBook();
         }
 
-        public bool CloseAddressBook()
+        public bool CloseCurrentAddressBook()
         {
             if (Current == null)
                 return true;
@@ -202,12 +188,10 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             AddressBookShell oldAddressBookShell = Current;
 
-            oldAddressBookShell.Saved -= HandleAddressBookShellSaved;
-
             Contact = null;
             Current = null;
 
-            OnClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
+            OnAddressBookClosed(new AddressBookClosedEventArgs(oldAddressBookShell));
 
             return true;
         }
@@ -216,7 +200,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         {
             bool addressBookNeedsSave = Current.Status == AddressBookStatus.Modified;
             AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(addressBookNeedsSave, Current);
-            OnClosing(eva);
+            OnAddressBookClosing(eva);
 
             if (eva.Cancel)
                 return false;
@@ -236,65 +220,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
 
             return true;
-        }
-
-        private bool SaveAddressBookInternal()
-        {
-            if (Current.Gate == null)
-            {
-                IGate gate = GetGateForSave();
-
-                if (gate == null)
-                    return false;
-
-                string location = GetLocationForSave();
-
-                if (location == null)
-                    return false;
-
-                Current.SaveAddressBook(location, gate);
-            }
-            else if (Current.Location == null)
-            {
-
-                string location = GetLocationForSave();
-
-                if (location == null)
-                    return false;
-
-                Current.SaveAddressBook(location);
-            }
-            else
-            {
-                Current.SaveAddressBook();
-            }
-
-            return true;
-        }
-
-        private string GetLocationForSave()
-        {
-            NewLocationNeededEventArgs eva = new NewLocationNeededEventArgs(Current);
-            OnNewLocationNeeded(eva);
-
-            return eva.Cancel
-                ? null
-                : eva.NewLocation;
-        }
-
-        private IGate GetGateForSave()
-        {
-            if (availableGates.DefaultGate == null || availableGates.DefaultGate.GetType() == typeof(EmptyGate))
-            {
-                GateNeededEventArgs eva = new GateNeededEventArgs(Current);
-                OnGateNeeded(eva);
-
-                return eva.Cancel
-                    ? null
-                    : eva.Gate;
-            }
-
-            return availableGates.DefaultGate;
         }
 
         #region Event Invocators
@@ -323,7 +248,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 handler(this, EventArgs.Empty);
         }
 
-        protected virtual void OnClosing(AddressBookClosingEventArgs e)
+        protected virtual void OnAddressBookClosing(AddressBookClosingEventArgs e)
         {
             EventHandler<AddressBookClosingEventArgs> handler = AddressBookClosing;
 
@@ -331,7 +256,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 handler(this, e);
         }
 
-        protected virtual void OnClosed(AddressBookClosedEventArgs e)
+        protected virtual void OnAddressBookClosed(AddressBookClosedEventArgs e)
         {
             EventHandler<AddressBookClosedEventArgs> handler = AddressBookClosed;
 
@@ -339,7 +264,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 handler(this, e);
         }
 
-        protected virtual void OnOpened(AddressBookOpenedEventArgs e)
+        protected virtual void OnAddressBookOpened(AddressBookOpenedEventArgs e)
         {
             EventHandler<AddressBookOpenedEventArgs> handler = AddressBookOpened;
 

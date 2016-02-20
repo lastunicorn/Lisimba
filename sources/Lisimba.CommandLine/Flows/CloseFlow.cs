@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
         public void Execute()
         {
             if (openedAddressBooks.Current != null)
-                openedAddressBooks.CloseAddressBook();
+                openedAddressBooks.CloseCurrentAddressBook();
             else
                 console.WriteLineError(Resources.NoAddessBookOpenedError);
         }

@@ -31,11 +31,12 @@ namespace DustInTheWind.Lisimba
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
+            InitializeProgramArguments(args);
+
             ConfigureObservers();
             ConfigureOperations();
             ConfigureGates();
 
-            InitializeProgramArguments(args);
             StartBackEnd();
             InitializeAndStartUi();
         }

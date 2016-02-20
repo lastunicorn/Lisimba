@@ -108,7 +108,7 @@ namespace DustInTheWind.Lisimba.Business
 
         public void Exit()
         {
-            bool allowToContinue = openedAddressBooks.CloseAddressBook();
+            bool allowToContinue = openedAddressBooks.CloseCurrentAddressBook();
             if (!allowToContinue)
                 return;
 

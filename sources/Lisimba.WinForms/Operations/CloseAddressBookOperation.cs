@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.CloseAddressBook();
+            openedAddressBooks.CloseCurrentAddressBook();
         }
     }
 }

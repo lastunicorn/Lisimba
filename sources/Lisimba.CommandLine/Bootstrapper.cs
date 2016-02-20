@@ -32,10 +32,10 @@ namespace DustInTheWind.Lisimba.CommandLine
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
+            InitializeProgramArguments(args);
             ConfigureApplicationFlows();
             ConfigureObservers();
             ConfigureGates();
-            InitializeProgramArguments(args);
 
             CreateAndInitializeUserInterface();
 

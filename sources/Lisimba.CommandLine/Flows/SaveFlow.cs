@@ -77,7 +77,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             else
             {
                 // todo: what happens if Current does not have a gate?
-                openedAddressBooks.SaveAddressBook();
+                openedAddressBooks.SaveCurrentAddressBook();
             }
         }
     }
