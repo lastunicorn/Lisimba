@@ -46,7 +46,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
 
         private void HandleApplicationBackEndEnded(object sender, EventArgs eventArgs)
         {
-            userInterface.Stop();
+            userInterface.Exit();
         }
     }
 }

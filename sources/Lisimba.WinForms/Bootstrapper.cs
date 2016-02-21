@@ -33,9 +33,9 @@ namespace DustInTheWind.Lisimba
 
             InitializeProgramArguments(args);
 
+            ConfigureGates();
             ConfigureObservers();
             ConfigureOperations();
-            ConfigureGates();
 
             StartBackEnd();
             InitializeAndStartUi();
@@ -74,9 +74,7 @@ namespace DustInTheWind.Lisimba
         private void InitializeAndStartUi()
         {
             UserInterface userInterface = unityContainer.Resolve<UserInterface>();
-
-            userInterface.RunAsTrayApp();
-            //userInterface.RunAsWindowApp();
+            userInterface.Start();
         }
     }
 }

@@ -20,6 +20,9 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.LocationProviders
 {
+    //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
+    //        openFileDialog.DefaultExt = "csv";
+
     class FileLocationProvider
     {
         private readonly UserInterface userInterface;

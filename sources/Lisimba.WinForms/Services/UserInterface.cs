@@ -70,23 +70,46 @@ namespace DustInTheWind.Lisimba.Services
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
         }
 
-        public void RunAsWindowApp()
+        public void Start()
+        {
+            RunAsTrayApp();
+            //RunAsWindowApp();
+        }
+
+        private void RunAsWindowApp()
         {
             CreateMainWindow();
             activeObservers.Start();
+
             Application.Run(MainWindow);
         }
 
-        public void RunAsTrayApp()
+        private void RunAsTrayApp()
         {
             CreateTrayIcon();
+            CreateMainWindow();
             DisplayMainWindow();
             activeObservers.Start();
+
             Application.Run();
+        }
+
+        private void CreateMainWindow()
+        {
+            MainWindow = uiFactory.GetForm<LisimbaForm>();
+        }
+
+        private void CreateTrayIcon()
+        {
+            trayIcon = uiFactory.GetComponent<TrayIcon>();
+            trayIcon.Visible = true;
         }
 
         public void Exit()
         {
+            if (trayIcon != null)
+                trayIcon.Visible = false;
+
             Application.Exit();
         }
 
@@ -121,64 +144,6 @@ namespace DustInTheWind.Lisimba.Services
 
             return dialogResult == DialogResult.Yes;
         }
-
-        //public string AskToSaveYahooCsvFile()
-        //{
-        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-        //    {
-        //        saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-        //        saveFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-        //        saveFileDialog.DefaultExt = "csv";
-        //        saveFileDialog.FileName = string.Empty;
-
-        //        DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
-
-        //        return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
-        //    }
-        //}
-
-        //public string AskToOpenYahooCsvFile()
-        //{
-        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
-        //    {
-        //        openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-        //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-        //        openFileDialog.DefaultExt = "csv";
-        //        openFileDialog.FileName = string.Empty;
-
-        //        DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
-
-        //        return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
-        //    }
-        //}
-
-        //public string AskToSaveLsbFile()
-        //{
-        //    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-        //    {
-        //        saveFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-        //        saveFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-        //        saveFileDialog.DefaultExt = "lsb";
-
-        //        DialogResult dialogResult = saveFileDialog.ShowDialog(MainWindow);
-
-        //        return dialogResult == DialogResult.OK ? saveFileDialog.FileName : null;
-        //    }
-        //}
-
-        //public string AskToOpenLsbFile()
-        //{
-        //    using (OpenFileDialog openFileDialog = new OpenFileDialog())
-        //    {
-        //        openFileDialog.InitialDirectory = Directory.GetCurrentDirectory();
-        //        openFileDialog.Filter = "Lisimba Files (*.lsb)|*.lsb|All Files (*.*)|*.*";
-        //        openFileDialog.DefaultExt = "lsb";
-
-        //        DialogResult dialogResult = openFileDialog.ShowDialog(MainWindow);
-
-        //        return dialogResult == DialogResult.OK ? openFileDialog.FileName : null;
-        //    }
-        //}
 
         public string AskToSave(string extension, string filter)
         {
@@ -229,23 +194,8 @@ namespace DustInTheWind.Lisimba.Services
 
         public void DisplayMainWindow()
         {
-            CreateMainWindow();
-
             MainWindow.Show();
             MainWindow.Activate();
-        }
-
-        private void CreateMainWindow()
-        {
-            if (MainWindow != null)
-                return;
-
-            MainWindow = uiFactory.GetForm<LisimbaForm>();
-        }
-
-        private void CreateTrayIcon()
-        {
-            trayIcon = uiFactory.GetComponent<TrayIcon>();
         }
 
         public void DisplayAddContactWindow()

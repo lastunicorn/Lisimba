@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         /// <summary>
         /// Stops processing the user input.
         /// </summary>
-        public void Stop()
+        public void Exit()
         {
             prompter.Stop();
             activeObservers.Stop();

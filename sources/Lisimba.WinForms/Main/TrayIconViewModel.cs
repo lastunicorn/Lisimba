@@ -39,29 +39,13 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public TrayIconViewModel(ApplicationBackEnd applicationBackEnd, UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
+        public TrayIconViewModel(UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
         {
-            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.userInterface = userInterface;
 
             TrayIconMenuViewModels = trayIconMenuViewModels;
-
-            applicationBackEnd.Ending += HandleApplicationBackEndEnding;
-            applicationBackEnd.EndCanceled += HandleApplicationBackEndExitCanceled;
-        }
-
-        private void HandleApplicationBackEndEnding(object sender, CancelEventArgs cancelEventArgs)
-        {
-            if (TrayIcon != null)
-                TrayIcon.Visible = false;
-        }
-
-        private void HandleApplicationBackEndExitCanceled(object sender, EventArgs eventArgs)
-        {
-            if (TrayIcon != null)
-                TrayIcon.Visible = true;
         }
 
         public void IconWasDoubleClicked()
