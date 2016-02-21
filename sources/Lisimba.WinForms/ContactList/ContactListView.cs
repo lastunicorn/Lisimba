@@ -106,8 +106,7 @@ namespace DustInTheWind.Lisimba.ContactList
 
             if (contact.Birthday.IsCompleteDate)
             {
-                BiorythmForm formBiorythm = new BiorythmForm();
-                formBiorythm.Contact = contact;
+                BiorythmForm formBiorythm = new BiorythmForm { Contact = contact };
                 formBiorythm.ShowDialog(this);
             }
         }
@@ -152,11 +151,6 @@ namespace DustInTheWind.Lisimba.ContactList
         {
             if (viewModel != null)
                 viewModel.ViewWasLoaded();
-        }
-
-        private void HandleButtonClearSearchClick(object sender, EventArgs e)
-        {
-            textBoxSearch.Clear();
         }
 
         public void SortContacts()

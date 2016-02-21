@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.Business
 
                 FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
-                return string.Format("{0} {1}", fileVersionInfo.ProductName, version);
+                return string.Format("{0} {1} alpha", fileVersionInfo.ProductName, version);
             }
         }
 
