@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    class Welcomer
+    internal class Welcomer
     {
         private readonly EnhancedConsole console;
         private readonly AvailableGates availableGates;

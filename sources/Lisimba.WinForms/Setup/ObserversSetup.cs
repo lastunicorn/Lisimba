@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Setup
 {
     internal class ObserversSetup
     {
-        public static void Configure(ActiveObservers activeObservers, UnityContainer unityContainer)
+        public static void Configure(ActiveObservers activeObservers, IUnityContainer unityContainer)
         {
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookOpenedObserver>());
             activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavedObserver>());

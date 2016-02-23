@@ -17,7 +17,6 @@
 using System;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.CommandLine.Flows;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
@@ -35,7 +34,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
 
         public IFlow CreateUnknownFlow(ConsoleCommand consoleCommand)
         {
-            var dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
+            DependencyOverride dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
             return unityContainer.Resolve<UnknownFlow>(dependencyOverride);
         }
 
@@ -47,7 +46,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
                 throw new LisimbaException(message);
             }
 
-            var dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
+            DependencyOverride dependencyOverride = new DependencyOverride(typeof(ConsoleCommand), consoleCommand);
             return (IFlow)unityContainer.Resolve(flowType, dependencyOverride);
         }
     }

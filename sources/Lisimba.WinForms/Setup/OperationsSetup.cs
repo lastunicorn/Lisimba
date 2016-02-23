@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Setup
 {
     internal class OperationsSetup
     {
-        public static void Configure(AvailableOperations availableOperations, UnityContainer unityContainer)
+        public static void Configure(AvailableOperations availableOperations, IUnityContainer unityContainer)
         {
             availableOperations.Add(unityContainer.Resolve<ShowMainOperation>());
             availableOperations.Add(unityContainer.Resolve<NewAddressBookOperation>());

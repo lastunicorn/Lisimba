@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    class PrompterTextBuilder : IPrompterTextBuilder
+    internal class PrompterTextBuilder : IPrompterTextBuilder
     {
         private readonly OpenedAddressBooks openedAddressBooks;
 

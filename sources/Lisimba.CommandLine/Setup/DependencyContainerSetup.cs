@@ -25,19 +25,12 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
-    static class DependencyContainerSetup
+    internal static class DependencyContainerSetup
     {
         public static UnityContainer CreateContainer()
         {
             UnityContainer container = new UnityContainer();
 
-            RegisterAdditionalTypes(container);
-
-            return container;
-        }
-
-        private static void RegisterAdditionalTypes(UnityContainer container)
-        {
             container.RegisterInstance(container);
 
             container.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
@@ -45,14 +38,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
-            container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
             container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationFlows>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             container.RegisterType<IFlowFactory, FlowFactory>();
             container.RegisterType<IPrompterTextBuilder, PrompterTextBuilder>();
-            container.RegisterType<IUserInterface, UserInterface>();
+            container.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
+
+            return container;
         }
     }
 }

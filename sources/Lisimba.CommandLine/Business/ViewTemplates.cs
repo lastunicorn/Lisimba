@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    static class ViewTemplates
+    internal static class ViewTemplates
     {
         public const string ViewTemplatesLocation = "DustInTheWind.Lisimba.CommandLine.ViewTemplates";
 

@@ -31,28 +31,21 @@ namespace DustInTheWind.Lisimba.Setup
         {
             UnityContainer unityContainer = new UnityContainer();
 
-            RegisterAdditionalTypes(unityContainer);
+            unityContainer.RegisterInstance(unityContainer);
+
+            unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
+            
+            unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
+            unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return unityContainer;
-        }
-
-        private static void RegisterAdditionalTypes(UnityContainer container)
-        {
-            container.RegisterInstance(container);
-
-            container.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
-            container.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
-            container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
-            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
-            container.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
-            container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
-
-            container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
-            container.RegisterType<IUserInterface, UserInterface>();
         }
     }
 }

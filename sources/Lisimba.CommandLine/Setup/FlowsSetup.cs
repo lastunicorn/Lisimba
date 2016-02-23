@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.CommandLine.Flows;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
-    static class FlowsSetup
+    internal static class FlowsSetup
     {
         public static void Configure(ApplicationFlows applicationFlows)
         {
