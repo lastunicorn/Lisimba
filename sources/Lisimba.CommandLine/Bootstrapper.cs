@@ -18,7 +18,6 @@ using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Setup;
 using Microsoft.Practices.Unity;
 
@@ -38,53 +37,37 @@ namespace DustInTheWind.Lisimba.CommandLine
             ConfigureObservers();
             ConfigureApplicationFlows();
 
-            CreateAndInitializeUserInterface();
-
-            StartBackEnd();
-
-            WaitForUserInput();
+            StartApplication();
         }
 
         private void ConfigureApplicationFlows()
         {
-            ApplicationFlows applicationFlows = unityContainer.Resolve<ApplicationFlows>();
+            var applicationFlows = unityContainer.Resolve<ApplicationFlows>();
             FlowsSetup.Configure(applicationFlows);
         }
 
         private void ConfigureObservers()
         {
-            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            var activeObservers = unityContainer.Resolve<ActiveObservers>();
             ObserversSetup.Configure(activeObservers, unityContainer);
         }
 
         private void ConfigureGates()
         {
-            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
+            var availableGates = unityContainer.Resolve<AvailableGates>();
             GatesSetup.Configure(availableGates, unityContainer);
         }
 
         private void InitializeProgramArguments(string[] args)
         {
-            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
+            var programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
         }
 
-        private void CreateAndInitializeUserInterface()
+        private void StartApplication()
         {
-            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
-            userInterface.Initialize();
-        }
-
-        private void StartBackEnd()
-        {
-            ApplicationBackEnd applicationBackEnd = unityContainer.Resolve<ApplicationBackEnd>();
+            var applicationBackEnd = unityContainer.Resolve<LisimbaApplication>();
             applicationBackEnd.Start();
-        }
-
-        private void WaitForUserInput()
-        {
-            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
-            userInterface.Start();
         }
     }
 }

@@ -28,12 +28,13 @@ namespace DustInTheWind.Lisimba.Business
     /// <summary>
     /// - announces start/stop
     /// </summary>
-    public class ApplicationBackEnd
+    public class LisimbaApplication
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
         private readonly ApplicationConfiguration config;
+        private readonly IUserInterface userInterface;
 
         public event EventHandler Started;
         public event EventHandler<CancelEventArgs> Ending;
@@ -59,24 +60,30 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
 
-        public ApplicationBackEnd(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks,
-            AvailableGates availableGates, ApplicationConfiguration config)
+        public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks,
+            AvailableGates availableGates, ApplicationConfiguration config, IUserInterface userInterface)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (config == null) throw new ArgumentNullException("config");
+            if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.initialCatalogOpener = initialCatalogOpener;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
             this.config = config;
+            this.userInterface = userInterface;
         }
 
         public void Start()
         {
+            userInterface.Initialize();
+
             ChooseDefaultGate();
             OpenInitialAddressBook();
+
+            userInterface.Start();
 
             OnStarted();
         }
@@ -116,9 +123,14 @@ namespace DustInTheWind.Lisimba.Business
             OnEnding(args);
 
             if (args.Cancel)
+            {
                 OnEndCanceled();
-            else
-                OnEnded();
+                return;
+            }
+            
+            userInterface.Exit();
+
+            OnEnded();
         }
 
         protected virtual void OnStarted()

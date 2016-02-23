@@ -153,7 +153,6 @@
     <Compile Include="Observers\AddressBookClosedObserver.cs" />
     <Compile Include="Observers\AddressBookClosingObserver.cs" />
     <Compile Include="Observers\AddressBookOpenedObserver.cs" />
-    <Compile Include="Observers\ApplicationEndingObserver.cs" />
     <Compile Include="Observers\AddressBookSavedObserver.cs" />
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\GatesSetup.cs" />

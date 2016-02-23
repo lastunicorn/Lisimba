@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Main
         private readonly UserInterface userInterface;
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly ApplicationStatus applicationStatus;
-        private readonly ApplicationBackEnd applicationBackEnd;
+        private readonly LisimbaApplication lisimbaApplication;
 
         private string title;
         private string statusText;
@@ -109,13 +109,13 @@ namespace DustInTheWind.Lisimba.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            ApplicationBackEnd applicationBackEnd, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
+            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
             AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface,
             MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
-            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
@@ -124,7 +124,7 @@ namespace DustInTheWind.Lisimba.Main
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
 
-            this.applicationBackEnd = applicationBackEnd;
+            this.lisimbaApplication = lisimbaApplication;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
             this.availableOperations = availableOperations;
@@ -232,12 +232,12 @@ namespace DustInTheWind.Lisimba.Main
         private string BuildFormTitle()
         {
             if (openedAddressBooks.Current == null)
-                return applicationBackEnd.ProgramName;
+                return lisimbaApplication.ProgramName;
 
             string addressBookName = openedAddressBooks.Current.GetFriendlyName();
             bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
             string unsavedSign = isModified ? " *" : string.Empty;
-            string programName = applicationBackEnd.ProgramName;
+            string programName = lisimbaApplication.ProgramName;
 
             return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
         }

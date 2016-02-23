@@ -57,12 +57,13 @@ namespace DustInTheWind.Lisimba.Setup
             container.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             container.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<UserInterface>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ApplicationBackEnd>(new ContainerControlledLifetimeManager());
+            container.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
             container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
             container.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
+            container.RegisterType<IUserInterface, UserInterface>();
         }
     }
 }

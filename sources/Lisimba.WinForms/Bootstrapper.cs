@@ -37,8 +37,7 @@ namespace DustInTheWind.Lisimba
             ConfigureObservers();
             ConfigureOperations();
 
-            StartBackEnd();
-            InitializeAndStartUi();
+            StartApplication();
         }
 
         private void ConfigureObservers()
@@ -65,16 +64,10 @@ namespace DustInTheWind.Lisimba
             programArguments.Initialize(args);
         }
 
-        private void StartBackEnd()
+        private void StartApplication()
         {
-            ApplicationBackEnd applicationBackEnd = unityContainer.Resolve<ApplicationBackEnd>();
-            applicationBackEnd.Start();
-        }
-
-        private void InitializeAndStartUi()
-        {
-            UserInterface userInterface = unityContainer.Resolve<UserInterface>();
-            userInterface.Start();
+            LisimbaApplication lisimbaApplication = unityContainer.Resolve<LisimbaApplication>();
+            lisimbaApplication.Start();
         }
     }
 }

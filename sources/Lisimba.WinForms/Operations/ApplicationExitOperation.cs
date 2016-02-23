@@ -23,24 +23,24 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class ApplicationExitOperation : OperationBase<object>
     {
-        private readonly ApplicationBackEnd applicationBackEnd;
+        private readonly LisimbaApplication lisimbaApplication;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(ApplicationBackEnd applicationBackEnd, UserInterface userInterface)
+        public ApplicationExitOperation(LisimbaApplication lisimbaApplication, UserInterface userInterface)
             : base(userInterface)
         {
-            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
-            this.applicationBackEnd = applicationBackEnd;
+            this.lisimbaApplication = lisimbaApplication;
         }
 
         protected override void DoExecute(object parameter)
         {
-            applicationBackEnd.Exit();
+            lisimbaApplication.Exit();
         }
     }
 }

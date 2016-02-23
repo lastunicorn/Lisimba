@@ -28,12 +28,13 @@ using DustInTheWind.Lisimba.Properties;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    internal class UserInterface
+    internal class UserInterface : IUserInterface
     {
         private readonly UiFactory uiFactory;
         private readonly ActiveObservers activeObservers;
         private Form mainWindow;
         private TrayIcon trayIcon;
+        private bool runAsTray;
 
         private Form MainWindow
         {
@@ -70,7 +71,7 @@ namespace DustInTheWind.Lisimba.Services
             applicationStatus.DefaultStatusText = LocalizedResources.DefaultStatusText;
         }
 
-        public void Start()
+        public void Initialize()
         {
             RunAsTrayApp();
             //RunAsWindowApp();
@@ -81,7 +82,7 @@ namespace DustInTheWind.Lisimba.Services
             CreateMainWindow();
             activeObservers.Start();
 
-            Application.Run(MainWindow);
+            runAsTray = false;
         }
 
         private void RunAsTrayApp()
@@ -91,7 +92,15 @@ namespace DustInTheWind.Lisimba.Services
             DisplayMainWindow();
             activeObservers.Start();
 
-            Application.Run();
+            runAsTray = true;
+        }
+
+        public void Start()
+        {
+            if (runAsTray)
+                Application.Run();
+            else
+                Application.Run(MainWindow);
         }
 
         private void CreateMainWindow()
@@ -194,6 +203,9 @@ namespace DustInTheWind.Lisimba.Services
 
         public void DisplayMainWindow()
         {
+            if (mainWindow == null)
+                CreateMainWindow();
+
             MainWindow.Show();
             MainWindow.Activate();
         }

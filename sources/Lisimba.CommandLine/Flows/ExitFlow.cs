@@ -22,18 +22,18 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     class ExitFlow : IFlow
     {
-        private readonly ApplicationBackEnd applicationBackEnd;
+        private readonly LisimbaApplication lisimbaApplication;
 
-        public ExitFlow(ApplicationBackEnd applicationBackEnd)
+        public ExitFlow(LisimbaApplication lisimbaApplication)
         {
-            if (applicationBackEnd == null) throw new ArgumentNullException("applicationBackEnd");
+            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 
-            this.applicationBackEnd = applicationBackEnd;
+            this.lisimbaApplication = lisimbaApplication;
         }
 
         public void Execute()
         {
-            applicationBackEnd.Exit();
+            lisimbaApplication.Exit();
         }
     }
 }

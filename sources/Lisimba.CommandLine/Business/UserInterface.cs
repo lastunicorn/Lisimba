@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    class UserInterface
+    class UserInterface : IUserInterface
     {
         private readonly Prompter prompter;
         private readonly ActiveObservers activeObservers;
