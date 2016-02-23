@@ -40,33 +40,33 @@ namespace DustInTheWind.Lisimba.CommandLine
             StartApplication();
         }
 
-        private void ConfigureApplicationFlows()
+        private void InitializeProgramArguments(string[] args)
         {
-            var applicationFlows = unityContainer.Resolve<ApplicationFlows>();
-            FlowsSetup.Configure(applicationFlows);
-        }
-
-        private void ConfigureObservers()
-        {
-            var activeObservers = unityContainer.Resolve<ActiveObservers>();
-            ObserversSetup.Configure(activeObservers, unityContainer);
+            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
+            programArguments.Initialize(args);
         }
 
         private void ConfigureGates()
         {
-            var availableGates = unityContainer.Resolve<AvailableGates>();
+            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
             GatesSetup.Configure(availableGates, unityContainer);
         }
 
-        private void InitializeProgramArguments(string[] args)
+        private void ConfigureObservers()
         {
-            var programArguments = unityContainer.Resolve<ProgramArguments>();
-            programArguments.Initialize(args);
+            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
+            ObserversSetup.Configure(activeObservers, unityContainer);
+        }
+
+        private void ConfigureApplicationFlows()
+        {
+            ApplicationFlows applicationFlows = unityContainer.Resolve<ApplicationFlows>();
+            FlowsSetup.Configure(applicationFlows);
         }
 
         private void StartApplication()
         {
-            var applicationBackEnd = unityContainer.Resolve<LisimbaApplication>();
+            LisimbaApplication applicationBackEnd = unityContainer.Resolve<LisimbaApplication>();
             applicationBackEnd.Start();
         }
     }

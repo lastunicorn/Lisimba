@@ -40,6 +40,18 @@ namespace DustInTheWind.Lisimba
             StartApplication();
         }
 
+        private void InitializeProgramArguments(string[] args)
+        {
+            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
+            programArguments.Initialize(args);
+        }
+
+        private void ConfigureGates()
+        {
+            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
+            GatesSetup.Configure(availableGates, unityContainer);
+        }
+
         private void ConfigureObservers()
         {
             ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
@@ -50,18 +62,6 @@ namespace DustInTheWind.Lisimba
         {
             AvailableOperations availableOperations = unityContainer.Resolve<AvailableOperations>();
             OperationsSetup.Configure(availableOperations, unityContainer);
-        }
-
-        private void ConfigureGates()
-        {
-            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
-            GatesSetup.Configure(availableGates, unityContainer);
-        }
-
-        private void InitializeProgramArguments(string[] args)
-        {
-            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
-            programArguments.Initialize(args);
         }
 
         private void StartApplication()
