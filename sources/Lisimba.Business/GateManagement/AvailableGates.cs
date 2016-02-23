@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg.GateModel;
 
@@ -26,6 +27,8 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     /// </summary>
     public class AvailableGates
     {
+        private readonly ApplicationConfiguration config;
+        private readonly GateProvider gateProvider;
         private readonly Dictionary<string, IGate> gates;
         private IGate defaultGate;
 
@@ -59,18 +62,35 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
             }
         }
 
-        public void Add(IGate gate)
-        {
-            if (gate == null) throw new ArgumentNullException("gate");
-
-            gates.Add(gate.Id, gate);
-        }
-
         public event EventHandler GateChanged;
 
-        public AvailableGates()
+        public AvailableGates(GateProvider gateProvider, ApplicationConfiguration config)
         {
+            if (gateProvider == null) throw new ArgumentNullException("gateProvider");
+            if (config == null) throw new ArgumentNullException("config");
+
+            this.gateProvider = gateProvider;
+            this.config = config;
+
             gates = new Dictionary<string, IGate>();
+
+            LoadGates();
+        }
+
+        private void LoadGates()
+        {
+            try
+            {
+                foreach (IGate gate in gateProvider.GetAllGates())
+                    gates.Add(gate.Id, gate);
+
+                SetDefaultGate(config.DefaultGateName);
+            }
+            catch
+            {
+                SetEmptyGate();
+                // todo: display exception as warning to the user
+            }
         }
 
         public void SetDefaultGate(string gateId)

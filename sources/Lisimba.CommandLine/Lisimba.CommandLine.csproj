@@ -49,7 +49,6 @@
     <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Setup\FlowsSetup.cs" />
-    <Compile Include="Setup\GatesSetup.cs" />
     <Compile Include="Setup\ObserversSetup.cs" />
     <Compile Include="Business\FlowFactory.cs" />
     <Compile Include="Business\UserInterface.cs" />

@@ -20,8 +20,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.Config;
-using DustInTheWind.Lisimba.Business.GateManagement;
 
 namespace DustInTheWind.Lisimba.Business
 {
@@ -32,8 +30,6 @@ namespace DustInTheWind.Lisimba.Business
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
-        private readonly ApplicationConfiguration config;
         private readonly IUserInterface userInterface;
 
         public event EventHandler Started;
@@ -60,45 +56,28 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
 
-        public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks,
-            AvailableGates availableGates, ApplicationConfiguration config, IUserInterface userInterface)
+        public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks, IUserInterface userInterface)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
-            if (config == null) throw new ArgumentNullException("config");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
 
             this.initialCatalogOpener = initialCatalogOpener;
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
-            this.config = config;
             this.userInterface = userInterface;
         }
 
-        public void Start()
+        public void Run()
         {
             userInterface.Initialize();
 
-            ChooseDefaultGate();
             OpenInitialAddressBook();
+
+            OnStarted();
 
             userInterface.Start();
 
-            OnStarted();
-        }
-
-        private void ChooseDefaultGate()
-        {
-            try
-            {
-                availableGates.SetDefaultGate(config.DefaultGateName);
-            }
-            catch (Exception ex)
-            {
-                availableGates.SetEmptyGate();
-                warnings.Add(ex);
-            }
+            OnEnded();
         }
 
         private void OpenInitialAddressBook()
@@ -127,10 +106,8 @@ namespace DustInTheWind.Lisimba.Business
                 OnEndCanceled();
                 return;
             }
-            
-            userInterface.Exit();
 
-            OnEnded();
+            userInterface.Exit();
         }
 
         protected virtual void OnStarted()

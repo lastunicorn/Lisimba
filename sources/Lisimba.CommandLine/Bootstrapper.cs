@@ -17,7 +17,6 @@
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
-using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Setup;
 using Microsoft.Practices.Unity;
 
@@ -33,7 +32,6 @@ namespace DustInTheWind.Lisimba.CommandLine
 
             InitializeProgramArguments(args);
 
-            ConfigureGates();
             ConfigureObservers();
             ConfigureApplicationFlows();
 
@@ -44,12 +42,6 @@ namespace DustInTheWind.Lisimba.CommandLine
         {
             ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
-        }
-
-        private void ConfigureGates()
-        {
-            AvailableGates availableGates = unityContainer.Resolve<AvailableGates>();
-            GatesSetup.Configure(availableGates, unityContainer);
         }
 
         private void ConfigureObservers()
@@ -67,7 +59,7 @@ namespace DustInTheWind.Lisimba.CommandLine
         private void StartApplication()
         {
             LisimbaApplication applicationBackEnd = unityContainer.Resolve<LisimbaApplication>();
-            applicationBackEnd.Start();
+            applicationBackEnd.Run();
         }
     }
 }
