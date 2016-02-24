@@ -30,7 +30,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             console.WriteLineError(Resources.UnknownCommandError);
         }

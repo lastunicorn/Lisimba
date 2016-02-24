@@ -25,24 +25,21 @@ using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class GateFlow : IFlow
+    internal class GateFlow : IFlow
     {
-        private readonly ConsoleCommand consoleCommand;
         private readonly AvailableGates availableGates;
         private readonly EnhancedConsole console;
 
-        public GateFlow(ConsoleCommand consoleCommand, AvailableGates availableGates, EnhancedConsole console)
+        public GateFlow(AvailableGates availableGates, EnhancedConsole console)
         {
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.consoleCommand = consoleCommand;
             this.availableGates = availableGates;
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (consoleCommand.ParameterCount == 0)
             {

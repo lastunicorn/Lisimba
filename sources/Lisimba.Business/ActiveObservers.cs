@@ -27,8 +27,8 @@ namespace DustInTheWind.Lisimba.Business
         {
             if (observerProvider == null) throw new ArgumentNullException("observerProvider");
 
-            IEnumerable<IObserver> observers = observerProvider.GetNewObservers();
-            this.observers = new List<IObserver>(observers);
+            IEnumerable<IObserver> newObservers = observerProvider.GetNewObservers();
+            observers = new List<IObserver>(newObservers);
         }
 
         public void Start()

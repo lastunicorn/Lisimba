@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class ExitFlow : IFlow
+    internal class ExitFlow : IFlow
     {
         private readonly LisimbaApplication lisimbaApplication;
 
@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.lisimbaApplication = lisimbaApplication;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             lisimbaApplication.Exit();
         }

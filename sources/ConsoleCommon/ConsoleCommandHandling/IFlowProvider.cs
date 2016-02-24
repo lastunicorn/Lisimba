@@ -21,6 +21,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     public interface IFlowProvider
     {
-        IEnumerable<Tuple<string, Type>> GetNewFlows();
+        IEnumerable<Tuple<string, IFlow>> GetNewFlows();
+        IFlow GetNewUnknownFlow();
     }
 }

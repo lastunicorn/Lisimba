@@ -44,6 +44,8 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
         {
             stopRequested = false;
 
+            applicationFlows.Initialize();
+
             while (!stopRequested)
             {
                 DisplayPrompter();
@@ -70,8 +72,8 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
         {
             try
             {
-                IFlow flow = applicationFlows.CreateFlow(consoleCommand);
-                flow.Execute();
+                IFlow flow = applicationFlows.GetFlow(consoleCommand.Name);
+                flow.Execute(consoleCommand);
             }
             catch (Exception ex)
             {

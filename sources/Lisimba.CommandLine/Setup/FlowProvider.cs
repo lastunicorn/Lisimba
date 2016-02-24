@@ -18,28 +18,42 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.CommandLine.Flows;
+using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
     internal class FlowProvider : IFlowProvider
     {
-        public IEnumerable<Tuple<string, Type>> GetNewFlows()
+        private readonly IUnityContainer unityContainer;
+
+        public FlowProvider(IUnityContainer unityContainer)
         {
-            yield return new Tuple<string, Type>("new", typeof(NewFlow));
-            yield return new Tuple<string, Type>("update", typeof(UpdateFlow));
-            yield return new Tuple<string, Type>("open", typeof(OpenFlow));
-            yield return new Tuple<string, Type>("save", typeof(SaveFlow));
-            yield return new Tuple<string, Type>("show", typeof(ShowFlow));
-            yield return new Tuple<string, Type>("next-birthdays", typeof(NextBirthdaysFlow));
-            yield return new Tuple<string, Type>("close", typeof(CloseFlow));
-            yield return new Tuple<string, Type>("info", typeof(InfoFlow));
-            yield return new Tuple<string, Type>("gate", typeof(GateFlow));
-            yield return new Tuple<string, Type>("gates", typeof(GatesFlow));
-            yield return new Tuple<string, Type>("lang", typeof(LangFlow));
-            yield return new Tuple<string, Type>("exit", typeof(ExitFlow));
-            yield return new Tuple<string, Type>("bye", typeof(ExitFlow));
-            yield return new Tuple<string, Type>("goodbye", typeof(ExitFlow));
-            yield return new Tuple<string, Type>("", typeof(EmptyFlow));
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+            this.unityContainer = unityContainer;
+        }
+
+        public IEnumerable<Tuple<string, IFlow>> GetNewFlows()
+        {
+            yield return new Tuple<string, IFlow>("new", unityContainer.Resolve<NewFlow>());
+            yield return new Tuple<string, IFlow>("update", unityContainer.Resolve<UpdateFlow>());
+            yield return new Tuple<string, IFlow>("open", unityContainer.Resolve<OpenFlow>());
+            yield return new Tuple<string, IFlow>("save", unityContainer.Resolve<SaveFlow>());
+            yield return new Tuple<string, IFlow>("show", unityContainer.Resolve<ShowFlow>());
+            yield return new Tuple<string, IFlow>("next-birthdays", unityContainer.Resolve<NextBirthdaysFlow>());
+            yield return new Tuple<string, IFlow>("close", unityContainer.Resolve<CloseFlow>());
+            yield return new Tuple<string, IFlow>("info", unityContainer.Resolve<InfoFlow>());
+            yield return new Tuple<string, IFlow>("gate", unityContainer.Resolve<GateFlow>());
+            yield return new Tuple<string, IFlow>("gates", unityContainer.Resolve<GatesFlow>());
+            yield return new Tuple<string, IFlow>("lang", unityContainer.Resolve<LangFlow>());
+            yield return new Tuple<string, IFlow>("exit", unityContainer.Resolve<ExitFlow>());
+            yield return new Tuple<string, IFlow>("bye", unityContainer.Resolve<ExitFlow>());
+            yield return new Tuple<string, IFlow>("goodbye", unityContainer.Resolve<ExitFlow>());
+            yield return new Tuple<string, IFlow>("", unityContainer.Resolve<EmptyFlow>());
+        }
+
+        public IFlow GetNewUnknownFlow()
+        {
+            return unityContainer.Resolve<UnknownFlow>();
         }
     }
 }

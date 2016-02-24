@@ -24,22 +24,19 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class UpdateFlow : IFlow
     {
-        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
 
-        public UpdateFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public UpdateFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             foreach (string actionText in consoleCommand)
             {

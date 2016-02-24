@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class GatesFlow : IFlow
+    internal class GatesFlow : IFlow
     {
         private readonly EnhancedConsole console;
         private readonly AvailableGates availableGates;
@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.availableGates = availableGates;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             IEnumerable<IGate> gates = availableGates.GetAllGates();
 

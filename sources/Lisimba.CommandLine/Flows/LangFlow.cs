@@ -26,21 +26,18 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class LangFlow : IFlow
+    internal class LangFlow : IFlow
     {
         private readonly EnhancedConsole console;
-        private readonly ConsoleCommand consoleCommand;
 
-        public LangFlow(EnhancedConsole console, ConsoleCommand consoleCommand)
+        public LangFlow(EnhancedConsole console)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
 
             this.console = console;
-            this.consoleCommand = consoleCommand;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (!consoleCommand.HasParameters)
             {
@@ -69,7 +66,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 else
                 {
                     string cultureName = consoleCommand[1];
-                    var culture = CultureInfo.GetCultureInfo(cultureName);
+                    CultureInfo culture = CultureInfo.GetCultureInfo(cultureName);
 
                     Thread.CurrentThread.CurrentUICulture = culture;
                     Thread.CurrentThread.CurrentCulture = culture;

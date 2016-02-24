@@ -26,44 +26,41 @@ using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class OpenFlow : IFlow
+    internal class OpenFlow : IFlow
     {
-        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks,
+        public OpenFlow(OpenedAddressBooks openedAddressBooks,
             AvailableGates availableGates, ApplicationConfiguration config)
         {
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
             if (config == null) throw new ArgumentNullException("config");
 
-            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
             this.config = config;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (consoleCommand.HasParameters)
-                OpenAddressBookFromCommand();
+                OpenAddressBookFromCommand(consoleCommand);
             else
                 OpenLastAddressBook();
         }
 
-        private void OpenAddressBookFromCommand()
+        private void OpenAddressBookFromCommand(ConsoleCommand consoleCommand)
         {
             string fileName = consoleCommand[1];
-            IGate gate = GetGateFromCommand();
+            IGate gate = GetGateFromCommand(consoleCommand);
 
             openedAddressBooks.OpenAddressBook(fileName, gate);
         }
 
-        private IGate GetGateFromCommand()
+        private IGate GetGateFromCommand(ConsoleCommand consoleCommand)
         {
             if (consoleCommand.ParameterCount >= 2)
             {

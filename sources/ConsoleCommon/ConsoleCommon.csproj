@@ -43,7 +43,6 @@
     <Compile Include="ConsoleCommandHandling\ConsoleCommand.cs" />
     <Compile Include="ConsoleCommandHandling\CommandSplitter.cs" />
     <Compile Include="ConsoleCommandHandling\EmptyFlow.cs" />
-    <Compile Include="ConsoleCommandHandling\IFlowFactory.cs" />
     <Compile Include="ConsoleCommandHandling\IFlowProvider.cs" />
     <Compile Include="ConsoleCommandHandling\IPrompterTextBuilder.cs" />
     <Compile Include="ConsoleCommandHandling\Prompter.cs" />

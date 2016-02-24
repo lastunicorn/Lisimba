@@ -26,24 +26,21 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class ShowFlow : IFlow
+    internal class ShowFlow : IFlow
     {
-        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
 
-        public ShowFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public ShowFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
         {
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (openedAddressBooks.Current != null)
             {

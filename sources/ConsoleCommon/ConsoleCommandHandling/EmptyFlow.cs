@@ -18,7 +18,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     public class EmptyFlow : IFlow
     {
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
         }
     }

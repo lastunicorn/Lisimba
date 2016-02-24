@@ -26,7 +26,7 @@ using DustInTheWind.Lisimba.Egg.Sorting;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class NextBirthdaysFlow : IFlow
+    internal class NextBirthdaysFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
@@ -40,7 +40,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             DisplayNextBirthdays();
         }

@@ -20,21 +20,18 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class NewFlow : IFlow
+    internal class NewFlow : IFlow
     {
-        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public NewFlow(ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks)
+        public NewFlow(OpenedAddressBooks openedAddressBooks)
         {
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             openedAddressBooks.CreateNewAddressBook(consoleCommand[1]);
         }

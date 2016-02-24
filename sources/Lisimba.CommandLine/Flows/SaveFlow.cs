@@ -26,27 +26,24 @@ using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class SaveFlow : IFlow
+    internal class SaveFlow : IFlow
     {
         private readonly EnhancedConsole console;
-        private readonly ConsoleCommand consoleCommand;
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableGates availableGates;
 
-        public SaveFlow(EnhancedConsole console, ConsoleCommand consoleCommand, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public SaveFlow(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (consoleCommand == null) throw new ArgumentNullException("consoleCommand");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
             this.console = console;
-            this.consoleCommand = consoleCommand;
             this.openedAddressBooks = openedAddressBooks;
             this.availableGates = availableGates;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);

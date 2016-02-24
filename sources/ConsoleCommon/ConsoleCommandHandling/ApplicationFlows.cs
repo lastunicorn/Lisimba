@@ -20,40 +20,37 @@ using System.Collections.Generic;
 
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
-    public class ApplicationFlows : IEnumerable<KeyValuePair<string, Type>>
+    public class ApplicationFlows : IEnumerable<KeyValuePair<string, IFlow>>
     {
-        private readonly IFlowFactory flowFactory;
+        private readonly IFlowProvider flowProvider;
+        private readonly Dictionary<string, IFlow> flows;
+        private IFlow unknownFlow;
 
-        private readonly Dictionary<string, Type> flows;
-
-        public ApplicationFlows(IFlowProvider flowProvider, IFlowFactory flowFactory)
+        public ApplicationFlows(IFlowProvider flowProvider)
         {
             if (flowProvider == null) throw new ArgumentNullException("flowProvider");
-            if (flowFactory == null) throw new ArgumentNullException("flowFactory");
 
-            this.flowFactory = flowFactory;
+            this.flowProvider = flowProvider;
 
-            flows = new Dictionary<string, Type>();
-
-            foreach (Tuple<string, Type> keyValuePair in flowProvider.GetNewFlows())
-                AddFlow(keyValuePair.Item1, keyValuePair.Item2);
+            flows = new Dictionary<string, IFlow>();
         }
 
-        private void AddFlow(string name, Type flowType)
+        public void Initialize()
         {
-            if (flows.ContainsKey(name))
-                throw new ApplicationException("Another flow with name '" + name + "' already exists.");
-
-            if (!typeof(IFlow).IsAssignableFrom(flowType))
+            foreach (Tuple<string, IFlow> keyValuePair in flowProvider.GetNewFlows())
             {
-                string message = string.Format("Type {0} does not inherit {1}.", flowType.FullName, typeof(IFlow).FullName);
-                throw new ApplicationException(message);
+                string name = keyValuePair.Item1;
+
+                if (flows.ContainsKey(name))
+                    throw new ApplicationException("Another flow with name '" + name + "' already exists.");
+
+                flows.Add(name, keyValuePair.Item2);
             }
 
-            flows.Add(name, flowType);
+            unknownFlow = flowProvider.GetNewUnknownFlow();
         }
 
-        public IEnumerator<KeyValuePair<string, Type>> GetEnumerator()
+        public IEnumerator<KeyValuePair<string, IFlow>> GetEnumerator()
         {
             return flows.GetEnumerator();
         }
@@ -68,14 +65,13 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
             return flows.ContainsKey(name);
         }
 
-        public IFlow CreateFlow(ConsoleCommand consoleCommand)
+        public IFlow GetFlow(string commandName)
         {
-            bool existsFlow = flows.ContainsKey(consoleCommand.Name);
-            if (!existsFlow)
-                return flowFactory.CreateUnknownFlow(consoleCommand);
+            bool existsFlow = flows.ContainsKey(commandName);
 
-            Type flowType = flows[consoleCommand.Name];
-            return flowFactory.CreateFlow(flowType, consoleCommand);
+            return existsFlow
+                ? flows[commandName]
+                : unknownFlow;
         }
     }
 }

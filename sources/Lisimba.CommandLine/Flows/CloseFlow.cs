@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
-    class CloseFlow : IFlow
+    internal class CloseFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute()
+        public void Execute(ConsoleCommand consoleCommand)
         {
             if (openedAddressBooks.Current != null)
                 openedAddressBooks.CloseCurrentAddressBook();

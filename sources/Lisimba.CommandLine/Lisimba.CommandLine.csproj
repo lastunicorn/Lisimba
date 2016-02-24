@@ -50,7 +50,6 @@
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
     <Compile Include="Setup\ObserverProvider.cs" />
-    <Compile Include="Business\FlowFactory.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Business\Welcomer.cs" />
     <Compile Include="Flows\CloseFlow.cs" />

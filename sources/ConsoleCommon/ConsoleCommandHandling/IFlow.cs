@@ -22,6 +22,6 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
     /// </summary>
     public interface IFlow
     {
-        void Execute();
+        void Execute(ConsoleCommand consoleCommand);
     }
 }
