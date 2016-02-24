@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,21 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.WinFormsCommon.Operations;
+using System.Linq;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.WinFormsCommon.Operations
 {
-    internal class AvailableOperations
+    public class AvailableOperations
     {
         private readonly Dictionary<Type, IOperation> operations;
+
+        public AvailableOperations(IOperationProvider operationProvider)
+        {
+            if (operationProvider == null) throw new ArgumentNullException("operationProvider");
+
+            operations = operationProvider.GetNewOperations()
+                .ToDictionary(x => x.GetType(), x => x);
+        }
 
         public T GetOperation<T>()
             where T : IOperation
@@ -30,19 +38,6 @@ namespace DustInTheWind.Lisimba.Services
             Type type = typeof(T);
             IOperation operation = operations[type];
             return (T)operation;
-        }
-
-        public AvailableOperations()
-        {
-            operations = new Dictionary<Type, IOperation>();
-        }
-
-        public void Add(IOperation operation)
-        {
-            if (operation == null) throw new ArgumentNullException("operation");
-
-            Type operationType = operation.GetType();
-            operations.Add(operationType, operation);
         }
     }
 }

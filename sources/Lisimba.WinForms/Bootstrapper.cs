@@ -16,7 +16,6 @@
 
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
-using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Setup;
 using Microsoft.Practices.Unity;
 
@@ -32,8 +31,6 @@ namespace DustInTheWind.Lisimba
 
             InitializeProgramArguments(args);
 
-            ConfigureOperations();
-
             StartApplication();
         }
 
@@ -41,12 +38,6 @@ namespace DustInTheWind.Lisimba
         {
             ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
-        }
-
-        private void ConfigureOperations()
-        {
-            AvailableOperations availableOperations = unityContainer.Resolve<AvailableOperations>();
-            OperationsSetup.Configure(availableOperations, unityContainer);
         }
 
         private void StartApplication()

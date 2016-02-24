@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Setup

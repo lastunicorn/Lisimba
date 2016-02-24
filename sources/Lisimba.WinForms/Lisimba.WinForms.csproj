@@ -156,7 +156,7 @@
     <Compile Include="Observers\AddressBookOpenedObserver.cs" />
     <Compile Include="Observers\AddressBookSavedObserver.cs" />
     <Compile Include="Services\BirthdaysInfo.cs" />
-    <Compile Include="Setup\OperationsSetup.cs" />
+    <Compile Include="Setup\OperationProvider.cs" />
     <Compile Include="Utils\ControlExtensions.cs" />
     <Compile Include="NameEditing\NameEditor.cs">
       <SubType>UserControl</SubType>
@@ -211,7 +211,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\AvailableOperations.cs" />
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
     <Compile Include="Operations\SaveAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeByNicknameOrNameComparer.cs" />
