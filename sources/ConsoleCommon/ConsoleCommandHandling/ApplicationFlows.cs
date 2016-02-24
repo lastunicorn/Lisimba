@@ -26,16 +26,20 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 
         private readonly Dictionary<string, Type> flows;
 
-        public ApplicationFlows(IFlowFactory flowFactory)
+        public ApplicationFlows(IFlowProvider flowProvider, IFlowFactory flowFactory)
         {
+            if (flowProvider == null) throw new ArgumentNullException("flowProvider");
             if (flowFactory == null) throw new ArgumentNullException("flowFactory");
-        
+
             this.flowFactory = flowFactory;
-            
+
             flows = new Dictionary<string, Type>();
+
+            foreach (Tuple<string, Type> keyValuePair in flowProvider.GetNewFlows())
+                AddFlow(keyValuePair.Item1, keyValuePair.Item2);
         }
 
-        public void AddFlow(string name, Type flowType)
+        private void AddFlow(string name, Type flowType)
         {
             if (flows.ContainsKey(name))
                 throw new ApplicationException("Another flow with name '" + name + "' already exists.");

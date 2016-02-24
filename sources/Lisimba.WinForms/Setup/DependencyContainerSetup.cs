@@ -26,7 +26,7 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Setup
 {
-    static class DependencyContainerSetup
+    internal static class DependencyContainerSetup
     {
         public static UnityContainer CreateContainer()
         {
@@ -46,6 +46,7 @@ namespace DustInTheWind.Lisimba.Setup
 
             unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             unityContainer.RegisterType<IObserverProvider, ObserverProvider>();
+            unityContainer.RegisterType<IOperationProvider, OperationProvider>();
             unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return unityContainer;
