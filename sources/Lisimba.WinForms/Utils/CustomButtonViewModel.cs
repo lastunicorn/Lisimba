@@ -25,7 +25,7 @@ namespace DustInTheWind.Lisimba.Utils
     internal class CustomButtonViewModel : ViewModelBase
     {
         protected readonly ApplicationStatus applicationStatus;
-        protected readonly UserInterface userInterface;
+        protected readonly WindowSystem windowSystem;
         protected readonly IOperation operation;
 
         private bool isEnabled;
@@ -65,14 +65,14 @@ namespace DustInTheWind.Lisimba.Utils
             }
         }
 
-        public CustomButtonViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
+        public CustomButtonViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (operation == null) throw new ArgumentNullException("operation");
 
             this.applicationStatus = applicationStatus;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
             this.operation = operation;
 
             operation.EnableChanged += HandleOperationEnableChanged;
@@ -110,7 +110,7 @@ namespace DustInTheWind.Lisimba.Utils
             }
             catch (Exception ex)
             {
-                userInterface.DisplayError(ex.Message);
+                windowSystem.DisplayError(ex.Message);
             }
         }
 

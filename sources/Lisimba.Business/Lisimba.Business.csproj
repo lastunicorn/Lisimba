@@ -55,6 +55,7 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
+    <Compile Include="IObserverProvider.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="RecentFilesManagement\AddressBookLocationInfo.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenedEventArgs.cs" />

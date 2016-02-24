@@ -28,20 +28,20 @@ namespace DustInTheWind.Lisimba.Observers
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
         private readonly BirthdaysInfo birthdaysInfo;
 
         public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus,
-            UserInterface userInterface, BirthdaysInfo birthdaysInfo)
+            WindowSystem windowSystem, BirthdaysInfo birthdaysInfo)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
             this.openedAddressBooks = openedAddressBooks;
             this.applicationStatus = applicationStatus;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
             this.birthdaysInfo = birthdaysInfo;
         }
 
@@ -92,7 +92,7 @@ namespace DustInTheWind.Lisimba.Observers
             }
 
             if (sb.Length > 0)
-                userInterface.DisplayWarning(sb.ToString());
+                windowSystem.DisplayWarning(sb.ToString());
         }
     }
 }

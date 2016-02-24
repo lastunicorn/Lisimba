@@ -30,8 +30,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.CreateNewContactOperationDescription; }
         }
 
-        public NewContactOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
-            : base(userInterface)
+        public NewContactOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            userInterface.DisplayAddContactWindow();
+            windowSystem.DisplayAddContactWindow();
         }
     }
 }

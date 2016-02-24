@@ -41,8 +41,10 @@ namespace DustInTheWind.Lisimba.Setup
             unityContainer.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
-            
+            unityContainer.RegisterType<WindowSystem>(new ContainerControlledLifetimeManager());
+
             unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
+            unityContainer.RegisterType<IObserverProvider, ObserverProvider>();
             unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return unityContainer;

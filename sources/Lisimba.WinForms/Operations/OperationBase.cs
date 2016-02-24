@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal abstract class OperationBase<T> : IOperation<T>
     {
-        protected readonly UserInterface userInterface;
+        protected readonly WindowSystem windowSystem;
 
         private bool isEnabled;
 
@@ -44,11 +44,11 @@ namespace DustInTheWind.Lisimba.Operations
 
         public event EventHandler EnableChanged;
 
-        protected OperationBase(UserInterface userInterface)
+        protected OperationBase(WindowSystem windowSystem)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
 
             isEnabled = true;
         }
@@ -78,7 +78,7 @@ namespace DustInTheWind.Lisimba.Operations
             }
             catch (Exception ex)
             {
-                userInterface.DisplayError(ex.Message);
+                windowSystem.DisplayError(ex.Message);
             }
         }
 
@@ -93,7 +93,7 @@ namespace DustInTheWind.Lisimba.Operations
             }
             catch (Exception ex)
             {
-                userInterface.DisplayError(ex.Message);
+                windowSystem.DisplayError(ex.Message);
             }
         }
 

@@ -25,15 +25,15 @@ namespace DustInTheWind.Lisimba.Observers
     class AddressBookClosingObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
 
-        public AddressBookClosingObserver(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
+        public AddressBookClosingObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
         }
 
         public void Start()
@@ -68,7 +68,7 @@ namespace DustInTheWind.Lisimba.Observers
             string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
             string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
 
-            return userInterface.DisplayYesNoCancelQuestion(text, title);
+            return windowSystem.DisplayYesNoCancelQuestion(text, title);
         }
     }
 }

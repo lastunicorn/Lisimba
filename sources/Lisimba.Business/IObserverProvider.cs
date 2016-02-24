@@ -14,26 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.Business
 {
-    internal class ShowMainOperation : OperationBase<object>
+    public interface IObserverProvider
     {
-        public override string ShortDescription
-        {
-            get { return LocalizedResources.ShowAboutOperationDescription; }
-        }
-
-        public ShowMainOperation(WindowSystem windowSystem)
-            : base(windowSystem)
-        {
-        }
-
-        protected override void DoExecute(object parameter)
-        {
-            windowSystem.DisplayMainWindow();
-        }
+        IEnumerable<IObserver> GetNewObservers();
     }
 }

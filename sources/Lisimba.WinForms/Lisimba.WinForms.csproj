@@ -131,6 +131,7 @@
     <Compile Include="Operations\OpenRecentFileOperation.cs" />
     <Compile Include="Operations\RedoOperation.cs" />
     <Compile Include="Operations\UndoOperation.cs" />
+    <Compile Include="Services\WindowSystem.cs" />
     <Compile Include="Utils\CustomMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -149,7 +150,7 @@
     <Compile Include="Observers\AddressBookSavingObserver.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
-    <Compile Include="Setup\ObserversSetup.cs" />
+    <Compile Include="Setup\ObserverProvider.cs" />
     <Compile Include="Observers\AddressBookClosedObserver.cs" />
     <Compile Include="Observers\AddressBookClosingObserver.cs" />
     <Compile Include="Observers\AddressBookOpenedObserver.cs" />

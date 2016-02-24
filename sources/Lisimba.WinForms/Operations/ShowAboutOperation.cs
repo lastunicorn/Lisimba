@@ -26,14 +26,14 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ShowAboutOperationDescription; }
         }
 
-        public ShowAboutOperation(UserInterface userInterface)
-            : base(userInterface)
+        public ShowAboutOperation(WindowSystem windowSystem)
+            : base(windowSystem)
         {
         }
 
         protected override void DoExecute(object parameter)
         {
-            userInterface.ShowAbout();
+            windowSystem.ShowAbout();
         }
     }
 }

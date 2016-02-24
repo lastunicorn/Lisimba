@@ -32,7 +32,6 @@ namespace DustInTheWind.Lisimba
 
             InitializeProgramArguments(args);
 
-            ConfigureObservers();
             ConfigureOperations();
 
             StartApplication();
@@ -42,12 +41,6 @@ namespace DustInTheWind.Lisimba
         {
             ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
             programArguments.Initialize(args);
-        }
-
-        private void ConfigureObservers()
-        {
-            ActiveObservers activeObservers = unityContainer.Resolve<ActiveObservers>();
-            ObserversSetup.Configure(activeObservers, unityContainer);
         }
 
         private void ConfigureOperations()

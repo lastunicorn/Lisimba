@@ -38,8 +38,8 @@ namespace DustInTheWind.Lisimba.MainMenu
             }
         }
 
-        public ImportMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
-            : base(applicationStatus, userInterface, operation)
+        public ImportMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
+            : base(applicationStatus, windowSystem, operation)
         {
         }
 

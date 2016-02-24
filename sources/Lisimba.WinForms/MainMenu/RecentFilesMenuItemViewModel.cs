@@ -28,8 +28,8 @@ namespace DustInTheWind.Lisimba.MainMenu
     {
         private readonly RecentFiles recentFiles;
 
-        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation, RecentFiles recentFiles)
-            : base(applicationStatus, userInterface, operation)
+        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation, RecentFiles recentFiles)
+            : base(applicationStatus, windowSystem, operation)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.MainMenu
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
             return recentFiles.GetAllFiles()
-                .Select((x, i) => new RecentFileMenuItemViewModel(applicationStatus, userInterface, ChildrenOpertion)
+                .Select((x, i) => new RecentFileMenuItemViewModel(applicationStatus, windowSystem, ChildrenOpertion)
                 {
                     File = x,
                     Index = i + 1

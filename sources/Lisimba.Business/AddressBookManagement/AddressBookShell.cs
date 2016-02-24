@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Egg.GateModel;
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     /// <summary>
-    /// Contains an opened address book and meta information about it like the location
+    /// Contains an opened address book and meta information about it, like the location
     /// from where it was openes and the gate used.
     /// </summary>
     public class AddressBookShell

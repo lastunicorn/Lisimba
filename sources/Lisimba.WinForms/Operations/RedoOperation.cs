@@ -30,8 +30,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.RedoOperationDescription; }
         }
 
-        public RedoOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
-            : base(userInterface)
+        public RedoOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 

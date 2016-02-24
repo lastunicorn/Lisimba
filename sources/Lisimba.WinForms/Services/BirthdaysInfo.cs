@@ -25,18 +25,18 @@ namespace DustInTheWind.Lisimba.Services
     class BirthdaysInfo
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
 
         private DateTime startDate;
         private DateTime endDate;
 
-        public BirthdaysInfo(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
+        public BirthdaysInfo(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
         }
 
         public void Show()
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Services
             if (!contacts.Any())
                 return;
 
-            userInterface.DisplayBirthdays(contacts, startDate, endDate);
+            windowSystem.DisplayBirthdays(contacts, startDate, endDate);
         }
 
         private IEnumerable<Contact> RetrieveContacts()

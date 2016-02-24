@@ -33,9 +33,9 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface,
+        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
             FileLocationProvider fileLocationProvider)
-            : base(userInterface)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");

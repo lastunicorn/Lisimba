@@ -14,21 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Observers;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Setup
 {
-    internal class ObserversSetup
+    internal class ObserverProvider : IObserverProvider
     {
-        public static void Configure(ActiveObservers activeObservers, IUnityContainer unityContainer)
+        private readonly IUnityContainer unityContainer;
+
+        public ObserverProvider(IUnityContainer unityContainer)
         {
-            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookOpenedObserver>());
-            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavedObserver>());
-            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookSavingObserver>());
-            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosingObserver>());
-            activeObservers.Observers.Add(unityContainer.Resolve<AddressBookClosedObserver>());
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+            this.unityContainer = unityContainer;
+        }
+
+        public IEnumerable<IObserver> GetNewObservers()
+        {
+            yield return unityContainer.Resolve<AddressBookOpenedObserver>();
+            yield return unityContainer.Resolve<AddressBookSavingObserver>();
+            yield return unityContainer.Resolve<AddressBookSavedObserver>();
+            yield return unityContainer.Resolve<AddressBookClosingObserver>();
+            yield return unityContainer.Resolve<AddressBookClosedObserver>();
         }
     }
 }

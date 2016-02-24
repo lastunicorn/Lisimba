@@ -28,21 +28,21 @@ namespace DustInTheWind.Lisimba.Forms
     internal class AddContactPresenter : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
 
         public Contact EditedContact { get; private set; }
 
         public IAddContactView View { get; set; }
         public ContactEditorViewModel ContactEditorViewModel { get; set; }
 
-        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel, OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
+        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel, OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             ContactEditorViewModel = contactEditorViewModel;
             this.openedAddressBooks = openedAddressBooks;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
         }
 
         public void ViewWasLoaded()
@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Forms
             }
             catch (Exception ex)
             {
-                userInterface.DisplayError(ex.Message);
+                windowSystem.DisplayError(ex.Message);
             }
         }
 
@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.Forms
             bool isAnotherContactWithSameName = openedAddressBooks.Current.AddressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
 
             return !isAnotherContactWithSameName ||
-                userInterface.DisplayYesNoExclamation("Another contact with the same name already exists.\nIt will NOT be overwritten.\n\nContinue?", "Another contact exists");
+                windowSystem.DisplayYesNoExclamation("Another contact with the same name already exists.\nIt will NOT be overwritten.\n\nContinue?", "Another contact exists");
         }
 
         public void CloseButtonWasClicked()

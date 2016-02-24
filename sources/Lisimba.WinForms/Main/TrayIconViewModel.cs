@@ -15,8 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.ComponentModel;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.WinFormsCommon;
 
@@ -24,7 +22,7 @@ namespace DustInTheWind.Lisimba.Main
 {
     internal class TrayIconViewModel : ViewModelBase
     {
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
         private TrayIcon trayIcon;
 
         public TrayIconMenuViewModels TrayIconMenuViewModels { get; private set; }
@@ -39,18 +37,18 @@ namespace DustInTheWind.Lisimba.Main
             }
         }
 
-        public TrayIconViewModel(UserInterface userInterface, TrayIconMenuViewModels trayIconMenuViewModels)
+        public TrayIconViewModel(WindowSystem windowSystem, TrayIconMenuViewModels trayIconMenuViewModels)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
 
             TrayIconMenuViewModels = trayIconMenuViewModels;
         }
 
         public void IconWasDoubleClicked()
         {
-            userInterface.DisplayMainWindow();
+            windowSystem.DisplayMainWindow();
         }
     }
 }

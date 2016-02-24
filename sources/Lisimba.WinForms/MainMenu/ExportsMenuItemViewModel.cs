@@ -28,8 +28,8 @@ namespace DustInTheWind.Lisimba.MainMenu
     {
         private readonly AvailableGates availableGates;
 
-        public ExportsMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation, AvailableGates availableGates)
-            : base(applicationStatus, userInterface, operation)
+        public ExportsMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation, AvailableGates availableGates)
+            : base(applicationStatus, windowSystem, operation)
         {
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.MainMenu
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
             return availableGates.GetAllGates()
-                .Select(x => new ExportMenuItemViewModel(applicationStatus, userInterface, ChildrenOpertion)
+                .Select(x => new ExportMenuItemViewModel(applicationStatus, windowSystem, ChildrenOpertion)
                 {
                     Text = x.Name,
                     Gate = x

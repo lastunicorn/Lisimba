@@ -22,8 +22,8 @@ namespace DustInTheWind.Lisimba.Operations
 {
     internal class ImportOperation : OperationBase<IGate>
     {
-        public ImportOperation(UserInterface userInterface)
-            : base(userInterface)
+        public ImportOperation(WindowSystem windowSystem)
+            : base(windowSystem)
         {
         }
 
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(IGate gate)
         {
-            userInterface.DisplayInfo("Import using " + gate.Name + ".");
+            windowSystem.DisplayInfo("Import using " + gate.Name + ".");
         }
     }
 }

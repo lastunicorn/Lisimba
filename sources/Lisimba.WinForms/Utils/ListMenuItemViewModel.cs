@@ -37,8 +37,8 @@ namespace DustInTheWind.Lisimba.Utils
             }
         }
 
-        public ListMenuItemViewModel(ApplicationStatus applicationStatus, UserInterface userInterface, IOperation operation)
-            : base(applicationStatus, userInterface, operation)
+        public ListMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
+            : base(applicationStatus, windowSystem, operation)
         {
             Items = new ObservableCollection<CustomButtonViewModel>();
         }

@@ -25,17 +25,17 @@ namespace DustInTheWind.Lisimba.LocationProviders
 
     class FileLocationProvider
     {
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
 
         public string Extension { get; set; }
         public string FileTypeName { get; set; }
         public bool DisplayAllFilesFilter { get; set; }
 
-        public FileLocationProvider(UserInterface userInterface)
+        public FileLocationProvider(WindowSystem windowSystem)
         {
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
 
             Extension = "lsb";
             FileTypeName = "Lisimba Files";
@@ -44,12 +44,12 @@ namespace DustInTheWind.Lisimba.LocationProviders
 
         public string AskToSave()
         {
-            return userInterface.AskToSave(Extension, BuildFilter());
+            return windowSystem.AskToSave(Extension, BuildFilter());
         }
 
         public string AskToOpen()
         {
-            return userInterface.AskToOpen(Extension, BuildFilter());
+            return windowSystem.AskToOpen(Extension, BuildFilter());
         }
 
         private string BuildFilter()

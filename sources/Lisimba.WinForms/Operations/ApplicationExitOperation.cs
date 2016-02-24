@@ -30,8 +30,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ApplicationExitOperationDescription; }
         }
 
-        public ApplicationExitOperation(LisimbaApplication lisimbaApplication, UserInterface userInterface)
-            : base(userInterface)
+        public ApplicationExitOperation(LisimbaApplication lisimbaApplication, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
 

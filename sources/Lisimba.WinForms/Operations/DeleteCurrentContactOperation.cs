@@ -31,8 +31,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.DeleteCurrentContactOperationDescription; }
         }
 
-        public DeleteCurrentContactOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
-            : base(userInterface)
+        public DeleteCurrentContactOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
@@ -77,7 +77,7 @@ namespace DustInTheWind.Lisimba.Operations
             string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
             string title = LocalizedResources.ContactDelete_ConfirmationTitle;
 
-            return userInterface.DisplayYesNoExclamation(text, title);
+            return windowSystem.DisplayYesNoExclamation(text, title);
         }
     }
 }

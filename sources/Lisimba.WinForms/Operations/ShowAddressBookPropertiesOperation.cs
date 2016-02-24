@@ -30,8 +30,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesOperation(OpenedAddressBooks openedAddressBooks, UserInterface userInterface)
-            : base(userInterface)
+        public ShowAddressBookPropertiesOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         private void DisplayAddressBookPropertiesWindow()
         {
-            userInterface.DisplayAddressBookProperties();
+            windowSystem.DisplayAddressBookProperties();
         }
     }
 }

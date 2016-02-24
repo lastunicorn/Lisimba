@@ -35,7 +35,7 @@ namespace DustInTheWind.Lisimba.Main
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableOperations availableOperations;
         private readonly AvailableGates availableGates;
-        private readonly UserInterface userInterface;
+        private readonly WindowSystem windowSystem;
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly ApplicationStatus applicationStatus;
         private readonly LisimbaApplication lisimbaApplication;
@@ -110,7 +110,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
-            AvailableOperations availableOperations, AvailableGates availableGates, UserInterface userInterface,
+            AvailableOperations availableOperations, AvailableGates availableGates, WindowSystem windowSystem,
             MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
@@ -120,7 +120,7 @@ namespace DustInTheWind.Lisimba.Main
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
 
@@ -129,7 +129,7 @@ namespace DustInTheWind.Lisimba.Main
             this.openedAddressBooks = openedAddressBooks;
             this.availableOperations = availableOperations;
             this.availableGates = availableGates;
-            this.userInterface = userInterface;
+            this.windowSystem = windowSystem;
             this.viewModelProvider = viewModelProvider;
 
             MainMenusViewModels = mainMenusViewModels;
@@ -249,7 +249,7 @@ namespace DustInTheWind.Lisimba.Main
 
         public void DefaultGateWasClicked(Point point)
         {
-            userInterface.ShowGateSelector(point);
+            windowSystem.ShowGateSelector(point);
         }
     }
 }

@@ -34,8 +34,8 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.ExportOperationDescription; }
         }
 
-        public ExportOperation(UserInterface userInterface, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
-            : base(userInterface)
+        public ExportOperation(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");

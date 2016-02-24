@@ -14,32 +14,36 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 
 namespace DustInTheWind.Lisimba.Business
 {
     public class ActiveObservers
     {
-        public List<IObserver> Observers { get; private set; }
+        private readonly List<IObserver> observers;
 
-        public ActiveObservers()
+        public ActiveObservers(IObserverProvider observerProvider)
         {
-            Observers = new List<IObserver>();
+            if (observerProvider == null) throw new ArgumentNullException("observerProvider");
+
+            IEnumerable<IObserver> observers = observerProvider.GetNewObservers();
+            this.observers = new List<IObserver>(observers);
         }
 
         public void Start()
         {
-            foreach (IObserver observer in Observers)
+            foreach (IObserver observer in observers)
                 observer.Start();
         }
 
         public void Stop()
         {
-            if (Observers != null)
-            {
-                foreach (IObserver observer in Observers)
-                    observer.Stop();
-            }
+            if (observers == null)
+                return;
+
+            foreach (IObserver observer in observers)
+                observer.Stop();
         }
     }
 }
