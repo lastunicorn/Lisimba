@@ -21,18 +21,24 @@ namespace DustInTheWind.Lisimba.Business
 {
     public class ActiveObservers
     {
-        private readonly List<IObserver> observers;
+        private readonly IObserverProvider observerProvider;
+        private List<IObserver> observers;
 
         public ActiveObservers(IObserverProvider observerProvider)
         {
             if (observerProvider == null) throw new ArgumentNullException("observerProvider");
 
-            IEnumerable<IObserver> newObservers = observerProvider.GetNewObservers();
-            observers = new List<IObserver>(newObservers);
+            this.observerProvider = observerProvider;
         }
 
         public void Start()
         {
+            if (observers == null)
+            {
+                IEnumerable<IObserver> newObservers = observerProvider.GetNewObservers();
+                observers = new List<IObserver>(newObservers);
+            }
+
             foreach (IObserver observer in observers)
                 observer.Start();
         }
