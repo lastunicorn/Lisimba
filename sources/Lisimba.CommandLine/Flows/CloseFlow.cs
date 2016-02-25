@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
@@ -36,7 +37,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
             if (openedAddressBooks.Current != null)
                 openedAddressBooks.CloseCurrentAddressBook();

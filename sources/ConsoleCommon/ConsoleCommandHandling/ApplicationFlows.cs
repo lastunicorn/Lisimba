@@ -60,12 +60,13 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
             return GetEnumerator();
         }
 
-        public bool ContainsFlow(string name)
+        public void HandleCommand(ConsoleCommand consoleCommand)
         {
-            return flows.ContainsKey(name);
+            IFlow flow = GetFlow(consoleCommand.Name);
+            flow.Execute(consoleCommand.Parameters);
         }
 
-        public IFlow GetFlow(string commandName)
+        private IFlow GetFlow(string commandName)
         {
             bool existsFlow = flows.ContainsKey(commandName);
 

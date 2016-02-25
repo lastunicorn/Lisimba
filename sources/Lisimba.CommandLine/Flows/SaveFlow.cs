@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
@@ -43,14 +44,14 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.availableGates = availableGates;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
-            if (consoleCommand.ParameterCount >= 1)
+            if (parameters.Count >= 1)
             {
-                string newLocation = consoleCommand[1];
+                string newLocation = parameters[0];
 
                 if (File.Exists(newLocation))
                 {
@@ -60,9 +61,9 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                         return;
                 }
 
-                if (consoleCommand.ParameterCount >= 2)
+                if (parameters.Count >= 2)
                 {
-                    IGate gate = availableGates.GetGate(consoleCommand[2]);
+                    IGate gate = availableGates.GetGate(parameters[1]);
                     openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
                 }
                 else

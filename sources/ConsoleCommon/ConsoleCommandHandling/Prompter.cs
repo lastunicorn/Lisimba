@@ -26,18 +26,18 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
     {
         private readonly EnhancedConsole console;
         private readonly ApplicationFlows applicationFlows;
-        private readonly IPrompterTextBuilder prompterTextBuilder;
+        private readonly IPrompterTextProvider prompterTextProvider;
         private bool stopRequested;
 
-        public Prompter(EnhancedConsole console, ApplicationFlows applicationFlows, IPrompterTextBuilder prompterTextBuilder)
+        public Prompter(EnhancedConsole console, ApplicationFlows applicationFlows, IPrompterTextProvider prompterTextProvider)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (applicationFlows == null) throw new ArgumentNullException("applicationFlows");
-            if (prompterTextBuilder == null) throw new ArgumentNullException("prompterTextBuilder");
+            if (prompterTextProvider == null) throw new ArgumentNullException("prompterTextProvider");
 
             this.console = console;
             this.applicationFlows = applicationFlows;
-            this.prompterTextBuilder = prompterTextBuilder;
+            this.prompterTextProvider = prompterTextProvider;
         }
 
         public void Run()
@@ -56,7 +56,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 
         private void DisplayPrompter()
         {
-            ConsoleTemplate consoleTemplate = prompterTextBuilder.BuildTemplate();
+            ConsoleTemplate consoleTemplate = prompterTextProvider.BuildTemplate();
 
             console.WriteLine();
             console.DisplayTemplate(consoleTemplate);
@@ -72,8 +72,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
         {
             try
             {
-                IFlow flow = applicationFlows.GetFlow(consoleCommand.Name);
-                flow.Execute(consoleCommand);
+                applicationFlows.HandleCommand(consoleCommand);
             }
             catch (Exception ex)
             {

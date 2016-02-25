@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.ConsoleCommon.Templating;
@@ -39,15 +40,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
-            if (consoleCommand.ParameterCount == 0)
+            if (parameters.Count == 0)
             {
                 DisplayGate(availableGates.DefaultGate);
             }
             else
             {
-                availableGates.SetDefaultGate(consoleCommand[1]);
+                availableGates.SetDefaultGate(parameters[1]);
 
                 DisplayGateChangeSuccess();
                 DisplayGate(availableGates.DefaultGate);

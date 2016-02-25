@@ -21,11 +21,11 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
-    internal class PrompterTextBuilder : IPrompterTextBuilder
+    internal class PrompterTextProvider : IPrompterTextProvider
     {
         private readonly OpenedAddressBooks openedAddressBooks;
 
-        public PrompterTextBuilder(OpenedAddressBooks openedAddressBooks)
+        public PrompterTextProvider(OpenedAddressBooks openedAddressBooks)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             this.openedAddressBooks = openedAddressBooks;

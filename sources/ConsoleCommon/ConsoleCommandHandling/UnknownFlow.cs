@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon.Properties;
 
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
@@ -30,7 +31,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
             this.console = console;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
             console.WriteLineError(Resources.UnknownCommandError);
         }

@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using DustInTheWind.ConsoleCommon;
@@ -40,12 +41,12 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
             if (openedAddressBooks.Current != null)
             {
-                if (consoleCommand.HasParameters)
-                    DisplayContactDetails(consoleCommand[1]);
+                if (parameters != null && parameters.Count > 0)
+                    DisplayContactDetails(parameters[0]);
                 else
                     DisplayAllContacts();
             }

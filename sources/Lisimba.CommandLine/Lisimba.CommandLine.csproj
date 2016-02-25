@@ -44,7 +44,7 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Business\PrompterTextBuilder.cs" />
+    <Compile Include="Business\PrompterTextProvider.cs" />
     <Compile Include="Business\ViewTemplates.cs" />
     <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Observers\AddressBookSavingObserver.cs" />

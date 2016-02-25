@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 
@@ -31,7 +32,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.lisimbaApplication = lisimbaApplication;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
             lisimbaApplication.Exit();
         }

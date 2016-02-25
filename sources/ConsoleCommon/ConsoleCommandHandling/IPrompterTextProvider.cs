@@ -18,7 +18,7 @@ using DustInTheWind.ConsoleCommon.Templating;
 
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
-    public interface IPrompterTextBuilder
+    public interface IPrompterTextProvider
     {
         ConsoleTemplate BuildTemplate();
     }

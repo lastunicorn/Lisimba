@@ -16,6 +16,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
@@ -37,6 +38,11 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
         public int ParameterCount
         {
             get { return parameters.Count; }
+        }
+
+        public ReadOnlyCollection<string> Parameters
+        {
+            get { return parameters.AsReadOnly(); }
         }
 
         public string this[int index]

@@ -44,7 +44,7 @@
     <Compile Include="ConsoleCommandHandling\CommandSplitter.cs" />
     <Compile Include="ConsoleCommandHandling\EmptyFlow.cs" />
     <Compile Include="ConsoleCommandHandling\IFlowProvider.cs" />
-    <Compile Include="ConsoleCommandHandling\IPrompterTextBuilder.cs" />
+    <Compile Include="ConsoleCommandHandling\IPrompterTextProvider.cs" />
     <Compile Include="ConsoleCommandHandling\Prompter.cs" />
     <Compile Include="ConsoleCommandHandling\UnknownFlow.cs" />
     <Compile Include="Properties\Resources.Designer.cs">

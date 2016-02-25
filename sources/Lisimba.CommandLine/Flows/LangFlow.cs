@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
@@ -37,9 +38,9 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
-            if (!consoleCommand.HasParameters)
+            if (parameters == null || parameters.Count == 0)
             {
                 console.WriteLine();
                 CultureInfo culture = CultureInfo.CurrentUICulture;
@@ -48,7 +49,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             }
             else
             {
-                if (consoleCommand[1] == "all")
+                if (parameters[0] == "all")
                 {
                     console.WriteLine();
 
@@ -65,7 +66,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 }
                 else
                 {
-                    string cultureName = consoleCommand[1];
+                    string cultureName = parameters[0];
                     CultureInfo culture = CultureInfo.GetCultureInfo(cultureName);
 
                     Thread.CurrentThread.CurrentUICulture = culture;

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
@@ -31,9 +32,9 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.openedAddressBooks = openedAddressBooks;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
-            openedAddressBooks.CreateNewAddressBook(consoleCommand[1]);
+            openedAddressBooks.CreateNewAddressBook(parameters[0]);
         }
     }
 }

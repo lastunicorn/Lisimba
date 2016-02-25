@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.ObjectModel;
+
 namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
 {
     /// <summary>
@@ -22,6 +24,6 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
     /// </summary>
     public interface IFlow
     {
-        void Execute(ConsoleCommand consoleCommand);
+        void Execute(ReadOnlyCollection<string> parameters);
     }
 }

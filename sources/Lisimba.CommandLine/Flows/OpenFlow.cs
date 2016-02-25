@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
@@ -44,27 +46,27 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.config = config;
         }
 
-        public void Execute(ConsoleCommand consoleCommand)
+        public void Execute(ReadOnlyCollection<string> parameters)
         {
-            if (consoleCommand.HasParameters)
-                OpenAddressBookFromCommand(consoleCommand);
+            if (parameters != null && parameters.Count > 0)
+                OpenAddressBookFromCommand(parameters);
             else
                 OpenLastAddressBook();
         }
 
-        private void OpenAddressBookFromCommand(ConsoleCommand consoleCommand)
+        private void OpenAddressBookFromCommand(IReadOnlyList<string> parameters)
         {
-            string fileName = consoleCommand[1];
-            IGate gate = GetGateFromCommand(consoleCommand);
+            string fileName = parameters[0];
+            IGate gate = GetGateFromCommand(parameters);
 
             openedAddressBooks.OpenAddressBook(fileName, gate);
         }
 
-        private IGate GetGateFromCommand(ConsoleCommand consoleCommand)
+        private IGate GetGateFromCommand(IReadOnlyList<string> parameters)
         {
-            if (consoleCommand.ParameterCount >= 2)
+            if (parameters.Count >= 2)
             {
-                string gateId = consoleCommand[2];
+                string gateId = parameters[1];
                 return availableGates.GetGate(gateId);
             }
 

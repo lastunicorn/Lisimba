@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             container.RegisterType<IFlowProvider, FlowProvider>();
             container.RegisterType<IObserverProvider, ObserverProvider>();
-            container.RegisterType<IPrompterTextBuilder, PrompterTextBuilder>();
+            container.RegisterType<IPrompterTextProvider, PrompterTextProvider>();
             container.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return container;
