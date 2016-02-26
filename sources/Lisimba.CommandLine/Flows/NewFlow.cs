@@ -34,7 +34,11 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         public void Execute(ReadOnlyCollection<string> parameters)
         {
-            openedAddressBooks.CreateNewAddressBook(parameters[0]);
+            string newName = (parameters != null && parameters.Count > 0)
+                ? parameters[0]
+                : null;
+
+            openedAddressBooks.CreateNewAddressBook(newName);
         }
     }
 }

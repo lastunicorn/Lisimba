@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
-            if (parameters.Count >= 1)
+            if (parameters.Count > 0)
             {
                 string newLocation = parameters[0];
 
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             else
             {
                 // todo: what happens if Current does not have a gate?
-                openedAddressBooks.SaveCurrentAddressBook();
+                openedAddressBooks.Current.SaveAddressBook();
             }
         }
     }
