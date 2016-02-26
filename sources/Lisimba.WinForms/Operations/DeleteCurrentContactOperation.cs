@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Operations
 
             if (allowToContinue)
             {
-                openedAddressBooks.Current.ActionQueue.DeleteContact(contactToDelete);
+                openedAddressBooks.Current.DeleteContact(contactToDelete);
                 //openedAddressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
 
                 if (ReferenceEquals(contactToDelete, openedAddressBooks.Contact))

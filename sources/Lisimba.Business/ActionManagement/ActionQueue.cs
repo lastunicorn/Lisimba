@@ -16,25 +16,17 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.ActionManagement
 {
     public class ActionQueue
     {
-        private readonly AddressBook addressBook;
         private readonly Stack<IAction> undoList = new Stack<IAction>();
         private readonly Stack<IAction> redoList = new Stack<IAction>();
         private readonly object synchronizationToken = new object();
 
         public event EventHandler UndoStackChanged;
         public event EventHandler RedoStackChanged;
-
-        public ActionQueue(AddressBook addressBook)
-        {
-            if (addressBook == null) throw new ArgumentNullException("addressBook");
-            this.addressBook = addressBook;
-        }
 
         public bool CanUndo
         {
@@ -88,28 +80,6 @@ namespace DustInTheWind.Lisimba.Business.ActionManagement
                 OnRedoStackChanged();
                 OnUndoStackChanged();
             }
-        }
-
-        public void ChangeAddressBookName(string newName)
-        {
-            IAction action = new RenameAddressBookAction(addressBook, newName);
-            Do(action);
-        }
-
-        public void AddContact(Contact contact)
-        {
-            if (contact == null) throw new ArgumentNullException("contact");
-
-            IAction action = new AddContactAction(addressBook, contact);
-            Do(action);
-        }
-
-        public void DeleteContact(Contact contact)
-        {
-            if (contact == null) throw new ArgumentNullException("contact");
-
-            IAction action = new DeleteContactAction(addressBook, contact);
-            Do(action);
         }
 
         protected virtual void OnUndoStackChanged()

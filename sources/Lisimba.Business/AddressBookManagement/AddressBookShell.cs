@@ -72,7 +72,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             status = location == null ? AddressBookStatus.New : AddressBookStatus.Saved;
 
-            ActionQueue = new ActionQueue(addressBook);
+            ActionQueue = new ActionQueue();
 
             AddressBook.Changed += HandleAddressBookChanged;
         }
@@ -167,6 +167,28 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (gate == null) throw new ArgumentNullException("gate");
 
             gate.Save(AddressBook, location);
+        }
+
+        public void ChangeAddressBookName(string newName)
+        {
+            IAction action = new RenameAddressBookAction(AddressBook, newName);
+            ActionQueue.Do(action);
+        }
+
+        public void AddContact(Contact contact)
+        {
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            IAction action = new AddContactAction(AddressBook, contact);
+            ActionQueue.Do(action);
+        }
+
+        public void DeleteContact(Contact contact)
+        {
+            if (contact == null) throw new ArgumentNullException("contact");
+
+            IAction action = new DeleteContactAction(AddressBook, contact);
+            ActionQueue.Do(action);
         }
 
         protected virtual void OnSaved()

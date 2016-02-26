@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Forms
                 if (!allowToContinue)
                     return;
 
-                openedAddressBooks.Current.ActionQueue.AddContact(EditedContact);
+                openedAddressBooks.Current.AddContact(EditedContact);
 
                 View.Close();
             }
