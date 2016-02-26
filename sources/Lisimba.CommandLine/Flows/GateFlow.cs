@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.ConsoleCommon.Templating;
@@ -40,7 +40,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.console = console;
         }
 
-        public void Execute(ReadOnlyCollection<string> parameters)
+        public void Execute(IList<string> parameters)
         {
             if (parameters.Count == 0)
             {

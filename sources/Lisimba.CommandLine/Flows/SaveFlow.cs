@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.IO;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.availableGates = availableGates;
         }
 
-        public void Execute(ReadOnlyCollection<string> parameters)
+        public void Execute(IList<string> parameters)
         {
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);

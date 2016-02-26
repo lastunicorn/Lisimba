@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
@@ -46,7 +45,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.config = config;
         }
 
-        public void Execute(ReadOnlyCollection<string> parameters)
+        public void Execute(IList<string> parameters)
         {
             if (parameters != null && parameters.Count > 0)
                 OpenAddressBookFromCommand(parameters);
@@ -54,7 +53,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 OpenLastAddressBook();
         }
 
-        private void OpenAddressBookFromCommand(IReadOnlyList<string> parameters)
+        private void OpenAddressBookFromCommand(IList<string> parameters)
         {
             string fileName = parameters[0];
             IGate gate = GetGateFromCommand(parameters);
@@ -62,7 +61,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             openedAddressBooks.OpenAddressBook(fileName, gate);
         }
 
-        private IGate GetGateFromCommand(IReadOnlyList<string> parameters)
+        private IGate GetGateFromCommand(IList<string> parameters)
         {
             if (parameters.Count >= 2)
             {

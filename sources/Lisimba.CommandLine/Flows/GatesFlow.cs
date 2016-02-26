@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business.GateManagement;
@@ -38,7 +37,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             this.availableGates = availableGates;
         }
 
-        public void Execute(ReadOnlyCollection<string> parameters)
+        public void Execute(IList<string> parameters)
         {
             IEnumerable<IGate> gates = availableGates.GetAllGates();
 
