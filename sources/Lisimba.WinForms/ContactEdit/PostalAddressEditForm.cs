@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
 
@@ -22,7 +23,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class PostalAddressEditForm : EditBaseForm
     {
         private PostalAddress postalAddress;
-        private bool addMode;
 
         public PostalAddress PostalAddress
         {
@@ -34,24 +34,13 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? Resources.AddPostalAddress_WindowTitle : Resources.EditPostalAddress_WindowTitle;
-            }
-        }
-
         public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public PostalAddressEditForm()
         {
             InitializeComponent();
 
-            AddMode = false;
+            EditMode = EditMode.Create;
 
             textBoxAddress.KeyDown += HandleFormKeyDown;
             textBoxCity.KeyDown += HandleFormKeyDown;
@@ -61,27 +50,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override void OnEditModeChanged()
         {
-            bool dataWasChanged = UserChangedData();
-
-            if (!dataWasChanged)
-                return;
-
-            ReadDataFromView();
-
-            if (AddMode && ContactItems != null)
-                ContactItems.Add(postalAddress);
-        }
-
-        private bool UserChangedData()
-        {
-            return !postalAddress.Street.Equals(textBoxAddress.Text) ||
-                   !postalAddress.City.Equals(textBoxCity.Text) ||
-                   !postalAddress.PostalCode.Equals(textBoxZip.Text) ||
-                   !postalAddress.State.Equals(textBoxState.Text) ||
-                   !postalAddress.Country.Equals(textBoxCountry.Text) ||
-                   !postalAddress.Description.Equals(textBoxComments.Text);
+            Text = EditMode == EditMode.Create ? Resources.AddPostalAddress_WindowTitle : Resources.EditPostalAddress_WindowTitle;
+            base.OnEditModeChanged();
         }
 
         private void DisplayDataInView()
@@ -94,14 +66,46 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.Text = postalAddress.Description;
         }
 
-        private void ReadDataFromView()
+        protected override bool IsDataChanged()
         {
-            postalAddress.Street = textBoxAddress.Text;
-            postalAddress.City = textBoxCity.Text;
-            postalAddress.PostalCode = textBoxZip.Text;
-            postalAddress.State = textBoxState.Text;
-            postalAddress.Country = textBoxCountry.Text;
-            postalAddress.Description = textBoxComments.Text;
+            if (postalAddress == null)
+                return textBoxAddress.Text.Length > 0 ||
+                       textBoxCity.Text.Length > 0 ||
+                       textBoxZip.Text.Length > 0 ||
+                       textBoxState.Text.Length > 0 ||
+                       textBoxCountry.Text.Length > 0 ||
+                       textBoxComments.Text.Length > 0;
+
+            return !postalAddress.Street.Equals(textBoxAddress.Text) ||
+                !postalAddress.City.Equals(textBoxCity.Text) ||
+                !postalAddress.PostalCode.Equals(textBoxZip.Text) ||
+                !postalAddress.State.Equals(textBoxState.Text) ||
+                !postalAddress.Country.Equals(textBoxCountry.Text) ||
+                !postalAddress.Description.Equals(textBoxComments.Text);
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            PostalAddress newPostalAddress = ReadPostalAddressFromView();
+            return new CreateContactItemAction(ContactItems, newPostalAddress);
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            PostalAddress newPostalAddress = ReadPostalAddressFromView();
+            return new UpdateContactItemAction(postalAddress, newPostalAddress);
+        }
+
+        private PostalAddress ReadPostalAddressFromView()
+        {
+            string newStreet = textBoxAddress.Text;
+            string newCity = textBoxCity.Text;
+            string newPostalCode = textBoxZip.Text;
+            string newState = textBoxState.Text;
+            string newCountry = textBoxCountry.Text;
+            string newDescription = textBoxComments.Text;
+
+            return new PostalAddress(newStreet, newCity, newState, newPostalCode, newCountry, newDescription);
         }
     }
 }

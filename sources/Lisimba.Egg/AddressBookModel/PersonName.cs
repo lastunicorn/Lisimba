@@ -19,7 +19,7 @@ using System.Text;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class PersonName : IEquatable<PersonName>
+    public class PersonName : ContactItem, IEquatable<PersonName>
     {
         private string firstName = string.Empty;
 
@@ -124,6 +124,16 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             OnChanged();
         }
 
+        public override void CopyFrom(ContactItem contactItem)
+        {
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            PersonName personName = contactItem as PersonName;
+
+            if (personName != null)
+                CopyFrom(personName);
+        }
+
         /// <summary>
         /// Copy all the informations from the specified <see cref="PersonName"/> object to the current instance. All the existing data will be lost.
         /// </summary>
@@ -136,6 +146,11 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             nickname = name.nickname;
 
             OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new PersonName(firstName, middleName, lastName, nickname);
         }
 
         public bool IsEmpty()

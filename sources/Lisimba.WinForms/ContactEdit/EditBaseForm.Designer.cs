@@ -110,9 +110,9 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Edit";
-            this.Activated += new System.EventHandler(this.FormEditBase_Activated);
-            this.Deactivate += new System.EventHandler(this.FormEditBase_Deactivate);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormEditBase_FormClosing);
+            this.Activated += new System.EventHandler(this.HandleFormActivated);
+            this.Deactivate += new System.EventHandler(this.HandleFormDeactivate);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.HandleFormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.HandleFormKeyDown);
             this.panelOuterContainer.ResumeLayout(false);
             this.panelOuterContainer.PerformLayout();

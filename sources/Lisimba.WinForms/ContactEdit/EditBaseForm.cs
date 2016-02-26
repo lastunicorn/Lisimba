@@ -17,28 +17,34 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class EditBaseForm : Form
+    public abstract partial class EditBaseForm : Form
     {
-        public EditBaseForm()
+        private EditMode editMode;
+
+        public EditMode EditMode
+        {
+            get { return editMode; }
+            set
+            {
+                editMode = value;
+                OnEditModeChanged();
+            }
+        }
+
+        public ActionQueue ActionQueue { get; set; }
+
+        public event EventHandler EditModeChanged;
+
+        protected EditBaseForm()
         {
             InitializeComponent();
         }
 
-        protected virtual void UpdateData()
-        {
-        }
-
-        protected void AcceptChanges()
-        {
-            DialogResult = DialogResult.OK;
-            UpdateData();
-            Close();
-        }
-
-        private void FormEditBase_Activated(object sender, EventArgs e)
+        private void HandleFormActivated(object sender, EventArgs e)
         {
             DialogResult = DialogResult.None;
 
@@ -63,17 +69,15 @@ namespace DustInTheWind.Lisimba.ContactEdit
             Location = new Point(x, y);
         }
 
-        private void FormEditBase_Deactivate(object sender, EventArgs e)
+        private void HandleFormDeactivate(object sender, EventArgs e)
         {
             if (DialogResult != DialogResult.None)
                 return;
 
-            DialogResult = DialogResult.OK;
-            UpdateData();
-            Close();
+            AcceptChanges();
         }
 
-        public void HandleFormKeyDown(object sender, KeyEventArgs e)
+        protected void HandleFormKeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -88,7 +92,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        private void FormEditBase_FormClosing(object sender, FormClosingEventArgs e)
+        private void HandleFormClosing(object sender, FormClosingEventArgs e)
         {
             if (DialogResult == DialogResult.None)
                 DialogResult = DialogResult.Cancel;
@@ -102,6 +106,42 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void HandleButtonCancelClick(object sender, EventArgs e)
         {
             Close();
+        }
+
+        protected void AcceptChanges()
+        {
+            DialogResult = DialogResult.OK;
+            UpdateData();
+            Close();
+        }
+
+        protected void UpdateData()
+        {
+            bool isDataChanged = IsDataChanged();
+
+            if (!isDataChanged)
+                return;
+
+            IAction action = EditMode == EditMode.Create
+                ? GetCreateAction()
+                : GetUpdateAction();
+
+            if (ActionQueue != null)
+                ActionQueue.Do(action);
+            else
+                action.Do();
+        }
+
+        protected abstract bool IsDataChanged();
+        protected abstract IAction GetCreateAction();
+        protected abstract IAction GetUpdateAction();
+
+        protected virtual void OnEditModeChanged()
+        {
+            EventHandler handler = EditModeChanged;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
     }
 }

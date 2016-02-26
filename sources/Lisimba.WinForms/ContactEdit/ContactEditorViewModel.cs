@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.WinFormsCommon;
 
@@ -32,6 +33,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private PersonName name;
 
         public IContactEditorView View { get; set; }
+
+        public ActionQueue ActionQueue { get; set; }
 
         public Contact Contact
         {
@@ -82,7 +85,14 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 OnPropertyChanged();
 
                 if (!isInitializationMode)
-                    contact.Notes = notes;
+                {
+                    IAction action = new ChangeContactNotesAction(contact, notes);
+
+                    if (ActionQueue != null)
+                        ActionQueue.Do(action);
+                    else
+                        action.Do();
+                }
             }
         }
 
@@ -143,7 +153,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
         private void DisplayContactInView()
         {
-            Name = Contact.Name;
+            Name = contact.Name;
             Birthday = contact.Birthday;
             ZodiacSign = contact.ZodiacSign;
 

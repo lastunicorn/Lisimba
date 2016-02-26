@@ -199,6 +199,7 @@ namespace DustInTheWind.Lisimba.Main
         private void HandleContactChanged(object sender, EventArgs e)
         {
             IsContactEditVisible = openedAddressBooks.Contact != null;
+            ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
             ContactEditorViewModel.Contact = openedAddressBooks.Contact;
         }
 

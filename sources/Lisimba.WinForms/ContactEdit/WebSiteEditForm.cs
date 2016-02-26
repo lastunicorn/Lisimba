@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -21,7 +22,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class WebSiteEditForm : EditBaseForm
     {
         private WebSite webSite;
-        private bool addMode;
 
         public WebSite WebSite
         {
@@ -34,46 +34,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? "Add Web Site" : "Edit Web Site";
-            }
-        }
-
         public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public WebSiteEditForm()
         {
             InitializeComponent();
 
-            AddMode = false;
+            EditMode = EditMode.Create;
 
             textBoxAddress.KeyDown += HandleFormKeyDown;
             textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override void OnEditModeChanged()
         {
-            bool isAnyDataChanged = UserChangedData();
-
-            if (!isAnyDataChanged)
-                return;
-
-            ReadDataFromView();
-
-            if (AddMode && ContactItems != null)
-                ContactItems.Add(webSite);
-        }
-
-        private bool UserChangedData()
-        {
-            return !webSite.Address.Equals(textBoxAddress.Text) ||
-                   !webSite.Description.Equals(textBoxComments.Text);
+            Text = EditMode == EditMode.Create ? "Add Web Site" : "Edit Web Site";
+            base.OnEditModeChanged();
         }
 
         private void DisplayDataInView()
@@ -82,10 +58,34 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.Text = webSite.Description;
         }
 
-        private void ReadDataFromView()
+        protected override bool IsDataChanged()
         {
-            webSite.Address = textBoxAddress.Text;
-            webSite.Description = textBoxComments.Text;
+            if (webSite == null)
+                return textBoxAddress.Text.Length > 0 ||
+                       textBoxComments.Text.Length > 0;
+
+            return !webSite.Address.Equals(textBoxAddress.Text) ||
+                !webSite.Description.Equals(textBoxComments.Text);
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            WebSite newWebSite = ReadWebSiteFromView();
+            return new CreateContactItemAction(ContactItems, newWebSite);
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            WebSite newWebSite = ReadWebSiteFromView();
+            return new UpdateContactItemAction(webSite, newWebSite);
+        }
+
+        private WebSite ReadWebSiteFromView()
+        {
+            string newAddress = textBoxAddress.Text;
+            string newDescription = textBoxComments.Text;
+
+            return new WebSite(newAddress, newDescription);
         }
     }
 }

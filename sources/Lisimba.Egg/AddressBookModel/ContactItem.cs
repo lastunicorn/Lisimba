@@ -18,12 +18,12 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
-    public class ContactItem : IObservableEntity
+    public abstract class ContactItem : IObservableEntity
     {
         protected string description;
 
         /// <summary>
-        /// A short description of the contact item.
+        /// Gets or sets a short description of the contact item.
         /// </summary>
         public string Description
         {
@@ -36,6 +36,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         }
 
         public event EventHandler Changed;
+
+        public abstract void CopyFrom(ContactItem contactItem);
+        public abstract ContactItem Clone();
 
         protected virtual void OnChanged()
         {

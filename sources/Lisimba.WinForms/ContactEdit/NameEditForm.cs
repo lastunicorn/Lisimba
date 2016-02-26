@@ -14,6 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -42,17 +44,29 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxNickname.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override bool IsDataChanged()
         {
-            bool isAnyDataChanged = !textBoxFirstName.Text.Equals(personName.FirstName) ||
-                                    !textBoxMiddleName.Text.Equals(personName.MiddleName) ||
-                                    !textBoxLastName.Text.Equals(personName.LastName) ||
-                                    !textBoxNickname.Text.Equals(personName.Nickname);
+            if (personName == null)
+                return textBoxFirstName.Text.Length > 0 ||
+                       textBoxMiddleName.Text.Length > 0 ||
+                       textBoxLastName.Text.Length > 0 ||
+                       textBoxNickname.Text.Length > 0;
 
-            if (!isAnyDataChanged)
-                return;
+            return !textBoxFirstName.Text.Equals(personName.FirstName) ||
+                !textBoxMiddleName.Text.Equals(personName.MiddleName) ||
+                !textBoxLastName.Text.Equals(personName.LastName) ||
+                !textBoxNickname.Text.Equals(personName.Nickname);
+        }
 
-            ReadDataFromView();
+        protected override IAction GetCreateAction()
+        {
+            throw new NotSupportedException();
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            PersonName newPersonName = ReadPersonNameFromView();
+            return new UpdateContactItemAction(personName, newPersonName);
         }
 
         private void DisplayDataInView()
@@ -63,15 +77,15 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxNickname.Text = personName.Nickname;
         }
 
-        private void ReadDataFromView()
+        private PersonName ReadPersonNameFromView()
         {
-            personName.CopyFrom(new PersonName
+            return new PersonName
             {
                 FirstName = textBoxFirstName.Text,
                 MiddleName = textBoxMiddleName.Text,
                 LastName = textBoxLastName.Text,
                 Nickname = textBoxNickname.Text
-            });
+            };
         }
     }
 }

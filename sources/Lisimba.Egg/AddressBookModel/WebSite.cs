@@ -75,10 +75,27 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             description = string.Empty;
         }
 
+        public override void CopyFrom(ContactItem contactItem)
+        {
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            WebSite webSite = contactItem as WebSite;
+
+            if (webSite != null)
+                CopyFrom(webSite);
+        }
+
         public void CopyFrom(WebSite webSite)
         {
             address = webSite.address;
             description = webSite.description;
+
+            OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new WebSite(address, description);
         }
 
         //public override bool Equals(object obj)

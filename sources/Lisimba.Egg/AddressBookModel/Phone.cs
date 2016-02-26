@@ -48,32 +48,44 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             CopyFrom(phone);
         }
 
+        public override void CopyFrom(ContactItem contactItem)
+        {
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            Phone phone = contactItem as Phone;
+
+            if (phone != null)
+                CopyFrom(phone);
+        }
+
         public void CopyFrom(Phone phone)
         {
             number = phone.number;
             description = phone.description;
+
+            OnChanged();
         }
 
-        public Phone GetCopy()
+        public override ContactItem Clone()
         {
-            Phone p = new Phone();
-            p.CopyFrom(this);
-            return p;
+            Phone phone = new Phone();
+            phone.CopyFrom(this);
+            return phone;
         }
 
         public void Clear()
         {
-            number = "";
-            description = "";
+            number = string.Empty;
+            description = string.Empty;
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (Phone)) return false;
+            if (obj.GetType() != typeof(Phone)) return false;
 
-            return Equals((Phone) obj);
+            return Equals((Phone)obj);
         }
 
         public bool Equals(Phone phone)
@@ -89,7 +101,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                return ((number != null ? number.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((number != null ? number.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

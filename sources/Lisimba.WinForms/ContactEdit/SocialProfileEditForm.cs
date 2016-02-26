@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -21,7 +22,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class SocialProfileEditForm : EditBaseForm
     {
         private SocialProfile socialProfile;
-        private bool addMode;
 
         public SocialProfile SocialProfile
         {
@@ -33,46 +33,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? "Add Social Profile" : "Edit Social Profile";
-            }
-        }
-
         public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public SocialProfileEditForm()
         {
             InitializeComponent();
 
-            AddMode = false;
+            EditMode = EditMode.Create;
 
             textBoxEmail.KeyDown += HandleFormKeyDown;
             textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override void OnEditModeChanged()
         {
-            bool isAnyDataChanged = UserChangedData();
-
-            if (!isAnyDataChanged)
-                return;
-
-            ReadDataFromView();
-
-            if (AddMode && ContactItems != null)
-                ContactItems.Add(SocialProfile);
-        }
-
-        private bool UserChangedData()
-        {
-            return !socialProfile.Id.Equals(textBoxEmail.Text) ||
-                   !socialProfile.Description.Equals(textBoxComments.Text);
+            Text = EditMode == EditMode.Create ? "Add Social Profile" : "Edit Social Profile";
+            base.OnEditModeChanged();
         }
 
         private void DisplayDataInView()
@@ -81,10 +57,34 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.Text = socialProfile.Description;
         }
 
-        private void ReadDataFromView()
+        protected override bool IsDataChanged()
         {
-            socialProfile.Id = textBoxEmail.Text;
-            socialProfile.Description = textBoxComments.Text;
+            if (socialProfile == null)
+                return textBoxEmail.Text.Length > 0 ||
+                       textBoxComments.Text.Length > 0;
+
+            return !socialProfile.Id.Equals(textBoxEmail.Text) ||
+                !socialProfile.Description.Equals(textBoxComments.Text);
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            SocialProfile newSocialProfile = ReadSocialProfileFromView();
+            return new CreateContactItemAction(ContactItems, newSocialProfile);
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            SocialProfile newSocialProfile = ReadSocialProfileFromView();
+            return new UpdateContactItemAction(socialProfile, newSocialProfile);
+        }
+
+        private SocialProfile ReadSocialProfileFromView()
+        {
+            string newId = textBoxEmail.Text;
+            string newDescription = textBoxComments.Text;
+
+            return new SocialProfile(newId, newDescription);
         }
     }
 }

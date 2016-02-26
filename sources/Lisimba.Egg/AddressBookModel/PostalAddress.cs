@@ -81,14 +81,14 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
         }
 
-        public PostalAddress(string address, string city, string state, string postalCode, string country, string description)
+        public PostalAddress(string street, string city, string state, string postalCode, string country, string description)
         {
-            Street = address;
-            City = city;
-            State = state;
-            PostalCode = postalCode;
-            Country = country;
-            Description = description;
+            this.street = street;
+            this.city = city;
+            this.state = state;
+            this.postalCode = postalCode;
+            this.country = country;
+            this.description = description;
         }
 
         public PostalAddress(PostalAddress postalAddress)
@@ -96,19 +96,31 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             CopyFrom(postalAddress);
         }
 
-        public void CopyFrom(PostalAddress postalAddress)
+        public override void CopyFrom(ContactItem contactItem)
         {
-            Street = postalAddress.Street;
-            City = postalAddress.City;
-            State = postalAddress.State;
-            PostalCode = postalAddress.PostalCode;
-            Country = postalAddress.Country;
-            Description = postalAddress.Description;
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            PostalAddress postalAddress = contactItem as PostalAddress;
+
+            if (postalAddress != null)
+                CopyFrom(postalAddress);
         }
 
-        public PostalAddress GetCopy()
+        public void CopyFrom(PostalAddress postalAddress)
         {
-            return new PostalAddress(Street, City, State, PostalCode, Country, Description);
+            street = postalAddress.street;
+            city = postalAddress.city;
+            state = postalAddress.state;
+            postalCode = postalAddress.postalCode;
+            country = postalAddress.country;
+            description = postalAddress.description;
+
+            OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new PostalAddress(street, city, state, postalCode, country, description);
         }
 
         public override string ToString()
@@ -186,9 +198,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (PostalAddress)) return false;
+            if (obj.GetType() != typeof(PostalAddress)) return false;
 
-            return Equals((PostalAddress) obj);
+            return Equals((PostalAddress)obj);
         }
 
         public override int GetHashCode()
@@ -196,11 +208,11 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             unchecked
             {
                 var hashCode = (street != null ? street.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (city != null ? city.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (state != null ? state.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (country != null ? country.GetHashCode() : 0);
-                hashCode = (hashCode*397) ^ (description != null ? description.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (city != null ? city.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (state != null ? state.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (country != null ? country.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);
 
                 return hashCode;
             }

@@ -72,6 +72,16 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             description = string.Empty;
         }
 
+        public override void CopyFrom(ContactItem contactItem)
+        {
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            SocialProfile socialProfile = contactItem as SocialProfile;
+
+            if (socialProfile != null)
+                CopyFrom(socialProfile);
+        }
+
         /// <summary>
         /// Copy the data from the <see cref="SocialProfile"/> object passed as parameter into the current object.
         /// </summary>
@@ -79,15 +89,22 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             id = socialProfile.id;
             description = socialProfile.description;
+
+            OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new SocialProfile(Id, description);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof (SocialProfile)) return false;
+            if (obj.GetType() != typeof(SocialProfile)) return false;
 
-            return Equals((SocialProfile) obj);
+            return Equals((SocialProfile)obj);
         }
 
         public bool Equals(SocialProfile socialProfile)
@@ -102,7 +119,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                return ((id != null ? id.GetHashCode() : 0)*397) ^ (description != null ? description.GetHashCode() : 0);
+                return ((id != null ? id.GetHashCode() : 0) * 397) ^ (description != null ? description.GetHashCode() : 0);
             }
         }
 

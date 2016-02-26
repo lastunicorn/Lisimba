@@ -17,6 +17,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Utils;
 
@@ -42,6 +43,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 UpdateDisplayedValue();
             }
         }
+
+        public ActionQueue ActionQueue { get; set; }
 
         public BirthdayView()
         {
@@ -125,6 +128,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             BirthDateEditForm form = new BirthDateEditForm
             {
                 Location = labelBirthday.GetBottomLeftCorner(),
+                ActionQueue = ActionQueue,
                 Date = Birthday
             };
 

@@ -52,9 +52,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
         private void CreateBindings()
         {
             nameEditor1.Bind(x => x.PersonName, ViewModel, x => x.Name, true, DataSourceUpdateMode.OnPropertyChanged);
+            nameEditor1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
             birthdayView1.Bind(x => x.Birthday, ViewModel, x => x.Birthday, true, DataSourceUpdateMode.Never);
+            birthdayView1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
             zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
+            customTreeView1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
             textBoxNotes.Bind(x => x.Text, ViewModel, x => x.Notes, false, DataSourceUpdateMode.OnPropertyChanged);
 
             this.Bind(x => x.Enabled, ViewModel, x => x.Enabled, false);
@@ -94,10 +97,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             PostalAddressEditForm form = new PostalAddressEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddAddress.GetBottomLeftCorner(),
-                PostalAddress = new PostalAddress()
+                Location = buttonAddAddress.GetBottomLeftCorner()
             };
 
             form.Show();
@@ -108,10 +111,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             DateEditForm form = new DateEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddDate.GetBottomLeftCorner(),
-                Date = new Date()
+                Location = buttonAddDate.GetBottomLeftCorner()
             };
 
             form.Show();
@@ -122,10 +125,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             EmailEditForm form = new EmailEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddEmail.GetBottomLeftCorner(),
-                Email = new Email()
+                Location = buttonAddEmail.GetBottomLeftCorner()
             };
 
             form.Show();
@@ -136,10 +139,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             SocialProfileEditForm form = new SocialProfileEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddSocialProfileId.GetBottomLeftCorner(),
-                SocialProfile = new SocialProfile()
+                Location = buttonAddSocialProfileId.GetBottomLeftCorner()
             };
 
             form.Show();
@@ -150,10 +153,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             PhoneEditForm form = new PhoneEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddPhone.GetBottomLeftCorner(),
-                Phone = new Phone()
+                Location = buttonAddPhone.GetBottomLeftCorner()
             };
 
             form.Show();
@@ -164,10 +167,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
         {
             WebSiteEditForm form = new WebSiteEditForm
             {
-                AddMode = true,
+                EditMode = EditMode.Create,
+                ActionQueue = ViewModel.ActionQueue,
                 ContactItems = contactItems,
-                Location = buttonAddWebSite.GetBottomLeftCorner(),
-                WebSite = new WebSite()
+                Location = buttonAddWebSite.GetBottomLeftCorner()
             };
 
             form.Show();

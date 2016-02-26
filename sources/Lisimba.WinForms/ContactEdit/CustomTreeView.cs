@@ -17,6 +17,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -92,6 +93,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
+        public ActionQueue ActionQueue { get; set; }
+
         public CustomTreeView()
         {
             InitializeComponent();
@@ -118,9 +121,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 PhoneEditForm form = new PhoneEditForm
                 {
+                    ActionQueue = ActionQueue,
                     Phone = phoneTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();
@@ -135,9 +139,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 EmailEditForm form = new EmailEditForm
                 {
+                    ActionQueue = ActionQueue,
                     Email = emailTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();
@@ -152,9 +157,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 WebSiteEditForm form = new WebSiteEditForm
                 {
+                    ActionQueue = ActionQueue,
                     WebSite = webSiteTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();
@@ -169,9 +175,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 PostalAddressEditForm form = new PostalAddressEditForm
                 {
+                    ActionQueue = ActionQueue,
                     PostalAddress = postalAddressTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();
@@ -186,9 +193,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 DateEditForm form = new DateEditForm
                 {
+                    ActionQueue = ActionQueue,
                     Date = dateTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();
@@ -203,9 +211,10 @@ namespace DustInTheWind.Lisimba.ContactEdit
             {
                 SocialProfileEditForm form = new SocialProfileEditForm
                 {
+                    ActionQueue = ActionQueue,
                     SocialProfile = socialProfileTag,
                     Location = PointToScreen(e.Location),
-                    AddMode = false
+                    EditMode = EditMode.Edit
                 };
 
                 form.Show();

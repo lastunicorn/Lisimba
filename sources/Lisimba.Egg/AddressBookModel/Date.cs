@@ -397,11 +397,29 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             return CompareWithoutYear(this, d);
         }
 
-        public void CopyFrom(Date d)
+        public override void CopyFrom(ContactItem contactItem)
         {
-            day = d.day;
-            month = d.month;
-            year = d.year;
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            Date date = contactItem as Date;
+
+            if (date != null)
+                CopyFrom(date);
+        }
+
+        public void CopyFrom(Date date)
+        {
+            day = date.day;
+            month = date.month;
+            year = date.year;
+            description = date.description;
+
+            OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new Date(day, month, year, description);
         }
 
         public static Date Parse(string value)

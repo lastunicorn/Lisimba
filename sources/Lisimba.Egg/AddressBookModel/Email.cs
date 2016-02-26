@@ -66,6 +66,16 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             CopyFrom(email);
         }
 
+        public override void CopyFrom(ContactItem contactItem)
+        {
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+
+            Email email = contactItem as Email;
+
+            if (email != null)
+                CopyFrom(email);
+        }
+
         /// <summary>
         /// Copy the data from the Email object passed as parameter into the current object.
         /// </summary>
@@ -74,6 +84,13 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             address = email.address;
             description = email.description;
+
+            OnChanged();
+        }
+
+        public override ContactItem Clone()
+        {
+            return new Email(address, description);
         }
 
         public override bool Equals(object obj)

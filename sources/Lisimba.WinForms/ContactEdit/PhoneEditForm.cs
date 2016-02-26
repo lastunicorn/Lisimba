@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -21,7 +22,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class PhoneEditForm : EditBaseForm
     {
         private Phone phone;
-        private bool addMode;
 
         public Phone Phone
         {
@@ -33,46 +33,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? "Add Phone" : "Edit Phone";
-            }
-        }
-
         public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public PhoneEditForm()
         {
             InitializeComponent();
 
-            AddMode = false;
+            EditMode = EditMode.Create;
 
             textBoxPhone.KeyDown += HandleFormKeyDown;
             textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override void OnEditModeChanged()
         {
-            bool dataWasChanged = UserChangedData();
-
-            if (!dataWasChanged)
-                return;
-
-            ReadDataFromView();
-
-            if (AddMode && ContactItems != null)
-                ContactItems.Add(phone);
-        }
-
-        private bool UserChangedData()
-        {
-            return !phone.Number.Equals(textBoxPhone.Text) ||
-                   !phone.Description.Equals(textBoxComments.Text);
+            Text = EditMode == EditMode.Create ? "Add Phone" : "Edit Phone";
+            base.OnEditModeChanged();
         }
 
         private void DisplayDataInView()
@@ -81,10 +57,34 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.Text = phone.Description;
         }
 
-        private void ReadDataFromView()
+        protected override bool IsDataChanged()
         {
-            phone.Number = textBoxPhone.Text;
-            phone.Description = textBoxComments.Text;
+            if (phone == null)
+                return textBoxPhone.Text.Length > 0 ||
+                       textBoxComments.Text.Length > 0;
+
+            return !phone.Number.Equals(textBoxPhone.Text) ||
+                !phone.Description.Equals(textBoxComments.Text);
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            Phone newPhone = ReadPhoneFromView();
+            return new CreateContactItemAction(ContactItems, newPhone);
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            Phone newPhone = ReadPhoneFromView();
+            return new UpdateContactItemAction(phone, newPhone);
+        }
+
+        private Phone ReadPhoneFromView()
+        {
+            string newNumber = textBoxPhone.Text;
+            string newDescription = textBoxComments.Text;
+
+            return new Phone(newNumber, newDescription);
         }
     }
 }

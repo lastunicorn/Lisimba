@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -19,29 +19,31 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.ActionManagement
 {
-    class ChangeContactNameAction : IAction
+    public class UpdateContactItemAction : IAction
     {
-        private readonly Contact contact;
-        private readonly PersonName name;
-        private PersonName oldName;
+        private readonly ContactItem contactItem;
+        private readonly ContactItem newContactItem;
+        private ContactItem oldContactItem;
 
-        public ChangeContactNameAction(Contact contact, PersonName name)
+        public UpdateContactItemAction(ContactItem contactItem, ContactItem newContactItem)
         {
-            if (contact == null) throw new ArgumentNullException("contact");
+            if (contactItem == null) throw new ArgumentNullException("contactItem");
+            if (newContactItem == null) throw new ArgumentNullException("newContactItem");
 
-            this.contact = contact;
-            this.name = name;
+            this.contactItem = contactItem;
+            this.newContactItem = newContactItem;
         }
 
         public void Do()
         {
-            oldName = contact.Name;
-            contact.Name = name;
+            oldContactItem = contactItem.Clone();
+
+            contactItem.CopyFrom(newContactItem);
         }
 
         public void Undo()
         {
-            contact.Name = oldName;
+            contactItem.CopyFrom(oldContactItem);
         }
     }
 }

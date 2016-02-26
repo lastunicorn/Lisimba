@@ -14,7 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Globalization;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -50,43 +52,47 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxYear.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
-        {
-            bool dataWasChanged = UserChangedData();
-
-            if (!dataWasChanged)
-                return;
-
-            ReadDataFromView();
-        }
-
-        private void ReadDataFromView()
-        {
-            int day = comboBoxDay.SelectedIndex;
-            int month = comboBoxMonth.SelectedIndex;
-
-            int year;
-            int.TryParse(textBoxYear.Text, out year);
-
-            date.SetValues(day, month, year);
-        }
-
-        private bool UserChangedData()
-        {
-            int day = comboBoxDay.SelectedIndex;
-            int month = comboBoxMonth.SelectedIndex;
-
-            int year;
-            int.TryParse(textBoxYear.Text, out year);
-
-            return date.Day != day || date.Month != month || date.Year != year;
-        }
-
         private void DisplayDataInView()
         {
             comboBoxDay.SelectedIndex = date.Day;
             comboBoxMonth.SelectedIndex = date.Month;
             textBoxYear.Text = (date.Year != 0 ? date.Year.ToString() : string.Empty);
+        }
+
+        protected override bool IsDataChanged()
+        {
+            int day = comboBoxDay.SelectedIndex;
+            int month = comboBoxMonth.SelectedIndex;
+
+            int year;
+            bool yearIsValid = int.TryParse(textBoxYear.Text, out year);
+
+            if (date == null)
+                return day != 0 || month != 0 || yearIsValid;
+
+            return date.Day != day || date.Month != month || date.Year != year;
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            throw new NotSupportedException();
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            Date newDate = ReadDateFromView();
+            return new UpdateContactItemAction(date, newDate);
+        }
+
+        private Date ReadDateFromView()
+        {
+            int day = comboBoxDay.SelectedIndex;
+            int month = comboBoxMonth.SelectedIndex;
+
+            int year;
+            int.TryParse(textBoxYear.Text, out year);
+
+            return new Date(day, month, year);
         }
     }
 }

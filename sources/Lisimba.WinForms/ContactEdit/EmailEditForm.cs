@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.ContactEdit
@@ -21,7 +22,6 @@ namespace DustInTheWind.Lisimba.ContactEdit
     public partial class EmailEditForm : EditBaseForm
     {
         private Email email;
-        private bool addMode;
 
         public Email Email
         {
@@ -33,46 +33,22 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public bool AddMode
-        {
-            get { return addMode; }
-            set
-            {
-                addMode = value;
-
-                Text = value ? "Add Email" : "Edit Email";
-            }
-        }
-
         public CustomObservableCollection<ContactItem> ContactItems { get; set; }
 
         public EmailEditForm()
         {
             InitializeComponent();
 
-            AddMode = false;
+            EditMode = EditMode.Edit;
 
             textBoxEmail.KeyDown += HandleFormKeyDown;
             textBoxComments.KeyDown += HandleFormKeyDown;
         }
 
-        protected override void UpdateData()
+        protected override void OnEditModeChanged()
         {
-            bool isAnyDataChanged = UserChangedData();
-
-            if (!isAnyDataChanged)
-                return;
-
-            ReadDataFromView();
-
-            if (AddMode && ContactItems != null)
-                ContactItems.Add(Email);
-        }
-
-        private bool UserChangedData()
-        {
-            return !email.Address.Equals(textBoxEmail.Text) ||
-                   !email.Description.Equals(textBoxComments.Text);
+            Text = EditMode == EditMode.Create ? "Add Email" : "Edit Email";
+            base.OnEditModeChanged();
         }
 
         private void DisplayDataInView()
@@ -81,10 +57,33 @@ namespace DustInTheWind.Lisimba.ContactEdit
             textBoxComments.Text = email.Description;
         }
 
-        private void ReadDataFromView()
+        protected override bool IsDataChanged()
         {
-            email.Address = textBoxEmail.Text;
-            email.Description = textBoxComments.Text;
+            if (Email == null)
+                return textBoxEmail.Text.Length > 0 || textBoxComments.Text.Length > 0;
+
+            return !email.Address.Equals(textBoxEmail.Text) ||
+                   !email.Description.Equals(textBoxComments.Text);
+        }
+
+        protected override IAction GetCreateAction()
+        {
+            Email newEmail = ReadEmailFromView();
+            return new CreateContactItemAction(ContactItems, newEmail);
+        }
+
+        protected override IAction GetUpdateAction()
+        {
+            Email newEmail = ReadEmailFromView();
+            return new UpdateContactItemAction(email, newEmail);
+        }
+
+        private Email ReadEmailFromView()
+        {
+            string newAddress = textBoxEmail.Text;
+            string newDescription = textBoxComments.Text;
+
+            return new Email(newAddress, newDescription);
         }
     }
 }
