@@ -41,7 +41,7 @@
     </Compile>
     <Compile Include="ConsoleCommandHandling\ApplicationFlows.cs" />
     <Compile Include="ConsoleCommandHandling\ConsoleCommand.cs" />
-    <Compile Include="ConsoleCommandHandling\CommandSplitter.cs" />
+    <Compile Include="ConsoleCommandHandling\ConsoleCommandSplitter.cs" />
     <Compile Include="ConsoleCommandHandling\EmptyFlow.cs" />
     <Compile Include="ConsoleCommandHandling\IFlowProvider.cs" />
     <Compile Include="ConsoleCommandHandling\IPrompterTextProvider.cs" />

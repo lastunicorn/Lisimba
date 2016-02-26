@@ -23,7 +23,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
     /// Splitts a console command into components based on spaces.
     /// To include spaces in a component of the command, the whole component must be enclosed in double quotes.
     /// </summary>
-    public class CommandSplitter
+    public class ConsoleCommandSplitter
     {
         private readonly string commandText;
         private int index;
@@ -43,7 +43,7 @@ namespace DustInTheWind.ConsoleCommon.ConsoleCommandHandling
             }
         }
 
-        public CommandSplitter(string commandText)
+        public ConsoleCommandSplitter(string commandText)
         {
             if (commandText == null) throw new ArgumentNullException("commandText");
 

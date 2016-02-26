@@ -25,31 +25,31 @@ namespace DustInTheWind.Lisimba.Tests.CommandLine
         [Test]
         public void test1()
         {
-            CommandSplitter commandSplitter = new CommandSplitter(@"update name=""value""");
+            ConsoleCommandSplitter consoleCommandSplitter = new ConsoleCommandSplitter(@"update name=""value""");
 
-            Assert.That(commandSplitter.Items.Length, Is.EqualTo(2));
-            Assert.That(commandSplitter.Items[0], Is.EqualTo("update"));
-            Assert.That(commandSplitter.Items[1], Is.EqualTo(@"name=""value"""));
+            Assert.That(consoleCommandSplitter.Items.Length, Is.EqualTo(2));
+            Assert.That(consoleCommandSplitter.Items[0], Is.EqualTo("update"));
+            Assert.That(consoleCommandSplitter.Items[1], Is.EqualTo(@"name=""value"""));
         }
 
         [Test]
         public void test2()
         {
-            CommandSplitter commandSplitter = new CommandSplitter(@"update name=""val""ue""");
+            ConsoleCommandSplitter consoleCommandSplitter = new ConsoleCommandSplitter(@"update name=""val""ue""");
 
-            Assert.That(commandSplitter.Items.Length, Is.EqualTo(2));
-            Assert.That(commandSplitter.Items[0], Is.EqualTo("update"));
-            Assert.That(commandSplitter.Items[1], Is.EqualTo(@"name=""val""ue"""));
+            Assert.That(consoleCommandSplitter.Items.Length, Is.EqualTo(2));
+            Assert.That(consoleCommandSplitter.Items[0], Is.EqualTo("update"));
+            Assert.That(consoleCommandSplitter.Items[1], Is.EqualTo(@"name=""val""ue"""));
         }
 
         [Test]
         public void test3()
         {
-            CommandSplitter commandSplitter = new CommandSplitter(@"update name=""va""l""ue""");
+            ConsoleCommandSplitter consoleCommandSplitter = new ConsoleCommandSplitter(@"update name=""va""l""ue""");
 
-            Assert.That(commandSplitter.Items.Length, Is.EqualTo(2));
-            Assert.That(commandSplitter.Items[0], Is.EqualTo("update"));
-            Assert.That(commandSplitter.Items[1], Is.EqualTo(@"name=""va""l""ue"""));
+            Assert.That(consoleCommandSplitter.Items.Length, Is.EqualTo(2));
+            Assert.That(consoleCommandSplitter.Items[0], Is.EqualTo("update"));
+            Assert.That(consoleCommandSplitter.Items[1], Is.EqualTo(@"name=""va""l""ue"""));
         }
     }
 }
