@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
@@ -80,7 +81,7 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void DisplayWarnings(IEnumerable<Exception> warnings)
         {
-            if (warnings == null)
+            if (warnings == null || !warnings.Any())
                 return;
 
             windowSystem.DisplayWarning(warnings);

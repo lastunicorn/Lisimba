@@ -18,18 +18,18 @@ namespace DustInTheWind.Lisimba.Forms
         protected override void OnShown(EventArgs e)
         {
             IEnumerable<Control> labels = Warnings
-                .Select(CreateLabel);
+                .Select(CreateLabelFor);
 
             listControl1.AddRange(labels.ToArray());
 
             base.OnShown(e);
         }
 
-        private static Control CreateLabel(Exception x)
+        private static Control CreateLabelFor(Exception exception)
         {
             Label control = new Label
             {
-                Text = x.Message,
+                Text = exception.Message,
                 AutoSize = true
             };
 

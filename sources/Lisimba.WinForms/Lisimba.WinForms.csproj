@@ -145,6 +145,7 @@
     <Compile Include="Operations\ImportOperation.cs" />
     <Compile Include="Operations\OpenRecentFileOperation.cs" />
     <Compile Include="Operations\RedoOperation.cs" />
+    <Compile Include="Operations\ShowBiorythmOperation.cs" />
     <Compile Include="Operations\UndoOperation.cs" />
     <Compile Include="Services\WindowSystem.cs" />
     <Compile Include="Utils\CustomMenuItem.cs">

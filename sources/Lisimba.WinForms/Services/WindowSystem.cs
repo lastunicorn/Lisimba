@@ -21,6 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using DustInTheWind.Lisimba.Biorhythm;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Forms;
 using DustInTheWind.Lisimba.Main;
@@ -216,6 +217,17 @@ namespace DustInTheWind.Lisimba.Services
             }
 
             return sb.ToString();
+        }
+
+        public void DisplayBiorythm(Contact contact)
+        {
+            BiorythmForm form = new BiorythmForm
+            {
+                Owner = mainWindow,
+                Contact = contact
+            };
+            form.Closed += (sender, e) => form.Dispose();
+            form.Show(mainWindow);
         }
     }
 }

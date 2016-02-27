@@ -16,14 +16,12 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Biorhythm;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Sorting;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.ContactList
 {
-    partial class ContactListView : UserControl
+    internal partial class ContactListView : UserControl
     {
         private readonly ContactsToTreeViewBinder contactsToTreeViewBinder;
 
@@ -93,22 +91,6 @@ namespace DustInTheWind.Lisimba.ContactList
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
             ViewModel.ContactWasSelected();
-        }
-
-        private void toolStripMenuItem_List_ViewBiorythm_Click(object sender, EventArgs e)
-        {
-            TreeNode node = treeViewContacts.SelectedNode;
-
-            if (node == null)
-                return;
-
-            Contact contact = (Contact)node.Tag;
-
-            if (contact.Birthday.IsCompleteDate)
-            {
-                BiorythmForm formBiorythm = new BiorythmForm { Contact = contact };
-                formBiorythm.ShowDialog(this);
-            }
         }
 
         private void comboBoxSortBy_SelectedIndexChanged(object sender, EventArgs e)

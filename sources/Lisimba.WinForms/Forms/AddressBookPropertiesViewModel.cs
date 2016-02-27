@@ -16,7 +16,6 @@
 
 using System;
 using System.IO;
-using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.WinFormsCommon;

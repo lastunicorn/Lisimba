@@ -50,6 +50,7 @@ namespace DustInTheWind.Lisimba.Setup
             yield return unityContainer.Resolve<OpenRecentFileOperation>();
             yield return unityContainer.Resolve<UndoOperation>();
             yield return unityContainer.Resolve<RedoOperation>();
+            yield return unityContainer.Resolve<ShowBiorythmOperation>();
         }
     }
 }

@@ -23,7 +23,7 @@ using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.ContactList
 {
-    class ContactMenuViewModels
+    internal class ContactMenuViewModels
     {
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
@@ -51,7 +51,7 @@ namespace DustInTheWind.Lisimba.ContactList
             DeleteCurrentContactOperation operation1 = availableOperations.GetOperation<DeleteCurrentContactOperation>();
             DeleteContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation1);
 
-            EmptyOperation operation2 = new EmptyOperation(LocalizedResources.BiorhythmOperationDescription);
+            ShowBiorythmOperation operation2 = availableOperations.GetOperation<ShowBiorythmOperation>();
             BiorhythmViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation2);
         }
     }

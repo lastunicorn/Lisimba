@@ -73,7 +73,7 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem1,
             this.toolStripMenuItem_List_ViewBiorythm});
             this.contextMenuStripListBox.Name = "contextMenuStripList";
-            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 76);
+            this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 98);
             // 
             // toolStripMenuItem_List_Add
             // 
@@ -91,15 +91,12 @@ namespace DustInTheWind.Lisimba.ContactList
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
-            this.toolStripMenuItem1.Visible = false;
             // 
             // toolStripMenuItem_List_ViewBiorythm
             // 
             this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
             this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
             this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.Visible = false;
-            this.toolStripMenuItem_List_ViewBiorythm.Click += new System.EventHandler(this.toolStripMenuItem_List_ViewBiorythm_Click);
             // 
             // textBoxSearch
             // 

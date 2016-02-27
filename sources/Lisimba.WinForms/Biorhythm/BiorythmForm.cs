@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Biorhythm
             else
             {
                 biorythm1.Birthday = contact.Birthday.ToDateTime();
-                Text = "The biorythm for " + contact.Name.ToString();
+                Text = string.Format("The biorythm for {0}", contact.Name);
                 biorythm1.Enabled = true;
             }
         }
