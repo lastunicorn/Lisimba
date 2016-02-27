@@ -67,9 +67,11 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -122,6 +124,18 @@
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GateSelectorViewModel.cs" />
+    <Compile Include="Forms\ListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ListControl.Designer.cs">
+      <DependentUpon>ListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\WarningsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\WarningsForm.Designer.cs">
+      <DependentUpon>WarningsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
     <Compile Include="MainMenu\ExportMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
@@ -357,6 +371,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\ZodiacSignView.resx">
       <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ListControl.resx">
+      <DependentUpon>ListControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\WarningsForm.resx">
+      <DependentUpon>WarningsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NameEditing\NameEditor.resx">
       <DependentUpon>NameEditor.cs</DependentUpon>

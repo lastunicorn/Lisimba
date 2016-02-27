@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -90,9 +91,13 @@ namespace DustInTheWind.Lisimba.Services
             MessageBox.Show(MainWindow, message, Resources.InfoPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        public void DisplayWarning(string message)
+        public void DisplayWarning(IEnumerable<Exception> warnings)
         {
-            MessageBox.Show(MainWindow, message, Resources.WarningPopup_Title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            using (WarningsForm form = new WarningsForm())
+            {
+                form.Warnings = warnings.ToList();
+                form.ShowDialog(mainWindow);
+            }
         }
 
         public void DisplayError(string message)

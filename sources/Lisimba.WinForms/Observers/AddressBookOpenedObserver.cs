@@ -24,7 +24,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookOpenedObserver : IObserver
+    internal class AddressBookOpenedObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly ApplicationStatus applicationStatus;
@@ -64,17 +64,17 @@ namespace DustInTheWind.Lisimba.Observers
 
         private void DisplayOpenSuccessMessage()
         {
-            if (openedAddressBooks.Current != null)
+            if (openedAddressBooks.Current == null)
+                return;
+
+            if (openedAddressBooks.Current.Status == AddressBookStatus.New)
             {
-                if (openedAddressBooks.Current.Status == AddressBookStatus.New)
-                {
-                    applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
-                }
-                else
-                {
-                    int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-                    applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
-                }
+                applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
+            }
+            else
+            {
+                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+                applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
             }
         }
 
@@ -83,16 +83,7 @@ namespace DustInTheWind.Lisimba.Observers
             if (warnings == null)
                 return;
 
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Exception warning in warnings)
-            {
-                sb.AppendLine(warning.Message);
-                sb.AppendLine();
-            }
-
-            if (sb.Length > 0)
-                windowSystem.DisplayWarning(sb.ToString());
+            windowSystem.DisplayWarning(warnings);
         }
     }
 }

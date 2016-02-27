@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Observers
 {
-    class AddressBookClosedObserver : IObserver
+    internal class AddressBookClosedObserver : IObserver
     {
         private readonly ApplicationStatus applicationStatus;
         private readonly OpenedAddressBooks openedAddressBooks;
