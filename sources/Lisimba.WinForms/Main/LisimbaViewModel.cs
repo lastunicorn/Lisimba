@@ -161,7 +161,7 @@ namespace DustInTheWind.Lisimba.Main
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
-            IsContactEditVisible = openedAddressBooks.Contact != null;
+            IsContactEditVisible = openedAddressBooks.CurrentContact != null;
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
 
             DefaultGate = availableGates.DefaultGate == null
@@ -198,9 +198,9 @@ namespace DustInTheWind.Lisimba.Main
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            IsContactEditVisible = openedAddressBooks.Contact != null;
+            IsContactEditVisible = openedAddressBooks.CurrentContact != null;
             ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
-            ContactEditorViewModel.Contact = openedAddressBooks.Contact;
+            ContactEditorViewModel.Contact = openedAddressBooks.CurrentContact;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)

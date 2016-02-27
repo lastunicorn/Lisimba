@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         private readonly RecentFiles recentFiles;
         private readonly AvailableGates availableGates;
         private AddressBookShell current;
-        private Contact contact;
+        private Contact currentContact;
 
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
         public event EventHandler ContactChanged;
@@ -62,8 +62,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
                 AddressBookShell oldAddressBook = current;
 
+                CurrentContact = null;
                 current = value;
-                Contact = null;
 
                 if (current != null)
                 {
@@ -76,15 +76,15 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
         }
 
-        public Contact Contact
+        public Contact CurrentContact
         {
-            get { return contact; }
+            get { return currentContact; }
             set
             {
-                if (ReferenceEquals(contact, value))
+                if (ReferenceEquals(currentContact, value))
                     return;
 
-                contact = value;
+                currentContact = value;
                 OnContactChanged();
             }
         }
@@ -188,7 +188,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             AddressBookShell oldAddressBookShell = Current;
 
-            Contact = null;
+            CurrentContact = null;
             Current = null;
 
             OnAddressBookClosed(new AddressBookClosedEventArgs(oldAddressBookShell));

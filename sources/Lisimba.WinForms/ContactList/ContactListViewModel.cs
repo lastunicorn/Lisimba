@@ -153,7 +153,7 @@ namespace DustInTheWind.Lisimba.ContactList
             if (ignoreCurrentContactChange || View == null)
                 return;
 
-            Contact contactToSelect = openedAddressBooks.Contact;
+            Contact contactToSelect = openedAddressBooks.CurrentContact;
 
             TreeNode treeNodeToSelect = (contactToSelect == null || !ContactsToTreeViewBinder.treeNodesByContact.ContainsKey(contactToSelect))
                 ? null
@@ -230,7 +230,7 @@ namespace DustInTheWind.Lisimba.ContactList
                 TreeNode selectedNode = View.GetSelecteContact();
                 Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
 
-                openedAddressBooks.Contact = selectedContact;
+                openedAddressBooks.CurrentContact = selectedContact;
             }
             finally
             {
