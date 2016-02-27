@@ -1,4 +1,6 @@
-﻿namespace DustInTheWind.Lisimba.ContactEdit
+﻿using DustInTheWind.Lisimba.Utils;
+
+namespace DustInTheWind.Lisimba.ContactEdit
 {
     partial class BirthdayView
     {
@@ -28,9 +30,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.labelBirthday = new System.Windows.Forms.Label();
+            this.buttonBiorhythm = new DustInTheWind.Lisimba.Utils.CustomButton(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +84,20 @@
             this.labelBirthday.MouseEnter += new System.EventHandler(this.HandleLabelBirthdayMouseEnter);
             this.labelBirthday.MouseLeave += new System.EventHandler(this.HandleLabelBirthdayMouseLeave);
             // 
+            // buttonBiorhythm
+            // 
+            this.buttonBiorhythm.AutoSize = true;
+            this.buttonBiorhythm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.buttonBiorhythm.Dock = System.Windows.Forms.DockStyle.Right;
+            this.buttonBiorhythm.Image = global::DustInTheWind.Lisimba.Properties.Resources.biorhythms_16;
+            this.buttonBiorhythm.Location = new System.Drawing.Point(69, 0);
+            this.buttonBiorhythm.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
+            this.buttonBiorhythm.Name = "buttonBiorhythm";
+            this.buttonBiorhythm.Size = new System.Drawing.Size(22, 23);
+            this.buttonBiorhythm.TabIndex = 14;
+            this.buttonBiorhythm.UseVisualStyleBackColor = true;
+            this.buttonBiorhythm.ViewModel = null;
+            // 
             // BirthdayView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -87,8 +105,9 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.buttonBiorhythm);
             this.Name = "BirthdayView";
-            this.Size = new System.Drawing.Size(69, 23);
+            this.Size = new System.Drawing.Size(91, 23);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -101,5 +120,6 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label labelBirthday;
+        private CustomButton buttonBiorhythm;
     }
 }

@@ -23,7 +23,7 @@ using DustInTheWind.Lisimba.Utils;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
-    public partial class BirthdayView : UserControl
+    internal partial class BirthdayView : UserControl
     {
         private Date birthday;
 
@@ -45,6 +45,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
         }
 
         public ActionQueue ActionQueue { get; set; }
+
+        public CustomButtonViewModel BiorhythmButtonViewModel
+        {
+            get { return buttonBiorhythm.ViewModel; }
+            set { buttonBiorhythm.ViewModel = value; }
+        }
 
         public BirthdayView()
         {
@@ -134,6 +140,11 @@ namespace DustInTheWind.Lisimba.ContactEdit
 
             form.Show();
             form.Focus();
+        }
+
+        private void buttonBiorhythm_Leave(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -129,6 +129,16 @@ namespace DustInTheWind.Lisimba.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap biorhythms_16 {
+            get {
+                object obj = ResourceManager.GetObject("biorhythms_16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap date {
             get {
                 object obj = ResourceManager.GetObject("date", resourceCulture);

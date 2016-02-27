@@ -18,7 +18,11 @@ using System;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.ContactEdit
 {
@@ -125,6 +129,16 @@ namespace DustInTheWind.Lisimba.ContactEdit
                 name = value;
                 OnPropertyChanged();
             }
+        }
+
+        public CustomButtonViewModel BiorhythmButtonViewModel { get; set; }
+
+        public ContactEditorViewModel(AvailableOperations availableOperations, MenuItemViewModelProvider viewModelProvider)
+        {
+            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
+
+            ShowBiorhythmOperation biorhythmOperation = availableOperations.GetOperation<ShowBiorhythmOperation>();
+            BiorhythmButtonViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(biorhythmOperation);
         }
 
         private void HandleContactChanged(object sender, EventArgs e)

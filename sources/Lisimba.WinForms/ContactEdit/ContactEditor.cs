@@ -55,6 +55,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             nameEditor1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
             birthdayView1.Bind(x => x.Birthday, ViewModel, x => x.Birthday, true, DataSourceUpdateMode.Never);
             birthdayView1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
+            birthdayView1.Bind(x => x.BiorhythmButtonViewModel, ViewModel, x => x.BiorhythmButtonViewModel, true, DataSourceUpdateMode.Never);
             zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
             customTreeView1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
