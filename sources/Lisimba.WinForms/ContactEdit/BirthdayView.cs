@@ -141,10 +141,5 @@ namespace DustInTheWind.Lisimba.ContactEdit
             form.Show();
             form.Focus();
         }
-
-        private void buttonBiorhythm_Leave(object sender, EventArgs e)
-        {
-
-        }
     }
 }

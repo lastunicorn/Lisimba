@@ -412,6 +412,16 @@ namespace DustInTheWind.Lisimba.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap warning_48 {
+            get {
+                object obj = ResourceManager.GetObject("warning_48", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Warning!.
         /// </summary>
         internal static string WarningPopup_Title {

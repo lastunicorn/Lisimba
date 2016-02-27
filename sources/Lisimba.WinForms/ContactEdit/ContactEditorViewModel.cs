@@ -131,7 +131,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             }
         }
 
-        public CustomButtonViewModel BiorhythmButtonViewModel { get; set; }
+        public CustomButtonViewModel BiorhythmButtonViewModel { get; private set; }
 
         public ContactEditorViewModel(AvailableOperations availableOperations, MenuItemViewModelProvider viewModelProvider)
         {

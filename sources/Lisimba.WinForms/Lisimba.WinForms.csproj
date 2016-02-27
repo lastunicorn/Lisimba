@@ -513,6 +513,7 @@
     <None Include="Images\MainMenu\undo.png" />
     <None Include="Images\MainMenu\search.png" />
     <None Include="Images\biorhythms_16.png" />
+    <None Include="Images\warning_48.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

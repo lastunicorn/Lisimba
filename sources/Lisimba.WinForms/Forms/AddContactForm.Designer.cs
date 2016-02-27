@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.AutoSize = true;
             this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonCancel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonCancel.Location = new System.Drawing.Point(455, 4);
             this.buttonCancel.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.buttonCancel.Name = "buttonCancel";
@@ -59,7 +59,7 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             this.buttonOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOkay.AutoSize = true;
-            this.buttonOkay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonOkay.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonOkay.Location = new System.Drawing.Point(376, 4);
             this.buttonOkay.Margin = new System.Windows.Forms.Padding(4, 0, 0, 0);
             this.buttonOkay.Name = "buttonOkay";

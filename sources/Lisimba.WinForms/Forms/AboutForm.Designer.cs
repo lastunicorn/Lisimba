@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.Forms
             // 
             this.buttonClose.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.buttonClose.Location = new System.Drawing.Point(92, 152);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(75, 23);
@@ -121,7 +121,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // FormAbout
+            // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -135,7 +135,7 @@ namespace DustInTheWind.Lisimba.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormAbout";
+            this.Name = "AboutForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "About";
