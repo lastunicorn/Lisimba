@@ -36,7 +36,7 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
             this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorythm = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_ViewBiorhythm = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem_List_Add,
             this.toolStripMenuItem_List_Delete,
             this.toolStripMenuItem1,
-            this.toolStripMenuItem_List_ViewBiorythm});
+            this.toolStripMenuItem_List_ViewBiorhythm});
             this.contextMenuStripListBox.Name = "contextMenuStripList";
             this.contextMenuStripListBox.Size = new System.Drawing.Size(153, 98);
             // 
@@ -92,11 +92,11 @@ namespace DustInTheWind.Lisimba.ContactList
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
-            // toolStripMenuItem_List_ViewBiorythm
+            // toolStripMenuItem_List_ViewBiorhythm
             // 
-            this.toolStripMenuItem_List_ViewBiorythm.Name = "toolStripMenuItem_List_ViewBiorythm";
-            this.toolStripMenuItem_List_ViewBiorythm.Size = new System.Drawing.Size(152, 22);
-            this.toolStripMenuItem_List_ViewBiorythm.Text = "View &Biorythm";
+            this.toolStripMenuItem_List_ViewBiorhythm.Name = "toolStripMenuItem_List_ViewBiorhythm";
+            this.toolStripMenuItem_List_ViewBiorhythm.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem_List_ViewBiorhythm.Text = "View &Biorhythm";
             // 
             // textBoxSearch
             // 
@@ -186,7 +186,7 @@ namespace DustInTheWind.Lisimba.ContactList
         private CustomMenuItem toolStripMenuItem_List_Add;
         private CustomMenuItem toolStripMenuItem_List_Delete;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private CustomMenuItem toolStripMenuItem_List_ViewBiorythm;
+        private CustomMenuItem toolStripMenuItem_List_ViewBiorhythm;
         private System.Windows.Forms.ComboBox comboBoxSortBy;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Biorhythm
             this.checkBoxPhysical = new System.Windows.Forms.CheckBox();
             this.labelColorPhysical = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.biorythmView1 = new DustInTheWind.Biorhythm.BiorhythmView();
+            this.biorhythmView1 = new DustInTheWind.Biorhythm.BiorhythmView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -158,37 +158,37 @@ namespace DustInTheWind.Lisimba.Biorhythm
             this.labelColorPhysical.TabIndex = 3;
             this.labelColorPhysical.Click += new System.EventHandler(this.labelColorPhysical_Click);
             // 
-            // biorythmView1
+            // biorhythmView1
             // 
-            this.biorythmView1.BackColor = System.Drawing.Color.White;
-            this.biorythmView1.Birthday = new System.DateTime(1980, 6, 13, 0, 0, 0, 0);
-            this.biorythmView1.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.biorythmView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.biorythmView1.EmotionChartColor = System.Drawing.Color.Blue;
-            this.biorythmView1.FirstDay = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
-            this.biorythmView1.ForeColor = System.Drawing.Color.DimGray;
-            this.biorythmView1.IntelectChartColor = System.Drawing.Color.Green;
-            this.biorythmView1.IntuitionChartColor = System.Drawing.Color.Lime;
-            this.biorythmView1.IntuitionChartVisible = false;
-            this.biorythmView1.LastDay = new System.DateTime(2008, 3, 1, 0, 0, 0, 0);
-            this.biorythmView1.Location = new System.Drawing.Point(3, 22);
-            this.biorythmView1.Name = "biorythmView1";
-            this.biorythmView1.Size = new System.Drawing.Size(833, 224);
-            this.biorythmView1.SundaysFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.biorythmView1.TabIndex = 4;
-            this.biorythmView1.Text = "biorythmView1";
-            this.biorythmView1.TodayBackColor = System.Drawing.Color.YellowGreen;
-            this.biorythmView1.XDay = new System.DateTime(2008, 2, 6, 0, 0, 0, 0);
-            this.biorythmView1.XDayBorderColor = System.Drawing.Color.Gray;
-            this.biorythmView1.XDayIndex = 5;
-            this.biorythmView1.FirstDayChanged += new DustInTheWind.Biorhythm.BiorhythmView.FirstDayChangedHandler(this.biorythmView1_FirstDayChanged);
+            this.biorhythmView1.BackColor = System.Drawing.Color.White;
+            this.biorhythmView1.Birthday = new System.DateTime(1980, 6, 13, 0, 0, 0, 0);
+            this.biorhythmView1.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.biorhythmView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.biorhythmView1.EmotionChartColor = System.Drawing.Color.Blue;
+            this.biorhythmView1.FirstDay = new System.DateTime(2008, 2, 1, 0, 0, 0, 0);
+            this.biorhythmView1.ForeColor = System.Drawing.Color.DimGray;
+            this.biorhythmView1.IntelectChartColor = System.Drawing.Color.Green;
+            this.biorhythmView1.IntuitionChartColor = System.Drawing.Color.Lime;
+            this.biorhythmView1.IntuitionChartVisible = false;
+            this.biorhythmView1.LastDay = new System.DateTime(2008, 3, 1, 0, 0, 0, 0);
+            this.biorhythmView1.Location = new System.Drawing.Point(3, 22);
+            this.biorhythmView1.Name = "biorhythmView1";
+            this.biorhythmView1.Size = new System.Drawing.Size(833, 224);
+            this.biorhythmView1.SundaysFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.biorhythmView1.TabIndex = 4;
+            this.biorhythmView1.Text = "biorhythmView1";
+            this.biorhythmView1.TodayBackColor = System.Drawing.Color.YellowGreen;
+            this.biorhythmView1.XDay = new System.DateTime(2008, 2, 6, 0, 0, 0, 0);
+            this.biorhythmView1.XDayBorderColor = System.Drawing.Color.Gray;
+            this.biorhythmView1.XDayIndex = 5;
+            this.biorhythmView1.FirstDayChanged += new DustInTheWind.Biorhythm.BiorhythmView.FirstDayChangedHandler(this.biorhythmView1_FirstDayChanged);
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.biorythmView1, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.biorhythmView1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -244,16 +244,16 @@ namespace DustInTheWind.Lisimba.Biorhythm
             this.tableLayoutPanel3.Size = new System.Drawing.Size(833, 23);
             this.tableLayoutPanel3.TabIndex = 5;
             // 
-            // Biorythm
+            // Biorhythm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
-            this.Name = "Biorythm";
+            this.Name = "Biorhythm";
             this.Size = new System.Drawing.Size(839, 278);
-            this.Load += new System.EventHandler(this.Biorythm_Load);
+            this.Load += new System.EventHandler(this.Biorhythm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -276,7 +276,7 @@ namespace DustInTheWind.Lisimba.Biorhythm
         private System.Windows.Forms.CheckBox checkBoxPhysical;
         private System.Windows.Forms.Label labelColorPhysical;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private DustInTheWind.Biorhythm.BiorhythmView biorythmView1;
+        private DustInTheWind.Biorhythm.BiorhythmView biorhythmView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;

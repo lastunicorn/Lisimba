@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.ContactList
 
                     toolStripMenuItem_List_Add.ViewModel = ViewModel.ContactMenuViewModels.AddContactViewModel;
                     toolStripMenuItem_List_Delete.ViewModel = ViewModel.ContactMenuViewModels.DeleteContactViewModel;
-                    toolStripMenuItem_List_ViewBiorythm.ViewModel = ViewModel.ContactMenuViewModels.BiorhythmViewModel;
+                    toolStripMenuItem_List_ViewBiorhythm.ViewModel = ViewModel.ContactMenuViewModels.BiorhythmViewModel;
                 }
             }
         }
@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.ContactList
 
             //// Display the menu
             //Contact selectedContact = currentData.Contact;
-            //toolStripMenuItem_List_ViewBiorythm.Enabled = (selectedContact != null && selectedContact.Birthday.IsCompleteDate);
+            //toolStripMenuItem_List_ViewBiorhythm.Enabled = (selectedContact != null && selectedContact.Birthday.IsCompleteDate);
             //contextMenuStripListBox.Show(treeViewContacts, e.Location);
         }
 

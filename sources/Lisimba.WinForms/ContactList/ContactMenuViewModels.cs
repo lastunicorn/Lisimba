@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 using DustInTheWind.Lisimba.Utils;
 using DustInTheWind.WinFormsCommon.Operations;
@@ -51,7 +50,7 @@ namespace DustInTheWind.Lisimba.ContactList
             DeleteCurrentContactOperation operation1 = availableOperations.GetOperation<DeleteCurrentContactOperation>();
             DeleteContactViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation1);
 
-            ShowBiorythmOperation operation2 = availableOperations.GetOperation<ShowBiorythmOperation>();
+            ShowBiorhythmOperation operation2 = availableOperations.GetOperation<ShowBiorhythmOperation>();
             BiorhythmViewModel = viewModelProvider.CreateNew<CustomButtonViewModel>(operation2);
         }
     }

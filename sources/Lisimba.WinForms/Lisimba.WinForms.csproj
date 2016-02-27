@@ -145,7 +145,7 @@
     <Compile Include="Operations\ImportOperation.cs" />
     <Compile Include="Operations\OpenRecentFileOperation.cs" />
     <Compile Include="Operations\RedoOperation.cs" />
-    <Compile Include="Operations\ShowBiorythmOperation.cs" />
+    <Compile Include="Operations\ShowBiorhythmOperation.cs" />
     <Compile Include="Operations\UndoOperation.cs" />
     <Compile Include="Services\WindowSystem.cs" />
     <Compile Include="Utils\CustomMenuItem.cs">
@@ -230,11 +230,11 @@
     <Compile Include="Operations\OpenAddressBookOperation.cs" />
     <Compile Include="Operations\SaveAddressBookOperation.cs" />
     <Compile Include="ContactList\TreeNodeByNicknameOrNameComparer.cs" />
-    <Compile Include="Biorhythm\BiorythmForm.cs">
+    <Compile Include="Biorhythm\BiorhythmForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Biorhythm\BiorythmForm.Designer.cs">
-      <DependentUpon>BiorythmForm.cs</DependentUpon>
+    <Compile Include="Biorhythm\BiorhythmForm.Designer.cs">
+      <DependentUpon>BiorhythmForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\EditBaseForm.cs">
       <SubType>Form</SubType>
@@ -389,9 +389,9 @@
     <EmbeddedResource Include="NameEditing\NameEditorLabel.resx">
       <DependentUpon>NameEditorLabel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Biorhythm\BiorythmForm.resx">
+    <EmbeddedResource Include="Biorhythm\BiorhythmForm.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>BiorythmForm.cs</DependentUpon>
+      <DependentUpon>BiorhythmForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\EditBaseForm.resx">
       <DependentUpon>EditBaseForm.cs</DependentUpon>

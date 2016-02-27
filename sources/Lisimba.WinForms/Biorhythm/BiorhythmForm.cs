@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Biorhythm
 {
-    public partial class BiorythmForm : Form
+    public partial class BiorhythmForm : Form
     {
         private Contact contact;
 
@@ -38,22 +38,22 @@ namespace DustInTheWind.Lisimba.Biorhythm
         {
             if (contact == null)
             {
-                biorythm1.Birthday = new DateTime(0);
-                Text = "The biorythm";
-                biorythm1.Enabled = false;
+                biorhythm1.Birthday = new DateTime(0);
+                Text = "The biorhythm";
+                biorhythm1.Enabled = false;
             }
             else
             {
-                biorythm1.Birthday = contact.Birthday.ToDateTime();
-                Text = string.Format("The biorythm for {0}", contact.Name);
-                biorythm1.Enabled = true;
+                biorhythm1.Birthday = contact.Birthday.ToDateTime();
+                Text = string.Format("The biorhythm for {0}", contact.Name);
+                biorhythm1.Enabled = true;
             }
         }
 
-        public BiorythmForm()
+        public BiorhythmForm()
         {
             InitializeComponent();
-            biorythm1.CurrentDay = DateTime.Today;
+            biorhythm1.CurrentDay = DateTime.Today;
         }
 
         private void buttonClose_Click(object sender, EventArgs e)

@@ -219,9 +219,9 @@ namespace DustInTheWind.Lisimba.Services
             return sb.ToString();
         }
 
-        public void DisplayBiorythm(Contact contact)
+        public void DisplayBiorhythm(Contact contact)
         {
-            BiorythmForm form = new BiorythmForm
+            BiorhythmForm form = new BiorhythmForm
             {
                 Owner = mainWindow,
                 Contact = contact

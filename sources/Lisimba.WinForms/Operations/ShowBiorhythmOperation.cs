@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Services;
 
 namespace DustInTheWind.Lisimba.Operations
 {
-    internal class ShowBiorythmOperation : OperationBase<object>
+    internal class ShowBiorhythmOperation : OperationBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
 
@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Operations
             get { return LocalizedResources.BiorhythmOperationDescription; }
         }
 
-        public ShowBiorythmOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public ShowBiorhythmOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -50,12 +50,12 @@ namespace DustInTheWind.Lisimba.Operations
         private bool CalculateEnableState()
         {
             return openedAddressBooks.CurrentContact != null &&
-                openedAddressBooks.CurrentContact.Birthday.IsCompleteDate;
+                   openedAddressBooks.CurrentContact.Birthday.IsCompleteDate;
         }
 
         protected override void DoExecute(object parameter)
         {
-            windowSystem.DisplayBiorythm(openedAddressBooks.CurrentContact);
+            windowSystem.DisplayBiorhythm(openedAddressBooks.CurrentContact);
         }
     }
 }
