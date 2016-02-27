@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,33 +15,34 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.ActionManagement
+namespace DustInTheWind.Lisimba.Business.Actions
 {
-    public class RenameAddressBookAction : IAction
+    public class ChangeContactNotesAction : IAction
     {
-        private readonly AddressBook addressBook;
-        private readonly string name;
-        private string oldName;
+        private readonly Contact contact;
+        private readonly string notes;
+        private string oldValue;
 
-        public RenameAddressBookAction(AddressBook addressBook, string name)
+        public ChangeContactNotesAction(Contact contact, string notes)
         {
-            if (addressBook == null) throw new ArgumentNullException("addressBook");
+            if (contact == null) throw new ArgumentNullException("contact");
 
-            this.addressBook = addressBook;
-            this.name = name;
+            this.contact = contact;
+            this.notes = notes;
         }
 
         public void Do()
         {
-            oldName = addressBook.Name;
-            addressBook.Name = name;
+            oldValue = contact.Notes;
+            contact.Notes = notes;
         }
 
         public void Undo()
         {
-            addressBook.Name = oldName;
+            contact.Notes = oldValue;
         }
     }
 }

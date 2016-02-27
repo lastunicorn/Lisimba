@@ -15,35 +15,32 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.ActionManagement
+namespace DustInTheWind.Lisimba.Business.Actions
 {
-    public class UpdateContactItemAction : IAction
+    public class CreateContactItemAction : IAction
     {
+        private readonly CustomObservableCollection<ContactItem> contactItems;
         private readonly ContactItem contactItem;
-        private readonly ContactItem newContactItem;
-        private ContactItem oldContactItem;
 
-        public UpdateContactItemAction(ContactItem contactItem, ContactItem newContactItem)
+        public CreateContactItemAction(CustomObservableCollection<ContactItem> contactItems, ContactItem contactItem)
         {
-            if (contactItem == null) throw new ArgumentNullException("contactItem");
-            if (newContactItem == null) throw new ArgumentNullException("newContactItem");
+            if (contactItems == null) throw new ArgumentNullException("contactItems");
 
+            this.contactItems = contactItems;
             this.contactItem = contactItem;
-            this.newContactItem = newContactItem;
         }
 
         public void Do()
         {
-            oldContactItem = contactItem.Clone();
-
-            contactItem.CopyFrom(newContactItem);
+            contactItems.Add(contactItem);
         }
 
         public void Undo()
         {
-            contactItem.CopyFrom(oldContactItem);
+            contactItems.Remove(contactItem);
         }
     }
 }

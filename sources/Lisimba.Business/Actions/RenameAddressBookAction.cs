@@ -15,32 +15,34 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.ActionManagement
+namespace DustInTheWind.Lisimba.Business.Actions
 {
-    class DeleteContactAction : IAction
+    public class RenameAddressBookAction : IAction
     {
         private readonly AddressBook addressBook;
-        private readonly Contact contact;
+        private readonly string name;
+        private string oldName;
 
-        public DeleteContactAction(AddressBook addressBook, Contact contact)
+        public RenameAddressBookAction(AddressBook addressBook, string name)
         {
             if (addressBook == null) throw new ArgumentNullException("addressBook");
-            if (contact == null) throw new ArgumentNullException("contact");
 
             this.addressBook = addressBook;
-            this.contact = contact;
+            this.name = name;
         }
 
         public void Do()
         {
-            addressBook.Contacts.Remove(contact);
+            oldName = addressBook.Name;
+            addressBook.Name = name;
         }
 
         public void Undo()
         {
-            addressBook.Contacts.Add(contact);
+            addressBook.Name = oldName;
         }
     }
 }
