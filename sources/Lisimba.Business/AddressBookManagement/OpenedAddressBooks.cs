@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.ComponentModel;
 using System.IO;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.Properties;
@@ -36,6 +37,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
         public event EventHandler ContactChanged;
+        public event EventHandler<ContactDeletingEventArgs> ContactDeleting;
 
         public event EventHandler<AddressBookOpenedEventArgs> AddressBookOpened;
         public event EventHandler AddressBookSaved;
@@ -222,6 +224,25 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             return true;
         }
 
+        public void DeleteCurrentContact()
+        {
+            Contact contactToDelete = CurrentContact;
+
+            if (contactToDelete == null)
+                return;
+
+            ContactDeletingEventArgs eva = new ContactDeletingEventArgs(contactToDelete);
+            OnContactDeleting(eva);
+
+            if (eva.Cancel)
+                return;
+
+            Current.DeleteContact(contactToDelete);
+
+            if (ReferenceEquals(contactToDelete, CurrentContact))
+                CurrentContact = null;
+        }
+
         #region Event Invocators
 
         protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
@@ -246,6 +267,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnContactDeleting(ContactDeletingEventArgs e)
+        {
+            EventHandler<ContactDeletingEventArgs> handler = ContactDeleting;
+
+            if (handler != null)
+                handler(this, e);
         }
 
         protected virtual void OnAddressBookClosing(AddressBookClosingEventArgs e)

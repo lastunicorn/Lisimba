@@ -141,6 +141,7 @@
     <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportsMenuItemViewModel.cs" />
+    <Compile Include="Observers\ContactDeletingObserver.cs" />
     <Compile Include="Operations\ExportOperation.cs" />
     <Compile Include="Operations\ImportOperation.cs" />
     <Compile Include="Operations\OpenRecentFileOperation.cs" />

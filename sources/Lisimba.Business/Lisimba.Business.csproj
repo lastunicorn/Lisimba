@@ -52,6 +52,7 @@
     <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosingEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenResult.cs" />
+    <Compile Include="AddressBookManagement\ContactDeletingEventArgs.cs" />
     <Compile Include="AddressBookManagement\GateNeededEventArgs.cs" />
     <Compile Include="AddressBookManagement\NewLocationNeededEventArgs.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />

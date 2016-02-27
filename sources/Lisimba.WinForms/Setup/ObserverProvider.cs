@@ -39,6 +39,7 @@ namespace DustInTheWind.Lisimba.Setup
             yield return unityContainer.Resolve<AddressBookSavedObserver>();
             yield return unityContainer.Resolve<AddressBookClosingObserver>();
             yield return unityContainer.Resolve<AddressBookClosedObserver>();
+            yield return unityContainer.Resolve<ContactDeletingObserver>();
         }
     }
 }

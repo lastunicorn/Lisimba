@@ -16,7 +16,6 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
 
@@ -50,34 +49,7 @@ namespace DustInTheWind.Lisimba.Operations
 
         protected override void DoExecute(object parameter)
         {
-            DeleteCurrentContact();
-        }
-
-        public void DeleteCurrentContact()
-        {
-            Contact contactToDelete = openedAddressBooks.CurrentContact;
-
-            if (contactToDelete == null)
-                return;
-
-            bool allowToContinue = ConfirmDeleteContact(contactToDelete);
-
-            if (allowToContinue)
-            {
-                openedAddressBooks.Current.DeleteContact(contactToDelete);
-                //openedAddressBooks.Current.AddressBook.Contacts.Remove(contactToDelete);
-
-                if (ReferenceEquals(contactToDelete, openedAddressBooks.CurrentContact))
-                    openedAddressBooks.CurrentContact = null;
-            }
-        }
-
-        private bool ConfirmDeleteContact(Contact contactToDelete)
-        {
-            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
-            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
-
-            return windowSystem.DisplayYesNoExclamation(text, title);
+            openedAddressBooks.DeleteCurrentContact();
         }
     }
 }
