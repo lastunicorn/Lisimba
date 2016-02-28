@@ -45,6 +45,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             yield return new Tuple<string, IFlow>("gate", unityContainer.Resolve<GateFlow>());
             yield return new Tuple<string, IFlow>("gates", unityContainer.Resolve<GatesFlow>());
             yield return new Tuple<string, IFlow>("lang", unityContainer.Resolve<LangFlow>());
+            yield return new Tuple<string, IFlow>("compare", unityContainer.Resolve<CompareFlow>());
             yield return new Tuple<string, IFlow>("exit", unityContainer.Resolve<ExitFlow>());
             yield return new Tuple<string, IFlow>("bye", unityContainer.Resolve<ExitFlow>());
             yield return new Tuple<string, IFlow>("goodbye", unityContainer.Resolve<ExitFlow>());

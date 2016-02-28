@@ -70,13 +70,13 @@ namespace DustInTheWind.Lisimba.Services
 
         public void CreateMainWindow()
         {
-            MainWindow = uiFactory.GetForm<LisimbaForm>();
+            MainWindow = uiFactory.CreateForm<LisimbaForm>();
         }
 
         public void ShowTrayIcon()
         {
             if (trayIcon == null)
-                trayIcon = uiFactory.GetComponent<TrayIcon>();
+                trayIcon = uiFactory.CreateComponent<TrayIcon>();
 
             trayIcon.Visible = true;
         }
@@ -153,7 +153,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void ShowAbout()
         {
-            using (AboutForm form = uiFactory.GetForm<AboutForm>())
+            using (AboutForm form = uiFactory.CreateForm<AboutForm>())
             {
                 if (mainWindow == null)
                     form.StartPosition = FormStartPosition.CenterScreen;
@@ -164,7 +164,7 @@ namespace DustInTheWind.Lisimba.Services
 
         public void DisplayAddressBookProperties()
         {
-            using (AddressBookPropertiesForm form = uiFactory.GetForm<AddressBookPropertiesForm>())
+            using (AddressBookPropertiesForm form = uiFactory.CreateForm<AddressBookPropertiesForm>())
             {
                 form.ShowDialog(MainWindow);
             }
@@ -181,13 +181,13 @@ namespace DustInTheWind.Lisimba.Services
 
         public void DisplayAddContactWindow()
         {
-            AddContactForm form = uiFactory.GetForm<AddContactForm>();
+            AddContactForm form = uiFactory.CreateForm<AddContactForm>();
             form.Show(MainWindow);
         }
 
         public void ShowGateSelector(Point point)
         {
-            GateSelectorForm form = uiFactory.GetForm<GateSelectorForm>();
+            GateSelectorForm form = uiFactory.CreateForm<GateSelectorForm>();
 
             int x = point.X - form.Width;
             int y = point.Y - form.Height;

@@ -21,7 +21,7 @@ using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class MenuItemViewModelProvider
+    internal class MenuItemViewModelProvider
     {
         private readonly IUnityContainer unityContainer;
 

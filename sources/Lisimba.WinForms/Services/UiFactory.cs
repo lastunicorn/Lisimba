@@ -17,11 +17,13 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Services
 {
-    class UiFactory
+    internal class UiFactory
     {
         private readonly IUnityContainer unityContainer;
 
@@ -31,16 +33,25 @@ namespace DustInTheWind.Lisimba.Services
             this.unityContainer = unityContainer;
         }
 
-        public T GetForm<T>()
+        public T CreateForm<T>()
             where T : Form
         {
             return unityContainer.Resolve<T>();
         }
 
-        public T GetComponent<T>()
+        public T CreateComponent<T>()
             where T : Component
         {
             return unityContainer.Resolve<T>();
+        }
+
+        public TViewModel CreateNewViewModel<TViewModel>(IOperation operation)
+            where TViewModel : ViewModelBase
+        {
+            if (operation == null) throw new ArgumentNullException("operation");
+
+            ResolverOverride resolverOverride = new DependencyOverride(typeof(IOperation), operation);
+            return unityContainer.Resolve<TViewModel>(resolverOverride);
         }
     }
 }

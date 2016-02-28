@@ -22,6 +22,10 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     {
         private PersonName name;
 
+        /// <summary>
+        /// Gets or sets the name of the person.
+        /// It cannot be set to null.
+        /// </summary>
         public PersonName Name
         {
             get { return name; }
@@ -40,6 +44,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
         private Date birthday;
 
+        /// <summary>
+        /// Gets or sets the birthday of te person.
+        /// </summary>
         public Date Birthday
         {
             get { return birthday; }
@@ -57,6 +64,9 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
         }
 
+        /// <summary>
+        /// Gets the zodiac sign calculated based on the birthday.
+        /// </summary>
         public ZodiacSign ZodiacSign
         {
             get
