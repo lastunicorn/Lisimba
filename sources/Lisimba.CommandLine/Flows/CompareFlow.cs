@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
@@ -24,6 +25,7 @@ using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Egg.Importing;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
@@ -56,53 +58,29 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             AddressBook addressBook = gate.Load(parameters[0]);
 
-            Compare(openedAddressBooks.Current.AddressBook, addressBook);
+            AddressBookComparer addressBookComparer = new AddressBookComparer();
+            ComparisonResult result = addressBookComparer.Compare(openedAddressBooks.Current.AddressBook, addressBook);
+            DisplayResult(result);
         }
 
-        private void Compare(AddressBook addressBook1, AddressBook addressBook2)
+        private void DisplayResult(ComparisonResult result)
         {
-            //ComparisonResult result = new ComparisonResult();
-            List<Contact> identicalContacts = new List<Contact>();
-            List<Contact> unique1Contacts = new List<Contact>();
-            List<Contact> unique2Contacts = new List<Contact>();
+            console.WriteLineNormal("Identical: " + result.IdenticalContacts.Count());
 
-            foreach (Contact contact in addressBook1.Contacts)
-            {
-                if (addressBook2.Contacts.Contains(contact))
-                    identicalContacts.Add(contact);
-                else
-                    unique1Contacts.Add(contact);
-            }
+            foreach (ContactComparisonResult comparisonResult in result.IdenticalContacts)
+                console.WriteLineNormal(comparisonResult.Contact1.ToString());
 
-            foreach (Contact contact in addressBook2.Contacts)
-            {
-                if (!addressBook1.Contacts.Contains(contact))
-                    unique2Contacts.Add(contact);
-            }
-
-            console.WriteLineNormal("Identical: " + identicalContacts.Count);
-
-            foreach (Contact contact in identicalContacts)
-                console.WriteLineNormal(contact.ToString());
-            
             console.WriteLine();
-            console.WriteLineNormal("unique1: " + unique1Contacts.Count);
+            console.WriteLineNormal("unique1: " + result.Unique1Contacts.Count());
 
-            foreach (Contact contact in unique1Contacts)
-                console.WriteLineNormal(contact.ToString());
-            
+            foreach (ContactComparisonResult comparisonResult in result.Unique1Contacts)
+                console.WriteLineNormal(comparisonResult.Contact1.ToString());
+
             console.WriteLine();
-            console.WriteLineNormal("unique2: " + unique2Contacts.Count);
+            console.WriteLineNormal("unique2: " + result.Unique2Contacts.Count());
 
-            foreach (Contact contact in unique2Contacts)
-                console.WriteLineNormal(contact.ToString());
+            foreach (ContactComparisonResult comparisonResult in result.Unique2Contacts)
+                console.WriteLineNormal(comparisonResult.Contact2.ToString());
         }
-    }
-
-    internal struct ComparisonResult
-    {
-        public int IdenticalCount { get; set; }
-        public int Unique1Count { get; set; }
-        public int Unique2Count { get; set; }
     }
 }

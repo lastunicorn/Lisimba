@@ -73,6 +73,7 @@
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
