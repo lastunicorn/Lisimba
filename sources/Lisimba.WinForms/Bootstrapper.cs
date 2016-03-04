@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.WinForms.Setup;
 using Microsoft.Practices.Unity;
 
@@ -29,21 +28,13 @@ namespace DustInTheWind.Lisimba.WinForms
         {
             unityContainer = DependencyContainerSetup.CreateContainer();
 
-            InitializeProgramArguments(args);
-
-            StartApplication();
+            StartApplication(args);
         }
 
-        private void InitializeProgramArguments(string[] args)
-        {
-            ProgramArguments programArguments = unityContainer.Resolve<ProgramArguments>();
-            programArguments.Initialize(args);
-        }
-
-        private void StartApplication()
+        private void StartApplication(string[] args)
         {
             LisimbaApplication lisimbaApplication = unityContainer.Resolve<LisimbaApplication>();
-            lisimbaApplication.Run();
+            lisimbaApplication.Run(args);
         }
     }
 }
