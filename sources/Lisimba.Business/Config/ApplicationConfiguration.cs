@@ -88,5 +88,10 @@ namespace DustInTheWind.Lisimba.Business.Config
         {
             get { return configurationFile.LisimbaConfigSection.SortBy.Value; }
         }
+
+        public bool StartInTray
+        {
+            get { return configurationFile.LisimbaConfigSection.StartInTray; }
+        }
     }
 }

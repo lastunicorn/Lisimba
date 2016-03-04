@@ -264,7 +264,7 @@
     </Compile>
     <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />
-    <Compile Include="Services\UserInterface.cs" />
+    <Compile Include="UserInterface.cs" />
     <Compile Include="Services\Zodiac.cs" />
     <Compile Include="Biorhythm\BiorhythmView.cs">
       <SubType>UserControl</SubType>

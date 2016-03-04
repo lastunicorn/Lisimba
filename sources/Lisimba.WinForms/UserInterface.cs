@@ -17,29 +17,36 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 
-namespace DustInTheWind.Lisimba.WinForms.Services
+namespace DustInTheWind.Lisimba.WinForms
 {
     internal class UserInterface : IUserInterface
     {
         private readonly WindowSystem windowSystem;
         private readonly ActiveObservers activeObservers;
+        private readonly ApplicationConfiguration config;
         private bool runAsTray;
 
-        public UserInterface(WindowSystem windowSystem, ActiveObservers activeObservers)
+        public UserInterface(WindowSystem windowSystem, ActiveObservers activeObservers, ApplicationConfiguration config)
         {
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (activeObservers == null) throw new ArgumentNullException("activeObservers");
+            if (config == null) throw new ArgumentNullException("config");
 
             this.windowSystem = windowSystem;
             this.activeObservers = activeObservers;
+            this.config = config;
         }
 
         public void Initialize()
         {
-            RunAsTrayApp();
-            //RunAsWindowApp();
+            if (config.StartInTray)
+                RunAsTrayApp();
+            else
+                RunAsWindowApp();
         }
 
         private void RunAsWindowApp()

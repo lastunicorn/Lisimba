@@ -23,25 +23,31 @@ namespace DustInTheWind.Lisimba.Business.ConfigSection
         [ConfigurationProperty("recentFiles")]
         public RecentFilesConfigElementCollection RecentFilesList
         {
-            get { return (RecentFilesConfigElementCollection) this["recentFiles"] ?? new RecentFilesConfigElementCollection(); }
+            get { return (RecentFilesConfigElementCollection)this["recentFiles"] ?? new RecentFilesConfigElementCollection(); }
         }
 
         [ConfigurationProperty("loadFileAtStart")]
         public LoadFileAtStartConfigElement LoadFileAtStart
         {
-            get { return (LoadFileAtStartConfigElement) this["loadFileAtStart"] ?? new LoadFileAtStartConfigElement(); }
+            get { return (LoadFileAtStartConfigElement)this["loadFileAtStart"] ?? new LoadFileAtStartConfigElement(); }
         }
 
         [ConfigurationProperty("sortBy")]
         public SortByConfigElement SortBy
         {
-            get { return (SortByConfigElement) this["sortBy"] ?? new SortByConfigElement(); }
+            get { return (SortByConfigElement)this["sortBy"] ?? new SortByConfigElement(); }
         }
 
         [ConfigurationProperty("gates")]
         public GatesConfigElement Gates
         {
             get { return (GatesConfigElement)this["gates"] ?? new GatesConfigElement(); }
+        }
+
+        [ConfigurationProperty("startInTray", IsRequired = false)]
+        public bool StartInTray
+        {
+            get { return (bool?)this["startInTray"] ?? false; }
         }
     }
 }
