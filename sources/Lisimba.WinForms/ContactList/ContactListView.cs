@@ -19,7 +19,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.Sorting;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     internal partial class ContactListView : UserControl
     {

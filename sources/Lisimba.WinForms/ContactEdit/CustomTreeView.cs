@@ -20,7 +20,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     partial class CustomTreeView : TreeView
     {

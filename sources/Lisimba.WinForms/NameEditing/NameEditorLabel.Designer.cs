@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.NameEditing
+﻿namespace DustInTheWind.Lisimba.WinForms.NameEditing
 {
     partial class NameEditorLabel
     {

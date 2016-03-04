@@ -1,4 +1,4 @@
-namespace DustInTheWind.Lisimba.Biorhythm
+namespace DustInTheWind.Lisimba.WinForms.Biorhythm
 {
     partial class BiorhythmView
     {

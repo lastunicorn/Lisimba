@@ -19,10 +19,10 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class OpenRecentFileOperation : OperationBase<AddressBookLocationInfo>
     {

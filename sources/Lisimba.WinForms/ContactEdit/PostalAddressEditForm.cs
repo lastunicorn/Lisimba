@@ -17,9 +17,9 @@
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.Properties;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     public partial class PostalAddressEditForm : EditBaseForm
     {

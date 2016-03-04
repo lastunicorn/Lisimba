@@ -17,7 +17,7 @@
 using System;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     partial class AddContactForm : Form, IAddContactView
     {

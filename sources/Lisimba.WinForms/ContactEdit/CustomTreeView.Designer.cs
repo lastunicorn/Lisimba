@@ -16,7 +16,7 @@
 
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     partial class CustomTreeView
     {

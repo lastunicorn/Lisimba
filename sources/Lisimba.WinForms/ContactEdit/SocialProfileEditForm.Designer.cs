@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.ContactEdit
+﻿namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     partial class SocialProfileEditForm
     {

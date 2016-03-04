@@ -23,7 +23,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     public partial class GateSelector : UserControl
     {

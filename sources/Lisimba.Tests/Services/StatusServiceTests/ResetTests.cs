@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests

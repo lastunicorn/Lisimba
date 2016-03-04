@@ -20,12 +20,12 @@ using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Setup
+namespace DustInTheWind.Lisimba.WinForms.Setup
 {
     internal static class DependencyContainerSetup
     {

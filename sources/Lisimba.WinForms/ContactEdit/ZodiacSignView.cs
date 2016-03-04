@@ -17,9 +17,9 @@
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     public partial class ZodiacSignView : UserControl
     {

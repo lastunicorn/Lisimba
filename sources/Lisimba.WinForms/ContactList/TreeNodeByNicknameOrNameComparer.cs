@@ -19,7 +19,7 @@ using System.Collections;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     /// <summary>
     /// Compares two contaCTs by nickname.

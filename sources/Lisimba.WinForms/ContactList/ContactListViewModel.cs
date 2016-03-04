@@ -24,7 +24,7 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Sorting;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     internal class ContactListViewModel : ViewModelBase
     {

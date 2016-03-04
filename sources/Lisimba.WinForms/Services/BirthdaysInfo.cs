@@ -20,7 +20,7 @@ using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     class BirthdaysInfo
     {

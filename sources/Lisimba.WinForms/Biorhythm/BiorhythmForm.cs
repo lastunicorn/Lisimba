@@ -18,7 +18,7 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Biorhythm
+namespace DustInTheWind.Lisimba.WinForms.Biorhythm
 {
     public partial class BiorhythmForm : Form
     {

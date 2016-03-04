@@ -17,11 +17,11 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.LocationProviders;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.LocationProviders;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class OpenAddressBookOperation : OperationBase<string>
     {

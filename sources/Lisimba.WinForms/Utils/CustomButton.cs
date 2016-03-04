@@ -19,7 +19,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     partial class CustomButton : Button
     {

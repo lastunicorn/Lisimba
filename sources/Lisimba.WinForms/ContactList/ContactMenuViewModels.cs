@@ -15,12 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Operations;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     internal class ContactMenuViewModels
     {

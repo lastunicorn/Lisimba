@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Egg.Sorting;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     internal class SortingComboBoxItem
     {

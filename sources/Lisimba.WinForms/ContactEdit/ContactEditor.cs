@@ -17,10 +17,10 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     /// <summary>
     /// Control to display and edit a contact.

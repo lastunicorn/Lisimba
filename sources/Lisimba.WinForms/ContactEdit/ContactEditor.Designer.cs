@@ -1,6 +1,6 @@
-using DustInTheWind.Lisimba.NameEditing;
+using DustInTheWind.Lisimba.WinForms.NameEditing;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     partial class ContactEditor
     {
@@ -35,12 +35,12 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.nameEditor1 = new DustInTheWind.Lisimba.NameEditing.NameEditor();
+            this.nameEditor1 = new NameEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customTreeView1 = new DustInTheWind.Lisimba.ContactEdit.CustomTreeView();
-            this.contactDetailsList1 = new DustInTheWind.Lisimba.ContactEdit.ContactDetailsList();
+            this.customTreeView1 = new CustomTreeView();
+            this.contactDetailsList1 = new ContactDetailsList();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
@@ -49,8 +49,8 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonAddPhone = new System.Windows.Forms.Button();
             this.buttonAddWebSite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.birthdayView1 = new DustInTheWind.Lisimba.ContactEdit.BirthdayView();
-            this.zodiacSignView1 = new DustInTheWind.Lisimba.ContactEdit.ZodiacSignView();
+            this.birthdayView1 = new BirthdayView();
+            this.zodiacSignView1 = new ZodiacSignView();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -228,7 +228,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddAddress.AutoSize = true;
             this.buttonAddAddress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddAddress.Image = global::DustInTheWind.Lisimba.Properties.Resources.address_add;
+            this.buttonAddAddress.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.address_add;
             this.buttonAddAddress.Location = new System.Drawing.Point(3, 3);
             this.buttonAddAddress.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddAddress.Name = "buttonAddAddress";
@@ -242,7 +242,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddDate.AutoSize = true;
             this.buttonAddDate.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddDate.Image = global::DustInTheWind.Lisimba.Properties.Resources.date_add;
+            this.buttonAddDate.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.date_add;
             this.buttonAddDate.Location = new System.Drawing.Point(54, 3);
             this.buttonAddDate.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddDate.Name = "buttonAddDate";
@@ -256,7 +256,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddEmail.AutoSize = true;
             this.buttonAddEmail.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddEmail.Image = global::DustInTheWind.Lisimba.Properties.Resources.email_add;
+            this.buttonAddEmail.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.email_add;
             this.buttonAddEmail.Location = new System.Drawing.Point(105, 3);
             this.buttonAddEmail.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddEmail.Name = "buttonAddEmail";
@@ -270,7 +270,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddSocialProfileId.AutoSize = true;
             this.buttonAddSocialProfileId.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddSocialProfileId.Image = global::DustInTheWind.Lisimba.Properties.Resources.mesengerid_add;
+            this.buttonAddSocialProfileId.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.mesengerid_add;
             this.buttonAddSocialProfileId.Location = new System.Drawing.Point(156, 3);
             this.buttonAddSocialProfileId.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddSocialProfileId.Name = "buttonAddSocialProfileId";
@@ -283,7 +283,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddPhone.AutoSize = true;
             this.buttonAddPhone.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddPhone.Image = global::DustInTheWind.Lisimba.Properties.Resources.phone_add;
+            this.buttonAddPhone.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.phone_add;
             this.buttonAddPhone.Location = new System.Drawing.Point(207, 3);
             this.buttonAddPhone.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddPhone.Name = "buttonAddPhone";
@@ -297,7 +297,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             // 
             this.buttonAddWebSite.AutoSize = true;
             this.buttonAddWebSite.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonAddWebSite.Image = global::DustInTheWind.Lisimba.Properties.Resources.webaddress_add;
+            this.buttonAddWebSite.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.webaddress_add;
             this.buttonAddWebSite.Location = new System.Drawing.Point(258, 3);
             this.buttonAddWebSite.MinimumSize = new System.Drawing.Size(45, 45);
             this.buttonAddWebSite.Name = "buttonAddWebSite";

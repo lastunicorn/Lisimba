@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     public partial class ContactDetailsListItem : UserControl
     {

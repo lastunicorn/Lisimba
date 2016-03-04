@@ -17,10 +17,10 @@
 using System.Drawing;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.ZodiacSigns;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     public class Zodiac
     {

@@ -19,11 +19,11 @@ using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.LocationProviders;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.LocationProviders;
+using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 
-namespace DustInTheWind.Lisimba.Observers
+namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class AddressBookSavingObserver : IObserver
     {

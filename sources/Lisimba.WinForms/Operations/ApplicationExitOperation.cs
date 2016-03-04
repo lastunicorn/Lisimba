@@ -16,10 +16,10 @@
 
 using System;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class ApplicationExitOperation : OperationBase<object>
     {

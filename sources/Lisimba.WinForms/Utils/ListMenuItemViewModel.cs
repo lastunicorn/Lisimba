@@ -16,10 +16,10 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     class ListMenuItemViewModel : CustomButtonViewModel
     {

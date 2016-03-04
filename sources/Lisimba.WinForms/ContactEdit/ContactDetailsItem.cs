@@ -17,7 +17,7 @@
 using System.Drawing;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     public class ContactDetailsItem : ViewModelBase
     {

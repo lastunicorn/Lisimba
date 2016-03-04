@@ -17,7 +17,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     internal static class ControlExtensions
     {

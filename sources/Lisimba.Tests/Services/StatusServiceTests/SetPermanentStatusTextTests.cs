@@ -16,7 +16,7 @@
 
 using System;
 using System.Threading;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests

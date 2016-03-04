@@ -19,7 +19,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     internal class UserInterface : IUserInterface
     {

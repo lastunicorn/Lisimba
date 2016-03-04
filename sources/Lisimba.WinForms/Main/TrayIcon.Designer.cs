@@ -1,6 +1,6 @@
-﻿using DustInTheWind.Lisimba.Utils;
+﻿using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.Main
+namespace DustInTheWind.Lisimba.WinForms.Main
 {
     partial class TrayIcon
     {
@@ -65,14 +65,14 @@ namespace DustInTheWind.Lisimba.Main
             // 
             // toolStripMenuItem_About
             // 
-            this.toolStripMenuItem_About.Image = global::DustInTheWind.Lisimba.Properties.Resources.about_16;
+            this.toolStripMenuItem_About.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.about_16;
             this.toolStripMenuItem_About.Name = "toolStripMenuItem_About";
             this.toolStripMenuItem_About.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_About.Text = "About";
             // 
             // toolStripMenuItem_Exit
             // 
-            this.toolStripMenuItem_Exit.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit_16;
+            this.toolStripMenuItem_Exit.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.exit_16;
             this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
             this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Exit.Text = "E&xit";

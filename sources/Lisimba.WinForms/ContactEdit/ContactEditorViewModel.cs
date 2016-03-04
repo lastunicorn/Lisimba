@@ -18,13 +18,13 @@ using System;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Operations;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     internal class ContactEditorViewModel : ViewModelBase
     {

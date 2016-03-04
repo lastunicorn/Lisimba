@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.Utils
+﻿namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     partial class CustomMenuItem
     {

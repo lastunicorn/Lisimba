@@ -16,11 +16,11 @@
 
 using System;
 using System.Drawing;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     internal class CustomButtonViewModel : ViewModelBase
     {

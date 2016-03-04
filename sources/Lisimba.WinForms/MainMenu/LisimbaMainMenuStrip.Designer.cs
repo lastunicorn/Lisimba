@@ -1,6 +1,6 @@
-﻿using DustInTheWind.Lisimba.Utils;
+﻿using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.MainMenu
+namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
     partial class LisimbaMainMenuStrip
     {
@@ -75,7 +75,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_New
             // 
-            this.toolStripMenuItem_File_New.Image = global::DustInTheWind.Lisimba.Properties.Resources.new_16;
+            this.toolStripMenuItem_File_New.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.new_16;
             this.toolStripMenuItem_File_New.Name = "toolStripMenuItem_File_New";
             this.toolStripMenuItem_File_New.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.toolStripMenuItem_File_New.Size = new System.Drawing.Size(158, 22);
@@ -83,7 +83,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_Open
             // 
-            this.toolStripMenuItem_File_Open.Image = global::DustInTheWind.Lisimba.Properties.Resources.open_16;
+            this.toolStripMenuItem_File_Open.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.open_16;
             this.toolStripMenuItem_File_Open.Name = "toolStripMenuItem_File_Open";
             this.toolStripMenuItem_File_Open.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.toolStripMenuItem_File_Open.Size = new System.Drawing.Size(158, 22);
@@ -91,7 +91,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_Save
             // 
-            this.toolStripMenuItem_File_Save.Image = global::DustInTheWind.Lisimba.Properties.Resources.save_16;
+            this.toolStripMenuItem_File_Save.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.save_16;
             this.toolStripMenuItem_File_Save.Name = "toolStripMenuItem_File_Save";
             this.toolStripMenuItem_File_Save.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.toolStripMenuItem_File_Save.Size = new System.Drawing.Size(158, 22);
@@ -116,7 +116,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_Export
             // 
-            this.toolStripMenuItem_File_Export.Image = global::DustInTheWind.Lisimba.Properties.Resources.export;
+            this.toolStripMenuItem_File_Export.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.export;
             this.toolStripMenuItem_File_Export.Name = "toolStripMenuItem_File_Export";
             this.toolStripMenuItem_File_Export.Size = new System.Drawing.Size(158, 22);
             this.toolStripMenuItem_File_Export.Text = "&Export";
@@ -124,7 +124,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_Import
             // 
-            this.toolStripMenuItem_File_Import.Image = global::DustInTheWind.Lisimba.Properties.Resources.import;
+            this.toolStripMenuItem_File_Import.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.import;
             this.toolStripMenuItem_File_Import.Name = "toolStripMenuItem_File_Import";
             this.toolStripMenuItem_File_Import.Size = new System.Drawing.Size(158, 22);
             this.toolStripMenuItem_File_Import.Text = "&Import";
@@ -149,7 +149,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_File_Exit
             // 
-            this.toolStripMenuItem_File_Exit.Image = global::DustInTheWind.Lisimba.Properties.Resources.exit_16;
+            this.toolStripMenuItem_File_Exit.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.exit_16;
             this.toolStripMenuItem_File_Exit.Name = "toolStripMenuItem_File_Exit";
             this.toolStripMenuItem_File_Exit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
             this.toolStripMenuItem_File_Exit.Size = new System.Drawing.Size(158, 22);
@@ -190,7 +190,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_AddressBook_Undo
             // 
-            this.toolStripMenuItem_AddressBook_Undo.Image = global::DustInTheWind.Lisimba.Properties.Resources.undo;
+            this.toolStripMenuItem_AddressBook_Undo.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.undo;
             this.toolStripMenuItem_AddressBook_Undo.Name = "toolStripMenuItem_AddressBook_Undo";
             this.toolStripMenuItem_AddressBook_Undo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
             this.toolStripMenuItem_AddressBook_Undo.Size = new System.Drawing.Size(208, 22);
@@ -198,7 +198,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_AddressBook_Redo
             // 
-            this.toolStripMenuItem_AddressBook_Redo.Image = global::DustInTheWind.Lisimba.Properties.Resources.redo;
+            this.toolStripMenuItem_AddressBook_Redo.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.redo;
             this.toolStripMenuItem_AddressBook_Redo.Name = "toolStripMenuItem_AddressBook_Redo";
             this.toolStripMenuItem_AddressBook_Redo.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
             this.toolStripMenuItem_AddressBook_Redo.Size = new System.Drawing.Size(208, 22);
@@ -226,7 +226,7 @@ namespace DustInTheWind.Lisimba.MainMenu
             // 
             // toolStripMenuItem_Help_About
             // 
-            this.toolStripMenuItem_Help_About.Image = global::DustInTheWind.Lisimba.Properties.Resources.about_16;
+            this.toolStripMenuItem_Help_About.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.about_16;
             this.toolStripMenuItem_Help_About.Name = "toolStripMenuItem_Help_About";
             this.toolStripMenuItem_Help_About.Size = new System.Drawing.Size(107, 22);
             this.toolStripMenuItem_Help_About.Text = "&About";

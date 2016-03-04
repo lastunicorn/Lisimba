@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.Forms
+﻿namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     partial class WarningsForm
     {
@@ -33,7 +33,7 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listControl1 = new DustInTheWind.Lisimba.Forms.ListControl();
+            this.listControl1 = new ListControl();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,7 +86,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBox1.Image = global::DustInTheWind.Lisimba.Properties.Resources.warning_48;
+            this.pictureBox1.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.warning_48;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Padding = new System.Windows.Forms.Padding(15, 20, 15, 0);

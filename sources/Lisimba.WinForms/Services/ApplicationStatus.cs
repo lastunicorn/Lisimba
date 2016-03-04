@@ -17,7 +17,7 @@
 using System;
 using System.Threading;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     public class ApplicationStatus : IDisposable
     {

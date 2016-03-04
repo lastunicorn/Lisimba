@@ -16,7 +16,7 @@
 
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.NameEditing
+namespace DustInTheWind.Lisimba.WinForms.NameEditing
 {
     internal class NameEditorLabelViewModel : ViewModelBase
     {

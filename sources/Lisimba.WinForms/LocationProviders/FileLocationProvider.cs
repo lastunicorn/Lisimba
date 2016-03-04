@@ -16,9 +16,9 @@
 
 using System;
 using System.Text;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.LocationProviders
+namespace DustInTheWind.Lisimba.WinForms.LocationProviders
 {
     //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
     //        openFileDialog.DefaultExt = "csv";

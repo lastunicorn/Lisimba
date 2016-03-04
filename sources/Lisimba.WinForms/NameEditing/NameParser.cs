@@ -18,7 +18,7 @@ using System;
 using System.Text.RegularExpressions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.NameEditing
+namespace DustInTheWind.Lisimba.WinForms.NameEditing
 {
     /// <summary>
     /// maximum 4 wards allowed

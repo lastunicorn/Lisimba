@@ -15,10 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.Operations
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class ImportOperation : OperationBase<IGate>
     {

@@ -18,7 +18,7 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     partial class AddressBookPropertiesForm : Form
     {

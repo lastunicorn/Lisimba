@@ -19,7 +19,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     internal partial class ListMenuItem : ToolStripMenuItem
     {

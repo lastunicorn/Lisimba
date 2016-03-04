@@ -16,7 +16,7 @@
 
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     public partial class ListControl : UserControl
     {

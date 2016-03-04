@@ -1,4 +1,4 @@
-namespace DustInTheWind.Lisimba.Biorhythm
+namespace DustInTheWind.Lisimba.WinForms.Biorhythm
 {
     partial class BiorhythmForm
     {
@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Biorhythm
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BiorhythmForm));
             this.buttonClose = new System.Windows.Forms.Button();
-            this.biorhythm1 = new DustInTheWind.Lisimba.Biorhythm.BiorhythmView();
+            this.biorhythm1 = new BiorhythmView();
             this.SuspendLayout();
             // 
             // buttonClose

@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     public abstract partial class EditBaseForm : Form
     {

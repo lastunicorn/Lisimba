@@ -18,11 +18,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.MainMenu
+namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
     class RecentFilesMenuItemViewModel : ListMenuItemViewModel
     {

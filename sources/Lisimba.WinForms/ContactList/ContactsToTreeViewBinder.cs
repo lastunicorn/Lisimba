@@ -21,7 +21,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     internal class ContactsToTreeViewBinder
     {

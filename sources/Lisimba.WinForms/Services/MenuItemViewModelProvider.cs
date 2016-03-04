@@ -19,7 +19,7 @@ using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     internal class MenuItemViewModelProvider
     {

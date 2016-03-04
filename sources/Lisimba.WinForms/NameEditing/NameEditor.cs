@@ -19,11 +19,11 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
-using DustInTheWind.Lisimba.ContactEdit;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.ContactEdit;
+using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.NameEditing
+namespace DustInTheWind.Lisimba.WinForms.NameEditing
 {
     public partial class NameEditor : UserControl
     {

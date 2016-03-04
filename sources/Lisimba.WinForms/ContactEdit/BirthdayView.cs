@@ -19,9 +19,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     internal partial class BirthdayView : UserControl
     {

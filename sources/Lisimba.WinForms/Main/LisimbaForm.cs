@@ -19,7 +19,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Main
+namespace DustInTheWind.Lisimba.WinForms.Main
 {
     // Create the LisimbaStatusBar control.
     // Refactor ContactListView to take advantage of the services.

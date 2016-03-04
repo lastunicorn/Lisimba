@@ -16,10 +16,10 @@
 
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
-using DustInTheWind.Lisimba.Setup;
+using DustInTheWind.Lisimba.WinForms.Setup;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.WinForms
 {
     internal class Bootstrapper
     {

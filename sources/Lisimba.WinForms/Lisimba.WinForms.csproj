@@ -8,7 +8,7 @@
     <ProjectGuid>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DustInTheWind.Lisimba</RootNamespace>
+    <RootNamespace>DustInTheWind.Lisimba.WinForms</RootNamespace>
     <AssemblyName>Lisimba</AssemblyName>
     <ApplicationIcon>Lion.ico</ApplicationIcon>
     <FileUpgradeFlags>

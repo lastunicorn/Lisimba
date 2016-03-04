@@ -18,7 +18,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.NameEditing
+namespace DustInTheWind.Lisimba.WinForms.NameEditing
 {
     public partial class NameEditorLabel : Form
     {

@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     public class GateSelectorViewModel : ViewModelBase
     {

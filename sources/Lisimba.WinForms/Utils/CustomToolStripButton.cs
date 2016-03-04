@@ -20,7 +20,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Utils
+namespace DustInTheWind.Lisimba.WinForms.Utils
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip)]
     internal partial class CustomToolStripButton : ToolStripButton, IBindableComponent

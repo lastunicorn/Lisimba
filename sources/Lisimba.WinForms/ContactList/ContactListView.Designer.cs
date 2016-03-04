@@ -1,6 +1,6 @@
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.ContactList
+namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
     partial class ContactListView
     {
@@ -33,10 +33,10 @@ namespace DustInTheWind.Lisimba.ContactList
             this.components = new System.ComponentModel.Container();
             this.treeViewContacts = new System.Windows.Forms.TreeView();
             this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItem_List_Add = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
-            this.toolStripMenuItem_List_Delete = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_Add = new CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_Delete = new CustomMenuItem(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem_List_ViewBiorhythm = new DustInTheWind.Lisimba.Utils.CustomMenuItem(this.components);
+            this.toolStripMenuItem_List_ViewBiorhythm = new CustomMenuItem(this.components);
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.comboBoxSortBy = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -149,8 +149,8 @@ namespace DustInTheWind.Lisimba.ContactList
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBox1.Image = global::DustInTheWind.Lisimba.Properties.Resources.search;
-            this.pictureBox1.InitialImage = global::DustInTheWind.Lisimba.Properties.Resources.search;
+            this.pictureBox1.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.search;
+            this.pictureBox1.InitialImage = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.search;
             this.pictureBox1.Location = new System.Drawing.Point(3, 5);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(14, 16);

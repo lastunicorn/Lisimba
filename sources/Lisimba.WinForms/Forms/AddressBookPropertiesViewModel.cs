@@ -17,10 +17,10 @@
 using System;
 using System.IO;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Forms
+namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     internal class AddressBookPropertiesViewModel : ViewModelBase
     {

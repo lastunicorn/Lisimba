@@ -16,9 +16,9 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.Properties;
 
-namespace DustInTheWind.Lisimba
+namespace DustInTheWind.Lisimba.WinForms
 {
     internal static class Program
     {

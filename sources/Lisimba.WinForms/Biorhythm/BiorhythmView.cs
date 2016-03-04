@@ -18,7 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.Biorhythm
+namespace DustInTheWind.Lisimba.WinForms.Biorhythm
 {
     public partial class BiorhythmView : UserControl
     {

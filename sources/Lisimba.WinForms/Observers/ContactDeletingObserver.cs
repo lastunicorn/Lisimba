@@ -15,14 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Properties;
-using DustInTheWind.Lisimba.Services;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 
-namespace DustInTheWind.Lisimba.Observers
+namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class ContactDeletingObserver : IObserver
     {

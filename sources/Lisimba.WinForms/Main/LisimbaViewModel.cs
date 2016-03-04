@@ -19,16 +19,16 @@ using System.Drawing;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.ContactEdit;
-using DustInTheWind.Lisimba.ContactList;
-using DustInTheWind.Lisimba.MainMenu;
-using DustInTheWind.Lisimba.Operations;
-using DustInTheWind.Lisimba.Services;
-using DustInTheWind.Lisimba.Utils;
+using DustInTheWind.Lisimba.WinForms.ContactEdit;
+using DustInTheWind.Lisimba.WinForms.ContactList;
+using DustInTheWind.Lisimba.WinForms.MainMenu;
+using DustInTheWind.Lisimba.WinForms.Operations;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.Main
+namespace DustInTheWind.Lisimba.WinForms.Main
 {
     internal class LisimbaViewModel : ViewModelBase
     {

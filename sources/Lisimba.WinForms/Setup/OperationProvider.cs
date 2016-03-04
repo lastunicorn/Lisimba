@@ -16,11 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Operations;
+using DustInTheWind.Lisimba.WinForms.Operations;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Setup
+namespace DustInTheWind.Lisimba.WinForms.Setup
 {
     internal class OperationProvider : IOperationProvider
     {

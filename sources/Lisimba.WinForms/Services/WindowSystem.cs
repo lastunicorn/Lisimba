@@ -21,13 +21,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Biorhythm;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Forms;
-using DustInTheWind.Lisimba.Main;
-using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.Lisimba.WinForms.Biorhythm;
+using DustInTheWind.Lisimba.WinForms.Forms;
+using DustInTheWind.Lisimba.WinForms.Main;
+using DustInTheWind.Lisimba.WinForms.Properties;
 
-namespace DustInTheWind.Lisimba.Services
+namespace DustInTheWind.Lisimba.WinForms.Services
 {
     internal class WindowSystem
     {

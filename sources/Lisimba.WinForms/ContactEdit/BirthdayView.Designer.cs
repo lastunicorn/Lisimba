@@ -1,6 +1,6 @@
-﻿using DustInTheWind.Lisimba.Utils;
+﻿using DustInTheWind.Lisimba.WinForms.Utils;
 
-namespace DustInTheWind.Lisimba.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
     partial class BirthdayView
     {
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.labelBirthday = new System.Windows.Forms.Label();
-            this.buttonBiorhythm = new DustInTheWind.Lisimba.Utils.CustomButton(this.components);
+            this.buttonBiorhythm = new CustomButton(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -89,7 +89,7 @@ namespace DustInTheWind.Lisimba.ContactEdit
             this.buttonBiorhythm.AutoSize = true;
             this.buttonBiorhythm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.buttonBiorhythm.Dock = System.Windows.Forms.DockStyle.Right;
-            this.buttonBiorhythm.Image = global::DustInTheWind.Lisimba.Properties.Resources.biorhythms_16;
+            this.buttonBiorhythm.Image = global::DustInTheWind.Lisimba.WinForms.Properties.Resources.biorhythms_16;
             this.buttonBiorhythm.Location = new System.Drawing.Point(69, 0);
             this.buttonBiorhythm.Margin = new System.Windows.Forms.Padding(3, 0, 0, 0);
             this.buttonBiorhythm.Name = "buttonBiorhythm";

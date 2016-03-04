@@ -1,4 +1,4 @@
-﻿namespace DustInTheWind.Lisimba.Forms
+﻿namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     partial class GateSelectorForm
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.gateSelector1 = new DustInTheWind.Lisimba.Forms.GateSelector();
+            this.gateSelector1 = new GateSelector();
             this.SuspendLayout();
             // 
             // gateSelector1
