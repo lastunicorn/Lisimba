@@ -16,7 +16,7 @@
 
 using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Business
+namespace DustInTheWind.WinFormsCommon.ObservingModel
 {
     public interface IObserverProvider
     {

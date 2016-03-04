@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.Lisimba.LocationProviders;
 using DustInTheWind.Lisimba.Properties;
+using DustInTheWind.WinFormsCommon.ObservingModel;
 
 namespace DustInTheWind.Lisimba.Observers
 {

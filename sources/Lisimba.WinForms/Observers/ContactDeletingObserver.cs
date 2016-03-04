@@ -20,6 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Properties;
 using DustInTheWind.Lisimba.Services;
+using DustInTheWind.WinFormsCommon.ObservingModel;
 
 namespace DustInTheWind.Lisimba.Observers
 {

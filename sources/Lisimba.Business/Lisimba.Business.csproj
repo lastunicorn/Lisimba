@@ -47,7 +47,6 @@
     <Compile Include="ActionManagement\IAction.cs" />
     <Compile Include="ActionManagement\ActionQueue.cs" />
     <Compile Include="Actions\RenameAddressBookAction.cs" />
-    <Compile Include="ActiveObservers.cs" />
     <Compile Include="AddressBookManagement\AddressBookChangedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosedEventArgs.cs" />
     <Compile Include="AddressBookManagement\AddressBookClosingEventArgs.cs" />
@@ -58,7 +57,6 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
-    <Compile Include="IObserverProvider.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="RecentFilesManagement\AddressBookLocationInfo.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenedEventArgs.cs" />
@@ -70,7 +68,6 @@
     <Compile Include="ConfigSection\RecentFilesConfigElement.cs" />
     <Compile Include="ConfigSection\RecentFilesConfigElementCollection.cs" />
     <Compile Include="ConfigSection\SortByConfigElement.cs" />
-    <Compile Include="IObserver.cs" />
     <Compile Include="LisimbaApplication.cs" />
     <Compile Include="LisimbaException.cs" />
     <Compile Include="AddressBookManagement\OpenedAddressBooks.cs" />

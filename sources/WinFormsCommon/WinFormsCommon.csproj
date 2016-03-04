@@ -42,6 +42,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="BindingExtensions.cs" />
+    <Compile Include="ObservingModel\ActiveObservers.cs" />
+    <Compile Include="ObservingModel\IObserver.cs" />
+    <Compile Include="ObservingModel\IObserverProvider.cs" />
     <Compile Include="Operations\AvailableOperations.cs" />
     <Compile Include="Operations\EmptyOperation.cs" />
     <Compile Include="Operations\IOperation.cs" />

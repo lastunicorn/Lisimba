@@ -17,7 +17,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Business
+namespace DustInTheWind.ConsoleCommon.ObservingModel
 {
     public class ActiveObservers
     {

@@ -32,27 +32,36 @@ namespace DustInTheWind.Lisimba.Egg.Importing
 
             List<Contact> contacts2 = addressBook2.Contacts.ToList();
 
-            foreach (Contact contact in addressBook1.Contacts)
+            foreach (Contact contact1 in addressBook1.Contacts)
             {
-                int index2 = contacts2.IndexOf(contact);
+                bool foundInContacts2 = false;
 
-                if (index2 >= 0)
+                for (int i2 = 0; i2 < contacts2.Count; i2++)
                 {
+                    Contact contact2 = contacts2[i2];
+
+                    if (!contact1.Equals(contact2))
+                        continue;
+
                     ContactComparisonResult contactComparisonResult = new ContactComparisonResult
                     {
-                        Contact1 = contact,
-                        Contact2 = contacts2[index2],
+                        Contact1 = contact1,
+                        Contact2 = contact2,
                         AreEqual = true
                     };
 
                     result.Add(contactComparisonResult);
-                    contacts2.Remove(contact);
+                    contacts2.Remove(contact1);
+
+                    foundInContacts2 = true;
+                    break;
                 }
-                else
+
+                if (!foundInContacts2)
                 {
                     ContactComparisonResult contactComparisonResult = new ContactComparisonResult
                     {
-                        Contact1 = contact,
+                        Contact1 = contact1,
                         AreEqual = false
                     };
 
@@ -60,11 +69,11 @@ namespace DustInTheWind.Lisimba.Egg.Importing
                 }
             }
 
-            foreach (Contact contact in contacts2)
+            foreach (Contact contact2 in contacts2)
             {
                 ContactComparisonResult contactComparisonResult = new ContactComparisonResult
                 {
-                    Contact2 = contact,
+                    Contact2 = contact2,
                     AreEqual = false
                 };
 

@@ -47,6 +47,9 @@
     <Compile Include="ConsoleCommandHandling\IPrompterTextProvider.cs" />
     <Compile Include="ConsoleCommandHandling\Prompter.cs" />
     <Compile Include="ConsoleCommandHandling\UnknownFlow.cs" />
+    <Compile Include="ObservingModel\ActiveObservers.cs" />
+    <Compile Include="ObservingModel\IObserver.cs" />
+    <Compile Include="ObservingModel\IObserverProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

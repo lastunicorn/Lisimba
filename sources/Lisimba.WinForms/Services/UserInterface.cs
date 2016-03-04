@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
+using DustInTheWind.WinFormsCommon.ObservingModel;
 
 namespace DustInTheWind.Lisimba.Services
 {

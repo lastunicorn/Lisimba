@@ -81,18 +81,32 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         }
 
         [Test]
-        public void comparing_address_books_containing_one_contact_that_is_different()
+        public void address_book_1_has_one_contact_address_book_2_has_no_contact()
         {
             AddressBook addressBook1 = new AddressBook();
             addressBook1.Contacts.Add(new Contact { Notes = "contact 1" });
 
             AddressBook addressBook2 = new AddressBook();
-            addressBook2.Contacts.Add(new Contact { Notes = "contact 2" });
 
             ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
 
             Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
             Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
+            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
+        }
+
+        [Test]
+        public void address_book_1_has_no_contact_address_book_2_has_one_contact()
+        {
+            AddressBook addressBook1 = new AddressBook();
+
+            AddressBook addressBook2 = new AddressBook();
+            addressBook2.Contacts.Add(new Contact());
+
+            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+
+            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
+            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
             Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
         }
     }
