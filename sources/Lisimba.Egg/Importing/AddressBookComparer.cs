@@ -23,64 +23,69 @@ namespace DustInTheWind.Lisimba.Egg.Importing
 {
     public class AddressBookComparer
     {
-        public ComparisonResult Compare(AddressBook addressBook1, AddressBook addressBook2)
+        private readonly AddressBook addressBook1;
+        private readonly AddressBook addressBook2;
+
+        private AddressBookComparisonResult result;
+        private List<Contact> contacts2;
+
+        public AddressBookComparer(AddressBook addressBook1, AddressBook addressBook2)
         {
             if (addressBook1 == null) throw new ArgumentNullException("addressBook1");
             if (addressBook2 == null) throw new ArgumentNullException("addressBook2");
 
-            ComparisonResult result = new ComparisonResult();
+            this.addressBook1 = addressBook1;
+            this.addressBook2 = addressBook2;
+        }
 
-            List<Contact> contacts2 = addressBook2.Contacts.ToList();
+        public AddressBookComparisonResult Compare()
+        {
+            result = new AddressBookComparisonResult();
+            contacts2 = addressBook2.Contacts.ToList();
 
             foreach (Contact contact1 in addressBook1.Contacts)
             {
-                bool foundInContacts2 = false;
-
-                for (int i2 = 0; i2 < contacts2.Count; i2++)
-                {
-                    Contact contact2 = contacts2[i2];
-
-                    if (!contact1.Equals(contact2))
-                        continue;
-
-                    ContactComparisonResult contactComparisonResult = new ContactComparisonResult
-                    {
-                        Contact1 = contact1,
-                        Contact2 = contact2,
-                        AreEqual = true
-                    };
-
-                    result.Add(contactComparisonResult);
-                    contacts2.Remove(contact1);
-
-                    foundInContacts2 = true;
-                    break;
-                }
+                bool foundInContacts2 = CheckAgainstSecondAddressBook(contact1);
 
                 if (!foundInContacts2)
-                {
-                    ContactComparisonResult contactComparisonResult = new ContactComparisonResult
-                    {
-                        Contact1 = contact1,
-                        AreEqual = false
-                    };
-
-                    result.Add(contactComparisonResult);
-                }
+                    AddResult(contact1, null, false);
             }
 
             foreach (Contact contact2 in contacts2)
-            {
-                ContactComparisonResult contactComparisonResult = new ContactComparisonResult
-                {
-                    Contact2 = contact2,
-                    AreEqual = false
-                };
-
-                result.Add(contactComparisonResult);
-            }
+                AddResult(null, contact2, false);
 
             return result;
+        }
+
+        private bool CheckAgainstSecondAddressBook(Contact contact1)
+        {
+            for (int i2 = 0; i2 < contacts2.Count; i2++)
+            {
+                Contact contact2 = contacts2[i2];
+
+                bool areEquals = contact1.Equals(contact2);
+                if (areEquals)
+                {
+                    AddResult(contact1, contact2, true);
+                    contacts2.Remove(contact2);
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private void AddResult(Contact contact1, Contact contact2, bool areEqual)
+        {
+            ContactComparisonResult contactComparisonResult = new ContactComparisonResult
+            {
+                Contact1 = contact1,
+                Contact2 = contact2,
+                AreEqual = areEqual
+            };
+
+            result.Add(contactComparisonResult);
         }
     }
 }

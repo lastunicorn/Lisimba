@@ -58,12 +58,12 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             AddressBook addressBook = gate.Load(parameters[0]);
 
-            AddressBookComparer addressBookComparer = new AddressBookComparer();
-            ComparisonResult result = addressBookComparer.Compare(openedAddressBooks.Current.AddressBook, addressBook);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(openedAddressBooks.Current.AddressBook, addressBook);
+            AddressBookComparisonResult result = addressBookComparer.Compare();
             DisplayResult(result);
         }
 
-        private void DisplayResult(ComparisonResult result)
+        private void DisplayResult(AddressBookComparisonResult result)
         {
             console.WriteLineNormal("Identical: " + result.IdenticalContacts.Count());
 

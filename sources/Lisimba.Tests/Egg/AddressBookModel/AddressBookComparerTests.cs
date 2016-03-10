@@ -27,38 +27,39 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
     {
         private AddressBook addressBook1;
         private AddressBook addressBook2;
-        private AddressBookComparer addressBookComparer;
 
         [SetUp]
         public void SetUp()
         {
             addressBook1 = new AddressBook();
             addressBook2 = new AddressBook();
-            addressBookComparer = new AddressBookComparer();
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook1_is_null()
         {
-            addressBookComparer.Compare(null, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(null, addressBook2);
+            addressBookComparer.Compare();
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook2_is_null()
         {
-            addressBookComparer.Compare(addressBook1, null);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, null);
+            addressBookComparer.Compare();
         }
 
         [Test]
         public void comparing_two_empty_address_books()
         {
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -67,11 +68,12 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
             addressBook1.Contacts.Add(new Contact());
             addressBook2.Contacts.Add(new Contact());
 
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(1));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -79,11 +81,12 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         {
             addressBook1.Contacts.Add(new Contact { Notes = "contact 1" });
 
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(0));
         }
 
         [Test]
@@ -91,11 +94,12 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         {
             addressBook2.Contacts.Add(new Contact());
 
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -104,11 +108,12 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
             addressBook1.Contacts.Add(new Contact { Notes = "contact 1" });
             addressBook2.Contacts.Add(new Contact { Notes = "contact 2" });
 
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(0));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -119,11 +124,12 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
             addressBook2.Contacts.Add(new Contact { Notes = "contact 0" });
             addressBook2.Contacts.Add(new Contact { Notes = "contact 2" });
 
-            ComparisonResult comparisonResult = addressBookComparer.Compare(addressBook1, addressBook2);
+            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, addressBook2);
+            AddressBookComparisonResult addressBookComparisonResult = addressBookComparer.Compare();
 
-            Assert.That(comparisonResult.IdenticalContacts.Count(), Is.EqualTo(1));
-            Assert.That(comparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
-            Assert.That(comparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.IdenticalContacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.Unique1Contacts.Count(), Is.EqualTo(1));
+            Assert.That(addressBookComparisonResult.Unique2Contacts.Count(), Is.EqualTo(1));
         }
     }
 }

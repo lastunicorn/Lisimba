@@ -18,9 +18,9 @@ namespace DustInTheWind.Lisimba.Egg.Importing
 {
     public enum ImportType
     {
+        Ignore,
         AddAsNew,
         Merge,
-        Replace,
-        Ignore
+        Replace
     }
 }

@@ -18,10 +18,10 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    public class ImportRule
+    public struct ImportRule
     {
-        public ImportType ImportType { get; set; }
-        public Contact Destination { get; set; }
         public Contact Source { get; set; }
+        public Contact Destination { get; set; }
+        public ImportType ImportType { get; set; }
     }
 }

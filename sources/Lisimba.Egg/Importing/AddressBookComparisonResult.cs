@@ -19,28 +19,21 @@ using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    public class ComparisonResult
+    public class AddressBookComparisonResult : List<ContactComparisonResult>
     {
-        private readonly List<ContactComparisonResult> contactComparisonResults = new List<ContactComparisonResult>();
-
         public IEnumerable<ContactComparisonResult> IdenticalContacts
         {
-            get { return contactComparisonResults.Where(x => x.AreEqual); }
+            get { return this.Where(x => x.AreEqual); }
         }
 
         public IEnumerable<ContactComparisonResult> Unique1Contacts
         {
-            get { return contactComparisonResults.Where(x => !x.AreEqual && x.Contact1 != null); }
+            get { return this.Where(x => !x.AreEqual && x.Contact1 != null); }
         }
 
         public IEnumerable<ContactComparisonResult> Unique2Contacts
         {
-            get { return contactComparisonResults.Where(x => !x.AreEqual && x.Contact2 != null); }
-        }
-
-        public void Add(ContactComparisonResult contactComparisonResult)
-        {
-            contactComparisonResults.Add(contactComparisonResult);
+            get { return this.Where(x => !x.AreEqual && x.Contact2 != null); }
         }
     }
 }

@@ -18,7 +18,7 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.Importing
 {
-    public class ContactComparisonResult
+    public struct ContactComparisonResult
     {
         public Contact Contact1 { get; set; }
         public Contact Contact2 { get; set; }

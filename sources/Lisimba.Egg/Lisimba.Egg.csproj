@@ -53,7 +53,8 @@
     <Compile Include="AddressBookModel\PersonNameMatch.cs" />
     <Compile Include="GateModel\GateException.cs" />
     <Compile Include="Importing\AddressBookComparer.cs" />
-    <Compile Include="Importing\ComparisonResult.cs" />
+    <Compile Include="Importing\AddressBookComparisonResult.cs" />
+    <Compile Include="Importing\AddressBookImporter.cs" />
     <Compile Include="Importing\ContactComparisonResult.cs" />
     <Compile Include="Sorting\ComparerFactory.cs" />
     <Compile Include="Sorting\MultipleComparer.cs" />
