@@ -15,7 +15,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
             {
                 Name = new PersonName("Alexandru", "Nicolae", "Iuga", "Alez"),
                 Picture = Image.FromFile("c:\\Temp\\avatar_200.jpg"),
-                //Birthday = new Date(13, 06, 1980),
+                Birthday = new Date(13, 06, 1980),
                 Notes = "some notes here"
             };
 

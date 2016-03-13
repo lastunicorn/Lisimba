@@ -19,6 +19,8 @@ using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.WinForms.ContactEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {

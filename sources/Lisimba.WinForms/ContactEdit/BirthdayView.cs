@@ -19,7 +19,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms;
 using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon.Utils;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
@@ -51,7 +53,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             get { return buttonBiorhythm.ViewModel; }
             set { buttonBiorhythm.ViewModel = value; }
         }
-
+        
         public BirthdayView()
         {
             InitializeComponent();

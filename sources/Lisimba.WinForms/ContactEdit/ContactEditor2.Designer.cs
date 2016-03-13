@@ -1,4 +1,6 @@
-﻿using DustInTheWind.Lisimba.WinForms.ContactDetailsEditing;
+﻿using DustInTheWind.Lisimba.WinForms.ContactEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.PersonNameEditing;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
@@ -38,10 +40,10 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxNotes = new System.Windows.Forms.TextBox();
-            this.nameEditor1 = new DustInTheWind.Lisimba.WinForms.NameEditing.NameEditor();
-            this.zodiacSignView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.ZodiacSignView();
+            this.nameEditor1 = new NameEditor();
+            this.zodiacSignView1 = new ZodiacSignView();
             this.birthdayView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.BirthdayView();
-            this.contactDetailsList1 = new ContactDetailsView();
+            this.contactItemsList1 = new ContactItemsView();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -109,7 +111,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.contactDetailsList1);
+            this.splitContainer1.Panel1.Controls.Add(this.contactItemsList1);
             // 
             // splitContainer1.Panel2
             // 
@@ -197,16 +199,16 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.birthdayView1.Size = new System.Drawing.Size(91, 23);
             this.birthdayView1.TabIndex = 2;
             // 
-            // contactDetailsList1
+            // contactItemsList1
             // 
-            this.contactDetailsList1.AutoScroll = true;
-            this.contactDetailsList1.ContactItems = null;
-            this.contactDetailsList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactDetailsList1.Location = new System.Drawing.Point(0, 0);
-            this.contactDetailsList1.Name = "contactDetailsList1";
-            this.contactDetailsList1.Padding = new System.Windows.Forms.Padding(2);
-            this.contactDetailsList1.Size = new System.Drawing.Size(360, 360);
-            this.contactDetailsList1.TabIndex = 0;
+            this.contactItemsList1.AutoScroll = true;
+            this.contactItemsList1.ContactItems = null;
+            this.contactItemsList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactItemsList1.Location = new System.Drawing.Point(0, 0);
+            this.contactItemsList1.Name = "contactItemsList1";
+            this.contactItemsList1.Padding = new System.Windows.Forms.Padding(2);
+            this.contactItemsList1.Size = new System.Drawing.Size(360, 360);
+            this.contactItemsList1.TabIndex = 0;
             // 
             // ContactEditor2
             // 
@@ -235,9 +237,9 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private NameEditing.NameEditor nameEditor1;
+        private NameEditor nameEditor1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private ContactDetailsView contactDetailsList1;
+        private ContactItemsView contactItemsList1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxNotes;

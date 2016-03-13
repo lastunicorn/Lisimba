@@ -34,6 +34,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -58,6 +59,11 @@
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
+    <Compile Include="Properties\ZodiacResources.Designer.cs">
+      <DependentUpon>ZodiacResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="RecentFilesManagement\AddressBookLocationInfo.cs" />
     <Compile Include="AddressBookManagement\AddressBookOpenedEventArgs.cs" />
     <Compile Include="Config\ApplicationConfiguration.cs" />
@@ -83,11 +89,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RecentFilesManagement\RecentFiles.cs" />
+    <Compile Include="Zodiac.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
       <Name>Lisimba.Egg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
+      <Project>{348216bd-da3e-4dec-9b9d-5ff14ed05722}</Project>
+      <Name>Lisimba.ZodiacSigns</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +107,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />
+    <EmbeddedResource Include="Properties\ZodiacResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ZodiacResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\ZodiacResources.ro.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

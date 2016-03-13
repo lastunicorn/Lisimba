@@ -71,34 +71,6 @@ namespace DustInTheWind.Lisimba.WinForms.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add Date.
-        /// </summary>
-        internal static string AddDate_WindowTitle {
-            get {
-                return ResourceManager.GetString("AddDate_WindowTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add Postal Address.
-        /// </summary>
-        internal static string AddPostalAddress_WindowTitle {
-            get {
-                return ResourceManager.GetString("AddPostalAddress_WindowTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap address {
-            get {
-                object obj = ResourceManager.GetObject("address", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap address_add {
@@ -139,47 +111,9 @@ namespace DustInTheWind.Lisimba.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap date {
-            get {
-                object obj = ResourceManager.GetObject("date", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap date_add {
             get {
                 object obj = ResourceManager.GetObject("date_add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit Date.
-        /// </summary>
-        internal static string EditDate_WindowTitle {
-            get {
-                return ResourceManager.GetString("EditDate_WindowTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit Postal Address.
-        /// </summary>
-        internal static string EditPostalAddress_WindowTitle {
-            get {
-                return ResourceManager.GetString("EditPostalAddress_WindowTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap email {
-            get {
-                object obj = ResourceManager.GetObject("email", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -259,16 +193,6 @@ namespace DustInTheWind.Lisimba.WinForms.Properties {
             get {
                 object obj = ResourceManager.GetObject("Lion", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap mesengerid {
-            get {
-                object obj = ResourceManager.GetObject("mesengerid", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -364,16 +288,6 @@ namespace DustInTheWind.Lisimba.WinForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap phone {
-            get {
-                object obj = ResourceManager.GetObject("phone", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap phone_add {
             get {
                 object obj = ResourceManager.GetObject("phone_add", resourceCulture);
@@ -437,16 +351,6 @@ namespace DustInTheWind.Lisimba.WinForms.Properties {
         internal static string WarningPopup_Title {
             get {
                 return ResourceManager.GetString("WarningPopup_Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap webaddress {
-            get {
-                object obj = ResourceManager.GetObject("webaddress", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

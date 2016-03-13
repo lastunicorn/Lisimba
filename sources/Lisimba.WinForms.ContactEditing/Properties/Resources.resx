@@ -117,96 +117,51 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddDate_WindowTitle" xml:space="preserve">
+    <value>Add Date</value>
+  </data>
+  <data name="AddPostalAddress_WindowTitle" xml:space="preserve">
+    <value>Add Postal Address</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="about_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\about_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="redo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\redo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="AddressBookNotSavedYet" xml:space="preserve">
-    <value>&lt; Address book is not saved yet &gt;</value>
-  </data>
-  <data name="OpenAddressBook_SuccessStatusText" xml:space="preserve">
-    <value>{0} contacts opened.</value>
-  </data>
-  <data name="AddressBookSaved_StatusText" xml:space="preserve">
-    <value>Address book saved. ({0} contacts)</value>
-  </data>
-  <data name="Lion" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Lion.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WarningPopup_Title" xml:space="preserve">
-    <value>Warning!</value>
-  </data>
-  <data name="undo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\undo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="new_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\new_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="new_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\new_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="open_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\open_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="open_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\open_32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="exit_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\exit_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="save_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\save_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="biorhythms_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\biorhythms_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ErrorPopup_Title" xml:space="preserve">
-    <value>Error</value>
-  </data>
-  <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="export" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\export_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="open_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\open_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="import" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\import_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="help_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\MainMenu\help_16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="new_24" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\mainmenu\new_24.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="InfoPopup_Title" xml:space="preserve">
-    <value>Info</value>
-  </data>
-  <data name="warning_48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\warning_48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="no_user_128" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\no-user_128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="address" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\address.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="address_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\address_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="date" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\date.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="date_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\date_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditDate_WindowTitle" xml:space="preserve">
+    <value>Edit Date</value>
+  </data>
+  <data name="EditPostalAddress_WindowTitle" xml:space="preserve">
+    <value>Edit Postal Address</value>
+  </data>
+  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\email.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="email_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\email_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mesengerid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mesengerid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="mesengerid_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mesengerid_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="phone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\phone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="phone_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\phone_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="webaddress" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\webaddress.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="webaddress_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\webaddress_add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

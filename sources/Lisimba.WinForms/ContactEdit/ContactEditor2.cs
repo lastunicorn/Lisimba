@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 
             zodiacSignView1.Bind(x => x.ZodiacSign, ViewModel, x => x.ZodiacSign, false, DataSourceUpdateMode.Never);
 
-            contactDetailsList1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
+            contactItemsList1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
             //customTreeView1.Bind(x => x.ContactItems, ViewModel, x => x.ContactItems, true, DataSourceUpdateMode.Never);
             //customTreeView1.Bind(x => x.ActionQueue, ViewModel, x => x.ActionQueue, true, DataSourceUpdateMode.Never);
 

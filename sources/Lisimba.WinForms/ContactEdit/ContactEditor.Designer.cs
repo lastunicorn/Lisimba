@@ -1,5 +1,6 @@
-using DustInTheWind.Lisimba.WinForms.ContactDetailsEditing;
-using DustInTheWind.Lisimba.WinForms.NameEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.PersonNameEditing;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
@@ -36,12 +37,12 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.nameEditor1 = new DustInTheWind.Lisimba.WinForms.NameEditing.NameEditor();
+            this.nameEditor1 = new NameEditor();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.customTreeView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.CustomTreeView();
-            this.contactDetailsList1 = new ContactDetailsView();
+            this.contactItemsList1 = new ContactItemsView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
@@ -51,7 +52,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.buttonAddWebSite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.birthdayView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.BirthdayView();
-            this.zodiacSignView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.ZodiacSignView();
+            this.zodiacSignView1 = new ZodiacSignView();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -173,7 +174,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.customTreeView1);
-            this.groupBox1.Controls.Add(this.contactDetailsList1);
+            this.groupBox1.Controls.Add(this.contactItemsList1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 60);
             this.groupBox1.Name = "groupBox1";
@@ -201,16 +202,16 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.customTreeView1.Size = new System.Drawing.Size(298, 64);
             this.customTreeView1.TabIndex = 12;
             // 
-            // contactDetailsList1
+            // contactItemsList1
             // 
-            this.contactDetailsList1.AutoScroll = true;
-            this.contactDetailsList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactDetailsList1.Location = new System.Drawing.Point(4, 17);
-            this.contactDetailsList1.Name = "contactDetailsList1";
-            this.contactDetailsList1.Padding = new System.Windows.Forms.Padding(2);
-            this.contactDetailsList1.Size = new System.Drawing.Size(298, 64);
-            this.contactDetailsList1.TabIndex = 13;
-            this.contactDetailsList1.Visible = false;
+            this.contactItemsList1.AutoScroll = true;
+            this.contactItemsList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactItemsList1.Location = new System.Drawing.Point(4, 17);
+            this.contactItemsList1.Name = "contactItemsList1";
+            this.contactItemsList1.Padding = new System.Windows.Forms.Padding(2);
+            this.contactItemsList1.Size = new System.Drawing.Size(298, 64);
+            this.contactItemsList1.TabIndex = 13;
+            this.contactItemsList1.Visible = false;
             // 
             // flowLayoutPanel3
             // 
@@ -460,7 +461,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
         private System.Windows.Forms.Button buttonAddSocialProfileId;
         private CustomTreeView customTreeView1;
         private NameEditor nameEditor1;
-        private ContactDetailsView contactDetailsList1;
+        private ContactItemsView contactItemsList1;
         private BirthdayView birthdayView1;
         private ZodiacSignView zodiacSignView1;
     }
