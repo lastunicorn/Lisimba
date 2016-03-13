@@ -15,10 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.Operations;
+using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
@@ -36,6 +38,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
         private bool enabled;
         private CustomObservableCollection<ContactItem> contactItems;
         private PersonName name;
+        private Image picture;
 
         public IContactEditorView View { get; set; }
 
@@ -131,6 +134,16 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             }
         }
 
+        public Image Picture
+        {
+            get { return picture; }
+            set
+            {
+                picture = value;
+                OnPropertyChanged();
+            }
+        }
+
         public CustomButtonViewModel BiorhythmButtonViewModel { get; private set; }
 
         public ContactEditorViewModel(AvailableOperations availableOperations, MenuItemViewModelProvider viewModelProvider)
@@ -143,14 +156,11 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            RefreshData();
+            //RefreshData();
         }
 
         private void RefreshData()
         {
-            if (View == null)
-                return;
-
             isInitializationMode = true;
 
             try
@@ -168,19 +178,22 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 
         private void DisplayContactInView()
         {
+            Picture = contact.Picture ?? Resources.no_user_128;
             Name = contact.Name;
             Birthday = contact.Birthday;
             ZodiacSign = contact.ZodiacSign;
 
             Notes = contact.Notes;
 
-            ContactItems = contact.Items;
+            if (ContactItems != contact.Items)
+                ContactItems = contact.Items;
 
             Enabled = true;
         }
 
         private void ClearView()
         {
+            Picture = null;
             Name = null;
             Birthday = null;
             ZodiacSign = ZodiacSign.NotSpecified;

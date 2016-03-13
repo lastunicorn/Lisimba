@@ -14,16 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.ObjectModel;
 using System.Drawing;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.WinForms.ContactEdit
+namespace DustInTheWind.Lisimba.WinForms.ContactDetailsEditing
 {
-    public class ContactDetailsItem : ViewModelBase
+    public class ContactDetailsSetViewModel : ViewModelBase
     {
         private Image image;
         private Image addButtonImage;
         private string title;
+        private ObservableCollection<ContactItem> contactItems;
 
         public Image Image
         {
@@ -53,6 +56,21 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
                 title = value;
                 OnPropertyChanged();
             }
+        }
+
+        public ObservableCollection<ContactItem> ContactItems
+        {
+            get { return contactItems; }
+            set
+            {
+                contactItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ContactDetailsSetViewModel()
+        {
+            ContactItems = new ContactItemCollection();
         }
 
         public void AddButtonWasClicked()

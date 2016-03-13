@@ -85,7 +85,7 @@ namespace DustInTheWind.Lisimba.Egg.Importing
         public void DoImport()
         {
             if (importRules == null)
-                throw new LicenseException("Prepare the import first.");
+                throw new EggException("Prepare the import first.");
 
             foreach (ImportRule importRule in importRules)
             {

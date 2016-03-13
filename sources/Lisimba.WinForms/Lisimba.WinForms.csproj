@@ -91,18 +91,31 @@
     <Compile Include="ContactEdit\BirthdayView.Designer.cs">
       <DependentUpon>BirthdayView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsItem.cs" />
-    <Compile Include="ContactEdit\ContactDetailsList.cs">
+    <Compile Include="ContactDetailsEditing\ContactDetailsSetViewModel.cs" />
+    <Compile Include="ContactDetailsEditing\ContactItemSet.cs" />
+    <Compile Include="ContactDetailsEditing\ContactItemView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsList.Designer.cs">
-      <DependentUpon>ContactDetailsList.cs</DependentUpon>
+    <Compile Include="ContactDetailsEditing\ContactItemView.Designer.cs">
+      <DependentUpon>ContactItemView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsListItem.cs">
+    <Compile Include="ContactDetailsEditing\ContactDetailsView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
-      <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
+    <Compile Include="ContactDetailsEditing\ContactDetailsView.Designer.cs">
+      <DependentUpon>ContactDetailsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactDetailsSetView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactDetailsSetView.Designer.cs">
+      <DependentUpon>ContactDetailsSetView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactEdit\ContactEditor2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactEdit\ContactEditor2.Designer.cs">
+      <DependentUpon>ContactEditor2.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactEdit\EditMode.cs" />
     <Compile Include="ContactEdit\ZodiacSignView.cs">
@@ -112,6 +125,12 @@
       <DependentUpon>ZodiacSignView.cs</DependentUpon>
     </Compile>
     <Compile Include="ContactList\ContactMenuViewModels.cs" />
+    <Compile Include="Forms\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GateSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -366,14 +385,23 @@
     <EmbeddedResource Include="ContactEdit\BirthdayView.resx">
       <DependentUpon>BirthdayView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ContactDetailsList.resx">
-      <DependentUpon>ContactDetailsList.cs</DependentUpon>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactItemView.resx">
+      <DependentUpon>ContactItemView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ContactDetailsListItem.resx">
-      <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactDetailsView.resx">
+      <DependentUpon>ContactDetailsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactDetailsSetView.resx">
+      <DependentUpon>ContactDetailsSetView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactEdit\ContactEditor2.resx">
+      <DependentUpon>ContactEditor2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\ZodiacSignView.resx">
       <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ListControl.resx">
       <DependentUpon>ListControl.cs</DependentUpon>
@@ -516,6 +544,7 @@
     <None Include="Images\MainMenu\search.png" />
     <None Include="Images\biorhythms_16.png" />
     <None Include="Images\warning_48.png" />
+    <None Include="Images\no-user_128.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

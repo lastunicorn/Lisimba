@@ -1,6 +1,6 @@
-﻿namespace DustInTheWind.Lisimba.WinForms.ContactEdit
+﻿namespace DustInTheWind.Lisimba.WinForms.ContactDetailsEditing
 {
-    partial class ContactDetailsListItem
+    partial class ContactDetailsSetView
     {
         /// <summary> 
         /// Required designer variable.
@@ -32,7 +32,7 @@
             this.buttonAdd = new System.Windows.Forms.Button();
             this.labelTitle = new System.Windows.Forms.Label();
             this.pictureBoxIcon = new System.Windows.Forms.PictureBox();
-            this.panelItems = new System.Windows.Forms.Panel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutPanelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).BeginInit();
             this.SuspendLayout();
@@ -40,6 +40,7 @@
             // tableLayoutPanelHeader
             // 
             this.tableLayoutPanelHeader.AutoSize = true;
+            this.tableLayoutPanelHeader.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanelHeader.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.tableLayoutPanelHeader.ColumnCount = 3;
             this.tableLayoutPanelHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
@@ -54,34 +55,32 @@
             this.tableLayoutPanelHeader.RowCount = 2;
             this.tableLayoutPanelHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelHeader.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanelHeader.Size = new System.Drawing.Size(300, 34);
+            this.tableLayoutPanelHeader.Size = new System.Drawing.Size(120, 34);
             this.tableLayoutPanelHeader.TabIndex = 0;
             // 
             // buttonAdd
             // 
             this.buttonAdd.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.buttonAdd.Location = new System.Drawing.Point(269, 3);
+            this.buttonAdd.Location = new System.Drawing.Point(89, 3);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(28, 28);
             this.buttonAdd.TabIndex = 0;
             this.buttonAdd.UseVisualStyleBackColor = true;
-            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
+            this.buttonAdd.Click += new System.EventHandler(this.HandleButtonAddClick);
             // 
             // labelTitle
             // 
-            this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTitle.AutoEllipsis = true;
+            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(42, 3);
             this.labelTitle.Margin = new System.Windows.Forms.Padding(3);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Size = new System.Drawing.Size(221, 28);
+            this.labelTitle.Size = new System.Drawing.Size(41, 28);
             this.labelTitle.TabIndex = 1;
             this.labelTitle.Text = "Title";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelTitle.Resize += new System.EventHandler(this.labelTitle_Resize);
+            this.labelTitle.Resize += new System.EventHandler(this.HandleLabelTitleResize);
             // 
             // pictureBoxIcon
             // 
@@ -94,29 +93,32 @@
             this.pictureBoxIcon.TabIndex = 2;
             this.pictureBoxIcon.TabStop = false;
             // 
-            // panelItems
+            // flowLayoutPanel1
             // 
-            this.panelItems.AutoSize = true;
-            this.panelItems.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.panelItems.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelItems.Location = new System.Drawing.Point(0, 34);
-            this.panelItems.Name = "panelItems";
-            this.panelItems.Size = new System.Drawing.Size(300, 0);
-            this.panelItems.TabIndex = 1;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 34);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(120, 0);
+            this.flowLayoutPanel1.TabIndex = 2;
+            this.flowLayoutPanel1.WrapContents = false;
+            this.flowLayoutPanel1.Resize += new System.EventHandler(this.HandleFlowLayoutPanel1Resize);
             // 
-            // ContactDetailsListItem
+            // ContactDetailsSetView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.panelItems);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.tableLayoutPanelHeader);
-            this.MinimumSize = new System.Drawing.Size(300, 34);
-            this.Name = "ContactDetailsListItem";
-            this.Size = new System.Drawing.Size(300, 34);
-            this.Resize += new System.EventHandler(this.ContactDetailsListItem_Resize);
+            this.MinimumSize = new System.Drawing.Size(120, 34);
+            this.Name = "ContactDetailsSetView";
+            this.Size = new System.Drawing.Size(120, 34);
+            this.Resize += new System.EventHandler(this.HandleResize);
             this.tableLayoutPanelHeader.ResumeLayout(false);
             this.tableLayoutPanelHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcon)).EndInit();
@@ -131,6 +133,6 @@
         private System.Windows.Forms.Button buttonAdd;
         private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.PictureBox pictureBoxIcon;
-        private System.Windows.Forms.Panel panelItems;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

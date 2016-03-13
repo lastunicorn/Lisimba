@@ -14,15 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows.Forms;
+using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.WinForms.ContactEdit
+namespace DustInTheWind.ConsoleCommon.ObservingModel
 {
-    public partial class ContactDetailsList : UserControl
+    public interface IObserverProvider
     {
-        public ContactDetailsList()
-        {
-            InitializeComponent();
-        }
+        IEnumerable<IObserver> GetNewObservers();
     }
 }

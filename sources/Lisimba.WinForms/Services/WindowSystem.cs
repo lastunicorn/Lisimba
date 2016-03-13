@@ -70,7 +70,8 @@ namespace DustInTheWind.Lisimba.WinForms.Services
 
         public void CreateMainWindow()
         {
-            MainWindow = uiFactory.CreateForm<LisimbaForm>();
+            //MainWindow = uiFactory.CreateForm<LisimbaForm>();
+            MainWindow = uiFactory.CreateForm<Form2>();
         }
 
         public void ShowTrayIcon()
