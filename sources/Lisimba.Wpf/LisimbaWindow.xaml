@@ -11,7 +11,36 @@
         ResizeMode="CanResizeWithGrip">
 
     <DockPanel>
-        
+
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Command="New" />
+                <MenuItem Header="_Open" />
+                <MenuItem Header="_Save" />
+                <MenuItem Header="Save _As" />
+                <MenuItem Header="_Close" />
+                <Separator />
+                <MenuItem Header="_Export" />
+                <MenuItem Header="_Import" />
+                <Separator/>
+                <MenuItem Header="Recent _Files" />
+                <Separator/>
+                <MenuItem Header="E_xit" />
+            </MenuItem>
+            <MenuItem Header="_Address Book">
+                <MenuItem Header="_Add Contact" />
+                <MenuItem Header="_Delete Contact" />
+                <Separator />
+                <MenuItem Header="_Undo" />
+                <MenuItem Header="_Redo" />
+                <Separator/>
+                <MenuItem Header="_Properties" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" />
+            </MenuItem>
+        </Menu>
+
         <lisimba:LisimbaStatusBar DockPanel.Dock="Bottom"
                                   DataContext="{Binding StatusBarViewModel}"/>
 
