@@ -76,6 +76,9 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ContactEditorViewModel.cs" />
     <Compile Include="ContactListViewModel.cs" />
+    <Compile Include="LisimbaStatusBar.xaml.cs">
+      <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="MainMenusViewModels.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
@@ -90,6 +93,7 @@
     <Compile Include="Operations\IOperation1.cs" />
     <Compile Include="Operations\IOperationProvider.cs" />
     <Compile Include="Setup\OperationProvider.cs" />
+    <Compile Include="StatusBarViewModel.cs" />
     <Compile Include="TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -102,6 +106,10 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
+    <Page Include="LisimbaStatusBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LisimbaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

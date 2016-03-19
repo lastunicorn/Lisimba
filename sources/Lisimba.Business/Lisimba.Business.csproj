@@ -59,6 +59,7 @@
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
+    <Compile Include="LisimbaWindowTitle.cs" />
     <Compile Include="Properties\ZodiacResources.Designer.cs">
       <DependentUpon>ZodiacResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
