@@ -1,6 +1,6 @@
-﻿namespace DustInTheWind.Lisimba.WinForms.Utils
+﻿namespace DustInTheWind.WinFormsCommon.Controls
 {
-    partial class ListMenuItem
+    public partial class CustomToolStripButton
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             // 
-            // RecentFilesMenuItem
+            // CustomToolStripButton
             // 
             this.Click += new System.EventHandler(this.HandleClick);
             this.MouseEnter += new System.EventHandler(this.HandleMouseEnter);

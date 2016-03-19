@@ -1,8 +1,8 @@
 using DustInTheWind.Lisimba.WinForms.ContactEdit;
 using DustInTheWind.Lisimba.WinForms.ContactList;
 using DustInTheWind.Lisimba.WinForms.MainMenu;
-using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 
 namespace DustInTheWind.Lisimba.WinForms.Main
 {

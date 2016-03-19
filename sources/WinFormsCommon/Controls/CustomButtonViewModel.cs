@@ -16,16 +16,14 @@
 
 using System;
 using System.Drawing;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.WinForms.Utils
+namespace DustInTheWind.WinFormsCommon.Controls
 {
-    internal class CustomButtonViewModel : ViewModelBase
+    public class CustomButtonViewModel : ViewModelBase
     {
         protected readonly ApplicationStatus applicationStatus;
-        protected readonly WindowSystem windowSystem;
+        protected readonly IWindowSystem windowSystem;
         protected readonly IOperation operation;
 
         private bool isEnabled;
@@ -65,7 +63,7 @@ namespace DustInTheWind.Lisimba.WinForms.Utils
             }
         }
 
-        public CustomButtonViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
+        public CustomButtonViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");

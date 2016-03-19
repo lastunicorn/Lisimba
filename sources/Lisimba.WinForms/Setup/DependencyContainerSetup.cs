@@ -21,6 +21,8 @@ using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
@@ -48,6 +50,7 @@ namespace DustInTheWind.Lisimba.WinForms.Setup
             unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             unityContainer.RegisterType<IObserverProvider, ObserverProvider>();
             unityContainer.RegisterType<IOperationProvider, OperationProvider>();
+            unityContainer.RegisterType<IWindowSystem, WindowSystem>();
             unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return unityContainer;

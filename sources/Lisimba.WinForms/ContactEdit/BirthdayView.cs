@@ -20,7 +20,7 @@ using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Utils;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit

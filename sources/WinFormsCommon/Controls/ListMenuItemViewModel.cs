@@ -16,12 +16,11 @@
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon.Operations;
 
-namespace DustInTheWind.Lisimba.WinForms.Utils
+namespace DustInTheWind.WinFormsCommon.Controls
 {
-    class ListMenuItemViewModel : CustomButtonViewModel
+    public class ListMenuItemViewModel : CustomButtonViewModel
     {
         public ObservableCollection<CustomButtonViewModel> Items { get; private set; }
 
@@ -37,7 +36,7 @@ namespace DustInTheWind.Lisimba.WinForms.Utils
             }
         }
 
-        public ListMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
+        public ListMenuItemViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
             : base(applicationStatus, windowSystem, operation)
         {
             Items = new ObservableCollection<CustomButtonViewModel>();

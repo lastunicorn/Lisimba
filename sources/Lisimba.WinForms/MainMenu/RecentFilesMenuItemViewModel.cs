@@ -19,7 +19,8 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu

@@ -18,12 +18,11 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
-using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.WinForms.Utils
+namespace DustInTheWind.WinFormsCommon.Controls
 {
     [ToolStripItemDesignerAvailability(ToolStripItemDesignerAvailability.ToolStrip)]
-    internal partial class CustomToolStripButton : ToolStripButton, IBindableComponent
+    public partial class CustomToolStripButton : ToolStripButton, IBindableComponent
     {
         private CustomButtonViewModel viewModel;
 

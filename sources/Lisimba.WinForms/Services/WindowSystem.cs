@@ -26,10 +26,12 @@ using DustInTheWind.Lisimba.WinForms.Biorhythm;
 using DustInTheWind.Lisimba.WinForms.Forms;
 using DustInTheWind.Lisimba.WinForms.Main;
 using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 
 namespace DustInTheWind.Lisimba.WinForms.Services
 {
-    internal class WindowSystem
+    internal class WindowSystem : IWindowSystem
     {
         private readonly UiFactory uiFactory;
         private Form mainWindow;
@@ -50,7 +52,7 @@ namespace DustInTheWind.Lisimba.WinForms.Services
             }
         }
 
-        private void HandleMainWindowClosed(object sender, EventArgs args)
+        private void HandleMainWindowClosed(object sender, EventArgs e)
         {
             MainWindow = null;
         }
@@ -70,8 +72,8 @@ namespace DustInTheWind.Lisimba.WinForms.Services
 
         public void CreateMainWindow()
         {
-            //MainWindow = uiFactory.CreateForm<LisimbaForm>();
-            MainWindow = uiFactory.CreateForm<Form2>();
+            MainWindow = uiFactory.CreateForm<LisimbaForm>();
+            //MainWindow = uiFactory.CreateForm<Form2>();
         }
 
         public void ShowTrayIcon()

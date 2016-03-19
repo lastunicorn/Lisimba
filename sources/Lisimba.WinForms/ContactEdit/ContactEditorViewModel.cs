@@ -22,8 +22,8 @@ using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.Operations;
 using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit

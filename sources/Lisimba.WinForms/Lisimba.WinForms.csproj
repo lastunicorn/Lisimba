@@ -201,7 +201,6 @@
     <Compile Include="Biorhythm\BiorhythmForm.Designer.cs">
       <DependentUpon>BiorhythmForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="Biorhythm\BiorhythmView.cs">
@@ -250,32 +249,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\CustomButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomButton.Designer.cs">
-      <DependentUpon>CustomButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CustomButtonViewModel.cs" />
-    <Compile Include="Utils\CustomMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomMenuItem.Designer.cs">
-      <DependentUpon>CustomMenuItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CustomToolStripButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomToolStripButton.Designer.cs">
-      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\ListMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\ListMenuItem.Designer.cs">
-      <DependentUpon>ListMenuItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\ListMenuItemViewModel.cs" />
     <EmbeddedResource Include="ContactEdit\BirthdayView.resx">
       <DependentUpon>BirthdayView.cs</DependentUpon>
     </EmbeddedResource>
@@ -348,18 +321,6 @@
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\CustomButton.resx">
-      <DependentUpon>CustomButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\CustomMenuItem.resx">
-      <DependentUpon>CustomMenuItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\CustomToolStripButton.resx">
-      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\ListMenuItem.resx">
-      <DependentUpon>ListMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>

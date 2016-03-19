@@ -1,4 +1,4 @@
-﻿using DustInTheWind.Lisimba.WinForms.Utils;
+﻿using DustInTheWind.WinFormsCommon.Controls;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
             this.labelBirthday = new System.Windows.Forms.Label();
-            this.buttonBiorhythm = new DustInTheWind.Lisimba.WinForms.Utils.CustomButton(this.components);
+            this.buttonBiorhythm = new CustomButton(this.components);
             this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 

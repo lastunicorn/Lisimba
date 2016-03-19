@@ -19,9 +19,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-namespace DustInTheWind.Lisimba.WinForms.Utils
+namespace DustInTheWind.WinFormsCommon.Controls
 {
-    internal partial class ListMenuItem : ToolStripMenuItem
+    public partial class ListMenuItem : ToolStripMenuItem
     {
         private ListMenuItemViewModel viewModel;
 

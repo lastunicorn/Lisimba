@@ -17,45 +17,16 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.WinForms.Utils
+namespace DustInTheWind.WinFormsCommon.Controls
 {
-    internal partial class CustomMenuItem : ToolStripMenuItem, IBindableComponent
+    public partial class CustomButton : Button
     {
-        private BindingContext bindingContext;
-        private ControlBindingsCollection dataBindings;
-
-        [Browsable(false)]
-        public BindingContext BindingContext
-        {
-            get
-            {
-                if (bindingContext == null)
-                    bindingContext = new BindingContext();
-
-                return bindingContext;
-            }
-            set { bindingContext = value; }
-        }
-
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        public ControlBindingsCollection DataBindings
-        {
-            get
-            {
-                if (dataBindings == null)
-                    dataBindings = new ControlBindingsCollection(this);
-
-                return dataBindings;
-            }
-        }
-
         private CustomButtonViewModel viewModel;
 
         public CustomButtonViewModel ViewModel
         {
-            private get { return viewModel; }
+            get { return viewModel; }
             set
             {
                 DataBindings.Clear();
@@ -64,24 +35,16 @@ namespace DustInTheWind.Lisimba.WinForms.Utils
                 viewModel = value;
 
                 if (viewModel != null)
-                {
                     this.Bind(x => x.Enabled, viewModel, x => x.IsEnabled, false, DataSourceUpdateMode.Never);
-
-                    if (viewModel.Image != null)
-                        this.Bind(x => x.Image, viewModel, x => x.Image, true, DataSourceUpdateMode.Never);
-
-                    if (viewModel.Text != null)
-                        this.Bind(x => x.Text, viewModel, x => x.Text, false, DataSourceUpdateMode.Never);
-                }
             }
         }
 
-        public CustomMenuItem()
+        public CustomButton()
         {
             InitializeComponent();
         }
 
-        public CustomMenuItem(IContainer container)
+        public CustomButton(IContainer container)
         {
             container.Add(this);
 

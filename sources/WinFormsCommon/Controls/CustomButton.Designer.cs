@@ -1,8 +1,8 @@
-﻿namespace DustInTheWind.Lisimba.WinForms.Utils
+﻿namespace DustInTheWind.WinFormsCommon.Controls
 {
-    partial class CustomToolStripButton
+    partial class CustomButton
     {
-        /// <summary>
+        /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
@@ -22,18 +22,20 @@
 
         #region Component Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
+            this.SuspendLayout();
             // 
-            // CustomToolStripButton
+            // CustomButton
             // 
             this.Click += new System.EventHandler(this.HandleClick);
             this.MouseEnter += new System.EventHandler(this.HandleMouseEnter);
             this.MouseLeave += new System.EventHandler(this.HandleMouseLeave);
+            this.ResumeLayout(false);
 
         }
 
