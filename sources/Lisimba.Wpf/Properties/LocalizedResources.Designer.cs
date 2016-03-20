@@ -70,6 +70,15 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close the currently opened address book..
+        /// </summary>
+        internal static string CloseCurrentAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("CloseCurrentAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create a new address book..
         /// </summary>
         internal static string CreateNewAddressBookOperationDescription {
@@ -115,11 +124,65 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No address book is opened..
+        /// </summary>
+        internal static string NoAddessBookOpenedError {
+            get {
+                return ResourceManager.GetString("NoAddessBookOpenedError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open address book from file..
         /// </summary>
         internal static string OpenAddressBookOperationDescription {
             get {
                 return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Executes again the last action that was undone..
+        /// </summary>
+        internal static string RedoOperationDescription {
+            get {
+                return ResourceManager.GetString("RedoOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save current opened address book..
+        /// </summary>
+        internal static string SaveAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("SaveAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save current opened address book with another name..
+        /// </summary>
+        internal static string SaveAsAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("SaveAsAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displays info about Lisimba..
+        /// </summary>
+        internal static string ShowAboutOperationDescription {
+            get {
+                return ResourceManager.GetString("ShowAboutOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Undo the last executed action..
+        /// </summary>
+        internal static string UndoOperationDescription {
+            get {
+                return ResourceManager.GetString("UndoOperationDescription", resourceCulture);
             }
         }
     }

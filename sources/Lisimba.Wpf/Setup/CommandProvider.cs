@@ -37,19 +37,19 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             //yield return unityContainer.Resolve<ShowMainOperation>();
             yield return unityContainer.Resolve<NewAddressBookCommand>();
             yield return unityContainer.Resolve<OpenAddressBookCommand>();
-            //yield return unityContainer.Resolve<SaveAddressBookOperation>();
-            //yield return unityContainer.Resolve<SaveAsAddressBookOperation>();
-            //yield return unityContainer.Resolve<CloseAddressBookOperation>();
+            yield return unityContainer.Resolve<SaveAddressBookCommand>();
+            yield return unityContainer.Resolve<SaveAsAddressBookCommand>();
+            yield return unityContainer.Resolve<CloseAddressBookCommand>();
             //yield return unityContainer.Resolve<ShowAddressBookPropertiesOperation>();
-            //yield return unityContainer.Resolve<ShowAboutOperation>();
+            yield return unityContainer.Resolve<ShowAboutCommand>();
             //yield return unityContainer.Resolve<NewContactOperation>();
             //yield return unityContainer.Resolve<DeleteCurrentContactOperation>();
             yield return unityContainer.Resolve<ApplicationExitCommand>();
             //yield return unityContainer.Resolve<ImportOperation>();
             //yield return unityContainer.Resolve<ExportOperation>();
             //yield return unityContainer.Resolve<OpenRecentFileOperation>();
-            //yield return unityContainer.Resolve<UndoOperation>();
-            //yield return unityContainer.Resolve<RedoOperation>();
+            yield return unityContainer.Resolve<UndoCommand>();
+            yield return unityContainer.Resolve<RedoCommand>();
             //yield return unityContainer.Resolve<ShowBiorhythmOperation>();
         }
     }

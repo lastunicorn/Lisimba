@@ -74,15 +74,36 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ActiveObservers.cs" />
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ApplicationExitCommand.cs" />
+    <Compile Include="Commands\CloseAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Commands\CommandBase.cs" />
     <Compile Include="Commands\NewAddressBookCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\OpenAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\RedoCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\SaveAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\SaveAsAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowAboutCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\UndoCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ContactEditorViewModel.cs" />
@@ -118,6 +139,10 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
+    <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LisimbaStatusBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

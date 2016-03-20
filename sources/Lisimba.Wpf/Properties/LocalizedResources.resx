@@ -120,6 +120,9 @@
   <data name="ApplicationExitOperationDescription" xml:space="preserve">
     <value>Exit the program.</value>
   </data>
+  <data name="CloseCurrentAddressBookOperationDescription" xml:space="preserve">
+    <value>Close the currently opened address book.</value>
+  </data>
   <data name="CreateNewAddressBookOperationDescription" xml:space="preserve">
     <value>Create a new address book.</value>
   </data>
@@ -135,7 +138,25 @@
   <data name="InfoPopup_Title" xml:space="preserve">
     <value>Info</value>
   </data>
+  <data name="NoAddessBookOpenedError" xml:space="preserve">
+    <value>No address book is opened.</value>
+  </data>
   <data name="OpenAddressBookOperationDescription" xml:space="preserve">
     <value>Open address book from file.</value>
+  </data>
+  <data name="RedoOperationDescription" xml:space="preserve">
+    <value>Executes again the last action that was undone.</value>
+  </data>
+  <data name="SaveAddressBookOperationDescription" xml:space="preserve">
+    <value>Save current opened address book.</value>
+  </data>
+  <data name="SaveAsAddressBookOperationDescription" xml:space="preserve">
+    <value>Save current opened address book with another name.</value>
+  </data>
+  <data name="ShowAboutOperationDescription" xml:space="preserve">
+    <value>Displays info about Lisimba.</value>
+  </data>
+  <data name="UndoOperationDescription" xml:space="preserve">
+    <value>Undo the last executed action.</value>
   </data>
 </root>

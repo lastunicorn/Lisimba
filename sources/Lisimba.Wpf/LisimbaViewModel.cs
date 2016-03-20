@@ -36,6 +36,12 @@ namespace DustInTheWind.Lisimba.Wpf
         public ApplicationExitCommand ApplicationExitCommand { get; private set; }
         public NewAddressBookCommand NewAddressBookCommand { get; private set; }
         public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
+        public SaveAddressBookCommand SaveAddressBookCommand { get; private set; }
+        public SaveAsAddressBookCommand SaveAsAddressBookCommand { get; private set; }
+        public CloseAddressBookCommand CloseAddressBookCommand { get; private set; }
+        public ShowAboutCommand ShowAboutCommand { get; private set; }
+        public UndoCommand UndoCommand { get; private set; }
+        public RedoCommand RedoCommand { get; private set; }
 
         //public MainMenusViewModels MainMenusViewModels { get; private set; }
         //public ContactListViewModel ContactListViewModel { get; private set; }
@@ -107,16 +113,22 @@ namespace DustInTheWind.Lisimba.Wpf
             ApplicationExitCommand = availableCommands.GetCommand<ApplicationExitCommand>();
             NewAddressBookCommand = availableCommands.GetCommand<NewAddressBookCommand>();
             OpenAddressBookCommand = availableCommands.GetCommand<OpenAddressBookCommand>();
+            SaveAddressBookCommand = availableCommands.GetCommand<SaveAddressBookCommand>();
+            SaveAsAddressBookCommand = availableCommands.GetCommand<SaveAsAddressBookCommand>();
+            CloseAddressBookCommand = availableCommands.GetCommand<CloseAddressBookCommand>();
+            ShowAboutCommand = availableCommands.GetCommand<ShowAboutCommand>();
+            UndoCommand = availableCommands.GetCommand<UndoCommand>();
+            RedoCommand = availableCommands.GetCommand<RedoCommand>();
 
             //NewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
             //OpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
 
             //ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
             //ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
-            //ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookOperation>();
-            //ToolStripUndoViewModel = CreateViewModel<UndoOperation>();
-            //ToolStripRedoViewModel = CreateViewModel<RedoOperation>();
-            //ToolStripAboutViewModel = CreateViewModel<ShowAboutOperation>();
+            //ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookCommand>();
+            //ToolStripUndoViewModel = CreateViewModel<UndoCommand>();
+            //ToolStripRedoViewModel = CreateViewModel<RedoCommand>();
+            //ToolStripAboutViewModel = CreateViewModel<ShowAboutCommand>();
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;

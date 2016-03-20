@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows;
 using DustInTheWind.Lisimba.Wpf.Properties;
 using Microsoft.Win32;
@@ -142,6 +141,13 @@ namespace DustInTheWind.Lisimba.Wpf
             return dialogResult == true
                 ? openFileDialog.FileName
                 : null;
+        }
+
+        public void ShowAbout()
+        {
+            AboutWindow window = uiFactory.CreateWindow<AboutWindow>();
+            window.Owner = mainWindow;
+            window.ShowDialog();
         }
     }
 }
