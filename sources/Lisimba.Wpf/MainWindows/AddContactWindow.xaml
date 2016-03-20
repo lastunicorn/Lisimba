@@ -4,7 +4,7 @@
         Title="Add Contact"
         Height="300"
         Width="300"
-        Icon="../Lion.ico"
+        Icon="{StaticResource LisimbaIcon}"
         WindowStartupLocation="CenterOwner">
     
     <Grid />

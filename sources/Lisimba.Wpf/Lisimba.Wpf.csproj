@@ -35,7 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Lion.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Lion.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
@@ -222,7 +222,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Lion.ico" />
+    <Resource Include="Images\Lion.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisimba.Business\Lisimba.Business.csproj">
@@ -245,6 +245,7 @@
     <None Include="Images\MainMenu\exit_16.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\lion.gif" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

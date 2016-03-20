@@ -7,7 +7,7 @@
         Height="350"
         Width="525"
         WindowStartupLocation="CenterScreen"
-        Icon="../Lion.ico"
+        Icon="{StaticResource LisimbaIcon}"
         ResizeMode="CanResizeWithGrip">
 
     <DockPanel>
