@@ -27,6 +27,7 @@
                 <Separator/>
                 <MenuItem Header="E_xit" />
             </MenuItem>
+            
             <MenuItem Header="_Address Book">
                 <MenuItem Header="_Add Contact" />
                 <MenuItem Header="_Delete Contact" />
@@ -36,9 +37,11 @@
                 <Separator/>
                 <MenuItem Header="_Properties" />
             </MenuItem>
+            
             <MenuItem Header="_Help">
                 <MenuItem Header="_About" />
             </MenuItem>
+        
         </Menu>
 
         <lisimba:LisimbaStatusBar DockPanel.Dock="Bottom"

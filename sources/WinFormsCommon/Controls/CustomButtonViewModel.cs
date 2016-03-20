@@ -23,7 +23,6 @@ namespace DustInTheWind.WinFormsCommon.Controls
     public class CustomButtonViewModel : ViewModelBase
     {
         protected readonly ApplicationStatus applicationStatus;
-        protected readonly IWindowSystem windowSystem;
         protected readonly IOperation operation;
 
         private bool isEnabled;
@@ -63,14 +62,12 @@ namespace DustInTheWind.WinFormsCommon.Controls
             }
         }
 
-        public CustomButtonViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
+        public CustomButtonViewModel(ApplicationStatus applicationStatus, IOperation operation)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (operation == null) throw new ArgumentNullException("operation");
 
             this.applicationStatus = applicationStatus;
-            this.windowSystem = windowSystem;
             this.operation = operation;
 
             operation.EnableChanged += HandleOperationEnableChanged;
@@ -97,19 +94,12 @@ namespace DustInTheWind.WinFormsCommon.Controls
 
         public void Execute()
         {
-            try
-            {
-                object parameter = GetExecuteParameter();
+            object parameter = GetExecuteParameter();
 
-                if (parameter == null)
-                    operation.Execute();
-                else
-                    operation.Execute(parameter);
-            }
-            catch (Exception ex)
-            {
-                windowSystem.DisplayError(ex.Message);
-            }
+            if (parameter == null)
+                operation.Execute();
+            else
+                operation.Execute(parameter);
         }
 
         protected virtual object GetExecuteParameter()

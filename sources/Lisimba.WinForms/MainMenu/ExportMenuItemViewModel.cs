@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
@@ -39,8 +38,8 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
             }
         }
 
-        public ExportMenuItemViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
-            : base(applicationStatus, windowSystem, operation)
+        public ExportMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation)
+            : base(applicationStatus, operation)
         {
         }
 

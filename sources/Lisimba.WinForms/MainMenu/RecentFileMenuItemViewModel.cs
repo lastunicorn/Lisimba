@@ -47,8 +47,8 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
             }
         }
 
-        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
-            : base(applicationStatus, windowSystem, operation)
+        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation)
+            : base(applicationStatus, operation)
         {
         }
 

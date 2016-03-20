@@ -36,8 +36,8 @@ namespace DustInTheWind.WinFormsCommon.Controls
             }
         }
 
-        public ListMenuItemViewModel(ApplicationStatus applicationStatus, IWindowSystem windowSystem, IOperation operation)
-            : base(applicationStatus, windowSystem, operation)
+        public ListMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation)
+            : base(applicationStatus, operation)
         {
             Items = new ObservableCollection<CustomButtonViewModel>();
         }

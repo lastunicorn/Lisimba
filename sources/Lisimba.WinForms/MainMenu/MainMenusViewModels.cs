@@ -23,7 +23,7 @@ using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
-    class MainMenusViewModels
+    internal class MainMenusViewModels
     {
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;
