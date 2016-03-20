@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
-using DustInTheWind.Lisimba.Wpf.Main;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {

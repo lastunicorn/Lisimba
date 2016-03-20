@@ -5,7 +5,7 @@
         Height="300"
         Width="300"
         WindowStartupLocation="CenterOwner"
-        Icon="Lion.ico">
+        Icon="../Lion.ico">
 
     <Grid Margin="8">
         <Grid.RowDefinitions>

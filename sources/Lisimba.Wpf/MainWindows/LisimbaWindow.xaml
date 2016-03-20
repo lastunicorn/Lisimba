@@ -15,7 +15,7 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_New" Command="{Binding NewAddressBookCommand}" />
-                <MenuItem Header="_Open" Command="{Binding OpenAddressBookCommand}" />
+                <MenuItem Header="_Open..." Command="{Binding OpenAddressBookCommand}" />
                 <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}" />
                 <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
                 <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
@@ -44,8 +44,7 @@
 
         </Menu>
 
-        <main:LisimbaStatusBar DockPanel.Dock="Bottom"
-                                  DataContext="{Binding StatusBarViewModel}"/>
+        <main:LisimbaStatusBar DockPanel.Dock="Bottom" DataContext="{Binding LisimbaStatusBarViewModel}"/>
 
         <Grid></Grid>
 

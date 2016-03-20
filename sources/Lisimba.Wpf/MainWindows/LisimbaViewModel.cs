@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Wpf.Commands;
 using DustInTheWind.Lisimba.Wpf.Operations;
 
-namespace DustInTheWind.Lisimba.Wpf.Main
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     internal class LisimbaViewModel : ViewModelBase
     {

@@ -18,7 +18,7 @@ using System;
 using System.Windows;
 using DustInTheWind.Lisimba.Business.GateManagement;
 
-namespace DustInTheWind.Lisimba.Wpf
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     internal class LisimbaStatusBarViewModel : ViewModelBase
     {
