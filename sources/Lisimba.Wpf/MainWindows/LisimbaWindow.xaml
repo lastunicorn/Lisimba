@@ -4,49 +4,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:main="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
         Title="{Binding Title, Mode=OneWay}"
-        Height="350"
-        Width="525"
+        Height="550"
+        Width="800"
         WindowStartupLocation="CenterScreen"
         Icon="{StaticResource LisimbaIcon}"
         ResizeMode="CanResizeWithGrip">
 
     <DockPanel>
 
-        <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New" Command="{Binding NewAddressBookCommand}" />
-                <MenuItem Header="_Open..." Command="{Binding OpenAddressBookCommand}" />
-                <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}" />
-                <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
-                <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
-                <Separator />
-                <MenuItem Header="_Export" />
-                <MenuItem Header="_Import" />
-                <Separator/>
-                <MenuItem Header="Recent _Files" />
-                <Separator/>
-                <MenuItem Header="E_xit" Command="{Binding ApplicationExitCommand}" />
-            </MenuItem>
-
-            <MenuItem Header="_Address Book">
-                <MenuItem Header="_Add Contact" Command="{Binding NewContactCommand}" />
-                <MenuItem Header="_Delete Contact" Command="{Binding DeleteCurrentContactCommand}" />
-                <Separator />
-                <MenuItem Header="_Undo" Command="{Binding UndoCommand}" />
-                <MenuItem Header="_Redo" Command="{Binding RedoCommand}" />
-                <Separator/>
-                <MenuItem Header="_Properties" Command="{Binding ShowAddressBookPropertiesCommand}" />
-            </MenuItem>
-
-            <MenuItem Header="_Help">
-                <MenuItem Header="_About" Command="{Binding ShowAboutCommand}" />
-            </MenuItem>
-
-        </Menu>
-
+        <main:LisimbaMainMenu DockPanel.Dock="Top" DataContext="{Binding LisimbaMainMenuViewModel}"/>
+        <main:LisimbaToolBar DockPanel.Dock="Top" DataContext="{Binding LisimbaToolBarViewModel}"/>
+        
         <main:LisimbaStatusBar DockPanel.Dock="Bottom" DataContext="{Binding LisimbaStatusBarViewModel}"/>
 
-        <Grid></Grid>
+        <Grid>
+            <TextBlock Text="asd" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
 
     </DockPanel>
 

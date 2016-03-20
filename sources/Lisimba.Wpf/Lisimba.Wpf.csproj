@@ -88,10 +88,18 @@
     </Compile>
     <Compile Include="MainWindows\ContactEditorViewModel.cs" />
     <Compile Include="MainWindows\ContactListViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">
+      <DependentUpon>LisimbaMainMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\LisimbaToolBarViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaMainMenuViewModel.cs" />
     <Compile Include="MainWindows\LisimbaStatusBar.xaml.cs">
       <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\LisimbaStatusBarViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaToolBar.xaml.cs">
+      <DependentUpon>LisimbaToolBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\LisimbaViewModel.cs" />
     <Compile Include="MainWindows\LisimbaWindow.xaml.cs">
       <DependentUpon>LisimbaWindow.xaml</DependentUpon>
@@ -136,7 +144,6 @@
     </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
-    <Compile Include="MainMenusViewModels.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,9 +180,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MainWindows\LisimbaMainMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindows\LisimbaStatusBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindows\LisimbaToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindows\LisimbaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

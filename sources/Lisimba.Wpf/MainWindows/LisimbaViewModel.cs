@@ -17,47 +17,23 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Wpf.Commands;
-using DustInTheWind.Lisimba.Wpf.Operations;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     internal class LisimbaViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableCommands availableCommands;
-        private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly LisimbaWindowTitle lisimbaWindowTitle;
 
         private string title;
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
 
-        public ApplicationExitCommand ApplicationExitCommand { get; private set; }
-        public NewAddressBookCommand NewAddressBookCommand { get; private set; }
-        public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
-        public SaveAddressBookCommand SaveAddressBookCommand { get; private set; }
-        public SaveAsAddressBookCommand SaveAsAddressBookCommand { get; private set; }
-        public CloseAddressBookCommand CloseAddressBookCommand { get; private set; }
-        public ShowAddressBookPropertiesCommand ShowAddressBookPropertiesCommand { get; private set; }
-        public ShowAboutCommand ShowAboutCommand { get; private set; }
-        public NewContactCommand NewContactCommand { get; private set; }
-        public DeleteCurrentContactCommand DeleteCurrentContactCommand { get; private set; }
-        public UndoCommand UndoCommand { get; private set; }
-        public RedoCommand RedoCommand { get; private set; }
-
-        //public MainMenusViewModels MainMenusViewModels { get; private set; }
         //public ContactListViewModel ContactListViewModel { get; private set; }
         //public ContactEditorViewModel ContactEditorViewModel { get; private set; }
-        //public CustomButtonViewModel NewAddressBookViewModel { get; private set; }
-        //public CustomButtonViewModel OpenAddressBookViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripNewAddressBookViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripOpenAddressBookViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripSaveAddressBookViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripUndoViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripRedoViewModel { get; private set; }
-        //public CustomButtonViewModel ToolStripAboutViewModel { get; private set; }
-
+        
+        public LisimbaMainMenuViewModel LisimbaMainMenuViewModel { get; private set; }
+        public LisimbaToolBarViewModel LisimbaToolBarViewModel { get; private set; }
         public LisimbaStatusBarViewModel LisimbaStatusBarViewModel { get; private set; }
 
         public string Title
@@ -91,50 +67,27 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            OpenedAddressBooks openedAddressBooks, AvailableCommands availableCommands, MainMenusViewModels mainMenusViewModels,
-            MenuItemViewModelProvider viewModelProvider, LisimbaStatusBarViewModel lisimbaStatusBarViewModel, LisimbaWindowTitle lisimbaWindowTitle)
+            OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
+            LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
+            LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableCommands == null) throw new ArgumentNullException("availableCommands");
-            if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
-            if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
             if (lisimbaStatusBarViewModel == null) throw new ArgumentNullException("lisimbaStatusBarViewModel");
+            if (lisimbaMainMenuViewModel == null) throw new ArgumentNullException("lisimbaMainMenuViewModel");
+            if (lisimbaToolBarViewModel == null) throw new ArgumentNullException("lisimbaToolBarViewModel");
+            if (lisimbaWindowTitle == null) throw new ArgumentNullException("lisimbaWindowTitle");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableCommands = availableCommands;
-            this.viewModelProvider = viewModelProvider;
             this.lisimbaWindowTitle = lisimbaWindowTitle;
 
+            LisimbaMainMenuViewModel = lisimbaMainMenuViewModel;
+            LisimbaToolBarViewModel = lisimbaToolBarViewModel;
             LisimbaStatusBarViewModel = lisimbaStatusBarViewModel;
 
-            //MainMenusViewModels = mainMenusViewModels;
             //ContactListViewModel = contactListViewModel;
             //ContactEditorViewModel = contactEditorViewModel;
-
-            ApplicationExitCommand = availableCommands.GetCommand<ApplicationExitCommand>();
-            NewAddressBookCommand = availableCommands.GetCommand<NewAddressBookCommand>();
-            OpenAddressBookCommand = availableCommands.GetCommand<OpenAddressBookCommand>();
-            SaveAddressBookCommand = availableCommands.GetCommand<SaveAddressBookCommand>();
-            SaveAsAddressBookCommand = availableCommands.GetCommand<SaveAsAddressBookCommand>();
-            CloseAddressBookCommand = availableCommands.GetCommand<CloseAddressBookCommand>();
-            ShowAddressBookPropertiesCommand = availableCommands.GetCommand<ShowAddressBookPropertiesCommand>();
-            ShowAboutCommand = availableCommands.GetCommand<ShowAboutCommand>();
-            NewContactCommand = availableCommands.GetCommand<NewContactCommand>();
-            DeleteCurrentContactCommand = availableCommands.GetCommand<DeleteCurrentContactCommand>();
-            UndoCommand = availableCommands.GetCommand<UndoCommand>();
-            RedoCommand = availableCommands.GetCommand<RedoCommand>();
-
-            //NewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
-            //OpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
-
-            //ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
-            //ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
-            //ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookCommand>();
-            //ToolStripUndoViewModel = CreateViewModel<UndoCommand>();
-            //ToolStripRedoViewModel = CreateViewModel<RedoCommand>();
-            //ToolStripAboutViewModel = CreateViewModel<ShowAboutCommand>();
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
@@ -148,13 +101,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             Title = lisimbaWindowTitle.Value;
         }
 
-        //private CustomButtonViewModel CreateViewModel<T>()
-        //    where T : class, IOperation
-        //{
-        //    T newAddressBookOperation = AvailableCommands.GetCommand<T>();
-        //    return viewModelProvider.CreateNew<CustomButtonViewModel>(newAddressBookOperation);
-        //}
-
         private void HandleContactChanged(object sender, EventArgs e)
         {
             IsContactEditVisible = openedAddressBooks.CurrentContact != null;
@@ -165,11 +111,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
-        }
-
-        public bool WindowIsClosing()
-        {
-            return true;
         }
     }
 }

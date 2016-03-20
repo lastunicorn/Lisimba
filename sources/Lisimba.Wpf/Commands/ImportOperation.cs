@@ -14,9 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Wpf
+using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
+
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
-    internal class MainMenusViewModels
+    internal class ImportOperation : OperationBase<IGate>
     {
+        public ImportOperation(WindowSystem windowSystem)
+            : base(windowSystem)
+        {
+        }
+
+        public override string ShortDescription
+        {
+            get { return LocalizedResources.ImportOperationDescription; }
+        }
+
+        protected override void DoExecute(IGate gate)
+        {
+            windowSystem.DisplayInfo("Import using " + gate.Name + ".");
+        }
     }
 }
