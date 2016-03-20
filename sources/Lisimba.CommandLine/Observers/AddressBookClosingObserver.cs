@@ -17,13 +17,12 @@
 using System;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ObservingModel;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
 {
-    class AddressBookClosingObserver : IObserver
+    internal class AddressBookClosingObserver : IObserver
     {
         private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;

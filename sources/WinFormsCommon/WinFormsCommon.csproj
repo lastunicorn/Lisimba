@@ -43,7 +43,7 @@
     <Compile Include="BindableToolStripStatusLabel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BindingExtensions.cs" />
+    <Compile Include="Utils\BindingExtensions.cs" />
     <Compile Include="Controls\CustomButton.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -4,7 +4,6 @@ namespace DustInTheWind.Lisimba.Wpf
     {
         public void Start()
         {
-            
         }
     }
 }

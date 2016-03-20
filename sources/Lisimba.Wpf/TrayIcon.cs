@@ -20,7 +20,7 @@ using System.Windows.Forms;
 
 namespace DustInTheWind.Lisimba.Wpf
 {
-    partial class TrayIcon : Component
+    internal partial class TrayIcon : Component
     {
         private readonly TrayIconViewModel viewModel;
 

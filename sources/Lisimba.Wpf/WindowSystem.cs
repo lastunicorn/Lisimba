@@ -86,7 +86,6 @@ namespace DustInTheWind.Lisimba.Wpf
 
         public void ShowGateSelector(Point point)
         {
-            
         }
     }
 }

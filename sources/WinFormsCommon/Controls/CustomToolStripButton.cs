@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using System.Windows.Forms;
 using System.Windows.Forms.Design;
+using DustInTheWind.WinFormsCommon.Utils;
 
 namespace DustInTheWind.WinFormsCommon.Controls
 {

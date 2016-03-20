@@ -47,7 +47,7 @@
         <lisimba:LisimbaStatusBar DockPanel.Dock="Bottom"
                                   DataContext="{Binding StatusBarViewModel}"/>
 
-        <Grid></Grid>
+        <Grid />
 
     </DockPanel>
 

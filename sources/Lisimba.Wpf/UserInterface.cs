@@ -76,7 +76,6 @@ namespace DustInTheWind.Lisimba.Wpf
             //    Application.Current.Run();
             //else
             //    Application.Current.Run(windowSystem.MainWindow);
-
         }
 
         public void Exit()

@@ -24,10 +24,10 @@
             <TextBlock Name="StatusLabel" Text="{Binding StatusText}" />
         </StatusBarItem>
 
-        <Separator Grid.Column="1"></Separator>
+        <Separator Grid.Column="1" />
 
         <StatusBarItem Grid.Column="2">
-            <TextBlock Name="DefaultGateLabel" Text="{Binding DefaultGate}"></TextBlock>
+            <TextBlock Name="DefaultGateLabel" Text="{Binding DefaultGate}" />
         </StatusBarItem>
 
     </StatusBar>
