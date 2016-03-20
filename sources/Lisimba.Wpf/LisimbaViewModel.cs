@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Wpf.Commands;
 using DustInTheWind.Lisimba.Wpf.Operations;
 
 namespace DustInTheWind.Lisimba.Wpf
@@ -24,13 +25,17 @@ namespace DustInTheWind.Lisimba.Wpf
     internal class LisimbaViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableOperations availableOperations;
+        private readonly AvailableCommands availableCommands;
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly LisimbaWindowTitle lisimbaWindowTitle;
 
         private string title;
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
+
+        public ApplicationExitCommand ApplicationExitCommand { get; private set; }
+        public NewAddressBookCommand NewAddressBookCommand { get; private set; }
+        public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
 
         //public MainMenusViewModels MainMenusViewModels { get; private set; }
         //public ContactListViewModel ContactListViewModel { get; private set; }
@@ -77,19 +82,19 @@ namespace DustInTheWind.Lisimba.Wpf
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            OpenedAddressBooks openedAddressBooks, AvailableOperations availableOperations, MainMenusViewModels mainMenusViewModels,
+            OpenedAddressBooks openedAddressBooks, AvailableCommands availableCommands, MainMenusViewModels mainMenusViewModels,
             MenuItemViewModelProvider viewModelProvider, StatusBarViewModel statusBarViewModel, LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableOperations == null) throw new ArgumentNullException("availableOperations");
+            if (availableCommands == null) throw new ArgumentNullException("availableCommands");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
             if (statusBarViewModel == null) throw new ArgumentNullException("statusBarViewModel");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableOperations = availableOperations;
+            this.availableCommands = availableCommands;
             this.viewModelProvider = viewModelProvider;
             this.lisimbaWindowTitle = lisimbaWindowTitle;
 
@@ -99,11 +104,15 @@ namespace DustInTheWind.Lisimba.Wpf
             //ContactListViewModel = contactListViewModel;
             //ContactEditorViewModel = contactEditorViewModel;
 
-            //NewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
-            //OpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
+            ApplicationExitCommand = availableCommands.GetCommand<ApplicationExitCommand>();
+            NewAddressBookCommand = availableCommands.GetCommand<NewAddressBookCommand>();
+            OpenAddressBookCommand = availableCommands.GetCommand<OpenAddressBookCommand>();
 
-            //ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookOperation>();
-            //ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookOperation>();
+            //NewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
+            //OpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
+
+            //ToolStripNewAddressBookViewModel = CreateViewModel<NewAddressBookCommand>();
+            //ToolStripOpenAddressBookViewModel = CreateViewModel<OpenAddressBookCommand>();
             //ToolStripSaveAddressBookViewModel = CreateViewModel<SaveAddressBookOperation>();
             //ToolStripUndoViewModel = CreateViewModel<UndoOperation>();
             //ToolStripRedoViewModel = CreateViewModel<RedoOperation>();
@@ -124,7 +133,7 @@ namespace DustInTheWind.Lisimba.Wpf
         //private CustomButtonViewModel CreateViewModel<T>()
         //    where T : class, IOperation
         //{
-        //    T newAddressBookOperation = availableOperations.GetOperation<T>();
+        //    T newAddressBookOperation = AvailableCommands.GetCommand<T>();
         //    return viewModelProvider.CreateNew<CustomButtonViewModel>(newAddressBookOperation);
         //}
 

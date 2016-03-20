@@ -61,6 +61,24 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exit the program..
+        /// </summary>
+        internal static string ApplicationExitOperationDescription {
+            get {
+                return ResourceManager.GetString("ApplicationExitOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new address book..
+        /// </summary>
+        internal static string CreateNewAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("CreateNewAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string DefaultStatusText {
@@ -72,9 +90,36 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
+        internal static string ErrorPopup_Title {
+            get {
+                return ResourceManager.GetString("ErrorPopup_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
         internal static string ErrorTitle {
             get {
                 return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        internal static string InfoPopup_Title {
+            get {
+                return ResourceManager.GetString("InfoPopup_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open address book from file..
+        /// </summary>
+        internal static string OpenAddressBookOperationDescription {
+            get {
+                return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
             }
         }
     }

@@ -16,27 +16,27 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Wpf.Commands;
 using DustInTheWind.Lisimba.Wpf.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Wpf.Setup
 {
-    internal class OperationProvider : IOperationProvider
+    internal class CommandProvider : ICommandProvider
     {
         private readonly IUnityContainer unityContainer;
 
-        public OperationProvider(IUnityContainer unityContainer)
+        public CommandProvider(IUnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
             this.unityContainer = unityContainer;
         }
 
-        public IEnumerable<IOperation> GetNewOperations()
+        public IEnumerable<CommandBase> GetNewCommands()
         {
-            yield break;
             //yield return unityContainer.Resolve<ShowMainOperation>();
-            //yield return unityContainer.Resolve<NewAddressBookOperation>();
-            //yield return unityContainer.Resolve<OpenAddressBookOperation>();
+            yield return unityContainer.Resolve<NewAddressBookCommand>();
+            yield return unityContainer.Resolve<OpenAddressBookCommand>();
             //yield return unityContainer.Resolve<SaveAddressBookOperation>();
             //yield return unityContainer.Resolve<SaveAsAddressBookOperation>();
             //yield return unityContainer.Resolve<CloseAddressBookOperation>();
@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             //yield return unityContainer.Resolve<ShowAboutOperation>();
             //yield return unityContainer.Resolve<NewContactOperation>();
             //yield return unityContainer.Resolve<DeleteCurrentContactOperation>();
-            //yield return unityContainer.Resolve<ApplicationExitOperation>();
+            yield return unityContainer.Resolve<ApplicationExitCommand>();
             //yield return unityContainer.Resolve<ImportOperation>();
             //yield return unityContainer.Resolve<ExportOperation>();
             //yield return unityContainer.Resolve<OpenRecentFileOperation>();

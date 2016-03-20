@@ -14,12 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Lisimba.Wpf.Commands;
 
 namespace DustInTheWind.Lisimba.Wpf.Operations
 {
-    public interface IOperationProvider
+    internal class AvailableCommands
     {
-        IEnumerable<IOperation> GetNewOperations();
+        private readonly Dictionary<Type, CommandBase> commands;
+
+        public AvailableCommands(ICommandProvider commandProvider)
+        {
+            if (commandProvider == null) throw new ArgumentNullException("commandProvider");
+
+            commands = commandProvider.GetNewCommands()
+                .ToDictionary(x => x.GetType(), x => x);
+        }
+
+        public T GetCommand<T>()
+            where T : CommandBase
+        {
+            Type type = typeof(T);
+            CommandBase command = commands[type];
+            return (T)command;
+        }
     }
 }

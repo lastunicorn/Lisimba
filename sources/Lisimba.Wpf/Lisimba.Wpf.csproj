@@ -77,11 +77,20 @@
     <Compile Include="ActiveObservers.cs" />
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Commands\ApplicationExitCommand.cs" />
+    <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\NewAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\OpenAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ContactEditorViewModel.cs" />
     <Compile Include="ContactListViewModel.cs" />
     <Compile Include="LisimbaStatusBar.xaml.cs">
       <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LocationProviders\FileLocationProvider.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="MainMenusViewModels.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
@@ -90,12 +99,12 @@
       <DependentUpon>LocalizedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="MenuItemViewModelProvider.cs" />
-    <Compile Include="Operations\AvailableOperations.cs" />
+    <Compile Include="Operations\AvailableCommands.cs" />
     <Compile Include="Operations\EmptyOperation.cs" />
     <Compile Include="Operations\IOperation.cs" />
     <Compile Include="Operations\IOperation1.cs" />
-    <Compile Include="Operations\IOperationProvider.cs" />
-    <Compile Include="Setup\OperationProvider.cs" />
+    <Compile Include="Operations\ICommandProvider.cs" />
+    <Compile Include="Setup\CommandProvider.cs" />
     <Compile Include="StatusBarViewModel.cs" />
     <Compile Include="TrayIcon.cs">
       <SubType>Component</SubType>
@@ -185,7 +194,15 @@
   <ItemGroup>
     <None Include="Images\MainMenu\exit_16.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="postbuild.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe" postbuild.xml /p:SolutionDir=$(SolutionDir);ConfigurationName=$(ConfigurationName)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

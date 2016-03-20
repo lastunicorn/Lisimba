@@ -29,6 +29,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     {
         private readonly ApplicationConfiguration config;
         private readonly GateProvider gateProvider;
+        private readonly List<Exception> warnings;
         private readonly Dictionary<string, IGate> gates;
         private IGate defaultGate;
 
@@ -62,6 +63,11 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
             }
         }
 
+        public IEnumerable<Exception> Warnings
+        {
+            get { return warnings; }
+        }
+
         public event EventHandler GateChanged;
 
         public AvailableGates(GateProvider gateProvider, ApplicationConfiguration config)
@@ -72,6 +78,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
             this.gateProvider = gateProvider;
             this.config = config;
 
+            warnings = new List<Exception>();
             gates = new Dictionary<string, IGate>();
 
             LoadGates();
@@ -86,10 +93,10 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
 
                 SetDefaultGate(config.DefaultGateName);
             }
-            catch
+            catch (Exception ex)
             {
+                warnings.Add(ex);
                 SetEmptyGate();
-                // todo: display exception as warning to the user
             }
         }
 

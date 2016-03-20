@@ -15,8 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Windows;
 using DustInTheWind.Lisimba.Wpf.Properties;
+using Microsoft.Win32;
 
 namespace DustInTheWind.Lisimba.Wpf
 {
@@ -86,6 +90,58 @@ namespace DustInTheWind.Lisimba.Wpf
 
         public void ShowGateSelector(Point point)
         {
+        }
+
+        public void DisplayInfo(string message)
+        {
+            MessageBox.Show(MainWindow, message, LocalizedResources.InfoPopup_Title, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void DisplayWarning(IEnumerable<Exception> warnings)
+        {
+            // todo: implement WarningsForm
+            //using (WarningsForm form = new WarningsForm())
+            //{
+            //    form.Warnings = warnings.ToList();
+            //    form.ShowDialog(mainWindow);
+            //}
+        }
+
+        public void DisplayError(string message)
+        {
+            MessageBox.Show(MainWindow, message, LocalizedResources.ErrorPopup_Title, MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        public string AskToSave(string extension, string filter)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = Directory.GetCurrentDirectory(),
+                Filter = filter,
+                DefaultExt = extension
+            };
+
+            bool? dialogResult = saveFileDialog.ShowDialog(MainWindow);
+
+            return dialogResult == true
+                ? saveFileDialog.FileName
+                : null;
+        }
+
+        public string AskToOpen(string extension, string filter)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = Directory.GetCurrentDirectory(),
+                Filter = filter,
+                DefaultExt = extension
+            };
+
+            bool? dialogResult = openFileDialog.ShowDialog(MainWindow);
+
+            return dialogResult == true
+                ? openFileDialog.FileName
+                : null;
         }
     }
 }

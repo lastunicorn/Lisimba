@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AvailableGates>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<AvailableCommands>(new ContainerControlledLifetimeManager());
             //unityContainer.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
 
             unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             //unityContainer.RegisterType<IObserverProvider, ObserverProvider>();
-            unityContainer.RegisterType<IOperationProvider, OperationProvider>();
+            unityContainer.RegisterType<ICommandProvider, CommandProvider>();
             unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 
             return unityContainer;
