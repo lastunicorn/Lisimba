@@ -78,6 +78,12 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ActiveObservers.cs" />
+    <Compile Include="AddContactWindow.xaml.cs">
+      <DependentUpon>AddContactWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddressBoogPropertiesWindow.xaml.cs">
+      <DependentUpon>AddressBoogPropertiesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ApplicationExitCommand.cs" />
@@ -85,7 +91,13 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\CommandBase.cs" />
+    <Compile Include="Commands\DeleteCurrentContactCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Commands\NewAddressBookCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\NewContactCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\OpenAddressBookCommand.cs">
@@ -101,6 +113,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\ShowAboutCommand.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Commands\ShowAddressBookPropertiesCommand.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Commands\UndoCommand.cs">
@@ -140,6 +155,14 @@
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddContactWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddressBoogPropertiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

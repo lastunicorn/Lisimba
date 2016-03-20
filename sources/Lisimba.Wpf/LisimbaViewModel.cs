@@ -39,7 +39,10 @@ namespace DustInTheWind.Lisimba.Wpf
         public SaveAddressBookCommand SaveAddressBookCommand { get; private set; }
         public SaveAsAddressBookCommand SaveAsAddressBookCommand { get; private set; }
         public CloseAddressBookCommand CloseAddressBookCommand { get; private set; }
+        public ShowAddressBookPropertiesCommand ShowAddressBookPropertiesCommand { get; private set; }
         public ShowAboutCommand ShowAboutCommand { get; private set; }
+        public NewContactCommand NewContactCommand { get; private set; }
+        public DeleteCurrentContactCommand DeleteCurrentContactCommand { get; private set; }
         public UndoCommand UndoCommand { get; private set; }
         public RedoCommand RedoCommand { get; private set; }
 
@@ -116,7 +119,10 @@ namespace DustInTheWind.Lisimba.Wpf
             SaveAddressBookCommand = availableCommands.GetCommand<SaveAddressBookCommand>();
             SaveAsAddressBookCommand = availableCommands.GetCommand<SaveAsAddressBookCommand>();
             CloseAddressBookCommand = availableCommands.GetCommand<CloseAddressBookCommand>();
+            ShowAddressBookPropertiesCommand = availableCommands.GetCommand<ShowAddressBookPropertiesCommand>();
             ShowAboutCommand = availableCommands.GetCommand<ShowAboutCommand>();
+            NewContactCommand = availableCommands.GetCommand<NewContactCommand>();
+            DeleteCurrentContactCommand = availableCommands.GetCommand<DeleteCurrentContactCommand>();
             UndoCommand = availableCommands.GetCommand<UndoCommand>();
             RedoCommand = availableCommands.GetCommand<RedoCommand>();
 

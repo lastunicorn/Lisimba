@@ -149,5 +149,19 @@ namespace DustInTheWind.Lisimba.Wpf
             window.Owner = mainWindow;
             window.ShowDialog();
         }
+
+        public void DisplayAddContactWindow()
+        {
+            AddContactWindow window = uiFactory.CreateWindow<AddContactWindow>();
+            window.Owner = mainWindow;
+            window.Show();
+        }
+
+        public void DisplayAddressBookProperties()
+        {
+            AddressBoogPropertiesWindow window = uiFactory.CreateWindow<AddressBoogPropertiesWindow>();
+            window.Owner = mainWindow;
+            window.ShowDialog();
+        }
     }
 }

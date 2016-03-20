@@ -40,10 +40,10 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             yield return unityContainer.Resolve<SaveAddressBookCommand>();
             yield return unityContainer.Resolve<SaveAsAddressBookCommand>();
             yield return unityContainer.Resolve<CloseAddressBookCommand>();
-            //yield return unityContainer.Resolve<ShowAddressBookPropertiesOperation>();
+            yield return unityContainer.Resolve<ShowAddressBookPropertiesCommand>();
             yield return unityContainer.Resolve<ShowAboutCommand>();
-            //yield return unityContainer.Resolve<NewContactOperation>();
-            //yield return unityContainer.Resolve<DeleteCurrentContactOperation>();
+            yield return unityContainer.Resolve<NewContactCommand>();
+            yield return unityContainer.Resolve<DeleteCurrentContactCommand>();
             yield return unityContainer.Resolve<ApplicationExitCommand>();
             //yield return unityContainer.Resolve<ImportOperation>();
             //yield return unityContainer.Resolve<ExportOperation>();

@@ -126,8 +126,14 @@
   <data name="CreateNewAddressBookOperationDescription" xml:space="preserve">
     <value>Create a new address book.</value>
   </data>
+  <data name="CreateNewContactOperationDescription" xml:space="preserve">
+    <value>Create a new contact.</value>
+  </data>
   <data name="DefaultStatusText" xml:space="preserve">
     <value>Ready</value>
+  </data>
+  <data name="DeleteCurrentContactOperationDescription" xml:space="preserve">
+    <value>Delete the currently selected contact.</value>
   </data>
   <data name="ErrorPopup_Title" xml:space="preserve">
     <value>Error</value>
@@ -155,6 +161,9 @@
   </data>
   <data name="ShowAboutOperationDescription" xml:space="preserve">
     <value>Displays info about Lisimba.</value>
+  </data>
+  <data name="ShowAddressBookPropertiesOperationDescription" xml:space="preserve">
+    <value>Display the address book properties.</value>
   </data>
   <data name="UndoOperationDescription" xml:space="preserve">
     <value>Undo the last executed action.</value>

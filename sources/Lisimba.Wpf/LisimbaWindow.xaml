@@ -29,13 +29,13 @@
             </MenuItem>
 
             <MenuItem Header="_Address Book">
-                <MenuItem Header="_Add Contact" />
-                <MenuItem Header="_Delete Contact" />
+                <MenuItem Header="_Add Contact" Command="{Binding NewContactCommand}" />
+                <MenuItem Header="_Delete Contact" Command="{Binding DeleteCurrentContactCommand}" />
                 <Separator />
                 <MenuItem Header="_Undo" Command="{Binding UndoCommand}" />
                 <MenuItem Header="_Redo" Command="{Binding RedoCommand}" />
                 <Separator/>
-                <MenuItem Header="_Properties" />
+                <MenuItem Header="_Properties" Command="{Binding ShowAddressBookPropertiesCommand}" />
             </MenuItem>
 
             <MenuItem Header="_Help">

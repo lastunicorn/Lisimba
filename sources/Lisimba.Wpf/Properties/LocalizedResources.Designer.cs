@@ -88,11 +88,29 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a new contact..
+        /// </summary>
+        internal static string CreateNewContactOperationDescription {
+            get {
+                return ResourceManager.GetString("CreateNewContactOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ready.
         /// </summary>
         internal static string DefaultStatusText {
             get {
                 return ResourceManager.GetString("DefaultStatusText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete the currently selected contact..
+        /// </summary>
+        internal static string DeleteCurrentContactOperationDescription {
+            get {
+                return ResourceManager.GetString("DeleteCurrentContactOperationDescription", resourceCulture);
             }
         }
         
@@ -174,6 +192,15 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         internal static string ShowAboutOperationDescription {
             get {
                 return ResourceManager.GetString("ShowAboutOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display the address book properties..
+        /// </summary>
+        internal static string ShowAddressBookPropertiesOperationDescription {
+            get {
+                return ResourceManager.GetString("ShowAddressBookPropertiesOperationDescription", resourceCulture);
             }
         }
         
