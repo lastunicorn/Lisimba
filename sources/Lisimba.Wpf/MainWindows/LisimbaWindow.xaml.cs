@@ -15,8 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Windows;
+using DustInTheWind.Lisimba.Wpf.Main;
 
-namespace DustInTheWind.Lisimba.Wpf
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     /// <summary>
     /// Interaction logic for LisimbaWindow.xaml

@@ -1,13 +1,13 @@
-﻿<Window x:Class="DustInTheWind.Lisimba.Wpf.LisimbaWindow"
+﻿<Window x:Class="DustInTheWind.Lisimba.Wpf.MainWindows.LisimbaWindow"
         x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:lisimba="clr-namespace:DustInTheWind.Lisimba.Wpf"
+        xmlns:main="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
         Title="{Binding Title, Mode=OneWay}"
         Height="350"
         Width="525"
         WindowStartupLocation="CenterScreen"
-        Icon="Lion.ico"
+        Icon="../Lion.ico"
         ResizeMode="CanResizeWithGrip">
 
     <DockPanel>
@@ -44,7 +44,7 @@
 
         </Menu>
 
-        <lisimba:LisimbaStatusBar DockPanel.Dock="Bottom"
+        <main:LisimbaStatusBar DockPanel.Dock="Bottom"
                                   DataContext="{Binding StatusBarViewModel}"/>
 
         <Grid></Grid>

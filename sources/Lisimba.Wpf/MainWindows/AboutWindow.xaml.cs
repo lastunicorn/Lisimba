@@ -16,7 +16,7 @@
 
 using System.Windows;
 
-namespace DustInTheWind.Lisimba.Wpf
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     /// <summary>
     /// Interaction logic for AboutWindow.xaml

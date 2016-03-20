@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Wpf.LocationProviders
     //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
     //        openFileDialog.DefaultExt = "csv";
 
-    class FileLocationProvider
+    internal class FileLocationProvider
     {
         private readonly WindowSystem windowSystem;
 

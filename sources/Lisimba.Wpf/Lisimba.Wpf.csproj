@@ -38,6 +38,9 @@
     <ApplicationIcon>Lion.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net451\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -74,16 +77,26 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="AboutWindow.xaml.cs">
+    <Compile Include="MainWindows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ActiveObservers.cs" />
-    <Compile Include="AddContactWindow.xaml.cs">
+    <Compile Include="MainWindows\AddContactWindow.xaml.cs">
       <DependentUpon>AddContactWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddressBoogPropertiesWindow.xaml.cs">
+    <Compile Include="MainWindows\AddressBoogPropertiesWindow.xaml.cs">
       <DependentUpon>AddressBoogPropertiesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\ContactEditorViewModel.cs" />
+    <Compile Include="MainWindows\ContactListViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaStatusBar.xaml.cs">
+      <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\LisimbaStatusBarViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaViewModel.cs" />
+    <Compile Include="MainWindows\LisimbaWindow.xaml.cs">
+      <DependentUpon>LisimbaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ActiveObservers.cs" />
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ApplicationExitCommand.cs" />
@@ -121,11 +134,6 @@
     <Compile Include="Commands\UndoCommand.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ContactEditorViewModel.cs" />
-    <Compile Include="ContactListViewModel.cs" />
-    <Compile Include="LisimbaStatusBar.xaml.cs">
-      <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="MainMenusViewModels.cs" />
@@ -141,7 +149,6 @@
     <Compile Include="Operations\IOperation1.cs" />
     <Compile Include="Operations\ICommandProvider.cs" />
     <Compile Include="Setup\CommandProvider.cs" />
-    <Compile Include="StatusBarViewModel.cs" />
     <Compile Include="TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -154,33 +161,28 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
-    <Page Include="AboutWindow.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="MainWindows\AboutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AddContactWindow.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddressBoogPropertiesWindow.xaml">
+    <Page Include="MainWindows\AddContactWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LisimbaStatusBar.xaml">
+    <Page Include="MainWindows\AddressBoogPropertiesWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="LisimbaWindow.xaml">
+    <Page Include="MainWindows\LisimbaStatusBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindows\LisimbaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="LisimbaViewModel.cs" />
-    <Compile Include="LisimbaWindow.xaml.cs">
-      <DependentUpon>LisimbaWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

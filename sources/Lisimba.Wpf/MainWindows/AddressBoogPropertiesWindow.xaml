@@ -1,10 +1,10 @@
-﻿<Window x:Class="DustInTheWind.Lisimba.Wpf.AddContactWindow"
+﻿<Window x:Class="DustInTheWind.Lisimba.Wpf.MainWindows.AddressBoogPropertiesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Add Contact"
+        Title="AddressBoogPropertiesWindow"
+        Icon="Lion.ico"
         Height="300"
         Width="300"
-        Icon="Lion.ico"
         WindowStartupLocation="CenterOwner">
     
     <Grid>

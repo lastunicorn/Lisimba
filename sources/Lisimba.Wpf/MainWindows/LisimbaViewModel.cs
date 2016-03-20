@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Wpf.Commands;
 using DustInTheWind.Lisimba.Wpf.Operations;
 
-namespace DustInTheWind.Lisimba.Wpf
+namespace DustInTheWind.Lisimba.Wpf.Main
 {
     internal class LisimbaViewModel : ViewModelBase
     {
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.Wpf
         //public CustomButtonViewModel ToolStripRedoViewModel { get; private set; }
         //public CustomButtonViewModel ToolStripAboutViewModel { get; private set; }
 
-        public StatusBarViewModel StatusBarViewModel { get; private set; }
+        public LisimbaStatusBarViewModel LisimbaStatusBarViewModel { get; private set; }
 
         public string Title
         {
@@ -92,7 +92,7 @@ namespace DustInTheWind.Lisimba.Wpf
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             OpenedAddressBooks openedAddressBooks, AvailableCommands availableCommands, MainMenusViewModels mainMenusViewModels,
-            MenuItemViewModelProvider viewModelProvider, StatusBarViewModel statusBarViewModel, LisimbaWindowTitle lisimbaWindowTitle)
+            MenuItemViewModelProvider viewModelProvider, LisimbaStatusBarViewModel lisimbaStatusBarViewModel, LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
@@ -100,14 +100,14 @@ namespace DustInTheWind.Lisimba.Wpf
             if (availableCommands == null) throw new ArgumentNullException("availableCommands");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
-            if (statusBarViewModel == null) throw new ArgumentNullException("statusBarViewModel");
+            if (lisimbaStatusBarViewModel == null) throw new ArgumentNullException("lisimbaStatusBarViewModel");
 
             this.openedAddressBooks = openedAddressBooks;
             this.availableCommands = availableCommands;
             this.viewModelProvider = viewModelProvider;
             this.lisimbaWindowTitle = lisimbaWindowTitle;
 
-            StatusBarViewModel = statusBarViewModel;
+            LisimbaStatusBarViewModel = lisimbaStatusBarViewModel;
 
             //MainMenusViewModels = mainMenusViewModels;
             //ContactListViewModel = contactListViewModel;

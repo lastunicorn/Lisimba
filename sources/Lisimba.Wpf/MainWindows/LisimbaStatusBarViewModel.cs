@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.GateManagement;
 
 namespace DustInTheWind.Lisimba.Wpf
 {
-    internal class StatusBarViewModel : ViewModelBase
+    internal class LisimbaStatusBarViewModel : ViewModelBase
     {
         private readonly ApplicationStatus applicationStatus;
         private readonly AvailableGates availableGates;
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Wpf
             }
         }
 
-        public StatusBarViewModel(ApplicationStatus applicationStatus, AvailableGates availableGates, WindowSystem windowSystem)
+        public LisimbaStatusBarViewModel(ApplicationStatus applicationStatus, AvailableGates availableGates, WindowSystem windowSystem)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (availableGates == null) throw new ArgumentNullException("availableGates");
