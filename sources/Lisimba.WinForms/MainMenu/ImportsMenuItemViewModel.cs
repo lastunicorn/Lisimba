@@ -18,8 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
@@ -28,8 +28,8 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
     {
         private readonly AvailableGates availableGates;
 
-        public ImportsMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation, AvailableGates availableGates)
-            : base(applicationStatus, windowSystem, operation)
+        public ImportsMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation, AvailableGates availableGates)
+            : base(applicationStatus, operation)
         {
             if (availableGates == null) throw new ArgumentNullException("availableGates");
 
@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
             return availableGates.GetAllGates()
-                .Select(x => new ImportMenuItemViewModel(applicationStatus, windowSystem, ChildrenOpertion)
+                .Select(x => new ImportMenuItemViewModel(applicationStatus, ChildrenOpertion)
                 {
                     Text = x.Name,
                     Gate = x

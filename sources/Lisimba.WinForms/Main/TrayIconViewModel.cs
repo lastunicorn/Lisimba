@@ -17,6 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 
 namespace DustInTheWind.Lisimba.WinForms.Main
 {
@@ -25,7 +26,9 @@ namespace DustInTheWind.Lisimba.WinForms.Main
         private readonly WindowSystem windowSystem;
         private TrayIcon trayIcon;
 
-        public TrayIconMenuViewModels TrayIconMenuViewModels { get; private set; }
+        public CustomButtonViewModel ApplicationExitViewModel { get; private set; }
+        public CustomButtonViewModel AboutViewModel { get; private set; }
+        public CustomButtonViewModel ShowMainViewModel { get; private set; }
 
         public TrayIcon TrayIcon
         {
@@ -43,7 +46,9 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
             this.windowSystem = windowSystem;
 
-            TrayIconMenuViewModels = trayIconMenuViewModels;
+            ApplicationExitViewModel = trayIconMenuViewModels.ApplicationExitViewModel;
+            AboutViewModel = trayIconMenuViewModels.AboutViewModel;
+            ShowMainViewModel = trayIconMenuViewModels.ShowMainViewModel;
         }
 
         public void IconWasDoubleClicked()

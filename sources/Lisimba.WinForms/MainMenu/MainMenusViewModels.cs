@@ -18,12 +18,12 @@ using System;
 using DustInTheWind.Lisimba.WinForms.Operations;
 using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
-    class MainMenusViewModels
+    internal class MainMenusViewModels
     {
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly AvailableOperations availableOperations;

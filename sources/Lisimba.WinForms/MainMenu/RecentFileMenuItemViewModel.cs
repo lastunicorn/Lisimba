@@ -16,12 +16,13 @@
 
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
-    class RecentFileMenuItemViewModel : CustomButtonViewModel
+    internal class RecentFileMenuItemViewModel : CustomButtonViewModel
     {
         private AddressBookLocationInfo file;
         private int index;
@@ -46,8 +47,8 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
             }
         }
 
-        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
-            : base(applicationStatus, windowSystem, operation)
+        public RecentFileMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation)
+            : base(applicationStatus, operation)
         {
         }
 

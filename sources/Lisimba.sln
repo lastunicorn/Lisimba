@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.WinForms", "Lisimba.WinForms\Lisimba.WinForms.csproj", "{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}"
 EndProject
@@ -26,6 +26,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleCommon", "ConsoleCommon\ConsoleCommon.csproj", "{BDFCAD78-775A-478D-8BFF-6A986704AA0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsCommon", "WinFormsCommon\WinFormsCommon.csproj", "{47CDB7C5-A066-45CF-BD3E-B6CA2FF72DB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.WinForms.ContactEditing", "Lisimba.WinForms.ContactEditing\Lisimba.WinForms.ContactEditing.csproj", "{FE04EE77-8675-4D62-AA62-C380C7770C20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Wpf", "Lisimba.Wpf\Lisimba.Wpf.csproj", "{49222E98-FD9E-4C17-9710-19D681D8FAE8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,14 @@ Global
 		{47CDB7C5-A066-45CF-BD3E-B6CA2FF72DB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47CDB7C5-A066-45CF-BD3E-B6CA2FF72DB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47CDB7C5-A066-45CF-BD3E-B6CA2FF72DB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE04EE77-8675-4D62-AA62-C380C7770C20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE04EE77-8675-4D62-AA62-C380C7770C20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE04EE77-8675-4D62-AA62-C380C7770C20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE04EE77-8675-4D62-AA62-C380C7770C20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49222E98-FD9E-4C17-9710-19D681D8FAE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49222E98-FD9E-4C17-9710-19D681D8FAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49222E98-FD9E-4C17-9710-19D681D8FAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49222E98-FD9E-4C17-9710-19D681D8FAE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -24,8 +24,8 @@ using DustInTheWind.Lisimba.WinForms.ContactList;
 using DustInTheWind.Lisimba.WinForms.MainMenu;
 using DustInTheWind.Lisimba.WinForms.Operations;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
 using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.Main
@@ -37,8 +37,8 @@ namespace DustInTheWind.Lisimba.WinForms.Main
         private readonly AvailableGates availableGates;
         private readonly WindowSystem windowSystem;
         private readonly MenuItemViewModelProvider viewModelProvider;
+        private readonly LisimbaWindowTitle lisimbaWindowTitle;
         private readonly ApplicationStatus applicationStatus;
-        private readonly LisimbaApplication lisimbaApplication;
 
         private string title;
         private string statusText;
@@ -109,13 +109,12 @@ namespace DustInTheWind.Lisimba.WinForms.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            LisimbaApplication lisimbaApplication, ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
+            ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
             AvailableOperations availableOperations, AvailableGates availableGates, WindowSystem windowSystem,
-            MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider)
+            MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider, LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
-            if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
@@ -123,14 +122,15 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
+            if (lisimbaWindowTitle == null) throw new ArgumentNullException("lisimbaWindowTitle");
 
-            this.lisimbaApplication = lisimbaApplication;
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
             this.availableOperations = availableOperations;
             this.availableGates = availableGates;
             this.windowSystem = windowSystem;
             this.viewModelProvider = viewModelProvider;
+            this.lisimbaWindowTitle = lisimbaWindowTitle;
 
             MainMenusViewModels = mainMenusViewModels;
             ContactListViewModel = contactListViewModel;
@@ -150,15 +150,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
-            openedAddressBooks.AddressBookClosing += HandleAddressBooksClosing;
-            openedAddressBooks.AddressBookOpened += HandleAddressBooksOpened;
-
-            if (openedAddressBooks.Current != null)
-            {
-                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
-            }
-
+            
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
             IsContactEditVisible = openedAddressBooks.CurrentContact != null;
@@ -169,7 +161,14 @@ namespace DustInTheWind.Lisimba.WinForms.Main
                 : availableGates.DefaultGate.Name;
 
             StatusText = applicationStatus.StatusText;
-            Title = BuildFormTitle();
+
+            lisimbaWindowTitle.ValueChanged += HandleLisimbaTitleValueChanged;
+            Title = lisimbaWindowTitle.Value;
+        }
+
+        private void HandleLisimbaTitleValueChanged(object sender, EventArgs eventArgs)
+        {
+            Title = lisimbaWindowTitle.Value;
         }
 
         private CustomButtonViewModel CreateViewModel<T>()
@@ -186,16 +185,6 @@ namespace DustInTheWind.Lisimba.WinForms.Main
                 : availableGates.DefaultGate.Name;
         }
 
-        private void HandleAddressBooksOpened(object sender, EventArgs e)
-        {
-            openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
-        }
-
-        private void HandleAddressBooksClosing(object sender, EventArgs e)
-        {
-            openedAddressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
-        }
-
         private void HandleContactChanged(object sender, EventArgs e)
         {
             IsContactEditVisible = openedAddressBooks.CurrentContact != null;
@@ -205,42 +194,12 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            if (e.OldAddressBook != null)
-                e.OldAddressBook.AddressBook.Changed -= HandleCurrentAddressBookContentChanged;
-
-            if (e.NewAddressBook != null)
-                e.NewAddressBook.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-
-            Title = BuildFormTitle();
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
-        }
-
-        private void HandleAddressBookStatusChanged(object sender, EventArgs e)
-        {
-            Title = BuildFormTitle();
-        }
-
-        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs e)
-        {
-            Title = BuildFormTitle();
         }
 
         private void HandleStatusTextChanged(object sender, EventArgs e)
         {
             StatusText = applicationStatus.StatusText;
-        }
-
-        private string BuildFormTitle()
-        {
-            if (openedAddressBooks.Current == null)
-                return lisimbaApplication.ProgramName;
-
-            string addressBookName = openedAddressBooks.Current.GetFriendlyName();
-            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
-            string unsavedSign = isModified ? " *" : string.Empty;
-            string programName = lisimbaApplication.ProgramName;
-
-            return string.Format("{0}{1} - {2}", addressBookName, unsavedSign, programName);
         }
 
         public bool WindowIsClosing()

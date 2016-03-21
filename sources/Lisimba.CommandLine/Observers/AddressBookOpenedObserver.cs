@@ -19,13 +19,12 @@ using System.Collections.Generic;
 using System.Text;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ObservingModel;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
 {
-    class AddressBookOpenedObserver : IObserver
+    internal class AddressBookOpenedObserver : IObserver
     {
         private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
@@ -63,7 +62,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
                 {
                     string addressBookName = openedAddressBooks.Current.GetFriendlyName();
                     string message = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
-                    
+
                     console.WriteLineSuccess(message);
                 }
                 else

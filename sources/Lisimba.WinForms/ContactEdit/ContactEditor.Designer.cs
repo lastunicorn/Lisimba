@@ -1,4 +1,6 @@
-using DustInTheWind.Lisimba.WinForms.NameEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing;
+using DustInTheWind.Lisimba.WinForms.ContactEditing.PersonNameEditing;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 {
@@ -39,8 +41,8 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.customTreeView1 = new CustomTreeView();
-            this.contactDetailsList1 = new ContactDetailsList();
+            this.customTreeView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.CustomTreeView();
+            this.contactItemsList1 = new ContactItemsView();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddAddress = new System.Windows.Forms.Button();
             this.buttonAddDate = new System.Windows.Forms.Button();
@@ -49,7 +51,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.buttonAddPhone = new System.Windows.Forms.Button();
             this.buttonAddWebSite = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.birthdayView1 = new BirthdayView();
+            this.birthdayView1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.BirthdayView();
             this.zodiacSignView1 = new ZodiacSignView();
             this.label8 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -125,6 +127,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // 
             // nameEditor1
             // 
+            this.nameEditor1.ActionQueue = null;
             this.nameEditor1.AutoSize = true;
             this.nameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nameEditor1.Location = new System.Drawing.Point(3, 3);
@@ -171,7 +174,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.customTreeView1);
-            this.groupBox1.Controls.Add(this.contactDetailsList1);
+            this.groupBox1.Controls.Add(this.contactItemsList1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 60);
             this.groupBox1.Name = "groupBox1";
@@ -182,8 +185,10 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // 
             // customTreeView1
             // 
+            this.customTreeView1.ActionQueue = null;
             this.customTreeView1.BackColor = System.Drawing.SystemColors.Control;
             this.customTreeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.customTreeView1.ContactItems = null;
             this.customTreeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customTreeView1.ForeColor = System.Drawing.SystemColors.WindowText;
             this.customTreeView1.FullRowSelect = true;
@@ -197,16 +202,16 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.customTreeView1.Size = new System.Drawing.Size(298, 64);
             this.customTreeView1.TabIndex = 12;
             // 
-            // contactDetailsList1
+            // contactItemsList1
             // 
-            this.contactDetailsList1.AutoScroll = true;
-            this.contactDetailsList1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.contactDetailsList1.Location = new System.Drawing.Point(4, 17);
-            this.contactDetailsList1.Name = "contactDetailsList1";
-            this.contactDetailsList1.Padding = new System.Windows.Forms.Padding(2);
-            this.contactDetailsList1.Size = new System.Drawing.Size(298, 64);
-            this.contactDetailsList1.TabIndex = 13;
-            this.contactDetailsList1.Visible = false;
+            this.contactItemsList1.AutoScroll = true;
+            this.contactItemsList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contactItemsList1.Location = new System.Drawing.Point(4, 17);
+            this.contactItemsList1.Name = "contactItemsList1";
+            this.contactItemsList1.Padding = new System.Windows.Forms.Padding(2);
+            this.contactItemsList1.Size = new System.Drawing.Size(298, 64);
+            this.contactItemsList1.TabIndex = 13;
+            this.contactItemsList1.Visible = false;
             // 
             // flowLayoutPanel3
             // 
@@ -326,13 +331,15 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             // 
             // birthdayView1
             // 
+            this.birthdayView1.ActionQueue = null;
             this.birthdayView1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.birthdayView1.AutoSize = true;
             this.birthdayView1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.birthdayView1.BiorhythmButtonViewModel = null;
             this.birthdayView1.Birthday = null;
-            this.birthdayView1.Location = new System.Drawing.Point(62, 3);
+            this.birthdayView1.Location = new System.Drawing.Point(51, 3);
             this.birthdayView1.Name = "birthdayView1";
-            this.birthdayView1.Size = new System.Drawing.Size(69, 23);
+            this.birthdayView1.Size = new System.Drawing.Size(91, 23);
             this.birthdayView1.TabIndex = 16;
             // 
             // zodiacSignView1
@@ -454,7 +461,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
         private System.Windows.Forms.Button buttonAddSocialProfileId;
         private CustomTreeView customTreeView1;
         private NameEditor nameEditor1;
-        private ContactDetailsList contactDetailsList1;
+        private ContactItemsView contactItemsList1;
         private BirthdayView birthdayView1;
         private ZodiacSignView zodiacSignView1;
     }

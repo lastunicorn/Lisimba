@@ -79,39 +79,39 @@
     </Compile>
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="ContactEdit\BiorhythmButtonViewModel.cs" />
-    <Compile Include="ContactEdit\BirthDateEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\BirthDateEditForm.Designer.cs">
-      <DependentUpon>BirthDateEditForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ContactEdit\BirthdayView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ContactEdit\BirthdayView.Designer.cs">
       <DependentUpon>BirthdayView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsItem.cs" />
-    <Compile Include="ContactEdit\ContactDetailsList.cs">
+    <Compile Include="ContactEdit\ContactEditor.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsList.Designer.cs">
-      <DependentUpon>ContactDetailsList.cs</DependentUpon>
+    <Compile Include="ContactEdit\ContactEditor.Designer.cs">
+      <DependentUpon>ContactEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsListItem.cs">
+    <Compile Include="ContactEdit\ContactEditor2.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ContactEdit\ContactDetailsListItem.Designer.cs">
-      <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
+    <Compile Include="ContactEdit\ContactEditor2.Designer.cs">
+      <DependentUpon>ContactEditor2.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\EditMode.cs" />
-    <Compile Include="ContactEdit\ZodiacSignView.cs">
-      <SubType>UserControl</SubType>
+    <Compile Include="ContactEdit\ContactEditorViewModel.cs" />
+    <Compile Include="ContactEdit\CustomTreeView.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ContactEdit\ZodiacSignView.Designer.cs">
-      <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    <Compile Include="ContactEdit\CustomTreeView.Designer.cs">
+      <DependentUpon>CustomTreeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContactEdit\IContactEditorView.cs" />
     <Compile Include="ContactList\ContactMenuViewModels.cs" />
+    <Compile Include="Forms\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\GateSelector.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,17 +150,7 @@
     <Compile Include="Operations\ShowBiorhythmOperation.cs" />
     <Compile Include="Operations\UndoOperation.cs" />
     <Compile Include="Services\WindowSystem.cs" />
-    <Compile Include="Utils\CustomMenuItem.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomMenuItem.Designer.cs">
-      <DependentUpon>CustomMenuItem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\ListMenuItemViewModel.cs" />
     <Compile Include="MainMenu\RecentFileMenuItemViewModel.cs" />
-    <Compile Include="Utils\ListMenuItem.Designer.cs">
-      <DependentUpon>ListMenuItem.cs</DependentUpon>
-    </Compile>
     <Compile Include="MainMenu\RecentFilesMenuItemViewModel.cs" />
     <Compile Include="Services\MenuItemViewModelProvider.cs" />
     <Compile Include="MainMenu\MainMenusViewModels.cs" />
@@ -175,33 +165,6 @@
     <Compile Include="Observers\AddressBookSavedObserver.cs" />
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\OperationProvider.cs" />
-    <Compile Include="Utils\ControlExtensions.cs" />
-    <Compile Include="NameEditing\NameEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="NameEditing\NameEditor.Designer.cs">
-      <DependentUpon>NameEditor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NameEditing\NameEditorLabel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NameEditing\NameEditorLabel.Designer.cs">
-      <DependentUpon>NameEditorLabel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NameEditing\NameEditorLabelViewModel.cs" />
-    <Compile Include="NameEditing\NameParser.cs" />
-    <Compile Include="ContactEdit\SocialProfileEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\SocialProfileEditForm.Designer.cs">
-      <DependentUpon>SocialProfileEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\NameEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\NameEditForm.Designer.cs">
-      <DependentUpon>NameEditForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Main\TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -238,34 +201,8 @@
     <Compile Include="Biorhythm\BiorhythmForm.Designer.cs">
       <DependentUpon>BiorhythmForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\EditBaseForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\EditBaseForm.Designer.cs">
-      <DependentUpon>EditBaseForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\EmailEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\EmailEditForm.Designer.cs">
-      <DependentUpon>EmailEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\PhoneEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\PhoneEditForm.Designer.cs">
-      <DependentUpon>PhoneEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\WebSiteEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\WebSiteEditForm.Designer.cs">
-      <DependentUpon>WebSiteEditForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Services\ApplicationStatus.cs" />
     <Compile Include="Services\UiFactory.cs" />
     <Compile Include="UserInterface.cs" />
-    <Compile Include="Services\Zodiac.cs" />
     <Compile Include="Biorhythm\BiorhythmView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,24 +215,13 @@
     <Compile Include="ContactList\ContactListView.Designer.cs">
       <DependentUpon>ContactListView.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactEditorViewModel.cs" />
     <Compile Include="ContactList\ContactListViewModel.cs" />
     <Compile Include="ContactList\ContactsToTreeViewBinder.cs" />
-    <Compile Include="ContactEdit\CustomTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\CustomTreeView.Designer.cs">
-      <DependentUpon>CustomTreeView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\IContactEditorView.cs" />
     <Compile Include="MainMenu\LisimbaMainMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="MainMenu\LisimbaMainMenuStrip.Designer.cs">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\ListMenuItem.cs">
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -309,23 +235,11 @@
     <Compile Include="Forms\AddContactForm.Designer.cs">
       <DependentUpon>AddContactForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\PostalAddressEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\PostalAddressEditForm.Designer.cs">
-      <DependentUpon>PostalAddressEditForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\AddressBookPropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AddressBookPropertiesForm.Designer.cs">
       <DependentUpon>AddressBookPropertiesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ContactEdit\DateEditForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\DateEditForm.Designer.cs">
-      <DependentUpon>DateEditForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Main\LisimbaForm.cs">
       <SubType>Form</SubType>
@@ -333,47 +247,23 @@
     <Compile Include="Main\LisimbaForm.Designer.cs">
       <DependentUpon>LisimbaForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ContactEdit\ContactEditor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ContactEdit\ContactEditor.Designer.cs">
-      <DependentUpon>ContactEditor.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\ZodiacResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZodiacResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CustomButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomButton.Designer.cs">
-      <DependentUpon>CustomButton.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\CustomButtonViewModel.cs" />
-    <Compile Include="Utils\CustomToolStripButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Utils\CustomToolStripButton.Designer.cs">
-      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="ContactEdit\BirthDateEditForm.resx">
-      <DependentUpon>BirthDateEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="ContactEdit\BirthdayView.resx">
       <DependentUpon>BirthdayView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ContactDetailsList.resx">
-      <DependentUpon>ContactDetailsList.cs</DependentUpon>
+    <EmbeddedResource Include="ContactEdit\ContactEditor.resx">
+      <DependentUpon>ContactEditor.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ContactDetailsListItem.resx">
-      <DependentUpon>ContactDetailsListItem.cs</DependentUpon>
+    <EmbeddedResource Include="ContactEdit\ContactEditor2.resx">
+      <DependentUpon>ContactEditor2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ZodiacSignView.resx">
-      <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    <EmbeddedResource Include="ContactEdit\CustomTreeView.resx">
+      <DependentUpon>CustomTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ListControl.resx">
       <DependentUpon>ListControl.cs</DependentUpon>
@@ -381,47 +271,15 @@
     <EmbeddedResource Include="Forms\WarningsForm.resx">
       <DependentUpon>WarningsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NameEditing\NameEditor.resx">
-      <DependentUpon>NameEditor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\NameEditForm.resx">
-      <DependentUpon>NameEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NameEditing\NameEditorLabel.resx">
-      <DependentUpon>NameEditorLabel.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Biorhythm\BiorhythmForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>BiorhythmForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\EditBaseForm.resx">
-      <DependentUpon>EditBaseForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\EmailEditForm.resx">
-      <DependentUpon>EmailEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\PhoneEditForm.resx">
-      <DependentUpon>PhoneEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\WebSiteEditForm.resx">
-      <DependentUpon>WebSiteEditForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GateSelector.resx">
       <DependentUpon>GateSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GateSelectorForm.resx">
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\CustomMenuItem.resx">
-      <DependentUpon>CustomMenuItem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\ListMenuItem.resx">
-      <DependentUpon>ListMenuItem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>
@@ -440,9 +298,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>ContactListView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\CustomTreeView.resx">
-      <DependentUpon>CustomTreeView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainMenu\LisimbaMainMenuStrip.resx">
       <DependentUpon>LisimbaMainMenuStrip.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,41 +309,18 @@
       <SubType>Designer</SubType>
       <DependentUpon>AddContactForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\PostalAddressEditForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>PostalAddressEditForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AddressBookPropertiesForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AddressBookPropertiesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\DateEditForm.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>DateEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\LisimbaForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>LisimbaForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ContactEdit\ContactEditor.resx">
-      <DependentUpon>ContactEditor.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\LocalizedResources.resx">
       <SubType>Designer</SubType>
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>LocalizedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\ZodiacResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ZodiacResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\ZodiacResources.ro.resx" />
-    <EmbeddedResource Include="Utils\CustomButton.resx">
-      <DependentUpon>CustomButton.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Utils\CustomToolStripButton.resx">
-      <DependentUpon>CustomToolStripButton.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config">
       <SubType>Designer</SubType>
@@ -511,11 +343,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\background.png" />
+    <None Include="Resources\address_add.png" />
+    <None Include="Resources\webaddress_add.png" />
+    <None Include="Resources\phone_add.png" />
+    <None Include="Resources\mesengerid_add.png" />
+    <None Include="Resources\email_add.png" />
+    <None Include="Resources\date_add.png" />
     <None Include="Images\MainMenu\redo.png" />
     <None Include="Images\MainMenu\undo.png" />
     <None Include="Images\MainMenu\search.png" />
     <None Include="Images\biorhythms_16.png" />
     <None Include="Images\warning_48.png" />
+    <None Include="Images\no-user_128.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -581,6 +420,10 @@
     <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
       <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
       <Name>Lisimba.Egg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.WinForms.ContactEditing\Lisimba.WinForms.ContactEditing.csproj">
+      <Project>{fe04ee77-8675-4d62-aa62-c380c7770c20}</Project>
+      <Name>Lisimba.WinForms.ContactEditing</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
       <Project>{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}</Project>

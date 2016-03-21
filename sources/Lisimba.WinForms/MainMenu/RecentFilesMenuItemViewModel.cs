@@ -18,18 +18,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
-    class RecentFilesMenuItemViewModel : ListMenuItemViewModel
+    internal class RecentFilesMenuItemViewModel : ListMenuItemViewModel
     {
         private readonly RecentFiles recentFiles;
 
-        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation, RecentFiles recentFiles)
-            : base(applicationStatus, windowSystem, operation)
+        public RecentFilesMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation, RecentFiles recentFiles)
+            : base(applicationStatus, operation)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
             return recentFiles.GetAllFiles()
-                .Select((x, i) => new RecentFileMenuItemViewModel(applicationStatus, windowSystem, ChildrenOpertion)
+                .Select((x, i) => new RecentFileMenuItemViewModel(applicationStatus, ChildrenOpertion)
                 {
                     File = x,
                     Index = i + 1

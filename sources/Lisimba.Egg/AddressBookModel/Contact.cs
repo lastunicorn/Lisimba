@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Drawing;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
@@ -133,6 +134,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         public ContactItemCollection Items { get; private set; }
 
         private string notes = string.Empty;
+        private Image picture;
 
         public string Notes
         {
@@ -140,6 +142,16 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             set
             {
                 notes = value;
+                OnChanged();
+            }
+        }
+
+        public Image Picture
+        {
+            get { return picture; }
+            set
+            {
+                picture = value;
                 OnChanged();
             }
         }

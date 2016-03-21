@@ -17,7 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 
 namespace DustInTheWind.Lisimba.WinForms.Observers

@@ -15,13 +15,13 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon;
+using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.Operations;
 
 namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
-    class ImportMenuItemViewModel : CustomButtonViewModel
+    internal class ImportMenuItemViewModel : CustomButtonViewModel
     {
         private IGate gate;
 
@@ -38,8 +38,8 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
             }
         }
 
-        public ImportMenuItemViewModel(ApplicationStatus applicationStatus, WindowSystem windowSystem, IOperation operation)
-            : base(applicationStatus, windowSystem, operation)
+        public ImportMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation)
+            : base(applicationStatus, operation)
         {
         }
 

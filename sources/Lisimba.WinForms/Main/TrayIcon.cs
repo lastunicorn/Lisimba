@@ -39,10 +39,9 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             this.viewModel = viewModel;
             viewModel.TrayIcon = this;
 
-            TrayIconMenuViewModels trayIconMenuViewModels = viewModel.TrayIconMenuViewModels;
-            toolStripMenuItem_Exit.ViewModel = trayIconMenuViewModels.ApplicationExitViewModel;
-            toolStripMenuItem_About.ViewModel = trayIconMenuViewModels.AboutViewModel;
-            toolStripMenuItem_Show.ViewModel = trayIconMenuViewModels.ShowMainViewModel;
+            toolStripMenuItem_Exit.ViewModel = viewModel.ApplicationExitViewModel;
+            toolStripMenuItem_About.ViewModel = viewModel.AboutViewModel;
+            toolStripMenuItem_Show.ViewModel = viewModel.ShowMainViewModel;
         }
 
         private void HandleMouseDoubleClick(object sender, MouseEventArgs e)

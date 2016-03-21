@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon.ObservingModel;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Observers;
 using Microsoft.Practices.Unity;
 

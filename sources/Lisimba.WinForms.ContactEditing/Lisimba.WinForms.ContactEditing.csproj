@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FE04EE77-8675-4D62-AA62-C380C7770C20}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DustInTheWind.Lisimba.WinForms.ContactEditing</RootNamespace>
+    <AssemblyName>DustInTheWind.Lisimba.WinForms.ContactEditing</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfo.Shared.cs">
+      <Link>Properties\AssemblyInfo.Shared.cs</Link>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemSetView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemSetView.Designer.cs">
+      <DependentUpon>ContactItemSetView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemSetViewModel.cs" />
+    <Compile Include="ContactDetailsEditing\ContactItemsView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemsView.Designer.cs">
+      <DependentUpon>ContactItemsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemSet.cs" />
+    <Compile Include="ContactDetailsEditing\ContactItemView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\ContactItemView.Designer.cs">
+      <DependentUpon>ContactItemView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactDetailsEditing\IContactItemEditor.cs" />
+    <Compile Include="ContactDetailsEditing\PhoneEditor.cs" />
+    <Compile Include="ContactItemEditForms\BirthDateEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\BirthDateEditForm.Designer.cs">
+      <DependentUpon>BirthDateEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\DateEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\DateEditForm.Designer.cs">
+      <DependentUpon>DateEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\EditBaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\EditBaseForm.Designer.cs">
+      <DependentUpon>EditBaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\EditMode.cs" />
+    <Compile Include="ContactItemEditForms\EmailEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\EmailEditForm.Designer.cs">
+      <DependentUpon>EmailEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\NameEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\NameEditForm.Designer.cs">
+      <DependentUpon>NameEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\PhoneEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\PhoneEditForm.Designer.cs">
+      <DependentUpon>PhoneEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\PostalAddressEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\PostalAddressEditForm.Designer.cs">
+      <DependentUpon>PostalAddressEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\SocialProfileEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\SocialProfileEditForm.Designer.cs">
+      <DependentUpon>SocialProfileEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ContactItemEditForms\WebSiteEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ContactItemEditForms\WebSiteEditForm.Designer.cs">
+      <DependentUpon>WebSiteEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonNameEditing\NameEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PersonNameEditing\NameEditor.Designer.cs">
+      <DependentUpon>NameEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonNameEditing\NameEditorLabel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PersonNameEditing\NameEditorLabel.Designer.cs">
+      <DependentUpon>NameEditorLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PersonNameEditing\NameEditorLabelViewModel.cs" />
+    <Compile Include="PersonNameEditing\NameParser.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ZodiacSignView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ZodiacSignView.Designer.cs">
+      <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactItemSetView.resx">
+      <DependentUpon>ContactItemSetView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactItemsView.resx">
+      <DependentUpon>ContactItemsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactDetailsEditing\ContactItemView.resx">
+      <DependentUpon>ContactItemView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\BirthDateEditForm.resx">
+      <DependentUpon>BirthDateEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\DateEditForm.resx">
+      <DependentUpon>DateEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\EditBaseForm.resx">
+      <DependentUpon>EditBaseForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\EmailEditForm.resx">
+      <DependentUpon>EmailEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\NameEditForm.resx">
+      <DependentUpon>NameEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\PhoneEditForm.resx">
+      <DependentUpon>PhoneEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\PostalAddressEditForm.resx">
+      <DependentUpon>PostalAddressEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ContactItemEditForms\WebSiteEditForm.resx">
+      <DependentUpon>WebSiteEditForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonNameEditing\NameEditor.resx">
+      <DependentUpon>NameEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PersonNameEditing\NameEditorLabel.resx">
+      <DependentUpon>NameEditorLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZodiacSignView.resx">
+      <DependentUpon>ZodiacSignView.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lisimba.Business\Lisimba.Business.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
+      <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
+      <Name>Lisimba.Egg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinFormsCommon\WinFormsCommon.csproj">
+      <Project>{47cdb7c5-a066-45cf-bd3e-b6ca2ff72db1}</Project>
+      <Name>WinFormsCommon</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\date.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\date_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\email.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\email_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mesengerid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mesengerid_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webaddress.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\webaddress_add.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

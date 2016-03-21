@@ -1,4 +1,4 @@
-using DustInTheWind.Lisimba.WinForms.Utils;
+using DustInTheWind.WinFormsCommon.Controls;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactList
 {
