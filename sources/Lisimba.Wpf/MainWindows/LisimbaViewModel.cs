@@ -15,8 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
@@ -28,10 +31,21 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private string title;
         private bool isContactEditVisible;
         private bool isAddressBookViewVisible;
+        private List<Contact> contacts;
 
         //public ContactListViewModel ContactListViewModel { get; private set; }
         //public ContactEditorViewModel ContactEditorViewModel { get; private set; }
-        
+
+        public List<Contact> Contacts
+        {
+            get { return contacts; }
+            private set
+            {
+                contacts = value;
+                OnPropertyChanged();
+            }
+        }
+
         public LisimbaMainMenuViewModel LisimbaMainMenuViewModel { get; private set; }
         public LisimbaToolBarViewModel LisimbaToolBarViewModel { get; private set; }
         public LisimbaStatusBarViewModel LisimbaStatusBarViewModel { get; private set; }
@@ -89,6 +103,12 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             //ContactListViewModel = contactListViewModel;
             //ContactEditorViewModel = contactEditorViewModel;
 
+            Contacts = new List<Contact>
+            {
+                new Contact {Name = new PersonName("alexandru", "nicolae", "iuga", "alez")},
+                new Contact {Name = new PersonName("elisabeta", "maria", "iuga", "eliza")}
+            };
+
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
             lisimbaWindowTitle.ValueChanged += HandleLisimbaTitleValueChanged;
@@ -111,6 +131,9 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
+
+            if (openedAddressBooks.Current != null)
+                Contacts = openedAddressBooks.Current.AddressBook.Contacts.ToList();
         }
     }
 }
