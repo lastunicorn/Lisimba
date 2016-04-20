@@ -1,0 +1,13 @@
+- As a user I want to be able to create a new empty address book.
+- As a user I want to be able to save the current address book into a lsb file.
+- As a user I want to be able to open a address book from a lsb file.
+- As a user I want to be able to close the current address book.
+- As a user I want to be able to create a new contact into the current address book.
+- As a user I want to be able to delete the current contact.
+- As a user I want to be able to see the details of the current contact.
+- As a user I want to be able to change the name of the current contact.
+- As a user I want to be able to change the notes of the current contact.
+- As a user I want to be able to change the birthday of the current contact.
+- As a user I want to be able to add a new item to the current contact.
+- As a user I want to be able to edit an item from the current contact.
+- As a user I want to be able to delete an item from the current contact.
