@@ -25,8 +25,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     class AddressBookViewModel : ViewModelBase
     {
-        private readonly ContactListViewModel contactListViewModel;
-        private readonly ContactEditorViewModel contactEditorViewModel;
         private readonly OpenedAddressBooks openedAddressBooks;
         private List<Contact> contacts;
         private Contact selectedContact;
@@ -64,7 +62,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         }
 
         //public ContactListViewModel ContactListViewModel { get; private set; }
-        //public ContactEditorViewModel ContactEditorViewModel { get; private set; }
+        public ContactEditorViewModel ContactEditorViewModel { get; private set; }
 
         public AddressBookViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             OpenedAddressBooks openedAddressBooks)
@@ -73,12 +71,10 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
-            this.contactListViewModel = contactListViewModel;
-            this.contactEditorViewModel = contactEditorViewModel;
             this.openedAddressBooks = openedAddressBooks;
 
             //ContactListViewModel = contactListViewModel;
-            //ContactEditorViewModel = contactEditorViewModel;
+            ContactEditorViewModel = contactEditorViewModel;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;

@@ -14,9 +14,64 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Business.AddressBookManagement;
+
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    internal class ContactEditorViewModel
+    internal class ContactEditorViewModel : ViewModelBase
     {
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private string name;
+        private string notes;
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Notes
+        {
+            get { return notes; }
+            set
+            {
+                notes = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks)
+        {
+            this.openedAddressBooks = openedAddressBooks;
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+
+            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
+
+            RefreshDisplayedData();
+        }
+
+        private void HandleCurrentContactChanged(object sender, EventArgs e)
+        {
+            RefreshDisplayedData();
+        }
+
+        private void RefreshDisplayedData()
+        {
+            if (openedAddressBooks.CurrentContact == null)
+            {
+                Name = string.Empty;
+                Notes = string.Empty;
+            }
+            else
+            {
+                Name = openedAddressBooks.CurrentContact.Name.ToString();
+                Notes = openedAddressBooks.CurrentContact.Notes;
+            }
+        }
     }
 }

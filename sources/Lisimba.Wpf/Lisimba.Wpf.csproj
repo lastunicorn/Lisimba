@@ -90,6 +90,9 @@
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddressBookViewModel.cs" />
+    <Compile Include="MainWindows\ContactEditor.xaml.cs">
+      <DependentUpon>ContactEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\ContactEditorViewModel.cs" />
     <Compile Include="MainWindows\ContactListViewModel.cs" />
     <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">
@@ -189,6 +192,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindows\AddressBookPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ContactEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
