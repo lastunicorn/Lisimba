@@ -37,8 +37,8 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LisimbaForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.contactListView1 = new ContactListView();
-            this.contactEditor1 = new ContactEditor();
+            this.contactListView1 = new DustInTheWind.Lisimba.WinForms.ContactList.ContactListView();
+            this.contactEditor1 = new DustInTheWind.Lisimba.WinForms.ContactEdit.ContactEditor();
             this.labelNoContact = new System.Windows.Forms.Label();
             this.labelNoAddressBook = new System.Windows.Forms.Label();
             this.statusStripMain = new System.Windows.Forms.StatusStrip();
@@ -49,18 +49,18 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             this.panelFormContent = new System.Windows.Forms.Panel();
             this.tableLayoutPanelNoAddressBook = new System.Windows.Forms.TableLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.buttonNewAddressBook = new CustomButton(this.components);
-            this.buttonOpenAddressBook = new CustomButton(this.components);
+            this.buttonNewAddressBook = new DustInTheWind.WinFormsCommon.Controls.CustomButton(this.components);
+            this.buttonOpenAddressBook = new DustInTheWind.WinFormsCommon.Controls.CustomButton(this.components);
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButtonNew = new CustomToolStripButton(this.components);
-            this.toolStripButtonOpen = new CustomToolStripButton(this.components);
-            this.toolStripButtonSave = new CustomToolStripButton(this.components);
+            this.toolStripButtonNew = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
+            this.toolStripButtonOpen = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
+            this.toolStripButtonSave = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonUndo = new CustomToolStripButton(this.components);
-            this.toolStripButtonRedo = new CustomToolStripButton(this.components);
+            this.toolStripButtonUndo = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
+            this.toolStripButtonRedo = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonAbout = new CustomToolStripButton(this.components);
-            this.menuStripMain = new LisimbaMainMenuStrip();
+            this.toolStripButtonAbout = new DustInTheWind.WinFormsCommon.Controls.CustomToolStripButton(this.components);
+            this.menuStripMain = new DustInTheWind.Lisimba.WinForms.MainMenu.LisimbaMainMenuStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -187,8 +187,8 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             // 
             // panelFormContent
             // 
-            this.panelFormContent.Controls.Add(this.panelAddressBookView);
             this.panelFormContent.Controls.Add(this.tableLayoutPanelNoAddressBook);
+            this.panelFormContent.Controls.Add(this.panelAddressBookView);
             this.panelFormContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFormContent.Location = new System.Drawing.Point(0, 49);
             this.panelFormContent.Name = "panelFormContent";

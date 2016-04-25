@@ -10,42 +10,22 @@
         Icon="{StaticResource LisimbaIcon}"
         ResizeMode="CanResizeWithGrip">
 
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type main:StartViewModel}">
+            <main:StartPanel/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type main:AddressBookViewModel}">
+            <main:AddressBookPanel/>
+        </DataTemplate>
+    </Window.Resources>
+
     <DockPanel>
 
         <main:LisimbaMainMenu DockPanel.Dock="Top" DataContext="{Binding LisimbaMainMenuViewModel}"/>
         <main:LisimbaToolBar DockPanel.Dock="Top" DataContext="{Binding LisimbaToolBarViewModel}"/>
         <main:LisimbaStatusBar DockPanel.Dock="Bottom" DataContext="{Binding LisimbaStatusBarViewModel}"/>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <ListBox Grid.Column="0"
-                     Name="ContactsListBox"
-                     ItemsSource="{Binding Contacts, Mode=OneWay}">
-                
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}" />
-                            <TextBlock Grid.Column="1" Text="{Binding Birthday}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                
-            </ListBox>
-
-            <TextBlock Grid.Column="1"
-                       Text="asd"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
-        </Grid>
+        <ContentControl Content="{Binding CurrentPageViewModel}"/>
 
     </DockPanel>
 

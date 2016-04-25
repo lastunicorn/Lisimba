@@ -86,6 +86,10 @@
     <Compile Include="MainWindows\AddressBoogPropertiesWindow.xaml.cs">
       <DependentUpon>AddressBoogPropertiesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\AddressBookPanel.xaml.cs">
+      <DependentUpon>AddressBookPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\AddressBookViewModel.cs" />
     <Compile Include="MainWindows\ContactEditorViewModel.cs" />
     <Compile Include="MainWindows\ContactListViewModel.cs" />
     <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">
@@ -143,6 +147,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
+    <Compile Include="MainWindows\StartPanel.xaml.cs">
+      <DependentUpon>StartPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\StartViewModel.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -180,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="MainWindows\AddressBookPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindows\LisimbaMainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -200,6 +212,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindows\StartPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="DustInTheWind.Lisimba.Wpf.MainWindows.StartPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            FontSize="30"
+            Margin="0 0 0 10"
+            HorizontalAlignment="Center"
+            Text="No address book loaded"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Right"
+            Width="120"
+            Height="50"
+            FontSize="20"
+            Margin="0 10 10 0"
+            Content="_New"
+            Command="{Binding NewAddressBookCommand}"/>
+
+        <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            HorizontalAlignment="Left"
+            Width="120"
+            Height="50"
+            FontSize="20"
+            Margin="10 10 0 0"
+            Content="_Open..."
+            Command="{Binding OpenAddressBookCommand}"/>
+
+    </Grid>
+
+</UserControl>
