@@ -83,8 +83,8 @@
     <Compile Include="MainWindows\AddContactWindow.xaml.cs">
       <DependentUpon>AddContactWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\AddressBoogPropertiesWindow.xaml.cs">
-      <DependentUpon>AddressBoogPropertiesWindow.xaml</DependentUpon>
+    <Compile Include="MainWindows\AddressBookPropertiesWindow.xaml.cs">
+      <DependentUpon>AddressBookPropertiesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddressBookPanel.xaml.cs">
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
@@ -184,7 +184,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindows\AddressBoogPropertiesWindow.xaml">
+    <Page Include="MainWindows\AddressBookPropertiesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

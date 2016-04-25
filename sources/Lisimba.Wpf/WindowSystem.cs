@@ -160,7 +160,7 @@ namespace DustInTheWind.Lisimba.Wpf
 
         public void DisplayAddressBookProperties()
         {
-            AddressBoogPropertiesWindow window = uiFactory.CreateWindow<AddressBoogPropertiesWindow>();
+            AddressBookPropertiesWindow window = uiFactory.CreateWindow<AddressBookPropertiesWindow>();
             window.Owner = mainWindow;
             window.ShowDialog();
         }

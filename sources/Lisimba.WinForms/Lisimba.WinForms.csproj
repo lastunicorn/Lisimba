@@ -142,6 +142,12 @@
     <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportsMenuItemViewModel.cs" />
+    <Compile Include="Main\LisimbaToolBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Main\LisimbaToolBar.Designer.cs">
+      <DependentUpon>LisimbaToolBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Observers\ContactDeletingObserver.cs" />
     <Compile Include="Operations\ExportOperation.cs" />
     <Compile Include="Operations\ImportOperation.cs" />
@@ -280,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GateSelectorForm.resx">
       <DependentUpon>GateSelectorForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main\LisimbaToolBar.resx">
+      <DependentUpon>LisimbaToolBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>
