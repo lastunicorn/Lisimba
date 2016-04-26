@@ -15,7 +15,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
@@ -24,6 +26,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private readonly OpenedAddressBooks openedAddressBooks;
         private string name;
         private string notes;
+        private BitmapSource picture;
 
         public string Name
         {
@@ -31,6 +34,16 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             set
             {
                 name = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public BitmapSource Picture
+        {
+            get { return picture; }
+            set
+            {
+                picture = value;
                 OnPropertyChanged();
             }
         }
@@ -65,11 +78,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (openedAddressBooks.CurrentContact == null)
             {
                 Name = string.Empty;
+                Picture = null;
                 Notes = string.Empty;
             }
             else
             {
                 Name = openedAddressBooks.CurrentContact.Name.ToString();
+                Picture = openedAddressBooks.CurrentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
                 Notes = openedAddressBooks.CurrentContact.Notes;
             }
         }

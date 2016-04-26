@@ -9,16 +9,48 @@
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition />
-            <RowDefinition />
+            <RowDefinition Height="100" />
         </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
         <TextBlock
             Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            FontSize="30"
+            Padding="5"
             Text="{Binding Name}"/>
 
-        <TextBox
+        <Image
             Grid.Row="1"
+            Grid.Column="0"
+            Width="128"
+            Height="128"
+            Margin="4"
+            VerticalAlignment="Top"
+            Source="{Binding Picture}"/>
+        
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="asd"/>
+
+        <ListBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.RowSpan="2"/>
+
+        <TextBox
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
             Text="{Binding Notes}"
             AcceptsReturn="True"/>
 

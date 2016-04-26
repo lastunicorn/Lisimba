@@ -16,9 +16,9 @@
         </Grid.ColumnDefinitions>
 
         <ListBox Grid.Column="0"
-                     Name="ContactsListBox"
-                     ItemsSource="{Binding Contacts, Mode=OneWay}"
-                     SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+                    Name="ContactsListBox"
+                    ItemsSource="{Binding Contacts, Mode=OneWay}"
+                    SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
