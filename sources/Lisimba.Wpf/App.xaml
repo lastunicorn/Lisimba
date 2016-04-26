@@ -5,6 +5,13 @@
     
     <Application.Resources>
         <BitmapImage x:Key="LisimbaIcon" UriSource="Images/Lion.ico"/>
+        <BitmapImage x:Key="NewIcon" UriSource="Images/MainMenu/new_16.png"/>
+        <BitmapImage x:Key="OpenIcon" UriSource="Images/MainMenu/open_16.png"/>
+        <BitmapImage x:Key="SaveIcon" UriSource="Images/MainMenu/save_16.png"/>
+        <BitmapImage x:Key="UndoIcon" UriSource="Images/MainMenu/undo.png"/>
+        <BitmapImage x:Key="RedoIcon" UriSource="Images/MainMenu/redo.png"/>
+        <BitmapImage x:Key="AboutIcon" UriSource="Images/MainMenu/about_16.png"/>
+        <BitmapImage x:Key="ExitIcon" UriSource="Images/MainMenu/exit_16.png"/>
     </Application.Resources>
     
 </Application>

@@ -287,14 +287,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\MainMenu\about_16.png" />
+    <Resource Include="Images\MainMenu\about_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Images\MainMenu\exit_16.png" />
+    <Resource Include="Images\MainMenu\exit_16.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\lion.gif" />
     <Resource Include="Images\no-user_128.png" />
+    <Resource Include="Images\MainMenu\new_16.png" />
+    <Resource Include="Images\MainMenu\open_16.png" />
+    <Resource Include="Images\MainMenu\save_16.png" />
+    <Resource Include="Images\MainMenu\undo.png" />
+    <Resource Include="Images\MainMenu\redo.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

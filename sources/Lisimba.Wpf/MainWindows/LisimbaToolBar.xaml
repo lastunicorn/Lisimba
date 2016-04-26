@@ -10,14 +10,26 @@
     <ToolBarTray VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
         
         <ToolBar>
-            <Button Command="{Binding NewAddressBookCommand}">New</Button>
-            <Button Command="{Binding OpenAddressBookCommand}">Open</Button>
-            <Button Command="{Binding SaveAddressBookCommand}">Save</Button>
+            <Button Command="{Binding NewAddressBookCommand}" ToolTip="New">
+                <Image Source="{DynamicResource NewIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
+            <Button Command="{Binding OpenAddressBookCommand}" ToolTip="Open">
+                <Image Source="{DynamicResource OpenIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
+            <Button Command="{Binding SaveAddressBookCommand}" ToolTip="Save">
+                <Image Source="{DynamicResource SaveIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
             <Separator/>
-            <Button Command="{Binding UndoCommand}">Undo</Button>
-            <Button Command="{Binding RedoCommand}">Redo</Button>
+            <Button Command="{Binding UndoCommand}" ToolTip="Undo">
+                <Image Source="{DynamicResource UndoIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
+            <Button Command="{Binding RedoCommand}" ToolTip="Redo">
+                <Image Source="{DynamicResource RedoIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
             <Separator/>
-            <Button Command="{Binding ShowAboutCommand}">About</Button>
+            <Button Command="{Binding ShowAboutCommand}" ToolTip="About">
+                <Image Source="{DynamicResource AboutIcon}" Stretch="Uniform" Width="16"/>
+            </Button>
         </ToolBar>
     
     </ToolBarTray>
