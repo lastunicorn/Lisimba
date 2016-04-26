@@ -14,12 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Runtime.InteropServices;
+
 namespace DustInTheWind.Lisimba.Wpf
 {
-    internal class ActiveObservers
+    internal static class NativeMethods
     {
-        public void Start()
-        {
-        }
+        [DllImport("gdi32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool DeleteObject(IntPtr hObject);
     }
 }

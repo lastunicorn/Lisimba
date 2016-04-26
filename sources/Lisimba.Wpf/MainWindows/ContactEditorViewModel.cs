@@ -17,6 +17,7 @@
 using System;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
@@ -27,6 +28,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private string name;
         private string notes;
         private BitmapSource picture;
+        private ZodiacSignViewModel zodiacSignViewModel;
+        private ContactItemCollection contactItems;
 
         public string Name
         {
@@ -48,6 +51,26 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
+        public ZodiacSignViewModel ZodiacSignViewModel
+        {
+            get { return zodiacSignViewModel; }
+            set
+            {
+                zodiacSignViewModel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ContactItemCollection ContactItems
+        {
+            get { return contactItems; }
+            set
+            {
+                contactItems = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string Notes
         {
             get { return notes; }
@@ -58,10 +81,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks)
+        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel)
         {
-            this.openedAddressBooks = openedAddressBooks;
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (zodiacSignViewModel == null) throw new ArgumentNullException("zodiacSignViewModel");
+
+            this.openedAddressBooks = openedAddressBooks;
+            this.zodiacSignViewModel = zodiacSignViewModel;
 
             openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
 
@@ -78,14 +104,20 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (openedAddressBooks.CurrentContact == null)
             {
                 Name = string.Empty;
-                Picture = null;
+                Picture = Resources.no_user_128.ToBitmapSource();
                 Notes = string.Empty;
+                zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
+                ContactItems = null;
             }
             else
             {
-                Name = openedAddressBooks.CurrentContact.Name.ToString();
-                Picture = openedAddressBooks.CurrentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
-                Notes = openedAddressBooks.CurrentContact.Notes;
+                Contact currentContact = openedAddressBooks.CurrentContact;
+
+                Name = currentContact.Name.ToString();
+                Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
+                Notes = currentContact.Notes;
+                zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
+                ContactItems = currentContact.Items;
             }
         }
     }

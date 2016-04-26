@@ -15,10 +15,10 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox Grid.Column="0"
-                    Name="ContactsListBox"
-                    ItemsSource="{Binding Contacts, Mode=OneWay}"
-                    SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+        <ListBox
+            Grid.Column="0"
+            ItemsSource="{Binding Contacts, Mode=OneWay}"
+            SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
@@ -34,16 +34,18 @@
 
         </ListBox>
 
-        <GridSplitter Grid.Column="1"
-                      ResizeDirection="Columns"
-                      HorizontalAlignment="Stretch"
-                      VerticalAlignment="Stretch"
-                      ResizeBehavior="PreviousAndNext"/>
+        <GridSplitter
+            Grid.Column="1"
+            ResizeDirection="Columns"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ResizeBehavior="PreviousAndNext"/>
 
-        <mainWindows:ContactEditor Grid.Column="2"
-                       VerticalAlignment="Stretch"
-                       HorizontalAlignment="Stretch"
-                                   DataContext="{Binding ContactEditorViewModel}"/>
+        <mainWindows:ContactEditor
+            Grid.Column="2"
+            VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
+            DataContext="{Binding ContactEditorViewModel}"/>
     </Grid>
 
 </UserControl>

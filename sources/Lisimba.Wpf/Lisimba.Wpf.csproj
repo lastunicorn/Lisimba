@@ -155,6 +155,10 @@
       <DependentUpon>StartPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\StartViewModel.cs" />
+    <Compile Include="MainWindows\ZodiacSignView.xaml.cs">
+      <DependentUpon>ZodiacSignView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
@@ -222,6 +226,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MainWindows\StartPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ZodiacSignView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

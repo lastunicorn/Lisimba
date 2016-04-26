@@ -4,7 +4,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:main="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
         Title="{Binding Title, Mode=OneWay}"
-        Height="550"
+        Height="600"
         Width="800"
         WindowStartupLocation="CenterScreen"
         Icon="{StaticResource LisimbaIcon}"

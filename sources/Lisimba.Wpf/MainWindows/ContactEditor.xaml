@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
@@ -10,49 +11,106 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition />
-            <RowDefinition Height="100" />
+            <RowDefinition Height="150" />
         </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
 
         <TextBlock
             Grid.Row="0"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
             FontSize="30"
-            Padding="5"
+            Margin="5"
             Text="{Binding Name}"/>
 
-        <Image
-            Grid.Row="1"
-            Grid.Column="0"
-            Width="128"
-            Height="128"
-            Margin="4"
-            VerticalAlignment="Top"
-            Source="{Binding Picture}"/>
-        
-        <TextBlock
-            Grid.Row="2"
-            Grid.Column="0"
-            Text="asd"/>
+        <Grid Grid.Row="1" Grid.Column="0">
 
-        <ListBox
-            Grid.Row="1"
-            Grid.Column="1"
-            Grid.RowSpan="2"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <TextBox
-            Grid.Row="3"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Image
+                Grid.Row="0"
+                Grid.Column="0"
+                Width="128"
+                Height="128"
+                Margin="4"
+                VerticalAlignment="Top"
+                Source="{Binding Picture}"/>
+
+            <mainWindows:ZodiacSignView
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="4"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                DataContext="{Binding ZodiacSignViewModel}"/>
+
+            <ListBox
+                Grid.Row="0"
+                Grid.Column="1"
+                Grid.RowSpan="3"
+                Margin="0 4 4 4"
+                ItemsSource="{Binding ContactItems, Mode=OneWay}">
+                
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <Image Grid.Column="0" Source="{Binding Icon}" />
+                            <TextBlock Grid.Column="1" Text="{Binding}" />
+                            
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                
+            </ListBox>
+
+        </Grid>
+
+        <GridSplitter
+            Grid.Row ="2"
             Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="{Binding Notes}"
-            AcceptsReturn="True"/>
+            Height="8"
+            ResizeDirection="Rows"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ResizeBehavior="BasedOnAlignment"/>
+
+        <Grid Grid.Row="3" Grid.Column="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Notes:"/>
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="{Binding Notes}"
+                AcceptsReturn="True"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto"
+                IsReadOnly="True"/>
+
+        </Grid>
 
     </Grid>
 
