@@ -15,22 +15,21 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Sorting;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    class AddressBookViewModel : ViewModelBase
+    internal class AddressBookViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private List<Contact> contacts;
+        private ListCollectionView contacts;
         private Contact selectedContact;
         private bool isContactEditVisible;
 
-        public List<Contact> Contacts
+        public ListCollectionView Contacts
         {
             get { return contacts; }
             private set
@@ -61,7 +60,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        //public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
 
         public AddressBookViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
@@ -73,7 +71,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             this.openedAddressBooks = openedAddressBooks;
 
-            //ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
@@ -82,22 +79,12 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            if (e.NewAddressBook == null)
+            Contacts = null;
+
+            if (e.NewAddressBook != null)
             {
-                Contacts = null;
-            }
-            else
-            {
-                if (openedAddressBooks.Current != null)
-                {
-                    Contacts = openedAddressBooks.Current.AddressBook.Contacts
-                        .OrderBy(x => x, new ContactByBirthdayComparer())
-                        .ToList();
-                }
-                else
-                {
-                    Contacts = null;
-                }
+                Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(e.NewAddressBook.AddressBook.Contacts);
+                Contacts.CustomSort = ComparerFactory.GetComparer(ContactsSortingType.Birthday);
             }
         }
 
