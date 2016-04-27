@@ -31,23 +31,43 @@
             Grid.Row="1"
             Grid.Column="0"
             HorizontalAlignment="Right"
-            Width="120"
+            MinWidth="120"
             Height="50"
-            FontSize="20"
+            FontSize="18"
             Margin="0 10 10 0"
-            Content="_New"
-            Command="{Binding NewAddressBookCommand}"/>
+            Command="{Binding NewAddressBookCommand}">
+
+            <StackPanel Orientation="Horizontal">
+                <Image
+                    Width="24"
+                    Height="24"
+                    Margin="0 0 8 0"
+                    Source="{StaticResource NewIcon}" />
+                <TextBlock>New</TextBlock>
+            </StackPanel>
+
+        </Button>
 
         <Button
             Grid.Row="1"
             Grid.Column="1"
             HorizontalAlignment="Left"
-            Width="120"
-            Height="50"
-            FontSize="20"
+            MinWidth="120"
+            MinHeight="50"
+            FontSize="18"
             Margin="10 10 0 0"
-            Content="_Open..."
-            Command="{Binding OpenAddressBookCommand}"/>
+            Command="{Binding OpenAddressBookCommand}">
+
+            <StackPanel Orientation="Horizontal" >
+                <Image
+                    Width="24"
+                    Height="24"
+                    Margin="0 0 8 0"
+                    Source="{StaticResource OpenIcon}" />
+                <TextBlock>Open...</TextBlock>
+            </StackPanel>
+
+        </Button>
 
     </Grid>
 
