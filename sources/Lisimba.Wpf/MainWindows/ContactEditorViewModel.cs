@@ -30,6 +30,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private BitmapSource picture;
         private ZodiacSignViewModel zodiacSignViewModel;
         private ContactItemCollection contactItems;
+        private Date birthday;
 
         public string Name
         {
@@ -81,6 +82,16 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
+        public Date Birthday
+        {
+            get { return birthday; }
+            set
+            {
+                birthday = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -105,9 +116,10 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             {
                 Name = string.Empty;
                 Picture = Resources.no_user_128.ToBitmapSource();
-                Notes = string.Empty;
+                Birthday = null;
                 zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
                 ContactItems = null;
+                Notes = string.Empty;
             }
             else
             {
@@ -115,9 +127,10 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
                 Name = currentContact.Name.ToString();
                 Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
-                Notes = currentContact.Notes;
+                Birthday = currentContact.Birthday;
                 zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
                 ContactItems = currentContact.Items;
+                Notes = currentContact.Notes;
             }
         }
     }

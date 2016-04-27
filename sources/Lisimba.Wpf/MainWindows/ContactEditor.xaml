@@ -7,6 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <mainWindows:DateFormatter x:Key="DateFormatter"/>
+    </UserControl.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -25,57 +29,54 @@
 
         <Grid Grid.Row="1" Grid.Column="0">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <Image
-                Grid.Row="0"
-                Grid.Column="0"
-                Width="128"
-                Height="128"
-                Margin="4"
-                VerticalAlignment="Top"
-                Source="{Binding Picture}"/>
+            <StackPanel Grid.Row="0" Grid.Column="0">
 
-            <mainWindows:ZodiacSignView
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="4"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                DataContext="{Binding ZodiacSignViewModel}"/>
+                <Image
+                    Width="128"
+                    Height="128"
+                    Margin="4"
+                    VerticalAlignment="Top"
+                    Source="{Binding Picture}"/>
+
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"/>
+
+                <mainWindows:ZodiacSignView
+                    Padding="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    DataContext="{Binding ZodiacSignViewModel}"/>
+
+            </StackPanel>
 
             <ListBox
                 Grid.Row="0"
                 Grid.Column="1"
-                Grid.RowSpan="3"
                 Margin="0 4 4 4"
                 ItemsSource="{Binding ContactItems, Mode=OneWay}">
-                
+
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,2">
-                            
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            
+
                             <Image Grid.Column="0" Source="{Binding Icon}" />
                             <TextBlock Grid.Column="1" Text="{Binding}" />
-                            
+
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-                
+
             </ListBox>
 
         </Grid>
@@ -97,17 +98,17 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal" Grid.Row="0">
-                
+
                 <Image
                     Width="16"
                     Height="16"
                     Margin="2 2 4 2"
                     Source="{StaticResource NotesIcon}"/>
-                
+
                 <TextBlock
                     Text="Notes"
                     VerticalAlignment="Center"/>
-                
+
             </StackPanel>
 
             <TextBox
