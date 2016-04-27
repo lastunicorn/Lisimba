@@ -96,14 +96,22 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="Notes:"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                
+                <Image
+                    Width="16"
+                    Height="16"
+                    Margin="2 2 4 2"
+                    Source="{StaticResource NotesIcon}"/>
+                
+                <TextBlock
+                    Text="Notes"
+                    VerticalAlignment="Center"/>
+                
+            </StackPanel>
 
             <TextBox
                 Grid.Row="1"
-                Grid.Column="0"
                 Text="{Binding Notes}"
                 AcceptsReturn="True"
                 HorizontalScrollBarVisibility="Auto"

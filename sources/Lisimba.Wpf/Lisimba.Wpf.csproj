@@ -77,6 +77,7 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="AutoGreyableImage.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="MainWindows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -300,6 +301,19 @@
     <Resource Include="Images\MainMenu\save_16.png" />
     <Resource Include="Images\MainMenu\undo.png" />
     <Resource Include="Images\MainMenu\redo.png" />
+    <Resource Include="Images\Contact\address.png" />
+    <Resource Include="Images\Contact\address_add.png" />
+    <Resource Include="Images\Contact\date.png" />
+    <Resource Include="Images\Contact\date_add.png" />
+    <Resource Include="Images\Contact\email.png" />
+    <Resource Include="Images\Contact\email_add.png" />
+    <Resource Include="Images\Contact\mesengerid.png" />
+    <Resource Include="Images\Contact\mesengerid_add.png" />
+    <Resource Include="Images\Contact\notes.png" />
+    <Resource Include="Images\Contact\phone.png" />
+    <Resource Include="Images\Contact\phone_add.png" />
+    <Resource Include="Images\Contact\webaddress.png" />
+    <Resource Include="Images\Contact\webaddress_add.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
