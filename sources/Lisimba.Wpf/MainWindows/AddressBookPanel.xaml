@@ -8,6 +8,18 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
 
+    <UserControl.Resources>
+        <!--<DataTemplate DataType="{x:Type mainWindows:ContactEditorViewModel}">
+            <mainWindows:ContactEditor/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type mainWindows:NoContactViewModel}">
+            <mainWindows:ContactEditor/>
+        </DataTemplate>-->
+
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+    </UserControl.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -28,7 +40,7 @@
                 <TextBox
                     Text="{Binding SearchedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                     Margin="0 4 0 4"/>
-                
+
             </DockPanel>
 
             <ListBox
@@ -58,11 +70,31 @@
             VerticalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"/>
 
-        <mainWindows:ContactEditor
+        <!--<ContentControl
             Grid.Column="2"
             VerticalAlignment="Stretch"
             HorizontalAlignment="Stretch"
-            DataContext="{Binding ContactEditorViewModel}"/>
+            Content="{Binding ContactEditorViewModel}"/>-->
+
+        <ContentControl
+            Grid.Column="2"
+            Visibility="{Binding IsContactEditVisible}">
+
+            <mainWindows:ContactEditor
+                VerticalAlignment="Stretch"
+                HorizontalAlignment="Stretch"
+                DataContext="{Binding ContactEditorViewModel}"/>
+
+        </ContentControl>
+
+        <TextBlock
+            Grid.Column="2"
+            Visibility="{Binding IsNoContactVisible}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="20"
+            Text="No contact selected"/>
+        
     </Grid>
 
 </UserControl>
