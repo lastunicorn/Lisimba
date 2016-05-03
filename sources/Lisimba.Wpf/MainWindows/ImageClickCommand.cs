@@ -18,16 +18,14 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Windows;
 using System.Windows.Input;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using Microsoft.Win32;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    public class ImageClickCommand : ICommand
+    internal class ImageClickCommand : ICommand
     {
+        private readonly WindowSystem windowSystem;
         private Contact contact;
 
         public Contact Contact
@@ -41,7 +39,14 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         }
 
         public event EventHandler CanExecuteChanged;
-        
+
+        public ImageClickCommand(WindowSystem windowSystem)
+        {
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+
+            this.windowSystem = windowSystem;
+        }
+
         public bool CanExecute(object parameter)
         {
             return Contact != null;
@@ -49,22 +54,20 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         public void Execute(object parameter)
         {
-            // todo: abstract the call to open file and display error message.
-
             try
             {
-                OpenFileDialog openFileDialog = new OpenFileDialog();
+                string fileName = windowSystem.AskToOpen(string.Empty, "Image Files|*.png;*.jpg;*.jpeg|All Files|*.*");
 
-                if (openFileDialog.ShowDialog() == true)
+                if (fileName != null)
                 {
-                    Image image = Image.FromFile(openFileDialog.FileName);
+                    Image image = Image.FromFile(fileName);
                     image = ResizeImage(image, 128, 128);
                     Contact.Picture = image;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                windowSystem.DisplayError(ex.Message);
             }
         }
 
@@ -101,8 +104,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         {
             int destX = 0;
             int destY = 0;
-            var nPercentW = ((float)desiredWidth / (float)sourceWidth);
-            var nPercentH = ((float)desiredHeight / (float)sourceHeight);
+            float nPercentW = ((float)desiredWidth / (float)sourceWidth);
+            float nPercentH = ((float)desiredHeight / (float)sourceHeight);
 
             float nPercent;
 

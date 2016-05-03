@@ -92,17 +92,18 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public ImageClickCommand ImageClickCommand { get; set; }
+        public ImageClickCommand ImageClickCommand { get; private set; }
 
-        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel)
+        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel, ImageClickCommand imageClickCommand)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (zodiacSignViewModel == null) throw new ArgumentNullException("zodiacSignViewModel");
+            if (imageClickCommand == null) throw new ArgumentNullException("imageClickCommand");
 
             this.openedAddressBooks = openedAddressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
 
-            ImageClickCommand = new ImageClickCommand();
+            ImageClickCommand = imageClickCommand;
 
             openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
             openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
