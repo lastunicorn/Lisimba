@@ -15,24 +15,41 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ListBox
-            Grid.Column="0"
-            ItemsSource="{Binding Contacts}"
-            SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+        <DockPanel Grid.Column="0">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Margin="0,2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="100" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Text="{Binding Name}" />
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+            <DockPanel DockPanel.Dock="Bottom">
 
-        </ListBox>
+                <Image
+                    Width="16"
+                    Height="16"
+                    Margin="4"
+                    Source="{StaticResource SearchIcon}"/>
+
+                <TextBox
+                    Text="{Binding SearchedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="0 4 0 4"/>
+                
+            </DockPanel>
+
+            <ListBox
+                ItemsSource="{Binding Contacts}"
+                SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="100" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+            </ListBox>
+
+        </DockPanel>
 
         <GridSplitter
             Grid.Column="1"

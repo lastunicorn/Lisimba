@@ -15,6 +15,7 @@
         <BitmapImage x:Key="ExitIcon" UriSource="Images/MainMenu/exit_16.png"/>
 
         <BitmapImage x:Key="NotesIcon" UriSource="Images/Contact/notes.png"/>
+        <BitmapImage x:Key="SearchIcon" UriSource="Images/MainMenu/search.png"/>
 
         <!--<Style x:Key="EnableDisableImageStyle" TargetType="{x:Type Image}">
             <Style.Triggers>

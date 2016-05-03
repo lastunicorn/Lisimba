@@ -187,8 +187,8 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             // 
             // panelFormContent
             // 
-            this.panelFormContent.Controls.Add(this.tableLayoutPanelNoAddressBook);
             this.panelFormContent.Controls.Add(this.panelAddressBookView);
+            this.panelFormContent.Controls.Add(this.tableLayoutPanelNoAddressBook);
             this.panelFormContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelFormContent.Location = new System.Drawing.Point(0, 49);
             this.panelFormContent.Name = "panelFormContent";

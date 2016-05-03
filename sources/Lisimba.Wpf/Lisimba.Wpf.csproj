@@ -315,6 +315,7 @@
     <Resource Include="Images\Contact\phone_add.png" />
     <Resource Include="Images\Contact\webaddress.png" />
     <Resource Include="Images\Contact\webaddress_add.png" />
+    <Resource Include="Images\MainMenu\search.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -28,6 +28,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private ListCollectionView contacts;
         private Contact selectedContact;
         private bool isContactEditVisible;
+        private string searchText;
 
         public ListCollectionView Contacts
         {
@@ -36,6 +37,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             {
                 contacts = value;
                 OnPropertyChanged();
+
+                RefilterContacts();
             }
         }
 
@@ -50,13 +53,15 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public bool IsContactEditVisible
+        public string SearchedText
         {
-            get { return isContactEditVisible; }
+            get { return searchText; }
             set
             {
-                isContactEditVisible = value;
+                searchText = value;
                 OnPropertyChanged();
+
+                RefilterContacts();
             }
         }
 
@@ -94,6 +99,39 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             IsContactEditVisible = openedAddressBooks.CurrentContact != null;
             //ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
             //ContactEditorViewModel.Contact = openedAddressBooks.CurrentContact;
+        }
+
+        private bool FilterContact(object item)
+        {
+            Contact contact = item as Contact;
+
+            if (contact == null)
+                return false;
+
+            if (searchText == null)
+                return true;
+
+            return searchText.Length == 0
+                || contact.Name.FirstName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || contact.Name.MiddleName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || contact.Name.LastName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || contact.Name.Nickname.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
+        }
+
+        private void RefilterContacts()
+        {
+            if (contacts != null)
+                contacts.Filter = FilterContact;
+        }
+
+        public bool IsContactEditVisible
+        {
+            get { return isContactEditVisible; }
+            set
+            {
+                isContactEditVisible = value;
+                OnPropertyChanged();
+            }
         }
     }
 }
