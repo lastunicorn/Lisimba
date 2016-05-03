@@ -28,21 +28,24 @@
             Margin="5"
             Text="{Binding Name}"/>
 
-        <Grid Grid.Row="1" Grid.Column="0">
+        <DockPanel Grid.Row="1" Grid.Column="0">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+            <StackPanel DockPanel.Dock="Left">
 
-            <StackPanel Grid.Row="0" Grid.Column="0">
-
-                <Image
+                <Button
+                    Command="{Binding ImageClickCommand}"
                     Width="128"
                     Height="128"
                     Margin="4"
-                    VerticalAlignment="Top"
-                    Source="{Binding Picture}"/>
+                    Cursor="Hand">
+
+                    <Button.Template>
+                        <ControlTemplate>
+                            <Image Source="{Binding Picture}"/>
+                        </ControlTemplate>
+                    </Button.Template>
+
+                </Button>
 
                 <TextBlock
                     HorizontalAlignment="Center"
@@ -57,8 +60,6 @@
             </StackPanel>
 
             <ListBox
-                Grid.Row="0"
-                Grid.Column="1"
                 Margin="0 4 4 4"
                 ItemsSource="{Binding ContactItems, Mode=OneWay}">
 
@@ -80,7 +81,7 @@
 
             </ListBox>
 
-        </Grid>
+        </DockPanel>
 
         <GridSplitter
             Grid.Row ="2"

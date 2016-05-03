@@ -8,18 +8,6 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <!--<DataTemplate DataType="{x:Type mainWindows:ContactEditorViewModel}">
-            <mainWindows:ContactEditor/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type mainWindows:NoContactViewModel}">
-            <mainWindows:ContactEditor/>
-        </DataTemplate>-->
-
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-
-    </UserControl.Resources>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -69,12 +57,6 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"/>
-
-        <!--<ContentControl
-            Grid.Column="2"
-            VerticalAlignment="Stretch"
-            HorizontalAlignment="Stretch"
-            Content="{Binding ContactEditorViewModel}"/>-->
 
         <ContentControl
             Grid.Column="2"

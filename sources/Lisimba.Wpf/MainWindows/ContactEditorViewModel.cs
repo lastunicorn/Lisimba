@@ -92,6 +92,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
+        public ImageClickCommand ImageClickCommand { get; set; }
+
         public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -100,13 +102,29 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             this.openedAddressBooks = openedAddressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
 
+            ImageClickCommand = new ImageClickCommand();
+
+            openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
             openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
 
             RefreshDisplayedData();
         }
 
+        private void HandleCurrentContactChanging(object sender, EventArgs e)
+        {
+            Contact currentContact = openedAddressBooks.CurrentContact;
+
+            if (currentContact != null)
+                currentContact.Changed -= HandleContactChanged;
+        }
+
         private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
+            Contact currentContact = openedAddressBooks.CurrentContact;
+
+            if (currentContact != null)
+                currentContact.Changed += HandleContactChanged;
+
             RefreshDisplayedData();
         }
 
@@ -120,6 +138,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
                 ContactItems = null;
                 Notes = string.Empty;
+
+                ImageClickCommand.Contact = null;
             }
             else
             {
@@ -131,7 +151,14 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
                 ContactItems = currentContact.Items;
                 Notes = currentContact.Notes;
+
+                ImageClickCommand.Contact = currentContact;
             }
+        }
+
+        private void HandleContactChanged(object sender, EventArgs eventArgs)
+        {
+            RefreshDisplayedData();
         }
     }
 }

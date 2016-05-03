@@ -35,6 +35,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         private Contact currentContact;
 
         public event EventHandler<AddressBookChangedEventArgs> AddressBookChanged;
+        public event EventHandler ContactChanging;
         public event EventHandler ContactChanged;
         public event EventHandler<ContactDeletingEventArgs> ContactDeleting;
 
@@ -85,6 +86,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 if (ReferenceEquals(currentContact, value))
                     return;
 
+                OnContactChanging();
                 currentContact = value;
                 OnContactChanged();
             }
@@ -258,6 +260,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
             if (handler != null)
                 handler(this, e);
+        }
+
+        protected virtual void OnContactChanging()
+        {
+            EventHandler handler = ContactChanging;
+
+            if (handler != null)
+                handler(this, EventArgs.Empty);
         }
 
         protected virtual void OnContactChanged()
