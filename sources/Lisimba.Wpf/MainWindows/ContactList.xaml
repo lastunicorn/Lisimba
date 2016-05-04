@@ -9,23 +9,47 @@
 
     <DockPanel>
 
+        <DockPanel DockPanel.Dock="Top">
+
+            <TextBlock
+                DockPanel.Dock="Left"
+                Margin="4"
+                VerticalAlignment="Center"
+                Text="Sort by:"/>
+
+            <ComboBox
+                ItemsSource="{Binding SortingMethods}"
+                Margin="0 4 0 4"
+                SelectedItem="{Binding SelectedSortingMethod}">
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Text}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+            </ComboBox>
+
+        </DockPanel>
+
         <DockPanel DockPanel.Dock="Bottom">
 
             <Image
-                    Width="16"
-                    Height="16"
-                    Margin="4"
-                    Source="{StaticResource SearchIcon}"/>
+                Width="16"
+                Height="16"
+                Margin="4"
+                DockPanel.Dock="Left"
+                Source="{StaticResource SearchIcon}"/>
 
             <TextBox
-                    Text="{Binding SearchedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0 4 0 4"/>
+                Text="{Binding SearchedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                Margin="0 4 0 4"/>
 
         </DockPanel>
 
         <ListBox
-                ItemsSource="{Binding Contacts}"
-                SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+            ItemsSource="{Binding Contacts}"
+            SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
