@@ -16,56 +16,17 @@
 
 using System;
 using System.Windows;
-using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Sorting;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     internal class AddressBookViewModel : ViewModelBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private ListCollectionView contacts;
-        private Contact selectedContact;
         private Visibility isContactEditVisible;
         private Visibility isNoContactVisible;
-        private string searchText;
 
-        public ListCollectionView Contacts
-        {
-            get { return contacts; }
-            private set
-            {
-                contacts = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Contact SelectedContact
-        {
-            get { return selectedContact; }
-            set
-            {
-                selectedContact = value;
-                openedAddressBooks.CurrentContact = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string SearchedText
-        {
-            get { return searchText; }
-            set
-            {
-                searchText = value;
-                OnPropertyChanged();
-
-                if (contacts != null)
-                    contacts.Filter = ShouldContactBeVisible;
-            }
-        }
-
+        public ContactListViewModel ContactListViewModel { get; private set; }
         public ContactEditorViewModel ContactEditorViewModel { get; private set; }
 
         public Visibility IsContactEditVisible
@@ -97,52 +58,21 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             this.openedAddressBooks = openedAddressBooks;
 
+            ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
 
             IsContactEditVisible = Visibility.Hidden;
             IsNoContactVisible = Visibility.Visible;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
-        }
-
-        private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
-        {
-            Contacts = null;
-
-            if (e.NewAddressBook != null)
-            {
-                Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(e.NewAddressBook.AddressBook.Contacts);
-                Contacts.CustomSort = ComparerFactory.GetComparer(ContactsSortingType.Birthday);
-                contacts.Filter = ShouldContactBeVisible;
-            }
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            SelectedContact = openedAddressBooks.CurrentContact;
-
             IsContactEditVisible = openedAddressBooks.CurrentContact != null ? Visibility.Visible : Visibility.Hidden;
             IsNoContactVisible = openedAddressBooks.CurrentContact != null ? Visibility.Hidden : Visibility.Visible;
 
             //todo: ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
-        }
-
-        private bool ShouldContactBeVisible(object item)
-        {
-            Contact contact = item as Contact;
-
-            if (contact == null)
-                return false;
-
-            if (searchText == null)
-                return true;
-
-            return searchText.Length == 0
-                || contact.Name.FirstName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.MiddleName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.LastName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.Nickname.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
         }
     }
 }

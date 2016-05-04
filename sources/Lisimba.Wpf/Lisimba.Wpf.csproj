@@ -96,6 +96,9 @@
       <DependentUpon>ContactEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\ContactEditorViewModel.cs" />
+    <Compile Include="MainWindows\ContactList.xaml.cs">
+      <DependentUpon>ContactList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\ContactListViewModel.cs" />
     <Compile Include="MainWindows\DateFormatter.cs" />
     <Compile Include="MainWindows\ImageClickCommand.cs" />
@@ -205,6 +208,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainWindows\ContactEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ContactList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

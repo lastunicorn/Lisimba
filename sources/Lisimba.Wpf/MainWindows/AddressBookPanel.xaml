@@ -15,41 +15,9 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel Grid.Column="0">
-
-            <DockPanel DockPanel.Dock="Bottom">
-
-                <Image
-                    Width="16"
-                    Height="16"
-                    Margin="4"
-                    Source="{StaticResource SearchIcon}"/>
-
-                <TextBox
-                    Text="{Binding SearchedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Margin="0 4 0 4"/>
-
-            </DockPanel>
-
-            <ListBox
-                ItemsSource="{Binding Contacts}"
-                SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,2">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="100" />
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="{Binding Name}" />
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-
-            </ListBox>
-
-        </DockPanel>
+        <mainWindows:ContactList
+            Grid.Column="0"
+            DataContext="{Binding ContactListViewModel}"/>
 
         <GridSplitter
             Grid.Column="1"
@@ -76,7 +44,7 @@
             VerticalAlignment="Center"
             FontSize="20"
             Text="No contact selected"/>
-        
+
     </Grid>
 
 </UserControl>
