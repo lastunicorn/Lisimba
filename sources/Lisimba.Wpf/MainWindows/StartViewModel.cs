@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Wpf.Commands;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    class StartViewModel : ViewModelBase
+    internal class StartViewModel : ViewModelBase
     {
         public NewAddressBookCommand NewAddressBookCommand { get; private set; }
         public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }

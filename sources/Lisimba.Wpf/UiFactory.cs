@@ -44,13 +44,13 @@ namespace DustInTheWind.Lisimba.Wpf
             return unityContainer.Resolve<T>();
         }
 
-        public TViewModel CreateNewViewModel<TViewModel>(IOperation operation)
-            where TViewModel : ViewModelBase
-        {
-            if (operation == null) throw new ArgumentNullException("operation");
+        //public TViewModel CreateNewViewModel<TViewModel>(IOperation operation)
+        //    where TViewModel : ViewModelBase
+        //{
+        //    if (operation == null) throw new ArgumentNullException("operation");
 
-            ResolverOverride resolverOverride = new DependencyOverride(typeof(IOperation), operation);
-            return unityContainer.Resolve<TViewModel>(resolverOverride);
-        }
+        //    ResolverOverride resolverOverride = new DependencyOverride(typeof(IOperation), operation);
+        //    return unityContainer.Resolve<TViewModel>(resolverOverride);
+        //}
     }
 }

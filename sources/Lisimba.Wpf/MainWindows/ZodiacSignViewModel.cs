@@ -66,11 +66,10 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         private void UpdateDisplayedZodiacSign()
         {
-            Image zodiacImage = zodiac.GetZodiacImage(ZodiacSign);
-            string zodiacSignName = zodiac.GetZodiacSignName(ZodiacSign);
-
+            Image zodiacImage = zodiac.GetZodiacImage(zodiacSign);
             Image = zodiacImage.ToBitmapSource();
-            Text = zodiacSignName;
+
+            Text = zodiac.GetZodiacSignName(zodiacSign);
         }
     }
 }

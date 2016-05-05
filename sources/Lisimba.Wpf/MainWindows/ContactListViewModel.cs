@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public List<SortingComboBoxItem> SortingMethods { get; private set; }
+        public IReadOnlyList<SortingComboBoxItem> SortingMethods { get; private set; }
 
         public SortingComboBoxItem SelectedSortingMethod
         {
@@ -156,9 +156,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             switch (applicationConfiguration.DefaultContactSort)
             {
-                default:
-                    return ContactsSortingType.Birthday;
-
                 case "BirthDate":
                     return ContactsSortingType.BirthDate;
 
@@ -173,6 +170,9 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
                 case "NicknameOrName":
                     return ContactsSortingType.NicknameOrName;
+
+                default:
+                    return ContactsSortingType.Birthday;
             }
         }
 

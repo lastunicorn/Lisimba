@@ -175,9 +175,6 @@
     </Compile>
     <Compile Include="MenuItemViewModelProvider.cs" />
     <Compile Include="Operations\AvailableCommands.cs" />
-    <Compile Include="Operations\EmptyOperation.cs" />
-    <Compile Include="Operations\IOperation.cs" />
-    <Compile Include="Operations\IOperation1.cs" />
     <Compile Include="Operations\ICommandProvider.cs" />
     <Compile Include="Setup\CommandProvider.cs" />
     <Compile Include="TrayIcon.cs">
