@@ -92,14 +92,9 @@
             VerticalAlignment="Stretch"
             ResizeBehavior="BasedOnAlignment"/>
 
-        <Grid Grid.Row="3" Grid.Column="0">
+        <DockPanel Grid.Row="3" Grid.Column="0">
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 
                 <Image
                     Width="16"
@@ -114,14 +109,13 @@
             </StackPanel>
 
             <TextBox
-                Grid.Row="1"
-                Text="{Binding Notes}"
+                Text="{Binding Notes, UpdateSourceTrigger=LostFocus}"
                 AcceptsReturn="True"
+                AcceptsTab="True"
                 HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto"
-                IsReadOnly="True"/>
+                VerticalScrollBarVisibility="Auto"/>
 
-        </Grid>
+        </DockPanel>
 
     </Grid>
 

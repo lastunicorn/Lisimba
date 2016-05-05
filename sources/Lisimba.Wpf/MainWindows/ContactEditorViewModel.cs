@@ -16,6 +16,8 @@
 
 using System;
 using System.Windows.Media.Imaging;
+using DustInTheWind.Lisimba.Business.ActionManagement;
+using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Wpf.Properties;
@@ -31,6 +33,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private ZodiacSignViewModel zodiacSignViewModel;
         private ContactItemCollection contactItems;
         private Date birthday;
+        private bool isInitializationMode;
 
         public string Name
         {
@@ -79,6 +82,16 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             {
                 notes = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                {
+                    IAction action = new ChangeContactNotesAction(openedAddressBooks.CurrentContact, notes);
+
+                    if (openedAddressBooks.Current.ActionQueue != null)
+                        openedAddressBooks.Current.ActionQueue.Do(action);
+                    else
+                        action.Do();
+                }
             }
         }
 
@@ -131,29 +144,38 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         private void RefreshDisplayedData()
         {
-            if (openedAddressBooks.CurrentContact == null)
-            {
-                Name = string.Empty;
-                Picture = Resources.no_user_128.ToBitmapSource();
-                Birthday = null;
-                zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
-                ContactItems = null;
-                Notes = string.Empty;
+            isInitializationMode = true;
 
-                ImageClickCommand.Contact = null;
+            try
+            {
+                if (openedAddressBooks.CurrentContact == null)
+                {
+                    Name = string.Empty;
+                    Picture = Resources.no_user_128.ToBitmapSource();
+                    Birthday = null;
+                    zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
+                    ContactItems = null;
+                    Notes = string.Empty;
+
+                    ImageClickCommand.Contact = null;
+                }
+                else
+                {
+                    Contact currentContact = openedAddressBooks.CurrentContact;
+
+                    Name = currentContact.Name.ToString();
+                    Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
+                    Birthday = currentContact.Birthday;
+                    zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
+                    ContactItems = currentContact.Items;
+                    Notes = currentContact.Notes;
+
+                    ImageClickCommand.Contact = currentContact;
+                }
             }
-            else
+            finally
             {
-                Contact currentContact = openedAddressBooks.CurrentContact;
-
-                Name = currentContact.Name.ToString();
-                Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
-                Birthday = currentContact.Birthday;
-                zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
-                ContactItems = currentContact.Items;
-                Notes = currentContact.Notes;
-
-                ImageClickCommand.Contact = currentContact;
+                isInitializationMode = false;
             }
         }
 
