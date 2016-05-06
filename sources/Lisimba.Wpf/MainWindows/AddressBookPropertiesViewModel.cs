@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,10 +17,10 @@
 using System;
 using System.IO;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.Wpf.Commands;
+using DustInTheWind.Lisimba.Wpf.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Forms
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
     internal class AddressBookPropertiesViewModel : ViewModelBase
     {
@@ -71,11 +71,14 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
             }
         }
 
+        public DelegateCommand OkCommand { get; private set; }
+
         public AddressBookPropertiesViewModel(OpenedAddressBooks openedAddressBooks)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
 
             this.openedAddressBooks = openedAddressBooks;
+            OkCommand = new DelegateCommand(OkButtonWasClicked);
 
             this.openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
             RefreshModel();
@@ -113,11 +116,11 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
         private static string GetFullFileLocationForDisplay(string fileName)
         {
             return fileName == null
-                ? Resources.AddressBookNotSavedYet
+                ? LocalizedResources.AddressBookNotSavedYet
                 : Path.GetFullPath(fileName);
         }
 
-        public void OkButtonWasClicked()
+        private void OkButtonWasClicked(object parameter)
         {
             if (openedAddressBooks.Current == null)
                 return;

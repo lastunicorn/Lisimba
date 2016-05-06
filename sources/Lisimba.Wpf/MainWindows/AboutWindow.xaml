@@ -10,14 +10,17 @@
 
     <DockPanel>
 
-        <StackPanel DockPanel.Dock="Bottom" Background="Beige">
+        <StackPanel
+            DockPanel.Dock="Bottom"
+            Background="Beige">
 
-            <Button Content="Close"
-                    HorizontalAlignment="Center"
-                    Margin="0 8"
-                    VerticalAlignment="Center"
-                    Width="75"
-                    Click="Button_Click"/>
+            <Button
+                Content="Close"
+                HorizontalAlignment="Center"
+                Margin="0 8"
+                VerticalAlignment="Center"
+                MinWidth="75"
+                Click="Button_Click"/>
 
         </StackPanel>
 

@@ -78,6 +78,7 @@
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
     <Compile Include="AutoGreyableImage.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="MainWindows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -85,6 +86,7 @@
     <Compile Include="MainWindows\AddContactWindow.xaml.cs">
       <DependentUpon>AddContactWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\AddressBookPropertiesViewModel.cs" />
     <Compile Include="MainWindows\AddressBookPropertiesWindow.xaml.cs">
       <DependentUpon>AddressBookPropertiesWindow.xaml</DependentUpon>
     </Compile>

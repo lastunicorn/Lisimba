@@ -21,7 +21,7 @@ using DustInTheWind.WinFormsCommon.Utils;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms
 {
-    partial class AddressBookPropertiesForm : Form
+    internal partial class AddressBookPropertiesForm : Form
     {
         private readonly AddressBookPropertiesViewModel viewModel;
 

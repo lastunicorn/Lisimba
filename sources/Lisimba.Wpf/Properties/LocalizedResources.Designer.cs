@@ -61,6 +61,15 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt; Address book is not saved yet &gt;.
+        /// </summary>
+        internal static string AddressBookNotSavedYet {
+            get {
+                return ResourceManager.GetString("AddressBookNotSavedYet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit the program..
         /// </summary>
         internal static string ApplicationExitOperationDescription {

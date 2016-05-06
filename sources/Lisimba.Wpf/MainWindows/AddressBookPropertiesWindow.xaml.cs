@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
@@ -21,11 +22,20 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
     /// <summary>
     /// Interaction logic for AddressBookPropertiesWindow.xaml
     /// </summary>
-    public partial class AddressBookPropertiesWindow : Window
+    internal partial class AddressBookPropertiesWindow : Window
     {
-        public AddressBookPropertiesWindow()
+        public AddressBookPropertiesWindow(AddressBookPropertiesViewModel viewModel)
         {
+            if (viewModel == null) throw new ArgumentNullException("viewModel");
+
             InitializeComponent();
+
+            Loaded += (sender, e) => DataContext = viewModel;
+        }
+
+        private void HandleButtonOkClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }
