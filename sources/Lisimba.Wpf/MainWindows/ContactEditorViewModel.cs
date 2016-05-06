@@ -15,6 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
@@ -31,7 +35,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private string notes;
         private BitmapSource picture;
         private ZodiacSignViewModel zodiacSignViewModel;
-        private ContactItemCollection contactItems;
+        private List<Tuple<Type, IEnumerable<ContactItem>>> contactItems;
         private Date birthday;
         private bool isInitializationMode;
 
@@ -65,7 +69,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public ContactItemCollection ContactItems
+        public List<Tuple<Type, IEnumerable<ContactItem>>> ContactItems
         {
             get { return contactItems; }
             set
@@ -163,11 +167,17 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 {
                     Contact currentContact = openedAddressBooks.CurrentContact;
 
+                    List<Tuple<Type, IEnumerable<ContactItem>>> all = currentContact.Items.ItemTypes
+                        .Select(x => new Tuple<Type, IEnumerable<ContactItem>>(x, currentContact.Items.GetItems(x)))
+                        .ToList();
+
+                    //all[0].Item1
+
                     Name = currentContact.Name.ToString();
                     Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
-                    ContactItems = currentContact.Items;
+                    ContactItems = all;
                     Notes = currentContact.Notes;
 
                     ImageClickCommand.Contact = currentContact;

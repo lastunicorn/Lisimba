@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         {
             try
             {
-                string fileName = windowSystem.AskToOpen(string.Empty, "Image Files|*.png;*.jpg;*.jpeg|All Files|*.*");
+                string fileName = windowSystem.AskToOpen(string.Empty, "Image Files|*.bmp;*.gif;*.jpg;*.jpeg;*.png|All Files|*.*");
 
                 if (fileName != null)
                 {

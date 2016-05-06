@@ -92,10 +92,19 @@
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddressBookViewModel.cs" />
+    <Compile Include="MainWindows\ContactEditor_ImageSection.xaml.cs">
+      <DependentUpon>ContactEditor_ImageSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\ContactEditor.xaml.cs">
       <DependentUpon>ContactEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\ContactEditorViewModel.cs" />
+    <Compile Include="MainWindows\ContactEditor_ItemsSection.xaml.cs">
+      <DependentUpon>ContactEditor_ItemsSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindows\ContactEditor_NotesSection.xaml.cs">
+      <DependentUpon>ContactEditor_NotesSection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\ContactList.xaml.cs">
       <DependentUpon>ContactList.xaml</DependentUpon>
     </Compile>
@@ -205,7 +214,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MainWindows\ContactEditor_ImageSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindows\ContactEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ContactEditor_ItemsSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\ContactEditor_NotesSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

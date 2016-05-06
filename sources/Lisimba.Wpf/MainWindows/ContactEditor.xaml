@@ -8,10 +8,6 @@
              d:DesignHeight="300"
              d:DesignWidth="300">
 
-    <UserControl.Resources>
-        <mainWindows:DateFormatter x:Key="DateFormatter"/>
-    </UserControl.Resources>
-
     <Grid>
 
         <Grid.RowDefinitions>
@@ -21,101 +17,24 @@
             <RowDefinition Height="150" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
+        <TextBlock Grid.Row="0" Grid.Column="0"
             FontSize="30"
             Margin="5"
             Text="{Binding Name}"/>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
-
-            <StackPanel DockPanel.Dock="Left">
-
-                <Button
-                    Command="{Binding ImageClickCommand}"
-                    Width="128"
-                    Height="128"
-                    Margin="4"
-                    Cursor="Hand">
-
-                    <Button.Template>
-                        <ControlTemplate>
-                            <Image Source="{Binding Picture}"/>
-                        </ControlTemplate>
-                    </Button.Template>
-
-                </Button>
-
-                <TextBlock
-                    HorizontalAlignment="Center"
-                    Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"/>
-
-                <mainWindows:ZodiacSignView
-                    Padding="4"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    DataContext="{Binding ZodiacSignViewModel}"/>
-
-            </StackPanel>
-
-            <ListBox
-                Margin="0 4 4 4"
-                ItemsSource="{Binding ContactItems, Mode=OneWay}">
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Margin="0,2">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <Image Grid.Column="0" Source="{Binding Icon}" />
-                            <TextBlock Grid.Column="1" Text="{Binding}" />
-
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-
-            </ListBox>
-
+            <mainWindows:ContactEditor_ImageSection DockPanel.Dock="Left"/>
+            <mainWindows:ContactEditor_ItemsSection/>
         </DockPanel>
 
-        <GridSplitter
-            Grid.Row ="2"
-            Grid.Column="0"
+        <GridSplitter Grid.Row ="2" Grid.Column="0"
             Height="8"
             ResizeDirection="Rows"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             ResizeBehavior="BasedOnAlignment"/>
 
-        <DockPanel Grid.Row="3" Grid.Column="0">
-
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-
-                <Image
-                    Width="16"
-                    Height="16"
-                    Margin="2 2 4 2"
-                    Source="{StaticResource NotesIcon}"/>
-
-                <TextBlock
-                    Text="Notes"
-                    VerticalAlignment="Center"/>
-
-            </StackPanel>
-
-            <TextBox
-                Text="{Binding Notes, UpdateSourceTrigger=LostFocus}"
-                AcceptsReturn="True"
-                AcceptsTab="True"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto"/>
-
-        </DockPanel>
+        <mainWindows:ContactEditor_NotesSection  Grid.Row="3" Grid.Column="0"/>
 
     </Grid>
 

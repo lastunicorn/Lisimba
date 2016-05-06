@@ -127,7 +127,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
         #endregion
 
         #region From Entity
-        
+
         public static AddressBook FromEntity(AddressBookEntity addressBookEntity)
         {
             AddressBook addressBook = new AddressBook
@@ -136,7 +136,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 Name = addressBookEntity.Name
             };
 
-            IEnumerable<Contact> contacts = addressBookEntity.Contacts.Select(FromEntity);
+            Contact[] contacts = addressBookEntity.Contacts.Select(FromEntity).ToArray();
             addressBook.Contacts.AddRange(contacts);
 
             return addressBook;
@@ -156,22 +156,22 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             contact.Birthday.Year = contactEntity.Birthday.Year;
             contact.Birthday.Description = contactEntity.Birthday.Description;
 
-            IEnumerable<Phone> phones = contactEntity.Phones.Select(FromEntity);
+            Phone[] phones = contactEntity.Phones.Select(FromEntity).ToArray();
             contact.Items.AddRange(phones);
 
-            IEnumerable<Email> emails = contactEntity.Emails.Select(FromEntity);
+            Email[] emails = contactEntity.Emails.Select(FromEntity).ToArray();
             contact.Items.AddRange(emails);
 
-            IEnumerable<WebSite> webSites = contactEntity.WebSites.Select(FromEntity);
+            WebSite[] webSites = contactEntity.WebSites.Select(FromEntity).ToArray();
             contact.Items.AddRange(webSites);
 
-            IEnumerable<PostalAddress> addresses = contactEntity.Addresses.Select(FromEntity);
+            PostalAddress[] addresses = contactEntity.Addresses.Select(FromEntity).ToArray();
             contact.Items.AddRange(addresses);
 
-            IEnumerable<Date> dates = contactEntity.Dates.Select(FromEntity);
+            Date[] dates = contactEntity.Dates.Select(FromEntity).ToArray();
             contact.Items.AddRange(dates);
 
-            IEnumerable<SocialProfile> socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity);
+            SocialProfile[] socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity).ToArray();
             contact.Items.AddRange(socialProfileIds);
 
             contact.Notes = contactEntity.Notes;

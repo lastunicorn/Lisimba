@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.Searching;
 
@@ -21,6 +25,18 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 {
     public class ContactItemCollection : CustomObservableCollection<ContactItem>
     {
+        private readonly Dictionary<Type, List<ContactItem>> itemsByType = new Dictionary<Type, List<ContactItem>>();
+
+        public List<Type> ItemTypes
+        {
+            get
+            {
+                return itemsByType.Keys
+                    .Distinct()
+                    .ToList();
+            }
+        }
+
         /// <summary>
         /// Returns the <see cref="ContactItem"/> object that match the description.
         /// </summary>
@@ -56,6 +72,74 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             }
 
             return null;
+        }
+
+        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    AddItemsToCategories(e.NewItems);
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    RemoveItemsFromCategories(e.OldItems);
+                    break;
+
+                case NotifyCollectionChangedAction.Replace:
+                    RemoveItemsFromCategories(e.OldItems);
+                    AddItemsToCategories(e.NewItems);
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    RemoveItemsFromCategories(e.OldItems);
+                    break;
+            }
+
+            base.OnCollectionChanged(e);
+        }
+
+        private void AddItemsToCategories(IEnumerable itemsToAdd)
+        {
+            foreach (ContactItem item in itemsToAdd)
+            {
+                Type itemType = item.GetType();
+                List<ContactItem> items = GetOrCreateListForType(itemType);
+
+                items.Add(item);
+            }
+        }
+
+        private void RemoveItemsFromCategories(IEnumerable itemsToRemove)
+        {
+            foreach (ContactItem item in itemsToRemove)
+            {
+                Type itemType = item.GetType();
+                List<ContactItem> items = GetOrCreateListForType(itemType);
+
+                items.Remove(item);
+
+                if (items.Count == 0)
+                    itemsByType.Remove(itemType);
+            }
+        }
+
+        private List<ContactItem> GetOrCreateListForType(Type itemType)
+        {
+            if (itemsByType.ContainsKey(itemType))
+                return itemsByType[itemType];
+
+            List<ContactItem> items = new List<ContactItem>();
+            itemsByType.Add(itemType, items);
+
+            return items;
+        }
+
+        public IEnumerable<ContactItem> GetItems(Type itemsType)
+        {
+            return itemsByType.ContainsKey(itemsType)
+                ? (IEnumerable<ContactItem>)itemsByType[itemsType]
+                : new ContactItem[0];
         }
 
         public override bool Equals(object obj)

@@ -15,9 +15,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 
 namespace DustInTheWind.Lisimba.Egg.AddressBookModel
@@ -25,8 +27,6 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
     public class CustomObservableCollection<T> : ObservableCollection<T>
         where T : class, IObservableEntity
     {
-        private bool suppressCollectionChangedEvent;
-
         public event EventHandler<ItemChangedEventArgs<T>> ItemChanged;
 
         public CustomObservableCollection()
@@ -64,33 +64,23 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             OnItemChanged(new ItemChangedEventArgs<T>(sender as T));
         }
 
-        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            if (!suppressCollectionChangedEvent)
-                base.OnCollectionChanged(e);
-        }
-
-        public void AddRange(IEnumerable<T> items)
+        public void AddRange(IList items)
         {
             if (items == null)
                 throw new ArgumentNullException("items");
 
-            suppressCollectionChangedEvent = true;
+            if (items.Count == 0)
+                return;
 
-            try
-            {
-                foreach (T item in items)
-                    Add(item);
-            }
-            finally
-            {
-                suppressCollectionChangedEvent = false;
-            }
+            foreach (T item in items)
+                Items.Add(item);
 
+            OnPropertyChanged(new PropertyChangedEventArgs("Count"));
+            OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
         }
 
-        public void CopyFrom(IEnumerable<T> items)
+        public void CopyFrom(IList items)
         {
             Clear();
             AddRange(items);
