@@ -20,20 +20,20 @@
                     <DockPanel>
 
                         <TextBlock
-                                    DockPanel.Dock="Top"
-                                    Text="{Binding Item1.Name}"
-                                    Background="BlanchedAlmond"
-                                    FontSize="13"
-                                    Padding="4"
-                                    FontWeight="Bold"/>
+                            DockPanel.Dock="Top"
+                            Text="{Binding Item1.Name}"
+                            Background="WhiteSmoke"
+                            FontSize="15"
+                            Padding="4"/>
 
                         <ListBox
-                                    ItemsSource="{Binding Item2}"
-                                    BorderThickness="0"
-                                    LostFocus="UIElement_OnLostFocus"
-                                    PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
-                                    Padding="0"
-                                    Margin="0">
+                            ItemsSource="{Binding Item2}"
+                            BorderThickness="0"
+                            LostFocus="UIElement_OnLostFocus"
+                            PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
+                            PreviewKeyDown="UIElement_OnPreviewKeyDown"
+                            Padding="0"
+                            Margin="0">
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -45,9 +45,9 @@
                                 <Style>
                                     <Style.Resources>
                                         <!-- Background of selected item when focussed -->
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Red" />
+                                        <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightGray" />
                                         <!-- Background of selected item when not focussed -->
-                                        <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Green" />
+                                        <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Green" />-->
                                     </Style.Resources>
                                 </Style>
                             </ListBox.ItemContainerStyle>
