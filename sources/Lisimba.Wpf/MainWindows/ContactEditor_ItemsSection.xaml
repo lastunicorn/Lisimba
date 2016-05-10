@@ -27,11 +27,16 @@
                     <ContextMenu
                         ItemsSource="{Binding ContactItemTypes}">
 
+                        <ContextMenu.Resources>
+                            <Image x:Key="imgCTX" x:Shared="false" Source="{Binding Path=Icon}" Height="16px" Width="16px"/>
+                        </ContextMenu.Resources>
+                        
                         <ContextMenu.ItemContainerStyle>
                             <Style TargetType="{x:Type MenuItem}">
-                                <Setter Property="Header" Value="{Binding Item1}" />
-                                <Setter Property="Command" Value="{Binding Item2}" />
-                                <Setter Property="CommandParameter" Value="{Binding Item3}" />
+                                <Setter Property="Header" Value="{Binding Text}" />
+                                <Setter Property="Command" Value="{Binding Command}" />
+                                <Setter Property="CommandParameter" Value="{Binding ItemType}" />
+                                <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
                             </Style>
                         </ContextMenu.ItemContainerStyle>
 

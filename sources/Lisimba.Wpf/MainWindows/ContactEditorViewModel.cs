@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
@@ -90,7 +89,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public List<Tuple<string, ICommand, Type>> ContactItemTypes { get; private set; }
+        public List<ContactItemInfo> ContactItemTypes { get; private set; }
 
         public string Notes
         {
@@ -137,12 +136,15 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             this.addContactItemClickCommand = addContactItemClickCommand;
 
             ImageClickCommand = imageClickCommand;
-            
-            ContactItemTypes = new List<Tuple<string, ICommand, Type>>
+
+            ContactItemTypes = new List<ContactItemInfo>
             {
-                new Tuple<string, ICommand, Type>("Phone", addContactItemClickCommand, typeof(Phone)),
-                new Tuple<string, ICommand, Type>("Email", addContactItemClickCommand, typeof(Email)),
-                new Tuple<string, ICommand, Type>("Date", addContactItemClickCommand, typeof(Date))
+                new ContactItemInfo { Text = "Phone", Command = addContactItemClickCommand, ItemType = typeof(Phone), Icon = Resources.phone.ToBitmapSource() },
+                new ContactItemInfo { Text = "Email", Command = addContactItemClickCommand, ItemType = typeof(Email), Icon = Resources.email.ToBitmapSource() },
+                new ContactItemInfo { Text = "Address", Command = addContactItemClickCommand, ItemType = typeof(PostalAddress), Icon = Resources.address.ToBitmapSource() },
+                new ContactItemInfo { Text = "Date", Command = addContactItemClickCommand, ItemType = typeof(Date), Icon = Resources.date.ToBitmapSource() },
+                new ContactItemInfo { Text = "Social Profile", Command = addContactItemClickCommand, ItemType = typeof(SocialProfile), Icon = Resources.mesengerid.ToBitmapSource() },
+                new ContactItemInfo { Text = "Web Site", Command = addContactItemClickCommand, ItemType = typeof(WebSite), Icon = Resources.webaddress.ToBitmapSource() }
             };
 
             openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
