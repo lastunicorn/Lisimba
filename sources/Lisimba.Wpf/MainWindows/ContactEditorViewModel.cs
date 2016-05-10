@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
@@ -33,9 +34,11 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private string notes;
         private BitmapSource picture;
         private ZodiacSignViewModel zodiacSignViewModel;
+        private readonly AddContactItemClickCommand addContactItemClickCommand;
         private List<Tuple<Type, IEnumerable<ContactItem>>> contactItems;
         private Date birthday;
         private bool isInitializationMode;
+        private bool canAddItems;
 
         public string Name
         {
@@ -77,7 +80,17 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public List<string> ContactItemTypes { get; private set; } 
+        public bool CanAddItems
+        {
+            get { return canAddItems; }
+            set
+            {
+                canAddItems = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public List<Tuple<string, ICommand, Type>> ContactItemTypes { get; private set; }
 
         public string Notes
         {
@@ -111,22 +124,25 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         public ImageClickCommand ImageClickCommand { get; private set; }
 
-        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel, ImageClickCommand imageClickCommand)
+        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel,
+            ImageClickCommand imageClickCommand, AddContactItemClickCommand addContactItemClickCommand)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (zodiacSignViewModel == null) throw new ArgumentNullException("zodiacSignViewModel");
             if (imageClickCommand == null) throw new ArgumentNullException("imageClickCommand");
+            if (addContactItemClickCommand == null) throw new ArgumentNullException("addContactItemClickCommand");
 
             this.openedAddressBooks = openedAddressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
+            this.addContactItemClickCommand = addContactItemClickCommand;
 
             ImageClickCommand = imageClickCommand;
-
-            ContactItemTypes = new List<string>
+            
+            ContactItemTypes = new List<Tuple<string, ICommand, Type>>
             {
-                "Phone",
-                "Email",
-                "Date"
+                new Tuple<string, ICommand, Type>("Phone", addContactItemClickCommand, typeof(Phone)),
+                new Tuple<string, ICommand, Type>("Email", addContactItemClickCommand, typeof(Email)),
+                new Tuple<string, ICommand, Type>("Date", addContactItemClickCommand, typeof(Date))
             };
 
             openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
@@ -159,6 +175,9 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             try
             {
+                CanAddItems = openedAddressBooks.CurrentContact != null;
+                addContactItemClickCommand.Contact = openedAddressBooks.CurrentContact;
+
                 if (openedAddressBooks.CurrentContact == null)
                 {
                     Name = string.Empty;
@@ -177,8 +196,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                     List<Tuple<Type, IEnumerable<ContactItem>>> all = currentContact.Items.ItemTypes
                         .Select(x => new Tuple<Type, IEnumerable<ContactItem>>(x, currentContact.Items.GetItems(x)))
                         .ToList();
-
-                    //all[0].Item1
 
                     Name = currentContact.Name.ToString();
                     Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();

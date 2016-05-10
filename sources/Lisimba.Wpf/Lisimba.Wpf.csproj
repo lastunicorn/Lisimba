@@ -83,6 +83,7 @@
     <Compile Include="MainWindows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindows\AddContactItemClickCommand.cs" />
     <Compile Include="MainWindows\AddContactWindow.xaml.cs">
       <DependentUpon>AddContactWindow.xaml</DependentUpon>
     </Compile>

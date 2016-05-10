@@ -9,12 +9,35 @@
 
     <DockPanel>
 
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" FlowDirection="RightToLeft">
+        <StackPanel
+            DockPanel.Dock="Bottom"
+            Orientation="Horizontal"
+            FlowDirection="RightToLeft">
 
-            <Button Click="ButtonBase_OnClick" Content="Add Item..." MinWidth="75" FlowDirection="LeftToRight">
+            <Button
+                Content="Add Item..."
+                MinWidth="75"
+                MinHeight="30"
+                FlowDirection="LeftToRight"
+                Margin="4"
+                Click="ButtonBase_OnClick"
+                IsEnabled="{Binding CanAddItems}">
+
                 <Button.ContextMenu>
-                    <ContextMenu ItemsSource="{Binding ContactItemTypes}"/>
+                    <ContextMenu
+                        ItemsSource="{Binding ContactItemTypes}">
+
+                        <ContextMenu.ItemContainerStyle>
+                            <Style TargetType="{x:Type MenuItem}">
+                                <Setter Property="Header" Value="{Binding Item1}" />
+                                <Setter Property="Command" Value="{Binding Item2}" />
+                                <Setter Property="CommandParameter" Value="{Binding Item3}" />
+                            </Style>
+                        </ContextMenu.ItemContainerStyle>
+
+                    </ContextMenu>
                 </Button.ContextMenu>
+
             </Button>
 
         </StackPanel>
