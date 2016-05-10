@@ -200,5 +200,18 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             return FindAncestor<T>(VisualTreeHelper.GetParent(element));
         }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button == null)
+                return;
+
+            button.ContextMenu.IsEnabled = true;
+            button.ContextMenu.PlacementTarget = button;
+            button.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            button.ContextMenu.IsOpen = true;
+        }
     }
 }

@@ -15,10 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
@@ -79,6 +77,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
+        public List<string> ContactItemTypes { get; private set; } 
+
         public string Notes
         {
             get { return notes; }
@@ -121,6 +121,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             this.zodiacSignViewModel = zodiacSignViewModel;
 
             ImageClickCommand = imageClickCommand;
+
+            ContactItemTypes = new List<string>
+            {
+                "Phone",
+                "Email",
+                "Date"
+            };
 
             openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
             openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
