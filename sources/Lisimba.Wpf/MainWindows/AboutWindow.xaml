@@ -1,18 +1,23 @@
 ﻿<Window x:Class="DustInTheWind.Lisimba.Wpf.MainWindows.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
         Title="About"
-        Height="200"
+        Height="240"
         Width="300"
         WindowStartupLocation="CenterOwner"
         Icon="{StaticResource LisimbaIcon}"
         ResizeMode="NoResize">
 
+    <Window.DataContext>
+        <mainWindows:AboutViewModel/>
+    </Window.DataContext>
+
     <DockPanel>
 
         <StackPanel
             DockPanel.Dock="Bottom"
-            Background="Beige">
+            Background="LightGray">
 
             <Button
                 Content="Close"
@@ -20,41 +25,58 @@
                 Margin="0 8"
                 VerticalAlignment="Center"
                 MinWidth="75"
-                Click="Button_Click"/>
+                IsCancel="True"
+                TabIndex="0"/>
 
         </StackPanel>
 
-        <Grid DockPanel.Dock="Top" Margin="8">
+        <DockPanel
+            DockPanel.Dock="Top"
+            Margin="8">
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Image
+                DockPanel.Dock="Left"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Source="pack://application:,,,/Images/lion.gif"
+                Margin="12"
+                Stretch="None"/>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+            <StackPanel
+                FlowDirection="LeftToRight"
+                Orientation="Vertical">
 
-            <Image Grid.Row="0"
-                   Grid.Column="0"
-                   Grid.RowSpan="2"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Top"
-                   Source="pack://application:,,,/Images/lion.gif"
-                   Margin="12"/>
+                <TextBlock
+                    Text="{Binding Name}"
+                    FontSize="20"/>
 
-            <TextBlock Grid.Row="0"
-                       Grid.Column="1"
-                       Text="Lisimba"
-                       FontSize="20"/>
+                <TextBlock
+                    Text="{Binding Version}"
+                    Padding="30 0 0 0"/>
 
-            <TextBlock Grid.Row="1"
-                       Grid.Column="1"
-                       Text="Version 1.4.0"
-                       Padding="10 0 0 0"/>
+            </StackPanel>
 
-        </Grid>
+        </DockPanel>
+
+        <Border
+            BorderThickness="1"
+            BorderBrush="Gainsboro"
+            CornerRadius="4"
+            Margin="8"
+            Padding="8">
+
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                
+                <TextBlock
+                    Text="Created by:"/>
+                
+                <TextBlock
+                    Text="{Binding Author}"
+                    Padding="20 0 0 0"/>
+                
+            </StackPanel>
+
+        </Border>
 
     </DockPanel>
 

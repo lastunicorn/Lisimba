@@ -75,6 +75,10 @@
                                 Padding="0"
                                 Margin="0">
 
+                                <!--<ListBox.ItemTemplateSelector>
+                                    
+                                </ListBox.ItemTemplateSelector>-->
+                                
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}" Margin="0" Padding="0"/>
