@@ -31,6 +31,9 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
     internal class Loader
     {
         private readonly List<Exception> warnings;
+        private readonly Dictionary<string, byte[]> pictures;
+        private AddressBookEntity addressBookEntity;
+        private readonly Version eggVersion;
 
         public IEnumerable<Exception> Warnings
         {
@@ -40,15 +43,18 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
         public Loader()
         {
             warnings = new List<Exception>();
+            pictures = new Dictionary<string, byte[]>();
+
+            eggVersion = Assembly.GetExecutingAssembly().GetName().Version;
         }
 
         public AddressBook Load(FileStream fileStream)
         {
             warnings.Clear();
+            pictures.Clear();
+            addressBookEntity = null;
 
             AddressBook book;
-
-            Version eggVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
             //System.Runtime.Serialization.IFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             //Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -58,70 +64,111 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             //return book;
 
             // Create unzipper.
-            using (ZipInputStream zipInputStream = new ZipInputStream(fileStream))
+            using (ZipInputStream zipStream = new ZipInputStream(fileStream))
             {
-                ZipEntry zipEntry;
-
                 // Search for the "file.xml" file
-                do
+                while (true)
                 {
-                    zipEntry = zipInputStream.GetNextEntry();
+                    ZipEntry zipEntry = zipStream.GetNextEntry();
 
                     if (zipEntry == null)
-                        throw new EggException("Incorrect file. The archive does not contains the \"file.xml\" file.");
-                } while (!zipEntry.Name.Equals("file.xml"));
+                        break;
 
-                // Unzip the "file.xml" file into memory.
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    byte[] buffer = new byte[10240];
-
-                    while (true)
-                    {
-                        int size = zipInputStream.Read(buffer, 0, buffer.Length);
-
-                        if (size > 0)
-                            ms.Write(buffer, 0, size);
-                        else
-                            break;
-                    }
-
-                    ms.Position = 0;
-
-                    // Read lsb version
-                    Version lsbVersion = ReadLsbVersion(ms);
-
-                    // Compare versions
-                    if (lsbVersion == null)
-                    {
-                        string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileStream.Name);
-                        IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
-                        warnings.Add(warning);
-                    }
-                    else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
-                    {
-                        string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileStream.Name, eggVersion.ToString(2), lsbVersion.ToString(2));
-                        IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
-                        warnings.Add(warning);
-                    }
-
-                    ms.Position = 0;
-
-                    // Deserialize the unzipped "file.xml" file
-                    using (XmlTextReader xr = new XmlTextReader(ms))
-                    {
-                        // Create serializer
-                        XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
-
-                        AddressBookEntity addressBookEntity = (AddressBookEntity)serializer.Deserialize(xr);
-                        book = EntityConverter.FromEntity(addressBookEntity);
-                    }
+                    if (zipEntry.Name.Equals("file.xml"))
+                        DeserializeMainFile(zipStream, fileStream.Name);
+                    else if (zipEntry.Name.StartsWith("images/"))
+                        DeserializePictureFile(zipStream, zipEntry);
                 }
+
+                if (addressBookEntity == null)
+                    throw new EggException("Incorrect file. The archive does not contain the \"file.xml\" file.");
+
+                foreach (ContactEntity contactEntity in addressBookEntity.Contacts)
+                {
+                    if (contactEntity.PictureHash == null)
+                        continue;
+
+                    if (pictures.ContainsKey(contactEntity.PictureHash))
+                        contactEntity.Picture = pictures[contactEntity.PictureHash];
+                }
+
+                book = EntityConverter.FromEntity(addressBookEntity);
             }
 
             book.Version = eggVersion.ToString();
 
             return book;
+        }
+
+        private void DeserializePictureFile(Stream zipStream, ZipEntry zipEntry)
+        {
+            string pictureHash = Path.GetFileName(zipEntry.Name);
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                byte[] buffer = new byte[10240];
+
+                while (true)
+                {
+                    int size = zipStream.Read(buffer, 0, buffer.Length);
+
+                    if (size > 0)
+                        ms.Write(buffer, 0, size);
+                    else
+                        break;
+                }
+
+                pictures.Add(pictureHash, ms.ToArray());
+            }
+        }
+
+        private void DeserializeMainFile(Stream zipStream, string fileName)
+        {
+            // Unzip the "file.xml" file into memory.
+            using (MemoryStream ms = new MemoryStream())
+            {
+                byte[] buffer = new byte[10240];
+
+                while (true)
+                {
+                    int size = zipStream.Read(buffer, 0, buffer.Length);
+
+                    if (size > 0)
+                        ms.Write(buffer, 0, size);
+                    else
+                        break;
+                }
+
+                ms.Position = 0;
+
+                // Read lsb version
+                Version lsbVersion = ReadLsbVersion(ms);
+
+                // Compare versions
+                if (lsbVersion == null)
+                {
+                    string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
+                    IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
+                    warnings.Add(warning);
+                }
+                else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
+                {
+                    string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileName, eggVersion.ToString(2), lsbVersion.ToString(2));
+                    IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
+                    warnings.Add(warning);
+                }
+
+                ms.Position = 0;
+
+                // Deserialize the unzipped "file.xml" file
+                using (XmlTextReader xr = new XmlTextReader(ms))
+                {
+                    // Create serializer
+                    XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
+
+                    addressBookEntity = (AddressBookEntity)serializer.Deserialize(xr);
+                }
+            }
         }
 
         private static Version ReadLsbVersion(Stream stream)

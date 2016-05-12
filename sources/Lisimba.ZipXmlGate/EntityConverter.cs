@@ -14,14 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using System;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 
 namespace DustInTheWind.Lisimba.ZipXmlGate
 {
-    static class EntityConverter
+    internal static class EntityConverter
     {
         #region ToEntity
 
@@ -46,6 +48,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     LastName = contact.Name.LastName,
                     Nickname = contact.Name.Nickname
                 },
+                Picture = ToByteArray(contact.Picture),
                 Birthday = new DateEntity
                 {
                     Day = contact.Birthday.Day,
@@ -62,6 +65,29 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 SocialProfileIds = contact.Items.OfType<SocialProfile>().Select(ToEntity).ToList(),
                 Notes = contact.Notes
             };
+        }
+
+        private static byte[] ToByteArray(Image image)
+        {
+            if (image == null)
+                return null;
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                return ms.ToArray();
+            }
+        }
+
+        private static Image ToImage(byte[] bytes)
+        {
+            if (bytes == null)
+                return null;
+
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                return Image.FromStream(ms);
+            }
         }
 
         private static PhoneEntity ToEntity(Phone phone)
@@ -150,6 +176,8 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             contact.Name.MiddleName = contactEntity.Name.MiddleName;
             contact.Name.LastName = contactEntity.Name.LastName;
             contact.Name.Nickname = contactEntity.Name.Nickname;
+
+            contact.Picture = ToImage(contactEntity.Picture);
 
             contact.Birthday.Day = contactEntity.Birthday.Day;
             contact.Birthday.Month = contactEntity.Birthday.Month;

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
@@ -36,14 +37,10 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 {
                     zipStream.SetLevel(9);
 
-                    ZipEntry zipEntry = new ZipEntry("file.xml")
-                    {
-                        CompressionMethod = CompressionMethod.Deflated
-                    };
+                    AddressBookEntity addressBookEntity = EntityConverter.ToEntity(addressBook);
 
-                    zipStream.PutNextEntry(zipEntry);
-
-                    SerializeAddressBook(addressBook, zipStream);
+                    WriteMainFile(zipStream, addressBookEntity);
+                    WritePictures(zipStream, addressBookEntity);
 
                     zipStream.Finish();
                 }
@@ -55,7 +52,45 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             }
         }
 
-        private static void SerializeAddressBook(AddressBook addressBook, Stream outputStream)
+        private static void WriteMainFile(ZipOutputStream zipStream, AddressBookEntity addressBookEntity)
+        {
+            ZipEntry zipEntry = new ZipEntry("file.xml")
+            {
+                CompressionMethod = CompressionMethod.Deflated
+            };
+
+            zipStream.PutNextEntry(zipEntry);
+
+            SerializeAddressBook(addressBookEntity, zipStream);
+        }
+
+        private static void WritePictures(ZipOutputStream zipStream, AddressBookEntity addressBookEntity)
+        {
+            Dictionary<string, byte[]> pictures = new Dictionary<string, byte[]>();
+
+            foreach (ContactEntity contact in addressBookEntity.Contacts)
+            {
+                if (contact.Picture == null)
+                    continue;
+
+                if (!pictures.ContainsKey(contact.PictureHash))
+                    pictures.Add(contact.PictureHash, contact.Picture);
+            }
+
+            foreach (KeyValuePair<string, byte[]> keyValuePair in pictures)
+            {
+                ZipEntry zipEntry = new ZipEntry("images/" + keyValuePair.Key)
+                {
+                    CompressionMethod = CompressionMethod.Deflated
+                };
+
+                zipStream.PutNextEntry(zipEntry);
+
+                zipStream.Write(keyValuePair.Value, 0, keyValuePair.Value.Length);
+            }
+        }
+
+        private static void SerializeAddressBook(AddressBookEntity addressBookEntity, Stream outputStream)
         {
             XmlWriterSettings settings = new XmlWriterSettings
             {
@@ -71,7 +106,6 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
             XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
 
-            AddressBookEntity addressBookEntity = EntityConverter.ToEntity(addressBook);
             serializer.Serialize(xmlWriter, addressBookEntity);
         }
     }
