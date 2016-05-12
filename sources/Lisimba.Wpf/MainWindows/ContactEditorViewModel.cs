@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
@@ -34,7 +35,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private BitmapSource picture;
         private ZodiacSignViewModel zodiacSignViewModel;
         private readonly AddContactItemClickCommand addContactItemClickCommand;
-        private List<Tuple<Type, IEnumerable<ContactItem>>> contactItems;
+        private List<ContactItemSetViewModel> contactItems;
         private Date birthday;
         private bool isInitializationMode;
         private bool canAddItems;
@@ -69,7 +70,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public List<Tuple<Type, IEnumerable<ContactItem>>> ContactItems
+        public List<ContactItemSetViewModel> ContactItems
         {
             get { return contactItems; }
             set
@@ -89,7 +90,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public List<ContactItemInfo> ContactItemTypes { get; private set; }
+        public List<ContactItemAddViewModel> ContactItemTypes { get; private set; }
 
         public string Notes
         {
@@ -137,14 +138,14 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             ImageClickCommand = imageClickCommand;
 
-            ContactItemTypes = new List<ContactItemInfo>
+            ContactItemTypes = new List<ContactItemAddViewModel>
             {
-                new ContactItemInfo { Text = "Phone", Command = addContactItemClickCommand, ItemType = typeof(Phone), Icon = Resources.phone.ToBitmapSource() },
-                new ContactItemInfo { Text = "Email", Command = addContactItemClickCommand, ItemType = typeof(Email), Icon = Resources.email.ToBitmapSource() },
-                new ContactItemInfo { Text = "Address", Command = addContactItemClickCommand, ItemType = typeof(PostalAddress), Icon = Resources.address.ToBitmapSource() },
-                new ContactItemInfo { Text = "Date", Command = addContactItemClickCommand, ItemType = typeof(Date), Icon = Resources.date.ToBitmapSource() },
-                new ContactItemInfo { Text = "Social Profile", Command = addContactItemClickCommand, ItemType = typeof(SocialProfile), Icon = Resources.mesengerid.ToBitmapSource() },
-                new ContactItemInfo { Text = "Web Site", Command = addContactItemClickCommand, ItemType = typeof(WebSite), Icon = Resources.webaddress.ToBitmapSource() }
+                new ContactItemAddViewModel { Text = "Phone", Command = addContactItemClickCommand, ItemType = typeof(Phone), Icon = Resources.phone.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Email", Command = addContactItemClickCommand, ItemType = typeof(Email), Icon = Resources.email.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Address", Command = addContactItemClickCommand, ItemType = typeof(PostalAddress), Icon = Resources.address.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Date", Command = addContactItemClickCommand, ItemType = typeof(Date), Icon = Resources.date.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Social Profile", Command = addContactItemClickCommand, ItemType = typeof(SocialProfile), Icon = Resources.mesengerid.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Web Site", Command = addContactItemClickCommand, ItemType = typeof(WebSite), Icon = Resources.webaddress.ToBitmapSource() }
             };
 
             openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
@@ -195,8 +196,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 {
                     Contact currentContact = openedAddressBooks.CurrentContact;
 
-                    List<Tuple<Type, IEnumerable<ContactItem>>> all = currentContact.Items.ItemTypes
-                        .Select(x => new Tuple<Type, IEnumerable<ContactItem>>(x, currentContact.Items.GetItems(x)))
+                    List<ContactItemSetViewModel> all = currentContact.Items.ItemTypes
+                        .Select(x => new ContactItemSetViewModel
+                        {
+                            Text = GetTextForItemType(x),
+                            Icon = GetIconForItemType(x),
+                            Items = currentContact.Items.GetItems(x)
+                        })
                         .ToList();
 
                     Name = currentContact.Name.ToString();
@@ -213,6 +219,52 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             {
                 isInitializationMode = false;
             }
+        }
+
+        private ImageSource GetIconForItemType(Type type)
+        {
+            if (type == typeof(Phone))
+                return Resources.phone.ToBitmapSource();
+
+            if (type == typeof(Email))
+                return Resources.email.ToBitmapSource();
+
+            if (type == typeof(PostalAddress))
+                return Resources.address.ToBitmapSource();
+
+            if (type == typeof(Date))
+                return Resources.date.ToBitmapSource();
+
+            if (type == typeof(SocialProfile))
+                return Resources.mesengerid.ToBitmapSource();
+
+            if (type == typeof(WebSite))
+                return Resources.webaddress.ToBitmapSource();
+
+            return Resources.phone.ToBitmapSource();
+        }
+
+        private static string GetTextForItemType(Type type)
+        {
+            if (type == typeof(Phone))
+                return "Phone";
+
+            if (type == typeof(Email))
+                return "Email";
+
+            if (type == typeof(PostalAddress))
+                return "Address";
+
+            if (type == typeof(Date))
+                return "Date";
+
+            if (type == typeof(SocialProfile))
+                return "Social Profile";
+
+            if (type == typeof(WebSite))
+                return "Web Site";
+
+            return string.Empty;
         }
 
         private void HandleContactChanged(object sender, EventArgs eventArgs)

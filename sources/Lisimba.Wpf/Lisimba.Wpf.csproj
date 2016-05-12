@@ -109,7 +109,8 @@
     <Compile Include="MainWindows\ContactEditor_NotesSection.xaml.cs">
       <DependentUpon>ContactEditor_NotesSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactItemInfo.cs" />
+    <Compile Include="MainWindows\ContactItemAddViewModel.cs" />
+    <Compile Include="MainWindows\ContactItemSetViewModel.cs" />
     <Compile Include="MainWindows\ContactList.xaml.cs">
       <DependentUpon>ContactList.xaml</DependentUpon>
     </Compile>

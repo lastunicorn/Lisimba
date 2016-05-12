@@ -20,11 +20,11 @@ using System.Windows.Media;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    internal class ContactItemInfo
+    internal class ContactItemAddViewModel
     {
         public string Text { get; set; }
+        public ImageSource Icon { get; set; }
         public ICommand Command { get; set; }
         public Type ItemType { get; set; }
-        public ImageSource Icon { get; set; }
     }
 }

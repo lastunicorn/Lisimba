@@ -6,7 +6,8 @@
              xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
              mc:Ignorable="d" 
              d:DesignHeight="300"
-             d:DesignWidth="300">
+             d:DesignWidth="300"
+             DataContext="{x:Type mainWindows:ContactEditorViewModel}">
 
     <Grid>
 
