@@ -16,7 +16,6 @@
 
 using System;
 using System.Threading;
-using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using NUnit.Framework;
 

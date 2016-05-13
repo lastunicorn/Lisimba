@@ -110,26 +110,17 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
         private void DeserializeMainFile(Stream zipStream, string fileName)
         {
-            // Unzip the "file.xml" file into memory.
             using (MemoryStream ms = new MemoryStream())
             {
                 ReadAllStream(zipStream, ms);
 
                 ms.Position = 0;
-
-                // Compare versions
                 ValidateVersion(ms, fileName);
 
                 ms.Position = 0;
-
-                // Deserialize the unzipped "file.xml" file
-                using (XmlTextReader xr = new XmlTextReader(ms))
-                {
-                    // Create serializer
-                    XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
-
-                    addressBookEntity = (AddressBookEntity)serializer.Deserialize(xr);
-                }
+                XmlTextReader xmlTextReader = new XmlTextReader(ms);
+                XmlSerializer serializer = new XmlSerializer(typeof(AddressBookEntity));
+                addressBookEntity = (AddressBookEntity)serializer.Deserialize(xmlTextReader);
             }
         }
 

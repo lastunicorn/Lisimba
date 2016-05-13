@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing
 
         public ContactItemSetViewModel()
         {
-            ContactItems = new ContactItemCollection();
+            contactItems = new ContactItemCollection();
         }
     }
 }

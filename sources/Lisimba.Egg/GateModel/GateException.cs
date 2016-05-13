@@ -18,6 +18,7 @@ using System;
 
 namespace DustInTheWind.Lisimba.Egg.GateModel
 {
+    [Serializable]
     public class GateException : EggException
     {
         public GateException()

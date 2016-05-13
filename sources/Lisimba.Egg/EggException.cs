@@ -19,6 +19,7 @@ using System.Runtime.Serialization;
 
 namespace DustInTheWind.Lisimba.Egg
 {
+    [Serializable]
     public class EggException : ApplicationException
     {
         public EggException()
