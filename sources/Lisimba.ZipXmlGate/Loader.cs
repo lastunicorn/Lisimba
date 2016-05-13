@@ -54,19 +54,9 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             pictures.Clear();
             addressBookEntity = null;
 
-            AddressBook book;
-
-            //System.Runtime.Serialization.IFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-            //Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
-            //book = (Book)formatter.Deserialize(stream);
-            //stream.Close();
-
-            //return book;
-
             // Create unzipper.
             using (ZipInputStream zipStream = new ZipInputStream(fileStream))
             {
-                // Search for the "file.xml" file
                 while (true)
                 {
                     ZipEntry zipEntry = zipStream.GetNextEntry();
@@ -74,9 +64,9 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     if (zipEntry == null)
                         break;
 
-                    if (zipEntry.Name.Equals("file.xml"))
+                    if (zipEntry.Name.Equals(Configuration.MainFileName))
                         DeserializeMainFile(zipStream, fileStream.Name);
-                    else if (zipEntry.Name.StartsWith("images/"))
+                    else if (zipEntry.Name.StartsWith(Configuration.DataDirectoryName + "/"))
                         DeserializePictureFile(zipStream, zipEntry);
                 }
 
@@ -85,16 +75,12 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
                 foreach (ContactEntity contactEntity in addressBookEntity.Contacts)
                 {
-                    if (contactEntity.PictureHash == null)
-                        continue;
-
-                    if (pictures.ContainsKey(contactEntity.PictureHash))
+                    if (contactEntity.PictureHash != null && pictures.ContainsKey(contactEntity.PictureHash))
                         contactEntity.Picture = pictures[contactEntity.PictureHash];
                 }
-
-                book = EntityConverter.FromEntity(addressBookEntity);
             }
 
+            AddressBook book = EntityConverter.FromEntity(addressBookEntity);
             book.Version = eggVersion.ToString();
 
             return book;
@@ -127,36 +113,12 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             // Unzip the "file.xml" file into memory.
             using (MemoryStream ms = new MemoryStream())
             {
-                byte[] buffer = new byte[10240];
-
-                while (true)
-                {
-                    int size = zipStream.Read(buffer, 0, buffer.Length);
-
-                    if (size > 0)
-                        ms.Write(buffer, 0, size);
-                    else
-                        break;
-                }
+                ReadAllStream(zipStream, ms);
 
                 ms.Position = 0;
 
-                // Read lsb version
-                Version lsbVersion = ReadLsbVersion(ms);
-
                 // Compare versions
-                if (lsbVersion == null)
-                {
-                    string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
-                    IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
-                    warnings.Add(warning);
-                }
-                else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
-                {
-                    string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}", fileName, eggVersion.ToString(2), lsbVersion.ToString(2));
-                    IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
-                    warnings.Add(warning);
-                }
+                ValidateVersion(ms, fileName);
 
                 ms.Position = 0;
 
@@ -168,6 +130,44 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
                     addressBookEntity = (AddressBookEntity)serializer.Deserialize(xr);
                 }
+            }
+        }
+
+        private static void ReadAllStream(Stream source, Stream destination)
+        {
+            byte[] buffer = new byte[10240];
+
+            while (true)
+            {
+                int size = source.Read(buffer, 0, buffer.Length);
+
+                if (size > 0)
+                    destination.Write(buffer, 0, size);
+                else
+                    break;
+            }
+        }
+
+        private void ValidateVersion(Stream ms, string fileName)
+        {
+            // Read lsb version
+            Version lsbVersion = ReadLsbVersion(ms);
+
+            if (lsbVersion == null)
+            {
+                string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
+                IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
+                warnings.Add(warning);
+            }
+            else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
+            {
+                string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}",
+                        fileName,
+                        eggVersion.ToString(2),
+                        lsbVersion.ToString(2));
+
+                IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
+                warnings.Add(warning);
             }
         }
 

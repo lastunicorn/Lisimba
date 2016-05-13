@@ -185,7 +185,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                var hashCode = (firstName != null ? firstName.GetHashCode() : 0);
+                int hashCode = (firstName != null ? firstName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (middleName != null ? middleName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (lastName != null ? lastName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (nickname != null ? nickname.GetHashCode() : 0);

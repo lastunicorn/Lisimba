@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
         private static void WriteMainFile(ZipOutputStream zipStream, AddressBookEntity addressBookEntity)
         {
-            ZipEntry zipEntry = new ZipEntry("file.xml")
+            ZipEntry zipEntry = new ZipEntry(Configuration.MainFileName)
             {
                 CompressionMethod = CompressionMethod.Deflated
             };
@@ -79,7 +79,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
             foreach (KeyValuePair<string, byte[]> keyValuePair in pictures)
             {
-                ZipEntry zipEntry = new ZipEntry("images/" + keyValuePair.Key)
+                ZipEntry zipEntry = new ZipEntry(Configuration.DataDirectoryName + "/" + keyValuePair.Key)
                 {
                     CompressionMethod = CompressionMethod.Deflated
                 };

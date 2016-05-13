@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -57,12 +56,12 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     Description = contact.Birthday.Description
                 },
                 Category = contact.Category,
-                Phones = contact.Items.OfType<Phone>().Select(ToEntity).ToList(),
-                Emails = contact.Items.OfType<Email>().Select(ToEntity).ToList(),
-                WebSites = contact.Items.OfType<WebSite>().Select(ToEntity).ToList(),
-                Addresses = contact.Items.OfType<PostalAddress>().Select(ToEntity).ToList(),
-                Dates = contact.Items.OfType<Date>().Select(ToEntity).ToList(),
-                SocialProfileIds = contact.Items.OfType<SocialProfile>().Select(ToEntity).ToList(),
+                Phones = contact.Items.OfType<Phone>().Select(ToEntity).ToListOrNull(),
+                Emails = contact.Items.OfType<Email>().Select(ToEntity).ToListOrNull(),
+                WebSites = contact.Items.OfType<WebSite>().Select(ToEntity).ToListOrNull(),
+                Addresses = contact.Items.OfType<PostalAddress>().Select(ToEntity).ToListOrNull(),
+                Dates = contact.Items.OfType<Date>().Select(ToEntity).ToListOrNull(),
+                SocialProfileIds = contact.Items.OfType<SocialProfile>().Select(ToEntity).ToListOrNull(),
                 Notes = contact.Notes
             };
         }

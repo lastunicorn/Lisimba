@@ -513,7 +513,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                var hashCode = day;
+                int hashCode = day;
                 hashCode = (hashCode * 397) ^ month;
                 hashCode = (hashCode * 397) ^ year;
                 hashCode = (hashCode * 397) ^ (description != null ? description.GetHashCode() : 0);

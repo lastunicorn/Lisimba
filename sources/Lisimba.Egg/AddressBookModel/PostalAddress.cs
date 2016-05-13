@@ -207,7 +207,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         {
             unchecked
             {
-                var hashCode = (street != null ? street.GetHashCode() : 0);
+                int hashCode = (street != null ? street.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (city != null ? city.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (state != null ? state.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (postalCode != null ? postalCode.GetHashCode() : 0);

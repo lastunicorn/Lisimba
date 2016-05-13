@@ -16,8 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Serialization;
@@ -32,6 +30,39 @@ namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
 
         [XmlElement("Name")]
         public PersonNameEntity Name { get; set; }
+
+        [XmlIgnore]
+        public byte[] Picture
+        {
+            get { return picture; }
+            set
+            {
+                picture = value;
+
+                if (value == null)
+                {
+                    PictureHash = null;
+                }
+                else
+                {
+                    byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(value);
+                    PictureHash = ByteArrayToString(tmpHash);
+                }
+            }
+        }
+
+        [XmlElement("Picture")]
+        public string PictureHash { get; set; }
+
+        private static string ByteArrayToString(IReadOnlyCollection<byte> bytes)
+        {
+            StringBuilder sb = new StringBuilder(bytes.Count);
+
+            foreach (byte b in bytes)
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
 
         [XmlElement("Birthday")]
         public DateEntity Birthday { get; set; }
@@ -59,39 +90,5 @@ namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
 
         [XmlElement("Notes")]
         public string Notes { get; set; }
-
-        [XmlIgnore]
-        public byte[] Picture
-        {
-            get { return picture; }
-            set
-            {
-                picture = value;
-
-                if (value == null)
-                {
-                    PictureHash = null;
-                }
-                else
-                {
-                    byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(value);
-                    PictureHash = ByteArrayToString(tmpHash);
-                }
-            }
-        }
-
-        [XmlElement("Picture")]
-        public string PictureHash { get; set; }
-
-        private static string ByteArrayToString(byte[] arrInput)
-        {
-            int i;
-            StringBuilder sOutput = new StringBuilder(arrInput.Length);
-
-            for (i = 0; i < arrInput.Length; i++)
-                sOutput.Append(arrInput[i].ToString("X2"));
-
-            return sOutput.ToString();
-        }
     }
 }

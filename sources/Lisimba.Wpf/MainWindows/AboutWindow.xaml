@@ -17,7 +17,7 @@
 
         <StackPanel
             DockPanel.Dock="Bottom"
-            Background="LightGray">
+            Background="WhiteSmoke">
 
             <Button
                 Content="Close"
