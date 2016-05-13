@@ -73,17 +73,27 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 if (addressBookEntity == null)
                     throw new EggException("Incorrect file. The archive does not contain the \"file.xml\" file.");
 
-                foreach (ContactEntity contactEntity in addressBookEntity.Contacts)
-                {
-                    if (contactEntity.PictureHash != null && pictures.ContainsKey(contactEntity.PictureHash))
-                        contactEntity.Picture = pictures[contactEntity.PictureHash];
-                }
+                AttachPicturesToContacts();
             }
 
             AddressBook book = EntityConverter.FromEntity(addressBookEntity);
             book.Version = eggVersion.ToString();
 
             return book;
+        }
+
+        private void AttachPicturesToContacts()
+        {
+            foreach (ContactEntity contactEntity in addressBookEntity.Contacts)
+            {
+                if (contactEntity.PictureHash != null)
+                {
+                    if (pictures.ContainsKey(contactEntity.PictureHash))
+                        contactEntity.Picture = pictures[contactEntity.PictureHash];
+                    else
+                        warnings.Add(new EggException("Picture not found. Picture hash: " + contactEntity.PictureHash));
+                }
+            }
         }
 
         private void DeserializePictureFile(Stream zipStream, ZipEntry zipEntry)
