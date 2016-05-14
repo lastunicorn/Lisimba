@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
-using System.Text;
 using System.Xml.Serialization;
 
 namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
@@ -39,30 +38,24 @@ namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
             {
                 picture = value;
 
-                if (value == null)
-                {
-                    PictureHash = null;
-                }
-                else
-                {
-                    byte[] tmpHash = new MD5CryptoServiceProvider().ComputeHash(value);
-                    PictureHash = ByteArrayToString(tmpHash);
-                }
+                PictureHash = ComputeHash(value);
+            }
+        }
+
+        private static string ComputeHash(byte[] value)
+        {
+            if (value == null)
+                return null;
+
+            using (SHA256CryptoServiceProvider cryptoServiceProvider = new SHA256CryptoServiceProvider())
+            {
+                byte[] hash = cryptoServiceProvider.ComputeHash(value);
+                return hash.ToHexString();
             }
         }
 
         [XmlElement("Picture")]
         public string PictureHash { get; set; }
-
-        private static string ByteArrayToString(IReadOnlyCollection<byte> bytes)
-        {
-            StringBuilder sb = new StringBuilder(bytes.Count);
-
-            foreach (byte b in bytes)
-                sb.Append(b.ToString("X2"));
-
-            return sb.ToString();
-        }
 
         [XmlElement("Birthday")]
         public DateEntity Birthday { get; set; }

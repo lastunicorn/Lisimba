@@ -45,6 +45,7 @@
     <Compile Include="Configuration.cs" />
     <Compile Include="Entities\AddressBookEntity.cs" />
     <Compile Include="Entities\AddressEntity.cs" />
+    <Compile Include="ByteArrayConverter.cs" />
     <Compile Include="Entities\ContactEntity.cs" />
     <Compile Include="Entities\DateEntity.cs" />
     <Compile Include="Entities\EmailEntity.cs" />

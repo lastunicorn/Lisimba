@@ -78,17 +78,6 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             }
         }
 
-        private static Image ToImage(byte[] bytes)
-        {
-            if (bytes == null)
-                return null;
-
-            using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                return Image.FromStream(ms);
-            }
-        }
-
         private static PhoneEntity ToEntity(Phone phone)
         {
             return new PhoneEntity
@@ -204,6 +193,17 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             contact.Notes = contactEntity.Notes;
 
             return contact;
+        }
+
+        private static Image ToImage(byte[] bytes)
+        {
+            if (bytes == null)
+                return null;
+
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                return Image.FromStream(ms);
+            }
         }
 
         private static Phone FromEntity(PhoneEntity phoneEntity)
