@@ -133,7 +133,6 @@
     <Compile Include="MainWindows\LisimbaWindow.xaml.cs">
       <DependentUpon>LisimbaWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ActiveObservers.cs" />
     <Compile Include="ApplicationStatus.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Commands\ApplicationExitCommand.cs" />
@@ -182,6 +181,7 @@
     </Compile>
     <Compile Include="MainWindows\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
+    <Compile Include="Observers\AddressBookOpenedObserver.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -192,6 +192,7 @@
     <Compile Include="Operations\AvailableCommands.cs" />
     <Compile Include="Operations\ICommandProvider.cs" />
     <Compile Include="Setup\CommandProvider.cs" />
+    <Compile Include="Setup\ObserverProvider.cs" />
     <Compile Include="TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>

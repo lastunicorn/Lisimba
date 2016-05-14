@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Wpf
+using System;
+using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Wpf.Observers;
+using Microsoft.Practices.Unity;
+
+namespace DustInTheWind.Lisimba.Wpf.Setup
 {
-    internal class ActiveObservers
+    internal class ObserverProvider : IObserverProvider
     {
-        public void Start()
+        private readonly IUnityContainer unityContainer;
+
+        public ObserverProvider(IUnityContainer unityContainer)
         {
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+            this.unityContainer = unityContainer;
+        }
+
+        public IEnumerable<IObserver> GetNewObservers()
+        {
+            yield return unityContainer.Resolve<AddressBookOpenedObserver>();
         }
     }
 }

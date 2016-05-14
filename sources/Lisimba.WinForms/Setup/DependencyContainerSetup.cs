@@ -22,7 +22,6 @@ using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
-using DustInTheWind.WinFormsCommon.Controls;
 using DustInTheWind.WinFormsCommon.ObservingModel;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;

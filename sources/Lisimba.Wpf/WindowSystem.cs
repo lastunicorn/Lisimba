@@ -17,6 +17,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows;
 using DustInTheWind.Lisimba.Wpf.MainWindows;
 using DustInTheWind.Lisimba.Wpf.Properties;
@@ -105,6 +107,16 @@ namespace DustInTheWind.Lisimba.Wpf
             //    form.Warnings = warnings.ToList();
             //    form.ShowDialog(mainWindow);
             //}
+
+            string text = warnings
+                .Aggregate(new StringBuilder(), (sb, ex) =>
+                {
+                    sb.AppendLine(ex.Message);
+                    return sb;
+                })
+                .ToString();
+
+            MessageBox.Show(text, "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
 
         public void DisplayError(string message)

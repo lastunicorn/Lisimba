@@ -18,6 +18,7 @@ using System;
 using System.Windows;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 
 namespace DustInTheWind.Lisimba.Wpf
 {
