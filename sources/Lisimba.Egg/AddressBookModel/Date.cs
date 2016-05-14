@@ -425,29 +425,19 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         public static Date Parse(string value)
         {
             Date d = new Date();
-            string[] v = value.Split('/');
-
-            try
-            {
-                d.Day = int.Parse(v[1]);
-                d.Month = int.Parse(v[0]);
-                d.Year = int.Parse(v[2]);
-            }
-            catch
-            {
-            }
-
+            d.FromString(value);
             return d;
         }
 
         public void FromString(string value)
         {
-            string[] v = value.Split('/');
+            string[] parts = value.Split('/');
+
             try
             {
-                Day = int.Parse(v[1]);
-                Month = int.Parse(v[0]);
-                Year = int.Parse(v[2]);
+                Day = int.Parse(parts[1]);
+                Month = int.Parse(parts[0]);
+                Year = int.Parse(parts[2]);
             }
             catch
             {

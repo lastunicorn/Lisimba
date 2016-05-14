@@ -26,11 +26,11 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             Date date = value as Date;
-            
+
             if (date == null)
                 return null;
 
-            if (targetType == typeof (string))
+            if (targetType == typeof(string))
                 return date.ToShortString();
 
             return null;
@@ -38,7 +38,36 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string dateAsString = value as string;
+
+            if (dateAsString == null)
+                return null;
+
+            if (targetType == typeof(Date))
+            {
+                string[] parts = dateAsString.Split(' ');
+
+                if (parts.Length != 3)
+                    return null;
+
+                try
+                {
+                    Date date = new Date
+                    {
+                        Year = int.Parse(parts[0]),
+                        Month = int.Parse(parts[1]),
+                        Day = int.Parse(parts[2])
+                    };
+
+                    return date;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+
+            return null;
         }
     }
 }
