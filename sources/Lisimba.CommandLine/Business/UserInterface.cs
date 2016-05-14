@@ -16,8 +16,8 @@
 
 using System;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
-using DustInTheWind.ConsoleCommon.ObservingModel;
 using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {

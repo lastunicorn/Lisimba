@@ -60,6 +60,9 @@
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="LisimbaWindowTitle.cs" />
+    <Compile Include="ObservingModel\ActiveObservers.cs" />
+    <Compile Include="ObservingModel\IObserver.cs" />
+    <Compile Include="ObservingModel\IObserverProvider.cs" />
     <Compile Include="Properties\ZodiacResources.Designer.cs">
       <DependentUpon>ZodiacResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>

@@ -18,8 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using DustInTheWind.ConsoleCommon;
-using DustInTheWind.ConsoleCommon.ObservingModel;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
