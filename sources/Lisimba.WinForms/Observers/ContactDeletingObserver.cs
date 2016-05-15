@@ -16,10 +16,10 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.WinFormsCommon.ObservingModel;
 
 namespace DustInTheWind.Lisimba.WinForms.Observers
 {

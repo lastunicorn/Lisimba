@@ -14,12 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.WinFormsCommon.ObservingModel
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
-    public interface IObserverProvider
+    internal class ShowMainOperation : OperationBase<object>
     {
-        IEnumerable<IObserver> GetNewObservers();
+        public override string ShortDescription
+        {
+            get { return LocalizedResources.ShowAboutOperationDescription; }
+        }
+
+        public ShowMainOperation(WindowSystem windowSystem)
+            : base(windowSystem)
+        {
+        }
+
+        protected override void DoExecute(object parameter)
+        {
+            windowSystem.DisplayMainWindow();
+        }
     }
 }

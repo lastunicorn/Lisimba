@@ -16,8 +16,8 @@
 
 using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.WinForms.Observers;
-using DustInTheWind.WinFormsCommon.ObservingModel;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.WinForms.Setup

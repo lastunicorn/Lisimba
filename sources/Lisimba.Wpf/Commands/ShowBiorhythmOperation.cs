@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,40 +16,46 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.WinForms.Observers
+namespace DustInTheWind.Lisimba.WinForms.Operations
 {
-    internal class AddressBookSavedObserver : IObserver
+    internal class ShowBiorhythmOperation : OperationBase<object>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookSavedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus)
+        public override string ShortDescription
+        {
+            get { return LocalizedResources.BiorhythmOperationDescription; }
+        }
+
+        public ShowBiorhythmOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+            : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.applicationStatus = applicationStatus;
+
+            openedAddressBooks.ContactChanged += HandleContactChanged;
+
+            IsEnabled = CalculateEnableState();
         }
 
-        public void Start()
+        private void HandleContactChanged(object sender, EventArgs e)
         {
-            openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+            IsEnabled = CalculateEnableState();
         }
 
-        public void Stop()
+        private bool CalculateEnableState()
         {
-            openedAddressBooks.AddressBookSaved -= HandleAddressBookSaved;
+            return openedAddressBooks.CurrentContact != null &&
+                   openedAddressBooks.CurrentContact.Birthday.IsCompleteDate;
         }
 
-        private void HandleAddressBookSaved(object sender, EventArgs e)
+        protected override void DoExecute(object parameter)
         {
-            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
+            windowSystem.DisplayBiorhythm(openedAddressBooks.CurrentContact);
         }
     }
 }

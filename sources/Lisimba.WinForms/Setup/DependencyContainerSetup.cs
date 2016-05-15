@@ -19,10 +19,10 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
-using DustInTheWind.WinFormsCommon.ObservingModel;
 using DustInTheWind.WinFormsCommon.Operations;
 using Microsoft.Practices.Unity;
 
