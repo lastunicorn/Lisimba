@@ -124,6 +124,25 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current address book is not saved.
+        ///Do you wanna save it before proceedeing?.
+        /// </summary>
+        internal static string EnsureAddressBookIsSaved_Question {
+            get {
+                return ResourceManager.GetString("EnsureAddressBookIsSaved_Question", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save?.
+        /// </summary>
+        internal static string EnsureAddressBookIsSaved_Title {
+            get {
+                return ResourceManager.GetString("EnsureAddressBookIsSaved_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         internal static string ErrorPopup_Title {

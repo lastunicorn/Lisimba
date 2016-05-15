@@ -35,6 +35,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
         public IEnumerable<IObserver> GetNewObservers()
         {
             yield return unityContainer.Resolve<AddressBookOpenedObserver>();
+            yield return unityContainer.Resolve<AddressBookClosingObserver>();
         }
     }
 }

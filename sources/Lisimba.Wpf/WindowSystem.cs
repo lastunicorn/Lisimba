@@ -176,5 +176,15 @@ namespace DustInTheWind.Lisimba.Wpf
             window.Owner = mainWindow;
             window.ShowDialog();
         }
+
+        public bool? DisplayYesNoCancelQuestion(string question, string title)
+        {
+            MessageBoxResult dialogResult = MessageBox.Show(MainWindow, question, title, MessageBoxButton.YesNoCancel, MessageBoxImage.Question, MessageBoxResult.Yes);
+
+            if (dialogResult == MessageBoxResult.Cancel)
+                return null;
+
+            return dialogResult == MessageBoxResult.Yes;
+        }
     }
 }
