@@ -34,12 +34,10 @@ namespace DustInTheWind.Lisimba.WinForms.Setup
 
         public IEnumerable<IObserver> GetNewObservers()
         {
-            yield return unityContainer.Resolve<AddressBookOpenedObserver>();
-            yield return unityContainer.Resolve<AddressBookSavingObserver>();
-            yield return unityContainer.Resolve<AddressBookSavedObserver>();
-            yield return unityContainer.Resolve<AddressBookClosingObserver>();
-            yield return unityContainer.Resolve<AddressBookClosedObserver>();
-            yield return unityContainer.Resolve<ContactDeletingObserver>();
+            yield return unityContainer.Resolve<AddressBookOpenObserver>();
+            yield return unityContainer.Resolve<AddressBookSaveObserver>();
+            yield return unityContainer.Resolve<AddressBookCloseObserver>();
+            yield return unityContainer.Resolve<ContactDeleteObserver>();
         }
     }
 }

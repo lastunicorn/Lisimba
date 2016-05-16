@@ -15,56 +15,72 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.CommandLine.Properties;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.CommandLine.Observers
+namespace DustInTheWind.Lisimba.WinForms.Observers
 {
-    internal class AddressBookClosingObserver : IObserver
+    internal class AddressBookCloseObserver : IObserver
     {
-        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly WindowSystem windowSystem;
+        private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookClosingObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
+        public AddressBookCloseObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
+            ApplicationStatus applicationStatus)
         {
-            if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
-            this.console = console;
             this.openedAddressBooks = openedAddressBooks;
+            this.windowSystem = windowSystem;
+            this.applicationStatus = applicationStatus;
         }
 
         public void Start()
         {
             openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
+            openedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         public void Stop()
         {
             openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
+            openedAddressBooks.AddressBookClosed -= HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
         {
             if (e.AddressBook.Status == AddressBookStatus.Modified)
             {
-                bool? needToSave = console.AskYesNoCancelQuestion(Resources.AskToSaveAddressBook);
+                bool? needToSave = AskToSaveAddressBook();
 
                 if (needToSave == null)
-                {
                     e.Cancel = true;
-                }
                 else
-                {
                     e.SaveAddressBook = needToSave.Value;
-                }
             }
             else
             {
                 e.SaveAddressBook = false;
             }
+        }
+
+        private bool? AskToSaveAddressBook()
+        {
+            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
+            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
+
+            return windowSystem.DisplayYesNoCancelQuestion(text, title);
+        }
+
+        private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
+        {
+            applicationStatus.StatusText = LocalizedResources.AddressBookClosedSuccessStatus;
         }
     }
 }

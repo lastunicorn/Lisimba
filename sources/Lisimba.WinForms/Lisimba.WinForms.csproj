@@ -148,7 +148,7 @@
     <Compile Include="Main\LisimbaToolBar.Designer.cs">
       <DependentUpon>LisimbaToolBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Observers\ContactDeletingObserver.cs" />
+    <Compile Include="Observers\ContactDeleteObserver.cs" />
     <Compile Include="Operations\ExportOperation.cs" />
     <Compile Include="Operations\ImportOperation.cs" />
     <Compile Include="Operations\OpenRecentFileOperation.cs" />
@@ -161,14 +161,12 @@
     <Compile Include="Services\MenuItemViewModelProvider.cs" />
     <Compile Include="MainMenu\MainMenusViewModels.cs" />
     <Compile Include="Main\TrayIconMenuViewModels.cs" />
-    <Compile Include="Observers\AddressBookSavingObserver.cs" />
+    <Compile Include="Observers\AddressBookSaveObserver.cs" />
     <Compile Include="Operations\ShowMainOperation.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Setup\ObserverProvider.cs" />
-    <Compile Include="Observers\AddressBookClosedObserver.cs" />
-    <Compile Include="Observers\AddressBookClosingObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenedObserver.cs" />
-    <Compile Include="Observers\AddressBookSavedObserver.cs" />
+    <Compile Include="Observers\AddressBookCloseObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
     <Compile Include="Services\BirthdaysInfo.cs" />
     <Compile Include="Setup\OperationProvider.cs" />
     <Compile Include="Main\TrayIcon.cs">

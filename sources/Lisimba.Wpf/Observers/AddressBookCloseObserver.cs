@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -17,18 +17,16 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.Wpf.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Observers
+namespace DustInTheWind.Lisimba.Wpf.Observers
 {
-    internal class ContactDeletingObserver : IObserver
+    internal class AddressBookCloseObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly WindowSystem windowSystem;
 
-        public ContactDeletingObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public AddressBookCloseObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
@@ -39,29 +37,37 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         public void Start()
         {
-            openedAddressBooks.ContactDeleting += HandleContactDeleting;
+            openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
         }
 
         public void Stop()
         {
-            openedAddressBooks.ContactDeleting -= HandleContactDeleting;
+            openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
         }
 
-        private void HandleContactDeleting(object sender, ContactDeletingEventArgs e)
+        private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
         {
-            if (!e.Cancel)
+            if (e.AddressBook.Status == AddressBookStatus.Modified)
             {
-                bool allowToDelete = ConfirmDeleteContact(e.ContactToDelete);
-                e.Cancel = !allowToDelete;
+                bool? needToSave = AskToSaveAddressBook();
+
+                if (needToSave == null)
+                    e.Cancel = true;
+                else
+                    e.SaveAddressBook = needToSave.Value;
+            }
+            else
+            {
+                e.SaveAddressBook = false;
             }
         }
 
-        private bool ConfirmDeleteContact(Contact contactToDelete)
+        private bool? AskToSaveAddressBook()
         {
-            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
-            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
+            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
+            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
 
-            return windowSystem.DisplayYesNoExclamation(text, title);
+            return windowSystem.DisplayYesNoCancelQuestion(text, title);
         }
     }
 }

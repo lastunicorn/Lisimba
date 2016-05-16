@@ -17,39 +17,51 @@
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.WinForms.Services;
 
 namespace DustInTheWind.Lisimba.WinForms.Observers
 {
-    internal class AddressBookSavedObserver : IObserver
+    internal class ContactDeleteObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly ApplicationStatus applicationStatus;
+        private readonly WindowSystem windowSystem;
 
-        public AddressBookSavedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus)
+        public ContactDeleteObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.applicationStatus = applicationStatus;
+            this.windowSystem = windowSystem;
         }
 
         public void Start()
         {
-            openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+            openedAddressBooks.ContactDeleting += HandleContactDeleting;
         }
 
         public void Stop()
         {
-            openedAddressBooks.AddressBookSaved -= HandleAddressBookSaved;
+            openedAddressBooks.ContactDeleting -= HandleContactDeleting;
         }
 
-        private void HandleAddressBookSaved(object sender, EventArgs e)
+        private void HandleContactDeleting(object sender, ContactDeletingEventArgs e)
         {
-            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
+            if (!e.Cancel)
+            {
+                bool allowToDelete = ConfirmDeleteContact(e.ContactToDelete);
+                e.Cancel = !allowToDelete;
+            }
+        }
+
+        private bool ConfirmDeleteContact(Contact contactToDelete)
+        {
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
+
+            return windowSystem.DisplayYesNoExclamation(text, title);
         }
     }
 }

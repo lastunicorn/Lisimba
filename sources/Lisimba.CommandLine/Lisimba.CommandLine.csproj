@@ -48,7 +48,7 @@
     <Compile Include="Business\ViewTemplates.cs" />
     <Compile Include="Flows\CompareFlow.cs" />
     <Compile Include="Flows\LangFlow.cs" />
-    <Compile Include="Observers\AddressBookSavingObserver.cs" />
+    <Compile Include="Observers\AddressBookSaveObserver.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
     <Compile Include="Setup\ObserverProvider.cs" />
     <Compile Include="Business\UserInterface.cs" />
@@ -64,10 +64,8 @@
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Observers\AddressBookClosedObserver.cs" />
-    <Compile Include="Observers\AddressBookClosingObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenedObserver.cs" />
-    <Compile Include="Observers\AddressBookSavedObserver.cs" />
+    <Compile Include="Observers\AddressBookCloseObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />

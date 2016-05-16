@@ -183,8 +183,8 @@
     </Compile>
     <Compile Include="MainWindows\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="Observers\AddressBookClosingObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenedObserver.cs" />
+    <Compile Include="Observers\AddressBookCloseObserver.cs" />
+    <Compile Include="Observers\AddressBookOpenObserver.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -16,34 +16,26 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Text;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Observers
+namespace DustInTheWind.Lisimba.CommandLine.Observers
 {
-    internal class AddressBookOpenedObserver : IObserver
+    internal class AddressBookOpenObserver : IObserver
     {
+        private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly ApplicationStatus applicationStatus;
-        private readonly WindowSystem windowSystem;
-        private readonly BirthdaysInfo birthdaysInfo;
 
-        public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus,
-            WindowSystem windowSystem, BirthdaysInfo birthdaysInfo)
+        public AddressBookOpenObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
         {
+            if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
-            if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
+            this.console = console;
             this.openedAddressBooks = openedAddressBooks;
-            this.applicationStatus = applicationStatus;
-            this.windowSystem = windowSystem;
-            this.birthdaysInfo = birthdaysInfo;
         }
 
         public void Start()
@@ -60,31 +52,49 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
         {
             DisplayOpenSuccessMessage();
             DisplayWarnings(e.Result.Warnings);
-            birthdaysInfo.Show();
         }
 
         private void DisplayOpenSuccessMessage()
         {
-            if (openedAddressBooks.Current == null)
-                return;
-
-            if (openedAddressBooks.Current.Status == AddressBookStatus.New)
+            if (openedAddressBooks.Current != null)
             {
-                applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
+                if (openedAddressBooks.Current.Status == AddressBookStatus.New)
+                {
+                    string addressBookName = openedAddressBooks.Current.GetFriendlyName();
+                    string message = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
+
+                    console.WriteLineSuccess(message);
+                }
+                else
+                {
+                    string addressBookFileName = openedAddressBooks.Current.Location;
+                    int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+                    string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
+
+                    console.WriteLineSuccess(message);
+                }
             }
             else
             {
-                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
-                applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
+                console.WriteLineError(Resources.OpenAddressBookUnknownError);
             }
         }
 
         private void DisplayWarnings(IEnumerable<Exception> warnings)
         {
-            if (warnings == null || !warnings.Any())
+            if (warnings == null)
                 return;
 
-            windowSystem.DisplayWarning(warnings);
+            StringBuilder sb = new StringBuilder();
+
+            foreach (Exception warning in warnings)
+            {
+                sb.AppendLine(warning.Message);
+                sb.AppendLine();
+            }
+
+            if (sb.Length > 0)
+                console.WriteLineWarning(sb.ToString());
         }
     }
 }

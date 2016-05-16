@@ -14,19 +14,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.ComponentModel;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {
     public class AddressBookClosingEventArgs : CancelEventArgs
     {
+        /// <summary>
+        /// Gets the address book that is about to be closed.
+        /// </summary>
         public AddressBookShell AddressBook { get; private set; }
-        public bool? SaveAddressBook { get; set; }
-        public bool AddressBookNeedsSave { get; private set; }
 
-        public AddressBookClosingEventArgs(bool addressBookNeedsSave, AddressBookShell addressBook)
+        /// <summary>
+        /// Gets or sets a value that specifies if the address book will require saving before closing.
+        /// </summary>
+        public bool? SaveAddressBook { get; set; }
+
+        public AddressBookClosingEventArgs(AddressBookShell addressBook)
         {
-            AddressBookNeedsSave = addressBookNeedsSave;
+            if (addressBook == null) throw new ArgumentNullException("addressBook");
+
             AddressBook = addressBook;
         }
     }

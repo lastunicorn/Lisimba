@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -19,21 +19,31 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Wpf.Observers
+namespace DustInTheWind.Lisimba.WinForms.Observers
 {
-    internal class AddressBookOpenedObserver : IObserver
+    internal class AddressBookOpenObserver : IObserver
     {
         private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly ApplicationStatus applicationStatus;
         private readonly WindowSystem windowSystem;
+        private readonly BirthdaysInfo birthdaysInfo;
 
-        public AddressBookOpenedObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus,
+            WindowSystem windowSystem, BirthdaysInfo birthdaysInfo)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+            if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
             this.openedAddressBooks = openedAddressBooks;
+            this.applicationStatus = applicationStatus;
             this.windowSystem = windowSystem;
+            this.birthdaysInfo = birthdaysInfo;
         }
 
         public void Start()
@@ -48,7 +58,25 @@ namespace DustInTheWind.Lisimba.Wpf.Observers
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
         {
+            DisplayOpenSuccessMessage();
             DisplayWarnings(e.Result.Warnings);
+            birthdaysInfo.Show();
+        }
+
+        private void DisplayOpenSuccessMessage()
+        {
+            if (openedAddressBooks.Current == null)
+                return;
+
+            if (openedAddressBooks.Current.Status == AddressBookStatus.New)
+            {
+                applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
+            }
+            else
+            {
+                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+                applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
+            }
         }
 
         private void DisplayWarnings(IEnumerable<Exception> warnings)

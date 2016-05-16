@@ -202,7 +202,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         private bool PrepareForClose()
         {
             bool addressBookNeedsSave = Current.Status == AddressBookStatus.Modified;
-            AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(addressBookNeedsSave, Current);
+            AddressBookClosingEventArgs eva = new AddressBookClosingEventArgs(Current);
             OnAddressBookClosing(eva);
 
             if (eva.Cancel)
