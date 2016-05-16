@@ -31,15 +31,15 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             DataContext = viewModel;
         }
 
-        private void LisimbaWindow_OnClosing(object sender, CancelEventArgs e)
-        {
-            LisimbaViewModel viewModel = DataContext as LisimbaViewModel;
+        //private void LisimbaWindow_OnClosing(object sender, CancelEventArgs e)
+        //{
+        //    LisimbaViewModel viewModel = DataContext as LisimbaViewModel;
 
-            if (viewModel == null)
-                return;
+        //    if (viewModel == null)
+        //        return;
 
-            if (viewModel.WindowClosing != null)
-                viewModel.WindowClosing.Execute(null);
-        }
+        //    if (viewModel.WindowClosing != null)
+        //        viewModel.WindowClosing.Execute(null);
+        //}
     }
 }

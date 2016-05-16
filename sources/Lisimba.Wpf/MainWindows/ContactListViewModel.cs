@@ -137,10 +137,9 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 return true;
 
             return searchText.Length == 0
-                || contact.Name.FirstName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.MiddleName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.LastName.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
-                || contact.Name.Nickname.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0;
+                || contact.Name.ContainsText(searchText)
+                || contact.Notes.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || contact.Items.OfType<Phone>().Any(x => x.Number.Replace(" ", string.Empty).Contains(searchText));
         }
 
         private SortingComboBoxItem GetSortingItem()
@@ -151,37 +150,16 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         private ContactsSortingType GetSortingType()
         {
-            if (applicationConfiguration == null)
-                return ContactsSortingType.Birthday;
-
-            switch (applicationConfiguration.DefaultContactSort)
-            {
-                case "BirthDate":
-                    return ContactsSortingType.BirthDate;
-
-                case "FirstName":
-                    return ContactsSortingType.FirstName;
-
-                case "LastName":
-                    return ContactsSortingType.LastName;
-
-                case "Nickname":
-                    return ContactsSortingType.Nickname;
-
-                case "NicknameOrName":
-                    return ContactsSortingType.NicknameOrName;
-
-                default:
-                    return ContactsSortingType.Birthday;
-            }
+            return applicationConfiguration == null
+                ? ContactsSortingType.Birthday
+                : applicationConfiguration.DefaultContactSort;
         }
 
         private IComparer GetContactComparer()
         {
-            if (SelectedSortingMethod == null)
-                return null;
-
-            return ComparerFactory.GetComparer(SelectedSortingMethod.SortingType);
+            return SelectedSortingMethod == null
+                ? null
+                : ComparerFactory.GetComparer(SelectedSortingMethod.SortingType);
         }
     }
 }

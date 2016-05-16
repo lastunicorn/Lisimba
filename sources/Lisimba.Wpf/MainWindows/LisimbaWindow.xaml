@@ -20,16 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         x:ClassModifier="internal"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:main="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
         d:DataContext="{d:DesignInstance main:LisimbaViewModel}"
         Title="{Binding Title, Mode=OneWay}"
         Height="600"
         Width="800"
         WindowStartupLocation="CenterScreen"
         Icon="{StaticResource LisimbaIcon}"
-        ResizeMode="CanResizeWithGrip"
-        Closing="LisimbaWindow_OnClosing">
+        ResizeMode="CanResizeWithGrip">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type main:StartViewModel}">

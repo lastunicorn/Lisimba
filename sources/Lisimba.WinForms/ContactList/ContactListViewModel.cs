@@ -198,27 +198,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
             if (applicationConfiguration == null)
                 return ContactsSortingType.Birthday;
 
-            switch (applicationConfiguration.DefaultContactSort)
-            {
-                default:
-                case "Birthday":
-                    return ContactsSortingType.Birthday;
-
-                case "BirthDate":
-                    return ContactsSortingType.BirthDate;
-
-                case "FirstName":
-                    return ContactsSortingType.FirstName;
-
-                case "LastName":
-                    return ContactsSortingType.LastName;
-
-                case "Nickname":
-                    return ContactsSortingType.Nickname;
-
-                case "NicknameOrName":
-                    return ContactsSortingType.NicknameOrName;
-            }
+            return applicationConfiguration.DefaultContactSort;
         }
 
         public void ContactWasSelected()

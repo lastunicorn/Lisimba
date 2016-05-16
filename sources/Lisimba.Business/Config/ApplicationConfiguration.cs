@@ -17,6 +17,7 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Business.ConfigSection;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
+using DustInTheWind.Lisimba.Egg.Sorting;
 
 namespace DustInTheWind.Lisimba.Business.Config
 {
@@ -84,9 +85,31 @@ namespace DustInTheWind.Lisimba.Business.Config
             get { return new AddressBookLocationInfo(configurationFile.LisimbaConfigSection.LoadFileAtStart.FileName); }
         }
 
-        public string DefaultContactSort
+        public ContactsSortingType DefaultContactSort
         {
-            get { return configurationFile.LisimbaConfigSection.SortBy.Value; }
+            get
+            {
+                switch (configurationFile.LisimbaConfigSection.SortBy.Value)
+                {
+                    case "BirthDate":
+                        return ContactsSortingType.BirthDate;
+
+                    case "FirstName":
+                        return ContactsSortingType.FirstName;
+
+                    case "LastName":
+                        return ContactsSortingType.LastName;
+
+                    case "Nickname":
+                        return ContactsSortingType.Nickname;
+
+                    case "NicknameOrName":
+                        return ContactsSortingType.NicknameOrName;
+
+                    default:
+                        return ContactsSortingType.Birthday;
+                }
+            }
         }
 
         public bool StartInTray

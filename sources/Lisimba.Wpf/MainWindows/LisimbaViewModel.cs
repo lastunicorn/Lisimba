@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public MainWindowClosingCommand WindowClosing { get; set; }
+        //public MainWindowClosingCommand WindowClosing { get; set; }
 
         public LisimbaViewModel(OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
             LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
@@ -96,42 +96,42 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         }
     }
 
-    class MainWindowClosingCommand : ICommand
-    {
-        private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly WindowSystem windowSystem;
+    //class MainWindowClosingCommand : ICommand
+    //{
+    //    private readonly OpenedAddressBooks openedAddressBooks;
+    //    private readonly WindowSystem windowSystem;
 
-        public event EventHandler CanExecuteChanged;
+    //    public event EventHandler CanExecuteChanged;
 
-        public MainWindowClosingCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
-        {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+    //    public MainWindowClosingCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+    //    {
+    //        if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+    //        if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.openedAddressBooks = openedAddressBooks;
-            this.windowSystem = windowSystem;
-        }
+    //        this.openedAddressBooks = openedAddressBooks;
+    //        this.windowSystem = windowSystem;
+    //    }
 
-        public bool CanExecute(object parameter)
-        {
+    //    public bool CanExecute(object parameter)
+    //    {
 
-        }
+    //    }
 
-        public void Execute(object parameter)
-        {
-            if (openedAddressBooks.Current.Status == AddressBookStatus.Modified)
-            {
-                bool? needToSave = AskToSaveAddressBook();
+    //    public void Execute(object parameter)
+    //    {
+    //        if (openedAddressBooks.Current.Status == AddressBookStatus.Modified)
+    //        {
+    //            bool? needToSave = AskToSaveAddressBook();
 
-                if (needToSave == null)
-                    e.Cancel = true;
-                else
-                    e.SaveAddressBook = needToSave.Value;
-            }
-            else
-            {
-                e.SaveAddressBook = false;
-            }
-        }
-    }
+    //            if (needToSave == null)
+    //                e.Cancel = true;
+    //            else
+    //                e.SaveAddressBook = needToSave.Value;
+    //        }
+    //        else
+    //        {
+    //            e.SaveAddressBook = false;
+    //        }
+    //    }
+    //}
 }

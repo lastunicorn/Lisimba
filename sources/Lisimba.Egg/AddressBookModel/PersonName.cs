@@ -161,6 +161,18 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                    string.IsNullOrEmpty(nickname);
         }
 
+        public bool ContainsText(string text, StringComparison stringComparison = StringComparison.CurrentCultureIgnoreCase)
+        {
+            if (text == null)
+                return false;
+
+            return firstName.IndexOf(text, stringComparison) >= 0
+                   || middleName.IndexOf(text, stringComparison) >= 0
+                   || lastName.IndexOf(text, stringComparison) >= 0
+                   || nickname.IndexOf(text, stringComparison) >= 0
+                   || description.IndexOf(text, stringComparison) >= 0;
+        }
+
         public bool Equals(PersonName other)
         {
             if (ReferenceEquals(null, other)) return false;
