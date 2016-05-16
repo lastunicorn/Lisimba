@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.ComponentModel;
 using System.Windows;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
@@ -28,6 +29,17 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             InitializeComponent();
 
             DataContext = viewModel;
+        }
+
+        private void LisimbaWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            LisimbaViewModel viewModel = DataContext as LisimbaViewModel;
+
+            if (viewModel == null)
+                return;
+
+            if (viewModel.WindowClosing != null)
+                viewModel.WindowClosing.Execute(null);
         }
     }
 }

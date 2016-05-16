@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Windows.Input;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
@@ -53,6 +54,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
+        public MainWindowClosingCommand WindowClosing { get; set; }
+
         public LisimbaViewModel(OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
             LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
             LisimbaWindowTitle lisimbaWindowTitle, AddressBookViewModel addressBookViewModel, StartViewModel startViewModel)
@@ -90,6 +93,45 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 CurrentPageViewModel = startViewModel;
             else
                 CurrentPageViewModel = addressBookViewModel;
+        }
+    }
+
+    class MainWindowClosingCommand : ICommand
+    {
+        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly WindowSystem windowSystem;
+
+        public event EventHandler CanExecuteChanged;
+
+        public MainWindowClosingCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        {
+            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+
+            this.openedAddressBooks = openedAddressBooks;
+            this.windowSystem = windowSystem;
+        }
+
+        public bool CanExecute(object parameter)
+        {
+
+        }
+
+        public void Execute(object parameter)
+        {
+            if (openedAddressBooks.Current.Status == AddressBookStatus.Modified)
+            {
+                bool? needToSave = AskToSaveAddressBook();
+
+                if (needToSave == null)
+                    e.Cancel = true;
+                else
+                    e.SaveAddressBook = needToSave.Value;
+            }
+            else
+            {
+                e.SaveAddressBook = false;
+            }
         }
     }
 }
