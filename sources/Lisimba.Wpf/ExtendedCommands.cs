@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
@@ -24,10 +25,16 @@ namespace DustInTheWind.Lisimba.Wpf
         public static readonly DependencyProperty DoubleClickCommandProperty;
         public static readonly DependencyProperty DoubleClickCommandParameterProperty;
 
+        public static readonly DependencyProperty ClosingCommandProperty;
+        public static readonly DependencyProperty ClosingCommandParameterProperty;
+
         static ExtendedCommands()
         {
             DoubleClickCommandProperty = DependencyProperty.RegisterAttached("DoubleClickCommand", typeof(ICommand), typeof(ExtendedCommands), new UIPropertyMetadata(null, OnDoubleClickCommandPropertyChanged));
             DoubleClickCommandParameterProperty = DependencyProperty.RegisterAttached("DoubleClickCommandParameter", typeof(object), typeof(ExtendedCommands), new UIPropertyMetadata(null));
+
+            ClosingCommandProperty = DependencyProperty.RegisterAttached("ClosingCommand", typeof(ICommand), typeof(ExtendedCommands), new UIPropertyMetadata(null, OnClosingCommandPropertyChanged));
+            ClosingCommandParameterProperty = DependencyProperty.RegisterAttached("ClosingCommandParameter", typeof(object), typeof(ExtendedCommands), new UIPropertyMetadata(null));
         }
 
         public static ICommand GetDoubleClickCommand(DependencyObject obj)
@@ -50,35 +57,85 @@ namespace DustInTheWind.Lisimba.Wpf
             obj.SetValue(DoubleClickCommandParameterProperty, value);
         }
 
+        public static ICommand GetClosingCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(ClosingCommandProperty);
+        }
+
+        public static void SetClosingCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(ClosingCommandProperty, value);
+        }
+
+        public static object GetClosingCommandParameter(DependencyObject obj)
+        {
+            return obj.GetValue(ClosingCommandParameterProperty);
+        }
+
+        public static void SetClosingCommandParameter(DependencyObject obj, object value)
+        {
+            obj.SetValue(ClosingCommandParameterProperty, value);
+        }
+
         private static void OnDoubleClickCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var element = d as UIElement;
+            UIElement element = d as UIElement;
 
             if (element != null)
             {
                 if (e.OldValue == null && e.NewValue != null)
-                    element.MouseDown += Control_MouseDown;
+                    element.MouseDown += HandleControlMouseDown;
                 else if (e.OldValue != null && e.NewValue == null)
-                    element.MouseDown -= Control_MouseDown;
+                    element.MouseDown -= HandleControlMouseDown;
             }
         }
 
-        private static void Control_MouseDown(object sender, MouseButtonEventArgs e)
+        private static void HandleControlMouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ClickCount == 2)
             {
-                var element = sender as UIElement;
+                UIElement element = sender as UIElement;
 
                 if (element != null)
                 {
-                    var command = GetDoubleClickCommand(element);
-                    var parameter = GetDoubleClickCommandParameter(element);
+                    ICommand command = GetDoubleClickCommand(element);
+                    object parameter = GetDoubleClickCommandParameter(element);
 
                     if (command != null && command.CanExecute(parameter))
                     {
                         e.Handled = true;
                         command.Execute(parameter);
                     }
+                }
+            }
+        }
+
+        private static void OnClosingCommandPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Window window = d as Window;
+
+            if (window != null)
+            {
+                if (e.OldValue == null && e.NewValue != null)
+                    window.Closing += HandleWindowClosing;
+                else if (e.OldValue != null && e.NewValue == null)
+                    window.Closing -= HandleWindowClosing;
+            }
+        }
+
+        private static void HandleWindowClosing(object sender, CancelEventArgs e)
+        {
+            Window window = sender as Window;
+
+            if (window != null)
+            {
+                ICommand command = GetClosingCommand(window);
+                object parameter = GetClosingCommandParameter(window);
+
+                if (command != null && command.CanExecute(parameter))
+                {
+                    command.Execute(parameter);
+                    e.Cancel = true;
                 }
             }
         }

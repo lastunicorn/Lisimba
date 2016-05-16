@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Windows.Input;
+using System.Windows;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 
@@ -54,11 +54,12 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        //public MainWindowClosingCommand WindowClosing { get; set; }
+        public MainWindowClosingCommand WindowClosingCommand { get; set; }
 
         public LisimbaViewModel(OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
             LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
-            LisimbaWindowTitle lisimbaWindowTitle, AddressBookViewModel addressBookViewModel, StartViewModel startViewModel)
+            LisimbaWindowTitle lisimbaWindowTitle, AddressBookViewModel addressBookViewModel, StartViewModel startViewModel,
+            MainWindowClosingCommand mainWindowClosingCommand)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (lisimbaStatusBarViewModel == null) throw new ArgumentNullException("lisimbaStatusBarViewModel");
@@ -67,6 +68,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (lisimbaWindowTitle == null) throw new ArgumentNullException("lisimbaWindowTitle");
             if (addressBookViewModel == null) throw new ArgumentNullException("addressBookViewModel");
             if (startViewModel == null) throw new ArgumentNullException("startViewModel");
+            if (mainWindowClosingCommand == null) throw new ArgumentNullException("mainWindowClosingCommand");
 
             this.lisimbaWindowTitle = lisimbaWindowTitle;
             this.addressBookViewModel = addressBookViewModel;
@@ -75,6 +77,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             LisimbaMainMenuViewModel = lisimbaMainMenuViewModel;
             LisimbaToolBarViewModel = lisimbaToolBarViewModel;
             LisimbaStatusBarViewModel = lisimbaStatusBarViewModel;
+
+            WindowClosingCommand = mainWindowClosingCommand;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             lisimbaWindowTitle.ValueChanged += HandleLisimbaTitleValueChanged;
@@ -95,43 +99,4 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 CurrentPageViewModel = addressBookViewModel;
         }
     }
-
-    //class MainWindowClosingCommand : ICommand
-    //{
-    //    private readonly OpenedAddressBooks openedAddressBooks;
-    //    private readonly WindowSystem windowSystem;
-
-    //    public event EventHandler CanExecuteChanged;
-
-    //    public MainWindowClosingCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
-    //    {
-    //        if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-    //        if (windowSystem == null) throw new ArgumentNullException("windowSystem");
-
-    //        this.openedAddressBooks = openedAddressBooks;
-    //        this.windowSystem = windowSystem;
-    //    }
-
-    //    public bool CanExecute(object parameter)
-    //    {
-
-    //    }
-
-    //    public void Execute(object parameter)
-    //    {
-    //        if (openedAddressBooks.Current.Status == AddressBookStatus.Modified)
-    //        {
-    //            bool? needToSave = AskToSaveAddressBook();
-
-    //            if (needToSave == null)
-    //                e.Cancel = true;
-    //            else
-    //                e.SaveAddressBook = needToSave.Value;
-    //        }
-    //        else
-    //        {
-    //            e.SaveAddressBook = false;
-    //        }
-    //    }
-    //}
 }
