@@ -82,6 +82,7 @@
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="MainWindows\AboutViewModel.cs" />
     <Compile Include="MainWindows\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -98,6 +99,7 @@
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddressBookViewModel.cs" />
+    <Compile Include="MainWindows\BirthdayEditCommand.cs" />
     <Compile Include="MainWindows\BirthdayViewer.xaml.cs">
       <DependentUpon>BirthdayViewer.xaml</DependentUpon>
     </Compile>

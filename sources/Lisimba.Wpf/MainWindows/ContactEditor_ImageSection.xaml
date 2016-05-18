@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
+             xmlns:wpf="clr-namespace:DustInTheWind.Lisimba.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -34,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     <StackPanel>
 
         <Button
-            Command="{Binding ImageClickCommand}"
+            Command="{Binding ImageEditCommand}"
             Width="128"
             Height="128"
             Margin="4"
@@ -49,42 +50,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </Button>
 
         <TextBlock
-            HorizontalAlignment="Center"
-            Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"/>
-
-        <Grid HorizontalAlignment="Stretch">
-
-            <TextBlock
-                Name="BirthdayLabel"
-                HorizontalAlignment="Stretch"
-                Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
-                TextAlignment="Center"/>
-
-            <TextBox
-                Name="BirthdayEditor"
-                HorizontalAlignment="Stretch"
-                Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
-                TextAlignment="Center">
-
-                <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Visibility" Value="Collapsed" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=BirthdayLabel, Path=IsMouseOver}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=BirthdayEditor, Path=IsMouseOver}" Value="True">
-                                <Setter Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-
-            </TextBox>
-            
-        </Grid>
-        
-        <mainWindows:BirthdayViewer HorizontalAlignment="Stretch" DataContext="{Binding Birthday}"/>
+            HorizontalAlignment="Stretch"
+            Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
+            TextAlignment="Center"
+            wpf:ExtendedCommands.DoubleClickCommand="{Binding BirthdayEditCommand}" wpf:ExtendedCommands.DoubleClickCommandParameter="{Binding Birthday}"/>
 
         <mainWindows:ZodiacSignView
             Padding="4"

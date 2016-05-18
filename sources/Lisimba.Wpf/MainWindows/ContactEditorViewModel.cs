@@ -122,21 +122,24 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             }
         }
 
-        public ImageClickCommand ImageClickCommand { get; private set; }
+        public ImageClickCommand ImageEditCommand { get; private set; }
+        public BirthdayEditCommand BirthdayEditCommand { get; private set; }
 
         public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel,
-            ImageClickCommand imageClickCommand, AddContactItemClickCommand addContactItemClickCommand)
+            ImageClickCommand imageEditCommand, BirthdayEditCommand birthdayEditCommand, AddContactItemClickCommand addContactItemClickCommand)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (zodiacSignViewModel == null) throw new ArgumentNullException("zodiacSignViewModel");
-            if (imageClickCommand == null) throw new ArgumentNullException("imageClickCommand");
+            if (imageEditCommand == null) throw new ArgumentNullException("imageEditCommand");
+            if (birthdayEditCommand == null) throw new ArgumentNullException("birthdayEditCommand");
             if (addContactItemClickCommand == null) throw new ArgumentNullException("addContactItemClickCommand");
 
             this.openedAddressBooks = openedAddressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
             this.addContactItemClickCommand = addContactItemClickCommand;
 
-            ImageClickCommand = imageClickCommand;
+            ImageEditCommand = imageEditCommand;
+            BirthdayEditCommand = birthdayEditCommand;
 
             ContactItemTypes = new List<ContactItemAddViewModel>
             {
@@ -190,7 +193,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                     ContactItems = null;
                     Notes = string.Empty;
 
-                    ImageClickCommand.Contact = null;
+                    ImageEditCommand.Contact = null;
                 }
                 else
                 {
@@ -212,7 +215,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                     ContactItems = all;
                     Notes = currentContact.Notes;
 
-                    ImageClickCommand.Contact = currentContact;
+                    ImageEditCommand.Contact = currentContact;
                 }
             }
             finally
