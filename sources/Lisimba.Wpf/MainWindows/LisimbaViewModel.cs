@@ -18,6 +18,7 @@ using System;
 using System.ComponentModel;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.Config;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
@@ -27,6 +28,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private readonly AddressBookViewModel addressBookViewModel;
         private readonly StartViewModel startViewModel;
         private readonly LisimbaApplication lisimbaApplication;
+        private readonly ApplicationConfiguration config;
 
         private bool allowToCloseWindow;
         private string title;
@@ -59,7 +61,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public LisimbaViewModel(OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
             LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
             LisimbaWindowTitle lisimbaWindowTitle, AddressBookViewModel addressBookViewModel, StartViewModel startViewModel,
-            LisimbaApplication lisimbaApplication)
+            LisimbaApplication lisimbaApplication, ApplicationConfiguration config)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (lisimbaStatusBarViewModel == null) throw new ArgumentNullException("lisimbaStatusBarViewModel");
@@ -69,11 +71,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (addressBookViewModel == null) throw new ArgumentNullException("addressBookViewModel");
             if (startViewModel == null) throw new ArgumentNullException("startViewModel");
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
+            if (config == null) throw new ArgumentNullException("config");
 
             this.lisimbaWindowTitle = lisimbaWindowTitle;
             this.addressBookViewModel = addressBookViewModel;
             this.startViewModel = startViewModel;
             this.lisimbaApplication = lisimbaApplication;
+            this.config = config;
 
             LisimbaMainMenuViewModel = lisimbaMainMenuViewModel;
             LisimbaToolBarViewModel = lisimbaToolBarViewModel;
@@ -112,7 +116,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         public bool WindowIsClosing()
         {
-            if (allowToCloseWindow)
+            if (allowToCloseWindow || config.StartInTray)
                 return true;
 
             lisimbaApplication.Exit();
