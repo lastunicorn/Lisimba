@@ -30,7 +30,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         Width="800"
         WindowStartupLocation="CenterScreen"
         Icon="{StaticResource LisimbaIcon}"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        Closing="LisimbaWindow_OnClosing">
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type main:StartViewModel}">

@@ -178,7 +178,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
-    <Compile Include="MainWindows\MainWindowClosingCommand.cs" />
     <Compile Include="MainWindows\SortingComboBoxItem.cs" />
     <Compile Include="MainWindows\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
