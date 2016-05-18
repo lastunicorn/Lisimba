@@ -81,7 +81,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </TextBox.Style>
 
             </TextBox>
+            
         </Grid>
+        
+        <mainWindows:BirthdayViewer HorizontalAlignment="Stretch" DataContext="{Binding Birthday}"/>
 
         <mainWindows:ZodiacSignView
             Padding="4"

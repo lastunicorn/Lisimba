@@ -98,6 +98,9 @@
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddressBookViewModel.cs" />
+    <Compile Include="MainWindows\BirthdayViewer.xaml.cs">
+      <DependentUpon>BirthdayViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainWindows\ContactEditor_ImageSection.xaml.cs">
       <DependentUpon>ContactEditor_ImageSection.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainWindows\AddressBookPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindows\BirthdayViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
