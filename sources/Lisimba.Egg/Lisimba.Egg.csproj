@@ -51,6 +51,7 @@
     <Compile Include="AddressBookModel\ContactMatch.cs" />
     <Compile Include="AddressBookModel\FuzzyMatch.cs" />
     <Compile Include="AddressBookModel\PersonNameMatch.cs" />
+    <Compile Include="GateModel\FileGate.cs" />
     <Compile Include="GateModel\GateException.cs" />
     <Compile Include="Importing\AddressBookComparer.cs" />
     <Compile Include="Importing\AddressBookComparisonResult.cs" />

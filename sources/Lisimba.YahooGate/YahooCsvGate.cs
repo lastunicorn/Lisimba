@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -24,51 +23,43 @@ using DustInTheWind.Lisimba.Gating.Properties;
 
 namespace DustInTheWind.Lisimba.Gating
 {
-    public class YahooCsvGate : IGate
+    public class YahooCsvGate : FileGate
     {
         private readonly Loader loader;
         private readonly Saver saver;
 
-        public IEnumerable<Exception> Warnings { get; private set; }
+        public override string ExtensionFilter
+        {
+            get { return "*.csv"; }
+        }
 
-        public string Id
+        public override string Id
         {
             get { return "YahooCsvGate"; }
         }
 
-        public string Name
+        public override string Name
         {
             get { return "Yahoo CSV Gate"; }
         }
 
-        public string Description
+        public override string Description
         {
             get { return "A Gate that knows to save and load address books from a Yahoo csv file."; }
         }
 
-        public Image Icon16
+        public override Image Icon16
         {
             get { return Resources.yahoo_icon; }
         }
 
         public YahooCsvGate()
         {
-            Warnings = new Exception[0];
             loader = new Loader();
             saver = new Saver();
         }
 
-        //public AddressBook Load(string fileName)
-        //{
-        //    return loader.Load(fileName);
-        //}
-
-        //public void Save(AddressBook addressBook, string fileName)
-        //{
-        //    saver.Save(addressBook, fileName);
-        //}
-
-        public AddressBook Load(object connectionData)
+        public override AddressBook Load(object connectionData)
         {
             string fileName = connectionData as string;
 
@@ -94,7 +85,7 @@ namespace DustInTheWind.Lisimba.Gating
             }
         }
 
-        public void Save(AddressBook addressBook, object connectionData)
+        public override void Save(AddressBook addressBook, object connectionData)
         {
             string fileName = connectionData as string;
 
