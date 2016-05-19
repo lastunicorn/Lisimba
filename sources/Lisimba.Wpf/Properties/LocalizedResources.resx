@@ -151,6 +151,12 @@ Do you wanna save it before proceedeing?</value>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Error</value>
   </data>
+  <data name="ExportOperationDescription" xml:space="preserve">
+    <value>Exports the current address book.</value>
+  </data>
+  <data name="ImportOperationDescription" xml:space="preserve">
+    <value>Imports an address book.</value>
+  </data>
   <data name="InfoPopup_Title" xml:space="preserve">
     <value>Info</value>
   </data>

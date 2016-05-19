@@ -18,13 +18,12 @@ using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.WinForms.LocationProviders;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.Lisimba.Wpf.LocationProviders;
+using DustInTheWind.Lisimba.Wpf.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Operations
+namespace DustInTheWind.Lisimba.Wpf.Commands
 {
-    internal class ExportOperation : OperationBase<IGate>
+    internal class ExportAddressBookCommand : CommandBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly FileLocationProvider fileLocationProvider;
@@ -34,7 +33,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             get { return LocalizedResources.ExportOperationDescription; }
         }
 
-        public ExportOperation(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
+        public ExportAddressBookCommand(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -52,8 +51,13 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             IsEnabled = openedAddressBooks.Current != null;
         }
 
-        protected override void DoExecute(IGate gate)
+        protected override void DoExecute(object parameter)
         {
+            IGate gate = parameter as IGate;
+
+            if (gate == null)
+                throw new ArgumentException("parameter is not a IGate", "parameter");
+
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 

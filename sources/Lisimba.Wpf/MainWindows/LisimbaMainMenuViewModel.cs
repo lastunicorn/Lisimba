@@ -14,6 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Wpf.Commands;
 using DustInTheWind.Lisimba.Wpf.Operations;
 
@@ -34,8 +38,14 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public UndoCommand UndoCommand { get; private set; }
         public RedoCommand RedoCommand { get; private set; }
 
-        public LisimbaMainMenuViewModel(AvailableCommands availableCommands)
+        public List<CustomMenuItem> ExportMenuItems { get; private set; }
+        public List<CustomMenuItem> ImportMenuItems { get; private set; }
+
+        public LisimbaMainMenuViewModel(AvailableCommands availableCommands, AvailableGates availableGates)
         {
+            if (availableCommands == null) throw new ArgumentNullException("availableCommands");
+            if (availableGates == null) throw new ArgumentNullException("availableGates");
+
             ApplicationExitCommand = availableCommands.GetCommand<ApplicationExitCommand>();
             NewAddressBookCommand = availableCommands.GetCommand<NewAddressBookCommand>();
             OpenAddressBookCommand = availableCommands.GetCommand<OpenAddressBookCommand>();
@@ -48,6 +58,26 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             DeleteCurrentContactCommand = availableCommands.GetCommand<DeleteCurrentContactCommand>();
             UndoCommand = availableCommands.GetCommand<UndoCommand>();
             RedoCommand = availableCommands.GetCommand<RedoCommand>();
+
+            ExportMenuItems = availableGates.Select(x =>
+                new CustomMenuItem
+                {
+                    Text = x.Name,
+                    Command = availableCommands.GetCommand<ExportAddressBookCommand>(),
+                    Icon = x.Icon16 != null ? x.Icon16.ToBitmapSource() : null,
+                    Gate = x
+                })
+            .ToList();
+
+            ImportMenuItems = availableGates.Select(x =>
+                new CustomMenuItem
+                {
+                    Text = x.Name,
+                    Command = availableCommands.GetCommand<ImportAddressBookCommand>(),
+                    Icon = x.Icon16 != null ? x.Icon16.ToBitmapSource() : null,
+                    Gate = x
+                })
+            .ToList();
         }
     }
 }

@@ -244,6 +244,16 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
                 CurrentContact = null;
         }
 
+        public void Import(string location, IGate gate)
+        {
+            if (location == null) throw new ArgumentNullException("location");
+            if (gate == null) throw new ArgumentNullException("gate");
+
+            AddressBook addressBook = gate.Load(location);
+
+            Current = new AddressBookShell(addressBook);
+        }
+
         #region Event Invocators
 
         protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)

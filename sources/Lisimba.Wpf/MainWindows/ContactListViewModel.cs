@@ -138,7 +138,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             return searchText.Length == 0
                 || contact.Name.ContainsText(searchText)
-                || contact.Notes.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0
+                || (contact.Notes != null && contact.Notes.IndexOf(searchText, StringComparison.CurrentCultureIgnoreCase) >= 0)
                 || contact.Items.OfType<Phone>().Any(x => x.Number.Replace(" ", string.Empty).Contains(searchText));
         }
 

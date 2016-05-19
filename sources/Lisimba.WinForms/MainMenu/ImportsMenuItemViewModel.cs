@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
 
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
-            return availableGates.GetAllGates()
+            return availableGates
                 .Select(x => new ImportMenuItemViewModel(applicationStatus, ChildrenOpertion)
                 {
                     Text = x.Name,

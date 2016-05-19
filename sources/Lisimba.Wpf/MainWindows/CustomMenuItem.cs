@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,27 +14,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows.Input;
+using System.Windows.Media;
 using DustInTheWind.Lisimba.Egg.GateModel;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.WinForms.Operations
+namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
-    internal class ImportOperation : OperationBase<IGate>
+    internal class CustomMenuItem
     {
-        public ImportOperation(WindowSystem windowSystem)
-            : base(windowSystem)
-        {
-        }
-
-        public override string ShortDescription
-        {
-            get { return LocalizedResources.ImportOperationDescription; }
-        }
-
-        protected override void DoExecute(IGate gate)
-        {
-            windowSystem.DisplayInfo("Import using " + gate.Name + ".");
-        }
+        public ImageSource Icon { get; set; }
+        public string Text { get; set; }
+        public ICommand Command { get; set; }
+        public IGate Gate { get; set; }
     }
 }

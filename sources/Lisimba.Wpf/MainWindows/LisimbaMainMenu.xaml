@@ -48,8 +48,40 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
             <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
             <Separator />
-            <MenuItem Header="_Export" />
-            <MenuItem Header="_Import" />
+            <MenuItem
+                Header="_Export"
+                ItemsSource="{Binding ExportMenuItems}"
+                DisplayMemberPath="Text">
+
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Icon">
+                            <Setter.Value>
+                                <Image Width="16" Height="16" Source="{Binding Icon}"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Command" Value="{Binding Command}"/>
+                        <Setter Property="CommandParameter" Value="{Binding Gate}"/>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
+            <MenuItem
+                Header="_Import"
+                ItemsSource="{Binding ImportMenuItems}"
+                DisplayMemberPath="Text">
+
+                <MenuItem.ItemContainerStyle>
+                    <Style TargetType="{x:Type MenuItem}">
+                        <Setter Property="Icon">
+                            <Setter.Value>
+                                <Image Width="16" Height="16" Source="{Binding Icon}"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Command" Value="{Binding Command}"/>
+                        <Setter Property="CommandParameter" Value="{Binding Gate}"/>
+                    </Style>
+                </MenuItem.ItemContainerStyle>
+            </MenuItem>
             <Separator/>
             <MenuItem Header="Recent _Files" />
             <Separator/>

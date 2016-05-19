@@ -108,13 +108,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                 Padding="0"
                                 Margin="0">
 
-                                <!--<ListBox.ItemTemplateSelector>
-                                    
-                                </ListBox.ItemTemplateSelector>-->
-
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding}" Margin="0" Padding="0"/>
+                                        <TextBlock Text="{Binding}" Margin="20 0 0 0" Padding="8"/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
 

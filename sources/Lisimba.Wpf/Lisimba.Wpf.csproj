@@ -79,6 +79,8 @@
     </Compile>
     <Compile Include="AutoGreyableImage.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\ExportAddressBookCommand.cs" />
+    <Compile Include="Commands\ImportAddressBookCommand.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
@@ -122,6 +124,7 @@
       <DependentUpon>ContactList.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\ContactListViewModel.cs" />
+    <Compile Include="MainWindows\CustomMenuItem.cs" />
     <Compile Include="MainWindows\DateFormatter.cs" />
     <Compile Include="MainWindows\ImageClickCommand.cs" />
     <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">

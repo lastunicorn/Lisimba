@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.Properties;
@@ -25,7 +26,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     /// <summary>
     /// Manages the gates available in the application.
     /// </summary>
-    public class AvailableGates
+    public class AvailableGates : IEnumerable<IGate>
     {
         private readonly ApplicationConfiguration config;
         private readonly GateProvider gateProvider;
@@ -142,6 +143,16 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
 
             if (handler != null)
                 handler(this, EventArgs.Empty);
+        }
+
+        public IEnumerator<IGate> GetEnumerator()
+        {
+            return gates.Values.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

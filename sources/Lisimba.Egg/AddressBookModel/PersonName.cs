@@ -170,7 +170,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                    || middleName.IndexOf(text, stringComparison) >= 0
                    || lastName.IndexOf(text, stringComparison) >= 0
                    || nickname.IndexOf(text, stringComparison) >= 0
-                   || description.IndexOf(text, stringComparison) >= 0;
+                   || (description != null && description.IndexOf(text, stringComparison) >= 0);
         }
 
         public bool Equals(PersonName other)
