@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,27 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.WinForms.LocationProviders
 {
-    public interface IGate
+    public struct FileTypeInfo
     {
-        string Id { get; }
-        string Name { get; }
-        string Description { get; }
-        Image Icon16 { get; }
-
-        IEnumerable<Exception> Warnings { get; }
-
-        //AddressBook Load(object connectionData);
-        //void Save(AddressBook addressBook, object connectionData);
-
-        AddressBook Load(Stream stream);
-        void Save(AddressBook addressBook, Stream stream);
+        public string Extension { get; set; }
+        public string FileTypeName { get; set; }
     }
 }

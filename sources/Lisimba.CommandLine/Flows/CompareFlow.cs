@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             IGate gate = availableGates.GetGate("ZipXmlGate");
 
-            AddressBook addressBook = gate.Load(parameters[0]);
+            AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
             AddressBookComparer addressBookComparer = new AddressBookComparer(openedAddressBooks.Current.AddressBook, addressBook);
             AddressBookComparisonResult result = addressBookComparer.Compare();

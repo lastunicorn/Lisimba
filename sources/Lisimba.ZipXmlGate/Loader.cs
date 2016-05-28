@@ -48,14 +48,14 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             eggVersion = Assembly.GetExecutingAssembly().GetName().Version;
         }
 
-        public AddressBook Load(FileStream fileStream)
+        public AddressBook Load(Stream stream)
         {
             warnings.Clear();
             pictures.Clear();
             addressBookEntity = null;
 
             // Create unzipper.
-            using (ZipInputStream zipStream = new ZipInputStream(fileStream))
+            using (ZipInputStream zipStream = new ZipInputStream(stream))
             {
                 while (true)
                 {
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                         break;
 
                     if (zipEntry.Name.Equals(Configuration.MainFileName))
-                        DeserializeMainFile(zipStream, fileStream.Name);
+                        DeserializeMainFile(zipStream);
                     else if (zipEntry.Name.StartsWith(Configuration.DataDirectoryName + "/"))
                         DeserializePictureFile(zipStream, zipEntry);
                 }
@@ -118,14 +118,14 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             }
         }
 
-        private void DeserializeMainFile(Stream zipStream, string fileName)
+        private void DeserializeMainFile(Stream zipStream)
         {
             using (MemoryStream ms = new MemoryStream())
             {
                 ReadAllStream(zipStream, ms);
 
                 ms.Position = 0;
-                ValidateVersion(ms, fileName);
+                ValidateVersion(ms);
 
                 ms.Position = 0;
                 XmlTextReader xmlTextReader = new XmlTextReader(ms);
@@ -149,21 +149,19 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             }
         }
 
-        private void ValidateVersion(Stream ms, string fileName)
+        private void ValidateVersion(Stream ms)
         {
             // Read lsb version
             Version lsbVersion = ReadLsbVersion(ms);
 
             if (lsbVersion == null)
             {
-                string warningText = string.Format("The version of the file \"{0}\" could not be determined.", fileName);
-                IncorrectEggVersionException warning = new IncorrectEggVersionException(warningText);
+                IncorrectEggVersionException warning = new IncorrectEggVersionException("The version of the file could not be determined.");
                 warnings.Add(warning);
             }
             else if (lsbVersion.ToString(2) != eggVersion.ToString(2))
             {
-                string warningText = string.Format("The file \"{0}\" is created with another version of the Egg.\n\nCurrent Egg version = {1}\nFile was created by Egg version = {2}",
-                        fileName,
+                string warningText = string.Format("The file is created with another version of the Egg.\n\nCurrent Egg version = {0}\nFile was created by Egg version = {1}",
                         eggVersion.ToString(2),
                         lsbVersion.ToString(2));
 

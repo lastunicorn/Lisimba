@@ -29,11 +29,11 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     internal class Saver
     {
-        public void Save(AddressBook addressBook, FileStream fileStream)
+        public void Save(AddressBook addressBook, Stream stream)
         {
             try
             {
-                using (ZipOutputStream zipStream = new ZipOutputStream(fileStream))
+                using (ZipOutputStream zipStream = new ZipOutputStream(stream))
                 {
                     zipStream.SetLevel(9);
 

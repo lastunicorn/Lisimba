@@ -59,48 +59,18 @@ namespace DustInTheWind.Lisimba.Gating
             saver = new Saver();
         }
 
-        public override AddressBook Load(object connectionData)
+        public override AddressBook DoLoad(Stream stream)
         {
-            string fileName = connectionData as string;
+            warnings.Clear();
 
-            if (!File.Exists(fileName))
-            {
-                string message = string.Format("Cannot open address book. File '{0}' does not exist.", fileName);
-                throw new GateException(message);
-            }
-
-            try
-            {
-                using (FileStream fileStream = File.OpenRead(fileName))
-                {
-                    AddressBook addressBook = loader.Load(fileStream);
-
-                    return addressBook;
-                }
-            }
-            catch (Exception ex)
-            {
-                string message = string.Format("Error opening address book from file '{0}'.", fileName);
-                throw new GateException(message, ex);
-            }
+            return loader.Load(stream);
         }
 
-        public override void Save(AddressBook addressBook, object connectionData)
+        public override void DoSave(AddressBook addressBook, Stream stream)
         {
-            string fileName = connectionData as string;
+            warnings.Clear();
 
-            try
-            {
-                using (FileStream fileStream = File.OpenWrite(fileName))
-                {
-                    saver.Save(addressBook, fileStream);
-                }
-            }
-            catch (Exception ex)
-            {
-                string message = string.Format("Error saving address book to file '{0}'.", fileName);
-                throw new GateException(message, ex);
-            }
+            saver.Save(addressBook, stream);
         }
     }
 }

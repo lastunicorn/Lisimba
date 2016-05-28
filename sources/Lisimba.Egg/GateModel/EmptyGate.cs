@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.Properties;
 
@@ -64,6 +65,16 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
         }
 
         public void Save(AddressBook addressBook, object connectionData)
+        {
+            throw new EggException(Resources.EmptyGate_SaveError);
+        }
+
+        public AddressBook Load(Stream stream)
+        {
+            throw new EggException(Resources.EmptyGate_LoadError);
+        }
+
+        public void Save(AddressBook addressBook, Stream stream)
         {
             throw new EggException(Resources.EmptyGate_SaveError);
         }

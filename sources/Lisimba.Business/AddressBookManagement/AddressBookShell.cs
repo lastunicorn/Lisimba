@@ -130,7 +130,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (newLocation == null)
                 return false;
 
-            gate.Save(AddressBook, newLocation);
+            (gate as FileGate).Save(AddressBook, newLocation);
 
             Location = newLocation;
             Gate = gate;
@@ -167,7 +167,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (location == null) throw new ArgumentNullException("location");
             if (gate == null) throw new ArgumentNullException("gate");
 
-            gate.Save(AddressBook, location);
+            (gate as FileGate).Save(AddressBook, location);
         }
 
         public void ChangeAddressBookName(string newName)

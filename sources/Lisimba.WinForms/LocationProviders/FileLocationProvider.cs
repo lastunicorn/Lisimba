@@ -23,12 +23,11 @@ namespace DustInTheWind.Lisimba.WinForms.LocationProviders
     //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
     //        openFileDialog.DefaultExt = "csv";
 
-    class FileLocationProvider
+    internal class FileLocationProvider
     {
         private readonly WindowSystem windowSystem;
 
-        public string Extension { get; set; }
-        public string FileTypeName { get; set; }
+        public FileTypeInfo FileTypeInfo { get; private set; }
         public bool DisplayAllFilesFilter { get; set; }
 
         public FileLocationProvider(WindowSystem windowSystem)
@@ -37,26 +36,29 @@ namespace DustInTheWind.Lisimba.WinForms.LocationProviders
 
             this.windowSystem = windowSystem;
 
-            Extension = "lsb";
-            FileTypeName = "Lisimba Files";
+            FileTypeInfo = new FileTypeInfo
+            {
+                Extension = "lsb",
+                FileTypeName = "Lisimba Files"
+            };
             DisplayAllFilesFilter = true;
         }
 
         public string AskToSave()
         {
-            return windowSystem.AskToSave(Extension, BuildFilter());
+            return windowSystem.AskToSave(FileTypeInfo.Extension, BuildFilter());
         }
 
         public string AskToOpen()
         {
-            return windowSystem.AskToOpen(Extension, BuildFilter());
+            return windowSystem.AskToOpen(FileTypeInfo.Extension, BuildFilter());
         }
 
         private string BuildFilter()
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(string.Format("{0} (*.{1})|*.{1}", FileTypeName, Extension));
+            sb.Append(string.Format("{0} (*.{1})|*.{1}", FileTypeInfo.FileTypeName, FileTypeInfo.Extension));
 
             if (DisplayAllFilesFilter)
                 sb.Append("|All Files (*.*)|*.*");

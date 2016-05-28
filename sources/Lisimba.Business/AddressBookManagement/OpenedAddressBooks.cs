@@ -152,7 +152,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (!allowToContinue)
                 return;
 
-            AddressBook addressBook = gate.Load(fileName);
+            AddressBook addressBook = (gate as FileGate).Load(fileName);
             Current = new AddressBookShell(addressBook, gate, fileName);
 
             AddFileToRecentFileList(fileName, gate);
@@ -249,7 +249,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             if (location == null) throw new ArgumentNullException("location");
             if (gate == null) throw new ArgumentNullException("gate");
 
-            AddressBook addressBook = gate.Load(location);
+            AddressBook addressBook = (gate as FileGate).Load(location);
 
             Current = new AddressBookShell(addressBook);
         }

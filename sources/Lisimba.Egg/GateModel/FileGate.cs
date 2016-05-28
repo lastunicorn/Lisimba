@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.GateModel
@@ -46,7 +47,61 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             warnings.Add(warning);
         }
 
-        public abstract AddressBook Load(object connectionData);
-        public abstract void Save(AddressBook addressBook, object connectionData);
+        public AddressBook Load(string fileName)
+        {
+            warnings.Clear();
+
+            if (!File.Exists(fileName))
+            {
+                string message = string.Format("Cannot open address book. File '{0}' does not exist.", fileName);
+                throw new GateException(message);
+            }
+
+            try
+            {
+                using (FileStream fileStream = File.OpenRead(fileName))
+                {
+                    return Load(fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error opening address book from file '{0}'.", fileName);
+                throw new GateException(message, ex);
+            }
+        }
+
+        public void Save(AddressBook addressBook, string fileName)
+        {
+            warnings.Clear();
+
+            try
+            {
+                using (FileStream fileStream = File.OpenWrite(fileName))
+                {
+                    Save(addressBook, fileStream);
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = string.Format("Error saving address book to file '{0}'.", fileName);
+                throw new GateException(message, ex);
+            }
+        }
+
+        public AddressBook Load(Stream stream)
+        {
+            warnings.Clear();
+            return DoLoad(stream);
+        }
+
+        public void Save(AddressBook addressBook, Stream stream)
+        {
+            warnings.Clear();
+            DoSave(addressBook, stream);
+        }
+
+        public abstract AddressBook DoLoad(Stream stream);
+        public abstract void DoSave(AddressBook addressBook, Stream stream);
     }
 }

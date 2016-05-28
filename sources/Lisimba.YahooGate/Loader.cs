@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Gating
 {
     public class Loader
     {
-        public AddressBook Load(FileStream fileStream)
+        public AddressBook Load(Stream stream)
         {
             AddressBook addressBook = new AddressBook
             {
@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Gating
                 Name = string.Empty
             };
 
-            using (StreamReader streamReader = new StreamReader(fileStream))
+            using (StreamReader streamReader = new StreamReader(stream))
             {
                 using (CsvReader csvReader = new CsvReader(streamReader))
                 {

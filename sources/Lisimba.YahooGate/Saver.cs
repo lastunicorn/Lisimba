@@ -23,9 +23,9 @@ namespace DustInTheWind.Lisimba.Gating
 {
     public class Saver
     {
-        public void Save(AddressBook addressBook, FileStream fileStream)
+        public void Save(AddressBook addressBook, Stream stream)
         {
-            using (StreamWriter streamWriter = new StreamWriter(fileStream))
+            using (StreamWriter streamWriter = new StreamWriter(stream))
             {
                 using (CsvWriter csvWriter = new CsvWriter(streamWriter))
                 {

@@ -138,6 +138,7 @@
       <DependentUpon>WarningsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
+    <Compile Include="LocationProviders\FileTypeInfo.cs" />
     <Compile Include="MainMenu\ExportMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ExportsMenuItemViewModel.cs" />
     <Compile Include="MainMenu\ImportMenuItemViewModel.cs" />
