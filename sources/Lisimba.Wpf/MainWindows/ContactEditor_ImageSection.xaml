@@ -43,7 +43,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
             <Button.Template>
                 <ControlTemplate>
-                    <Image Source="{Binding Picture}"/>
+                    <Image Source="{Binding Picture}">
+                        <Image.Style>
+                            <Style TargetType="Image">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="False">
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Effect">
+                                            <Setter.Value>
+                                                <DropShadowEffect Direction="250" ShadowDepth="0" Opacity="0.7"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
                 </ControlTemplate>
             </Button.Template>
 
@@ -53,7 +69,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             HorizontalAlignment="Stretch"
             Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
             TextAlignment="Center"
-            wpf:ExtendedCommands.DoubleClickCommand="{Binding BirthdayEditCommand}" wpf:ExtendedCommands.DoubleClickCommandParameter="{Binding Birthday}"/>
+            wpf:ExtendedCommands.DoubleClickCommand="{Binding BirthdayEditCommand}"
+            wpf:ExtendedCommands.DoubleClickCommandParameter="{Binding Birthday}"/>
 
         <mainWindows:ZodiacSignView
             Padding="4"

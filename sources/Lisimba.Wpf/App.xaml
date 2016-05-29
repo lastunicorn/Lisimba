@@ -16,10 +16,6 @@
         <BitmapImage x:Key="NotesIcon" UriSource="Images/Contact/notes.png"/>
         <BitmapImage x:Key="SearchIcon" UriSource="Images/MainMenu/search.png"/>
 
-        <!--<Style TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="LightCoral"/>
-        </Style>-->
-
         <!--<Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"></Style>-->
 
         <!--<Style TargetType="Button">

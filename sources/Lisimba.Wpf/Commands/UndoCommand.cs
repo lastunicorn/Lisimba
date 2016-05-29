@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             IsEnabled = CalculateEnableState();
         }
 
-        private void HandleUndoStackChanged(object sender, EventArgs eventArgs)
+        private void HandleUndoStackChanged(object sender, EventArgs e)
         {
             IsEnabled = CalculateEnableState();
         }

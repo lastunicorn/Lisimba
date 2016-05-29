@@ -96,7 +96,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             allowToCloseWindow = true;
         }
 
-        private void HandleApplicationEndCanceled(object sender, EventArgs eventArgs)
+        private void HandleApplicationEndCanceled(object sender, EventArgs e)
         {
             allowToCloseWindow = false;
         }

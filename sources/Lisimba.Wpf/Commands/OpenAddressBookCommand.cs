@@ -15,8 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Egg.GateModel;
 using DustInTheWind.Lisimba.Wpf.LocationProviders;
 using DustInTheWind.Lisimba.Wpf.Properties;
 
@@ -50,16 +52,30 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
         {
             string fileName = parameter as string;
 
-            if (string.IsNullOrEmpty(fileName))
+            if (fileName == null)
             {
-                // todo: the FileLocationProvider should be requested from the gate itself.
-                fileName = fileLocationProvider.AskToOpen();
+                FileGate fileGate = availableGates.DefaultGate as FileGate;
 
-                if (fileName == null)
-                    return;
+                if (fileGate != null)
+                {
+                    fileName = AskForFileToOpen(fileGate);
+
+                    if (fileName == null)
+                        return;
+                }
             }
 
             openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
+        }
+
+        private string AskForFileToOpen(FileGate fileGate)
+        {
+            List<FileType> fileTypes = new List<FileType>(fileGate.SupportedFileTypes)
+            {
+                new FileType {FileTypeName = "All Files", Extension = "*"}
+            };
+
+            return fileLocationProvider.AskToOpen(fileTypes, fileTypes[0]);
         }
     }
 }

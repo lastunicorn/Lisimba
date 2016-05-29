@@ -40,7 +40,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             IsEnabled = openedAddressBooks.Current != null;
         }
 
-        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs addressBookChangedEventArgs)
+        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             IsEnabled = openedAddressBooks.Current != null;
         }

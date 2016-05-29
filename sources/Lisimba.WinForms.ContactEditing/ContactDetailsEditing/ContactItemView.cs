@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing
             InitializeComponent();
         }
 
-        private void HandleContactItemChanged(object sender, EventArgs eventArgs)
+        private void HandleContactItemChanged(object sender, EventArgs e)
         {
             RefreshDisplayedData();
         }

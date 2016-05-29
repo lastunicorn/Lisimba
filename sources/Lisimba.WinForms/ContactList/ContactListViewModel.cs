@@ -119,12 +119,12 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
             RepopulateFromCurrentAddressBook();
         }
 
-        private void HandleCurrentAddressBookSaved(object sender, EventArgs eventArgs)
+        private void HandleCurrentAddressBookSaved(object sender, EventArgs e)
         {
             ResetModifiedFlags();
         }
 
-        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs eventArgs)
+        private void HandleCurrentAddressBookContentChanged(object sender, EventArgs e)
         {
             RepopulateFromCurrentAddressBook();
         }
@@ -148,7 +148,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
             View.SortContacts();
         }
 
-        private void HandleCurrentContactChanged(object sender, EventArgs eventArgs)
+        private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
             if (ignoreCurrentContactChange || View == null)
                 return;

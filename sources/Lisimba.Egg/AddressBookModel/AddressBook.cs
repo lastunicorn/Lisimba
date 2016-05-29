@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
             OnChanged();
         }
 
-        private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs notifyCollectionChangedEventArgs)
+        private void HandleContactsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             OnChanged();
         }

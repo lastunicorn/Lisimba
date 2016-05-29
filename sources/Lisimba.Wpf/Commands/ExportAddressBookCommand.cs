@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Egg.GateModel;
@@ -53,20 +54,39 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 
         protected override void DoExecute(object parameter)
         {
+            if (parameter == null) throw new ArgumentNullException("parameter");
+
             IGate gate = parameter as IGate;
 
             if (gate == null)
-                throw new ArgumentException("parameter is not a IGate", "parameter");
+                throw new ArgumentException("Invalid parameter type. IGate is required.", "parameter");
 
             if (openedAddressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
-            string newLocation = fileLocationProvider.AskToSave();
+            string fileName = null;
 
-            if (newLocation == null)
-                return;
+            FileGate fileGate = gate as FileGate;
 
-            openedAddressBooks.Current.Export(newLocation, gate);
+            if (fileGate != null)
+            {
+                fileName = AskForFileToSave(fileGate);
+
+                if (fileName == null)
+                    return;
+            }
+
+            openedAddressBooks.Current.Export(fileName, gate);
+        }
+
+        private string AskForFileToSave(FileGate fileGate)
+        {
+            List<FileType> fileTypes = new List<FileType>(fileGate.SupportedFileTypes)
+            {
+                new FileType { FileTypeName = "All Files", Extension = "*" }
+            };
+
+            return fileLocationProvider.AskToSave(fileTypes, fileTypes[0]);
         }
     }
 }

@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -27,11 +28,6 @@ namespace DustInTheWind.Lisimba.Gating
     {
         private readonly Loader loader;
         private readonly Saver saver;
-
-        public override string ExtensionFilter
-        {
-            get { return "*.csv"; }
-        }
 
         public override string Id
         {
@@ -51,6 +47,17 @@ namespace DustInTheWind.Lisimba.Gating
         public override Image Icon16
         {
             get { return Resources.yahoo_icon; }
+        }
+
+        public override IEnumerable<FileType> SupportedFileTypes
+        {
+            get
+            {
+                return new[]
+                {
+                    new FileType { FileTypeName = "Csv Files", Extension = "csv" }
+                };
+            }
         }
 
         public YahooCsvGate()

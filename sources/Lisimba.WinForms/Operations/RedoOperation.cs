@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             IsEnabled = CalculateEnableState();
         }
 
-        private void HandleRedoStackChanged(object sender, EventArgs eventArgs)
+        private void HandleRedoStackChanged(object sender, EventArgs e)
         {
             IsEnabled = CalculateEnableState();
         }

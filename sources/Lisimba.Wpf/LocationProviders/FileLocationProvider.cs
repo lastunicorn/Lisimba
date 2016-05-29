@@ -15,50 +15,46 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Text;
+using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Wpf.LocationProviders
 {
-    //        openFileDialog.Filter = "Csv Files (*.csv)|*.csv|All Files (*.*)|*.*";
-    //        openFileDialog.DefaultExt = "csv";
-
     internal class FileLocationProvider
     {
         private readonly WindowSystem windowSystem;
-
-        public string Extension { get; set; }
-        public string FileTypeName { get; set; }
-        public bool DisplayAllFilesFilter { get; set; }
 
         public FileLocationProvider(WindowSystem windowSystem)
         {
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             this.windowSystem = windowSystem;
-
-            Extension = "lsb";
-            FileTypeName = "Lisimba Files";
-            DisplayAllFilesFilter = true;
         }
 
-        public string AskToSave()
+        public string AskToSave(IEnumerable<FileType> fileTypes, FileType defaultFileType)
         {
-            return windowSystem.AskToSave(Extension, BuildFilter());
+            string filter = BuildFilter(fileTypes);
+            return windowSystem.AskToSave(defaultFileType.Extension, filter);
         }
 
-        public string AskToOpen()
+        public string AskToOpen(IEnumerable<FileType> fileTypes, FileType defaultFileType)
         {
-            return windowSystem.AskToOpen(Extension, BuildFilter());
+            string filter = BuildFilter(fileTypes);
+            return windowSystem.AskToOpen(defaultFileType.Extension, filter);
         }
 
-        private string BuildFilter()
+        private static string BuildFilter(IEnumerable<FileType> fileTypes)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(string.Format("{0} (*.{1})|*.{1}", FileTypeName, Extension));
+            foreach (FileType fileType in fileTypes)
+            {
+                if (sb.Length > 0)
+                    sb.Append("|");
 
-            if (DisplayAllFilesFilter)
-                sb.Append("|All Files (*.*)|*.*");
+                sb.Append(string.Format("{0} (*.{1})|*.{1}", fileType.FileTypeName, fileType.Extension));
+            }
 
             return sb.ToString();
         }

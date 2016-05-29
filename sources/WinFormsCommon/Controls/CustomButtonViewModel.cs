@@ -75,7 +75,7 @@ namespace DustInTheWind.WinFormsCommon.Controls
             isEnabled = operation.IsEnabled;
         }
 
-        private void HandleOperationEnableChanged(object sender, EventArgs eventArgs)
+        private void HandleOperationEnableChanged(object sender, EventArgs e)
         {
             IsEnabled = operation.IsEnabled;
         }

@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             Status = AddressBookStatus.Modified;
         }
 
-        private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs contactContentChangedEventArgs)
+        private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs e)
         {
             Status = AddressBookStatus.Modified;
         }

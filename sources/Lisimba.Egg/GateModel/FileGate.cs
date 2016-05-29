@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
 {
     public abstract class FileGate : GateBase
     {
-        public abstract string ExtensionFilter { get; }
+        public abstract IEnumerable<FileType> SupportedFileTypes { get; }
 
         protected FileGate()
         {

@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             IsEnabled = openedAddressBooks.Current != null;
         }
 
-        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs addressBookChangedEventArgs)
+        private void HandleAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
             IsEnabled = openedAddressBooks.Current != null;
         }

@@ -166,7 +166,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             Title = lisimbaWindowTitle.Value;
         }
 
-        private void HandleLisimbaTitleValueChanged(object sender, EventArgs eventArgs)
+        private void HandleLisimbaTitleValueChanged(object sender, EventArgs e)
         {
             Title = lisimbaWindowTitle.Value;
         }

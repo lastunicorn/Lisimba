@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
             return control;
         }
 
-        private static void HandleLabelMouseLeave(object sender, EventArgs eventArgs)
+        private static void HandleLabelMouseLeave(object sender, EventArgs e)
         {
             Control control = sender as Control;
 
@@ -50,7 +50,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
             control.BackColor = SystemColors.Control;
         }
 
-        private static void HandleLabelMouseEnter(object sender, EventArgs eventArgs)
+        private static void HandleLabelMouseEnter(object sender, EventArgs e)
         {
             Control control = sender as Control;
 

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
@@ -25,11 +26,6 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
     public class ZipXmlGate : FileGate
     {
         private readonly ZipXmlGateEncoder gateEncoder;
-
-        public override string ExtensionFilter
-        {
-            get { return "*.lsb"; }
-        }
 
         public override string Id
         {
@@ -49,6 +45,17 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
         public override Image Icon16
         {
             get { return Resources.lisimba_icon; }
+        }
+
+        public override IEnumerable<FileType> SupportedFileTypes
+        {
+            get
+            {
+                return new[]
+                {
+                    new FileType { FileTypeName = "Lisimba Files", Extension = "lsb" }
+                };
+            }
         }
 
         public ZipXmlGate()

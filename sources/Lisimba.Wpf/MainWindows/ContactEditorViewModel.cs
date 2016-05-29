@@ -270,7 +270,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             return string.Empty;
         }
 
-        private void HandleContactChanged(object sender, EventArgs eventArgs)
+        private void HandleContactChanged(object sender, EventArgs e)
         {
             RefreshDisplayedData();
         }
