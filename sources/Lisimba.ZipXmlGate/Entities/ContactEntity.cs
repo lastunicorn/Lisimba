@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
             if (value == null)
                 return null;
 
-            using (SHA256CryptoServiceProvider cryptoServiceProvider = new SHA256CryptoServiceProvider())
+            using (MD5CryptoServiceProvider cryptoServiceProvider = new MD5CryptoServiceProvider())
             {
                 byte[] hash = cryptoServiceProvider.ComputeHash(value);
                 return hash.ToHexString();
