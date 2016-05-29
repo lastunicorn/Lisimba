@@ -70,7 +70,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         <ListBox
             ItemsSource="{Binding Contacts}"
-            SelectedItem="{Binding SelectedContact, Mode=TwoWay}">
+            SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
+            Background="WhiteSmoke"
+            BorderThickness="0">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>

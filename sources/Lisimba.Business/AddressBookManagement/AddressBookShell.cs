@@ -76,9 +76,15 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             ActionQueue = new ActionQueue();
 
             AddressBook.Changed += HandleAddressBookChanged;
+            AddressBook.ContactContentChanged += HandleContactContentChanged;
         }
 
         private void HandleAddressBookChanged(object sender, EventArgs e)
+        {
+            Status = AddressBookStatus.Modified;
+        }
+
+        private void HandleContactContentChanged(object sender, ContactContentChangedEventArgs contactContentChangedEventArgs)
         {
             Status = AddressBookStatus.Modified;
         }

@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             icon16 = new Bitmap(16, 16);
         }
 
-        public IEnumerable<Exception> Warnings { get; private set; }
+        public IReadOnlyList<Exception> Warnings { get; private set; }
 
         public string Id
         {

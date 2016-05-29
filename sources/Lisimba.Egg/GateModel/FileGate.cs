@@ -16,35 +16,18 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.GateModel
 {
-    public abstract class FileGate : IGate
+    public abstract class FileGate : GateBase
     {
-        protected readonly List<Exception> warnings;
-        public abstract string Id { get; }
-        public abstract string Name { get; }
-        public abstract string Description { get; }
-        public abstract Image Icon16 { get; }
-
-        public IEnumerable<Exception> Warnings
-        {
-            get { return warnings; }
-        }
-
         public abstract string ExtensionFilter { get; }
 
         protected FileGate()
         {
             warnings = new List<Exception>();
-        }
-
-        protected void AddWarning(Exception warning)
-        {
-            warnings.Add(warning);
         }
 
         public AddressBook Load(string fileName)
@@ -61,8 +44,12 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             {
                 using (FileStream fileStream = File.OpenRead(fileName))
                 {
-                    return Load(fileStream);
+                    return DoLoad(fileStream);
                 }
+            }
+            catch (GateException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -79,8 +66,12 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             {
                 using (FileStream fileStream = File.OpenWrite(fileName))
                 {
-                    Save(addressBook, fileStream);
+                    DoSave(addressBook, fileStream);
                 }
+            }
+            catch (GateException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -89,16 +80,45 @@ namespace DustInTheWind.Lisimba.Egg.GateModel
             }
         }
 
-        public AddressBook Load(Stream stream)
+        public override AddressBook Load(Stream stream)
         {
+            if (stream == null) throw new ArgumentNullException("stream");
+
             warnings.Clear();
-            return DoLoad(stream);
+
+            try
+            {
+                return DoLoad(stream);
+            }
+            catch (GateException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new GateException("Error opening address book,", ex);
+            }
         }
 
-        public void Save(AddressBook addressBook, Stream stream)
+        public override void Save(AddressBook addressBook, Stream stream)
         {
+            if (addressBook == null) throw new ArgumentNullException("addressBook");
+            if (stream == null) throw new ArgumentNullException("stream");
+
             warnings.Clear();
-            DoSave(addressBook, stream);
+
+            try
+            {
+                DoSave(addressBook, stream);
+            }
+            catch (GateException)
+            {
+                throw;
+            }
+            catch (Exception ex)
+            {
+                throw new GateException("Error saving address book.", ex);
+            }
         }
 
         public abstract AddressBook DoLoad(Stream stream);

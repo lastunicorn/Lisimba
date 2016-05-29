@@ -24,9 +24,8 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 {
     public class ZipXmlGate : FileGate
     {
-        private readonly Saver saver;
-        private readonly Loader loader;
-        
+        private readonly ZipXmlGateEncoder gateEncoder;
+
         public override string ExtensionFilter
         {
             get { return "*.lsb"; }
@@ -54,16 +53,15 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
 
         public ZipXmlGate()
         {
-            loader = new Loader();
-            saver = new Saver();
+            gateEncoder = new ZipXmlGateEncoder();
         }
 
         public override AddressBook DoLoad(Stream stream)
         {
             warnings.Clear();
 
-            AddressBook addressBook = loader.Load(stream);
-            warnings.AddRange(loader.Warnings);
+            AddressBook addressBook = gateEncoder.Decode(stream);
+            warnings.AddRange(gateEncoder.Warnings);
 
             return addressBook;
         }
@@ -72,7 +70,8 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
         {
             warnings.Clear();
 
-            saver.Save(addressBook, stream);
+            gateEncoder.Encode(addressBook, stream);
+            warnings.AddRange(gateEncoder.Warnings);
         }
     }
 }

@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,16 @@
 
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.ZipXmlGate
 {
-    public interface IGate
+    internal interface IGateEncoder
     {
-        string Id { get; }
-        string Name { get; }
-        string Description { get; }
-        Image Icon16 { get; }
-
         IReadOnlyList<Exception> Warnings { get; }
 
-        AddressBook Load(Stream stream);
-        void Save(AddressBook addressBook, Stream stream);
+        AddressBook Decode(Stream stream);
+        void Encode(AddressBook addressBook, Stream stream);
     }
 }

@@ -73,7 +73,10 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
                 return;
 
             foreach (T item in items)
+            {
                 Items.Add(item);
+                item.Changed += HandleItemChanged;
+            }
 
             OnPropertyChanged(new PropertyChangedEventArgs("Count"));
             OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
