@@ -27,28 +27,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance mainWindows:ContactEditorViewModel}">
 
-    <DockPanel>
+    <DockPanel Background="WhiteSmoke">
 
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
 
             <Image
-                    Width="16"
-                    Height="16"
-                    Margin="2 2 4 2"
-                    Source="{StaticResource NotesIcon}"/>
+                Width="16"
+                Height="16"
+                Margin="2 2 4 2"
+                Source="{StaticResource NotesIcon}"/>
 
             <TextBlock
-                    Text="Notes"
-                    VerticalAlignment="Center"/>
+                Text="Notes"
+                VerticalAlignment="Center"/>
 
         </StackPanel>
 
         <TextBox
-                Text="{Binding Notes, UpdateSourceTrigger=LostFocus}"
-                AcceptsReturn="True"
-                AcceptsTab="True"
-                HorizontalScrollBarVisibility="Auto"
-                VerticalScrollBarVisibility="Auto"/>
+            Text="{Binding Notes, UpdateSourceTrigger=LostFocus}"
+            AcceptsReturn="True"
+            AcceptsTab="True"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            BorderThickness="0"/>
 
     </DockPanel>
 

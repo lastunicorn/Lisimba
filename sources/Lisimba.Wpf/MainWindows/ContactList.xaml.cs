@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Windows.Controls;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
@@ -26,6 +27,22 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public ContactList()
         {
             InitializeComponent();
+        }
+
+        private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListBox listBox = sender as ListBox;
+            
+            if (listBox != null && listBox.SelectedItem != null)
+            {
+                listBox.Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    listBox.UpdateLayout();
+
+                    if (listBox.SelectedItem != null)
+                        listBox.ScrollIntoView(listBox.SelectedItem);
+                }));
+            }
         }
     }
 }

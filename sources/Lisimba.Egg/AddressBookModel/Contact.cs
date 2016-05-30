@@ -177,8 +177,8 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
 
             Items = new ContactItemCollection();
 
-            name.Changed += (sender, args) => OnChanged();
-            birthday.Changed += (sender, args) => OnChanged();
+            name.Changed += (sender, e) => OnChanged();
+            birthday.Changed += (sender, e) => OnChanged();
 
             Items.CollectionChanged += (sender, e) => OnChanged();
             Items.ItemChanged += (sender, e) => OnChanged();
