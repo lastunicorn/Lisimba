@@ -53,13 +53,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 ItemsSource="{Binding ExportMenuItems}"
                 DisplayMemberPath="Text">
 
+                <MenuItem.Resources>
+                    <Image x:Key="imgCTX" x:Shared="false" Height="16px" Width="16px" Source="{Binding Path=Icon}"/>
+                </MenuItem.Resources>
+
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="Icon">
-                            <Setter.Value>
-                                <Image Width="16" Height="16" Source="{Binding Icon}"/>
-                            </Setter.Value>
-                        </Setter>
+                        <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
                         <Setter Property="Command" Value="{Binding Command}"/>
                         <Setter Property="CommandParameter" Value="{Binding Gate}"/>
                     </Style>
@@ -70,13 +70,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 ItemsSource="{Binding ImportMenuItems}"
                 DisplayMemberPath="Text">
 
+                <MenuItem.Resources>
+                    <Image x:Key="imgCTX" x:Shared="false" Height="16px" Width="16px" Source="{Binding Path=Icon}"/>
+                </MenuItem.Resources>
+
                 <MenuItem.ItemContainerStyle>
                     <Style TargetType="{x:Type MenuItem}">
-                        <Setter Property="Icon">
-                            <Setter.Value>
-                                <Image Width="16" Height="16" Source="{Binding Icon}"/>
-                            </Setter.Value>
-                        </Setter>
+                        <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
                         <Setter Property="Command" Value="{Binding Command}"/>
                         <Setter Property="CommandParameter" Value="{Binding Gate}"/>
                     </Style>
