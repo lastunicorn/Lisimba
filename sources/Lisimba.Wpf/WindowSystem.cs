@@ -163,13 +163,6 @@ namespace DustInTheWind.Lisimba.Wpf
             window.ShowDialog();
         }
 
-        public void DisplayAddContactWindow()
-        {
-            AddContactWindow window = uiFactory.CreateWindow<AddContactWindow>();
-            window.Owner = mainWindow;
-            window.Show();
-        }
-
         public void DisplayAddressBookProperties()
         {
             AddressBookPropertiesWindow window = uiFactory.CreateWindow<AddressBookPropertiesWindow>();

@@ -90,9 +90,6 @@
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindows\AddContactItemClickCommand.cs" />
-    <Compile Include="MainWindows\AddContactWindow.xaml.cs">
-      <DependentUpon>AddContactWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindows\AddressBookPropertiesViewModel.cs" />
     <Compile Include="MainWindows\AddressBookPropertiesWindow.xaml.cs">
       <DependentUpon>AddressBookPropertiesWindow.xaml</DependentUpon>
@@ -217,10 +214,6 @@
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
     <Page Include="MainWindows\AboutWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainWindows\AddContactWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

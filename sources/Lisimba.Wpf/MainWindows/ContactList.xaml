@@ -72,7 +72,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             ItemsSource="{Binding Contacts}"
             SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
             Background="WhiteSmoke"
-            BorderThickness="0">
+            BorderThickness="0"
+            SelectionChanged="Selector_OnSelectionChanged">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
