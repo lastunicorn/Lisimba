@@ -20,26 +20,5 @@ as a user i want the application to start when os starts and remain minimized as
 as a user i want to be able to open an address book from a url.
 
 
-Desmond
-=======
-
-- Open address book from a file.
-- If the file was modified, reload the address book.
-
-- Open address book from database.
-- If the database was updated, reload the address book.
-
-- Open address from a web service.
-- If the address book was changed, reload the address book.
-
-- Announce the next birthday if less then n days.
-
-- Display a NotifyIcon.
-
-Spider
-======
-
-- mysql database
-- 2 pages (something like a web service)
-	- read book
-	- write book
+- list of Contact items.
+http://www.codeproject.com/Articles/9238/WinForms-Custom-Container-Control
