@@ -16,6 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.Commands
@@ -47,7 +48,13 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 
         protected override void DoExecute(object parameter)
         {
-            WindowSystem.DisplayAddContactWindow();
+            Contact contact = new Contact
+            {
+                Name = new PersonName { FirstName = "<noname"+ new Random().Next(100, 1000) +">" }
+            };
+
+            openedAddressBooks.Current.AddContact(contact);
+            openedAddressBooks.CurrentContact = contact;
         }
     }
 }
