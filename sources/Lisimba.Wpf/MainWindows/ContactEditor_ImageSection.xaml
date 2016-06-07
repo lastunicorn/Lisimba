@@ -66,11 +66,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </Button>
 
         <TextBlock
+            x:Name="BirthdayLabel"
             HorizontalAlignment="Stretch"
             Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
             TextAlignment="Center"
+            MouseDown="UIElement_OnMouseDown"
             wpf:ExtendedCommands.DoubleClickCommand="{Binding BirthdayEditCommand}"
             wpf:ExtendedCommands.DoubleClickCommandParameter="{Binding Birthday}"/>
+        
+        <TextBox
+            x:Name="BirthdayTextBox"
+            HorizontalAlignment="Stretch"
+            Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
+            TextAlignment="Center"
+            Visibility="Collapsed"
+            LostFocus="BirthdayTextBox_OnLostFocus"
+            KeyDown="BirthdayTextBox_OnKeyDown"
+            mainWindows:Masking.Mask="^\d\d\d\d \d\d \d\d$"/>
 
         <mainWindows:ZodiacSignView
             Padding="4"
