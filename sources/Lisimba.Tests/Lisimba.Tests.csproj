@@ -81,9 +81,9 @@
       <Project>{BDFCAD78-775A-478D-8BFF-6A986704AA0C}</Project>
       <Name>ConsoleCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
-      <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
-      <Name>Lisimba.Egg</Name>
+    <ProjectReference Include="..\Lisimba.Business\Lisimba.Business.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Lisimba.WinForms\Lisimba.WinForms.csproj">
       <Project>{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}</Project>

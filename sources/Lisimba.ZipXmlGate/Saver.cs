@@ -20,6 +20,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.ZipXmlGate.Entities;
@@ -48,7 +49,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             catch (Exception ex)
             {
                 string message = string.Format("Error saving address book. Inner error: {0}", ex.Message);
-                throw new EggException(message, ex);
+                throw new LisimbaException(message, ex);
             }
         }
 

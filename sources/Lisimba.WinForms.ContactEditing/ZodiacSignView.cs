@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
@@ -23,8 +24,8 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing
 {
     public partial class ZodiacSignView : UserControl
     {
-        private readonly Zodiac zodiac;
         private ZodiacSign zodiacSign;
+        private Zodiac zodiac;
 
         public ZodiacSign ZodiacSign
         {
@@ -37,17 +38,28 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing
             }
         }
 
+        public Zodiac Zodiac
+        {
+            get { return zodiac; }
+            set
+            {
+                zodiac = value;
+                UpdateDisplayedZodiacSign();
+            }
+        }
+
         public ZodiacSignView()
         {
             InitializeComponent();
-
-            zodiac = new Zodiac();
         }
 
         private void UpdateDisplayedZodiacSign()
         {
-            Image zodiacImage = zodiac.GetZodiacImage(ZodiacSign);
-            string zodiacSignName = zodiac.GetZodiacSignName(ZodiacSign);
+            if (Zodiac == null)
+                return;
+
+            Image zodiacImage = Zodiac.GetZodiacImage(ZodiacSign);
+            string zodiacSignName = Zodiac.GetZodiacSignName(ZodiacSign);
 
             pictureBoxZodiacSign.Image = zodiacImage;
             pictureBoxZodiacSign.Text = zodiacSignName;

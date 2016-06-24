@@ -138,4 +138,19 @@
   <data name="NoAddressBookName" xml:space="preserve">
     <value>&lt; Unnamed &gt;</value>
   </data>
+  <data name="ContactComparer_XIsNotContact" xml:space="preserve">
+    <value>x is not a Contact object.</value>
+  </data>
+  <data name="ContactComparer_YIsNotContact" xml:space="preserve">
+    <value>y is not a Contact object.</value>
+  </data>
+  <data name="EmptyGate_Description" xml:space="preserve">
+    <value>A Gate that knows nothing, does nothing. It just exists.</value>
+  </data>
+  <data name="EmptyGate_LoadError" xml:space="preserve">
+    <value>EmptyGate cannot open anything.</value>
+  </data>
+  <data name="EmptyGate_SaveError" xml:space="preserve">
+    <value>EmptyGate cannot save anything.</value>
+  </data>
 </root>

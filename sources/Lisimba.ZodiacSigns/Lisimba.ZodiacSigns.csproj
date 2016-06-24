@@ -69,9 +69,9 @@
     <None Include="Images\zodiac\mic_balanta.gif" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
-      <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
-      <Name>Lisimba.Egg</Name>
+    <ProjectReference Include="..\Lisimba.Business\Lisimba.Business.csproj">
+      <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
+      <Name>Lisimba.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

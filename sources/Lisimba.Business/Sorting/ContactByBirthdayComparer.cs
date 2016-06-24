@@ -16,15 +16,16 @@
 
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Properties;
 
 namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     /// <summary>
-    /// Compares two contacts by last name.
+    /// Compares two contacts only by day and month of their birthdate. (Ignores the year)
     /// </summary>
-    internal class ContactByLastNameComparer : IComparer
+    public class ContactByBirthdayComparer : IComparer, IComparer<Contact>
     {
         public int Compare(object x, object y)
         {
@@ -37,7 +38,18 @@ namespace DustInTheWind.Lisimba.Egg.Sorting
             if (contactY == null)
                 throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
 
-            return string.Compare(contactX.Name.LastName, contactY.Name.LastName);
+            return Date.CompareWithoutYear(contactX.Birthday, contactY.Birthday);
+        }
+
+        public int Compare(Contact contactX, Contact contactY)
+        {
+            if (contactX == null)
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
+
+            if (contactY == null)
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
+
+            return Date.CompareWithoutYear(contactX.Birthday, contactY.Birthday);
         }
     }
 }

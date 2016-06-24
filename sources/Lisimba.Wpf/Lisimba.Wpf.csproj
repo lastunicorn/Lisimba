@@ -322,9 +322,9 @@
       <Project>{878C348A-8754-4CAD-AB41-B63B3E157256}</Project>
       <Name>Lisimba.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
-      <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
-      <Name>Lisimba.Egg</Name>
+    <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
+      <Project>{348216bd-da3e-4dec-9b9d-5ff14ed05722}</Project>
+      <Name>Lisimba.ZodiacSigns</Name>
     </ProjectReference>
     <ProjectReference Include="..\WinFormsCommon\WinFormsCommon.csproj">
       <Project>{47cdb7c5-a066-45cf-bd3e-b6ca2ff72db1}</Project>

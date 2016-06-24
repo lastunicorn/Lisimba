@@ -16,15 +16,15 @@
 
 using System;
 using System.Collections;
+using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Properties;
 
 namespace DustInTheWind.Lisimba.Egg.Sorting
 {
     /// <summary>
-    /// Compares two contacts by first name.
+    /// Compares two contacts by last name.
     /// </summary>
-    internal class ContactByFirstNameComparer : IComparer
+    internal class ContactByMiddleNameComparer : IComparer
     {
         public int Compare(object x, object y)
         {
@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Egg.Sorting
             if (contactY == null)
                 throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
 
-            return string.Compare(contactX.Name.FirstName, contactY.Name.FirstName);
+            return string.Compare(contactX.Name.MiddleName, contactY.Name.MiddleName);
         }
     }
 }

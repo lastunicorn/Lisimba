@@ -16,8 +16,8 @@
 
 using System;
 using System.Collections;
+using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Properties;
 
 namespace DustInTheWind.Lisimba.Egg.Sorting
 {

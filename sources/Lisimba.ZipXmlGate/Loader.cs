@@ -20,6 +20,7 @@ using System.IO;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 using DustInTheWind.Lisimba.Egg.GateModel;
@@ -71,7 +72,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 }
 
                 if (addressBookEntity == null)
-                    throw new EggException("Incorrect file. The archive does not contain the \"file.xml\" file.");
+                    throw new LisimbaException("Incorrect file. The archive does not contain the \"file.xml\" file.");
 
                 AttachPicturesToContacts();
             }
@@ -91,7 +92,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     if (pictures.ContainsKey(contactEntity.PictureHash))
                         contactEntity.Picture = pictures[contactEntity.PictureHash];
                     else
-                        warnings.Add(new EggException("Picture not found. Picture hash: " + contactEntity.PictureHash));
+                        warnings.Add(new LisimbaException("Picture not found. Picture hash: " + contactEntity.PictureHash));
                 }
             }
         }

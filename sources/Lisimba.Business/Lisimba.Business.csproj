@@ -55,10 +55,46 @@
     <Compile Include="AddressBookManagement\ContactDeletingEventArgs.cs" />
     <Compile Include="AddressBookManagement\GateNeededEventArgs.cs" />
     <Compile Include="AddressBookManagement\NewLocationNeededEventArgs.cs" />
+    <Compile Include="AddressBookModel\AddressBook.cs" />
+    <Compile Include="AddressBookModel\Contact.cs" />
+    <Compile Include="AddressBookModel\ContactCollection.cs" />
+    <Compile Include="AddressBookModel\ContactContentChangedEventArgs.cs" />
+    <Compile Include="AddressBookModel\ContactItem.cs" />
+    <Compile Include="AddressBookModel\ContactItemCollection.cs" />
+    <Compile Include="AddressBookModel\ContactMatch.cs" />
+    <Compile Include="AddressBookModel\CustomObservableCollection.cs" />
+    <Compile Include="AddressBookModel\Date.cs" />
+    <Compile Include="AddressBookModel\Email.cs" />
+    <Compile Include="AddressBookModel\FuzzyMatch.cs" />
+    <Compile Include="AddressBookModel\IObservableEntity.cs" />
+    <Compile Include="AddressBookModel\ItemChangedEventArgs.cs" />
+    <Compile Include="AddressBookModel\NameSection.cs" />
+    <Compile Include="AddressBookModel\PersonName.cs" />
+    <Compile Include="AddressBookModel\PersonNameMatch.cs" />
+    <Compile Include="AddressBookModel\Phone.cs" />
+    <Compile Include="AddressBookModel\PostalAddress.cs" />
+    <Compile Include="AddressBookModel\SocialProfile.cs" />
+    <Compile Include="AddressBookModel\WebSite.cs" />
+    <Compile Include="AddressBookModel\ZodiacSign.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
+    <Compile Include="GateModel\EmptyGate.cs" />
+    <Compile Include="GateModel\FileGate.cs" />
+    <Compile Include="GateModel\FileType.cs" />
+    <Compile Include="GateModel\GateBase.cs" />
+    <Compile Include="GateModel\GateException.cs" />
+    <Compile Include="GateModel\IGate.cs" />
+    <Compile Include="GateModel\IncorrectEggVersionException.cs" />
+    <Compile Include="Importing\AddressBookComparer.cs" />
+    <Compile Include="Importing\AddressBookComparisonResult.cs" />
+    <Compile Include="Importing\AddressBookImporter.cs" />
+    <Compile Include="Importing\ContactComparisonResult.cs" />
+    <Compile Include="Importing\ImportRule.cs" />
+    <Compile Include="Importing\ImportRuleCollection.cs" />
+    <Compile Include="Importing\ImportType.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
+    <Compile Include="IZodiacSignProvider.cs" />
     <Compile Include="LisimbaWindowTitle.cs" />
     <Compile Include="ObservingModel\ActiveObservers.cs" />
     <Compile Include="ObservingModel\IObserver.cs" />
@@ -93,19 +129,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RecentFilesManagement\RecentFiles.cs" />
+    <Compile Include="Searching\SearchMode.cs" />
+    <Compile Include="Sorting\ComparerFactory.cs" />
+    <Compile Include="Sorting\ContactByBirthdateComparer.cs" />
+    <Compile Include="Sorting\ContactByBirthdayComparer.cs" />
+    <Compile Include="Sorting\ContactByFirstNameComparer.cs" />
+    <Compile Include="Sorting\ContactByLastNameComparer.cs" />
+    <Compile Include="Sorting\ContactByMiddleNameComparer.cs" />
+    <Compile Include="Sorting\ContactByNicknameComparer.cs" />
+    <Compile Include="Sorting\ContactsSortingType.cs" />
+    <Compile Include="Sorting\MultipleComparer.cs" />
     <Compile Include="Zodiac.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
-      <Project>{9381d002-2dd0-41b5-b676-3b0358b6eff0}</Project>
-      <Name>Lisimba.Egg</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj">
-      <Project>{348216bd-da3e-4dec-9b9d-5ff14ed05722}</Project>
-      <Name>Lisimba.ZodiacSigns</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

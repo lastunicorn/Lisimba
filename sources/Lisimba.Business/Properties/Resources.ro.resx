@@ -120,8 +120,23 @@
   <data name="CloseAddressBooks_NotSavedError" xml:space="preserve">
     <value>Nu se poate închide agenda curentă pentru că nu este salvată.</value>
   </data>
+  <data name="ContactComparer_XIsNotContact" xml:space="preserve">
+    <value>x nu este un obiect Contact.</value>
+  </data>
+  <data name="ContactComparer_YIsNotContact" xml:space="preserve">
+    <value>y nu este un obiect Contact.</value>
+  </data>
   <data name="DefaultAddressBookName" xml:space="preserve">
     <value>Agendă nouă</value>
+  </data>
+  <data name="EmptyGate_Description" xml:space="preserve">
+    <value>Un Gate care nu știe nimic, nu face nimic. Pur și simplu există.</value>
+  </data>
+  <data name="EmptyGate_LoadError" xml:space="preserve">
+    <value>EmptyGate nu poate deschide nimic.</value>
+  </data>
+  <data name="EmptyGate_SaveError" xml:space="preserve">
+    <value>EmptyGate nu poate salva nimic.</value>
   </data>
   <data name="GateNotFoundError" xml:space="preserve">
     <value>Nu există nici un Gate cu id  = {0}</value>

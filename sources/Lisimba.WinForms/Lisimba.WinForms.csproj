@@ -425,10 +425,6 @@
       <Project>{878c348a-8754-4cad-ab41-b63b3e157256}</Project>
       <Name>Lisimba.Business</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Lisimba.Egg\Lisimba.Egg.csproj">
-      <Project>{9381D002-2DD0-41B5-B676-3B0358B6EFF0}</Project>
-      <Name>Lisimba.Egg</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Lisimba.WinForms.ContactEditing\Lisimba.WinForms.ContactEditing.csproj">
       <Project>{fe04ee77-8675-4d62-aa62-c380c7770c20}</Project>
       <Name>Lisimba.WinForms.ContactEditing</Name>

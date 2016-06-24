@@ -14,24 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Drawing;
 using DustInTheWind.Lisimba.Business.Properties;
+using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.ZodiacSigns;
 
 namespace DustInTheWind.Lisimba.Business
 {
     public class Zodiac
     {
+        private readonly IZodiacSignProvider zodiacSignProvider;
+
+        public Zodiac(IZodiacSignProvider zodiacSignProvider)
+        {
+            if (zodiacSignProvider == null) throw new ArgumentNullException("zodiacSignProvider");
+            this.zodiacSignProvider = zodiacSignProvider;
+        }
+
         public Image GetZodiacImage(ZodiacSign zodiacSign)
         {
-            ZodiacSignProvider zodiacSignProvider = new ZodiacSignProvider();
             return zodiacSignProvider.GetZodiacImage(zodiacSign);
         }
 
         public Image GetEmptyImage()
         {
-            ZodiacSignProvider zodiacSignProvider = new ZodiacSignProvider();
             return zodiacSignProvider.GetZodiacImage(ZodiacSign.Aquarius);
         }
 

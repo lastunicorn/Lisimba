@@ -15,29 +15,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Runtime.Serialization;
+using DustInTheWind.Lisimba.Business;
 
-namespace DustInTheWind.Lisimba.Egg
+namespace DustInTheWind.Lisimba.Egg.GateModel
 {
     [Serializable]
-    public class EggException : ApplicationException
+    public class GateException : LisimbaException
     {
-        public EggException()
+        public GateException()
         {
         }
 
-        public EggException(string message)
+        public GateException(string message)
             : base(message)
         {
         }
 
-        public EggException(string message, Exception innerException)
+        public GateException(string message, Exception innerException)
             : base(message, innerException)
-        {
-        }
-
-        protected EggException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
         {
         }
     }

@@ -5,8 +5,6 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.WinForms", "Lisimba.WinForms\Lisimba.WinForms.csproj", "{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Egg", "Lisimba.Egg\Lisimba.Egg.csproj", "{9381D002-2DD0-41B5-B676-3B0358B6EFF0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.Tests", "Lisimba.Tests\Lisimba.Tests.csproj", "{367C4ADF-B8A3-4FCE-8049-E23FD802073E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lisimba.ZodiacSigns", "Lisimba.ZodiacSigns\Lisimba.ZodiacSigns.csproj", "{348216BD-DA3E-4DEC-9B9D-5FF14ED05722}"
@@ -41,10 +39,6 @@ Global
 		{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D86FC79-5DF1-430A-A3D2-1B9C7D6295C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9381D002-2DD0-41B5-B676-3B0358B6EFF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9381D002-2DD0-41B5-B676-3B0358B6EFF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9381D002-2DD0-41B5-B676-3B0358B6EFF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9381D002-2DD0-41B5-B676-3B0358B6EFF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{367C4ADF-B8A3-4FCE-8049-E23FD802073E}.Release|Any CPU.ActiveCfg = Release|Any CPU

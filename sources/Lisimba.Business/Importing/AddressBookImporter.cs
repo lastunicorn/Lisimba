@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Egg.Importing
@@ -85,7 +86,7 @@ namespace DustInTheWind.Lisimba.Egg.Importing
         public void DoImport()
         {
             if (importRules == null)
-                throw new EggException("Prepare the import first.");
+                throw new LisimbaException("Prepare the import first.");
 
             foreach (ImportRule importRule in importRules)
             {
