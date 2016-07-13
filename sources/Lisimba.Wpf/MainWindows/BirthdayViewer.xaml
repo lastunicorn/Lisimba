@@ -3,33 +3,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:egg="clr-namespace:DustInTheWind.Lisimba.Egg.AddressBookModel;assembly=DustInTheWind.Lisimba.Egg"
              xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
+             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Egg.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance egg:Date}">
+             d:DataContext="{d:DesignInstance addressBookModel:Date}">
 
     <UserControl.Resources>
+        <Style x:Key="NormalModeStyle" TargetType="Label">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="HoverModeStyle" TargetType="Label">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+
         <mainWindows:DateFormatter x:Key="DateFormatter"/>
+        <mainWindows:DateValidationRule x:Key="DateValidationRule"/>
     </UserControl.Resources>
 
-    <Grid>
-        
-        <TextBlock
-            Name="BirthdayLabel"
-            HorizontalAlignment="Stretch"
-            Text="{Binding Converter={StaticResource DateFormatter}}"
-            TextAlignment="Center"
-            MouseDown="BirthdayLabel_MouseDown"/>
+    <Grid Name="LayoutRoot" d:DataContext="{d:DesignInstance mainWindows:BirthdayViewer}">
+
+        <Label
+            Name="Label1"
+            Content="{Binding Date, Mode=OneWay, Converter={StaticResource DateFormatter}}"
+            Style="{StaticResource NormalModeStyle}"
+            Focusable="True"
+            IsTabStop="True"
+            HorizontalContentAlignment="Center"
+            MouseEnter="Label1_OnMouseEnter"
+            MouseLeave="Label1_OnMouseLeave"
+            MouseLeftButtonUp="Label1_OnMouseLeftButtonUp"/>
 
         <TextBox
-            Name="BirthdayEditor"
-            HorizontalAlignment="Stretch"
-            TextAlignment="Center"
+            Name="TextBox1"
             Visibility="Collapsed"
-            LostFocus="BirthdayEditor_LostFocus"/>
-        
+            Focusable="True"
+            HorizontalContentAlignment="Center"
+            mainWindows:Masking.Mask="^\d{1,4} \d{1,2} \d{1,2}$"
+            LostFocus="TextBox1_OnLostFocus"
+            KeyDown="TextBox1_OnKeyDown">
+
+            <TextBox.Text>
+                <Binding Path="Date" Mode="TwoWay" Converter="{StaticResource DateFormatter}">
+                    <Binding.ValidationRules>
+                        <mainWindows:DateValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
     </Grid>
-    
+
 </UserControl>

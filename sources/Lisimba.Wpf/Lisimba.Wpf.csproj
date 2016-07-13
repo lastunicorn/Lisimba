@@ -123,6 +123,7 @@
     <Compile Include="MainWindows\ContactListViewModel.cs" />
     <Compile Include="MainWindows\CustomMenuItem.cs" />
     <Compile Include="MainWindows\DateFormatter.cs" />
+    <Compile Include="MainWindows\DateValidationRule.cs" />
     <Compile Include="MainWindows\ImageClickCommand.cs" />
     <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">
       <DependentUpon>LisimbaMainMenu.xaml</DependentUpon>

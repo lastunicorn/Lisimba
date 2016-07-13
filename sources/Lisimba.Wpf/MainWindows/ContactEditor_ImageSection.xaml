@@ -97,6 +97,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         </Button>
 
+        <mainWindows:BirthdayViewer Date="{Binding Birthday}"/>
+        
         <TextBlock
             x:Name="BirthdayLabel"
             HorizontalAlignment="Stretch"

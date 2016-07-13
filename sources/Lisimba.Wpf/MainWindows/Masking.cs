@@ -43,20 +43,17 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public static readonly DependencyProperty MaskExpressionProperty = _maskExpressionPropertyKey.DependencyProperty;
 
         /// <summary>
-        /// Gets the mask for a given <see cref="TextBox"/>.
+        /// Gets the mask for a given <see cref="System.Windows.Controls.TextBox"/>.
         /// </summary>
         /// <param name="textBox">
-        /// The <see cref="TextBox"/> whose mask is to be retrieved.
+        /// The <see cref="System.Windows.Controls.TextBox"/> whose mask is to be retrieved.
         /// </param>
         /// <returns>
         /// The mask, or <see langword="null"/> if no mask has been set.
         /// </returns>
         public static string GetMask(TextBox textBox)
         {
-            if (textBox == null)
-            {
-                throw new ArgumentNullException("textBox");
-            }
+            if (textBox == null) throw new ArgumentNullException("textBox");
 
             return textBox.GetValue(MaskProperty) as string;
         }
@@ -72,10 +69,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         /// </param>
         public static void SetMask(TextBox textBox, string mask)
         {
-            if (textBox == null)
-            {
-                throw new ArgumentNullException("textBox");
-            }
+            if (textBox == null) throw new ArgumentNullException("textBox");
 
             textBox.SetValue(MaskProperty, mask);
         }
@@ -94,10 +88,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         /// </returns>
         public static Regex GetMaskExpression(TextBox textBox)
         {
-            if (textBox == null)
-            {
-                throw new ArgumentNullException("textBox");
-            }
+            if (textBox == null) throw new ArgumentNullException("textBox");
 
             return textBox.GetValue(MaskExpressionProperty) as Regex;
         }
@@ -126,7 +117,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             else
             {
                 textBox.SetValue(MaskProperty, mask);
-                SetMaskExpression(textBox, new Regex(mask, RegexOptions.Compiled | RegexOptions.IgnorePatternWhitespace));
+                SetMaskExpression(textBox, new Regex(mask, RegexOptions.Compiled));
                 textBox.PreviewTextInput += textBox_PreviewTextInput;
                 textBox.PreviewKeyDown += textBox_PreviewKeyDown;
                 DataObject.AddPastingHandler(textBox, Pasting);
@@ -138,17 +129,13 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private static void NoCutting(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Command == ApplicationCommands.Cut)
-            {
                 e.Handled = true;
-            }
         }
 
         private static void NoDragCopy(object sender, DataObjectCopyingEventArgs e)
         {
             if (e.IsDragDrop)
-            {
                 e.CancelCommand();
-            }
         }
 
         private static void textBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -157,16 +144,12 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             var maskExpression = GetMaskExpression(textBox);
 
             if (maskExpression == null)
-            {
                 return;
-            }
 
             var proposedText = GetProposedText(textBox, e.Text);
 
             if (!maskExpression.IsMatch(proposedText))
-            {
                 e.Handled = true;
-            }
         }
 
         private static void textBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -175,28 +158,18 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             var maskExpression = GetMaskExpression(textBox);
 
             if (maskExpression == null)
-            {
                 return;
-            }
 
             string proposedText = null;
 
             //pressing space doesn't raise PreviewTextInput, reasons here http://social.msdn.microsoft.com/Forums/en-US/wpf/thread/446ec083-04c8-43f2-89dc-1e2521a31f6b?prof=required
             if (e.Key == Key.Space)
-            {
                 proposedText = GetProposedText(textBox, " ");
-            }
-            // Same story with backspace
             else if (e.Key == Key.Back)
-            {
                 proposedText = GetProposedTextBackspace(textBox);
-            }
 
-            if (proposedText != null && proposedText != string.Empty && !maskExpression.IsMatch(proposedText))
-            {
+            if (!string.IsNullOrEmpty(proposedText) && !maskExpression.IsMatch(proposedText))
                 e.Handled = true;
-            }
-
         }
 
         private static void Pasting(object sender, DataObjectPastingEventArgs e)
@@ -205,9 +178,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             var maskExpression = GetMaskExpression(textBox);
 
             if (maskExpression == null)
-            {
                 return;
-            }
 
             if (e.DataObject.GetDataPresent(typeof(string)))
             {
@@ -215,9 +186,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
                 var proposedText = GetProposedText(textBox, pastedText);
 
                 if (!maskExpression.IsMatch(proposedText))
-                {
                     e.CancelCommand();
-                }
             }
             else
             {
@@ -228,18 +197,24 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         private static string GetProposedTextBackspace(TextBox textBox)
         {
             var text = GetTextWithSelectionRemoved(textBox);
-            if (textBox.SelectionStart > 0 && textBox.SelectionLength == 0)
-            {
+
+            bool containsSelectedText = textBox.SelectionStart > 0 && textBox.SelectionLength > 0;
+
+            if (!containsSelectedText)
                 text = text.Remove(textBox.SelectionStart - 1, 1);
-            }
 
             return text;
         }
 
-
         private static string GetProposedText(TextBox textBox, string newText)
         {
             var text = GetTextWithSelectionRemoved(textBox);
+
+            bool containsSelectedText = textBox.SelectionStart > 0 && textBox.SelectionLength > 0;
+
+            if (!containsSelectedText)
+                text = text.Remove(textBox.SelectionStart, 1);
+
             text = text.Insert(textBox.CaretIndex, newText);
 
             return text;
@@ -250,9 +225,8 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             var text = textBox.Text;
 
             if (textBox.SelectionStart != -1)
-            {
                 text = text.Remove(textBox.SelectionStart, textBox.SelectionLength);
-            }
+            
             return text;
         }
     }

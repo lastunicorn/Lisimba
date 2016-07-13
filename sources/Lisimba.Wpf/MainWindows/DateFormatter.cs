@@ -33,6 +33,9 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
             if (targetType == typeof(string))
                 return date.ToShortString();
 
+            if (targetType == typeof(object))
+                return date.ToShortString();
+
             return null;
         }
 
