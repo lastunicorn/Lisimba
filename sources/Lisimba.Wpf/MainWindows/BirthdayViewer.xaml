@@ -22,6 +22,38 @@
 
         <mainWindows:DateFormatter x:Key="DateFormatter"/>
         <mainWindows:DateValidationRule x:Key="DateValidationRule"/>
+
+        <!--<Style x:Key="NormalModeStyle" TargetType="{x:Type Label}">
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Label}">
+                        <Grid>
+                            <TextBox Name="textBox"
+                             Grid.ZIndex="1"
+                             Padding="1,3,0,0"
+                             Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Label}}, Path=Content, UpdateSourceTrigger=PropertyChanged}"
+                             Opacity="0"/>
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter TargetName="textBox" Property="Opacity" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
     </UserControl.Resources>
 
     <Grid Name="LayoutRoot" d:DataContext="{d:DesignInstance mainWindows:BirthdayViewer}">
@@ -37,12 +69,13 @@
             MouseLeave="Label1_OnMouseLeave"
             MouseLeftButtonUp="Label1_OnMouseLeftButtonUp"/>
 
+        <!--mainWindows:Masking.Mask="^\d{1,4} \d{1,2} \d{1,2}$"-->
+        
         <TextBox
             Name="TextBox1"
             Visibility="Collapsed"
             Focusable="True"
             HorizontalContentAlignment="Center"
-            mainWindows:Masking.Mask="^\d{1,4} \d{1,2} \d{1,2}$"
             LostFocus="TextBox1_OnLostFocus"
             KeyDown="TextBox1_OnKeyDown">
 

@@ -208,12 +208,15 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
         private static string GetProposedText(TextBox textBox, string newText)
         {
-            var text = GetTextWithSelectionRemoved(textBox);
+            var text = textBox.Text;
 
-            bool containsSelectedText = textBox.SelectionStart > 0 && textBox.SelectionLength > 0;
-
-            if (!containsSelectedText)
-                text = text.Remove(textBox.SelectionStart, 1);
+            if (textBox.SelectionStart >= 0)
+            {
+                if (textBox.SelectionLength >= 0)
+                    text = text.Remove(textBox.SelectionStart, textBox.SelectionLength);
+                else if (textBox.CaretIndex >= 0 && textBox.CaretIndex < textBox.Text.Length - 1)
+                    text = text.Remove(textBox.SelectionStart, 1);
+            }
 
             text = text.Insert(textBox.CaretIndex, newText);
 
@@ -226,7 +229,7 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
 
             if (textBox.SelectionStart != -1)
                 text = text.Remove(textBox.SelectionStart, textBox.SelectionLength);
-            
+
             return text;
         }
     }

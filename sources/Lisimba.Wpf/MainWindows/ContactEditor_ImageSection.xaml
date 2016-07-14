@@ -22,47 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mainWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.MainWindows"
-             xmlns:wpf="clr-namespace:DustInTheWind.Lisimba.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300"
              d:DataContext="{d:DesignInstance mainWindows:ContactEditorViewModel}">
-
-    <UserControl.Resources>
-        <mainWindows:DateFormatter x:Key="DateFormatter"/>
-
-        <Style x:Key="EditableLabelStyle" TargetType="{x:Type Label}">
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="VerticalContentAlignment" Value="Top"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Label}">
-                        <Grid>
-                            <TextBox Name="textBox"
-                             Grid.ZIndex="1"
-                             Padding="1,3,0,0"
-                             Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Label}}, Path=Content, UpdateSourceTrigger=PropertyChanged}"
-                             Opacity="0"/>
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            </Border>
-                        </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter TargetName="textBox" Property="Opacity" Value="1"/>
-                            </Trigger>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </UserControl.Resources>
 
     <StackPanel>
 
@@ -97,32 +60,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         </Button>
 
-        <mainWindows:BirthdayViewer Date="{Binding Birthday}"/>
-        
-        <TextBlock
-            x:Name="BirthdayLabel"
-            HorizontalAlignment="Stretch"
-            Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
-            TextAlignment="Center"
-            MouseDown="UIElement_OnMouseDown"
-            wpf:ExtendedCommands.DoubleClickCommand="{Binding BirthdayEditCommand}"
-            wpf:ExtendedCommands.DoubleClickCommandParameter="{Binding Birthday}"/>
-        
-        <TextBox
-            x:Name="BirthdayTextBox"
-            HorizontalAlignment="Stretch"
-            Text="{Binding Birthday, Converter={StaticResource DateFormatter}}"
-            TextAlignment="Center"
-            Visibility="Collapsed"
-            LostFocus="BirthdayTextBox_OnLostFocus"
-            KeyDown="BirthdayTextBox_OnKeyDown"
-            mainWindows:Masking.Mask="^\d\d\d\d \d\d \d\d$"/>
-
-        <Label
-            x:Name="LblCantidad"
-            Style="{StaticResource EditableLabelStyle}"
-            Content="{Binding Birthday, Converter={StaticResource DateFormatter}}"
-            HorizontalAlignment="Stretch"/>
+        <mainWindows:BirthdayViewer Date="{Binding Birthday, Mode=TwoWay}"/>
 
         <mainWindows:ZodiacSignView
             Padding="4"

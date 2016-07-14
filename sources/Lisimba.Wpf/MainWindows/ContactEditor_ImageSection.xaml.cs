@@ -14,9 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace DustInTheWind.Lisimba.Wpf.MainWindows
 {
@@ -28,27 +26,6 @@ namespace DustInTheWind.Lisimba.Wpf.MainWindows
         public ContactEditor_ImageSection()
         {
             InitializeComponent();
-        }
-
-        private void UIElement_OnMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            BirthdayLabel.Visibility = Visibility.Collapsed;
-            BirthdayTextBox.Visibility = Visibility.Visible;
-        }
-
-        private void BirthdayTextBox_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            BirthdayTextBox.Visibility = Visibility.Collapsed;
-            BirthdayLabel.Visibility = Visibility.Visible;
-        }
-
-        private void BirthdayTextBox_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                BirthdayTextBox.Visibility = Visibility.Collapsed;
-                BirthdayLabel.Visibility = Visibility.Visible;
-            }
         }
     }
 }
