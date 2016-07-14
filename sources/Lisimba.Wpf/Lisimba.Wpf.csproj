@@ -91,6 +91,9 @@
     <Compile Include="Sections\AddressBookSection\Views\ContactEditor_ContactItems.xaml.cs">
       <DependentUpon>ContactEditor_ContactItems.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\ContactItemSet.xaml.cs">
+      <DependentUpon>ContactItemSet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
     <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -222,6 +225,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sections\AddressBookSection\Views\ContactEditor_ContactItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\ContactItemSet.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
