@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels"
+             xmlns:views="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -52,11 +53,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             PreviewMouseWheel="UIElement_OnPreviewMouseWheel"
             PreviewKeyDown="UIElement_OnPreviewKeyDown"
             Padding="0"
-            Margin="0">
+            Margin="0"
+            HorizontalContentAlignment="Stretch">
 
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding}" Margin="20 0 0 0" Padding="8"/>
+                    <views:ContactItem DataContext="{Binding}" HorizontalAlignment="Stretch"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
 
@@ -68,6 +70,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         <!-- Background of selected item when not focussed -->
                         <!--<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Green" />-->
                     </Style.Resources>
+                    
+                    
                 </Style>
             </ListBox.ItemContainerStyle>
 
