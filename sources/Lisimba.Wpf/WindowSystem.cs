@@ -20,8 +20,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using DustInTheWind.Lisimba.Wpf.MainWindows;
 using DustInTheWind.Lisimba.Wpf.Properties;
+using DustInTheWind.Lisimba.Wpf.Sections.MainWindow.Views;
+using DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.Views;
+using DustInTheWind.Lisimba.Wpf.Sections.TraySection;
 using Microsoft.Win32;
 
 namespace DustInTheWind.Lisimba.Wpf

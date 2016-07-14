@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views.BirthdayViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Egg.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
+             xmlns:addressBookSection="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection"
+             xmlns:views="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance addressBookModel:Date}">
+
+    <UserControl.Resources>
+        <Style x:Key="NormalModeStyle" TargetType="Label">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+        <Style x:Key="HoverModeStyle" TargetType="Label">
+            <Setter Property="Background" Value="LightGray"/>
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+        </Style>
+
+        <addressBookSection:DateFormatter x:Key="DateFormatter"/>
+        <addressBookSection:DateValidationRule x:Key="DateValidationRule"/>
+
+        <!--<Style x:Key="NormalModeStyle" TargetType="{x:Type Label}">
+           <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+           <Setter Property="Background" Value="Transparent"/>
+           <Setter Property="Padding" Value="5"/>
+           <Setter Property="HorizontalContentAlignment" Value="Left"/>
+           <Setter Property="VerticalContentAlignment" Value="Top"/>
+           <Setter Property="Template">
+               <Setter.Value>
+                   <ControlTemplate TargetType="{x:Type Label}">
+                       <Grid>
+                           <TextBox Name="textBox"
+                            Grid.ZIndex="1"
+                            Padding="1,3,0,0"
+                            Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type Label}}, Path=Content, UpdateSourceTrigger=PropertyChanged}"
+                            Opacity="0"/>
+                           <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
+                               <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                           </Border>
+                       </Grid>
+                       <ControlTemplate.Triggers>
+                           <Trigger Property="IsMouseOver" Value="true">
+                               <Setter TargetName="textBox" Property="Opacity" Value="1"/>
+                           </Trigger>
+                           <Trigger Property="IsEnabled" Value="false">
+                               <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                           </Trigger>
+                       </ControlTemplate.Triggers>
+                   </ControlTemplate>
+               </Setter.Value>
+           </Setter>
+       </Style>-->
+    </UserControl.Resources>
+
+    <Grid Name="LayoutRoot" d:DataContext="{d:DesignInstance views:BirthdayViewer}">
+
+        <Label
+            Name="Label1"
+            Content="{Binding Date, Mode=OneWay, Converter={StaticResource DateFormatter}}"
+            Style="{StaticResource NormalModeStyle}"
+            Focusable="True"
+            IsTabStop="True"
+            HorizontalContentAlignment="Center"
+            MouseEnter="Label1_OnMouseEnter"
+            MouseLeave="Label1_OnMouseLeave"
+            MouseLeftButtonUp="Label1_OnMouseLeftButtonUp"/>
+
+        <!--mainWindows:Masking.Mask="^\d{1,4} \d{1,2} \d{1,2}$"-->
+
+        <TextBox
+            Name="TextBox1"
+            Visibility="Collapsed"
+            Focusable="True"
+            HorizontalContentAlignment="Center"
+            LostFocus="TextBox1_OnLostFocus"
+            KeyDown="TextBox1_OnKeyDown">
+
+            <TextBox.Text>
+                <Binding Path="Date" Mode="TwoWay" Converter="{StaticResource DateFormatter}">
+                    <Binding.ValidationRules>
+                        <addressBookSection:DateValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
+    </Grid>
+
+</UserControl>

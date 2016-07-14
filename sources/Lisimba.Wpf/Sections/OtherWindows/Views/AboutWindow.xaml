@@ -1,0 +1,105 @@
+﻿<!--
+Lisimba
+Copyright (C) 2007-2016 Dust in the Wind
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<Window x:Class="DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels"
+        mc:Ignorable="d"
+        Title="About"
+        Height="240"
+        Width="300"
+        WindowStartupLocation="CenterOwner"
+        Icon="{StaticResource LisimbaIcon}"
+        ResizeMode="NoResize"
+        d:DataContext="{d:DesignInstance mainWindows:AboutViewModel}">
+
+    <Window.DataContext>
+        <viewModels:AboutViewModel/>
+    </Window.DataContext>
+
+    <DockPanel>
+
+        <StackPanel
+            DockPanel.Dock="Bottom"
+            Background="WhiteSmoke">
+
+            <Button
+                Content="Close"
+                HorizontalAlignment="Center"
+                Margin="0 8"
+                VerticalAlignment="Center"
+                MinWidth="75"
+                IsCancel="True"
+                TabIndex="0"/>
+
+        </StackPanel>
+
+        <DockPanel
+            DockPanel.Dock="Top"
+            Margin="8">
+
+            <Image
+                DockPanel.Dock="Left"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Source="pack://application:,,,/Images/lion.gif"
+                Margin="12"
+                Stretch="None"/>
+
+            <StackPanel
+                FlowDirection="LeftToRight"
+                Orientation="Vertical">
+
+                <TextBlock
+                    Text="{Binding Name}"
+                    FontSize="20"/>
+
+                <TextBlock
+                    Text="{Binding Version}"
+                    Padding="30 0 0 0"/>
+
+            </StackPanel>
+
+        </DockPanel>
+
+        <Border
+            BorderThickness="1"
+            BorderBrush="Gainsboro"
+            CornerRadius="4"
+            Margin="8"
+            Padding="8">
+
+            <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                
+                <TextBlock
+                    Text="Created by:"/>
+                
+                <TextBlock
+                    Text="{Binding Author}"
+                    Padding="20 0 0 0"/>
+                
+            </StackPanel>
+
+        </Border>
+
+    </DockPanel>
+
+</Window>

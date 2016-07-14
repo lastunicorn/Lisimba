@@ -85,60 +85,60 @@
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="MainWindows\AboutViewModel.cs" />
-    <Compile Include="MainWindows\AboutWindow.xaml.cs">
+    <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
+    <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\AddContactItemClickCommand.cs" />
-    <Compile Include="MainWindows\AddressBookPropertiesViewModel.cs" />
-    <Compile Include="MainWindows\AddressBookPropertiesWindow.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\AddContactItemClickCommand.cs" />
+    <Compile Include="Sections\OtherWindows\ViewModels\AddressBookPropertiesViewModel.cs" />
+    <Compile Include="Sections\OtherWindows\Views\AddressBookPropertiesWindow.xaml.cs">
       <DependentUpon>AddressBookPropertiesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\AddressBookPanel.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Views\AddressBookPanel.xaml.cs">
       <DependentUpon>AddressBookPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\AddressBookViewModel.cs" />
-    <Compile Include="MainWindows\BirthdayEditCommand.cs" />
-    <Compile Include="MainWindows\BirthdayViewer.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\ViewModels\AddressBookViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\BirthdayEditCommand.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\BirthdayViewer.xaml.cs">
       <DependentUpon>BirthdayViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactEditor_ImageSection.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_ImageSection.xaml.cs">
       <DependentUpon>ContactEditor_ImageSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactEditor.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor.xaml.cs">
       <DependentUpon>ContactEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactEditorViewModel.cs" />
-    <Compile Include="MainWindows\ContactEditor_ItemsSection.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\ViewModels\ContactEditorViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_ItemsSection.xaml.cs">
       <DependentUpon>ContactEditor_ItemsSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactEditor_NotesSection.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_NotesSection.xaml.cs">
       <DependentUpon>ContactEditor_NotesSection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactItemAddViewModel.cs" />
-    <Compile Include="MainWindows\ContactItemSetViewModel.cs" />
-    <Compile Include="MainWindows\ContactList.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\ViewModels\ContactItemAddViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\ContactItemSetViewModel.cs" />
+    <Compile Include="Sections\OtherWindows\Views\ContactList.xaml.cs">
       <DependentUpon>ContactList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ContactListViewModel.cs" />
-    <Compile Include="MainWindows\CustomMenuItem.cs" />
-    <Compile Include="MainWindows\DateFormatter.cs" />
-    <Compile Include="MainWindows\DateValidationRule.cs" />
-    <Compile Include="MainWindows\ImageClickCommand.cs" />
-    <Compile Include="MainWindows\LisimbaMainMenu.xaml.cs">
+    <Compile Include="Sections\OtherWindows\ViewModels\ContactListViewModel.cs" />
+    <Compile Include="Sections\MainWindow\CustomMenuItem.cs" />
+    <Compile Include="Sections\AddressBookSection\DateFormatter.cs" />
+    <Compile Include="Sections\AddressBookSection\DateValidationRule.cs" />
+    <Compile Include="Sections\OtherWindows\ImageClickCommand.cs" />
+    <Compile Include="Sections\MainWindow\Views\LisimbaMainMenu.xaml.cs">
       <DependentUpon>LisimbaMainMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\LisimbaToolBarViewModel.cs" />
-    <Compile Include="MainWindows\LisimbaMainMenuViewModel.cs" />
-    <Compile Include="MainWindows\LisimbaStatusBar.xaml.cs">
+    <Compile Include="Sections\MainWindow\ViewModels\LisimbaToolBarViewModel.cs" />
+    <Compile Include="Sections\MainWindow\ViewModels\LisimbaMainMenuViewModel.cs" />
+    <Compile Include="Sections\MainWindow\Views\LisimbaStatusBar.xaml.cs">
       <DependentUpon>LisimbaStatusBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\LisimbaStatusBarViewModel.cs" />
-    <Compile Include="MainWindows\LisimbaToolBar.xaml.cs">
+    <Compile Include="Sections\MainWindow\ViewModels\LisimbaStatusBarViewModel.cs" />
+    <Compile Include="Sections\MainWindow\Views\LisimbaToolBar.xaml.cs">
       <DependentUpon>LisimbaToolBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\LisimbaViewModel.cs" />
-    <Compile Include="MainWindows\LisimbaWindow.xaml.cs">
+    <Compile Include="Sections\MainWindow\ViewModels\LisimbaViewModel.cs" />
+    <Compile Include="Sections\MainWindow\Views\LisimbaWindow.xaml.cs">
       <DependentUpon>LisimbaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ApplicationStatus.cs" />
@@ -179,16 +179,16 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
-    <Compile Include="MainWindows\Masking.cs" />
-    <Compile Include="MainWindows\SortingComboBoxItem.cs" />
-    <Compile Include="MainWindows\StartPanel.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Masking.cs" />
+    <Compile Include="Sections\OtherWindows\SortingComboBoxItem.cs" />
+    <Compile Include="Sections\StartSection\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\StartViewModel.cs" />
-    <Compile Include="MainWindows\ZodiacSignView.xaml.cs">
+    <Compile Include="Sections\StartSection\StartViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\ZodiacSignView.xaml.cs">
       <DependentUpon>ZodiacSignView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindows\ZodiacSignViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Observers\AddressBookCloseObserver.cs" />
     <Compile Include="Observers\AddressBookOpenObserver.cs" />
@@ -198,72 +198,71 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalizedResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="MenuItemViewModelProvider.cs" />
     <Compile Include="Operations\AvailableCommands.cs" />
     <Compile Include="Operations\ICommandProvider.cs" />
     <Compile Include="Setup\CommandProvider.cs" />
     <Compile Include="Setup\ObserverProvider.cs" />
-    <Compile Include="TrayIcon.cs">
+    <Compile Include="Sections\TraySection\TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="TrayIcon.Designer.cs">
+    <Compile Include="Sections\TraySection\TrayIcon.Designer.cs">
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </Compile>
-    <Compile Include="TrayIconMenuViewModels.cs" />
-    <Compile Include="TrayIconViewModel.cs" />
+    <Compile Include="Sections\TraySection\TrayIconMenuViewModels.cs" />
+    <Compile Include="Sections\TraySection\TrayIconViewModel.cs" />
     <Compile Include="UiFactory.cs" />
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
-    <Page Include="MainWindows\AboutWindow.xaml">
+    <Page Include="Sections\OtherWindows\Views\AboutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindows\AddressBookPropertiesWindow.xaml">
+    <Page Include="Sections\OtherWindows\Views\AddressBookPropertiesWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindows\AddressBookPanel.xaml">
+    <Page Include="Sections\AddressBookSection\Views\AddressBookPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\BirthdayViewer.xaml">
+    <Page Include="Sections\AddressBookSection\Views\BirthdayViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ContactEditor_ImageSection.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor_ImageSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ContactEditor.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ContactEditor_ItemsSection.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor_ItemsSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ContactEditor_NotesSection.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor_NotesSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ContactList.xaml">
+    <Page Include="Sections\OtherWindows\Views\ContactList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\LisimbaMainMenu.xaml">
+    <Page Include="Sections\MainWindow\Views\LisimbaMainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\LisimbaStatusBar.xaml">
+    <Page Include="Sections\MainWindow\Views\LisimbaStatusBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindows\LisimbaToolBar.xaml">
+    <Page Include="Sections\MainWindow\Views\LisimbaToolBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\LisimbaWindow.xaml">
+    <Page Include="Sections\MainWindow\Views\LisimbaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -271,11 +270,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MainWindows\StartPanel.xaml">
+    <Page Include="Sections\StartSection\StartPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindows\ZodiacSignView.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ZodiacSignView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,7 +301,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="TrayIcon.resx">
+    <EmbeddedResource Include="Sections\TraySection\TrayIcon.resx">
       <DependentUpon>TrayIcon.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -364,6 +363,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(MSBuildBinPath)\msbuild.exe" postbuild.xml /p:SolutionDir="$(SolutionDir)\";ConfigurationName=$(ConfigurationName)</PostBuildEvent>
