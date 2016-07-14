@@ -44,7 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <views:ContactEditor_ImageSection DockPanel.Dock="Left"/>
-            <views:ContactEditor_ItemsSection/>
+            <views:ContactEditor_AddButton DockPanel.Dock="Bottom"/>
+            <views:ContactEditor_ContactItems/>
         </DockPanel>
 
         <GridSplitter Grid.Row ="2" Grid.Column="0"

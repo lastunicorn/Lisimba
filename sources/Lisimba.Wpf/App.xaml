@@ -69,6 +69,14 @@
             </Setter>
         </Style>-->
 
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="LightYellow"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </Application.Resources>
 
 </Application>

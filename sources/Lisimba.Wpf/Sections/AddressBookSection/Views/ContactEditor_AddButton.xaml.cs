@@ -16,21 +16,30 @@
 
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
 {
-    // todo: Very ugly code. Is there a better approach?
-
     /// <summary>
-    /// Interaction logic for ContactEditor_ItemsSection.xaml
+    /// Interaction logic for ContactEditor_AddButton.xaml
     /// </summary>
-    public partial class ContactEditor_ItemsSection : UserControl
+    public partial class ContactEditor_AddButton : UserControl
     {
-        public ContactEditor_ItemsSection()
+        public ContactEditor_AddButton()
         {
             InitializeComponent();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+
+            if (button == null)
+                return;
+
+            button.ContextMenu.IsEnabled = true;
+            button.ContextMenu.PlacementTarget = button;
+            button.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            button.ContextMenu.IsOpen = true;
         }
     }
 }

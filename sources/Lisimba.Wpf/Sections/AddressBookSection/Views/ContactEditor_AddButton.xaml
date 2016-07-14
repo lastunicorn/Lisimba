@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views.ContactEditor_AddButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance viewModels:ContactEditorViewModel}">
+
+    <StackPanel
+        Orientation="Horizontal"
+        FlowDirection="RightToLeft">
+
+        <Button
+            Content="Add Item..."
+            MinWidth="75"
+            MinHeight="30"
+            FlowDirection="LeftToRight"
+            Margin="4"
+            Click="ButtonBase_OnClick"
+            IsEnabled="{Binding CanAddItems}">
+
+            <Button.ContextMenu>
+                <ContextMenu
+                    ItemsSource="{Binding ContactItemTypes}">
+
+                    <ContextMenu.Resources>
+                        <Image x:Key="imgCTX" x:Shared="false" Source="{Binding Path=Icon}" Height="16px" Width="16px"/>
+                    </ContextMenu.Resources>
+
+                    <ContextMenu.ItemContainerStyle>
+                        <Style TargetType="{x:Type MenuItem}" d:DataContext="{d:DesignInstance viewModels:ContactItemAddViewModel}">
+                            <Setter Property="Header" Value="{Binding Text}" />
+                            <Setter Property="Command" Value="{Binding Command}" />
+                            <Setter Property="CommandParameter" Value="{Binding ItemType}" />
+                            <Setter Property="Icon" Value="{StaticResource imgCTX}"/>
+                        </Style>
+                    </ContextMenu.ItemContainerStyle>
+
+                </ContextMenu>
+            </Button.ContextMenu>
+
+        </Button>
+
+    </StackPanel>
+    
+</UserControl>

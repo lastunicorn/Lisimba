@@ -85,6 +85,12 @@
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_AddButton.xaml.cs">
+      <DependentUpon>ContactEditor_AddButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_ContactItems.xaml.cs">
+      <DependentUpon>ContactEditor_ContactItems.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
     <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
@@ -109,9 +115,6 @@
       <DependentUpon>ContactEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sections\AddressBookSection\ViewModels\ContactEditorViewModel.cs" />
-    <Compile Include="Sections\AddressBookSection\Views\ContactEditor_ItemsSection.xaml.cs">
-      <DependentUpon>ContactEditor_ItemsSection.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Sections\AddressBookSection\Views\ContactEditor_NotesSection.xaml.cs">
       <DependentUpon>ContactEditor_NotesSection.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,14 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor_AddButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\ContactEditor_ContactItems.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sections\OtherWindows\Views\AboutWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -235,10 +246,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sections\AddressBookSection\Views\ContactEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Sections\AddressBookSection\Views\ContactEditor_ItemsSection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
