@@ -85,6 +85,12 @@
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\DateViewer.xaml.cs">
+      <DependentUpon>DateViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\EmailViewer.xaml.cs">
+      <DependentUpon>EmailViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sections\AddressBookSection\Views\ContactEditor_AddButton.xaml.cs">
       <DependentUpon>ContactEditor_AddButton.xaml</DependentUpon>
     </Compile>
@@ -96,6 +102,18 @@
     </Compile>
     <Compile Include="Sections\AddressBookSection\Views\ContactItemSet.xaml.cs">
       <DependentUpon>ContactItemSet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\PhoneViewer.xaml.cs">
+      <DependentUpon>PhoneViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\PostalAddressViewer.xaml.cs">
+      <DependentUpon>PostalAddressViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\SocialProfileViewer.xaml.cs">
+      <DependentUpon>SocialProfileViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Sections\AddressBookSection\Views\WebSiteViewer.xaml.cs">
+      <DependentUpon>WebSiteViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
     <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">
@@ -223,6 +241,14 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
+    <Page Include="Sections\AddressBookSection\Views\DateViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\EmailViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sections\AddressBookSection\Views\ContactEditor_AddButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -236,6 +262,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sections\AddressBookSection\Views\ContactItemSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\PhoneViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\PostalAddressViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\SocialProfileViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sections\AddressBookSection\Views\WebSiteViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -36,7 +36,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         private BitmapSource picture;
         private ZodiacSignViewModel zodiacSignViewModel;
         private readonly AddContactItemClickCommand addContactItemClickCommand;
-        private List<ContactItemSetViewModel> contactItems;
+        //private List<ContactItemSetViewModel> contactItems;
+        private List<ContactItem> contactItems;
         private Date birthday;
         private bool isInitializationMode;
         private bool canAddItems;
@@ -71,7 +72,17 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             }
         }
 
-        public List<ContactItemSetViewModel> ContactItems
+        //public List<ContactItemSetViewModel> ContactItems
+        //{
+        //    get { return contactItems; }
+        //    set
+        //    {
+        //        contactItems = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        public List<ContactItem> ContactItems
         {
             get { return contactItems; }
             set
@@ -213,7 +224,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
-                    ContactItems = all;
+                    ContactItems = all.SelectMany(x => x.Items).ToList();
                     Notes = currentContact.Notes;
 
                     ImageEditCommand.Contact = currentContact;

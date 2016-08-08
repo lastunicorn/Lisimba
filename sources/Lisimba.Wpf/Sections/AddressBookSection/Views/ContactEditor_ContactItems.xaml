@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views"
+             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Egg.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300">
@@ -30,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         HorizontalScrollBarVisibility="Auto"
         VerticalScrollBarVisibility="Auto">
 
-        <ItemsControl
+        <!--<ItemsControl
                 Margin="0 4 4 4"
                 ItemsSource="{Binding ContactItems, Mode=OneWay}">
 
@@ -39,6 +40,57 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <views:ContactItemSet/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+
+        </ItemsControl>-->
+
+        <ItemsControl
+                Margin="0 4 4 4"
+                ItemsSource="{Binding ContactItems, Mode=OneWay}">
+
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type addressBookModel:Phone}">
+                    <StackPanel>
+                        <views:PhoneViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type addressBookModel:Email}">
+                    <StackPanel>
+                        <views:EmailViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type addressBookModel:PostalAddress}">
+                    <StackPanel>
+                        <views:PostalAddressViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type addressBookModel:Date}">
+                    <StackPanel>
+                        <views:DateViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type addressBookModel:SocialProfile}">
+                    <StackPanel>
+                        <views:SocialProfileViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type addressBookModel:WebSite}">
+                    <StackPanel>
+                        <views:WebSiteViewer/>
+                        <Separator/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.Resources>
+
+            <!--<ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>-->
 
         </ItemsControl>
     </ScrollViewer>
