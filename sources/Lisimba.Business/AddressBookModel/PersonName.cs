@@ -140,6 +140,8 @@ namespace DustInTheWind.Lisimba.Egg.AddressBookModel
         /// <param name="name">The <see cref="PersonName"/> object to be copied.</param>
         public void CopyFrom(PersonName name)
         {
+            if (name == null) throw new ArgumentNullException("name");
+
             firstName = name.firstName;
             middleName = name.middleName;
             lastName = name.lastName;

@@ -49,6 +49,21 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             {
                 name = value;
                 OnPropertyChanged();
+
+                if (!isInitializationMode)
+                {
+                    NameParser nameParser = new NameParser(value);
+
+                    if (!nameParser.Success)
+                        throw new Exception();
+
+                    IAction action = new UpdateContactItemAction(openedAddressBooks.CurrentContact.Name, nameParser.Result);
+
+                    if (openedAddressBooks.Current.ActionQueue != null)
+                        openedAddressBooks.Current.ActionQueue.Do(action);
+                    else
+                        action.Do();
+                }
             }
         }
 
@@ -198,7 +213,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
                 if (openedAddressBooks.CurrentContact == null)
                 {
-                    Name = string.Empty;
+                    Name = null;
                     Picture = Resources.no_user_128.ToBitmapSource();
                     Birthday = null;
                     zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;

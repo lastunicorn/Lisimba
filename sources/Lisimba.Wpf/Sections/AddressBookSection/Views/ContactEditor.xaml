@@ -37,10 +37,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <RowDefinition Height="150" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0"
+        <TextBox Grid.Row="0" Grid.Column="0"
             FontSize="30"
             Margin="5"
-            Text="{Binding Name}"/>
+            Text="{Binding Name, Mode=TwoWay}"/>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <views:ContactEditor_ImageSection DockPanel.Dock="Left"/>

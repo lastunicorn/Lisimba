@@ -85,6 +85,8 @@
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Sections\AddressBookSection\NameParser.cs" />
+    <Compile Include="Sections\AddressBookSection\PersonNameConverter.cs" />
     <Compile Include="Sections\AddressBookSection\Views\DateViewer.xaml.cs">
       <DependentUpon>DateViewer.xaml</DependentUpon>
     </Compile>

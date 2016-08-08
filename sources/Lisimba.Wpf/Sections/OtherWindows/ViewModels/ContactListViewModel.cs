@@ -31,6 +31,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         private readonly ApplicationConfiguration applicationConfiguration;
         private readonly OpenedAddressBooks openedAddressBooks;
 
+        private CustomObservableCollection<Contact> originalContactsCollection;
         private ListCollectionView contacts;
         private Contact selectedContact;
         private string searchText;
@@ -111,14 +112,34 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            Contacts = null;
+            ClearContacts();
 
             if (e.NewAddressBook != null)
-            {
-                Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(e.NewAddressBook.AddressBook.Contacts);
-                Contacts.CustomSort = GetContactComparer();
-                contacts.Filter = ShouldContactBeVisible;
-            }
+                SetContacts(e.NewAddressBook.AddressBook.Contacts);
+        }
+
+        private void ClearContacts()
+        {
+            if (originalContactsCollection != null)
+                originalContactsCollection.ItemChanged -= ContactsItemChanged;
+
+            Contacts = null;
+            originalContactsCollection = null;
+        }
+
+        private void SetContacts(ContactCollection contactCollection)
+        {
+            Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(contactCollection);
+            Contacts.CustomSort = GetContactComparer();
+            contacts.Filter = ShouldContactBeVisible;
+
+            originalContactsCollection = contactCollection;
+            originalContactsCollection.ItemChanged += ContactsItemChanged;
+        }
+
+        private void ContactsItemChanged(object sender, ItemChangedEventArgs<Contact> itemChangedEventArgs)
+        {
+            contacts.Refresh();
         }
 
         private void HandleContactChanged(object sender, EventArgs e)

@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxAddress}"
-            Content="Address"/>
+            Content="Email"/>
 
         <TextBox
             x:Name="TextBoxAddress"

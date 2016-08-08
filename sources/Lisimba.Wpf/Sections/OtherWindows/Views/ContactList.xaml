@@ -22,10 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:otherWindows="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows"
+             xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance otherWindows:ContactListViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:ContactListViewModel}">
 
     <DockPanel>
 
