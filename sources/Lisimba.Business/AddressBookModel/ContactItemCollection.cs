@@ -19,9 +19,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.Searching;
+using DustInTheWind.Lisimba.Business.Searching;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class ContactItemCollection : CustomObservableCollection<ContactItem>
     {

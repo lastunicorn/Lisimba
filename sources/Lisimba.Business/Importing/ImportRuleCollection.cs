@@ -17,9 +17,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.Importing
+namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class ImportRuleCollection : Collection<ImportRule>
     {

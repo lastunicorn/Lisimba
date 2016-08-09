@@ -15,9 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Business;
 
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.Business.GateModel
 {
     [Serializable]
     public class GateException : LisimbaException

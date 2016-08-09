@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     /// <summary>
     /// Class containing information about a social profile id.

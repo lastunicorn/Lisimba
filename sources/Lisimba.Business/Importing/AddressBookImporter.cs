@@ -16,12 +16,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.Importing
+namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class AddressBookImporter
     {

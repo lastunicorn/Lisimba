@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.WinForms.Services
 {

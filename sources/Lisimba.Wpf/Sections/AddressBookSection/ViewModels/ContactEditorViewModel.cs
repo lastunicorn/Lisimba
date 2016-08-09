@@ -22,7 +22,7 @@ using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Wpf.Properties;
 using DustInTheWind.Lisimba.Wpf.Sections.OtherWindows;
 

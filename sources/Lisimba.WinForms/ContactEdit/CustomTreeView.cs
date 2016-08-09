@@ -18,7 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.ActionManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.ContactEditing;
 using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms;
 

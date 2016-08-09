@@ -16,7 +16,7 @@
 
 using System.Collections.ObjectModel;
 using System.Drawing;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing

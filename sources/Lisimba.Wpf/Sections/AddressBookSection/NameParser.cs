@@ -16,7 +16,7 @@
 
 using System;
 using System.Text.RegularExpressions;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection
 {

@@ -15,7 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.ComponentModel;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {

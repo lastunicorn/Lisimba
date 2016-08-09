@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Utils;
 

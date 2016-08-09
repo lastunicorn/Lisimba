@@ -18,8 +18,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Gating.Properties;
 
 namespace DustInTheWind.Lisimba.Gating

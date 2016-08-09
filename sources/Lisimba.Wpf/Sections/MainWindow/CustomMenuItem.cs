@@ -16,7 +16,7 @@
 
 using System.Windows.Input;
 using System.Windows.Media;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow
 {

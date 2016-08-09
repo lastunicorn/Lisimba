@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     class ContactMatch
     {

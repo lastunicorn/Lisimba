@@ -17,7 +17,7 @@
 using System;
 using System.Text;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class PersonName : ContactItem, IEquatable<PersonName>
     {

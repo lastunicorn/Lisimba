@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing
 {

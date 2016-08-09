@@ -17,10 +17,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Properties;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.Sorting
+namespace DustInTheWind.Lisimba.Business.Sorting
 {
     /// <summary>
     /// Compares two contacts by birthdate (year, month and day).
@@ -44,10 +44,10 @@ namespace DustInTheWind.Lisimba.Egg.Sorting
         public int Compare(Contact contactX, Contact contactY)
         {
             if (contactX == null)
-                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "x");
+                throw new ArgumentException(Resources.ContactComparer_XIsNotContact, "contactX");
 
             if (contactY == null)
-                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "y");
+                throw new ArgumentException(Resources.ContactComparer_YIsNotContact, "contactY");
 
             return Date.Compare(contactX.Birthday, contactY.Birthday);
         }

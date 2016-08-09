@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.Business.GateModel
 {
     public class IncorrectEggVersionException : GateException
     {

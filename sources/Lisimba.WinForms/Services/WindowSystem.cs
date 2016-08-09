@@ -21,7 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.Biorhythm;
 using DustInTheWind.Lisimba.WinForms.Forms;
 using DustInTheWind.Lisimba.WinForms.Main;

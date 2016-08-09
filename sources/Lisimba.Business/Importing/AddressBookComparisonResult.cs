@@ -17,7 +17,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.Importing
+namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class AddressBookComparisonResult : List<ContactComparisonResult>
     {

@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.Business.GateManagement
 {

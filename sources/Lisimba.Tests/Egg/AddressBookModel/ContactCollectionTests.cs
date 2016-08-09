@@ -15,8 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Importing;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Importing;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel

@@ -16,7 +16,7 @@
 
 using System.Collections.Generic;
 using System.Windows.Media;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 {

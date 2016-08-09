@@ -20,9 +20,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Config;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Sorting;
+using DustInTheWind.Lisimba.Business.Sorting;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {

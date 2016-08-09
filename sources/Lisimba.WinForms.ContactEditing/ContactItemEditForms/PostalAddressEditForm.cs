@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Business.ActionManagement;
 using DustInTheWind.Lisimba.Business.Actions;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.ContactEditing.Properties;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms

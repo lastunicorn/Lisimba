@@ -17,7 +17,7 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Business.ConfigSection;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Egg.Sorting;
+using DustInTheWind.Lisimba.Business.Sorting;
 
 namespace DustInTheWind.Lisimba.Business.Config
 {

@@ -20,9 +20,9 @@ using System.Linq;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Observers
 {

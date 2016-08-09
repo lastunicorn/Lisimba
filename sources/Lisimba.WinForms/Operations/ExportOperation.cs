@@ -17,7 +17,7 @@
 using System;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.WinForms.LocationProviders;
 using DustInTheWind.Lisimba.WinForms.Properties;
 using DustInTheWind.Lisimba.WinForms.Services;

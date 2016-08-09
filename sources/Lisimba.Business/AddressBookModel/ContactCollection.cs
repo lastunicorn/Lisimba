@@ -17,9 +17,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.Importing;
+using DustInTheWind.Lisimba.Business.Importing;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class ContactCollection : CustomObservableCollection<Contact>
     {

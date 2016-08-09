@@ -19,8 +19,8 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Business
 {

@@ -16,10 +16,10 @@
 
 using System;
 using System.Collections;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Properties;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.Sorting
+namespace DustInTheWind.Lisimba.Business.Sorting
 {
     /// <summary>
     /// Compares two contacts by first name.

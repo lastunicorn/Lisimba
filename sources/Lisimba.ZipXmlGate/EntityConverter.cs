@@ -17,7 +17,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 
 namespace DustInTheWind.Lisimba.ZipXmlGate

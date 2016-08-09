@@ -21,7 +21,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms
 {

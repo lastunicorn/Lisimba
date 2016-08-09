@@ -16,7 +16,7 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.Sorting;
+using DustInTheWind.Lisimba.Business.Sorting;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Utils;
 

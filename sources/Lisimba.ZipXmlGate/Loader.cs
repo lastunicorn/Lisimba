@@ -21,9 +21,8 @@ using System.Reflection;
 using System.Xml;
 using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.ZipXmlGate.Entities;
 using ICSharpCode.SharpZipLib.Zip;
 

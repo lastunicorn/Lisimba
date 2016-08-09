@@ -1,4 +1,5 @@
-﻿using DustInTheWind.Lisimba.WinForms.ContactEditing;
+﻿using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.WinForms.ContactEditing;
 using DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing;
 using DustInTheWind.Lisimba.WinForms.ContactEditing.PersonNameEditing;
 
@@ -184,7 +185,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
             this.zodiacSignView1.Name = "zodiacSignView1";
             this.zodiacSignView1.Size = new System.Drawing.Size(45, 58);
             this.zodiacSignView1.TabIndex = 3;
-            this.zodiacSignView1.ZodiacSign = DustInTheWind.Lisimba.Egg.AddressBookModel.ZodiacSign.NotSpecified;
+            this.zodiacSignView1.ZodiacSign = ZodiacSign.NotSpecified;
             // 
             // birthdayView1
             // 

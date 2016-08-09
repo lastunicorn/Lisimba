@@ -16,7 +16,7 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.Commands

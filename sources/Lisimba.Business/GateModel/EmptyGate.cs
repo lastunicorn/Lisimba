@@ -18,11 +18,10 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using DustInTheWind.Lisimba.Business;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Properties;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.Business.GateModel
 {
     public class EmptyGate : IGate
     {

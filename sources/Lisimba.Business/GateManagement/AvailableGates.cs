@@ -18,8 +18,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.Config;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.Properties;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Business.GateManagement
 {

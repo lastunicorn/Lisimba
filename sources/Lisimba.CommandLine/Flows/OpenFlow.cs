@@ -21,9 +21,9 @@ using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {

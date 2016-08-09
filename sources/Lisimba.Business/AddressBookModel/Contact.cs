@@ -17,7 +17,7 @@
 using System;
 using System.Drawing;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class Contact : IObservableEntity, IComparable, IEquatable<Contact>
     {

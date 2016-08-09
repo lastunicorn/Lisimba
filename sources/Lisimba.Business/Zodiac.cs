@@ -16,9 +16,8 @@
 
 using System;
 using System.Drawing;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Properties;
-using DustInTheWind.Lisimba.Egg;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business
 {

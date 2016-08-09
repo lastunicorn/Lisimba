@@ -17,7 +17,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 {

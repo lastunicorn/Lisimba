@@ -16,11 +16,11 @@
 
 using System;
 using System.IO;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.Properties;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 {

@@ -17,8 +17,8 @@
 using System;
 using System.Collections;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Sorting;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Sorting;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactList
 {

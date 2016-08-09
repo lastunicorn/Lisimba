@@ -18,9 +18,9 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Egg.GateModel
+namespace DustInTheWind.Lisimba.Business.GateModel
 {
     public abstract class GateBase : IGate
     {

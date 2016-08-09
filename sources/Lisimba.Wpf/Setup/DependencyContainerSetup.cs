@@ -21,7 +21,6 @@ using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.ObservingModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
-using DustInTheWind.Lisimba.Egg;
 using DustInTheWind.Lisimba.Wpf.Operations;
 using DustInTheWind.Lisimba.ZodiacSigns;
 using Microsoft.Practices.Unity;

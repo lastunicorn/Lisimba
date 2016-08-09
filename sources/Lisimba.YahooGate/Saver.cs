@@ -16,8 +16,8 @@
 
 using System.IO;
 using CsvHelper;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Searching;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Searching;
 
 namespace DustInTheWind.Lisimba.Gating
 {

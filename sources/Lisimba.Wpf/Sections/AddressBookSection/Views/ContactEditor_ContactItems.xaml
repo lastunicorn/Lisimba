@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views"
-             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Egg.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
+             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Business.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300">

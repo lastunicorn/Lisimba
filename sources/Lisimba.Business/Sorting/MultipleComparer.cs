@@ -19,7 +19,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.Sorting
+namespace DustInTheWind.Lisimba.Business.Sorting
 {
     internal class MultipleComparer : IComparer
     {

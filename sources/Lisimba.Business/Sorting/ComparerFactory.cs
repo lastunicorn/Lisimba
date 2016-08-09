@@ -16,7 +16,7 @@
 
 using System.Collections;
 
-namespace DustInTheWind.Lisimba.Egg.Sorting
+namespace DustInTheWind.Lisimba.Business.Sorting
 {
     public static class ComparerFactory
     {

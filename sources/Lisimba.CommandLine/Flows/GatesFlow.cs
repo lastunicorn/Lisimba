@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Egg.GateModel;
+using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.WinForms.ContactEdit;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms

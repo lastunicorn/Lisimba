@@ -19,9 +19,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Config;
-using DustInTheWind.Lisimba.Egg.AddressBookModel;
-using DustInTheWind.Lisimba.Egg.Sorting;
+using DustInTheWind.Lisimba.Business.Sorting;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.WinForms.ContactList

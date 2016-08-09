@@ -20,9 +20,9 @@ using DustInTheWind.ConsoleCommon;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.ConsoleCommon.Templating;
 using DustInTheWind.Lisimba.Business.GateManagement;
+using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using DustInTheWind.Lisimba.CommandLine.Properties;
-using DustInTheWind.Lisimba.Egg.GateModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
 {

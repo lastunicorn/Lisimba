@@ -16,7 +16,7 @@
 
 using System;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class Date : ContactItem, IEquatable<Date>, IComparable, IComparable<Date>
     {

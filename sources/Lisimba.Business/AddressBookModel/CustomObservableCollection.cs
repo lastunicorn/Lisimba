@@ -22,7 +22,7 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
     public class CustomObservableCollection<T> : ObservableCollection<T>
         where T : class, IObservableEntity
