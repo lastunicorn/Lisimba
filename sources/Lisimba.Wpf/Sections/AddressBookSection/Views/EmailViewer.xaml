@@ -44,15 +44,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxAddress}"
-            Content="Email"/>
+            Content="_Email"/>
 
         <TextBox
             x:Name="TextBoxAddress"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Address, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Address, Mode=TwoWay}"/>
 
         <!-- Description -->
 
@@ -60,15 +58,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
-            Content="Description"/>
+            Content="_Description"/>
 
         <TextBox
             x:Name="TextBoxDescription"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Description, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Description, Mode=TwoWay}"/>
 
     </Grid>
     

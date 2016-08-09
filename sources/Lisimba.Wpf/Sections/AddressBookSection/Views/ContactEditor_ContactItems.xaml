@@ -48,51 +48,64 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 ItemsSource="{Binding ContactItems, Mode=OneWay}">
 
             <ItemsControl.Resources>
+
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="Foreground" Value="Blue"/>
+                </Style>
+
+                <Style TargetType="Label" BasedOn="{StaticResource {x:Type Label}}">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="2 2 8 2"/>
+                </Style>
+
                 <DataTemplate DataType="{x:Type addressBookModel:Phone}">
                     <StackPanel>
-                        <views:PhoneViewer/>
+                        <views:PhoneViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
                 <DataTemplate DataType="{x:Type addressBookModel:Email}">
                     <StackPanel>
-                        <views:EmailViewer/>
+                        <views:EmailViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
                 <DataTemplate DataType="{x:Type addressBookModel:PostalAddress}">
                     <StackPanel>
-                        <views:PostalAddressViewer/>
+                        <views:PostalAddressViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
                 <DataTemplate DataType="{x:Type addressBookModel:Date}">
                     <StackPanel>
-                        <views:DateViewer/>
+                        <views:DateViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
                 <DataTemplate DataType="{x:Type addressBookModel:SocialProfile}">
                     <StackPanel>
-                        <views:SocialProfileViewer/>
+                        <views:SocialProfileViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
                 <DataTemplate DataType="{x:Type addressBookModel:WebSite}">
                     <StackPanel>
-                        <views:WebSiteViewer/>
+                        <views:WebSiteViewer Margin="8"/>
                         <Separator/>
                     </StackPanel>
                 </DataTemplate>
+
             </ItemsControl.Resources>
 
-            <!--<ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>-->
-
         </ItemsControl>
+        
     </ScrollViewer>
 
 </UserControl>

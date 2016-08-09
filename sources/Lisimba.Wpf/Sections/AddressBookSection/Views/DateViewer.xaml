@@ -46,15 +46,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxYear}"
-            Content="Year"/>
+            Content="_Year"/>
 
         <TextBox
             x:Name="TextBoxYear"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Year, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Year, Mode=TwoWay}"/>
 
         <!-- Month -->
 
@@ -62,15 +60,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxMonth}"
-            Content="Month"/>
+            Content="_Month"/>
 
         <TextBox
             x:Name="TextBoxMonth"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Month, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Month, Mode=TwoWay}"/>
 
         <!-- Day -->
 
@@ -78,15 +74,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="2"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDay}"
-            Content="Day"/>
+            Content="Da_y"/>
 
         <TextBox
             x:Name="TextBoxDay"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding Day, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Day, Mode=TwoWay}"/>
 
         <!-- Description -->
 
@@ -94,15 +88,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="3"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
-            Content="Description"/>
+            Content="_Description"/>
 
         <TextBox
             x:Name="TextBoxDescription"
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding Description, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Description, Mode=TwoWay}"/>
 
     </Grid>
 

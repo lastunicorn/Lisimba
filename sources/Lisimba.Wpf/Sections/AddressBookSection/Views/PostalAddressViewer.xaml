@@ -47,15 +47,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxStreet}"
-            Content="Street"/>
+            Content="_Street"/>
 
         <TextBox
             x:Name="TextBoxStreet"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Street, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Street, Mode=TwoWay}"/>
 
         <!-- PostalCode -->
 
@@ -63,15 +61,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxPostalCode}"
-            Content="PostalCode"/>
+            Content="_Postal Code"/>
 
         <TextBox
             x:Name="TextBoxPostalCode"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding PostalCode, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding PostalCode, Mode=TwoWay}"/>
 
         <!-- City -->
         
@@ -79,15 +75,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="2"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxCity}"
-            Content="City"/>
+            Content="_City"/>
 
         <TextBox
             x:Name="TextBoxCity"
             Grid.Row="2"
             Grid.Column="1"
-            Text="{Binding City, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding City, Mode=TwoWay}"/>
 
         <!-- State -->
         
@@ -95,15 +89,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="3"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxState}"
-            Content="State"/>
+            Content="S_tate"/>
 
         <TextBox
             x:Name="TextBoxState"
             Grid.Row="3"
             Grid.Column="1"
-            Text="{Binding State, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding State, Mode=TwoWay}"/>
 
         <!-- Country -->
 
@@ -111,15 +103,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="4"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxCountry}"
-            Content="Country"/>
+            Content="C_ountry"/>
 
         <TextBox
             x:Name="TextBoxCountry"
             Grid.Row="4"
             Grid.Column="1"
-            Text="{Binding Country, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Country, Mode=TwoWay}"/>
 
         <!-- Description -->
         
@@ -127,15 +117,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Grid.Row="5"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
-            Content="Description"/>
+            Content="_Description"/>
 
         <TextBox
             x:Name="TextBoxDescription"
             Grid.Row="5"
             Grid.Column="1"
-            Text="{Binding Description, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Description, Mode=TwoWay}"/>
 
     </Grid>
     

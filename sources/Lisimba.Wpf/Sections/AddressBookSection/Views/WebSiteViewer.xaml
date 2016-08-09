@@ -26,15 +26,13 @@
             Grid.Row="0"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxAddress}"
-            Content="Address"/>
+            Content="_Web Address"/>
 
         <TextBox
             x:Name="TextBoxAddress"
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Address, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Address, Mode=TwoWay}"/>
 
         <!-- Description -->
 
@@ -42,15 +40,13 @@
             Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
-            Content="Description"/>
+            Content="_Description"/>
 
         <TextBox
             x:Name="TextBoxDescription"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Description, Mode=TwoWay}"
-            Foreground="Blue"
-            BorderThickness="0"/>
+            Text="{Binding Description, Mode=TwoWay}"/>
 
     </Grid>
 
