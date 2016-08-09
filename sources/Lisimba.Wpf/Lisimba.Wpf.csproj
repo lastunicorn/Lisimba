@@ -87,6 +87,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Sections\AddressBookSection\NameParser.cs" />
     <Compile Include="Sections\AddressBookSection\PersonNameConverter.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\PhoneViewModel.cs" />
     <Compile Include="Sections\AddressBookSection\Views\DateViewer.xaml.cs">
       <DependentUpon>DateViewer.xaml</DependentUpon>
     </Compile>
@@ -424,6 +425,7 @@
     <Resource Include="Images\Contact\webaddress.png" />
     <Resource Include="Images\Contact\webaddress_add.png" />
     <Resource Include="Images\MainMenu\search.png" />
+    <Resource Include="Images\description.png" />
     <Content Include="postbuild.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -15,6 +15,7 @@
 
         <BitmapImage x:Key="NotesIcon" UriSource="Images/Contact/notes.png"/>
         <BitmapImage x:Key="SearchIcon" UriSource="Images/MainMenu/search.png"/>
+        <BitmapImage x:Key="DescriptionIcon" UriSource="Images/description.png"/>
 
         <!--<Style BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" TargetType="Button"></Style>-->
 

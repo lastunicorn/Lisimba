@@ -21,11 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:addressBookModel="clr-namespace:DustInTheWind.Lisimba.Business.AddressBookModel;assembly=DustInTheWind.Lisimba.Business"
+             xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance addressBookModel:Phone}">
+             d:DataContext="{d:DesignInstance viewModels:PhoneViewModel}">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -36,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- Number -->
@@ -55,17 +56,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <!-- Description -->
         
         <Label
+            x:Name="LabelDescription"
             Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
-            Content="_Description"/>
+            Content="_Description"
+            Visibility="{Binding DescriptionVisibility}"/>
 
         <TextBox
             x:Name="TextBoxDescription"
             Grid.Row="1"
             Grid.Column="1"
-            Text="{Binding Description, Mode=TwoWay}"/>
+            Text="{Binding Description, Mode=TwoWay}"
+            Visibility="{Binding DescriptionVisibility}"/>
 
+        <!-- Description Button -->
+        
+        <Button
+            x:Name="ButtonDescription"
+            Grid.Row="0"
+            Grid.Column="2"
+            Visibility="{Binding DescriptionButtonVisibility}"
+            Click="ButtonBase_OnClick"
+            BorderThickness="0">
+            
+            <Image Source="{StaticResource DescriptionIcon}"/>
+        </Button>
     </Grid>
 
 </UserControl>

@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         private ZodiacSignViewModel zodiacSignViewModel;
         private readonly AddContactItemClickCommand addContactItemClickCommand;
         //private List<ContactItemSetViewModel> contactItems;
-        private List<ContactItem> contactItems;
+        private List<object> contactItems;
         private Date birthday;
         private bool isInitializationMode;
         private bool canAddItems;
@@ -97,7 +97,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         //    }
         //}
 
-        public List<ContactItem> ContactItems
+        public List<object> ContactItems
         {
             get { return contactItems; }
             set
@@ -239,7 +239,18 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
-                    ContactItems = all.SelectMany(x => x.Items).ToList();
+                    ContactItems = all
+                        .SelectMany(x => x.Items)
+                        .Select(x =>
+                        {
+                            Type t = x.GetType();
+                            
+                            if(t == typeof(Phone))
+                                return new PhoneViewModel(x as Phone) as object;
+
+                            return x as object;
+                        })
+                        .ToList();
                     Notes = currentContact.Notes;
 
                     ImageEditCommand.Contact = currentContact;
