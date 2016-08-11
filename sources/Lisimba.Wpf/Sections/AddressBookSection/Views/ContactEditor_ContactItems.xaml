@@ -82,7 +82,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </StackPanel>
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type addressBookModel:Date}">
+                <DataTemplate DataType="{x:Type viewModels:DateViewModel}">
                     <StackPanel>
                         <views:DateViewer Margin="8"/>
                         <Separator/>

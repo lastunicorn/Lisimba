@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
@@ -226,31 +227,38 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 {
                     Contact currentContact = openedAddressBooks.CurrentContact;
 
-                    List<ContactItemSetViewModel> all = currentContact.Items.ItemTypes
-                        .Select(x => new ContactItemSetViewModel
-                        {
-                            Text = GetTextForItemType(x),
-                            Icon = GetIconForItemType(x),
-                            Items = currentContact.Items.GetItems(x)
-                        })
-                        .ToList();
-
                     Name = currentContact.Name.ToString();
                     Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
-                    ContactItems = all
-                        .SelectMany(x => x.Items)
-                        .Select(x =>
-                        {
-                            Type t = x.GetType();
-                            
-                            if(t == typeof(Phone))
-                                return new PhoneViewModel(x as Phone) as object;
 
-                            return x as object;
-                        })
-                        .ToList();
+                    //List<ContactItemSetViewModel> all = currentContact.Items.ItemTypes
+                    //    .Select(x => new ContactItemSetViewModel
+                    //    {
+                    //        Text = GetTextForItemType(x),
+                    //        Icon = GetIconForItemType(x),
+                    //        Items = currentContact.Items.GetItems(x)
+                    //    })
+                    //    .ToList();
+
+                    Dictionary<Type, Type> viewModelTypes = new Dictionary<Type, Type>
+                    {
+                        { typeof(Phone), typeof(PhoneViewModel) },
+                        { typeof(Date), typeof(DateViewModel) }
+                    };
+
+
+                    ContactItems = currentContact.Items
+                    .Select(x =>
+                    {
+                        Type t = x.GetType();
+
+                        if (viewModelTypes.ContainsKey(t))
+                            return Activator.CreateInstance(viewModelTypes[t], x);
+
+                        return x as object;
+                    })
+                    .ToList();
                     Notes = currentContact.Notes;
 
                     ImageEditCommand.Contact = currentContact;
@@ -262,7 +270,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             }
         }
 
-        private ImageSource GetIconForItemType(Type type)
+        private static ImageSource GetIconForItemType(Type type)
         {
             if (type == typeof(Phone))
                 return Resources.phone.ToBitmapSource();
