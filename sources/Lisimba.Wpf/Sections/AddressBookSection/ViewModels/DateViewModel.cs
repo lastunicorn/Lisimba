@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
@@ -26,30 +25,75 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
     {
         private readonly Date date;
 
-        public int Year
+        private int? year;
+        private int month;
+        private int day;
+        private string description;
+
+        public int? Year
         {
-            get { return date.Year; }
-            set { date.Year = value; }
+            get { return year; }
+            set
+            {
+                if (year == value)
+                    return;
+
+                year = value;
+
+                if (value != null)
+                    date.Year = value.Value;
+
+                OnPropertyChanged();
+            }
         }
 
         public List<string> Months { get; private set; }
 
         public int Month
         {
-            get { return date.Month; }
-            set { date.Month = value; }
+            get { return month; }
+            set
+            {
+                if (month == value)
+                    return;
+
+                month = value;
+                date.Month = value;
+
+                OnPropertyChanged();
+            }
         }
+
+        public List<string> Days { get; private set; }
 
         public int Day
         {
-            get { return date.Day; }
-            set { date.Day = value; }
+            get { return day; }
+            set
+            {
+                if (day == value)
+                    return;
+                
+                day = value;
+                date.Day = value;
+
+                OnPropertyChanged();
+            }
         }
 
         public string Description
         {
-            get { return date.Description; }
-            set { date.Description = value; }
+            get { return description; }
+            set
+            {
+                if (description == value)
+                    return;
+
+                description = value;
+                date.Description = value;
+
+                OnPropertyChanged();
+            }
         }
 
         public DateViewModel(Date date)
@@ -59,13 +103,18 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             this.date = date;
 
             Months = CreateMonths();
+            Days = CreateDays();
+
+            year = date.Year;
+            month = date.Month;
+            day = date.Day;
 
             date.Changed += HandleDateChanged;
         }
 
         private static List<string> CreateMonths()
         {
-            List<string> values = new List<string> { "-" };
+            List<string> values = new List<string> { "-- Month --" };
 
             IEnumerable<string> monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames
                 .Where(x => x != string.Empty);
@@ -75,12 +124,22 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             return values;
         }
 
+        private static List<string> CreateDays()
+        {
+            List<string> values = new List<string> { "-- Day --" };
+
+            for (int i = 1; i < 32; i++)
+                values.Add(i.ToString());
+
+            return values;
+        }
+
         private void HandleDateChanged(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged("Year");
-            OnPropertyChanged("Month");
-            OnPropertyChanged("Day");
-            OnPropertyChanged("Description");
+            Year = date.Year;
+            Month = date.Month;
+            Day = date.Day;
+            Description = date.Description;
         }
     }
 }

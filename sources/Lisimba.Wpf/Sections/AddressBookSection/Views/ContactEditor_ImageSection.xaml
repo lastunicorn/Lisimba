@@ -43,8 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                         <Image.Style>
                             <Style TargetType="Image">
                                 <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="False">
-                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="False"/>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
@@ -62,6 +61,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </Button>
 
         <views:BirthdayViewer Date="{Binding Birthday, Mode=TwoWay}"/>
+
+        <views:ZodiacSignView DataContext="{Binding ZodiacSignViewModel}" />
 
     </StackPanel>
 

@@ -37,10 +37,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <RowDefinition Height="150" />
         </Grid.RowDefinitions>
 
-        <TextBox Grid.Row="0" Grid.Column="0"
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="0"
             FontSize="30"
             Margin="5"
-            Text="{Binding Name, Mode=TwoWay}"/>
+            BorderThickness="0"     
+            Text="{Binding Name, Mode=TwoWay}">
+            
+            <TextBox.Style>
+                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                    <Style.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="IsFocused" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.Setters>
+                                <Setter Property="Background" Value="WhiteSmoke"/>
+                            </MultiTrigger.Setters>
+                        </MultiTrigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <views:ContactEditor_ImageSection DockPanel.Dock="Left"/>
@@ -48,7 +68,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <views:ContactEditor_ContactItems/>
         </DockPanel>
 
-        <GridSplitter Grid.Row ="2" Grid.Column="0"
+        <GridSplitter
+            Grid.Row ="2"
+            Grid.Column="0"
             Height="8"
             ResizeDirection="Rows"
             HorizontalAlignment="Stretch"

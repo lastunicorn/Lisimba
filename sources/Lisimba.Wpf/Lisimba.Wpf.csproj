@@ -148,10 +148,10 @@
     </Compile>
     <Compile Include="Sections\AddressBookSection\ViewModels\ContactItemAddViewModel.cs" />
     <Compile Include="Sections\AddressBookSection\ViewModels\ContactItemSetViewModel.cs" />
-    <Compile Include="Sections\OtherWindows\Views\ContactList.xaml.cs">
+    <Compile Include="Sections\AddressBookSection\Views\ContactList.xaml.cs">
       <DependentUpon>ContactList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Sections\OtherWindows\ViewModels\ContactListViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\ContactListViewModel.cs" />
     <Compile Include="Sections\MainWindow\CustomMenuItem.cs" />
     <Compile Include="Sections\AddressBookSection\DateFormatter.cs" />
     <Compile Include="Sections\AddressBookSection\DateValidationRule.cs" />
@@ -313,7 +313,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Sections\OtherWindows\Views\ContactList.xaml">
+    <Page Include="Sections\AddressBookSection\Views\ContactList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -31,8 +31,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
@@ -40,66 +38,62 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- Year -->
-
         <Label
             Grid.Row="0"
             Grid.Column="0"
-            Target="{Binding ElementName=TextBoxYear}"
-            Content="_Year"/>
+            Target="{Binding ElementName=ComboBoxDay}"
+            Content="_Date"/>
 
-        <TextBox
-            x:Name="TextBoxYear"
+        <Grid
             Grid.Row="0"
             Grid.Column="1"
-            Text="{Binding Year, Mode=TwoWay}"/>
+            HorizontalAlignment="Stretch">
 
-        <!-- Month -->
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label
-            Grid.Row="1"
-            Grid.Column="0"
-            Target="{Binding ElementName=TextBoxMonth}"
-            Content="_Month"/>
+            <!-- Day -->
 
-        <!--<TextBox
-            x:Name="TextBoxMonth"
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="{Binding Month, Mode=TwoWay}"/>-->
+            <ComboBox
+                x:Name="ComboBoxDay"
+                Grid.Column="0"
+                Margin="0 0 4 0"
+                ItemsSource="{Binding Days}"
+                SelectedIndex="{Binding Day, Mode=TwoWay}"/>
+
+            <!-- Month -->
+
+            <ComboBox
+                x:Name="ComboBoxMonth"
+                Grid.Column="1"
+                Margin="0 0 4 0"
+                ItemsSource="{Binding Months}"
+                SelectedIndex="{Binding Month, Mode=TwoWay}"/>
+
+            <!-- Year -->
+
+            <TextBox
+                x:Name="TextBoxYear"
+                Grid.Column="2"
+                BorderThickness="1"
+                Text="{Binding Year, Mode=TwoWay}"/>
+
+        </Grid>
         
-        <ComboBox
-            x:Name="ComboBoxMonth"
-            Grid.Row="1"
-            Grid.Column="1"
-            ItemsSource="{Binding Months}"
-            SelectedIndex="{Binding Month, Mode=TwoWay}"/>
-
-        <!-- Day -->
-
-        <Label
-            Grid.Row="2"
-            Grid.Column="0"
-            Target="{Binding ElementName=TextBoxDay}"
-            Content="Da_y"/>
-
-        <TextBox
-            x:Name="TextBoxDay"
-            Grid.Row="2"
-            Grid.Column="1"
-            Text="{Binding Day, Mode=TwoWay}"/>
-
         <!-- Description -->
 
         <Label
-            Grid.Row="3"
+            Grid.Row="1"
             Grid.Column="0"
             Target="{Binding ElementName=TextBoxDescription}"
             Content="_Description"/>
 
         <TextBox
             x:Name="TextBoxDescription"
-            Grid.Row="3"
+            Grid.Row="1"
             Grid.Column="1"
             Text="{Binding Description, Mode=TwoWay}"/>
 

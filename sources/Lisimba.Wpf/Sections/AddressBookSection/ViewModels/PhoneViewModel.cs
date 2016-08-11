@@ -24,16 +24,37 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
     {
         private readonly Phone phone;
 
+        private string number;
+        private string description;
+
         public string Number
         {
-            get { return phone.Number; }
-            set { phone.Number = value; }
+            get { return number; }
+            set
+            {
+                if (number == value)
+                    return;
+
+                number = value;
+                phone.Number = value;
+
+                OnPropertyChanged();
+            }
         }
 
         public string Description
         {
-            get { return phone.Description; }
-            set { phone.Description = value; }
+            get { return description; }
+            set
+            {
+                if (description == value)
+                    return;
+
+                description = value;
+                phone.Description = value;
+
+                OnPropertyChanged();
+            }
         }
 
         public Visibility DescriptionVisibility { get; private set; }
@@ -45,6 +66,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             if (phone == null) throw new ArgumentNullException("phone");
 
             this.phone = phone;
+
+            number = phone.Number;
+            description = phone.Description;
+
             phone.Changed += HandlePhoneChanged;
 
             DescriptionVisibility = string.IsNullOrEmpty(phone.Description) ? Visibility.Collapsed : Visibility.Visible;
@@ -53,8 +78,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
         private void HandlePhoneChanged(object sender, EventArgs eventArgs)
         {
-            OnPropertyChanged("Number");
-            OnPropertyChanged("Description");
+            Number = phone.Number;
+            Description = phone.Description;
         }
     }
 }
