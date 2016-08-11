@@ -232,33 +232,23 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
 
-                    //List<ContactItemSetViewModel> all = currentContact.Items.ItemTypes
-                    //    .Select(x => new ContactItemSetViewModel
-                    //    {
-                    //        Text = GetTextForItemType(x),
-                    //        Icon = GetIconForItemType(x),
-                    //        Items = currentContact.Items.GetItems(x)
-                    //    })
-                    //    .ToList();
-
                     Dictionary<Type, Type> viewModelTypes = new Dictionary<Type, Type>
                     {
                         { typeof(Phone), typeof(PhoneViewModel) },
                         { typeof(Date), typeof(DateViewModel) }
                     };
-
-
+                    
                     ContactItems = currentContact.Items
-                    .Select(x =>
-                    {
-                        Type t = x.GetType();
+                        .Select(x =>
+                        {
+                            Type t = x.GetType();
 
-                        if (viewModelTypes.ContainsKey(t))
-                            return Activator.CreateInstance(viewModelTypes[t], x);
+                            return viewModelTypes.ContainsKey(t)
+                                ? Activator.CreateInstance(viewModelTypes[t], x)
+                                : x as object;
+                        })
+                        .ToList();
 
-                        return x as object;
-                    })
-                    .ToList();
                     Notes = currentContact.Notes;
 
                     ImageEditCommand.Contact = currentContact;

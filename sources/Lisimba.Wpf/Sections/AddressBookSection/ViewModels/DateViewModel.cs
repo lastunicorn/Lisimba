@@ -16,6 +16,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
@@ -65,7 +67,9 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         {
             List<string> values = new List<string> { "-" };
 
-            string[] monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames;
+            IEnumerable<string> monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames
+                .Where(x => x != string.Empty);
+
             values.AddRange(monthNames);
 
             return values;
