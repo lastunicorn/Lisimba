@@ -43,6 +43,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\AssemblyInfo.Shared.cs">
@@ -50,7 +51,18 @@
     </Compile>
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
+    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests\ConstructorTests.cs" />
     <Compile Include="Egg\AddressBookModel\ContactCollectionTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\BirthdayComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\NicknameComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\LastNameComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\MiddleNameComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\FirstNameComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\ItemComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\PictureComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\ConstructorTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\CategoryComparisonTests.cs" />
+    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\NotesComparisonTests.cs" />
     <Compile Include="Egg\AddressBookModel\ContactEqualsTests.cs" />
     <Compile Include="Egg\AddressBookModel\PersonNameTests\EqualsTests.cs" />
     <Compile Include="Egg\AddressBookModel\PersonNameTests\CompareTests.cs" />
@@ -73,7 +85,7 @@
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests.cs" />
+    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests\AddressBookComparerTests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Importing;
@@ -33,22 +32,6 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         {
             addressBook1 = new AddressBook();
             addressBook2 = new AddressBook();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void throws_if_addressBook1_is_null()
-        {
-            AddressBookComparer addressBookComparer = new AddressBookComparer(null, addressBook2);
-            addressBookComparer.Compare();
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void throws_if_addressBook2_is_null()
-        {
-            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, null);
-            addressBookComparer.Compare();
         }
 
         [Test]
