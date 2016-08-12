@@ -17,49 +17,49 @@
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.PersonNameTests
+namespace DustInTheWind.Lisimba.Tests.Business.AddressBookModel.PersonNameTests
 {
     [TestFixture]
-    public class HasMiddleNameTests
+    public class HasFirstNameTests
     {
         [Test]
-        public void returns_false_if_MiddleName_not_set_in_constructor()
+        public void returns_false_if_FirstName_not_set_in_constructor()
         {
             PersonName personName = new PersonName();
 
-            bool actual = personName.HasMiddleName;
+            bool actual = personName.HasFirstName;
 
             Assert.That(actual, Is.False);
         }
 
         [Test]
-        public void returns_true_if_MiddleName_is_set_in_constructor()
+        public void returns_true_if_FirstName_is_set_in_constructor()
         {
-            PersonName personName = new PersonName(string.Empty, "middle", string.Empty, string.Empty);
+            PersonName personName = new PersonName("first", string.Empty, string.Empty, string.Empty);
 
-            bool actual = personName.HasMiddleName;
+            bool actual = personName.HasFirstName;
 
             Assert.That(actual, Is.True);
         }
 
         [Test]
-        public void returns_true_after_MiddleName_is_set()
+        public void returns_true_after_FirstName_is_set()
         {
             PersonName personName = new PersonName();
-            personName.MiddleName = "middle";
+            personName.FirstName = "first";
 
-            bool actual = personName.HasMiddleName;
+            bool actual = personName.HasFirstName;
 
             Assert.That(actual, Is.True);
         }
 
         [Test]
-        public void returns_false_after_MiddleName_is_set_to_empty()
+        public void returns_false_after_FirstName_is_set_to_empty()
         {
-            PersonName personName = new PersonName(string.Empty, "middle", string.Empty, string.Empty);
-            personName.MiddleName = string.Empty;
+            PersonName personName = new PersonName("first", string.Empty, string.Empty, string.Empty);
+            personName.FirstName = string.Empty;
 
-            bool actual = personName.HasMiddleName;
+            bool actual = personName.HasFirstName;
 
             Assert.That(actual, Is.False);
         }

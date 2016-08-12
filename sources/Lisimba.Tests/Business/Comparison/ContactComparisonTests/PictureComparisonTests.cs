@@ -22,7 +22,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
     public class PictureComparisonTests
@@ -34,11 +34,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertContainsType(contactComparison.Differences, typeof(PictureComparison));
+            AssertContainsType(contactComparison.Results, typeof(PictureComparison));
         }
 
         [Test]
@@ -46,11 +45,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.BothEmpty);
+            AssertEquality(contactComparison.Results, ItemEquality.BothEmpty);
         }
 
         [Test]
@@ -58,11 +56,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact { Picture = GetRandomPicture() };
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.LeftExists);
+            AssertEquality(contactComparison.Results, ItemEquality.LeftExists);
         }
 
         [Test]
@@ -70,11 +67,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact { Picture = GetRandomPicture() };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.RightExists);
+            AssertEquality(contactComparison.Results, ItemEquality.RightExists);
         }
 
         [Test]
@@ -82,11 +78,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact { Picture = GetRandomPicture() };
             Contact contactRight = new Contact { Picture = GetRandomPicture() };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Different);
+            AssertEquality(contactComparison.Results, ItemEquality.Different);
         }
 
         [Test]
@@ -95,11 +90,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Image picture = GetRandomPicture();
             Contact contactLeft = new Contact { Picture = picture };
             Contact contactRight = new Contact { Picture = picture };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         [Test]
@@ -109,11 +103,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Image picture2 = new Bitmap(picture1);
             Contact contactLeft = new Contact { Picture = picture1 };
             Contact contactRight = new Contact { Picture = picture2 };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         private static Image GetRandomPicture()

@@ -21,87 +21,81 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
-    public class NotesComparisonTests
+    public class LastNameComparisonTests
     {
         [Test]
-        public void after_Compare_the_Differences_contains_the_NotesComparison()
+        public void after_Compare_the_Differences_contains_the_LastNameComparison()
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertContainsType(contactComparison.Differences, typeof(NotesComparison));
+            AssertContainsType(contactComparison.Results, typeof(LastNameComparison));
         }
 
         [Test]
-        public void both_notes_are_empty()
+        public void both_middle_names_are_empty()
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.BothEmpty);
+            AssertEquality(contactComparison.Results, ItemEquality.BothEmpty);
         }
 
         [Test]
         public void left_contains_value_right_is_empty()
         {
-            Contact contactLeft = new Contact { Notes = "note" };
+            Contact contactLeft = new Contact { Name = { LastName = "last name" } };
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.LeftExists);
+            AssertEquality(contactComparison.Results, ItemEquality.LeftExists);
         }
 
         [Test]
         public void left_is_empty_right_contains_value()
         {
             Contact contactLeft = new Contact();
-            Contact contactRight = new Contact { Notes = "note" };
+            Contact contactRight = new Contact { Name = { LastName = "last name" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.RightExists);
+            AssertEquality(contactComparison.Results, ItemEquality.RightExists);
         }
 
         [Test]
         public void both_exists_but_different_values()
         {
-            Contact contactLeft = new Contact { Notes = "note1" };
-            Contact contactRight = new Contact { Notes = "note2" };
+            Contact contactLeft = new Contact { Name = { LastName = "last name 1" } };
+            Contact contactRight = new Contact { Name = { LastName = "last name 2" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Different);
+            AssertEquality(contactComparison.Results, ItemEquality.Different);
         }
 
         [Test]
         public void both_exists_and_have_same_value()
         {
-            Contact contactLeft = new Contact { Notes = "note" };
-            Contact contactRight = new Contact { Notes = "note" };
+            Contact contactLeft = new Contact { Name = { LastName = "last name" } };
+            Contact contactRight = new Contact { Name = { LastName = "last name" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         private static void AssertEquality(IEnumerable<IItemComparison> comparisons, ItemEquality expectedEquality)
         {
-            NotesComparison notesComparison = comparisons.OfType<NotesComparison>().First();
-            Assert.That(notesComparison.Equality, Is.EqualTo(expectedEquality));
+            LastNameComparison lastNameComparison = comparisons.OfType<LastNameComparison>().First();
+            Assert.That(lastNameComparison.Equality, Is.EqualTo(expectedEquality));
         }
 
         private static void AssertContainsType(IEnumerable<IItemComparison> differences, Type type)

@@ -51,29 +51,29 @@
     </Compile>
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
-    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests\ConstructorTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactCollectionTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\BirthdayComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\NicknameComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\LastNameComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\MiddleNameComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\FirstNameComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\ItemComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\PictureComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\ConstructorTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\CategoryComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactComparisonTests\NotesComparisonTests.cs" />
-    <Compile Include="Egg\AddressBookModel\ContactEqualsTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\EqualsTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\CompareTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasLastNameTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasNicknameTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\HasFirstNameTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\NamePartsTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\ConstructorTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\CopyFromTests.cs" />
-    <Compile Include="Egg\AddressBookModel\PersonNameTests\ClearTests.cs" />
+    <Compile Include="Business\Comparison\AddressBookComparisonTests\ConstructorTests.cs" />
+    <Compile Include="Business\AddressBookModel\ContactCollectionTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\BirthdayComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\NicknameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\LastNameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\MiddleNameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\FirstNameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\ItemComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\PictureComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\ConstructorTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\CategoryComparisonTests.cs" />
+    <Compile Include="Business\Comparison\ContactComparisonTests\NotesComparisonTests.cs" />
+    <Compile Include="Business\AddressBookModel\ContactEqualsTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\EqualsTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\CompareTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\HasLastNameTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\HasNicknameTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\HasFirstNameTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\NamePartsTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\ConstructorTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\CopyFromTests.cs" />
+    <Compile Include="Business\AddressBookModel\PersonNameTests\ClearTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ConstructorTests.cs" />
     <Compile Include="Presenters\ContactViewPresenterTests\ContactChangedTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,7 +85,7 @@
     <Compile Include="TestConstants.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Egg\AddressBookModel\AddressBookComparerTests\AddressBookComparerTests.cs" />
+    <Compile Include="Business\Comparison\AddressBookComparisonTests\Tests.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

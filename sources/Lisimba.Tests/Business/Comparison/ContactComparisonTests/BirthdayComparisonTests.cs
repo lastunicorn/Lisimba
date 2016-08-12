@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
     public class BirthdayComparisonTests
@@ -31,11 +31,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact();
             Contact contact2 = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertContainsType(contactComparison.Differences, typeof(BirthdayComparison));
+            AssertContainsType(contactComparison.Results, typeof(BirthdayComparison));
         }
 
         [Test]
@@ -43,11 +42,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact { Birthday = null };
             Contact contact2 = new Contact { Birthday = null };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.BothEmpty);
+            AssertEquality(contactComparison.Results, ItemEquality.BothEmpty);
         }
 
         [Test]
@@ -55,11 +53,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact { Birthday = new Date(13, 03, 2000) };
             Contact contact2 = new Contact { Birthday = null };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.LeftExists);
+            AssertEquality(contactComparison.Results, ItemEquality.LeftExists);
         }
 
         [Test]
@@ -67,11 +64,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact { Birthday = null };
             Contact contact2 = new Contact { Birthday = new Date(13, 03, 2000) };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.RightExists);
+            AssertEquality(contactComparison.Results, ItemEquality.RightExists);
         }
 
         [Test]
@@ -79,11 +75,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact { Birthday = new Date(14, 04, 4000) };
             Contact contact2 = new Contact { Birthday = new Date(13, 03, 2000) };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Different);
+            AssertEquality(contactComparison.Results, ItemEquality.Different);
         }
 
         [Test]
@@ -91,11 +86,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contact1 = new Contact { Birthday = new Date(13, 03, 2000) };
             Contact contact2 = new Contact { Birthday = new Date(13, 03, 2000) };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         [Test]
@@ -104,11 +98,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Date birthday = new Date(13, 03, 2000);
             Contact contact1 = new Contact { Birthday = birthday };
             Contact contact2 = new Contact { Birthday = birthday };
+
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         private static void AssertEquality(IEnumerable<IItemComparison> comparisons, ItemEquality expectedEquality)

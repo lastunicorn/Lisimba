@@ -16,10 +16,10 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Importing;
+using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.AddressBookComparisonTests
 {
     [TestFixture]
     public class ConstructorTests
@@ -38,16 +38,16 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
         [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook1_is_null()
         {
-            AddressBookComparer addressBookComparer = new AddressBookComparer(null, addressBook2);
-            addressBookComparer.Compare();
+            AddressBookComparison addressBookComparison = new AddressBookComparison(null, addressBook2);
+            addressBookComparison.Compare();
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook2_is_null()
         {
-            AddressBookComparer addressBookComparer = new AddressBookComparer(addressBook1, null);
-            addressBookComparer.Compare();
+            AddressBookComparison addressBookComparison = new AddressBookComparison(addressBook1, null);
+            addressBookComparison.Compare();
         }
     }
 }

@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
@@ -41,8 +42,8 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
             addressBookToImport = addressBook;
 
-            AddressBookComparer comparer = new AddressBookComparer(addressBookBase, addressBookToImport);
-            AddressBookComparisonResult comparisonResult = comparer.Compare();
+            AddressBookComparison comparison = new AddressBookComparison(addressBookBase, addressBookToImport);
+            comparison.Compare();
 
             //importRules = new ImportRuleCollection();
 
@@ -61,16 +62,16 @@ namespace DustInTheWind.Lisimba.Business.Importing
             IEnumerable<ImportRule> rules = addressBookToImport.Contacts
                 .Select(x =>
                 {
-                    ContactComparisonResult contactComparisonResult = comparisonResult.First(y => y.Contact2 == x);
+                    ContactComparison contactComparisonResult = comparison.Results.First(y => y.ContactRight == x);
 
                     ImportType importType = contactComparisonResult.AreEqual
                         ? ImportType.Ignore
-                        : (contactComparisonResult.Contact1 == null ? ImportType.AddAsNew : ImportType.Replace);
+                        : (contactComparisonResult.ContactLeft == null ? ImportType.AddAsNew : ImportType.Replace);
 
                     return new ImportRule
                     {
                         Source = x,
-                        Destination = contactComparisonResult.Contact1,
+                        Destination = contactComparisonResult.ContactLeft,
                         ImportType = importType
                     };
                 })

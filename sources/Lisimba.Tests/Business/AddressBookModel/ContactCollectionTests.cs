@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Importing;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Tests.Business.AddressBookModel
 {
     [TestFixture]
     public class ContactCollectionTests

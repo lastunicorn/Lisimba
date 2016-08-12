@@ -19,21 +19,11 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
     public class ConstructorTests
     {
-        [Test]
-        public void initially_the_Differences_is_empty()
-        {
-            Contact contactLeft = new Contact();
-            Contact contactRight = new Contact();
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
-
-            Assert.That(contactComparison.Differences, Is.Empty);
-        }
-
         [Test]
         public void initially_ContactLeft_is_initialized_with_value_received_on_constructor()
         {

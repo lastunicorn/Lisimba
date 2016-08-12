@@ -98,10 +98,8 @@
     <Compile Include="GateModel\GateException.cs" />
     <Compile Include="GateModel\IGate.cs" />
     <Compile Include="GateModel\IncorrectEggVersionException.cs" />
-    <Compile Include="Importing\AddressBookComparer.cs" />
-    <Compile Include="Importing\AddressBookComparisonResult.cs" />
+    <Compile Include="Comparison\AddressBookComparison.cs" />
     <Compile Include="Importing\AddressBookImporter.cs" />
-    <Compile Include="Importing\ContactComparisonResult.cs" />
     <Compile Include="Importing\ImportRule.cs" />
     <Compile Include="Importing\ImportRuleCollection.cs" />
     <Compile Include="Importing\ImportType.cs" />

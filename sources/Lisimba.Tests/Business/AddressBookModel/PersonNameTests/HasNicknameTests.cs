@@ -17,7 +17,7 @@
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.PersonNameTests
+namespace DustInTheWind.Lisimba.Tests.Business.AddressBookModel.PersonNameTests
 {
     [TestFixture]
     public class HasNicknameTests

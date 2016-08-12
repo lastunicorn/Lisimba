@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
     public class ItemComparisonTests
@@ -31,11 +31,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertDoesNotContainType(contactComparison.Differences, typeof(ItemComparison));
+            AssertDoesNotContainType(contactComparison.Results, typeof(ItemComparison));
         }
 
         [Test]
@@ -45,11 +44,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Email emailLeft = new Email { Address = "aaa@bbb.ccc", Description = "desc" };
             contactLeft.Items.Add(emailLeft);
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            List<ItemComparison> itemComparisons = contactComparison.Differences.OfType<ItemComparison>().ToList();
+            List<ItemComparison> itemComparisons = contactComparison.Results.OfType<ItemComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.That(itemComparisons[0].ItemLeft, Is.SameAs(emailLeft));
             Assert.That(itemComparisons[0].ItemRight, Is.Null);
@@ -63,11 +61,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Contact contactRight = new Contact();
             Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc" };
             contactRight.Items.Add(emailRight);
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            List<ItemComparison> itemComparisons = contactComparison.Differences.OfType<ItemComparison>().ToList();
+            List<ItemComparison> itemComparisons = contactComparison.Results.OfType<ItemComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.That(itemComparisons[0].ItemLeft, Is.Null);
             Assert.That(itemComparisons[0].ItemRight, Is.SameAs(emailRight));
@@ -83,11 +80,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Contact contactRight = new Contact();
             Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc 2" };
             contactRight.Items.Add(emailRight);
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            List<ItemComparison> itemComparisons = contactComparison.Differences.OfType<ItemComparison>().ToList();
+            List<ItemComparison> itemComparisons = contactComparison.Results.OfType<ItemComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(2));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == emailLeft && x.ItemRight == null && x.Equality == ItemEquality.LeftExists));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == null && x.ItemRight == emailRight && x.Equality == ItemEquality.RightExists));
@@ -102,11 +98,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
             Contact contactRight = new Contact();
             Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc" };
             contactRight.Items.Add(emailRight);
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            List<ItemComparison> itemComparisons = contactComparison.Differences.OfType<ItemComparison>().ToList();
+            List<ItemComparison> itemComparisons = contactComparison.Results.OfType<ItemComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == emailLeft && x.ItemRight == emailRight && x.Equality == ItemEquality.Equal));
         }

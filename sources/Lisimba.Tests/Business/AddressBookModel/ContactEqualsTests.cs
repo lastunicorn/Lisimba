@@ -17,7 +17,7 @@
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel
+namespace DustInTheWind.Lisimba.Tests.Business.AddressBookModel
 {
     [TestFixture]
     public class ContactEqualsTests

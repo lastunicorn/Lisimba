@@ -17,49 +17,49 @@
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.PersonNameTests
+namespace DustInTheWind.Lisimba.Tests.Business.AddressBookModel.PersonNameTests
 {
     [TestFixture]
-    public class HasFirstNameTests
+    public class HasLastNameTests
     {
         [Test]
-        public void returns_false_if_FirstName_not_set_in_constructor()
+        public void returns_false_if_LastName_not_set_in_constructor()
         {
             PersonName personName = new PersonName();
 
-            bool actual = personName.HasFirstName;
+            bool actual = personName.HasLastName;
 
             Assert.That(actual, Is.False);
         }
 
         [Test]
-        public void returns_true_if_FirstName_is_set_in_constructor()
+        public void returns_true_if_LastName_is_set_in_constructor()
         {
-            PersonName personName = new PersonName("first", string.Empty, string.Empty, string.Empty);
+            PersonName personName = new PersonName(string.Empty, string.Empty, "last", string.Empty);
 
-            bool actual = personName.HasFirstName;
+            bool actual = personName.HasLastName;
 
             Assert.That(actual, Is.True);
         }
 
         [Test]
-        public void returns_true_after_FirstName_is_set()
+        public void returns_true_after_LastName_is_set()
         {
             PersonName personName = new PersonName();
-            personName.FirstName = "first";
+            personName.LastName = "last";
 
-            bool actual = personName.HasFirstName;
+            bool actual = personName.HasLastName;
 
             Assert.That(actual, Is.True);
         }
 
         [Test]
-        public void returns_false_after_FirstName_is_set_to_empty()
+        public void returns_false_after_LastName_is_set_to_empty()
         {
-            PersonName personName = new PersonName("first", string.Empty, string.Empty, string.Empty);
-            personName.FirstName = string.Empty;
+            PersonName personName = new PersonName(string.Empty, string.Empty, "last", string.Empty);
+            personName.LastName = string.Empty;
 
-            bool actual = personName.HasFirstName;
+            bool actual = personName.HasLastName;
 
             Assert.That(actual, Is.False);
         }

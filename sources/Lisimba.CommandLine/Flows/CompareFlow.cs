@@ -22,6 +22,7 @@ using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.Importing;
@@ -58,29 +59,37 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
-            AddressBookComparer addressBookComparer = new AddressBookComparer(openedAddressBooks.Current.AddressBook, addressBook);
-            AddressBookComparisonResult result = addressBookComparer.Compare();
-            DisplayResult(result);
+            AddressBookComparison addressBookComparison = new AddressBookComparison(openedAddressBooks.Current.AddressBook, addressBook);
+            addressBookComparison.Compare();
+            DisplayResult(addressBookComparison);
         }
 
-        private void DisplayResult(AddressBookComparisonResult result)
+        private void DisplayResult(AddressBookComparison result)
         {
-            console.WriteLineNormal("Identical: " + result.IdenticalContacts.Count());
+            List<ContactComparison> identicalContacts = result.IdenticalContacts.ToList();
 
-            foreach (ContactComparisonResult comparisonResult in result.IdenticalContacts)
-                console.WriteLineNormal(comparisonResult.Contact1.ToString());
+            console.WriteLineNormal("Identical: " + identicalContacts.Count);
 
-            console.WriteLine();
-            console.WriteLineNormal("unique1: " + result.Unique1Contacts.Count());
-
-            foreach (ContactComparisonResult comparisonResult in result.Unique1Contacts)
-                console.WriteLineNormal(comparisonResult.Contact1.ToString());
+            foreach (ContactComparison comparisonResult in identicalContacts)
+                console.WriteLineNormal(comparisonResult.ContactLeft.ToString());
 
             console.WriteLine();
-            console.WriteLineNormal("unique2: " + result.Unique2Contacts.Count());
 
-            foreach (ContactComparisonResult comparisonResult in result.Unique2Contacts)
-                console.WriteLineNormal(comparisonResult.Contact2.ToString());
+            List<ContactComparison> unique1Contacts = result.UniqueLeftContacts.ToList();
+
+            console.WriteLineNormal("unique1: " + unique1Contacts.Count());
+
+            foreach (ContactComparison comparisonResult in unique1Contacts)
+                console.WriteLineNormal(comparisonResult.ContactLeft.ToString());
+
+            console.WriteLine();
+
+            List<ContactComparison> unique2Contacts = result.UniqueRightContacts.ToList();
+
+            console.WriteLineNormal("unique2: " + unique2Contacts.Count());
+
+            foreach (ContactComparison comparisonResult in unique2Contacts)
+                console.WriteLineNormal(comparisonResult.ContactRight.ToString());
         }
     }
 }

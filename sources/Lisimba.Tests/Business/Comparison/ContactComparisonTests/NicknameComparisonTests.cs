@@ -21,7 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTests
+namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 {
     [TestFixture]
     public class NicknameComparisonTests
@@ -31,11 +31,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertContainsType(contactComparison.Differences, typeof(NicknameComparison));
+            AssertContainsType(contactComparison.Results, typeof(NicknameComparison));
         }
 
         [Test]
@@ -43,11 +42,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.BothEmpty);
+            AssertEquality(contactComparison.Results, ItemEquality.BothEmpty);
         }
 
         [Test]
@@ -55,11 +53,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact { Name = { Nickname = "nickname" } };
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.LeftExists);
+            AssertEquality(contactComparison.Results, ItemEquality.LeftExists);
         }
 
         [Test]
@@ -67,11 +64,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact { Name = { Nickname = "nickname" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.RightExists);
+            AssertEquality(contactComparison.Results, ItemEquality.RightExists);
         }
 
         [Test]
@@ -79,11 +75,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact { Name = { Nickname = "nickname 1" } };
             Contact contactRight = new Contact { Name = { Nickname = "nickname 2" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Different);
+            AssertEquality(contactComparison.Results, ItemEquality.Different);
         }
 
         [Test]
@@ -91,11 +86,10 @@ namespace DustInTheWind.Lisimba.Tests.Egg.AddressBookModel.ContactComparisonTest
         {
             Contact contactLeft = new Contact { Name = { Nickname = "nickname" } };
             Contact contactRight = new Contact { Name = { Nickname = "nickname" } };
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            contactComparison.Compare();
-
-            AssertEquality(contactComparison.Differences, ItemEquality.Equal);
+            AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
         private static void AssertEquality(IEnumerable<IItemComparison> comparisons, ItemEquality expectedEquality)

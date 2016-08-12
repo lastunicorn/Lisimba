@@ -25,52 +25,79 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         public Contact ContactLeft { get; private set; }
         public Contact ContactRight { get; private set; }
 
-        public List<IItemComparison> Differences { get; private set; }
+        public List<IItemComparison> Results { get; private set; }
+
+        public bool AreEqual
+        {
+            get { return Equality == ItemEquality.Equal; }
+        }
+
+        public ItemEquality Equality { get; private set; }
 
         public ContactComparison(Contact contactLeft, Contact contactRight)
         {
             ContactLeft = contactLeft;
             ContactRight = contactRight;
 
-            Differences = new List<IItemComparison>();
+            Results = new List<IItemComparison>();
+
+            Compare();
         }
 
-        public void Compare()
+        private void Compare()
         {
-            Differences.Clear();
+            Results.Clear();
 
-            Differences.Add(new NotesComparison(ContactLeft, ContactRight));
-            Differences.Add(new BirthdayComparison(ContactLeft, ContactRight));
-            Differences.Add(new CategoryComparison(ContactLeft, ContactRight));
-            Differences.Add(new FirstNameComparison(ContactLeft, ContactRight));
-            Differences.Add(new MiddleNameComparison(ContactLeft, ContactRight));
-            Differences.Add(new LastNameComparison(ContactLeft, ContactRight));
-            Differences.Add(new NicknameComparison(ContactLeft, ContactRight));
-            Differences.Add(new PictureComparison(ContactLeft, ContactRight));
+            if (ContactLeft == null && ContactRight == null)
+                Equality = ItemEquality.BothEmpty;
+            else if (ContactLeft == null)
+                Equality = ItemEquality.RightExists;
+            else if (ContactRight == null)
+                Equality = ItemEquality.LeftExists;
+            else
+            {
+                CompareAllItems();
+
+                bool areEqual = Results.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
+
+                Equality = areEqual
+                    ? ItemEquality.Equal
+                    : ItemEquality.Different;
+            }
+        }
+
+        private void CompareAllItems()
+        {
+            Results.Add(new NotesComparison(ContactLeft, ContactRight));
+            Results.Add(new BirthdayComparison(ContactLeft, ContactRight));
+            Results.Add(new CategoryComparison(ContactLeft, ContactRight));
+            Results.Add(new FirstNameComparison(ContactLeft, ContactRight));
+            Results.Add(new MiddleNameComparison(ContactLeft, ContactRight));
+            Results.Add(new LastNameComparison(ContactLeft, ContactRight));
+            Results.Add(new NicknameComparison(ContactLeft, ContactRight));
+            Results.Add(new PictureComparison(ContactLeft, ContactRight));
 
             List<ContactItem> contactRightItems = ContactRight.Items.ToList();
 
             foreach (ContactItem itemLeft in ContactLeft.Items)
             {
-                List<ItemComparison> comparisons = contactRightItems
+                ItemComparison comparison = contactRightItems
                     .Select(x => new ItemComparison(itemLeft, x))
-                    .ToList();
-
-                ItemComparison comparison = comparisons.FirstOrDefault(x => x.Equality == ItemEquality.Equal);
+                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
 
                 if (comparison != null)
                 {
-                    Differences.Add(comparison);
+                    Results.Add(comparison);
                     contactRightItems.Remove(comparison.ItemRight);
                 }
                 else
                 {
-                    Differences.Add(new ItemComparison(itemLeft, null));
+                    Results.Add(new ItemComparison(itemLeft, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Differences.Add(new ItemComparison(null, itemRight));
+                Results.Add(new ItemComparison(null, itemRight));
         }
     }
 }
