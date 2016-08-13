@@ -22,6 +22,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         LeftExists,
         RightExists,
         Different,
+        Similar,
         Equal
     }
 }

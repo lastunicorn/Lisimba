@@ -39,5 +39,10 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         {
             return ContactLeft.Name.Nickname == ContactRight.Name.Nickname;
         }
+
+        protected override bool HaveSimilarValue()
+        {
+            return ContactLeft.Name.Nickname == ContactRight.Name.Nickname;
+        }
     }
 }

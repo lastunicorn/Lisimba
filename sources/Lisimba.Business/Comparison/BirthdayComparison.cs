@@ -39,5 +39,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         {
             return Date.Equals(ContactLeft.Birthday, ContactRight.Birthday);
         }
+
+        protected override bool HaveSimilarValue()
+        {
+            return ContactLeft.Birthday.Year == ContactRight.Birthday.Year &&
+                   ContactLeft.Birthday.Month == ContactRight.Birthday.Month &&
+                   ContactLeft.Birthday.Day == ContactRight.Birthday.Day;
+        }
     }
 }

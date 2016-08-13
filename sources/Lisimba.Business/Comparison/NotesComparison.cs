@@ -39,5 +39,11 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         {
             return ContactLeft.Notes == ContactRight.Notes;
         }
+
+        protected override bool HaveSimilarValue()
+        {
+            return ContactLeft.Notes.Contains(ContactRight.Notes) ||
+                ContactRight.Notes.Contains(ContactLeft.Notes);
+        }
     }
 }

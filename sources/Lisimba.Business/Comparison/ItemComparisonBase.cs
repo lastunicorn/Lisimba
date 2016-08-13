@@ -40,9 +40,15 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private void Compare()
         {
             if (ContactLeftHasValue())
-                Equality = ContactRightHasValue()
-                    ? (HaveSameValue() ? ItemEquality.Equal : ItemEquality.Different)
-                    : ItemEquality.LeftExists;
+                if (ContactRightHasValue())
+                    if (HaveSameValue())
+                        Equality = ItemEquality.Equal;
+                    else if(HaveSimilarValue())
+                        Equality = ItemEquality.Similar;
+                    else
+                        Equality = ItemEquality.Different;
+                else
+                    Equality = ItemEquality.LeftExists;
             else
                 Equality = ContactRightHasValue() ? ItemEquality.RightExists : ItemEquality.BothEmpty;
         }
@@ -50,5 +56,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         protected abstract bool ContactLeftHasValue();
         protected abstract bool ContactRightHasValue();
         protected abstract bool HaveSameValue();
+        protected abstract bool HaveSimilarValue();
     }
 }

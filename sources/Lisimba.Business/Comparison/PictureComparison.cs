@@ -43,6 +43,11 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             return AreEquals(ContactLeft.Picture, ContactRight.Picture);
         }
 
+        protected override bool HaveSimilarValue()
+        {
+            return AreEquals(ContactLeft.Picture, ContactRight.Picture);
+        }
+
         public static bool AreEquals(Image bmp1, Image bmp2)
         {
             //Test to see if we have the same size of image

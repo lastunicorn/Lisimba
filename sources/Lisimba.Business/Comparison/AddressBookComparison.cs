@@ -31,12 +31,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         public bool AreEqual
         {
-            get { return Results.All(x => x.AreEqual); }
+            get { return Results.All(x => x.Equality == ItemEquality.Equal); }
         }
 
         public IEnumerable<ContactComparison> IdenticalContacts
         {
-            get { return Results.Where(x => x.AreEqual); }
+            get { return Results.Where(x => x.Equality == ItemEquality.Equal); }
         }
 
         public IEnumerable<ContactComparison> UniqueLeftContacts
@@ -66,15 +66,19 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
             List<Contact> addressBookRightContacts = addressBookRight.Contacts.ToList();
 
+            // Search each contact from left address book into the right address book.
+
             foreach (Contact contactLeft in addressBookLeft.Contacts)
             {
                 ContactComparison comparison = addressBookRightContacts
                     .Select(x => new ContactComparison(contactLeft, x))
-                    .FirstOrDefault(x => x.AreEqual);
+                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
 
                 if (comparison != null)
                 {
                     Results.Add(comparison);
+
+                    // If identical contact found in right address book, remove it.
                     addressBookRightContacts.Remove(comparison.ContactRight);
                 }
                 else
@@ -82,6 +86,8 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                     Results.Add(new ContactComparison(contactLeft, null));
                 }
             }
+
+            // Create items for the remaining contacts în the right address book.
 
             foreach (Contact contactRight in addressBookRightContacts)
                 Results.Add(new ContactComparison(null, contactRight));

@@ -26,12 +26,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         public Contact ContactRight { get; private set; }
 
         public List<IItemComparison> Results { get; private set; }
-
-        public bool AreEqual
-        {
-            get { return Equality == ItemEquality.Equal; }
-        }
-
         public ItemEquality Equality { get; private set; }
 
         public ContactComparison(Contact contactLeft, Contact contactRight)
@@ -60,9 +54,22 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
                 bool areEqual = Results.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
 
-                Equality = areEqual
-                    ? ItemEquality.Equal
-                    : ItemEquality.Different;
+                if (areEqual)
+                    Equality = ItemEquality.Equal;
+                else
+                    Equality = (Results.All(x => x.Equality != ItemEquality.Different))
+                        ? ItemEquality.Similar
+                        : ItemEquality.Different;
+
+                // Equal
+                // - all items should be Equal
+
+                // Similar - not Equal and:
+                // - 
+
+                // If birthday has same date but different description. (*)
+                // If parts of the name are added in one side and absent in the other
+                // If category exists only in one side
             }
         }
 

@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 {
                     ContactComparison contactComparisonResult = comparison.Results.First(y => y.ContactRight == x);
 
-                    ImportType importType = contactComparisonResult.AreEqual
+                    ImportType importType = (contactComparisonResult.Equality == ItemEquality.Equal)
                         ? ImportType.Ignore
                         : (contactComparisonResult.ContactLeft == null ? ImportType.AddAsNew : ImportType.Replace);
 
