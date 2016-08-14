@@ -22,6 +22,15 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 {
     public class ContactComparison
     {
+        private FirstNameComparison firstNameComparison;
+        private MiddleNameComparison middleNameComparison;
+        private LastNameComparison lastNameComparison;
+        private NicknameComparison nicknameComparison;
+        private NotesComparison notesComparison;
+        private BirthdayComparison birthdayComparison;
+        private CategoryComparison categoryComparison;
+        private PictureComparison pictureComparison;
+
         public Contact ContactLeft { get; private set; }
         public Contact ContactRight { get; private set; }
 
@@ -52,37 +61,60 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             {
                 CompareAllItems();
 
+                // Equal
+                // - all items should be Equal
+
                 bool areEqual = Results.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
 
                 if (areEqual)
                     Equality = ItemEquality.Equal;
                 else
-                    Equality = (Results.All(x => x.Equality != ItemEquality.Different))
+                {
+                    // Similar - not Equal and:
+                    // - Name parts are: - at least one Equal and the rest are (all Equal or Left or BothEmpty) or (all Equal or Right or BothEmpty).
+                    // - Notes doesn't metter.
+                    // - Birthdays are Equal or Similar or Left or Right or BothEmpty.
+                    // - Category doesn't metter.
+                    // - Pictures doesn't metter.
+                    // - Items doesn't metter.
+
+                    bool areSimilar = false;
+
+                    areSimilar |= AreNamesSimilar();
+                    areSimilar |= AreBirthdaysSimilar();
+
+                    Equality = areSimilar
                         ? ItemEquality.Similar
                         : ItemEquality.Different;
-
-                // Equal
-                // - all items should be Equal
-
-                // Similar - not Equal and:
-                // - 
-
-                // If birthday has same date but different description. (*)
-                // If parts of the name are added in one side and absent in the other
-                // If category exists only in one side
+                }
             }
         }
 
         private void CompareAllItems()
         {
-            Results.Add(new NotesComparison(ContactLeft, ContactRight));
-            Results.Add(new BirthdayComparison(ContactLeft, ContactRight));
-            Results.Add(new CategoryComparison(ContactLeft, ContactRight));
-            Results.Add(new FirstNameComparison(ContactLeft, ContactRight));
-            Results.Add(new MiddleNameComparison(ContactLeft, ContactRight));
-            Results.Add(new LastNameComparison(ContactLeft, ContactRight));
-            Results.Add(new NicknameComparison(ContactLeft, ContactRight));
-            Results.Add(new PictureComparison(ContactLeft, ContactRight));
+            firstNameComparison = new FirstNameComparison(ContactLeft, ContactRight);
+            Results.Add(firstNameComparison);
+
+            middleNameComparison = new MiddleNameComparison(ContactLeft, ContactRight);
+            Results.Add(middleNameComparison);
+
+            lastNameComparison = new LastNameComparison(ContactLeft, ContactRight);
+            Results.Add(lastNameComparison);
+
+            nicknameComparison = new NicknameComparison(ContactLeft, ContactRight);
+            Results.Add(nicknameComparison);
+
+            notesComparison = new NotesComparison(ContactLeft, ContactRight);
+            Results.Add(notesComparison);
+
+            birthdayComparison = new BirthdayComparison(ContactLeft, ContactRight);
+            Results.Add(birthdayComparison);
+
+            categoryComparison = new CategoryComparison(ContactLeft, ContactRight);
+            Results.Add(categoryComparison);
+
+            pictureComparison = new PictureComparison(ContactLeft, ContactRight);
+            Results.Add(pictureComparison);
 
             List<ContactItem> contactRightItems = ContactRight.Items.ToList();
 
@@ -105,6 +137,47 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
             foreach (ContactItem itemRight in contactRightItems)
                 Results.Add(new ItemComparison(null, itemRight));
+        }
+
+        private bool AreNamesSimilar()
+        {
+            // Name parts are:
+            // - at least one Equal
+            // - the rest are (all Equal or Left or BothEmpty) or (all Equal or Right or BothEmpty).
+
+            IItemComparison[] comparisons =
+            {
+                firstNameComparison,
+                middleNameComparison,
+                lastNameComparison,
+                nicknameComparison
+            };
+
+            if (comparisons.All(x => x.Equality != ItemEquality.Equal))
+                return false;
+
+            if (comparisons.Any(x =>
+                    x.Equality != ItemEquality.Equal &&
+                    x.Equality != ItemEquality.LeftExists &&
+                    x.Equality != ItemEquality.BothEmpty) &&
+                comparisons.Any(x =>
+                    x.Equality != ItemEquality.Equal &&
+                    x.Equality != ItemEquality.RightExists &&
+                    x.Equality != ItemEquality.BothEmpty))
+                return false;
+
+            return true;
+        }
+
+        private bool AreBirthdaysSimilar()
+        {
+            // Birthdays are Equal or Similar or Left or Right or BothEmpty.
+
+            return birthdayComparison.Equality == ItemEquality.Equal ||
+                   birthdayComparison.Equality == ItemEquality.Similar ||
+                   birthdayComparison.Equality == ItemEquality.LeftExists ||
+                   birthdayComparison.Equality == ItemEquality.RightExists ||
+                   birthdayComparison.Equality == ItemEquality.BothEmpty;
         }
     }
 }

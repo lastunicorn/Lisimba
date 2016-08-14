@@ -72,7 +72,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             {
                 ContactComparison comparison = addressBookRightContacts
                     .Select(x => new ContactComparison(contactLeft, x))
-                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
+                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal || x.Equality == ItemEquality.Similar);
 
                 if (comparison != null)
                 {

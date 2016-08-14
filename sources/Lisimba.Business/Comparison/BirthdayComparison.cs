@@ -42,9 +42,9 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         protected override bool HaveSimilarValue()
         {
-            return ContactLeft.Birthday.Year == ContactRight.Birthday.Year &&
-                   ContactLeft.Birthday.Month == ContactRight.Birthday.Month &&
-                   ContactLeft.Birthday.Day == ContactRight.Birthday.Day;
+            return (ContactLeft.Birthday.Year == 0 || ContactRight.Birthday.Year == 0 || ContactLeft.Birthday.Year == ContactRight.Birthday.Year) &&
+                (ContactLeft.Birthday.Month == 0 || ContactRight.Birthday.Month == 0 || ContactLeft.Birthday.Month == ContactRight.Birthday.Month) &&
+                (ContactLeft.Birthday.Day == 0 || ContactRight.Birthday.Day == 0 || ContactLeft.Birthday.Day == ContactRight.Birthday.Day);
         }
     }
 }
