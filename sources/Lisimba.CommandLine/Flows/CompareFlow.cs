@@ -58,58 +58,109 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
             AddressBook currentaddressBook = openedAddressBooks.Current.AddressBook;
-            
+
             AddressBookComparison addressBookComparison = new AddressBookComparison(currentaddressBook, addressBook);
             addressBookComparison.Compare();
-            
-            DisplayResult(addressBookComparison);
+
+            bool displayDetails = parameters.Count >= 2 && (parameters[1] == "-d" || parameters[1] == "--details");
+
+            DisplayResult(addressBookComparison, displayDetails);
         }
 
-        private void DisplayResult(AddressBookComparison addressBookComparison)
+        private void DisplayResult(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            foreach (ContactComparison contactComparison in addressBookComparison.Results.Where(x=>x.Equality != ItemEquality.Equal))
-            {
-                console.WriteLineNormal(string.Format("[{0}] <-> [{1}] - [{2}]", contactComparison.ContactLeft, contactComparison.ContactRight, contactComparison.Equality));
-            }
+            DisplayIdenticalContacts(addressBookComparison, displayDetails);
 
+            if (displayDetails)
+                console.WriteLine();
 
-            //DisplayIdenticalContacts(addressBookComparison);
-            
-            //console.WriteLine();
-            //DisplayContactsOnlyInLeft(addressBookComparison);
-            
-            //console.WriteLine();
-            //DisplayContactsOnlyInRight(addressBookComparison);
+            DisplayContactsOnlyInLeft(addressBookComparison, displayDetails);
+
+            if (displayDetails)
+                console.WriteLine();
+
+            DisplayContactsOnlyInRight(addressBookComparison, displayDetails);
+
+            if (displayDetails)
+                console.WriteLine();
+
+            DisplaySimilarContacts(addressBookComparison, displayDetails);
+
+            if (displayDetails)
+                console.WriteLine();
+
+            DisplayDifferentContacts(addressBookComparison, displayDetails);
         }
 
-        private void DisplayIdenticalContacts(AddressBookComparison addressBookComparison)
+        private void DisplayIdenticalContacts(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> identicalContacts = addressBookComparison.IdenticalContacts.ToList();
+            List<ContactComparison> contactComparisons = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.Equal)
+                .ToList();
 
-            console.WriteLineNormal("Identical: " + identicalContacts.Count);
+            console.WriteLineEmphasize("Identical: " + contactComparisons.Count);
 
-            foreach (ContactComparison contactComparison in identicalContacts)
-                console.WriteLineNormal(contactComparison.ContactLeft.ToString());
+            if (displayDetails)
+                foreach (ContactComparison contactComparison in contactComparisons)
+                    console.WriteLineNormal(contactComparison.ContactLeft.ToString());
         }
 
-        private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison)
+        private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> unique1Contacts = addressBookComparison.UniqueLeftContacts.ToList();
+            List<ContactComparison> contactComparisons = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.LeftExists)
+                .ToList();
 
-            console.WriteLineNormal("unique left: " + unique1Contacts.Count());
+            console.WriteLineEmphasize("Unique in left: " + contactComparisons.Count);
 
-            foreach (ContactComparison contactComparison in unique1Contacts)
-                console.WriteLineNormal(contactComparison.ContactLeft.ToString());
+            if (displayDetails)
+                foreach (ContactComparison contactComparison in contactComparisons)
+                    console.WriteLineNormal(contactComparison.ContactLeft.ToString());
         }
 
-        private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison)
+        private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> unique2Contacts = addressBookComparison.UniqueRightContacts.ToList();
+            List<ContactComparison> contactComparisons = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.RightExists)
+                .ToList();
 
-            console.WriteLineNormal("unique right: " + unique2Contacts.Count());
+            console.WriteLineEmphasize("Unique in right: " + contactComparisons.Count);
 
-            foreach (ContactComparison comparisonResult in unique2Contacts)
-                console.WriteLineNormal(comparisonResult.ContactRight.ToString());
+            if (displayDetails)
+                foreach (ContactComparison comparisonResult in contactComparisons)
+                    console.WriteLineNormal(comparisonResult.ContactRight.ToString());
+        }
+
+        private void DisplaySimilarContacts(AddressBookComparison addressBookComparison, bool displayDetails)
+        {
+            List<ContactComparison> contactComparisons = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.Similar)
+                .ToList();
+
+            console.WriteLineEmphasize("Similar: " + contactComparisons.Count);
+
+            if (displayDetails)
+                foreach (ContactComparison contactComparison in contactComparisons)
+                {
+                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ContactLeft, contactComparison.ContactRight);
+                    console.WriteLineNormal(text);
+                }
+        }
+
+        private void DisplayDifferentContacts(AddressBookComparison addressBookComparison, bool displayDetails)
+        {
+            List<ContactComparison> contactComparisons = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.Different)
+                .ToList();
+
+            console.WriteLineEmphasize("Different: " + contactComparisons.Count);
+
+            if (displayDetails)
+                foreach (ContactComparison contactComparison in contactComparisons)
+                {
+                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ContactLeft, contactComparison.ContactRight);
+                    console.WriteLineNormal(text);
+                }
         }
     }
 }

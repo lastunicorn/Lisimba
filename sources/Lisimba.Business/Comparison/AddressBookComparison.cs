@@ -28,7 +28,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         public List<ContactComparison> Results { get; private set; }
         
-
         public bool AreEqual
         {
             get { return Results.All(x => x.Equality == ItemEquality.Equal); }

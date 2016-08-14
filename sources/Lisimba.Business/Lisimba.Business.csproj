@@ -61,16 +61,13 @@
     <Compile Include="AddressBookModel\ContactContentChangedEventArgs.cs" />
     <Compile Include="AddressBookModel\ContactItem.cs" />
     <Compile Include="AddressBookModel\ContactItemCollection.cs" />
-    <Compile Include="AddressBookModel\ContactMatch.cs" />
     <Compile Include="AddressBookModel\CustomObservableCollection.cs" />
     <Compile Include="AddressBookModel\Date.cs" />
     <Compile Include="AddressBookModel\Email.cs" />
-    <Compile Include="AddressBookModel\FuzzyMatch.cs" />
     <Compile Include="AddressBookModel\IObservableEntity.cs" />
     <Compile Include="AddressBookModel\ItemChangedEventArgs.cs" />
     <Compile Include="AddressBookModel\NameSection.cs" />
     <Compile Include="AddressBookModel\PersonName.cs" />
-    <Compile Include="AddressBookModel\PersonNameMatch.cs" />
     <Compile Include="AddressBookModel\Phone.cs" />
     <Compile Include="AddressBookModel\PostalAddress.cs" />
     <Compile Include="AddressBookModel\SocialProfile.cs" />

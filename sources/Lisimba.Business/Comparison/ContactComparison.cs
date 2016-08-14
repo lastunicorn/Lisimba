@@ -78,10 +78,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                     // - Pictures doesn't metter.
                     // - Items doesn't metter.
 
-                    bool areSimilar = false;
-
-                    areSimilar |= AreNamesSimilar();
-                    areSimilar |= AreBirthdaysSimilar();
+                    bool areSimilar = AreNamesSimilar();
 
                     Equality = areSimilar
                         ? ItemEquality.Similar

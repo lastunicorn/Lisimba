@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
@@ -25,64 +26,63 @@ namespace DustInTheWind.Lisimba.Business.Importing
     public class AddressBookImporter
     {
         private readonly AddressBook addressBookBase;
-        private AddressBook addressBookToImport;
-        private ImportRuleCollection importRules;
+        private readonly AddressBook addressBookSource;
+        private readonly Collection<ImportRule> importRules;
 
-
-        public AddressBookImporter(AddressBook addressBookBase)
+        public AddressBookImporter(AddressBook addressBookBase, AddressBook addressBookSource)
         {
             if (addressBookBase == null) throw new ArgumentNullException("addressBookBase");
+            if (addressBookSource == null) throw new ArgumentNullException("addressBookSource");
 
             this.addressBookBase = addressBookBase;
+            this.addressBookSource = addressBookSource;
+
+            importRules = new Collection<ImportRule>();
+
+            PrepareToImportFrom();
         }
 
-        public ImportRuleCollection PrepareToImportFrom(AddressBook addressBook)
+        private void PrepareToImportFrom()
         {
-            if (addressBook == null) throw new ArgumentNullException("addressBook");
+            importRules.Clear();
 
-            addressBookToImport = addressBook;
+            AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookBase, addressBookSource);
+            addressBookComparison.Compare();
 
-            AddressBookComparison comparison = new AddressBookComparison(addressBookBase, addressBookToImport);
-            comparison.Compare();
-
-            //importRules = new ImportRuleCollection();
-
-            //foreach (Contact contact2 in addressBookToImport.Contacts)
-            //{
-            //    ContactComparisonResult contactComparisonResult = comparisonResult.First(x => x.Contact2 == contact2);
-
-            //    importRules.Add(new ImportRule
-            //    {
-            //        Source = contact2,
-            //        Destination = contactComparisonResult.Contact1,
-            //        ImportType = contactComparisonResult.AreEqual ? ImportType.Ignore : (contactComparisonResult.Contact1 == null ? ImportType.AddAsNew : ImportType.Replace)
-            //    });
-            //}
-
-            IEnumerable<ImportRule> rules = addressBookToImport.Contacts
+            IEnumerable<ImportRule> rules = addressBookComparison.Results
+                .Where(x => x.Equality == ItemEquality.RightExists || x.Equality == ItemEquality.Different || x.Equality == ItemEquality.Similar)
                 .Select(x =>
                 {
-                    ContactComparison contactComparisonResult = comparison.Results.First(y => y.ContactRight == x);
-
-                    ImportType importType = (contactComparisonResult.Equality == ItemEquality.Equal)
-                        ? ImportType.Ignore
-                        : (contactComparisonResult.ContactLeft == null ? ImportType.AddAsNew : ImportType.Replace);
-
-                    return new ImportRule
+                    switch (x.Equality)
                     {
-                        Source = x,
-                        Destination = contactComparisonResult.ContactLeft,
-                        ImportType = importType
-                    };
-                })
-                .Where(x => x.ImportType != ImportType.Ignore);
+                        case ItemEquality.RightExists:
+                        case ItemEquality.Different:
+                            return new ImportRule
+                            {
+                                Source = x.ContactRight,
+                                Destination = null,
+                                ImportType = ImportType.AddAsNew
+                            };
 
-            importRules = new ImportRuleCollection(rules);
+                        case ItemEquality.Similar:
+                            return new ImportRule
+                            {
+                                Source = x.ContactRight,
+                                Destination = x.ContactLeft,
+                                ImportType = ImportType.Merge
+                            };
 
-            return importRules;
+                        default:
+                            string message = string.Format("Cannot import contact {0}", x.ContactRight);
+                            throw new LisimbaException(message);
+                    }
+                });
+
+            foreach (ImportRule importRule in rules)
+                importRules.Add(importRule);
         }
 
-        public void DoImport()
+        public void PerformImport()
         {
             if (importRules == null)
                 throw new LisimbaException("Prepare the import first.");
@@ -99,6 +99,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     case ImportType.Merge:
+                        importRule.Destination.Merge(importRule.Source);
                         // todo: The merging algorithm will be implemented at a later time.
                         break;
 

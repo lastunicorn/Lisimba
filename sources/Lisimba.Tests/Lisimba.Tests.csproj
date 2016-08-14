@@ -52,7 +52,6 @@
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Business\Comparison\AddressBookComparisonTests\ConstructorTests.cs" />
-    <Compile Include="Business\AddressBookModel\ContactCollectionTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\BirthdayComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\NicknameComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\LastNameComparisonTests.cs" />
@@ -65,7 +64,6 @@
     <Compile Include="Business\Comparison\ContactComparisonTests\NotesComparisonTests.cs" />
     <Compile Include="Business\AddressBookModel\ContactEqualsTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\EqualsTests.cs" />
-    <Compile Include="Business\AddressBookModel\PersonNameTests\CompareTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\HasLastNameTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\HasNicknameTests.cs" />

@@ -32,64 +32,64 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         {
         }
 
-        public void AddRange(ImportRuleCollection importRules)
-        {
-            foreach (ImportRule importRule in importRules)
-            {
-                switch (importRule.ImportType)
-                {
-                    case ImportType.AddAsNew:
-                        Add(importRule.Source);
-                        break;
+        //public void AddRange(ImportRuleCollection importRules)
+        //{
+        //    foreach (ImportRule importRule in importRules)
+        //    {
+        //        switch (importRule.ImportType)
+        //        {
+        //            case ImportType.AddAsNew:
+        //                Add(importRule.Source);
+        //                break;
 
-                    case ImportType.Merge:
-                        importRule.Destination.Merge(importRule.Source);
-                        break;
+        //            case ImportType.Merge:
+        //                importRule.Destination.Merge(importRule.Source);
+        //                break;
 
-                    case ImportType.Replace:
-                        Remove(importRule.Destination);
-                        Add(importRule.Source);
-                        break;
+        //            case ImportType.Replace:
+        //                Remove(importRule.Destination);
+        //                Add(importRule.Source);
+        //                break;
 
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-        }
+        //            default:
+        //                throw new ArgumentOutOfRangeException();
+        //        }
+        //    }
+        //}
 
-        public ImportRuleCollection AnalyzeForImport(ContactCollection sourceContacts)
-        {
-            if (sourceContacts == null) throw new ArgumentNullException("sourceContacts");
+        //public ImportRuleCollection AnalyzeForImport(ContactCollection sourceContacts)
+        //{
+        //    if (sourceContacts == null) throw new ArgumentNullException("sourceContacts");
 
-            if (sourceContacts.Count == 0)
-                return new ImportRuleCollection();
+        //    if (sourceContacts.Count == 0)
+        //        return new ImportRuleCollection();
 
-            IEnumerable<ImportRule> importRules = sourceContacts
-                .Select(CreateImportRule)
-                .Where(x => x.ImportType != ImportType.Ignore);
+        //    IEnumerable<ImportRule> importRules = sourceContacts
+        //        .Select(CreateImportRule)
+        //        .Where(x => x.ImportType != ImportType.Ignore);
 
-            return new ImportRuleCollection(importRules);
-        }
+        //    return new ImportRuleCollection(importRules);
+        //}
 
-        private ImportRule CreateImportRule(Contact contact)
-        {
-            if (Count == 0)
-                return new ImportRule
-                {
-                    Source = contact,
-                    ImportType = ImportType.AddAsNew
-                };
+        //private ImportRule CreateImportRule(Contact contact)
+        //{
+        //    if (Count == 0)
+        //        return new ImportRule
+        //        {
+        //            Source = contact,
+        //            ImportType = ImportType.AddAsNew
+        //        };
 
-            ContactMatch bestMatch = this
-                .Select(x => new ContactMatch(contact, x))
-                .Aggregate((x, y) => x.Percentage >= y.Percentage ? x : y);
+        //    ContactMatch bestMatch = this
+        //        .Select(x => new ContactMatch(contact, x))
+        //        .Aggregate((x, y) => x.Percentage >= y.Percentage ? x : y);
 
-            return new ImportRule
-            {
-                Source = contact,
-                Destination = bestMatch.Contact2,
-                ImportType = bestMatch.Percentage == 100 ? ImportType.Ignore : ImportType.Merge
-            };
-        }
+        //    return new ImportRule
+        //    {
+        //        Source = contact,
+        //        Destination = bestMatch.Contact2,
+        //        ImportType = bestMatch.Percentage == 100 ? ImportType.Ignore : ImportType.Merge
+        //    };
+        //}
     }
 }
