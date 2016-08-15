@@ -48,16 +48,22 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             return AreEquals(ItemLeft.Image, ItemRight.Image);
         }
 
-        public static bool AreEquals(Image bmp1, Image bmp2)
+        public static bool AreEquals(Image image1, Image image2)
         {
+            if (image1 == null && image2 == null)
+                return true;
+
+            if (image1 == null || image2 == null)
+                return false;
+
             //Test to see if we have the same size of image
-            if (bmp1.Size != bmp2.Size)
+            if (image1.Size != image2.Size)
                 return false;
 
             //Convert each image to a byte array
             ImageConverter imageConverter = new ImageConverter();
-            byte[] btImage1 = (byte[])imageConverter.ConvertTo(bmp1, typeof(byte[]));
-            byte[] btImage2 = (byte[])imageConverter.ConvertTo(bmp2, typeof(byte[]));
+            byte[] btImage1 = (byte[])imageConverter.ConvertTo(image1, typeof(byte[]));
+            byte[] btImage2 = (byte[])imageConverter.ConvertTo(image2, typeof(byte[]));
 
             //Compute a hash for each image
             SHA256Managed shaM = new SHA256Managed();

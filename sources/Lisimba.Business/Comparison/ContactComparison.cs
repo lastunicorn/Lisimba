@@ -102,22 +102,22 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             foreach (ContactItem itemLeft in ContactLeft.Items)
             {
                 IItemComparison comparison = contactRightItems
-                    .Select(x => ItemComparison.Create(itemLeft, x))
+                    .Select(x => ItemComparisonFactory.Create(itemLeft, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
 
                 if (comparison != null)
                 {
                     Results.Add(comparison);
-                    contactRightItems.Remove(comparison.ItemRight);
+                    contactRightItems.Remove(comparison.ItemRight as ContactItem);
                 }
                 else
                 {
-                    Results.Add(ItemComparison.Create(itemLeft, null));
+                    Results.Add(ItemComparisonFactory.Create(itemLeft, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Results.Add(ItemComparison.Create(null, itemRight));
+                Results.Add(ItemComparisonFactory.Create(null, itemRight));
         }
     }
 }

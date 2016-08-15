@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            AssertDoesNotContainType(contactComparison.Results, typeof(ItemComparison));
+            AssertDoesNotContainType(contactComparison.Results, typeof(ItemComparisonFactory));
         }
 
         [Test]

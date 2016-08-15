@@ -75,12 +75,13 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="Comparison\EmailComparison.cs" />
+    <Compile Include="Comparison\ObjectComparison.cs" />
     <Compile Include="Comparison\PersonNameComparison.cs" />
     <Compile Include="Comparison\DateComparison.cs" />
     <Compile Include="Comparison\CategoryComparison.cs" />
     <Compile Include="Comparison\ContactComparison.cs" />
     <Compile Include="Comparison\IItemComparison.cs" />
-    <Compile Include="Comparison\ItemComparison.cs" />
+    <Compile Include="Comparison\ItemComparisonFactory.cs" />
     <Compile Include="Comparison\ItemComparisonBase.cs" />
     <Compile Include="Comparison\ItemEquality.cs" />
     <Compile Include="Comparison\NotesComparison.cs" />

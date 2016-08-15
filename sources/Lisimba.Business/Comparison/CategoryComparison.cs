@@ -18,41 +18,31 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class CategoryComparison : ItemComparisonBase
+    public class CategoryComparison : ItemComparisonBase<Contact>
     {
         public CategoryComparison(Contact contactLeft, Contact contactRight)
             : base(contactLeft, contactRight)
         {
         }
 
-        public override ContactItem ItemLeft
+        protected override bool LeftHasValue()
         {
-            get { throw new System.NotImplementedException(); }
+            return !string.IsNullOrEmpty(ItemLeft.Category);
         }
 
-        public override ContactItem ItemRight
+        protected override bool RightHasValue()
         {
-            get { throw new System.NotImplementedException(); }
+            return !string.IsNullOrEmpty(ItemRight.Category);
         }
 
-        protected override bool ContactLeftHasValue()
+        protected override bool ValuesAreEqual()
         {
-            return !string.IsNullOrEmpty(ContactLeft.Category);
+            return ItemLeft.Category == ItemRight.Category;
         }
 
-        protected override bool ContactRightHasValue()
+        protected override bool ValuesAreSimilar()
         {
-            return !string.IsNullOrEmpty(ContactRight.Category);
-        }
-
-        protected override bool HaveSameValue()
-        {
-            return ContactLeft.Category == ContactRight.Category;
-        }
-
-        protected override bool HaveSimilarValue()
-        {
-            return ContactLeft.Category == ContactRight.Category;
+            return ItemLeft.Category == ItemRight.Category;
         }
     }
 }

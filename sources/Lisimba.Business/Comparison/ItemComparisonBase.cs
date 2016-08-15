@@ -14,66 +14,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public abstract class ItemComparisonBase : IItemComparison
-    {
-        protected Contact ContactLeft { get; set; }
-        protected Contact ContactRight { get; set; }
-
-        public abstract ContactItem ItemLeft { get; }
-        public abstract ContactItem ItemRight { get; }
-
-        public ItemEquality Equality { get; private set; }
-
-        protected ItemComparisonBase(Contact contactLeft, Contact contactRight)
-        {
-            if (contactLeft == null) throw new ArgumentNullException("contactLeft");
-            if (contactRight == null) throw new ArgumentNullException("contactRight");
-
-            ContactLeft = contactLeft;
-            ContactRight = contactRight;
-
-            Compare();
-        }
-
-        private void Compare()
-        {
-            if (ContactLeftHasValue())
-                if (ContactRightHasValue())
-                    if (HaveSameValue())
-                        Equality = ItemEquality.Equal;
-                    else if (HaveSimilarValue())
-                        Equality = ItemEquality.Similar;
-                    else
-                        Equality = ItemEquality.Different;
-                else
-                    Equality = ItemEquality.LeftExists;
-            else
-                Equality = ContactRightHasValue() ? ItemEquality.RightExists : ItemEquality.BothEmpty;
-        }
-
-        protected abstract bool ContactLeftHasValue();
-        protected abstract bool ContactRightHasValue();
-        protected abstract bool HaveSameValue();
-        protected abstract bool HaveSimilarValue();
-    }
-
     public abstract class ItemComparisonBase<T> : IItemComparison
-        where T : ContactItem
     {
         public T ItemLeft { get; set; }
         public T ItemRight { get; set; }
 
-        ContactItem IItemComparison.ItemLeft
+        object IItemComparison.ItemLeft
         {
             get { return ItemLeft; }
         }
 
-        ContactItem IItemComparison.ItemRight
+        object IItemComparison.ItemRight
         {
             get { return ItemRight; }
         }

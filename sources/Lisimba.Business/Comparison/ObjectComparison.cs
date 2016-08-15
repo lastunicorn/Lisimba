@@ -14,36 +14,53 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.AddressBookModel;
+using System;
+using System.Reflection;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class NotesComparison : ItemComparisonBase<Contact>
+    public class ObjectComparison : ItemComparisonBase<object>
     {
-        public NotesComparison(Contact contactLeft, Contact contactRight)
-            : base(contactLeft, contactRight)
+        public ObjectComparison(object itemLeft, object itemRight)
+            : base(itemLeft, itemRight)
         {
         }
 
         protected override bool LeftHasValue()
         {
-            return !string.IsNullOrEmpty(ItemLeft.Notes);
+            return ItemLeft != null;
         }
 
         protected override bool RightHasValue()
         {
-            return !string.IsNullOrEmpty(ItemRight.Notes);
+            return ItemRight != null;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return ItemLeft.Notes == ItemRight.Notes;
+            return AreEqual();
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return ItemLeft.Notes.Contains(ItemRight.Notes) ||
-                ItemRight.Notes.Contains(ItemLeft.Notes);
+            return AreEqual();
+        }
+
+        private bool AreEqual()
+        {
+            if (ItemLeft.GetType() != ItemRight.GetType())
+                return false;
+
+            Type t = ItemLeft.GetType();
+            MethodInfo methodInfo = t.GetMethod("Equals");
+
+            if (ReferenceEquals(ItemLeft, ItemRight))
+                return true;
+
+            if (methodInfo.GetParameters().Length == 2 && methodInfo.ReturnParameter != null && methodInfo.ReturnParameter.ParameterType == typeof(bool))
+                return (bool)methodInfo.Invoke(null, new[] { ItemLeft, ItemRight });
+
+            return false;
         }
     }
 }

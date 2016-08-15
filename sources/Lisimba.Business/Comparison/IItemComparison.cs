@@ -14,14 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
     public interface IItemComparison
     {
-        ContactItem ItemLeft { get; }
-        ContactItem ItemRight { get; }
+        object ItemLeft { get; }
+        object ItemRight { get; }
         ItemEquality Equality { get; }
     }
 }

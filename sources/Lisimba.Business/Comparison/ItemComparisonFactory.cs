@@ -20,11 +20,11 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class ItemComparison
+    public class ItemComparisonFactory
     {
         private static readonly Dictionary<Type, Type> comparisonTypes;
 
-        static ItemComparison()
+        static ItemComparisonFactory()
         {
             comparisonTypes = new Dictionary<Type, Type>
             {
@@ -46,15 +46,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             Type typeRight = itemRight == null ? null : itemRight.GetType();
 
             if (typeLeft != null && itemRight != null && typeLeft != typeRight)
-                throw new ArgumentException("Both items should be of the same type.", "itemRight");
+                return new ObjectComparison(itemLeft, itemRight);
 
             Type itemsType = typeLeft ?? typeRight;
 
             if (!comparisonTypes.ContainsKey(itemsType))
-            {
-                string message = string.Format("Cannot create comparison for type {0}.", itemsType.FullName);
-                throw new LisimbaException(message);
-            }
+                return new ObjectComparison(itemLeft, itemRight);
 
             Type typeComparison = comparisonTypes[itemsType];
 
