@@ -194,17 +194,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             OnChanged();
         }
 
-        public void Merge(Contact source)
-        {
-            // merge only the items
-
-            foreach (ContactItem contactItem in source.Items)
-            {
-                // if contact item exists (identical) - ignore
-                // if contact item exists (modified)
-            }
-        }
-
         /// <summary>
         /// Returns a string that represent the current Contact.
         /// </summary>

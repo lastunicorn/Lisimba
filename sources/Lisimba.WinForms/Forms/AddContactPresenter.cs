@@ -76,7 +76,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
 
         private bool ValidateContact()
         {
-            bool isNameEmpty = EditedContact.Name.IsEmpty();
+            bool isNameEmpty = EditedContact.Name.IsEmpty;
 
             if (isNameEmpty)
                 throw new LisimbaException("Please enter a name.");

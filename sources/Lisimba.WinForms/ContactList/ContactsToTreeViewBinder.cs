@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
     {
         private readonly TreeView treeView1;
 
-        private ContactCollection contacts;
+        private CustomObservableCollection<Contact> contacts;
         public readonly Dictionary<Contact, bool> modifiedContacts = new Dictionary<Contact, bool>();
         public readonly Dictionary<Contact, TreeNode> treeNodesByContact = new Dictionary<Contact, TreeNode>();
 
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
             this.treeView1 = treeView1;
         }
 
-        public ContactCollection Contacts
+        public CustomObservableCollection<Contact> Contacts
         {
             set
             {

@@ -186,7 +186,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
                 openedAddressBooks.Current != null &&
                 openedAddressBooks.Current.AddressBook.Contacts != null;
 
-            ContactCollection contacts = currentDataContainsContacts
+            CustomObservableCollection<Contact> contacts = currentDataContainsContacts
                 ? openedAddressBooks.Current.AddressBook.Contacts
                 : null;
 

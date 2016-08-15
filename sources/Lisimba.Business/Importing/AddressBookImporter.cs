@@ -25,69 +25,56 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class AddressBookImporter
     {
-        private readonly AddressBook addressBookBase;
+        private readonly AddressBook addressBookDestination;
         private readonly AddressBook addressBookSource;
-        private readonly Collection<ImportRule> importRules;
+        private readonly Collection<ContactImport> importRules;
+        private bool isAnalysed;
 
-        public AddressBookImporter(AddressBook addressBookBase, AddressBook addressBookSource)
+        public AddressBookImporter(AddressBook addressBookDestination, AddressBook addressBookSource)
         {
-            if (addressBookBase == null) throw new ArgumentNullException("addressBookBase");
+            if (addressBookDestination == null) throw new ArgumentNullException("addressBookDestination");
             if (addressBookSource == null) throw new ArgumentNullException("addressBookSource");
 
-            this.addressBookBase = addressBookBase;
+            this.addressBookDestination = addressBookDestination;
             this.addressBookSource = addressBookSource;
 
-            importRules = new Collection<ImportRule>();
+            importRules = new Collection<ContactImport>();
 
-            PrepareToImportFrom();
+            addressBookDestination.Changed += HandleAddressBookBaseChanged;
+            addressBookSource.Changed += HandleAddressBookSourceChanged;
         }
 
-        private void PrepareToImportFrom()
+        private void HandleAddressBookBaseChanged(object sender, EventArgs eventArgs)
+        {
+            isAnalysed = false;
+        }
+
+        private void HandleAddressBookSourceChanged(object sender, EventArgs eventArgs)
+        {
+            isAnalysed = false;
+        }
+
+        public void Analyse()
         {
             importRules.Clear();
 
-            AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookBase, addressBookSource);
+            AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookDestination, addressBookSource);
             addressBookComparison.Compare();
 
-            IEnumerable<ImportRule> rules = addressBookComparison.Results
-                .Where(x => x.Equality == ItemEquality.RightExists || x.Equality == ItemEquality.Different || x.Equality == ItemEquality.Similar)
-                .Select(x =>
-                {
-                    switch (x.Equality)
-                    {
-                        case ItemEquality.RightExists:
-                        case ItemEquality.Different:
-                            return new ImportRule
-                            {
-                                Source = x.ContactRight,
-                                Destination = null,
-                                ImportType = ImportType.AddAsNew
-                            };
+            IEnumerable<ContactImport> rules = addressBookComparison.Results
+                .Select(ContactImport.Create)
+                .Where(x => x.ImportType != ImportType.Ignore);
 
-                        case ItemEquality.Similar:
-                            return new ImportRule
-                            {
-                                Source = x.ContactRight,
-                                Destination = x.ContactLeft,
-                                ImportType = ImportType.Merge
-                            };
-
-                        default:
-                            string message = string.Format("Cannot import contact {0}", x.ContactRight);
-                            throw new LisimbaException(message);
-                    }
-                });
-
-            foreach (ImportRule importRule in rules)
+            foreach (ContactImport importRule in rules)
                 importRules.Add(importRule);
         }
 
         public void PerformImport()
         {
-            if (importRules == null)
-                throw new LisimbaException("Prepare the import first.");
+            if (!isAnalysed)
+                throw new LisimbaException("The import strategy must be created first. Call the Analyse method.");
 
-            foreach (ImportRule importRule in importRules)
+            foreach (ContactImport importRule in importRules)
             {
                 switch (importRule.ImportType)
                 {
@@ -95,21 +82,20 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     case ImportType.AddAsNew:
-                        addressBookBase.Contacts.Add(importRule.Source);
+                        addressBookDestination.Contacts.Add(importRule.Source);
                         break;
 
                     case ImportType.Merge:
-                        importRule.Destination.Merge(importRule.Source);
-                        // todo: The merging algorithm will be implemented at a later time.
+                        importRule.Merge();
                         break;
 
                     case ImportType.Replace:
-                        addressBookBase.Contacts.Remove(importRule.Destination);
-                        addressBookBase.Contacts.Add(importRule.Source);
+                        addressBookDestination.Contacts.Remove(importRule.Destination);
+                        addressBookDestination.Contacts.Add(importRule.Source);
                         break;
-
+                    
                     default:
-                        throw new ArgumentOutOfRangeException();
+                        throw new LisimbaException("Invalid Import type.");
                 }
             }
         }

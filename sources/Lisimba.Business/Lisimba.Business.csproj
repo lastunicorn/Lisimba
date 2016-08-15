@@ -57,7 +57,6 @@
     <Compile Include="AddressBookManagement\NewLocationNeededEventArgs.cs" />
     <Compile Include="AddressBookModel\AddressBook.cs" />
     <Compile Include="AddressBookModel\Contact.cs" />
-    <Compile Include="AddressBookModel\ContactCollection.cs" />
     <Compile Include="AddressBookModel\ContactContentChangedEventArgs.cs" />
     <Compile Include="AddressBookModel\ContactItem.cs" />
     <Compile Include="AddressBookModel\ContactItemCollection.cs" />
@@ -75,17 +74,14 @@
     <Compile Include="AddressBookModel\ZodiacSign.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
+    <Compile Include="Comparison\PersonNameComparison.cs" />
     <Compile Include="Comparison\BirthdayComparison.cs" />
     <Compile Include="Comparison\CategoryComparison.cs" />
     <Compile Include="Comparison\ContactComparison.cs" />
-    <Compile Include="Comparison\FirstNameComparison.cs" />
     <Compile Include="Comparison\IItemComparison.cs" />
     <Compile Include="Comparison\ItemComparison.cs" />
     <Compile Include="Comparison\ItemComparisonBase.cs" />
     <Compile Include="Comparison\ItemEquality.cs" />
-    <Compile Include="Comparison\LastNameComparison.cs" />
-    <Compile Include="Comparison\MiddleNameComparison.cs" />
-    <Compile Include="Comparison\NicknameComparison.cs" />
     <Compile Include="Comparison\NotesComparison.cs" />
     <Compile Include="Comparison\PictureComparison.cs" />
     <Compile Include="GateModel\EmptyGate.cs" />
@@ -97,8 +93,7 @@
     <Compile Include="GateModel\IncorrectEggVersionException.cs" />
     <Compile Include="Comparison\AddressBookComparison.cs" />
     <Compile Include="Importing\AddressBookImporter.cs" />
-    <Compile Include="Importing\ImportRule.cs" />
-    <Compile Include="Importing\ImportRuleCollection.cs" />
+    <Compile Include="Importing\ContactImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />

@@ -175,9 +175,9 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             Day = day;
         }
 
-        public bool IsNull()
+        public bool IsEmpty
         {
-            return Year == 0 && Month == 0 && Day == 0;
+            get { return Year == 0 && Month == 0 && Day == 0 && description == null; }
         }
 
         #region Compare - static

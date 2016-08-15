@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         /// <summary>
         /// Gets a collection of Contact.
         /// </summary>
-        public ContactCollection Contacts { get; private set; }
+        public CustomObservableCollection<Contact> Contacts { get; private set; }
 
         public event EventHandler Changed;
         public event EventHandler<ContactContentChangedEventArgs> ContactContentChanged;
@@ -81,7 +81,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         {
             Name = "New Address Book";
 
-            Contacts = new ContactCollection();
+            Contacts = new CustomObservableCollection<Contact>();
             Contacts.CollectionChanged += HandleContactsCollectionChanged;
             Contacts.ItemChanged += HandleContactChanged;
 

@@ -127,7 +127,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             originalContactsCollection = null;
         }
 
-        private void SetContacts(ContactCollection contactCollection)
+        private void SetContacts(CustomObservableCollection<Contact> contactCollection)
         {
             Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(contactCollection);
             Contacts.CustomSort = GetContactComparer();

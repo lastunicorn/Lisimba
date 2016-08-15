@@ -155,12 +155,16 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return new PersonName(firstName, middleName, lastName, nickname);
         }
 
-        public bool IsEmpty()
+        public bool IsEmpty
         {
-            return string.IsNullOrEmpty(firstName) &&
-                   string.IsNullOrEmpty(middleName) &&
-                   string.IsNullOrEmpty(lastName) &&
-                   string.IsNullOrEmpty(nickname);
+            get
+            {
+                return string.IsNullOrEmpty(firstName) &&
+                       string.IsNullOrEmpty(middleName) &&
+                       string.IsNullOrEmpty(lastName) &&
+                       string.IsNullOrEmpty(nickname) &&
+                       description == null;
+            }
         }
 
         public bool ContainsText(string text, StringComparison stringComparison = StringComparison.CurrentCultureIgnoreCase)
@@ -183,7 +187,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return string.Equals(firstName, other.firstName) &&
                    string.Equals(middleName, other.middleName) &&
                    string.Equals(lastName, other.lastName) &&
-                   string.Equals(nickname, other.nickname);
+                   string.Equals(nickname, other.nickname) &&
+                   string.Equals(description, other.description);
         }
 
         public override bool Equals(object obj)

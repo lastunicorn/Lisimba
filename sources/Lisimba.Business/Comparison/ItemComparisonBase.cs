@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 if (ContactRightHasValue())
                     if (HaveSameValue())
                         Equality = ItemEquality.Equal;
-                    else if(HaveSimilarValue())
+                    else if (HaveSimilarValue())
                         Equality = ItemEquality.Similar;
                     else
                         Equality = ItemEquality.Different;
@@ -57,5 +57,46 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         protected abstract bool ContactRightHasValue();
         protected abstract bool HaveSameValue();
         protected abstract bool HaveSimilarValue();
+    }
+
+    public abstract class ItemComparisonBase<T> : IItemComparison
+        where T : ContactItem
+    {
+        protected T ItemLeft { get; set; }
+        protected T ItemRight { get; set; }
+
+        public ItemEquality Equality { get; private set; }
+
+        protected ItemComparisonBase(T itemLeft, T itemRight)
+        {
+            if (itemLeft == null) throw new ArgumentNullException("itemLeft");
+            if (itemRight == null) throw new ArgumentNullException("itemRight");
+
+            ItemLeft = itemLeft;
+            ItemRight = itemRight;
+
+            Compare();
+        }
+
+        private void Compare()
+        {
+            if (LeftHasValue())
+                if (RightHasValue())
+                    if (ValuesAreEqual())
+                        Equality = ItemEquality.Equal;
+                    else if (ValuesAreSimilar())
+                        Equality = ItemEquality.Similar;
+                    else
+                        Equality = ItemEquality.Different;
+                else
+                    Equality = ItemEquality.LeftExists;
+            else
+                Equality = RightHasValue() ? ItemEquality.RightExists : ItemEquality.BothEmpty;
+        }
+
+        protected abstract bool LeftHasValue();
+        protected abstract bool RightHasValue();
+        protected abstract bool ValuesAreEqual();
+        protected abstract bool ValuesAreSimilar();
     }
 }

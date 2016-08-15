@@ -49,14 +49,11 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
+    <Compile Include="Business\Comparison\ContactComparisonTests\PersonNameComparisonTests.cs" />
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Business\Comparison\AddressBookComparisonTests\ConstructorTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\BirthdayComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\NicknameComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\LastNameComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\MiddleNameComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\FirstNameComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\ItemComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\PictureComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\ConstructorTests.cs" />

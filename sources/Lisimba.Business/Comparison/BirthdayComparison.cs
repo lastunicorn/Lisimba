@@ -18,33 +18,33 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class BirthdayComparison : ItemComparisonBase
+    public class BirthdayComparison : ItemComparisonBase<Date>
     {
-        public BirthdayComparison(Contact contactLeft, Contact contactRight)
+        public BirthdayComparison(Date contactLeft, Date contactRight)
             : base(contactLeft, contactRight)
         {
         }
 
-        protected override bool ContactLeftHasValue()
+        protected override bool LeftHasValue()
         {
-            return ContactLeft.Birthday != null;
+            return ItemLeft != null && !ItemLeft.IsEmpty;
         }
 
-        protected override bool ContactRightHasValue()
+        protected override bool RightHasValue()
         {
-            return ContactRight.Birthday != null;
+            return ItemRight != null && !ItemRight.IsEmpty;
         }
 
-        protected override bool HaveSameValue()
+        protected override bool ValuesAreEqual()
         {
-            return Date.Equals(ContactLeft.Birthday, ContactRight.Birthday);
+            return Date.Equals(ItemLeft, ItemRight);
         }
 
-        protected override bool HaveSimilarValue()
+        protected override bool ValuesAreSimilar()
         {
-            return (ContactLeft.Birthday.Year == 0 || ContactRight.Birthday.Year == 0 || ContactLeft.Birthday.Year == ContactRight.Birthday.Year) &&
-                (ContactLeft.Birthday.Month == 0 || ContactRight.Birthday.Month == 0 || ContactLeft.Birthday.Month == ContactRight.Birthday.Month) &&
-                (ContactLeft.Birthday.Day == 0 || ContactRight.Birthday.Day == 0 || ContactLeft.Birthday.Day == ContactRight.Birthday.Day);
+            return (ItemLeft.Year == 0 || ItemRight.Year == 0 || ItemLeft.Year == ItemRight.Year) &&
+                (ItemLeft.Month == 0 || ItemRight.Month == 0 || ItemLeft.Month == ItemRight.Month) &&
+                (ItemLeft.Day == 0 || ItemRight.Day == 0 || ItemLeft.Day == ItemRight.Day);
         }
     }
 }

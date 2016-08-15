@@ -232,7 +232,7 @@ namespace DustInTheWind.Lisimba.Gating
             }
 
             // Birthday
-            if (!contact.Birthday.IsNull())
+            if (!contact.Birthday.IsEmpty)
             {
                 date = contact.Birthday;
                 string dateAsString = (date.Month > 0 ? date.Month.ToString() : string.Empty) + "/" +
