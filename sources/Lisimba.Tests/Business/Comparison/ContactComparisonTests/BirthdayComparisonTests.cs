@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contact1, contact2);
 
-            AssertContainsType(contactComparison.Results, typeof(BirthdayComparison));
+            AssertContainsType(contactComparison.Results, typeof(DateComparison));
         }
 
         [Test]
@@ -106,8 +106,8 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
         private static void AssertEquality(IEnumerable<IItemComparison> comparisons, ItemEquality expectedEquality)
         {
-            BirthdayComparison birthdayComparison = comparisons.OfType<BirthdayComparison>().First();
-            Assert.That(birthdayComparison.Equality, Is.EqualTo(expectedEquality));
+            DateComparison dateComparison = comparisons.OfType<DateComparison>().First();
+            Assert.That(dateComparison.Equality, Is.EqualTo(expectedEquality));
         }
 
         private static void AssertContainsType(IEnumerable<IItemComparison> differences, Type type)

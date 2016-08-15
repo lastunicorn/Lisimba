@@ -115,6 +115,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return string.Equals(id, socialProfile.id) && string.Equals(description, socialProfile.description);
         }
 
+        public static bool Equals(SocialProfile socialProfile1, SocialProfile socialProfile2)
+        {
+            if (socialProfile1 == null)
+                return socialProfile2 == null;
+
+            return socialProfile1.Equals(socialProfile2);
+        }
+
         public override int GetHashCode()
         {
             unchecked

@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
     {
         private PersonNameComparison personNameComparison;
         private NotesComparison notesComparison;
-        private BirthdayComparison birthdayComparison;
+        private DateComparison birthdayComparison;
         private CategoryComparison categoryComparison;
         private PictureComparison pictureComparison;
 
@@ -88,21 +88,21 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             notesComparison = new NotesComparison(ContactLeft, ContactRight);
             Results.Add(notesComparison);
 
-            birthdayComparison = new BirthdayComparison(ContactLeft.Birthday, ContactRight.Birthday);
+            birthdayComparison = new DateComparison(ContactLeft.Birthday, ContactRight.Birthday);
             Results.Add(birthdayComparison);
 
             categoryComparison = new CategoryComparison(ContactLeft, ContactRight);
             Results.Add(categoryComparison);
 
-            pictureComparison = new PictureComparison(ContactLeft, ContactRight);
+            pictureComparison = new PictureComparison(ContactLeft.Picture, ContactRight.Picture);
             Results.Add(pictureComparison);
 
             List<ContactItem> contactRightItems = ContactRight.Items.ToList();
 
             foreach (ContactItem itemLeft in ContactLeft.Items)
             {
-                ItemComparison comparison = contactRightItems
-                    .Select(x => new ItemComparison(itemLeft, x))
+                IItemComparison comparison = contactRightItems
+                    .Select(x => ItemComparison.Create(itemLeft, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
 
                 if (comparison != null)
@@ -112,12 +112,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 }
                 else
                 {
-                    Results.Add(new ItemComparison(itemLeft, null));
+                    Results.Add(ItemComparison.Create(itemLeft, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Results.Add(new ItemComparison(null, itemRight));
+                Results.Add(ItemComparison.Create(null, itemRight));
         }
     }
 }

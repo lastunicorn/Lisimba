@@ -18,42 +18,33 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class NotesComparison : ItemComparisonBase
+    public class DateComparison : ItemComparisonBase<Date>
     {
-        public NotesComparison(Contact contactLeft, Contact contactRight)
+        public DateComparison(Date contactLeft, Date contactRight)
             : base(contactLeft, contactRight)
         {
         }
 
-        public override ContactItem ItemLeft
+        protected override bool LeftHasValue()
         {
-            get { throw new System.NotImplementedException(); }
+            return ItemLeft != null && !ItemLeft.IsEmpty;
         }
 
-        public override ContactItem ItemRight
+        protected override bool RightHasValue()
         {
-            get { throw new System.NotImplementedException(); }
+            return ItemRight != null && !ItemRight.IsEmpty;
         }
 
-        protected override bool ContactLeftHasValue()
+        protected override bool ValuesAreEqual()
         {
-            return !string.IsNullOrEmpty(ContactLeft.Notes);
+            return Date.Equals(ItemLeft, ItemRight);
         }
 
-        protected override bool ContactRightHasValue()
+        protected override bool ValuesAreSimilar()
         {
-            return !string.IsNullOrEmpty(ContactRight.Notes);
-        }
-
-        protected override bool HaveSameValue()
-        {
-            return ContactLeft.Notes == ContactRight.Notes;
-        }
-
-        protected override bool HaveSimilarValue()
-        {
-            return ContactLeft.Notes.Contains(ContactRight.Notes) ||
-                ContactRight.Notes.Contains(ContactLeft.Notes);
+            return (ItemLeft.Year == 0 || ItemRight.Year == 0 || ItemLeft.Year == ItemRight.Year) &&
+                (ItemLeft.Month == 0 || ItemRight.Month == 0 || ItemLeft.Month == ItemRight.Month) &&
+                (ItemLeft.Day == 0 || ItemRight.Day == 0 || ItemLeft.Day == ItemRight.Day);
         }
     }
 }

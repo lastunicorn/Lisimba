@@ -110,6 +110,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return string.Equals(address, email.address) && string.Equals(description, email.description);
         }
 
+        public static bool Equals(Email email1, Email email2)
+        {
+            if (email1 == null)
+                return email2 == null;
+
+            return email1.Equals(email2);
+        }
+
         public override int GetHashCode()
         {
             unchecked

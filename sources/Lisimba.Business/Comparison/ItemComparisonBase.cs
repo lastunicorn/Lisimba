@@ -24,6 +24,9 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         protected Contact ContactLeft { get; set; }
         protected Contact ContactRight { get; set; }
 
+        public abstract ContactItem ItemLeft { get; }
+        public abstract ContactItem ItemRight { get; }
+
         public ItemEquality Equality { get; private set; }
 
         protected ItemComparisonBase(Contact contactLeft, Contact contactRight)
@@ -62,16 +65,23 @@ namespace DustInTheWind.Lisimba.Business.Comparison
     public abstract class ItemComparisonBase<T> : IItemComparison
         where T : ContactItem
     {
-        protected T ItemLeft { get; set; }
-        protected T ItemRight { get; set; }
+        public T ItemLeft { get; set; }
+        public T ItemRight { get; set; }
+
+        ContactItem IItemComparison.ItemLeft
+        {
+            get { return ItemLeft; }
+        }
+
+        ContactItem IItemComparison.ItemRight
+        {
+            get { return ItemRight; }
+        }
 
         public ItemEquality Equality { get; private set; }
 
         protected ItemComparisonBase(T itemLeft, T itemRight)
         {
-            if (itemLeft == null) throw new ArgumentNullException("itemLeft");
-            if (itemRight == null) throw new ArgumentNullException("itemRight");
-
             ItemLeft = itemLeft;
             ItemRight = itemRight;
 

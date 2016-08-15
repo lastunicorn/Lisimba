@@ -97,6 +97,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
                    string.Equals(description, phone.description);
         }
 
+        public static bool Equals(Phone phone1, Phone phone2)
+        {
+            if (phone1 == null)
+                return phone2 == null;
+
+            return phone1.Equals(phone2);
+        }
+
         public override int GetHashCode()
         {
             unchecked

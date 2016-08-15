@@ -74,8 +74,9 @@
     <Compile Include="AddressBookModel\ZodiacSign.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
+    <Compile Include="Comparison\EmailComparison.cs" />
     <Compile Include="Comparison\PersonNameComparison.cs" />
-    <Compile Include="Comparison\BirthdayComparison.cs" />
+    <Compile Include="Comparison\DateComparison.cs" />
     <Compile Include="Comparison\CategoryComparison.cs" />
     <Compile Include="Comparison\ContactComparison.cs" />
     <Compile Include="Comparison\IItemComparison.cs" />
@@ -83,7 +84,11 @@
     <Compile Include="Comparison\ItemComparisonBase.cs" />
     <Compile Include="Comparison\ItemEquality.cs" />
     <Compile Include="Comparison\NotesComparison.cs" />
+    <Compile Include="Comparison\PhoneComparison.cs" />
     <Compile Include="Comparison\PictureComparison.cs" />
+    <Compile Include="Comparison\PostalAddressComparison.cs" />
+    <Compile Include="Comparison\SocialProfileIdComparison.cs" />
+    <Compile Include="Comparison\WebSiteComparison.cs" />
     <Compile Include="GateModel\EmptyGate.cs" />
     <Compile Include="GateModel\FileGate.cs" />
     <Compile Include="GateModel\FileType.cs" />

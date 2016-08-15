@@ -203,6 +203,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return Equals((PostalAddress)obj);
         }
 
+        public static bool Equals(PostalAddress postalAddress1, PostalAddress postalAddress2)
+        {
+            if (postalAddress1 == null)
+                return postalAddress2 == null;
+
+            return postalAddress1.Equals(postalAddress2);
+        }
+
         public override int GetHashCode()
         {
             unchecked

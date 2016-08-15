@@ -15,38 +15,50 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class ItemComparison : IItemComparison
+    public class ItemComparison
     {
-        public ContactItem ItemLeft { get; private set; }
-        public ContactItem ItemRight { get; private set; }
+        private static readonly Dictionary<Type, Type> comparisonTypes;
 
-        public ItemEquality Equality { get; private set; }
+        static ItemComparison()
+        {
+            comparisonTypes = new Dictionary<Type, Type>
+            {
+                { typeof(Phone), typeof(PhoneComparison) },
+                { typeof(Email), typeof(EmailComparison) },
+                { typeof(Date), typeof(DateComparison) },
+                { typeof(PostalAddress), typeof(PostalAddressComparison) },
+                { typeof(WebSite), typeof(WebSiteComparison) },
+                { typeof(SocialProfile), typeof(SocialProfileIdComparison) }
+            };
+        }
 
-        public ItemComparison(ContactItem itemLeft, ContactItem itemRight)
+        public static IItemComparison Create(ContactItem itemLeft, ContactItem itemRight)
         {
             if (itemLeft == null && itemRight == null)
                 throw new ArgumentNullException("itemRight");
 
-            ItemLeft = itemLeft;
-            ItemRight = itemRight;
+            Type typeLeft = itemLeft == null ? null : itemLeft.GetType();
+            Type typeRight = itemRight == null ? null : itemRight.GetType();
 
-            Compare();
-        }
+            if (typeLeft != null && itemRight != null && typeLeft != typeRight)
+                throw new ArgumentException("Both items should be of the same type.", "itemRight");
 
-        private void Compare()
-        {
-            if (ItemLeft == null)
-                Equality = ItemEquality.RightExists;
-            else if (ItemRight == null)
-                Equality = ItemEquality.LeftExists;
-            else if (ItemLeft.Equals(ItemRight))
-                Equality = ItemEquality.Equal;
-            else
-                Equality = ItemEquality.Different;
+            Type itemsType = typeLeft ?? typeRight;
+
+            if (!comparisonTypes.ContainsKey(itemsType))
+            {
+                string message = string.Format("Cannot create comparison for type {0}.", itemsType.FullName);
+                throw new LisimbaException(message);
+            }
+
+            Type typeComparison = comparisonTypes[itemsType];
+
+            return Activator.CreateInstance(typeComparison, itemLeft, itemRight) as IItemComparison;
         }
     }
 }

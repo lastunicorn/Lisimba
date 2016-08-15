@@ -18,33 +18,31 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class BirthdayComparison : ItemComparisonBase<Date>
+    public class SocialProfileIdComparison : ItemComparisonBase<SocialProfile>
     {
-        public BirthdayComparison(Date contactLeft, Date contactRight)
-            : base(contactLeft, contactRight)
+        public SocialProfileIdComparison(SocialProfile socialProfileIdLeft, SocialProfile socialProfileIdRight)
+            : base(socialProfileIdLeft, socialProfileIdRight)
         {
         }
 
         protected override bool LeftHasValue()
         {
-            return ItemLeft != null && !ItemLeft.IsEmpty;
+            return ItemLeft != null;
         }
 
         protected override bool RightHasValue()
         {
-            return ItemRight != null && !ItemRight.IsEmpty;
+            return ItemRight != null;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return Date.Equals(ItemLeft, ItemRight);
+            return SocialProfile.Equals(ItemLeft, ItemRight);
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return (ItemLeft.Year == 0 || ItemRight.Year == 0 || ItemLeft.Year == ItemRight.Year) &&
-                (ItemLeft.Month == 0 || ItemRight.Month == 0 || ItemLeft.Month == ItemRight.Month) &&
-                (ItemLeft.Day == 0 || ItemRight.Day == 0 || ItemLeft.Day == ItemRight.Day);
+            return ItemLeft.Id == ItemRight.Id;
         }
     }
 }

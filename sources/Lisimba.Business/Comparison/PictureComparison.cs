@@ -21,31 +21,31 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class PictureComparison : ItemComparisonBase
+    public class PictureComparison : ItemComparisonBase<Picture>
     {
-        public PictureComparison(Contact contactLeft, Contact contactRight)
-            : base(contactLeft, contactRight)
+        public PictureComparison(Picture pictureLeft, Picture pictureRight)
+            : base(pictureLeft, pictureRight)
         {
         }
 
-        protected override bool ContactLeftHasValue()
+        protected override bool LeftHasValue()
         {
-            return ContactLeft.Picture != null;
+            return ItemLeft != null;
         }
 
-        protected override bool ContactRightHasValue()
+        protected override bool RightHasValue()
         {
-            return ContactRight.Picture != null;
+            return ItemRight != null;
         }
 
-        protected override bool HaveSameValue()
+        protected override bool ValuesAreEqual()
         {
-            return Picture.Equals(ContactLeft.Picture, ContactRight.Picture);
+            return Picture.Equals(ItemLeft, ItemRight);
         }
 
-        protected override bool HaveSimilarValue()
+        protected override bool ValuesAreSimilar()
         {
-            return AreEquals(ContactLeft.Picture.Image, ContactRight.Picture.Image);
+            return AreEquals(ItemLeft.Image, ItemRight.Image);
         }
 
         public static bool AreEquals(Image bmp1, Image bmp2)

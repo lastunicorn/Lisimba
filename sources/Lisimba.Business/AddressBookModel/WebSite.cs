@@ -128,6 +128,14 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             return string.Equals(address, webSite.address) && string.Equals(description, webSite.description);
         }
 
+        public static bool Equals(WebSite webSite1, WebSite webSite2)
+        {
+            if (webSite1 == null)
+                return webSite2 == null;
+
+            return webSite1.Equals(webSite2);
+        }
+
         public override int GetHashCode()
         {
             unchecked

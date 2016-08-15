@@ -18,10 +18,31 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public interface IItemComparison
+    public class PhoneComparison : ItemComparisonBase<Phone>
     {
-        ContactItem ItemLeft { get; }
-        ContactItem ItemRight { get; }
-        ItemEquality Equality { get; }
+        public PhoneComparison(Phone phoneLeft, Phone phoneRight)
+            : base(phoneLeft, phoneRight)
+        {
+        }
+
+        protected override bool LeftHasValue()
+        {
+            return ItemLeft != null;
+        }
+
+        protected override bool RightHasValue()
+        {
+            return ItemRight != null;
+        }
+
+        protected override bool ValuesAreEqual()
+        {
+            return Phone.Equals(ItemLeft, ItemRight);
+        }
+
+        protected override bool ValuesAreSimilar()
+        {
+            return ItemLeft.Number == ItemRight.Number;
+        }
     }
 }

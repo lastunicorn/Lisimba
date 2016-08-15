@@ -25,6 +25,16 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         {
         }
 
+        public override ContactItem ItemLeft
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
+        public override ContactItem ItemRight
+        {
+            get { throw new System.NotImplementedException(); }
+        }
+
         protected override bool ContactLeftHasValue()
         {
             return !string.IsNullOrEmpty(ContactLeft.Category);
