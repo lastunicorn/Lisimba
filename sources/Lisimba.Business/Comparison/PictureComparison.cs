@@ -40,12 +40,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         protected override bool HaveSameValue()
         {
-            return AreEquals(ContactLeft.Picture, ContactRight.Picture);
+            return Picture.Equals(ContactLeft.Picture, ContactRight.Picture);
         }
 
         protected override bool HaveSimilarValue()
         {
-            return AreEquals(ContactLeft.Picture, ContactRight.Picture);
+            return AreEquals(ContactLeft.Picture.Image, ContactRight.Picture.Image);
         }
 
         public static bool AreEquals(Image bmp1, Image bmp2)

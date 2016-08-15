@@ -87,7 +87,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         [Test]
         public void both_exists_and_have_same_value()
         {
-            Image picture = GetRandomPicture();
+            Picture picture = GetRandomPicture();
             Contact contactLeft = new Contact { Picture = picture };
             Contact contactRight = new Contact { Picture = picture };
 
@@ -99,8 +99,8 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         [Test]
         public void both_exists_and_have_equal_values()
         {
-            Image picture1 = GetRandomPicture();
-            Image picture2 = new Bitmap(picture1);
+            Picture picture1 = GetRandomPicture();
+            Picture picture2 = picture1.Clone() as Picture;
             Contact contactLeft = new Contact { Picture = picture1 };
             Contact contactRight = new Contact { Picture = picture2 };
 
@@ -109,23 +109,23 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             AssertEquality(contactComparison.Results, ItemEquality.Equal);
         }
 
-        private static Image GetRandomPicture()
+        private static Picture GetRandomPicture()
         {
             const int height = 16;
             const int width = 16;
 
-            Bitmap picture = new Bitmap(width, height);
+            Bitmap image = new Bitmap(width, height);
 
             for (int i = 0; i < height; i++)
             {
                 for (int j = 0; j < width; j++)
                 {
                     Color color = Color.FromArgb(Random.Next(256), Random.Next(256), Random.Next(256));
-                    picture.SetPixel(j, i, color);
+                    image.SetPixel(j, i, color);
                 }
             }
 
-            return picture;
+            return new Picture(image);
         }
 
         private static void AssertEquality(IEnumerable<IItemComparison> comparisons, ItemEquality expectedEquality)

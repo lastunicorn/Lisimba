@@ -134,7 +134,6 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         public ContactItemCollection Items { get; private set; }
 
         private string notes = string.Empty;
-        private Image picture;
 
         public string Notes
         {
@@ -146,12 +145,21 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             }
         }
 
-        public Image Picture
+        private Picture picture;
+
+        public Picture Picture
         {
             get { return picture; }
             set
             {
+                if (picture != null)
+                    picture.Changed -= HandlePictureChanged;
+
                 picture = value;
+
+                if (picture != null)
+                    picture.Changed += HandlePictureChanged;
+
                 OnChanged();
             }
         }
@@ -177,8 +185,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
 
             Items = new ContactItemCollection();
 
-            name.Changed += (sender, e) => OnChanged();
-            birthday.Changed += (sender, e) => OnChanged();
+            name.Changed += HandleNameChanged;
+            birthday.Changed += HandleBirthdayChanged;
 
             Items.CollectionChanged += (sender, e) => OnChanged();
             Items.ItemChanged += (sender, e) => OnChanged();
@@ -190,6 +198,11 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         }
 
         private void HandleBirthdayChanged(object sender, EventArgs e)
+        {
+            OnChanged();
+        }
+
+        private void HandlePictureChanged(object sender, EventArgs e)
         {
             OnChanged();
         }

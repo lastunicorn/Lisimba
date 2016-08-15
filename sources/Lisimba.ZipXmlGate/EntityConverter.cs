@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     LastName = contact.Name.LastName,
                     Nickname = contact.Name.Nickname
                 },
-                Picture = ToByteArray(contact.Picture),
+                Picture = ToByteArray(contact.Picture.Image),
                 Birthday = new DateEntity
                 {
                     Day = contact.Birthday.Day,
@@ -165,7 +165,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             contact.Name.LastName = contactEntity.Name.LastName;
             contact.Name.Nickname = contactEntity.Name.Nickname;
 
-            contact.Picture = ToImage(contactEntity.Picture);
+            contact.Picture = new Picture(ToImage(contactEntity.Picture));
 
             contact.Birthday.Day = contactEntity.Birthday.Day;
             contact.Birthday.Month = contactEntity.Birthday.Month;

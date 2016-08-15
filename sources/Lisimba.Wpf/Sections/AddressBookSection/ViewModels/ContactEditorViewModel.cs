@@ -228,7 +228,12 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     Contact currentContact = openedAddressBooks.CurrentContact;
 
                     Name = currentContact.Name.ToString();
-                    Picture = currentContact.Picture.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
+
+                    if (currentContact.Picture != null && currentContact.Picture.Image != null)
+                        Picture = currentContact.Picture.Image.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
+                    else
+                        Picture = Resources.no_user_128.ToBitmapSource();
+
                     Birthday = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
 
@@ -237,7 +242,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                         { typeof(Phone), typeof(PhoneViewModel) },
                         { typeof(Date), typeof(DateViewModel) }
                     };
-                    
+
                     ContactItems = currentContact.Items
                         .Select(x =>
                         {

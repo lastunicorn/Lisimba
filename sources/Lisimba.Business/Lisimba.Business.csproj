@@ -65,9 +65,9 @@
     <Compile Include="AddressBookModel\Email.cs" />
     <Compile Include="AddressBookModel\IObservableEntity.cs" />
     <Compile Include="AddressBookModel\ItemChangedEventArgs.cs" />
-    <Compile Include="AddressBookModel\NameSection.cs" />
     <Compile Include="AddressBookModel\PersonName.cs" />
     <Compile Include="AddressBookModel\Phone.cs" />
+    <Compile Include="AddressBookModel\Picture.cs" />
     <Compile Include="AddressBookModel\PostalAddress.cs" />
     <Compile Include="AddressBookModel\SocialProfile.cs" />
     <Compile Include="AddressBookModel\WebSite.cs" />

@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
-    public enum NameSection
+    public enum NamePart
     {
         FirstName,
         MiddleName,

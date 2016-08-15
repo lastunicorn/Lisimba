@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows
                 {
                     Image image = Image.FromFile(fileName);
                     image = ResizeImage(image, 128, 128);
-                    Contact.Picture = image;
+                    Contact.Picture = new Picture(image);
                 }
             }
             catch (Exception ex)

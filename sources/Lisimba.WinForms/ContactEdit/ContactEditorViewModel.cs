@@ -178,7 +178,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
 
         private void DisplayContactInView()
         {
-            Picture = contact.Picture ?? Resources.no_user_128;
+            Picture = contact.Picture.Image ?? Resources.no_user_128;
             Name = contact.Name;
             Birthday = contact.Birthday;
             ZodiacSign = contact.ZodiacSign;
