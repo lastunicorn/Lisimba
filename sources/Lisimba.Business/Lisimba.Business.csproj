@@ -100,7 +100,9 @@
     <Compile Include="Comparison\AddressBookComparison.cs" />
     <Compile Include="Importing\AddressBookImporter.cs" />
     <Compile Include="Importing\ContactImport.cs" />
+    <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
+    <Compile Include="Importing\ItemImport.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="IZodiacSignProvider.cs" />

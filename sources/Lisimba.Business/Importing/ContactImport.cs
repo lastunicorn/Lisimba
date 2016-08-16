@@ -73,21 +73,4 @@ namespace DustInTheWind.Lisimba.Business.Importing
         {
         }
     }
-
-    public interface IItemImport
-    {
-        void Import();
-    }
-
-    public class ItemImport : IItemImport
-    {
-        public ItemImport(IItemComparison a)
-        {
-            
-        }
-
-        public void Import()
-        {
-        }
-    }
 }

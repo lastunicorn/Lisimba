@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 
@@ -67,12 +68,16 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
             foreach (ContactImport importRule in rules)
                 importRules.Add(importRule);
+
+            isAnalysed = true;
         }
 
-        public void PerformImport()
+        public StringBuilder PerformImport(bool simulate = false)
         {
             if (!isAnalysed)
                 throw new LisimbaException("The import strategy must be created first. Call the Analyse method.");
+
+            StringBuilder sb = new StringBuilder();
 
             foreach (ContactImport importRule in importRules)
             {
@@ -82,22 +87,39 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     case ImportType.AddAsNew:
-                        addressBookDestination.Contacts.Add(importRule.Source);
+                        if (!simulate)
+                            addressBookDestination.Contacts.Add(importRule.Source);
+
+                        sb.AppendLine(string.Format("Added contact '{0}'.", importRule.Source));
+
                         break;
 
                     case ImportType.Merge:
-                        importRule.Merge();
+                        sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.Destination, importRule.Source));
+
+                        if (!simulate)
+                            importRule.Merge();
+
                         break;
 
                     case ImportType.Replace:
-                        addressBookDestination.Contacts.Remove(importRule.Destination);
-                        addressBookDestination.Contacts.Add(importRule.Source);
+                        if (!simulate)
+                        {
+                            addressBookDestination.Contacts.Remove(importRule.Destination);
+                            addressBookDestination.Contacts.Add(importRule.Source);
+                        }
+
+                        sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.Destination, importRule.Source));
+
                         break;
-                    
+
                     default:
-                        throw new LisimbaException("Invalid Import type.");
+                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.Destination, importRule.Source, importRule.ImportType));
+                        break;
                 }
             }
+
+            return sb;
         }
     }
 }

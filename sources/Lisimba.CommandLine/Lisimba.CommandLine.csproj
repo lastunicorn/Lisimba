@@ -47,6 +47,7 @@
     <Compile Include="Business\PrompterTextProvider.cs" />
     <Compile Include="Business\ViewTemplates.cs" />
     <Compile Include="Flows\CompareFlow.cs" />
+    <Compile Include="Flows\ImportFlow.cs" />
     <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Observers\AddressBookSaveObserver.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
