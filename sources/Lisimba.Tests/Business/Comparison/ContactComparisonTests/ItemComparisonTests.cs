@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
@@ -27,17 +26,6 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
     public class ItemComparisonTests
     {
         [Test]
-        public void if_no_item_exists_no_ItemComparison_is_created()
-        {
-            Contact contactLeft = new Contact();
-            Contact contactRight = new Contact();
-
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
-
-            AssertDoesNotContainType(contactComparison.Results, typeof(ItemComparisonFactory));
-        }
-
-        [Test]
         public void left_contains_one_Email_right_is_empty()
         {
             Contact contactLeft = new Contact();
@@ -47,7 +35,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            List<EmailComparison> itemComparisons = contactComparison.Results.OfType<EmailComparison>().ToList();
+            List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.That(itemComparisons[0].ItemLeft, Is.SameAs(emailLeft));
             Assert.That(itemComparisons[0].ItemRight, Is.Null);
@@ -64,7 +52,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            List<EmailComparison> itemComparisons = contactComparison.Results.OfType<EmailComparison>().ToList();
+            List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.That(itemComparisons[0].ItemLeft, Is.Null);
             Assert.That(itemComparisons[0].ItemRight, Is.SameAs(emailRight));
@@ -83,7 +71,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            List<EmailComparison> itemComparisons = contactComparison.Results.OfType<EmailComparison>().ToList();
+            List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(2));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == emailLeft && x.ItemRight == null && x.Equality == ItemEquality.LeftExists));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == null && x.ItemRight == emailRight && x.Equality == ItemEquality.RightExists));
@@ -101,17 +89,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            List<EmailComparison> itemComparisons = contactComparison.Results.OfType<EmailComparison>().ToList();
+            List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
             Assert.True(itemComparisons.Any(x => x.ItemLeft == emailLeft && x.ItemRight == emailRight && x.Equality == ItemEquality.Equal));
-        }
-
-        private static void AssertDoesNotContainType(IEnumerable<IItemComparison> differences, Type type)
-        {
-            bool containsType = differences.Any(itemComparison => itemComparison.GetType() == type);
-
-            if (containsType)
-                Assert.Fail("The list does contain at least one comparison of type {0}.", type.FullName);
         }
     }
 }

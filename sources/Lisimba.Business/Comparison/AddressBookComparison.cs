@@ -26,26 +26,26 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private readonly AddressBook addressBookLeft;
         private readonly AddressBook addressBookRight;
 
-        public List<ContactComparison> Results { get; private set; }
+        public List<ContactComparison> Comparisons { get; private set; }
         
         public bool AreEqual
         {
-            get { return Results.All(x => x.Equality == ItemEquality.Equal); }
+            get { return Comparisons.All(x => x.Equality == ItemEquality.Equal); }
         }
 
         public IEnumerable<ContactComparison> IdenticalContacts
         {
-            get { return Results.Where(x => x.Equality == ItemEquality.Equal); }
+            get { return Comparisons.Where(x => x.Equality == ItemEquality.Equal); }
         }
 
         public IEnumerable<ContactComparison> UniqueLeftContacts
         {
-            get { return Results.Where(x => x.Equality == ItemEquality.LeftExists); }
+            get { return Comparisons.Where(x => x.Equality == ItemEquality.LeftExists); }
         }
 
         public IEnumerable<ContactComparison> UniqueRightContacts
         {
-            get { return Results.Where(x => x.Equality == ItemEquality.RightExists); }
+            get { return Comparisons.Where(x => x.Equality == ItemEquality.RightExists); }
         }
 
         public AddressBookComparison(AddressBook addressBookLeft, AddressBook addressBookRight)
@@ -56,12 +56,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             this.addressBookLeft = addressBookLeft;
             this.addressBookRight = addressBookRight;
 
-            Results = new List<ContactComparison>();
+            Comparisons = new List<ContactComparison>();
         }
 
         public void Compare()
         {
-            Results.Clear();
+            Comparisons.Clear();
 
             List<Contact> addressBookRightContacts = addressBookRight.Contacts.ToList();
 
@@ -75,21 +75,21 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
                 if (comparison != null)
                 {
-                    Results.Add(comparison);
+                    Comparisons.Add(comparison);
 
                     // If identical contact found in right address book, remove it.
                     addressBookRightContacts.Remove(comparison.ContactRight);
                 }
                 else
                 {
-                    Results.Add(new ContactComparison(contactLeft, null));
+                    Comparisons.Add(new ContactComparison(contactLeft, null));
                 }
             }
 
-            // Create items for the remaining contacts în the right address book.
+            // Create items for the remaining contacts in the right address book.
 
             foreach (Contact contactRight in addressBookRightContacts)
-                Results.Add(new ContactComparison(null, contactRight));
+                Comparisons.Add(new ContactComparison(null, contactRight));
         }
     }
 }

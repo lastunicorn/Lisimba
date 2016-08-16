@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
     /// <summary>
     /// Class containing information about a social profile id.
     /// </summary>
-    public class SocialProfile : ContactItem, IEquatable<SocialProfile>
+    public class SocialProfileId : ContactItem, IEquatable<SocialProfileId>
     {
         private string id;
 
@@ -39,28 +39,28 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         }
 
         /// <summary>
-        /// Creates a new empty <see cref="SocialProfile"/> object.
+        /// Creates a new empty <see cref="SocialProfileId"/> object.
         /// </summary>
-        public SocialProfile()
+        public SocialProfileId()
             : this(string.Empty, string.Empty)
         {
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfile"/> object with the id and description specified.
+        /// Creates a new <see cref="SocialProfileId"/> object with the id and description specified.
         /// </summary>
-        public SocialProfile(string id, string description)
+        public SocialProfileId(string id, string description)
         {
             this.id = id;
             this.description = description;
         }
 
         /// <summary>
-        /// Creates a new <see cref="SocialProfile"/> object with the data copied from the one passed as parameter.
+        /// Creates a new <see cref="SocialProfileId"/> object with the data copied from the one passed as parameter.
         /// </summary>
-        public SocialProfile(SocialProfile socialProfile)
+        public SocialProfileId(SocialProfileId socialProfileId)
         {
-            CopyFrom(socialProfile);
+            CopyFrom(socialProfileId);
         }
 
         /// <summary>
@@ -76,46 +76,46 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
         {
             if (contactItem == null) throw new ArgumentNullException("contactItem");
 
-            SocialProfile socialProfile = contactItem as SocialProfile;
+            SocialProfileId socialProfileId = contactItem as SocialProfileId;
 
-            if (socialProfile != null)
-                CopyFrom(socialProfile);
+            if (socialProfileId != null)
+                CopyFrom(socialProfileId);
         }
 
         /// <summary>
-        /// Copy the data from the <see cref="SocialProfile"/> object passed as parameter into the current object.
+        /// Copy the data from the <see cref="SocialProfileId"/> object passed as parameter into the current object.
         /// </summary>
-        public void CopyFrom(SocialProfile socialProfile)
+        public void CopyFrom(SocialProfileId socialProfileId)
         {
-            id = socialProfile.id;
-            description = socialProfile.description;
+            id = socialProfileId.id;
+            description = socialProfileId.description;
 
             OnChanged();
         }
 
         public override ContactItem Clone()
         {
-            return new SocialProfile(Id, description);
+            return new SocialProfileId(Id, description);
         }
 
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != typeof(SocialProfile)) return false;
+            if (obj.GetType() != typeof(SocialProfileId)) return false;
 
-            return Equals((SocialProfile)obj);
+            return Equals((SocialProfileId)obj);
         }
 
-        public bool Equals(SocialProfile socialProfile)
+        public bool Equals(SocialProfileId socialProfileId)
         {
-            if (ReferenceEquals(null, socialProfile)) return false;
-            if (ReferenceEquals(this, socialProfile)) return true;
+            if (ReferenceEquals(null, socialProfileId)) return false;
+            if (ReferenceEquals(this, socialProfileId)) return true;
 
-            return string.Equals(id, socialProfile.id) && string.Equals(description, socialProfile.description);
+            return string.Equals(id, socialProfileId.id) && string.Equals(description, socialProfileId.description);
         }
 
-        public static bool Equals(SocialProfile socialProfile1, SocialProfile socialProfile2)
+        public static bool Equals(SocialProfileId socialProfile1, SocialProfileId socialProfile2)
         {
             if (socialProfile1 == null)
                 return socialProfile2 == null;

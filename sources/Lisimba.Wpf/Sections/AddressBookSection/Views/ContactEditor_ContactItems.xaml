@@ -89,7 +89,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </StackPanel>
                 </DataTemplate>
 
-                <DataTemplate DataType="{x:Type addressBookModel:SocialProfile}">
+                <DataTemplate DataType="{x:Type addressBookModel:SocialProfileId}">
                     <StackPanel>
                         <views:SocialProfileViewer Margin="8"/>
                         <Separator/>

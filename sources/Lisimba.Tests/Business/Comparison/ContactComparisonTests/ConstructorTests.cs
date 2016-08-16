@@ -15,6 +15,8 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using NUnit.Framework;
@@ -29,6 +31,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             Assert.That(contactComparison.ContactRight, Is.SameAs(contactRight));
@@ -39,27 +42,116 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         {
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
+
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             Assert.That(contactComparison.ContactLeft, Is.SameAs(contactLeft));
         }
 
         [Test]
-        public void throws_if_contactLeft_is_null()
+        public void Equality_is_RightExists_if_contactLeft_is_null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                new CategoryComparison(null, new Contact());
-            });
+            ContactComparison contactComparison = new ContactComparison(null, new Contact());
+
+            Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
 
         [Test]
-        public void throws_if_contactRight_is_null()
+        public void Equality_is_LeftExists_if_contactRight_is_null()
         {
-            Assert.Throws<ArgumentNullException>(() =>
-            {
-                new CategoryComparison(new Contact(), null);
-            });
+            ContactComparison contactComparison = new ContactComparison(new Contact(), null);
+
+            Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
+        }
+
+        [Test]
+        public void Equality_is_BothEmpty_if_both_contactLeft_and_contactRight_are_null()
+        {
+            ContactComparison contactComparison = new ContactComparison(null, null);
+
+            Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
+        }
+
+        [Test]
+        public void after_Compare_the_Differences_contains_the_BirthdayComparison()
+        {
+            Contact contact1 = new Contact();
+            Contact contact2 = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contact1, contact2);
+
+            AssertContainsType(contactComparison.Comparisons, typeof(DateComparison));
+        }
+
+        [Test]
+        public void after_Compare_the_Differences_contains_the_CategoryComparison()
+        {
+            Contact contactLeft = new Contact();
+            Contact contactRight = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+
+            AssertContainsType(contactComparison.Comparisons, typeof(CategoryComparison));
+        }
+
+        [Test]
+        public void after_Compare_the_Differences_contains_the_NotesComparison()
+        {
+            Contact contactLeft = new Contact();
+            Contact contactRight = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+
+            AssertContainsType(contactComparison.Comparisons, typeof(NotesComparison));
+        }
+
+        [Test]
+        public void after_Compare_the_Differences_contains_the_PersonNameComparison()
+        {
+            Contact contactLeft = new Contact();
+            Contact contactRight = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+
+            AssertContainsType(contactComparison.Comparisons, typeof(PersonNameComparison));
+        }
+
+        [Test]
+        public void after_Compare_the_Differences_contains_the_PictureComparison()
+        {
+            Contact contactLeft = new Contact();
+            Contact contactRight = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+
+            AssertContainsType(contactComparison.Comparisons, typeof(PictureComparison));
+        }
+
+        [Test]
+        public void if_no_item_exists_no_ItemComparison_is_created()
+        {
+            Contact contactLeft = new Contact();
+            Contact contactRight = new Contact();
+
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+
+            AssertDoesNotContainType(contactComparison.Comparisons, typeof(ItemComparisonFactory));
+        }
+
+        private static void AssertContainsType(IEnumerable<IItemComparison> differences, Type type)
+        {
+            bool containsType = differences.Any(itemComparison => itemComparison.GetType() == type);
+
+            if (!containsType)
+                Assert.Fail("The list does not contain the comparison of type {0}.", type.FullName);
+        }
+
+        private static void AssertDoesNotContainType(IEnumerable<IItemComparison> differences, Type type)
+        {
+            bool containsType = differences.Any(itemComparison => itemComparison.GetType() == type);
+
+            if (containsType)
+                Assert.Fail("The list does contain at least one comparison of type {0}.", type.FullName);
         }
     }
 }

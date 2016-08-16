@@ -18,9 +18,9 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class SocialProfileIdComparison : ItemComparisonBase<SocialProfile>
+    public class SocialProfileIdComparison : ItemComparisonBase<SocialProfileId>
     {
-        public SocialProfileIdComparison(SocialProfile socialProfileIdLeft, SocialProfile socialProfileIdRight)
+        public SocialProfileIdComparison(SocialProfileId socialProfileIdLeft, SocialProfileId socialProfileIdRight)
             : base(socialProfileIdLeft, socialProfileIdRight)
         {
         }
@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         protected override bool ValuesAreEqual()
         {
-            return SocialProfile.Equals(ItemLeft, ItemRight);
+            return SocialProfileId.Equals(ItemLeft, ItemRight);
         }
 
         protected override bool ValuesAreSimilar()

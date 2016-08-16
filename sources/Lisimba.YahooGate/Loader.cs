@@ -77,7 +77,7 @@ namespace DustInTheWind.Lisimba.Gating
 
 
             // Messenger ID
-            if (csvRecord[7].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[7], "Yahoo!"));
+            if (csvRecord[7].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[7], "Yahoo!"));
 
 
             // Home
@@ -179,52 +179,52 @@ namespace DustInTheWind.Lisimba.Gating
 
 
             // Messenger ID1
-            if (csvRecord[39].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[39], "Messenger ID1"));
+            if (csvRecord[39].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[39], "Messenger ID1"));
 
             // Messenger ID2
-            if (csvRecord[40].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[40], "Messenger ID2"));
+            if (csvRecord[40].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[40], "Messenger ID2"));
 
             // Messenger ID3
-            if (csvRecord[41].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[41], "Messenger ID3"));
+            if (csvRecord[41].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[41], "Messenger ID3"));
 
             // Messenger ID4
-            if (csvRecord[42].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[42], "Messenger ID4"));
+            if (csvRecord[42].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[42], "Messenger ID4"));
 
             // Messenger ID5
-            if (csvRecord[43].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[43], "Messenger ID5"));
+            if (csvRecord[43].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[43], "Messenger ID5"));
 
             // Messenger ID6
-            if (csvRecord[44].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[44], "Messenger ID6"));
+            if (csvRecord[44].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[44], "Messenger ID6"));
 
             // Messenger ID7
-            if (csvRecord[45].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[45], "Messenger ID7"));
+            if (csvRecord[45].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[45], "Messenger ID7"));
 
             // Messenger ID8
-            if (csvRecord[46].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[46], "Messenger ID8"));
+            if (csvRecord[46].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[46], "Messenger ID8"));
 
             // Messenger ID9
-            if (csvRecord[47].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[47], "Messenger ID9"));
+            if (csvRecord[47].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[47], "Messenger ID9"));
 
             // Skype ID
-            if (csvRecord[48].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[48], "Skype ID"));
+            if (csvRecord[48].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[48], "Skype ID"));
 
             // IRC ID
-            if (csvRecord[49].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[49], "IRC ID"));
+            if (csvRecord[49].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[49], "IRC ID"));
 
             // ICQ ID
-            if (csvRecord[50].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[50], "ICQ ID"));
+            if (csvRecord[50].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[50], "ICQ ID"));
 
             // Google ID
-            if (csvRecord[51].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[51], "Google ID"));
+            if (csvRecord[51].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[51], "Google ID"));
 
             // MSN ID
-            if (csvRecord[52].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[52], "MSN ID"));
+            if (csvRecord[52].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[52], "MSN ID"));
 
             // AIM ID
-            if (csvRecord[53].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[53], "AIM ID"));
+            if (csvRecord[53].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[53], "AIM ID"));
 
             // QQ ID
-            if (csvRecord[54].Length > 0) contact.Items.Add(new SocialProfile(csvRecord[54], "QQ ID"));
+            if (csvRecord[54].Length > 0) contact.Items.Add(new SocialProfileId(csvRecord[54], "QQ ID"));
 
             return contact;
         }

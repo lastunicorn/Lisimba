@@ -31,7 +31,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         public Contact ContactLeft { get; private set; }
         public Contact ContactRight { get; private set; }
 
-        public List<IItemComparison> Results { get; private set; }
+        public List<IItemComparison> Comparisons { get; private set; }
         public ItemEquality Equality { get; private set; }
 
         public ContactComparison(Contact contactLeft, Contact contactRight)
@@ -39,14 +39,14 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             ContactLeft = contactLeft;
             ContactRight = contactRight;
 
-            Results = new List<IItemComparison>();
+            Comparisons = new List<IItemComparison>();
 
             Compare();
         }
 
         private void Compare()
         {
-            Results.Clear();
+            Comparisons.Clear();
 
             if (ContactLeft == null && ContactRight == null)
                 Equality = ItemEquality.BothEmpty;
@@ -61,14 +61,14 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 // Equal
                 // - all items should be Equal
 
-                bool areEqual = Results.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
+                bool areEqual = Comparisons.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
 
                 if (areEqual)
                     Equality = ItemEquality.Equal;
                 else
                 {
                     // Similar
-                    // - Names should not be Different
+                    // - Names should not be both empty and should be anything but Different.
 
                     bool areSimilar = personNameComparison.Equality != ItemEquality.Different &&
                         personNameComparison.Equality != ItemEquality.BothEmpty;
@@ -83,19 +83,19 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private void CompareAllItems()
         {
             personNameComparison = new PersonNameComparison(ContactLeft.Name, ContactRight.Name);
-            Results.Add(personNameComparison);
+            Comparisons.Add(personNameComparison);
 
             notesComparison = new NotesComparison(ContactLeft, ContactRight);
-            Results.Add(notesComparison);
+            Comparisons.Add(notesComparison);
 
             birthdayComparison = new DateComparison(ContactLeft.Birthday, ContactRight.Birthday);
-            Results.Add(birthdayComparison);
+            Comparisons.Add(birthdayComparison);
 
             categoryComparison = new CategoryComparison(ContactLeft, ContactRight);
-            Results.Add(categoryComparison);
+            Comparisons.Add(categoryComparison);
 
             pictureComparison = new PictureComparison(ContactLeft.Picture, ContactRight.Picture);
-            Results.Add(pictureComparison);
+            Comparisons.Add(pictureComparison);
 
             List<ContactItem> contactRightItems = ContactRight.Items.ToList();
 
@@ -107,17 +107,17 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
                 if (comparison != null)
                 {
-                    Results.Add(comparison);
+                    Comparisons.Add(comparison);
                     contactRightItems.Remove(comparison.ItemRight as ContactItem);
                 }
                 else
                 {
-                    Results.Add(ItemComparisonFactory.Create(itemLeft, null));
+                    Comparisons.Add(ItemComparisonFactory.Create(itemLeft, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Results.Add(ItemComparisonFactory.Create(null, itemRight));
+                Comparisons.Add(ItemComparisonFactory.Create(null, itemRight));
         }
     }
 }

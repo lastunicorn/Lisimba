@@ -43,8 +43,8 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         private void Compare()
         {
-            if (LeftHasValue())
-                if (RightHasValue())
+            if (ItemLeft != null && LeftHasValue())
+                if (ItemRight != null && RightHasValue())
                     if (ValuesAreEqual())
                         Equality = ItemEquality.Equal;
                     else if (ValuesAreSimilar())
@@ -54,7 +54,9 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 else
                     Equality = ItemEquality.LeftExists;
             else
-                Equality = RightHasValue() ? ItemEquality.RightExists : ItemEquality.BothEmpty;
+                Equality = ItemRight != null && RightHasValue()
+                    ? ItemEquality.RightExists
+                    : ItemEquality.BothEmpty;
         }
 
         protected abstract bool LeftHasValue();

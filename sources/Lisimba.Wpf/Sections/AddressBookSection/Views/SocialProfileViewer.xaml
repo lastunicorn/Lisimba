@@ -25,7 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              mc:Ignorable="d" 
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance addressBookModel:SocialProfile}">
+             d:DataContext="{d:DesignInstance addressBookModel:SocialProfileId}">
 
     <Grid>
         <Grid.RowDefinitions>

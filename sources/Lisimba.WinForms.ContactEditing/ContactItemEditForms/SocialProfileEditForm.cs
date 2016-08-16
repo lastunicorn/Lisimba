@@ -22,14 +22,14 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms
 {
     public partial class SocialProfileEditForm : EditBaseForm
     {
-        private SocialProfile socialProfile;
+        private SocialProfileId socialProfileId;
 
-        public SocialProfile SocialProfile
+        public SocialProfileId SocialProfileId
         {
-            get { return socialProfile; }
+            get { return socialProfileId; }
             set
             {
-                socialProfile = value;
+                socialProfileId = value;
                 DisplayDataInView();
             }
         }
@@ -54,38 +54,38 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactItemEditForms
 
         private void DisplayDataInView()
         {
-            textBoxEmail.Text = socialProfile.Id;
-            textBoxComments.Text = socialProfile.Description;
+            textBoxEmail.Text = socialProfileId.Id;
+            textBoxComments.Text = socialProfileId.Description;
         }
 
         protected override bool IsDataChanged()
         {
-            if (socialProfile == null)
+            if (socialProfileId == null)
                 return textBoxEmail.Text.Length > 0 ||
                        textBoxComments.Text.Length > 0;
 
-            return !socialProfile.Id.Equals(textBoxEmail.Text) ||
-                !socialProfile.Description.Equals(textBoxComments.Text);
+            return !socialProfileId.Id.Equals(textBoxEmail.Text) ||
+                !socialProfileId.Description.Equals(textBoxComments.Text);
         }
 
         protected override IAction GetCreateAction()
         {
-            SocialProfile newSocialProfile = ReadSocialProfileFromView();
-            return new CreateContactItemAction(ContactItems, newSocialProfile);
+            SocialProfileId newSocialProfileId = ReadSocialProfileFromView();
+            return new CreateContactItemAction(ContactItems, newSocialProfileId);
         }
 
         protected override IAction GetUpdateAction()
         {
-            SocialProfile newSocialProfile = ReadSocialProfileFromView();
-            return new UpdateContactItemAction(socialProfile, newSocialProfile);
+            SocialProfileId newSocialProfileId = ReadSocialProfileFromView();
+            return new UpdateContactItemAction(socialProfileId, newSocialProfileId);
         }
 
-        private SocialProfile ReadSocialProfileFromView()
+        private SocialProfileId ReadSocialProfileFromView()
         {
             string newId = textBoxEmail.Text;
             string newDescription = textBoxComments.Text;
 
-            return new SocialProfile(newId, newDescription);
+            return new SocialProfileId(newId, newDescription);
         }
     }
 }

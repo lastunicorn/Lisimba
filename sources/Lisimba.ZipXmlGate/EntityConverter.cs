@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                 WebSites = contact.Items.OfType<WebSite>().Select(ToEntity).ToListOrNull(),
                 Addresses = contact.Items.OfType<PostalAddress>().Select(ToEntity).ToListOrNull(),
                 Dates = contact.Items.OfType<Date>().Select(ToEntity).ToListOrNull(),
-                SocialProfileIds = contact.Items.OfType<SocialProfile>().Select(ToEntity).ToListOrNull(),
+                SocialProfileIds = contact.Items.OfType<SocialProfileId>().Select(ToEntity).ToListOrNull(),
                 Notes = contact.Notes
             };
         }
@@ -129,12 +129,12 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             };
         }
 
-        private static SocialProfileIdEntity ToEntity(SocialProfile socialProfile)
+        private static SocialProfileIdEntity ToEntity(SocialProfileId socialProfileId)
         {
             return new SocialProfileIdEntity
             {
-                Id = socialProfile.Id,
-                Description = socialProfile.Description
+                Id = socialProfileId.Id,
+                Description = socialProfileId.Description
             };
         }
 
@@ -187,7 +187,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             Date[] dates = contactEntity.Dates.Select(FromEntity).ToArray();
             contact.Items.AddRange(dates);
 
-            SocialProfile[] socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity).ToArray();
+            SocialProfileId[] socialProfileIds = contactEntity.SocialProfileIds.Select(FromEntity).ToArray();
             contact.Items.AddRange(socialProfileIds);
 
             contact.Notes = contactEntity.Notes;
@@ -257,9 +257,9 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             };
         }
 
-        private static SocialProfile FromEntity(SocialProfileIdEntity socialProfileIdEntity)
+        private static SocialProfileId FromEntity(SocialProfileIdEntity socialProfileIdEntity)
         {
-            return new SocialProfile
+            return new SocialProfileId
             {
                 Id = socialProfileIdEntity.Id,
                 Description = socialProfileIdEntity.Description

@@ -49,16 +49,17 @@
     <Compile Include="..\AssemblyInfo.Shared.cs">
       <Link>Properties\AssemblyInfo.Shared.cs</Link>
     </Compile>
-    <Compile Include="Business\Comparison\ContactComparisonTests\PersonNameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\EmailComparisonTests.cs" />
+    <Compile Include="Business\Comparison\PersonNameComparisonTests.cs" />
+    <Compile Include="Business\Comparison\DateComparisonTests.cs" />
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Business\Comparison\AddressBookComparisonTests\ConstructorTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\BirthdayComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\ItemComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\PictureComparisonTests.cs" />
+    <Compile Include="Business\Comparison\PictureComparisonTests.cs" />
     <Compile Include="Business\Comparison\ContactComparisonTests\ConstructorTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\CategoryComparisonTests.cs" />
-    <Compile Include="Business\Comparison\ContactComparisonTests\NotesComparisonTests.cs" />
+    <Compile Include="Business\Comparison\CategoryComparisonTests.cs" />
+    <Compile Include="Business\Comparison\NotesComparisonTests.cs" />
     <Compile Include="Business\AddressBookModel\ContactEqualsTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\EqualsTests.cs" />
     <Compile Include="Business\AddressBookModel\PersonNameTests\HasMiddleNameTests.cs" />

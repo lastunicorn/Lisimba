@@ -133,7 +133,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEditing.ContactDetailsEditing
                     Icon = Resources.mesengerid,
                     AddIcon = Resources.mesengerid_add,
                     Title = "Social Profiles",
-                    ItemType = typeof(SocialProfile)
+                    ItemType = typeof(SocialProfileId)
                 }
             };
         }

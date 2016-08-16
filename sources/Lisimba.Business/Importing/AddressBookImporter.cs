@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
             AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookDestination, addressBookSource);
             addressBookComparison.Compare();
 
-            IEnumerable<ContactImport> rules = addressBookComparison.Results
+            IEnumerable<ContactImport> rules = addressBookComparison.Comparisons
                 .Select(ContactImport.Create)
                 .Where(x => x.ImportType != ImportType.Ignore);
 

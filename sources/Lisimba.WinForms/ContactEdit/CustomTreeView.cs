@@ -207,14 +207,14 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
                 return;
             }
 
-            SocialProfile socialProfileTag = selectedNode.Tag as SocialProfile;
+            SocialProfileId socialProfileIdTag = selectedNode.Tag as SocialProfileId;
 
-            if (socialProfileTag != null)
+            if (socialProfileIdTag != null)
             {
                 SocialProfileEditForm form = new SocialProfileEditForm
                 {
                     ActionQueue = ActionQueue,
-                    SocialProfile = socialProfileTag,
+                    SocialProfileId = socialProfileIdTag,
                     Location = PointToScreen(e.Location),
                     EditMode = EditMode.Edit
                 };
@@ -252,7 +252,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactEdit
                     TreeNodeAddresses.Nodes.Add(treeNode);
                 else if (contactItem is Date)
                     TreeNodeDates.Nodes.Add(treeNode);
-                else if (contactItem is SocialProfile)
+                else if (contactItem is SocialProfileId)
                     TreeNodeSocialProfileIds.Nodes.Add(treeNode);
 
                 treeNode.ImageIndex = -2;

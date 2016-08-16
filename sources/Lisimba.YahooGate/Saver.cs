@@ -112,7 +112,7 @@ namespace DustInTheWind.Lisimba.Gating
             Email email;
             PostalAddress postalAddress;
             Date date;
-            SocialProfile socialProfile;
+            SocialProfileId socialProfileId;
 
             // First
             csvWriter.WriteField(contact.Name.FirstName);
@@ -138,8 +138,8 @@ namespace DustInTheWind.Lisimba.Gating
             csvWriter.WriteField(string.Empty);
 
             // Messenger ID
-            socialProfile = contact.Items.SearchByDescription("Messenger ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Home
             phone = contact.Items.SearchByDescription("Home", SearchMode.Exact) as Phone;
@@ -257,68 +257,68 @@ namespace DustInTheWind.Lisimba.Gating
             csvWriter.WriteField(contact.Notes);
 
             // Messenger ID1
-            socialProfile = contact.Items.SearchByDescription("Messenger ID1", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID1", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID2
-            socialProfile = contact.Items.SearchByDescription("Messenger ID2", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID2", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID3
-            socialProfile = contact.Items.SearchByDescription("Messenger ID3", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID3", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID4
-            socialProfile = contact.Items.SearchByDescription("Messenger ID4", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID4", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID5
-            socialProfile = contact.Items.SearchByDescription("Messenger ID5", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID5", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID6
-            socialProfile = contact.Items.SearchByDescription("Messenger ID6", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID6", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID7
-            socialProfile = contact.Items.SearchByDescription("Messenger ID7", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID7", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID8
-            socialProfile = contact.Items.SearchByDescription("Messenger ID8", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID8", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Messenger ID9
-            socialProfile = contact.Items.SearchByDescription("Messenger ID9", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Messenger ID9", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Skype ID
-            socialProfile = contact.Items.SearchByDescription("Skype ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Skype ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // IRC ID
-            socialProfile = contact.Items.SearchByDescription("IRC ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("IRC ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // ICQ ID
-            socialProfile = contact.Items.SearchByDescription("ICQ ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("ICQ ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // Google ID
-            socialProfile = contact.Items.SearchByDescription("Google ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("Google ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // MSN ID
-            socialProfile = contact.Items.SearchByDescription("MSN ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("MSN ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // AIM ID
-            socialProfile = contact.Items.SearchByDescription("AIM ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("AIM ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             // QQ ID
-            socialProfile = contact.Items.SearchByDescription("QQ ID", SearchMode.Exact) as SocialProfile;
-            csvWriter.WriteField(socialProfile == null ? string.Empty : socialProfile.Id);
+            socialProfileId = contact.Items.SearchByDescription("QQ ID", SearchMode.Exact) as SocialProfileId;
+            csvWriter.WriteField(socialProfileId == null ? string.Empty : socialProfileId.Id);
 
             csvWriter.NextRecord();
         }

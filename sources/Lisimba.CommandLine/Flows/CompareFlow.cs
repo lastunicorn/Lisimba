@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayIdenticalContacts(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> contactComparisons = addressBookComparison.Results
+            List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Equal)
                 .ToList();
 
@@ -107,7 +107,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> contactComparisons = addressBookComparison.Results
+            List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.LeftExists)
                 .ToList();
 
@@ -120,7 +120,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> contactComparisons = addressBookComparison.Results
+            List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.RightExists)
                 .ToList();
 
@@ -133,7 +133,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplaySimilarContacts(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> contactComparisons = addressBookComparison.Results
+            List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Similar)
                 .ToList();
 
@@ -149,7 +149,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayDifferentContacts(AddressBookComparison addressBookComparison, bool displayDetails)
         {
-            List<ContactComparison> contactComparisons = addressBookComparison.Results
+            List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Different)
                 .ToList();
 

@@ -69,7 +69,7 @@
     <Compile Include="AddressBookModel\Phone.cs" />
     <Compile Include="AddressBookModel\Picture.cs" />
     <Compile Include="AddressBookModel\PostalAddress.cs" />
-    <Compile Include="AddressBookModel\SocialProfile.cs" />
+    <Compile Include="AddressBookModel\SocialProfileId.cs" />
     <Compile Include="AddressBookModel\WebSite.cs" />
     <Compile Include="AddressBookModel\ZodiacSign.cs" />
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />

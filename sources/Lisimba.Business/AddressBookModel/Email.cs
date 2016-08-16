@@ -66,6 +66,11 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             CopyFrom(email);
         }
 
+        public bool IsEmpty
+        {
+            get { return string.IsNullOrEmpty(address) && string.IsNullOrEmpty(description); }
+        }
+
         public override void CopyFrom(ContactItem contactItem)
         {
             if (contactItem == null) throw new ArgumentNullException("contactItem");

@@ -33,7 +33,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 { typeof(Date), typeof(DateComparison) },
                 { typeof(PostalAddress), typeof(PostalAddressComparison) },
                 { typeof(WebSite), typeof(WebSiteComparison) },
-                { typeof(SocialProfile), typeof(SocialProfileIdComparison) }
+                { typeof(SocialProfileId), typeof(SocialProfileIdComparison) }
             };
         }
 

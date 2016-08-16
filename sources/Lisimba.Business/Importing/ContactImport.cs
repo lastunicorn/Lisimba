@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         Source = contactComparison.ContactRight,
                         Destination = contactComparison.ContactLeft,
                         ImportType = ImportType.Merge,
-                        ItemImports = contactComparison.Results
+                        ItemImports = contactComparison.Comparisons
                             .Select(x=> new ItemImport(x))
                             .ToList()
                     };

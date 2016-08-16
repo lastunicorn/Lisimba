@@ -175,7 +175,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 new ContactItemAddViewModel { Text = "Email", Command = addContactItemClickCommand, ItemType = typeof(Email), Icon = Resources.email.ToBitmapSource() },
                 new ContactItemAddViewModel { Text = "Address", Command = addContactItemClickCommand, ItemType = typeof(PostalAddress), Icon = Resources.address.ToBitmapSource() },
                 new ContactItemAddViewModel { Text = "Date", Command = addContactItemClickCommand, ItemType = typeof(Date), Icon = Resources.date.ToBitmapSource() },
-                new ContactItemAddViewModel { Text = "Social Profile", Command = addContactItemClickCommand, ItemType = typeof(SocialProfile), Icon = Resources.mesengerid.ToBitmapSource() },
+                new ContactItemAddViewModel { Text = "Social Profile", Command = addContactItemClickCommand, ItemType = typeof(SocialProfileId), Icon = Resources.mesengerid.ToBitmapSource() },
                 new ContactItemAddViewModel { Text = "Web Site", Command = addContactItemClickCommand, ItemType = typeof(WebSite), Icon = Resources.webaddress.ToBitmapSource() }
             };
 
@@ -279,7 +279,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             if (type == typeof(Date))
                 return Resources.date.ToBitmapSource();
 
-            if (type == typeof(SocialProfile))
+            if (type == typeof(SocialProfileId))
                 return Resources.mesengerid.ToBitmapSource();
 
             if (type == typeof(WebSite))
@@ -302,7 +302,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             if (type == typeof(Date))
                 return "Date";
 
-            if (type == typeof(SocialProfile))
+            if (type == typeof(SocialProfileId))
                 return "Social Profile";
 
             if (type == typeof(WebSite))
