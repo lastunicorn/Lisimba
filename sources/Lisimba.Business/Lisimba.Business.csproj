@@ -101,10 +101,12 @@
     <Compile Include="Comparison\AddressBookComparison.cs" />
     <Compile Include="Importing\AddressBookImporter.cs" />
     <Compile Include="Importing\ContactImport.cs" />
+    <Compile Include="Importing\EmailImport.cs" />
     <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
-    <Compile Include="Importing\ItemImport.cs" />
+    <Compile Include="Importing\ObjectImport.cs" />
     <Compile Include="Importing\ItemImportBase.cs" />
+    <Compile Include="Importing\ItemImportFactory.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="IZodiacSignProvider.cs" />
@@ -170,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Comparison\ClassDiagram1.cd" />
+    <None Include="Importing\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

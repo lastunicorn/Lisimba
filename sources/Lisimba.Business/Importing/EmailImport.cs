@@ -15,15 +15,25 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Text;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public interface IItemImport
+    public class EmailImport : ItemImportBase<Email>
     {
-        object Source { get; }
-        object Destination { get; }
-        ImportType ImportType { get; }
+        public EmailImport(EmailComparison emailComparison)
+            : base(emailComparison)
+        {
+        }
 
-        void Merge(StringBuilder sb, bool simulate);
+        public override void Merge(StringBuilder sb, bool simulate)
+        {
+            if (!string.IsNullOrEmpty(Source.Address))
+                Destination.Address = Source.Address;
+
+            if (!string.IsNullOrEmpty(Source.Description))
+                Destination.Description = Source.Description;
+        }
     }
 }

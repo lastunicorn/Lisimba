@@ -14,9 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using System.Text;
+using DustInTheWind.Lisimba.Business.Comparison;
+
 namespace DustInTheWind.Lisimba.Business.Importing
 {
     public abstract class ItemImportBase<T> : IItemImport
+        where T : class
     {
         public T Source { get; protected set; }
         public T Destination { get; protected set; }
@@ -33,6 +38,40 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
         public ImportType ImportType { get; protected set; }
 
-        public abstract void Merge();
+        protected ItemImportBase(IItemComparison<T> itemComparison)
+        {
+            if (itemComparison == null) throw new ArgumentNullException("itemComparison");
+
+            switch (itemComparison.Equality)
+            {
+                case ItemEquality.BothEmpty:
+                case ItemEquality.LeftExists:
+                case ItemEquality.Equal:
+                    ImportType = ImportType.Ignore;
+                    break;
+
+                case ItemEquality.RightExists:
+                    Source = itemComparison.ItemRight;
+                    ImportType = ImportType.AddAsNew;
+                    break;
+
+                case ItemEquality.Different:
+                    Source = itemComparison.ItemRight;
+                    Destination = itemComparison.ItemLeft;
+                    ImportType = ImportType.Replace;
+                    break;
+
+                case ItemEquality.Similar:
+                    Source = itemComparison.ItemRight;
+                    Destination = itemComparison.ItemLeft;
+                    ImportType = ImportType.Merge;
+                    break;
+
+                default:
+                    throw new LisimbaException("Invalid comparison item.");
+            }
+        }
+
+        public abstract void Merge(StringBuilder sb, bool simulate);
     }
 }

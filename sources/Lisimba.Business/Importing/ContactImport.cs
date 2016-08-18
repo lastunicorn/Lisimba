@@ -16,6 +16,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 
@@ -23,50 +24,68 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class ContactImport : ItemImportBase<Contact>
     {
-        public List<ItemImport> ItemImports { get; private set; }
+        public List<IItemImport> ItemImports { get; private set; }
 
-        public static ContactImport Create(ContactComparison contactComparison)
+        public ContactImport(ContactComparison contactComparison)
+            : base(contactComparison)
         {
-            switch (contactComparison.Equality)
+            ItemImports = contactComparison.Comparisons
+                .Select(ItemImportFactory.Create)
+                .ToList();
+        }
+
+        public override void Merge(StringBuilder sb, bool simulate)
+        {
+            foreach (IItemImport importRule in ItemImports)
             {
-                case ItemEquality.BothEmpty:
-                case ItemEquality.LeftExists:
-                case ItemEquality.Equal:
-                    return new ContactImport
-                    {
-                        Source = null,
-                        Destination = null,
-                        ImportType = ImportType.Ignore
-                    };
+                switch (importRule.ImportType)
+                {
+                    case ImportType.Ignore:
+                        break;
 
-                case ItemEquality.RightExists:
-                case ItemEquality.Different:
-                    return new ContactImport
-                    {
-                        Source = contactComparison.ItemRight,
-                        Destination = null,
-                        ImportType = ImportType.AddAsNew
-                    };
+                    case ImportType.AddAsNew:
+                        AddAsNew(importRule, sb, simulate);
+                        break;
 
-                case ItemEquality.Similar:
-                    return new ContactImport
-                    {
-                        Source = contactComparison.ItemRight,
-                        Destination = contactComparison.ItemLeft,
-                        ImportType = ImportType.Merge,
-                        ItemImports = contactComparison.Comparisons
-                            .Select(ItemImport.Create)
-                            .ToList()
-                    };
+                    case ImportType.Merge:
+                        Merge(importRule, sb, simulate);
+                        break;
 
-                default:
-                    string message = string.Format("Cannot import contact {0}", contactComparison.ItemRight);
-                    throw new LisimbaException(message);
+                    case ImportType.Replace:
+                        Replace(importRule, sb, simulate);
+                        break;
+
+                    default:
+                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.Destination, importRule.Source, importRule.ImportType));
+                        break;
+                }
             }
         }
 
-        public override void Merge()
+        private void AddAsNew(IItemImport importRule, StringBuilder sb, bool simulate)
         {
+            if (!simulate)
+                Destination.Items.Add((ContactItem)importRule.Source);
+
+            sb.AppendLine(string.Format("Added item: {0}", importRule.Source));
+        }
+
+        private static void Merge(IItemImport importRule, StringBuilder sb, bool simulate)
+        {
+            sb.AppendLine(string.Format("Merging items '{0}' and '{1}'.", importRule.Destination, importRule.Source));
+
+            importRule.Merge(sb, simulate);
+        }
+
+        private void Replace(IItemImport importRule, StringBuilder sb, bool simulate)
+        {
+            if (!simulate)
+            {
+                Destination.Items.Remove((ContactItem)importRule.Destination);
+                Destination.Items.Add((ContactItem)importRule.Source);
+            }
+
+            sb.AppendLine(string.Format("Replaced item '{0}' with '{1}'.", importRule.Destination, importRule.Source));
         }
     }
 }

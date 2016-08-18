@@ -15,15 +15,24 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System.Text;
+using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public interface IItemImport
+    public class ObjectImport : ItemImportBase<object>
     {
-        object Source { get; }
-        object Destination { get; }
-        ImportType ImportType { get; }
+        public ObjectImport(IItemComparison<object> itemComparison)
+            : base(itemComparison)
+        {
+        }
 
-        void Merge(StringBuilder sb, bool simulate);
+        public override void Merge(StringBuilder sb, bool simulate)
+        {
+        }
+
+        public static ObjectImport Empty()
+        {
+            return new ObjectImport(new ObjectComparison(null, null));
+        }
     }
 }

@@ -102,7 +102,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             if (displayDetails)
                 foreach (ContactComparison contactComparison in contactComparisons)
-                    console.WriteLineNormal(contactComparison.ContactLeft.ToString());
+                    console.WriteLineNormal(contactComparison.ItemLeft.ToString());
         }
 
         private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison, bool displayDetails)
@@ -115,7 +115,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             if (displayDetails)
                 foreach (ContactComparison contactComparison in contactComparisons)
-                    console.WriteLineNormal(contactComparison.ContactLeft.ToString());
+                    console.WriteLineNormal(contactComparison.ItemLeft.ToString());
         }
 
         private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison, bool displayDetails)
@@ -128,7 +128,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             if (displayDetails)
                 foreach (ContactComparison comparisonResult in contactComparisons)
-                    console.WriteLineNormal(comparisonResult.ContactRight.ToString());
+                    console.WriteLineNormal(comparisonResult.ItemRight.ToString());
         }
 
         private void DisplaySimilarContacts(AddressBookComparison addressBookComparison, bool displayDetails)
@@ -142,7 +142,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (displayDetails)
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
-                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ContactLeft, contactComparison.ContactRight);
+                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
                     console.WriteLineNormal(text);
                 }
         }
@@ -158,7 +158,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (displayDetails)
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
-                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ContactLeft, contactComparison.ContactRight);
+                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
                     console.WriteLineNormal(text);
                 }
         }

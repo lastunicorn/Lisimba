@@ -57,13 +57,15 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
         public void Analyse()
         {
+            isAnalysed = false;
+
             importRules.Clear();
 
             AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookDestination, addressBookSource);
             addressBookComparison.Compare();
 
             IEnumerable<ContactImport> rules = addressBookComparison.Comparisons
-                .Select(ContactImport.Create)
+                .Select(x => new ContactImport(x))
                 .Where(x => x.ImportType != ImportType.Ignore);
 
             foreach (ContactImport importRule in rules)
@@ -87,30 +89,15 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     case ImportType.AddAsNew:
-                        if (!simulate)
-                            addressBookDestination.Contacts.Add(importRule.Source);
-
-                        sb.AppendLine(string.Format("Added contact '{0}'.", importRule.Source));
-
+                        AddAsNew(importRule, simulate, sb);
                         break;
 
                     case ImportType.Merge:
-                        sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.Destination, importRule.Source));
-
-                        if (!simulate)
-                            importRule.Merge();
-
+                        Merge(importRule, simulate, sb);
                         break;
 
                     case ImportType.Replace:
-                        if (!simulate)
-                        {
-                            addressBookDestination.Contacts.Remove(importRule.Destination);
-                            addressBookDestination.Contacts.Add(importRule.Source);
-                        }
-
-                        sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.Destination, importRule.Source));
-
+                        Replace(importRule, simulate, sb);
                         break;
 
                     default:
@@ -120,6 +107,32 @@ namespace DustInTheWind.Lisimba.Business.Importing
             }
 
             return sb;
+        }
+
+        private void AddAsNew(ContactImport importRule, bool simulate, StringBuilder sb)
+        {
+            if (!simulate)
+                addressBookDestination.Contacts.Add(importRule.Source);
+
+            sb.AppendLine(string.Format("Added contact: {0}.", importRule.Source));
+        }
+
+        private static void Merge(ContactImport importRule, bool simulate, StringBuilder sb)
+        {
+            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.Destination, importRule.Source));
+
+            importRule.Merge(sb, simulate);
+        }
+
+        private void Replace(ContactImport importRule, bool simulate, StringBuilder sb)
+        {
+            if (!simulate)
+            {
+                addressBookDestination.Contacts.Remove(importRule.Destination);
+                addressBookDestination.Contacts.Add(importRule.Source);
+            }
+
+            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.Destination, importRule.Source));
         }
     }
 }

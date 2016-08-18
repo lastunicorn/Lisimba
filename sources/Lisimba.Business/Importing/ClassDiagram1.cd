@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DustInTheWind.Lisimba.Business.Importing.AddressBookImporter" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAgAAKAAIAAAAAAAAACAAABAQAGAAAAAAAAACA=</HashCode>
+      <FileName>Importing\AddressBookImporter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Importing.ContactImport" Collapsed="true">
+    <Position X="3.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAAAAAAAAACAAQAAAAAAAAAAACA=</HashCode>
+      <FileName>Importing\ContactImport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Importing.ObjectImport" Collapsed="true">
+    <Position X="5.5" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Importing\ObjectImport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Importing.ItemImportBase&lt;T&gt;" Collapsed="true">
+    <Position X="7.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAABAAAgAAAAAAAAAAAAAAAAAAAQAEAAAAgAAAAAA=</HashCode>
+      <FileName>Importing\ItemImportBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Importing.EmailImport" Collapsed="true">
+    <Position X="7.75" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Importing\EmailImport.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DustInTheWind.Lisimba.Business.Importing.IItemImport">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAAAAAAQAEAAAAgAAAAAA=</HashCode>
+      <FileName>Importing\IItemImport.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
