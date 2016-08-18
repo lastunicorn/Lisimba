@@ -75,6 +75,7 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="Comparison\EmailComparison.cs" />
+    <Compile Include="Comparison\IItemComparison1.cs" />
     <Compile Include="Comparison\ObjectComparison.cs" />
     <Compile Include="Comparison\PersonNameComparison.cs" />
     <Compile Include="Comparison\DateComparison.cs" />

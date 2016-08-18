@@ -16,7 +16,7 @@
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public abstract class ItemComparisonBase<T> : IItemComparison
+    public abstract class ItemComparisonBase<T> : IItemComparison<T>
     {
         public T ItemLeft { get; set; }
         public T ItemRight { get; set; }
@@ -45,16 +45,17 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         {
             PrepareToCompareValues();
 
-            if (LeftHasValue())
-                if (RightHasValue())
-                    CompareNotEmptyValues();
-                else
-                    Equality = ItemEquality.LeftExists;
+            bool leftHasValue = LeftHasValue();
+            bool rightHasValue = RightHasValue();
+
+            if (!leftHasValue && !rightHasValue)
+                Equality = ItemEquality.BothEmpty;
+            else if (!leftHasValue)
+                Equality = ItemEquality.RightExists;
+            else if (!rightHasValue)
+                Equality = ItemEquality.LeftExists;
             else
-                if (RightHasValue())
-                    Equality = ItemEquality.RightExists;
-                else
-                    Equality = ItemEquality.BothEmpty;
+                CompareNotEmptyValues();
         }
 
         private void CompareNotEmptyValues()

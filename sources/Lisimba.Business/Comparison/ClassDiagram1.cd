@@ -106,11 +106,11 @@
       <FileName>Comparison\WebSiteComparison.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Interface Name="DustInTheWind.Lisimba.Business.Comparison.IItemComparison">
+  <Interface Name="DustInTheWind.Lisimba.Business.Comparison.IItemComparison&lt;T&gt;">
     <Position X="9" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAQIEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Comparison\IItemComparison.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comparison\IItemComparison1.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />
