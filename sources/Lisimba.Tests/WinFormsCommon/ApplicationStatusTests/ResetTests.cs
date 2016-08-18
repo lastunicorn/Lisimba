@@ -14,11 +14,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
+namespace DustInTheWind.Lisimba.Tests.WinFormsCommon.ApplicationStatusTests
 {
     [TestFixture]
     public class ResetTests

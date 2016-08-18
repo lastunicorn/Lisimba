@@ -19,10 +19,10 @@ using System.Threading;
 using DustInTheWind.WinFormsCommon;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
+namespace DustInTheWind.Lisimba.Tests.WinFormsCommon.ApplicationStatusTests
 {
     [TestFixture]
-    public class StatusTextTests
+    public class SetPermanentStatusTextTests
     {
         private ApplicationStatus applicationStatus;
 
@@ -39,12 +39,22 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         }
 
         [Test]
+        public void sets_the_StatusText_value()
+        {
+            const string statusText = "some status";
+
+            applicationStatus.SetPermanentStatusText(statusText);
+
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(statusText));
+        }
+
+        [Test]
         public void raises_StatusTextChanged_event_when_value_is_changed()
         {
             bool eventWasRaised = false;
             applicationStatus.StatusTextChanged += (sender, e) => { eventWasRaised = true; };
 
-            applicationStatus.StatusText = "test status";
+            applicationStatus.SetPermanentStatusText("test status");
 
             Assert.That(eventWasRaised, Is.True);
         }
@@ -57,24 +67,20 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
             applicationStatus.StatusText = statusText;
             applicationStatus.StatusTextChanged += (sender, e) => { eventWasRaised = true; };
 
-            applicationStatus.StatusText = statusText;
+            applicationStatus.SetPermanentStatusText(statusText);
 
             Assert.That(eventWasRaised, Is.False);
         }
 
         [Test]
-        public void reverts_to_DefaultStatusText_value_after_ResetTimeout_time()
+        public void StatusText_is_not_reset_after_ResetTimeout_time()
         {
-            const string defaultStatusText = "default status text";
-            const string statusText = "some status";
             applicationStatus.ResetTimeout = TimeSpan.FromMilliseconds(100);
-            applicationStatus.DefaultStatusText = defaultStatusText;
 
-            applicationStatus.StatusText = statusText;
+            applicationStatus.SetPermanentStatusText("some text");
 
-            Thread.Sleep(1000 + TestConstants.AcceptedTimeError);
-
-            Assert.That(applicationStatus.StatusText, Is.EqualTo(defaultStatusText));
+            Thread.Sleep(100 + TestConstants.AcceptedTimeError);
+            Assert.That(applicationStatus.StatusText, Is.Not.EqualTo(applicationStatus.DefaultStatusText));
         }
     }
 }

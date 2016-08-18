@@ -14,15 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using NUnit.Framework;
 
-namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
+namespace DustInTheWind.Lisimba.Tests.WinFormsCommon.ApplicationStatusTests
 {
     [TestFixture]
-    public class ConstructorTests
+    public class DefaultStatusTextTests
     {
         private ApplicationStatus applicationStatus;
 
@@ -39,21 +37,12 @@ namespace DustInTheWind.Lisimba.Tests.Services.StatusServiceTests
         }
 
         [Test]
-        public void StatusText_is_initially_empty_string()
+        public void when_value_is_set_StatusText_is_set_to_same_value()
         {
-            Assert.That(applicationStatus.StatusText, Is.EqualTo(string.Empty));
-        }
+            const string statusText = "some value";
+            applicationStatus.DefaultStatusText = statusText;
 
-        [Test]
-        public void DefaultStatusText_is_initially_empty_string()
-        {
-            Assert.That(applicationStatus.DefaultStatusText, Is.EqualTo(string.Empty));
-        }
-
-        [Test]
-        public void ResetTimeout_is_initially_1_second()
-        {
-            Assert.That(applicationStatus.ResetTimeout, Is.EqualTo(TimeSpan.FromSeconds(1)));
+            Assert.That(applicationStatus.StatusText, Is.EqualTo(statusText));
         }
     }
 }

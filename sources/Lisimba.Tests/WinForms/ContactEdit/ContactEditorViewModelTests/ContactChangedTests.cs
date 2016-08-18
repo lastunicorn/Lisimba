@@ -16,12 +16,16 @@
 
 //using System;
 //using System.Collections.Generic;
-//using DustInTheWind.Lisimba.ContactEdit;
-//using DustInTheWind.Lisimba.Egg.AddressBookModel;
+//using DustInTheWind.Lisimba.Business.AddressBookModel;
+//using DustInTheWind.Lisimba.WinForms.ContactEdit;
+//using DustInTheWind.Lisimba.WinForms.Operations;
+//using DustInTheWind.Lisimba.WinForms.Services;
+//using DustInTheWind.WinFormsCommon.Operations;
+//using Microsoft.Practices.Unity;
 //using Moq;
 //using NUnit.Framework;
 
-//namespace DustInTheWind.Lisimba.Tests.Presenters.ContactViewPresenterTests
+//namespace DustInTheWind.Lisimba.Tests.WinForms.ContactEdit.ContactEditorViewModelTests
 //{
 //    [TestFixture]
 //    public class ContactChangedTests
@@ -32,7 +36,15 @@
 //        [SetUp]
 //        public void SetUp()
 //        {
-//            contactEditorViewModel = new ContactEditorViewModel();
+//            Mock<IOperationProvider> operationProvider = new Mock<IOperationProvider>();
+//            operationProvider.Setup<ShowBiorhythmOperation>(new ShowBiorhythmOperation());
+//            AvailableOperations availableOperations = new AvailableOperations(operationProvider.Object);
+            
+//            Mock<IUnityContainer> unityContainer = new Mock<IUnityContainer>();
+//            MenuItemViewModelProvider menuItemViewModelProvider = new MenuItemViewModelProvider(unityContainer.Object);
+            
+//            contactEditorViewModel = new ContactEditorViewModel(availableOperations, menuItemViewModelProvider);
+
 //            view = new Mock<IContactEditorView>();
 //        }
 
@@ -211,7 +223,7 @@
 //        {
 //            contactEditorViewModel.View = view.Object;
 //            Contact contact = new Contact();
-//            List<SocialProfile> socialProfileIds = new List<SocialProfile> { new SocialProfile(), new SocialProfile() };
+//            List<SocialProfileId> socialProfileIds = new List<SocialProfileId> { new SocialProfileId(), new SocialProfileId() };
 //            contact.Items.AddRange(socialProfileIds);
 
 //            contactEditorViewModel.Contact = contact;
