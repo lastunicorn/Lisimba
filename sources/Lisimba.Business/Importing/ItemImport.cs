@@ -14,19 +14,68 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public class ItemImport : IItemImport
+    public class ItemImport : ItemImportBase<object>
     {
-        public ItemImport(IItemComparison a)
+        private ItemImport()
         {
-            
         }
 
-        public void Import()
+        public override void Merge()
         {
+        }
+
+        public static ItemImport Create(IItemComparison itemComparison)
+        {
+            if (itemComparison == null) throw new ArgumentNullException("itemComparison");
+
+            switch (itemComparison.Equality)
+            {
+                case ItemEquality.BothEmpty:
+                case ItemEquality.LeftExists:
+                case ItemEquality.Equal:
+                    return new ItemImport
+                    {
+                        Source = null,
+                        Destination = null,
+                        ImportType = ImportType.Ignore
+                    };
+
+                case ItemEquality.RightExists:
+                case ItemEquality.Different:
+                    return new ItemImport
+                    {
+                        Source = itemComparison.ItemRight,
+                        Destination = null,
+                        ImportType = ImportType.AddAsNew
+                    };
+
+                case ItemEquality.Similar:
+                    Type type = itemComparison.ItemLeft.GetType();
+
+                    if (type == typeof(Email))
+                        return new ItemImport
+                        {
+                            Source = itemComparison.ItemRight,
+                            Destination = null,
+                            ImportType = ImportType.AddAsNew
+                        };
+
+                    return new ItemImport
+                    {
+                        Source = null,
+                        Destination = null,
+                        ImportType = ImportType.Ignore
+                    };
+
+                default:
+                    throw new LisimbaException("Invalid comparison item.");
+            }
         }
     }
 }

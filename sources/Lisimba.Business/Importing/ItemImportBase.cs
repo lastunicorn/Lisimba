@@ -16,12 +16,23 @@
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public interface IItemImport
+    public abstract class ItemImportBase<T> : IItemImport
     {
-        object Source { get; }
-        object Destination { get; }
-        ImportType ImportType { get; }
+        public T Source { get; protected set; }
+        public T Destination { get; protected set; }
 
-        void Merge();
+        object IItemImport.Source
+        {
+            get { return Source; }
+        }
+
+        object IItemImport.Destination
+        {
+            get { return Destination; }
+        }
+
+        public ImportType ImportType { get; protected set; }
+
+        public abstract void Merge();
     }
 }

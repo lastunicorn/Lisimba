@@ -103,6 +103,7 @@
     <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
     <Compile Include="Importing\ItemImport.cs" />
+    <Compile Include="Importing\ItemImportBase.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="IZodiacSignProvider.cs" />
@@ -167,6 +168,7 @@
     <EmbeddedResource Include="Properties\ZodiacResources.ro.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Comparison\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

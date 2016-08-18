@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.AddressBookComparison" Collapsed="true">
+    <Position X="3" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgEAABAAAAAAAABAAAAAEAAAAABABAAAgAA=</HashCode>
+      <FileName>Comparison\AddressBookComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.CategoryComparison" Collapsed="true">
+    <Position X="5.5" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\CategoryComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.ContactComparison" Collapsed="true">
+    <Position X="1.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAACAAEAAAAgCBAAQAEAIAAAAAAAAQAAAAAAAYI=</HashCode>
+      <FileName>Comparison\ContactComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.DateComparison" Collapsed="true">
+    <Position X="11" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\DateComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.EmailComparison" Collapsed="true">
+    <Position X="13.75" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\EmailComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.ItemComparisonBase&lt;T&gt;" Collapsed="true">
+    <Position X="8.75" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAACAAIAAAAgGBAQIEAAAAAAAAAAAABAAAAAABI=</HashCode>
+      <FileName>Comparison\ItemComparisonBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.ItemComparisonFactory" Collapsed="true">
+    <Position X="11.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comparison\ItemComparisonFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.NotesComparison" Collapsed="true">
+    <Position X="15" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\NotesComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.ObjectComparison" Collapsed="true">
+    <Position X="2.75" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAABAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\ObjectComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.PersonNameComparison" Collapsed="true">
+    <Position X="6.75" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAiCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\PersonNameComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.PhoneComparison" Collapsed="true">
+    <Position X="9.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\PhoneComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.PictureComparison" Collapsed="true">
+    <Position X="12.25" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAABAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\PictureComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.PostalAddressComparison" Collapsed="true">
+    <Position X="16.5" Y="4" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\PostalAddressComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.SocialProfileIdComparison" Collapsed="true">
+    <Position X="4" Y="5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\SocialProfileIdComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DustInTheWind.Lisimba.Business.Comparison.WebSiteComparison" Collapsed="true">
+    <Position X="8.25" Y="4" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Comparison\WebSiteComparison.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="DustInTheWind.Lisimba.Business.Comparison.IItemComparison">
+    <Position X="9" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQIEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Comparison\IItemComparison.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

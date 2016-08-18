@@ -78,7 +78,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                     Comparisons.Add(comparison);
 
                     // If identical contact found in right address book, remove it.
-                    addressBookRightContacts.Remove(comparison.ContactRight);
+                    addressBookRightContacts.Remove(comparison.ItemRight);
                 }
                 else
                 {

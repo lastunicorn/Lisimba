@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public class ContactComparison
+    public class ContactComparison : ItemComparisonBase<Contact>
     {
         private PersonNameComparison personNameComparison;
         private NotesComparison notesComparison;
@@ -28,78 +28,56 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private CategoryComparison categoryComparison;
         private PictureComparison pictureComparison;
 
-        public Contact ContactLeft { get; private set; }
-        public Contact ContactRight { get; private set; }
-
         public List<IItemComparison> Comparisons { get; private set; }
-        public ItemEquality Equality { get; private set; }
-
+        
         public ContactComparison(Contact contactLeft, Contact contactRight)
+            : base(contactLeft, contactRight)
         {
-            ContactLeft = contactLeft;
-            ContactRight = contactRight;
-
-            Comparisons = new List<IItemComparison>();
-
-            Compare();
         }
 
-        private void Compare()
+        protected override void PrepareToCompareValues()
         {
-            Comparisons.Clear();
-
-            if (ContactLeft == null && ContactRight == null)
-                Equality = ItemEquality.BothEmpty;
-            else if (ContactLeft == null)
-                Equality = ItemEquality.RightExists;
-            else if (ContactRight == null)
-                Equality = ItemEquality.LeftExists;
+            if (Comparisons == null)
+                Comparisons = new List<IItemComparison>();
             else
-            {
-                CompareAllItems();
+                Comparisons.Clear();
+        }
 
-                // Equal
-                // - all items should be Equal
+        protected override bool LeftHasValue()
+        {
+            return ItemLeft != null;
+        }
 
-                bool areEqual = Comparisons.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
+        protected override bool RightHasValue()
+        {
+            return ItemRight != null;
+        }
 
-                if (areEqual)
-                    Equality = ItemEquality.Equal;
-                else
-                {
-                    // Similar
-                    // - Names should not be both empty and should be anything but Different.
-
-                    bool areSimilar = personNameComparison.Equality != ItemEquality.Different &&
-                        personNameComparison.Equality != ItemEquality.BothEmpty;
-
-                    Equality = areSimilar
-                        ? ItemEquality.Similar
-                        : ItemEquality.Different;
-                }
-            }
+        protected override void PrepareToCompareNotEmptyValues()
+        {
+            CompareAllItems();
         }
 
         private void CompareAllItems()
         {
-            personNameComparison = new PersonNameComparison(ContactLeft.Name, ContactRight.Name);
+            personNameComparison = new PersonNameComparison(ItemLeft.Name, ItemRight.Name);
             Comparisons.Add(personNameComparison);
 
-            notesComparison = new NotesComparison(ContactLeft, ContactRight);
+            notesComparison = new NotesComparison(ItemLeft, ItemRight);
             Comparisons.Add(notesComparison);
 
-            birthdayComparison = new DateComparison(ContactLeft.Birthday, ContactRight.Birthday);
+            birthdayComparison = new DateComparison(ItemLeft.Birthday, ItemRight.Birthday);
             Comparisons.Add(birthdayComparison);
 
-            categoryComparison = new CategoryComparison(ContactLeft, ContactRight);
+            categoryComparison = new CategoryComparison(ItemLeft, ItemRight);
             Comparisons.Add(categoryComparison);
 
-            pictureComparison = new PictureComparison(ContactLeft.Picture, ContactRight.Picture);
+            pictureComparison = new PictureComparison(ItemLeft.Picture, ItemRight.Picture);
             Comparisons.Add(pictureComparison);
 
-            List<ContactItem> contactRightItems = ContactRight.Items.ToList();
+            List<ContactItem> contactRightItems = ItemRight.Items.ToList();
 
-            foreach (ContactItem itemLeft in ContactLeft.Items)
+            foreach (ContactItem itemLeft in ItemLeft.Items)
             {
                 IItemComparison comparison = contactRightItems
                     .Select(x => ItemComparisonFactory.Create(itemLeft, x))
@@ -118,6 +96,23 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
             foreach (ContactItem itemRight in contactRightItems)
                 Comparisons.Add(ItemComparisonFactory.Create(null, itemRight));
+        }
+
+        protected override bool ValuesAreEqual()
+        {
+            // Equal
+            // - all items should be Equal or Empty
+
+            return Comparisons.All(x => x.Equality == ItemEquality.BothEmpty || x.Equality == ItemEquality.Equal);
+        }
+
+        protected override bool ValuesAreSimilar()
+        {
+            // Similar
+            // - Names should not be both empty and should be anything but Different.
+
+            return personNameComparison.Equality != ItemEquality.Different &&
+                   personNameComparison.Equality != ItemEquality.BothEmpty;
         }
     }
 }

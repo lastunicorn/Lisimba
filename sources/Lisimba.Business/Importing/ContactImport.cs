@@ -21,12 +21,8 @@ using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public class ContactImport
+    public class ContactImport : ItemImportBase<Contact>
     {
-        public Contact Source { get; private set; }
-        public Contact Destination { get; private set; }
-        public ImportType ImportType { get; private set; }
-
         public List<ItemImport> ItemImports { get; private set; }
 
         public static ContactImport Create(ContactComparison contactComparison)
@@ -47,7 +43,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 case ItemEquality.Different:
                     return new ContactImport
                     {
-                        Source = contactComparison.ContactRight,
+                        Source = contactComparison.ItemRight,
                         Destination = null,
                         ImportType = ImportType.AddAsNew
                     };
@@ -55,21 +51,21 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 case ItemEquality.Similar:
                     return new ContactImport
                     {
-                        Source = contactComparison.ContactRight,
-                        Destination = contactComparison.ContactLeft,
+                        Source = contactComparison.ItemRight,
+                        Destination = contactComparison.ItemLeft,
                         ImportType = ImportType.Merge,
                         ItemImports = contactComparison.Comparisons
-                            .Select(x=> new ItemImport(x))
+                            .Select(ItemImport.Create)
                             .ToList()
                     };
 
                 default:
-                    string message = string.Format("Cannot import contact {0}", contactComparison.ContactRight);
+                    string message = string.Format("Cannot import contact {0}", contactComparison.ItemRight);
                     throw new LisimbaException(message);
             }
         }
 
-        public void Merge()
+        public override void Merge()
         {
         }
     }

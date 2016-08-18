@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            Assert.That(contactComparison.ContactRight, Is.SameAs(contactRight));
+            Assert.That(contactComparison.ItemRight, Is.SameAs(contactRight));
         }
 
         [Test]
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
-            Assert.That(contactComparison.ContactLeft, Is.SameAs(contactLeft));
+            Assert.That(contactComparison.ItemLeft, Is.SameAs(contactLeft));
         }
 
         [Test]
