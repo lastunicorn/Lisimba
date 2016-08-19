@@ -28,15 +28,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class GateFlow : IFlow
     {
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly EnhancedConsole console;
 
-        public GateFlow(AvailableGates availableGates, EnhancedConsole console)
+        public GateFlow(Gates gates, EnhancedConsole console)
         {
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.console = console;
         }
 
@@ -44,14 +44,14 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
         {
             if (parameters.Count == 0)
             {
-                DisplayGate(availableGates.DefaultGate);
+                DisplayGate(gates.DefaultGate);
             }
             else
             {
-                availableGates.SetDefaultGate(parameters[1]);
+                gates.SetDefaultGate(parameters[1]);
 
                 DisplayGateChangeSuccess();
-                DisplayGate(availableGates.DefaultGate);
+                DisplayGate(gates.DefaultGate);
             }
         }
 

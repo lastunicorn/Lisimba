@@ -16,8 +16,6 @@
 
 using System;
 using System.Windows.Forms;
-using DustInTheWind.WinFormsCommon;
-using DustInTheWind.WinFormsCommon.Utils;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms
 {
@@ -29,8 +27,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
 
             InitializeComponent();
 
-            gateSelector1.AvailableGates = viewModel.AvailableGates;
-            gateSelector1.Bind(x => x.Gates, viewModel, x => x.Gates, false, DataSourceUpdateMode.Never);
+            gateSelector1.Gates = viewModel.Gates;
         }
 
         private void GateSelectorForm_Deactivate(object sender, EventArgs e)

@@ -23,7 +23,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
     internal class LisimbaStatusBarViewModel : ViewModelBase
     {
         private readonly ApplicationStatus applicationStatus;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly WindowSystem windowSystem;
 
         private string statusText;
@@ -49,22 +49,22 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             }
         }
 
-        public LisimbaStatusBarViewModel(ApplicationStatus applicationStatus, AvailableGates availableGates, WindowSystem windowSystem)
+        public LisimbaStatusBarViewModel(ApplicationStatus applicationStatus, Gates gates, WindowSystem windowSystem)
         {
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             this.applicationStatus = applicationStatus;
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.windowSystem = windowSystem;
 
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
-            availableGates.GateChanged += HandleDefaultGateChanged;
+            gates.GateChanged += HandleDefaultGateChanged;
 
-            DefaultGate = availableGates.DefaultGate == null
+            DefaultGate = gates.DefaultGate == null
                 ? string.Empty
-                : availableGates.DefaultGate.Name;
+                : gates.DefaultGate.Name;
 
             StatusText = applicationStatus.StatusText;
         }
@@ -76,9 +76,9 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
 
         private void HandleDefaultGateChanged(object sender, EventArgs e)
         {
-            DefaultGate = availableGates.DefaultGate == null
+            DefaultGate = gates.DefaultGate == null
                 ? string.Empty
-                : availableGates.DefaultGate.Name;
+                : gates.DefaultGate.Name;
         }
 
         public void DefaultGateWasClicked(Point point)

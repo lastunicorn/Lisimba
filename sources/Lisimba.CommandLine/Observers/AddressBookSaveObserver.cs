@@ -30,17 +30,17 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
     {
         private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public AddressBookSaveObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public AddressBookSaveObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void Start()
@@ -87,7 +87,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
         {
             console.WriteLineNormal(Resources.GateListTitle);
 
-            List<IGate> gates = availableGates.GetAllGates().ToList();
+            List<IGate> gates = this.gates.GetAllGates().ToList();
 
             DisplayGates(gates);
 

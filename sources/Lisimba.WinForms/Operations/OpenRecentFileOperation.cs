@@ -27,21 +27,21 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
     internal class OpenRecentFileOperation : OperationBase<AddressBookLocationInfo>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenRecentFileOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem, AvailableGates availableGates)
+        public OpenRecentFileOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem, Gates gates)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         protected override void DoExecute(AddressBookLocationInfo file)
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             if (file == null)
                 return;
 
-            IGate gate = availableGates.GetGate(file.GateId);
+            IGate gate = gates.GetGate(file.GateId);
             openedAddressBooks.OpenAddressBook(file.FileName, gate);
         }
     }

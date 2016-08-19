@@ -34,17 +34,17 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly EnhancedConsole console;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public ImportFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, AvailableGates availableGates)
+        public ImportFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, Gates gates)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (console == null) throw new ArgumentNullException("console");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.openedAddressBooks = openedAddressBooks;
             this.console = console;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void Execute(IList<string> parameters)
@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (parameters.Count == 0)
                 throw new LisimbaException("Specify the address book to import from.");
 
-            IGate gate = availableGates.GetGate("ZipXmlGate");
+            IGate gate = gates.GetGate("ZipXmlGate");
             AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
             AddressBook currentaddressBook = openedAddressBooks.Current.AddressBook;

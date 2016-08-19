@@ -15,36 +15,20 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.ObjectModel;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.WinFormsCommon;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     public class GateSelectorViewModel : ViewModelBase
     {
-        private ObservableCollection<IGate> gates;
+        public Gates Gates { get; private set; }
 
-        public ObservableCollection<IGate> Gates
+        public GateSelectorViewModel(Gates gates)
         {
-            get { return gates; }
-            set
-            {
-                gates = value;
-                OnPropertyChanged();
-            }
-        }
+            if (gates == null) throw new ArgumentNullException("gates");
 
-        public AvailableGates AvailableGates { get; private set; }
-
-        public GateSelectorViewModel(AvailableGates availableGates)
-        {
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
-
-            AvailableGates = availableGates;
-
-            Gates = new ObservableCollection<IGate>(availableGates.GetAllGates());
+            Gates = gates;
         }
     }
 }

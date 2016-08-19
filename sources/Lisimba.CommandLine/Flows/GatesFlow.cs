@@ -26,20 +26,20 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
     internal class GatesFlow : IFlow
     {
         private readonly EnhancedConsole console;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public GatesFlow(EnhancedConsole console, AvailableGates availableGates)
+        public GatesFlow(EnhancedConsole console, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void Execute(IList<string> parameters)
         {
-            IEnumerable<IGate> gates = availableGates.GetAllGates();
+            IEnumerable<IGate> gates = this.gates.GetAllGates();
 
             foreach (IGate gate in gates)
             {

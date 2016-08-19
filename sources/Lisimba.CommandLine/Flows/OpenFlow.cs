@@ -30,18 +30,18 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
     internal class OpenFlow : IFlow
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly ApplicationConfiguration config;
 
         public OpenFlow(OpenedAddressBooks openedAddressBooks,
-            AvailableGates availableGates, ApplicationConfiguration config)
+            Gates gates, ApplicationConfiguration config)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (config == null) throw new ArgumentNullException("config");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.config = config;
         }
 
@@ -66,13 +66,13 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (parameters.Count >= 2)
             {
                 string gateId = parameters[1];
-                return availableGates.GetGate(gateId);
+                return gates.GetGate(gateId);
             }
 
-            if (availableGates.DefaultGate == null)
+            if (gates.DefaultGate == null)
                 throw new LisimbaException(Resources.NoDefaultGateError);
 
-            return availableGates.DefaultGate;
+            return gates.DefaultGate;
         }
 
         private void OpenLastAddressBook()
@@ -97,7 +97,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             try
             {
-                return availableGates.GetGate(addressBookLocationInfo.GateId);
+                return gates.GetGate(addressBookLocationInfo.GateId);
             }
             catch (Exception ex)
             {

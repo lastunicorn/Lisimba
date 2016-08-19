@@ -16,48 +16,31 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Business.GateModel;
 
 namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     public partial class GateSelector : UserControl
     {
-        private ObservableCollection<IGate> gates;
+        private Gates gates;
 
-        public ObservableCollection<IGate> Gates
+        public Gates Gates
         {
             get { return gates; }
             set
             {
-                if (gates != null)
-                    gates.CollectionChanged -= HandleGatesCollectionChanged;
-
                 gates = value;
-
-                if (gates != null)
-                    gates.CollectionChanged += HandleGatesCollectionChanged;
-
                 UpdateGates();
             }
         }
-
-        public AvailableGates AvailableGates { get; set; }
 
         public event EventHandler GateSelected;
 
         public GateSelector()
         {
             InitializeComponent();
-        }
-
-        private void HandleGatesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            UpdateGates();
         }
 
         private void UpdateGates()
@@ -101,8 +84,8 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
         {
             Control control = sender as Control;
 
-            if (control != null && AvailableGates != null)
-                AvailableGates.SetDefaultGate(control.Tag as string);
+            if (control != null && gates != null)
+                gates.SetDefaultGate(control.Tag as string);
 
             OnGateSelected();
         }

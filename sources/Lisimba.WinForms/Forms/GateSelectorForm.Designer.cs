@@ -33,9 +33,8 @@
             // 
             // gateSelector1
             // 
-            this.gateSelector1.AvailableGates = null;
-            this.gateSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gateSelector1.Gates = null;
+            this.gateSelector1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gateSelector1.Location = new System.Drawing.Point(0, 0);
             this.gateSelector1.Name = "gateSelector1";
             this.gateSelector1.Size = new System.Drawing.Size(213, 279);

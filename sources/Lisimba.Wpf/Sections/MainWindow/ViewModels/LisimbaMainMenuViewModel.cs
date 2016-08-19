@@ -42,10 +42,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
         public List<CustomMenuItem> ExportMenuItems { get; private set; }
         public ImportCommand ImportCommand { get; private set; }
 
-        public LisimbaMainMenuViewModel(AvailableCommands availableCommands, AvailableGates availableGates)
+        public LisimbaMainMenuViewModel(AvailableCommands availableCommands, Gates gates)
         {
             if (availableCommands == null) throw new ArgumentNullException("availableCommands");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             ApplicationExitCommand = availableCommands.GetCommand<ApplicationExitCommand>();
             NewAddressBookCommand = availableCommands.GetCommand<NewAddressBookCommand>();
@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             UndoCommand = availableCommands.GetCommand<UndoCommand>();
             RedoCommand = availableCommands.GetCommand<RedoCommand>();
 
-            ExportMenuItems = availableGates
+            ExportMenuItems = gates
                 .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
                 })
                 .ToList();
 
-            OpenFromMenuItems = availableGates
+            OpenFromMenuItems = gates
                 .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,

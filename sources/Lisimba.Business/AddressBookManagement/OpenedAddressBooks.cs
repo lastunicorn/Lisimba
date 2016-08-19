@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
     public class OpenedAddressBooks
     {
         private readonly RecentFiles recentFiles;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private AddressBookShell current;
         private Contact currentContact;
 
@@ -92,21 +92,21 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
         }
 
-        public OpenedAddressBooks(RecentFiles recentFiles, AvailableGates availableGates)
+        public OpenedAddressBooks(RecentFiles recentFiles, Gates gates)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.recentFiles = recentFiles;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         private void HandleGateNeeded(object sender, GateNeededEventArgs e)
         {
-            bool existsDefaultGate = availableGates.DefaultGate != null && availableGates.DefaultGate.GetType() != typeof(EmptyGate);
+            bool existsDefaultGate = gates.DefaultGate != null && gates.DefaultGate.GetType() != typeof(EmptyGate);
 
             if (existsDefaultGate)
-                e.Gate = availableGates.DefaultGate;
+                e.Gate = gates.DefaultGate;
             else
                 OnGateNeeded(e);
         }

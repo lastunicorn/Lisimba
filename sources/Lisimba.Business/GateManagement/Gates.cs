@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
     /// <summary>
     /// Manages the gates available in the application.
     /// </summary>
-    public class AvailableGates : IEnumerable<IGate>
+    public class Gates : IEnumerable<IGate>
     {
         private readonly ApplicationConfiguration config;
         private readonly GateProvider gateProvider;
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
 
         public event EventHandler GateChanged;
 
-        public AvailableGates(GateProvider gateProvider, ApplicationConfiguration config)
+        public Gates(GateProvider gateProvider, ApplicationConfiguration config)
         {
             if (gateProvider == null) throw new ArgumentNullException("gateProvider");
             if (config == null) throw new ArgumentNullException("config");

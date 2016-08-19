@@ -26,15 +26,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
     internal class Welcomer
     {
         private readonly EnhancedConsole console;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public Welcomer(EnhancedConsole console, AvailableGates availableGates)
+        public Welcomer(EnhancedConsole console, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void SayWelcome()
@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
             var parameters = new
             {
                 Title = GetTitle(),
-                GateInfo = string.Format(Resources.DefaultGateMessage, availableGates.DefaultGateName)
+                GateInfo = string.Format(Resources.DefaultGateMessage, gates.DefaultGateName)
             };
 
             ConsoleTemplate consoleTemplate = ConsoleTemplate.CreateFromEmbeddedFile(templateFileName, parameters);

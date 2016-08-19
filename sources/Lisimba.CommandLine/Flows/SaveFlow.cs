@@ -31,17 +31,17 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
     {
         private readonly EnhancedConsole console;
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public SaveFlow(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, AvailableGates availableGates)
+        public SaveFlow(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void Execute(IList<string> parameters)
@@ -63,7 +63,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
                 if (parameters.Count >= 2)
                 {
-                    IGate gate = availableGates.GetGate(parameters[1]);
+                    IGate gate = gates.GetGate(parameters[1]);
                     openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
                 }
                 else

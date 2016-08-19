@@ -26,19 +26,19 @@ namespace DustInTheWind.Lisimba.WinForms.MainMenu
 {
     class ImportsMenuItemViewModel : ListMenuItemViewModel
     {
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
-        public ImportsMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation, AvailableGates availableGates)
+        public ImportsMenuItemViewModel(ApplicationStatus applicationStatus, IOperation operation, Gates gates)
             : base(applicationStatus, operation)
         {
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         protected override IEnumerable<CustomButtonViewModel> GetItems()
         {
-            return availableGates
+            return gates
                 .Select(x => new ImportMenuItemViewModel(applicationStatus, ChildrenOpertion)
                 {
                     Text = x.Name,

@@ -30,10 +30,10 @@ namespace DustInTheWind.Lisimba.Business
         private readonly ProgramArguments programArguments;
         private readonly IApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
         public InitialCatalogOpener(OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
-            IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, AvailableGates availableGates)
+            IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, Gates gates)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
@@ -44,7 +44,7 @@ namespace DustInTheWind.Lisimba.Business
             this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
-            this.availableGates = availableGates;
+            this.gates = gates;
         }
 
         public void OpenInitialCatalog()
@@ -63,7 +63,7 @@ namespace DustInTheWind.Lisimba.Business
                     throw new LisimbaException(message);
                 }
 
-                IGate gate = availableGates.GetGate(fileNameToOpenAtLoad.GateId);
+                IGate gate = gates.GetGate(fileNameToOpenAtLoad.GateId);
                 openedAddressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
             }
         }
@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Business
                 return new AddressBookLocationInfo
                 {
                     FileName = programArguments.FileName,
-                    GateId = availableGates.DefaultGate.Id
+                    GateId = gates.DefaultGate.Id
                 };
 
             switch (applicationConfiguration.LoadFileAtStart)

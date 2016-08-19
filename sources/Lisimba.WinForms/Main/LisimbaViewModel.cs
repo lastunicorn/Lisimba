@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly AvailableOperations availableOperations;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly WindowSystem windowSystem;
         private readonly MenuItemViewModelProvider viewModelProvider;
         private readonly LisimbaWindowTitle lisimbaWindowTitle;
@@ -110,7 +110,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
             ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
-            AvailableOperations availableOperations, AvailableGates availableGates, WindowSystem windowSystem,
+            AvailableOperations availableOperations, Gates gates, WindowSystem windowSystem,
             MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider, LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
@@ -118,7 +118,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (mainMenusViewModels == null) throw new ArgumentNullException("mainMenusViewModels");
             if (viewModelProvider == null) throw new ArgumentNullException("viewModelProvider");
@@ -127,7 +127,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             this.applicationStatus = applicationStatus;
             this.openedAddressBooks = openedAddressBooks;
             this.availableOperations = availableOperations;
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.windowSystem = windowSystem;
             this.viewModelProvider = viewModelProvider;
             this.lisimbaWindowTitle = lisimbaWindowTitle;
@@ -146,7 +146,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             ToolStripRedoViewModel = CreateViewModel<RedoOperation>();
             ToolStripAboutViewModel = CreateViewModel<ShowAboutOperation>();
 
-            availableGates.GateChanged += HandleDefaultGateChanged;
+            gates.GateChanged += HandleDefaultGateChanged;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             openedAddressBooks.ContactChanged += HandleContactChanged;
@@ -156,9 +156,9 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             IsContactEditVisible = openedAddressBooks.CurrentContact != null;
             IsAddressBookViewVisible = openedAddressBooks.Current != null;
 
-            DefaultGate = availableGates.DefaultGate == null
+            DefaultGate = gates.DefaultGate == null
                 ? string.Empty
-                : availableGates.DefaultGate.Name;
+                : gates.DefaultGate.Name;
 
             StatusText = applicationStatus.StatusText;
 
@@ -180,9 +180,9 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
         private void HandleDefaultGateChanged(object sender, EventArgs e)
         {
-            DefaultGate = availableGates.DefaultGate == null
+            DefaultGate = gates.DefaultGate == null
                 ? string.Empty
-                : availableGates.DefaultGate.Name;
+                : gates.DefaultGate.Name;
         }
 
         private void HandleContactChanged(object sender, EventArgs e)

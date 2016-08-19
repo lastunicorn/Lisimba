@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
     internal class OpenAddressBookOperation : OperationBase<string>
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
@@ -35,15 +35,15 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
         }
 
         public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
-            AvailableGates availableGates, FileLocationProvider fileLocationProvider)
+            Gates gates, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.fileLocationProvider = fileLocationProvider;
         }
 
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
                     return;
             }
 
-            openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
+            openedAddressBooks.OpenAddressBook(fileName, gates.DefaultGate);
         }
     }
 }

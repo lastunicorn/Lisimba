@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly FileLocationProvider fileLocationProvider;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
 
         public override string ShortDescription
         {
@@ -37,16 +37,16 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
         }
 
         public SaveAsAddressBookCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
-            FileLocationProvider fileLocationProvider, AvailableGates availableGates)
+            FileLocationProvider fileLocationProvider, Gates gates)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
 
             this.openedAddressBooks = openedAddressBooks;
             this.fileLocationProvider = fileLocationProvider;
-            this.availableGates = availableGates;
+            this.gates = gates;
 
             openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             IsEnabled = openedAddressBooks.Current != null;
@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 
             string fileName = null;
 
-            FileGate fileGate = availableGates.DefaultGate as FileGate;
+            FileGate fileGate = gates.DefaultGate as FileGate;
 
             if (fileGate != null)
             {

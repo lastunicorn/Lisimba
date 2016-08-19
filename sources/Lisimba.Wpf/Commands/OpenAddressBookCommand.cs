@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
     internal class OpenAddressBookCommand : CommandBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
-        private readonly AvailableGates availableGates;
+        private readonly Gates gates;
         private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
@@ -36,15 +36,15 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
         }
 
         public OpenAddressBookCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
-            AvailableGates availableGates, FileLocationProvider fileLocationProvider)
+            Gates gates, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            if (availableGates == null) throw new ArgumentNullException("availableGates");
+            if (gates == null) throw new ArgumentNullException("gates");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
             this.openedAddressBooks = openedAddressBooks;
-            this.availableGates = availableGates;
+            this.gates = gates;
             this.fileLocationProvider = fileLocationProvider;
         }
 
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 
             if (fileName == null)
             {
-                FileGate fileGate = availableGates.DefaultGate as FileGate;
+                FileGate fileGate = gates.DefaultGate as FileGate;
 
                 if (fileGate != null)
                 {
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                 }
             }
 
-            openedAddressBooks.OpenAddressBook(fileName, availableGates.DefaultGate);
+            openedAddressBooks.OpenAddressBook(fileName, gates.DefaultGate);
         }
 
         private string AskForFileToOpen(FileGate fileGate)
