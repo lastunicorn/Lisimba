@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             yield return unityContainer.Resolve<NewContactCommand>();
             yield return unityContainer.Resolve<DeleteCurrentContactCommand>();
             yield return unityContainer.Resolve<ApplicationExitCommand>();
-            yield return unityContainer.Resolve<ImportAddressBookCommand>();
+            yield return unityContainer.Resolve<OpenFromCommand>();
             yield return unityContainer.Resolve<ExportAddressBookCommand>();
             //yield return unityContainer.Resolve<OpenRecentFileOperation>();
             yield return unityContainer.Resolve<UndoCommand>();

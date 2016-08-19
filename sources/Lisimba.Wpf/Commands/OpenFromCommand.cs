@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Wpf.LocationProviders;
@@ -24,12 +23,12 @@ using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.Commands
 {
-    internal class ImportAddressBookCommand : CommandBase
+    internal class OpenFromCommand : CommandBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
         private readonly FileLocationProvider fileLocationProvider;
 
-        public ImportAddressBookCommand(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
+        public OpenFromCommand(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -39,14 +38,14 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             this.fileLocationProvider = fileLocationProvider;
         }
 
-        public ImportAddressBookCommand(WindowSystem windowSystem)
+        public OpenFromCommand(WindowSystem windowSystem)
             : base(windowSystem)
         {
         }
 
         public override string ShortDescription
         {
-            get { return LocalizedResources.ImportOperationDescription; }
+            get { return LocalizedResources.OpenFromOperationDescription; }
         }
 
         protected override void DoExecute(object parameter)
@@ -70,14 +69,14 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                     return;
             }
 
-            openedAddressBooks.Import(fileName, gate);
+            openedAddressBooks.OpenAddressBook(fileName, gate);
         }
 
         private string AskForFileToOpen(FileGate fileGate)
         {
             List<FileType> fileTypes = new List<FileType>(fileGate.SupportedFileTypes)
             {
-                new FileType {FileTypeName = "All Files", Extension = "*"}
+                new FileType { FileTypeName = "All Files", Extension = "*" }
             };
 
             return fileLocationProvider.AskToOpen(fileTypes, fileTypes[0]);

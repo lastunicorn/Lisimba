@@ -22,12 +22,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:wpf="clr-namespace:DustInTheWind.Lisimba.Wpf"
+             xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
-             d:DataContext="{d:DesignInstance mainWindows:LisimbaMainMenuViewModel}">
+             d:DataContext="{d:DesignInstance viewModels:LisimbaMainMenuViewModel}">
 
     <Menu>
+        
         <MenuItem Header="_File">
             <MenuItem Header="_New" Command="{Binding NewAddressBookCommand}">
                 <MenuItem.Icon>
@@ -39,17 +41,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <Image Width="16" Height="16" Source="{StaticResource OpenIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}">
-                <MenuItem.Icon>
-                    <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource SaveIcon}"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
-            <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
-            <Separator />
             <MenuItem
-                Header="_Export"
-                ItemsSource="{Binding ExportMenuItems}"
+                Header="Open _From"
+                ItemsSource="{Binding OpenFromMenuItems}"
                 DisplayMemberPath="Text">
 
                 <MenuItem.Resources>
@@ -64,9 +58,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
+            <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}">
+                <MenuItem.Icon>
+                    <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource SaveIcon}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
+            <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
+            <Separator />
             <MenuItem
-                Header="_Import"
-                ItemsSource="{Binding ImportMenuItems}"
+                Header="_Export"
+                ItemsSource="{Binding ExportMenuItems}"
                 DisplayMemberPath="Text">
 
                 <MenuItem.Resources>

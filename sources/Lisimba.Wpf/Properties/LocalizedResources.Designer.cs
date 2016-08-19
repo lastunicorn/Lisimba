@@ -170,15 +170,6 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Imports an address book..
-        /// </summary>
-        internal static string ImportOperationDescription {
-            get {
-                return ResourceManager.GetString("ImportOperationDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Info.
         /// </summary>
         internal static string InfoPopup_Title {
@@ -202,6 +193,15 @@ namespace DustInTheWind.Lisimba.Wpf.Properties {
         internal static string OpenAddressBookOperationDescription {
             get {
                 return ResourceManager.GetString("OpenAddressBookOperationDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Imports an address book..
+        /// </summary>
+        internal static string OpenFromOperationDescription {
+            get {
+                return ResourceManager.GetString("OpenFromOperationDescription", resourceCulture);
             }
         }
         

@@ -39,7 +39,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
         public RedoCommand RedoCommand { get; private set; }
 
         public List<CustomMenuItem> ExportMenuItems { get; private set; }
-        public List<CustomMenuItem> ImportMenuItems { get; private set; }
+        public List<CustomMenuItem> OpenFromMenuItems { get; private set; }
 
         public LisimbaMainMenuViewModel(AvailableCommands availableCommands, AvailableGates availableGates)
         {
@@ -69,11 +69,11 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
                 })
             .ToList();
 
-            ImportMenuItems = availableGates.Select(x =>
+            OpenFromMenuItems = availableGates.Select(x =>
                 new CustomMenuItem
                 {
                     Text = x.Name,
-                    Command = availableCommands.GetCommand<ImportAddressBookCommand>(),
+                    Command = availableCommands.GetCommand<OpenFromCommand>(),
                     Icon = x.Icon16 != null ? x.Icon16.ToBitmapSource() : null,
                     Gate = x
                 })

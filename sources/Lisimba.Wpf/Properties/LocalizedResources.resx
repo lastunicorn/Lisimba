@@ -154,7 +154,7 @@ Do you wanna save it before proceedeing?</value>
   <data name="ExportOperationDescription" xml:space="preserve">
     <value>Exports the current address book.</value>
   </data>
-  <data name="ImportOperationDescription" xml:space="preserve">
+  <data name="OpenFromOperationDescription" xml:space="preserve">
     <value>Imports an address book.</value>
   </data>
   <data name="InfoPopup_Title" xml:space="preserve">

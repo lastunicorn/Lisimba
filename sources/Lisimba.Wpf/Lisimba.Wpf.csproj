@@ -80,7 +80,7 @@
     <Compile Include="AutoGreyableImage.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\ExportAddressBookCommand.cs" />
-    <Compile Include="Commands\ImportAddressBookCommand.cs" />
+    <Compile Include="Commands\OpenFromCommand.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="ExtendedCommands.cs" />
     <Compile Include="FocusBehavior.cs" />
