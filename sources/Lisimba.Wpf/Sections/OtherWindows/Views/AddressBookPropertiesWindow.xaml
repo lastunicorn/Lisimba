@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels"
         mc:Ignorable="d"
         Title="Properties"
         Icon="{StaticResource LisimbaIcon}"
@@ -31,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         x:ClassModifier="internal"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
-        d:DataContext="{d:DesignInstance mainWindows:AddressBookPropertiesViewModel}"
+        d:DataContext="{d:DesignInstance viewModels:AddressBookPropertiesViewModel}"
         FocusManager.FocusedElement="{Binding ElementName=BookNameTextBox}">
 
     <DockPanel>
