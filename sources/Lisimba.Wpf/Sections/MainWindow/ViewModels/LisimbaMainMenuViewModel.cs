@@ -28,6 +28,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
         public ApplicationExitCommand ApplicationExitCommand { get; private set; }
         public NewAddressBookCommand NewAddressBookCommand { get; private set; }
         public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
+        public List<CustomMenuItem> OpenFromMenuItems { get; private set; }
         public SaveAddressBookCommand SaveAddressBookCommand { get; private set; }
         public SaveAsAddressBookCommand SaveAsAddressBookCommand { get; private set; }
         public CloseAddressBookCommand CloseAddressBookCommand { get; private set; }
@@ -39,7 +40,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
         public RedoCommand RedoCommand { get; private set; }
 
         public List<CustomMenuItem> ExportMenuItems { get; private set; }
-        public List<CustomMenuItem> OpenFromMenuItems { get; private set; }
+        public ImportCommand ImportCommand { get; private set; }
 
         public LisimbaMainMenuViewModel(AvailableCommands availableCommands, AvailableGates availableGates)
         {
@@ -52,6 +53,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             SaveAddressBookCommand = availableCommands.GetCommand<SaveAddressBookCommand>();
             SaveAsAddressBookCommand = availableCommands.GetCommand<SaveAsAddressBookCommand>();
             CloseAddressBookCommand = availableCommands.GetCommand<CloseAddressBookCommand>();
+            ImportCommand = availableCommands.GetCommand<ImportCommand>();
             ShowAddressBookPropertiesCommand = availableCommands.GetCommand<ShowAddressBookPropertiesCommand>();
             ShowAboutCommand = availableCommands.GetCommand<ShowAboutCommand>();
             NewContactCommand = availableCommands.GetCommand<NewContactCommand>();
@@ -59,25 +61,25 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             UndoCommand = availableCommands.GetCommand<UndoCommand>();
             RedoCommand = availableCommands.GetCommand<RedoCommand>();
 
-            ExportMenuItems = availableGates.Select(x =>
-                new CustomMenuItem
+            ExportMenuItems = availableGates
+                .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,
                     Command = availableCommands.GetCommand<ExportAddressBookCommand>(),
                     Icon = x.Icon16 != null ? x.Icon16.ToBitmapSource() : null,
                     Gate = x
                 })
-            .ToList();
+                .ToList();
 
-            OpenFromMenuItems = availableGates.Select(x =>
-                new CustomMenuItem
+            OpenFromMenuItems = availableGates
+                .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,
                     Command = availableCommands.GetCommand<OpenFromCommand>(),
                     Icon = x.Icon16 != null ? x.Icon16.ToBitmapSource() : null,
                     Gate = x
                 })
-            .ToList();
+                .ToList();
         }
     }
 }

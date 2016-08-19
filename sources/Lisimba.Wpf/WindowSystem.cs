@@ -181,5 +181,12 @@ namespace DustInTheWind.Lisimba.Wpf
 
             return dialogResult == MessageBoxResult.Yes;
         }
+
+        public void DisplayImport()
+        {
+            ImportWindow window = uiFactory.CreateWindow<ImportWindow>();
+            window.Owner = mainWindow;
+            window.ShowDialog();
+        }
     }
 }

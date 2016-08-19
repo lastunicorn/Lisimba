@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -20,16 +20,16 @@ using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.Commands
 {
-    internal class ShowAddressBookPropertiesCommand : CommandBase
+    internal class ImportCommand : CommandBase
     {
         private readonly OpenedAddressBooks openedAddressBooks;
 
         public override string ShortDescription
         {
-            get { return LocalizedResources.ShowAddressBookPropertiesOperationDescription; }
+            get { return LocalizedResources.ImportOperationDescription; }
         }
 
-        public ShowAddressBookPropertiesCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public ImportCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
             if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 
         protected override void DoExecute(object parameter)
         {
-            WindowSystem.DisplayAddressBookProperties();
+            WindowSystem.DisplayImport();
         }
     }
 }

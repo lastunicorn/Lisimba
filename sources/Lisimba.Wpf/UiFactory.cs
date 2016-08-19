@@ -17,7 +17,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using DustInTheWind.Lisimba.Wpf.Operations;
 using Microsoft.Practices.Unity;
 
 namespace DustInTheWind.Lisimba.Wpf

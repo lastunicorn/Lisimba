@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         WindowStartupLocation="CenterOwner"
         Icon="{StaticResource LisimbaIcon}"
         ResizeMode="NoResize"
-        d:DataContext="{d:DesignInstance mainWindows:AboutViewModel}">
+        d:DataContext="{d:DesignInstance viewModels:AboutViewModel}">
 
     <Window.DataContext>
         <viewModels:AboutViewModel/>

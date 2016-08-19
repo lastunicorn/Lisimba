@@ -29,18 +29,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              d:DataContext="{d:DesignInstance viewModels:LisimbaMainMenuViewModel}">
 
     <Menu>
-        
+
         <MenuItem Header="_File">
+
             <MenuItem Header="_New" Command="{Binding NewAddressBookCommand}">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="{StaticResource NewIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
             <MenuItem Header="_Open..." Command="{Binding OpenAddressBookCommand}">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="{StaticResource OpenIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
             <MenuItem
                 Header="Open _From"
                 ItemsSource="{Binding OpenFromMenuItems}"
@@ -58,14 +61,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
+
             <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}">
                 <MenuItem.Icon>
                     <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource SaveIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
             <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
+
             <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
+
             <Separator />
+
             <MenuItem
                 Header="_Export"
                 ItemsSource="{Binding ExportMenuItems}"
@@ -83,40 +91,57 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
+
+            <MenuItem Header="_Import" Command="{Binding ImportCommand}" />
+
             <Separator/>
+
             <MenuItem Header="Recent _Files" />
+
             <Separator/>
+
             <MenuItem Header="E_xit" Command="{Binding ApplicationExitCommand}">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="{StaticResource ExitIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
         </MenuItem>
 
         <MenuItem Header="_Address Book">
+
             <MenuItem Header="_Add Contact" Command="{Binding NewContactCommand}" />
+
             <MenuItem Header="_Delete Contact" Command="{Binding DeleteCurrentContactCommand}" />
+
             <Separator />
+
             <MenuItem Header="_Undo" Command="{Binding UndoCommand}">
                 <MenuItem.Icon>
                     <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource UndoIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
             <MenuItem Header="_Redo" Command="{Binding RedoCommand}">
                 <MenuItem.Icon>
                     <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource RedoIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
             <Separator/>
+
             <MenuItem Header="_Properties" Command="{Binding ShowAddressBookPropertiesCommand}" />
+
         </MenuItem>
 
         <MenuItem Header="_Help">
+
             <MenuItem Header="_About" Command="{Binding ShowAboutCommand}">
                 <MenuItem.Icon>
                     <Image Width="16" Height="16" Source="{StaticResource AboutIcon}"/>
                 </MenuItem.Icon>
             </MenuItem>
+
         </MenuItem>
 
     </Menu>

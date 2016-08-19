@@ -51,6 +51,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
             yield return unityContainer.Resolve<UndoCommand>();
             yield return unityContainer.Resolve<RedoCommand>();
             //yield return unityContainer.Resolve<ShowBiorhythmOperation>();
+            yield return unityContainer.Resolve<ImportCommand>();
         }
     }
 }

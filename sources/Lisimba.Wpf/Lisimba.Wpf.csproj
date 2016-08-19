@@ -80,6 +80,7 @@
     <Compile Include="AutoGreyableImage.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\ExportAddressBookCommand.cs" />
+    <Compile Include="Commands\ImportCommand.cs" />
     <Compile Include="Commands\OpenFromCommand.cs" />
     <Compile Include="DrawingExtensions.cs" />
     <Compile Include="ExtendedCommands.cs" />
@@ -212,6 +213,9 @@
     <Compile Include="LocationProviders\FileLocationProvider.cs" />
     <Compile Include="Sections\AddressBookSection\Masking.cs" />
     <Compile Include="Sections\OtherWindows\SortingComboBoxItem.cs" />
+    <Compile Include="Sections\OtherWindows\Views\ImportWindow.xaml.cs">
+      <DependentUpon>ImportWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sections\StartSection\StartPanel.xaml.cs">
       <DependentUpon>StartPanel.xaml</DependentUpon>
     </Compile>
@@ -337,6 +341,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Sections\OtherWindows\Views\ImportWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sections\StartSection\StartPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
