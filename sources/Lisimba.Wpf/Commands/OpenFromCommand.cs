@@ -25,16 +25,16 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 {
     internal class OpenFromCommand : CommandBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
 
-        public OpenFromCommand(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
+        public OpenFromCommand(WindowSystem windowSystem, AddressBooks addressBooks, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.fileLocationProvider = fileLocationProvider;
         }
 
@@ -69,7 +69,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                     return;
             }
 
-            openedAddressBooks.OpenAddressBook(fileName, gate);
+            addressBooks.OpenAddressBook(fileName, gate);
         }
 
         private string AskForFileToOpen(FileGate fileGate)

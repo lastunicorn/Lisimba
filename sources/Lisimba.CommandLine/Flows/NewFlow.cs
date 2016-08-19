@@ -23,13 +23,13 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class NewFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
-        public NewFlow(OpenedAddressBooks openedAddressBooks)
+        public NewFlow(AddressBooks addressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
         }
 
         public void Execute(IList<string> parameters)
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 ? parameters[0]
                 : null;
 
-            openedAddressBooks.CreateNewAddressBook(newName);
+            addressBooks.CreateNewAddressBook(newName);
         }
     }
 }

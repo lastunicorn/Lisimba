@@ -26,21 +26,21 @@ namespace DustInTheWind.Lisimba.Business
 {
     public class InitialCatalogOpener
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly ProgramArguments programArguments;
         private readonly IApplicationConfiguration applicationConfiguration;
         private readonly RecentFiles recentFiles;
         private readonly Gates gates;
 
-        public InitialCatalogOpener(OpenedAddressBooks openedAddressBooks, ProgramArguments programArguments,
+        public InitialCatalogOpener(AddressBooks addressBooks, ProgramArguments programArguments,
             IApplicationConfiguration applicationConfiguration, RecentFiles recentFiles, Gates gates)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.programArguments = programArguments;
             this.applicationConfiguration = applicationConfiguration;
             this.recentFiles = recentFiles;
@@ -53,7 +53,7 @@ namespace DustInTheWind.Lisimba.Business
 
             if (fileNameToOpenAtLoad == null)
             {
-                openedAddressBooks.CreateNewAddressBook(null);
+                addressBooks.CreateNewAddressBook(null);
             }
             else
             {
@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Business
                 }
 
                 IGate gate = gates.GetGate(fileNameToOpenAtLoad.GateId);
-                openedAddressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
+                addressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
             }
         }
 

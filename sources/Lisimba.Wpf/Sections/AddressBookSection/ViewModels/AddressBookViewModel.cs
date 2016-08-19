@@ -17,14 +17,13 @@
 using System;
 using System.Windows;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Wpf.Sections.OtherWindows;
 using DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 {
     internal class AddressBookViewModel : ViewModelBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private Visibility isContactEditVisible;
         private Visibility isNoContactVisible;
 
@@ -52,13 +51,13 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         }
 
         public AddressBookViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            OpenedAddressBooks openedAddressBooks)
+            AddressBooks addressBooks)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
             ContactListViewModel = contactListViewModel;
             ContactEditorViewModel = contactEditorViewModel;
@@ -66,15 +65,15 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             IsContactEditVisible = Visibility.Hidden;
             IsNoContactVisible = Visibility.Visible;
 
-            openedAddressBooks.ContactChanged += HandleContactChanged;
+            addressBooks.ContactChanged += HandleContactChanged;
         }
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            IsContactEditVisible = openedAddressBooks.CurrentContact != null ? Visibility.Visible : Visibility.Hidden;
-            IsNoContactVisible = openedAddressBooks.CurrentContact != null ? Visibility.Hidden : Visibility.Visible;
+            IsContactEditVisible = addressBooks.CurrentContact != null ? Visibility.Visible : Visibility.Hidden;
+            IsNoContactVisible = addressBooks.CurrentContact != null ? Visibility.Hidden : Visibility.Visible;
 
-            //todo: ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
+            //todo: ContactEditorViewModel.ActionQueue = addressBooks.Current.ActionQueue;
         }
     }
 }

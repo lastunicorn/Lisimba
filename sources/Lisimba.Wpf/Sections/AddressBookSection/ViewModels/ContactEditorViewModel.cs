@@ -17,7 +17,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using DustInTheWind.Lisimba.Business.ActionManagement;
@@ -31,7 +30,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 {
     internal class ContactEditorViewModel : ViewModelBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private string name;
         private string notes;
         private BitmapSource picture;
@@ -58,10 +57,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     if (!nameParser.Success)
                         throw new Exception();
 
-                    IAction action = new UpdateContactItemAction(openedAddressBooks.CurrentContact.Name, nameParser.Result);
+                    IAction action = new UpdateContactItemAction(addressBooks.CurrentContact.Name, nameParser.Result);
 
-                    if (openedAddressBooks.Current.ActionQueue != null)
-                        openedAddressBooks.Current.ActionQueue.Do(action);
+                    if (addressBooks.Current.ActionQueue != null)
+                        addressBooks.Current.ActionQueue.Do(action);
                     else
                         action.Do();
                 }
@@ -130,10 +129,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
                 if (!isInitializationMode)
                 {
-                    IAction action = new ChangeContactNotesAction(openedAddressBooks.CurrentContact, notes);
+                    IAction action = new ChangeContactNotesAction(addressBooks.CurrentContact, notes);
 
-                    if (openedAddressBooks.Current.ActionQueue != null)
-                        openedAddressBooks.Current.ActionQueue.Do(action);
+                    if (addressBooks.Current.ActionQueue != null)
+                        addressBooks.Current.ActionQueue.Do(action);
                     else
                         action.Do();
                 }
@@ -153,16 +152,16 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         public ImageClickCommand ImageEditCommand { get; private set; }
         public BirthdayEditCommand BirthdayEditCommand { get; private set; }
 
-        public ContactEditorViewModel(OpenedAddressBooks openedAddressBooks, ZodiacSignViewModel zodiacSignViewModel,
+        public ContactEditorViewModel(AddressBooks addressBooks, ZodiacSignViewModel zodiacSignViewModel,
             ImageClickCommand imageEditCommand, BirthdayEditCommand birthdayEditCommand, AddContactItemClickCommand addContactItemClickCommand)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (zodiacSignViewModel == null) throw new ArgumentNullException("zodiacSignViewModel");
             if (imageEditCommand == null) throw new ArgumentNullException("imageEditCommand");
             if (birthdayEditCommand == null) throw new ArgumentNullException("birthdayEditCommand");
             if (addContactItemClickCommand == null) throw new ArgumentNullException("addContactItemClickCommand");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
             this.addContactItemClickCommand = addContactItemClickCommand;
 
@@ -179,15 +178,15 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 new ContactItemAddViewModel { Text = "Web Site", Command = addContactItemClickCommand, ItemType = typeof(WebSite), Icon = Resources.webaddress.ToBitmapSource() }
             };
 
-            openedAddressBooks.ContactChanging += HandleCurrentContactChanging;
-            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
+            addressBooks.ContactChanging += HandleCurrentContactChanging;
+            addressBooks.ContactChanged += HandleCurrentContactChanged;
 
             RefreshDisplayedData();
         }
 
         private void HandleCurrentContactChanging(object sender, EventArgs e)
         {
-            Contact currentContact = openedAddressBooks.CurrentContact;
+            Contact currentContact = addressBooks.CurrentContact;
 
             if (currentContact != null)
                 currentContact.Changed -= HandleContactChanged;
@@ -195,7 +194,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
         private void HandleCurrentContactChanged(object sender, EventArgs e)
         {
-            Contact currentContact = openedAddressBooks.CurrentContact;
+            Contact currentContact = addressBooks.CurrentContact;
 
             if (currentContact != null)
                 currentContact.Changed += HandleContactChanged;
@@ -209,10 +208,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
             try
             {
-                CanAddItems = openedAddressBooks.CurrentContact != null;
-                addContactItemClickCommand.Contact = openedAddressBooks.CurrentContact;
+                CanAddItems = addressBooks.CurrentContact != null;
+                addContactItemClickCommand.Contact = addressBooks.CurrentContact;
 
-                if (openedAddressBooks.CurrentContact == null)
+                if (addressBooks.CurrentContact == null)
                 {
                     Name = null;
                     Picture = Resources.no_user_128.ToBitmapSource();
@@ -225,7 +224,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 }
                 else
                 {
-                    Contact currentContact = openedAddressBooks.CurrentContact;
+                    Contact currentContact = addressBooks.CurrentContact;
 
                     Name = currentContact.Name.ToString();
 

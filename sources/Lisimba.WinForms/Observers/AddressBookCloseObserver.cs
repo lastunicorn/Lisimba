@@ -25,32 +25,32 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class AddressBookCloseObserver : IObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
         private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookCloseObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
+        public AddressBookCloseObserver(AddressBooks addressBooks, WindowSystem windowSystem,
             ApplicationStatus applicationStatus)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
             this.applicationStatus = applicationStatus;
         }
 
         public void Start()
         {
-            openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
-            openedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
+            addressBooks.AddressBookClosing += HandleAddressBookClosing;
+            addressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         public void Stop()
         {
-            openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
-            openedAddressBooks.AddressBookClosed -= HandleAddressBookClosed;
+            addressBooks.AddressBookClosing -= HandleAddressBookClosing;
+            addressBooks.AddressBookClosed -= HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)

@@ -23,24 +23,24 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class RedoOperation : OperationBase<object>
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.RedoOperationDescription; }
         }
 
-        public RedoOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public RedoOperation(AddressBooks addressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
 
-            if (openedAddressBooks.Current != null)
-                openedAddressBooks.Current.ActionQueue.RedoStackChanged += HandleRedoStackChanged;
+            if (addressBooks.Current != null)
+                addressBooks.Current.ActionQueue.RedoStackChanged += HandleRedoStackChanged;
 
             IsEnabled = CalculateEnableState();
         }
@@ -63,13 +63,13 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 
         private bool CalculateEnableState()
         {
-            return openedAddressBooks.Current != null &&
-                   openedAddressBooks.Current.ActionQueue.CanRedo;
+            return addressBooks.Current != null &&
+                   addressBooks.Current.ActionQueue.CanRedo;
         }
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.Current.ActionQueue.Redo();
+            addressBooks.Current.ActionQueue.Redo();
         }
     }
 }

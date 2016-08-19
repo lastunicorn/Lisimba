@@ -60,12 +60,12 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             }
         }
 
-        public LisimbaViewModel(OpenedAddressBooks openedAddressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
+        public LisimbaViewModel(AddressBooks addressBooks, LisimbaStatusBarViewModel lisimbaStatusBarViewModel,
             LisimbaMainMenuViewModel lisimbaMainMenuViewModel, LisimbaToolBarViewModel lisimbaToolBarViewModel,
             LisimbaWindowTitle lisimbaWindowTitle, AddressBookViewModel addressBookViewModel, StartViewModel startViewModel,
             LisimbaApplication lisimbaApplication, ApplicationConfiguration config)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (lisimbaStatusBarViewModel == null) throw new ArgumentNullException("lisimbaStatusBarViewModel");
             if (lisimbaMainMenuViewModel == null) throw new ArgumentNullException("lisimbaMainMenuViewModel");
             if (lisimbaToolBarViewModel == null) throw new ArgumentNullException("lisimbaToolBarViewModel");
@@ -85,7 +85,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             LisimbaToolBarViewModel = lisimbaToolBarViewModel;
             LisimbaStatusBarViewModel = lisimbaStatusBarViewModel;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
             lisimbaWindowTitle.ValueChanged += HandleLisimbaTitleValueChanged;
             lisimbaApplication.Ending += HandleApplicationEnding;
             lisimbaApplication.EndCanceled += HandleApplicationEndCanceled;

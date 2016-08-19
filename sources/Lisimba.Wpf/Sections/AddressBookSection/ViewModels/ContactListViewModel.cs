@@ -23,13 +23,14 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.Sorting;
+using DustInTheWind.Lisimba.Wpf.Sections.OtherWindows;
 
-namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
+namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 {
     internal class ContactListViewModel : ViewModelBase
     {
         private readonly ApplicationConfiguration applicationConfiguration;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         private CustomObservableCollection<Contact> originalContactsCollection;
         private ListCollectionView contacts;
@@ -53,7 +54,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             set
             {
                 selectedContact = value;
-                openedAddressBooks.CurrentContact = value;
+                addressBooks.CurrentContact = value;
                 OnPropertyChanged();
             }
         }
@@ -86,13 +87,13 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             }
         }
 
-        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks)
+        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, AddressBooks addressBooks)
         {
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
             this.applicationConfiguration = applicationConfiguration;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
             SortingMethods = new List<SortingComboBoxItem>
             {
@@ -106,8 +107,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
             SelectedSortingMethod = GetSortingItem();
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            openedAddressBooks.ContactChanged += HandleContactChanged;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.ContactChanged += HandleContactChanged;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
@@ -144,7 +145,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            SelectedContact = openedAddressBooks.CurrentContact;
+            SelectedContact = addressBooks.CurrentContact;
         }
 
         private bool ShouldContactBeVisible(object item)

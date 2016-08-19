@@ -17,7 +17,7 @@
 using System;
 using System.Windows.Controls;
 
-namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.Views
+namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
 {
     /// <summary>
     /// Interaction logic for ContactList.xaml

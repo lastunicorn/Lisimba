@@ -31,24 +31,24 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class CompareFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
         private readonly Gates gates;
 
-        public CompareFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console, Gates gates)
+        public CompareFlow(AddressBooks addressBooks, EnhancedConsole console, Gates gates)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
             if (gates == null) throw new ArgumentNullException("gates");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
             this.gates = gates;
         }
 
         public void Execute(IList<string> parameters)
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
             if (parameters.Count == 0)
@@ -57,7 +57,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             IGate gate = gates.GetGate("ZipXmlGate");
             AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
-            AddressBook currentaddressBook = openedAddressBooks.Current.AddressBook;
+            AddressBook currentaddressBook = addressBooks.Current.AddressBook;
 
             AddressBookComparison addressBookComparison = new AddressBookComparison(currentaddressBook, addressBook);
             addressBookComparison.Compare();

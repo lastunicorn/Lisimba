@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 {
     internal class ExportAddressBookCommand : CommandBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
@@ -34,22 +34,22 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             get { return LocalizedResources.ExportOperationDescription; }
         }
 
-        public ExportAddressBookCommand(WindowSystem windowSystem, OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider)
+        public ExportAddressBookCommand(WindowSystem windowSystem, AddressBooks addressBooks, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.fileLocationProvider = fileLocationProvider;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = openedAddressBooks.Current != null;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = openedAddressBooks.Current != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
@@ -61,7 +61,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             if (gate == null)
                 throw new ArgumentException("Invalid parameter type. IGate is required.", "parameter");
 
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
             string fileName = null;
@@ -76,7 +76,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                     return;
             }
 
-            openedAddressBooks.Current.Export(fileName, gate);
+            addressBooks.Current.Export(fileName, gate);
         }
 
         private string AskForFileToSave(FileGate fileGate)

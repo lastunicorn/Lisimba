@@ -25,26 +25,26 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class ContactDeleteObserver : IObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
-        public ContactDeleteObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public ContactDeleteObserver(AddressBooks addressBooks, WindowSystem windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
         }
 
         public void Start()
         {
-            openedAddressBooks.ContactDeleting += HandleContactDeleting;
+            addressBooks.ContactDeleting += HandleContactDeleting;
         }
 
         public void Stop()
         {
-            openedAddressBooks.ContactDeleting -= HandleContactDeleting;
+            addressBooks.ContactDeleting -= HandleContactDeleting;
         }
 
         private void HandleContactDeleting(object sender, ContactDeletingEventArgs e)

@@ -30,23 +30,23 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
     internal class SaveFlow : IFlow
     {
         private readonly EnhancedConsole console;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly Gates gates;
 
-        public SaveFlow(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, Gates gates)
+        public SaveFlow(EnhancedConsole console, AddressBooks addressBooks, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.gates = gates;
         }
 
         public void Execute(IList<string> parameters)
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
             if (parameters.Count > 0)
@@ -64,18 +64,18 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
                 if (parameters.Count >= 2)
                 {
                     IGate gate = gates.GetGate(parameters[1]);
-                    openedAddressBooks.Current.SaveAddressBook(newLocation, gate);
+                    addressBooks.Current.SaveAddressBook(newLocation, gate);
                 }
                 else
                 {
                     // todo: what happens if Current does not have a gate?
-                    openedAddressBooks.Current.SaveAddressBook(newLocation);
+                    addressBooks.Current.SaveAddressBook(newLocation);
                 }
             }
             else
             {
                 // todo: what happens if Current does not have a gate?
-                openedAddressBooks.Current.SaveAddressBook();
+                addressBooks.Current.SaveAddressBook();
             }
         }
     }

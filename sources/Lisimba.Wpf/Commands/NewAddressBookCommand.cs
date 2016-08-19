@@ -22,24 +22,24 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 {
     internal class NewAddressBookCommand : CommandBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.CreateNewAddressBookOperationDescription; }
         }
 
-        public NewAddressBookCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public NewAddressBookCommand(AddressBooks addressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
         }
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.CreateNewAddressBook(null);
+            addressBooks.CreateNewAddressBook(null);
         }
     }
 }

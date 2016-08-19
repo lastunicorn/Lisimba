@@ -92,7 +92,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
 
-            <MenuItem Header="_Import" Command="{Binding ImportCommand}" />
+            <MenuItem Header="_Import..." Command="{Binding ImportCommand}" />
 
             <Separator/>
 

@@ -25,27 +25,27 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
     internal class AddressBookCloseObserver : IObserver
     {
         private readonly EnhancedConsole console;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
-        public AddressBookCloseObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks)
+        public AddressBookCloseObserver(EnhancedConsole console, AddressBooks addressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
             this.console = console;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
         }
 
         public void Start()
         {
-            openedAddressBooks.AddressBookClosing += HandleAddressBookClosing;
-            openedAddressBooks.AddressBookClosed += HandleAddressBookClosed;
+            addressBooks.AddressBookClosing += HandleAddressBookClosing;
+            addressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         public void Stop()
         {
-            openedAddressBooks.AddressBookClosing -= HandleAddressBookClosing;
-            openedAddressBooks.AddressBookClosed -= HandleAddressBookClosed;
+            addressBooks.AddressBookClosing -= HandleAddressBookClosing;
+            addressBooks.AddressBookClosed -= HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)

@@ -23,21 +23,21 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class ShowBiorhythmOperation : OperationBase<object>
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.BiorhythmOperationDescription; }
         }
 
-        public ShowBiorhythmOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public ShowBiorhythmOperation(AddressBooks addressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
-            openedAddressBooks.ContactChanged += HandleContactChanged;
+            addressBooks.ContactChanged += HandleContactChanged;
 
             IsEnabled = CalculateEnableState();
         }
@@ -49,13 +49,13 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 
         private bool CalculateEnableState()
         {
-            return openedAddressBooks.CurrentContact != null &&
-                   openedAddressBooks.CurrentContact.Birthday.IsCompleteDate;
+            return addressBooks.CurrentContact != null &&
+                   addressBooks.CurrentContact.Birthday.IsCompleteDate;
         }
 
         protected override void DoExecute(object parameter)
         {
-            windowSystem.DisplayBiorhythm(openedAddressBooks.CurrentContact);
+            windowSystem.DisplayBiorhythm(addressBooks.CurrentContact);
         }
     }
 }

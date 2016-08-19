@@ -22,7 +22,7 @@ namespace DustInTheWind.Lisimba.Business
     public class LisimbaWindowTitle
     {
         private readonly LisimbaApplication lisimbaApplication;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private string value;
 
         public event EventHandler ValueChanged;
@@ -37,22 +37,22 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
         
-        public LisimbaWindowTitle(LisimbaApplication lisimbaApplication, OpenedAddressBooks openedAddressBooks)
+        public LisimbaWindowTitle(LisimbaApplication lisimbaApplication, AddressBooks addressBooks)
         {
             if (lisimbaApplication == null) throw new ArgumentNullException("lisimbaApplication");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
             this.lisimbaApplication = lisimbaApplication;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            openedAddressBooks.AddressBookClosing += HandleAddressBooksClosing;
-            openedAddressBooks.AddressBookOpened += HandleAddressBooksOpened;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.AddressBookClosing += HandleAddressBooksClosing;
+            addressBooks.AddressBookOpened += HandleAddressBooksOpened;
 
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
-                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                addressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
             }
 
             Value = BuildTitle();
@@ -60,12 +60,12 @@ namespace DustInTheWind.Lisimba.Business
 
         private void HandleAddressBooksOpened(object sender, EventArgs e)
         {
-            openedAddressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
+            addressBooks.Current.StatusChanged += HandleAddressBookStatusChanged;
         }
 
         private void HandleAddressBooksClosing(object sender, EventArgs e)
         {
-            openedAddressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
+            addressBooks.Current.StatusChanged -= HandleAddressBookStatusChanged;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
@@ -91,11 +91,11 @@ namespace DustInTheWind.Lisimba.Business
 
         private string BuildTitle()
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 return lisimbaApplication.ProgramName;
 
-            string addressBookName = openedAddressBooks.Current.GetFriendlyName();
-            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
+            string addressBookName = addressBooks.Current.GetFriendlyName();
+            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
             string unsavedSign = isModified ? " *" : string.Empty;
             string programName = lisimbaApplication.ProgramName;
 

@@ -22,32 +22,32 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 {
     internal class SaveAddressBookCommand : CommandBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.SaveAddressBookOperationDescription; }
         }
 
-        public SaveAddressBookCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public SaveAddressBookCommand(AddressBooks addressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = openedAddressBooks.Current != null;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = openedAddressBooks.Current != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.SaveCurrentAddressBook();
+            addressBooks.SaveCurrentAddressBook();
         }
     }
 }

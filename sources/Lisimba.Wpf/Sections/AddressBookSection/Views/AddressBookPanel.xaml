@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:views="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views"
              xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels"
-             xmlns:views1="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.Views"
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="300"
@@ -36,7 +35,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <views1:ContactList
+        <views:ContactList
             Grid.Column="0"
             DataContext="{Binding ContactListViewModel}"/>
 

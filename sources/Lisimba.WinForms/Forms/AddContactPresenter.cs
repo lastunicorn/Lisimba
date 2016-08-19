@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
 {
     internal class AddContactPresenter : ViewModelBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
         public Contact EditedContact { get; private set; }
@@ -35,19 +35,19 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
         public IAddContactView View { get; set; }
         public ContactEditorViewModel ContactEditorViewModel { get; set; }
 
-        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel, OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public AddContactPresenter(ContactEditorViewModel contactEditorViewModel, AddressBooks addressBooks, WindowSystem windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
             ContactEditorViewModel = contactEditorViewModel;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
         }
 
         public void ViewWasLoaded()
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException("There is no opened address book to add contacts to.");
 
             EditedContact = new Contact();
@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
                 if (!allowToContinue)
                     return;
 
-                openedAddressBooks.Current.AddContact(EditedContact);
+                addressBooks.Current.AddContact(EditedContact);
 
                 View.Close();
             }
@@ -81,7 +81,7 @@ namespace DustInTheWind.Lisimba.WinForms.Forms
             if (isNameEmpty)
                 throw new LisimbaException("Please enter a name.");
 
-            bool isAnotherContactWithSameName = openedAddressBooks.Current.AddressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
+            bool isAnotherContactWithSameName = addressBooks.Current.AddressBook.Contacts.Any(x => x.Name.Equals(EditedContact.Name));
 
             return !isAnotherContactWithSameName ||
                 windowSystem.DisplayYesNoExclamation("Another contact with the same name already exists.\nIt will NOT be overwritten.\n\nContinue?", "Another contact exists");

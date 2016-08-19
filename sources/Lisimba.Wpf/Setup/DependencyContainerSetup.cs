@@ -37,7 +37,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
 
             unityContainer.RegisterType<LisimbaApplication>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ProgramArguments>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<OpenedAddressBooks>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<Gates>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AvailableCommands>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());

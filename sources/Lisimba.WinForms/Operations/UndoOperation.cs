@@ -23,24 +23,24 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class UndoOperation : OperationBase<object>
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         public override string ShortDescription
         {
             get { return LocalizedResources.UndoOperationDescription; }
         }
 
-        public UndoOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public UndoOperation(AddressBooks addressBooks, WindowSystem windowSystem)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
 
-            if (openedAddressBooks.Current != null)
-                openedAddressBooks.Current.ActionQueue.UndoStackChanged += HandleUndoStackChanged;
+            if (addressBooks.Current != null)
+                addressBooks.Current.ActionQueue.UndoStackChanged += HandleUndoStackChanged;
 
             IsEnabled = CalculateEnableState();
         }
@@ -63,13 +63,13 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 
         private bool CalculateEnableState()
         {
-            return openedAddressBooks.Current != null &&
-                   openedAddressBooks.Current.ActionQueue.CanUndo;
+            return addressBooks.Current != null &&
+                   addressBooks.Current.ActionQueue.CanUndo;
         }
 
         protected override void DoExecute(object parameter)
         {
-            openedAddressBooks.Current.ActionQueue.Undo();
+            addressBooks.Current.ActionQueue.Undo();
         }
     }
 }

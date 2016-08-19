@@ -24,26 +24,26 @@ namespace DustInTheWind.Lisimba.Wpf.Observers
 {
     internal class AddressBookOpenObserver : IObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
-        public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public AddressBookOpenObserver(AddressBooks addressBooks, WindowSystem windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
         }
 
         public void Start()
         {
-            openedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
+            addressBooks.AddressBookOpened += HandleAddressBookOpened;
         }
 
         public void Stop()
         {
-            openedAddressBooks.AddressBookOpened -= HandleAddressBookOpened;
+            addressBooks.AddressBookOpened -= HandleAddressBookOpened;
         }
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)

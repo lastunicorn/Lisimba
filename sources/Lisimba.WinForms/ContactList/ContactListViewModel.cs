@@ -29,7 +29,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
     internal class ContactListViewModel : ViewModelBase
     {
         private readonly ApplicationConfiguration applicationConfiguration;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private ContactsSortingType selectedSortingMethod;
         private string searchedText;
 
@@ -65,14 +65,14 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
 
         public ContactsToTreeViewBinder ContactsToTreeViewBinder { get; set; }
 
-        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, OpenedAddressBooks openedAddressBooks, ContactMenuViewModels contactMenuViewModels)
+        public ContactListViewModel(ApplicationConfiguration applicationConfiguration, AddressBooks addressBooks, ContactMenuViewModels contactMenuViewModels)
         {
             if (applicationConfiguration == null) throw new ArgumentNullException("applicationConfiguration");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (contactMenuViewModels == null) throw new ArgumentNullException("contactMenuViewModels");
 
             this.applicationConfiguration = applicationConfiguration;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
 
             ContactMenuViewModels = contactMenuViewModels;
 
@@ -88,14 +88,14 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
 
             SelectedSortingMethod = GetSortingType();
 
-            openedAddressBooks.ContactChanged += HandleCurrentContactChanged;
-            openedAddressBooks.AddressBookChanged += HandleOpenedAddressBookChanged;
+            addressBooks.ContactChanged += HandleCurrentContactChanged;
+            addressBooks.AddressBookChanged += HandleOpenedAddressBookChanged;
 
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
-                openedAddressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
-                openedAddressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
-                openedAddressBooks.Current.Saved += HandleCurrentAddressBookSaved;
+                addressBooks.Current.AddressBook.Changed += HandleCurrentAddressBookContentChanged;
+                addressBooks.Current.AddressBook.ContactContentChanged += HandleContactContentChanged;
+                addressBooks.Current.Saved += HandleCurrentAddressBookSaved;
             }
         }
 
@@ -153,7 +153,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
             if (ignoreCurrentContactChange || View == null)
                 return;
 
-            Contact contactToSelect = openedAddressBooks.CurrentContact;
+            Contact contactToSelect = addressBooks.CurrentContact;
 
             TreeNode treeNodeToSelect = (contactToSelect == null || !ContactsToTreeViewBinder.treeNodesByContact.ContainsKey(contactToSelect))
                 ? null
@@ -182,12 +182,12 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
         private void RepopulateFromCurrentAddressBook()
         {
             bool currentDataContainsContacts =
-                openedAddressBooks != null &&
-                openedAddressBooks.Current != null &&
-                openedAddressBooks.Current.AddressBook.Contacts != null;
+                addressBooks != null &&
+                addressBooks.Current != null &&
+                addressBooks.Current.AddressBook.Contacts != null;
 
             CustomObservableCollection<Contact> contacts = currentDataContainsContacts
-                ? openedAddressBooks.Current.AddressBook.Contacts
+                ? addressBooks.Current.AddressBook.Contacts
                 : null;
 
             ContactsToTreeViewBinder.Contacts = contacts;
@@ -210,7 +210,7 @@ namespace DustInTheWind.Lisimba.WinForms.ContactList
                 TreeNode selectedNode = View.GetSelecteContact();
                 Contact selectedContact = selectedNode != null ? (Contact)selectedNode.Tag : null;
 
-                openedAddressBooks.CurrentContact = selectedContact;
+                addressBooks.CurrentContact = selectedContact;
             }
             finally
             {

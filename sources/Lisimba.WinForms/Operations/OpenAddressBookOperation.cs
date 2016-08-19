@@ -25,7 +25,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class OpenAddressBookOperation : OperationBase<string>
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly Gates gates;
         private readonly FileLocationProvider fileLocationProvider;
 
@@ -34,15 +34,15 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             get { return LocalizedResources.OpenAddressBookOperationDescription; }
         }
 
-        public OpenAddressBookOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
+        public OpenAddressBookOperation(AddressBooks addressBooks, WindowSystem windowSystem,
             Gates gates, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.gates = gates;
             this.fileLocationProvider = fileLocationProvider;
         }
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
                     return;
             }
 
-            openedAddressBooks.OpenAddressBook(fileName, gates.DefaultGate);
+            addressBooks.OpenAddressBook(fileName, gates.DefaultGate);
         }
     }
 }

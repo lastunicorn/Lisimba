@@ -131,7 +131,7 @@
     <Compile Include="ConfigSection\SortByConfigElement.cs" />
     <Compile Include="LisimbaApplication.cs" />
     <Compile Include="LisimbaException.cs" />
-    <Compile Include="AddressBookManagement\OpenedAddressBooks.cs" />
+    <Compile Include="AddressBookManagement\AddressBooks.cs" />
     <Compile Include="AddressBookManagement\AddressBookShell.cs" />
     <Compile Include="AddressBookManagement\AddressBookStatus.cs" />
     <Compile Include="GateManagement\GateProvider.cs" />

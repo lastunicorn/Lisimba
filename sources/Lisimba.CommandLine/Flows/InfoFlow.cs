@@ -29,27 +29,27 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class InfoFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
 
-        public InfoFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public InfoFlow(AddressBooks addressBooks, EnhancedConsole console)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
         }
 
         public void Execute(IList<string> parameters)
         {
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
-                string addressBookLocation = openedAddressBooks.Current.Location == null
+                string addressBookLocation = addressBooks.Current.Location == null
                     ? "< not saved yet >"
-                    : Path.GetFullPath(openedAddressBooks.Current.Location);
+                    : Path.GetFullPath(addressBooks.Current.Location);
 
-                DisplayAddressBookInfo(openedAddressBooks.Current.AddressBook, addressBookLocation);
+                DisplayAddressBookInfo(addressBooks.Current.AddressBook, addressBookLocation);
             }
             else
             {

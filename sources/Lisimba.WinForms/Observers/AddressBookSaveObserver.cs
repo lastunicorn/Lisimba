@@ -28,20 +28,20 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class AddressBookSaveObserver : IObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
         private readonly Gates gates;
         private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookSaveObserver(OpenedAddressBooks openedAddressBooks, FileLocationProvider fileLocationProvider,
+        public AddressBookSaveObserver(AddressBooks addressBooks, FileLocationProvider fileLocationProvider,
             Gates gates, ApplicationStatus applicationStatus)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
             if (gates == null) throw new ArgumentNullException("gates");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.fileLocationProvider = fileLocationProvider;
             this.gates = gates;
             this.applicationStatus = applicationStatus;
@@ -49,16 +49,16 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         public void Start()
         {
-            openedAddressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
-            openedAddressBooks.GateNeeded += HandleOpenedAddressBooksGateNeeded;
-            openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+            addressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
+            addressBooks.GateNeeded += HandleAddressBooksGateNeeded;
+            addressBooks.AddressBookSaved += HandleAddressBookSaved;
         }
 
         public void Stop()
         {
-            openedAddressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
-            openedAddressBooks.GateNeeded -= HandleOpenedAddressBooksGateNeeded;
-            openedAddressBooks.AddressBookSaved -= HandleAddressBookSaved;
+            addressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
+            addressBooks.GateNeeded -= HandleAddressBooksGateNeeded;
+            addressBooks.AddressBookSaved -= HandleAddressBookSaved;
         }
 
         private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
                 e.NewLocation = newLocation;
         }
 
-        private void HandleOpenedAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
+        private void HandleAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
         {
             if (gates.DefaultGate == null)
                 throw new LisimbaException(LocalizedResources.NoDefaultGateExists);
@@ -86,7 +86,7 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
-            int contactCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
             applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
         }
     }

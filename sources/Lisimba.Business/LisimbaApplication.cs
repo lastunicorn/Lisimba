@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Business
     public class LisimbaApplication
     {
         private readonly InitialCatalogOpener initialCatalogOpener;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly IUserInterface userInterface;
         private readonly ProgramArguments programArguments;
 
@@ -58,16 +58,16 @@ namespace DustInTheWind.Lisimba.Business
             }
         }
 
-        public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, OpenedAddressBooks openedAddressBooks,
+        public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, AddressBooks addressBooks,
             IUserInterface userInterface, ProgramArguments programArguments)
         {
             if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (userInterface == null) throw new ArgumentNullException("userInterface");
             if (programArguments == null) throw new ArgumentNullException("programArguments");
 
             this.initialCatalogOpener = initialCatalogOpener;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.userInterface = userInterface;
             this.programArguments = programArguments;
         }
@@ -97,7 +97,7 @@ namespace DustInTheWind.Lisimba.Business
 
         public void Exit()
         {
-            bool allowToContinue = openedAddressBooks.CloseCurrentAddressBook();
+            bool allowToContinue = addressBooks.CloseCurrentAddressBook();
             if (!allowToContinue)
                 return;
 

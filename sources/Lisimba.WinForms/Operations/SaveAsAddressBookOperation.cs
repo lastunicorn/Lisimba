@@ -25,7 +25,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
 {
     internal class SaveAsAddressBookOperation : OperationBase<object>
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
 
         public override string ShortDescription
@@ -33,28 +33,28 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookOperation(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
+        public SaveAsAddressBookOperation(AddressBooks addressBooks, WindowSystem windowSystem,
             FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.fileLocationProvider = fileLocationProvider;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = openedAddressBooks.Current != null;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = openedAddressBooks.Current != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
             string newLocation = fileLocationProvider.AskToSave();
@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
             if (newLocation == null)
                 return;
 
-            openedAddressBooks.Current.SaveAddressBook(newLocation);
+            addressBooks.Current.SaveAddressBook(newLocation);
         }
     }
 }

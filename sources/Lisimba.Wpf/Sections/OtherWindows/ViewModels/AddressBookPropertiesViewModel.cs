@@ -24,7 +24,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {
     internal class AddressBookPropertiesViewModel : ViewModelBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
         private string bookName;
         private bool bookNameEnabled;
@@ -73,14 +73,14 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         public DelegateCommand OkCommand { get; private set; }
 
-        public AddressBookPropertiesViewModel(OpenedAddressBooks openedAddressBooks)
+        public AddressBookPropertiesViewModel(AddressBooks addressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             OkCommand = new DelegateCommand(OkButtonWasClicked);
 
-            this.openedAddressBooks.AddressBookChanged += HandleAddressBookChanged;
+            this.addressBooks.AddressBookChanged += HandleAddressBookChanged;
             RefreshModel();
         }
 
@@ -91,7 +91,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         private void RefreshModel()
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 ClearModel();
             else
                 PopulateModel();
@@ -107,10 +107,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         private void PopulateModel()
         {
-            BookName = openedAddressBooks.Current.AddressBook.Name;
+            BookName = addressBooks.Current.AddressBook.Name;
             BookNameEnabled = true;
-            FileLocation = GetFullFileLocationForDisplay(openedAddressBooks.Current.Location);
-            ContactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+            FileLocation = GetFullFileLocationForDisplay(addressBooks.Current.Location);
+            ContactsCount = addressBooks.Current.AddressBook.Contacts.Count;
         }
 
         private static string GetFullFileLocationForDisplay(string fileName)
@@ -122,13 +122,13 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
         private void OkButtonWasClicked(object parameter)
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 return;
 
-            bool nameIsChanged = openedAddressBooks.Current.AddressBook.Name != bookName;
+            bool nameIsChanged = addressBooks.Current.AddressBook.Name != bookName;
 
             if (nameIsChanged)
-                openedAddressBooks.Current.ChangeAddressBookName(bookName);
+                addressBooks.Current.ChangeAddressBookName(bookName);
         }
     }
 }

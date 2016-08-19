@@ -25,22 +25,22 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class CloseFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
 
-        public CloseFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public CloseFlow(AddressBooks addressBooks, EnhancedConsole console)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
         }
 
         public void Execute(IList<string> parameters)
         {
-            if (openedAddressBooks.Current != null)
-                openedAddressBooks.CloseCurrentAddressBook();
+            if (addressBooks.Current != null)
+                addressBooks.CloseCurrentAddressBook();
             else
                 console.WriteLineError(Resources.NoAddessBookOpenedError);
         }

@@ -32,7 +32,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 {
     internal class LisimbaViewModel : ViewModelBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly AvailableOperations availableOperations;
         private readonly Gates gates;
         private readonly WindowSystem windowSystem;
@@ -109,14 +109,14 @@ namespace DustInTheWind.Lisimba.WinForms.Main
         }
 
         public LisimbaViewModel(ContactListViewModel contactListViewModel, ContactEditorViewModel contactEditorViewModel,
-            ApplicationStatus applicationStatus, OpenedAddressBooks openedAddressBooks,
+            ApplicationStatus applicationStatus, AddressBooks addressBooks,
             AvailableOperations availableOperations, Gates gates, WindowSystem windowSystem,
             MainMenusViewModels mainMenusViewModels, MenuItemViewModelProvider viewModelProvider, LisimbaWindowTitle lisimbaWindowTitle)
         {
             if (contactListViewModel == null) throw new ArgumentNullException("contactListViewModel");
             if (contactEditorViewModel == null) throw new ArgumentNullException("contactEditorViewModel");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (availableOperations == null) throw new ArgumentNullException("availableOperations");
             if (gates == null) throw new ArgumentNullException("gates");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
@@ -125,7 +125,7 @@ namespace DustInTheWind.Lisimba.WinForms.Main
             if (lisimbaWindowTitle == null) throw new ArgumentNullException("lisimbaWindowTitle");
 
             this.applicationStatus = applicationStatus;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.availableOperations = availableOperations;
             this.gates = gates;
             this.windowSystem = windowSystem;
@@ -148,13 +148,13 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
             gates.GateChanged += HandleDefaultGateChanged;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            openedAddressBooks.ContactChanged += HandleContactChanged;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            addressBooks.ContactChanged += HandleContactChanged;
             
             applicationStatus.StatusTextChanged += HandleStatusTextChanged;
 
-            IsContactEditVisible = openedAddressBooks.CurrentContact != null;
-            IsAddressBookViewVisible = openedAddressBooks.Current != null;
+            IsContactEditVisible = addressBooks.CurrentContact != null;
+            IsAddressBookViewVisible = addressBooks.Current != null;
 
             DefaultGate = gates.DefaultGate == null
                 ? string.Empty
@@ -187,14 +187,14 @@ namespace DustInTheWind.Lisimba.WinForms.Main
 
         private void HandleContactChanged(object sender, EventArgs e)
         {
-            IsContactEditVisible = openedAddressBooks.CurrentContact != null;
-            ContactEditorViewModel.ActionQueue = openedAddressBooks.Current.ActionQueue;
-            ContactEditorViewModel.Contact = openedAddressBooks.CurrentContact;
+            IsContactEditVisible = addressBooks.CurrentContact != null;
+            ContactEditorViewModel.ActionQueue = addressBooks.Current.ActionQueue;
+            ContactEditorViewModel.Contact = addressBooks.CurrentContact;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsAddressBookViewVisible = openedAddressBooks.Current != null;
+            IsAddressBookViewVisible = addressBooks.Current != null;
         }
 
         private void HandleStatusTextChanged(object sender, EventArgs e)

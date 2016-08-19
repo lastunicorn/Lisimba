@@ -28,15 +28,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class NextBirthdaysFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
 
-        public NextBirthdaysFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public NextBirthdaysFlow(AddressBooks addressBooks, EnhancedConsole console)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
         }
 
@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayNextBirthdays()
         {
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
                 IEnumerable<Contact> contacts = GetContacts();
 
@@ -65,7 +65,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private IEnumerable<Contact> GetContacts()
         {
-            return openedAddressBooks.Current.AddressBook.Contacts
+            return addressBooks.Current.AddressBook.Contacts
                 .Where(x => x.Birthday != null)
                 .Where(x => Date.CompareWithoutYear(x.Birthday, DateTime.Today) >= 0)
                 .OrderBy(x => x, new ContactByBirthdayComparer())

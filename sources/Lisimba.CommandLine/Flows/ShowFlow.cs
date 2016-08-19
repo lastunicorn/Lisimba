@@ -28,21 +28,21 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class ShowFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
 
-        public ShowFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public ShowFlow(AddressBooks addressBooks, EnhancedConsole console)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
         }
 
         public void Execute(IList<string> parameters)
         {
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
                 if (parameters != null && parameters.Count > 0)
                     DisplayContactDetails(parameters[0]);
@@ -103,7 +103,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private IEnumerable<Contact> GetContacts(string contactName)
         {
-            return openedAddressBooks.Current.AddressBook.Contacts.Where(x => MatchName(x.Name.FirstName, contactName) || MatchName(x.Name.MiddleName, contactName) || MatchName(x.Name.LastName, contactName) || MatchName(x.Name.Nickname, contactName));
+            return addressBooks.Current.AddressBook.Contacts.Where(x => MatchName(x.Name.FirstName, contactName) || MatchName(x.Name.MiddleName, contactName) || MatchName(x.Name.LastName, contactName) || MatchName(x.Name.Nickname, contactName));
         }
 
         private static bool MatchName(string name, string contactName)
@@ -113,7 +113,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void DisplayAllContacts()
         {
-            foreach (Contact contact in openedAddressBooks.Current.AddressBook.Contacts)
+            foreach (Contact contact in addressBooks.Current.AddressBook.Contacts)
                 console.WriteLineNormal(contact.ToString());
         }
     }

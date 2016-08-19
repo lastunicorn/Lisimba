@@ -29,18 +29,18 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class OpenFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly Gates gates;
         private readonly ApplicationConfiguration config;
 
-        public OpenFlow(OpenedAddressBooks openedAddressBooks,
+        public OpenFlow(AddressBooks addressBooks,
             Gates gates, ApplicationConfiguration config)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
             if (config == null) throw new ArgumentNullException("config");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.gates = gates;
             this.config = config;
         }
@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             string fileName = parameters[0];
             IGate gate = GetGateFromCommand(parameters);
 
-            openedAddressBooks.OpenAddressBook(fileName, gate);
+            addressBooks.OpenAddressBook(fileName, gate);
         }
 
         private IGate GetGateFromCommand(IList<string> parameters)
@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             IGate gate = GetGate(addressBookLocationInfo);
 
-            openedAddressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+            addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
         }
 
         private IGate GetGate(AddressBookLocationInfo addressBookLocationInfo)

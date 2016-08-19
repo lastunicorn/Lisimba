@@ -24,18 +24,18 @@ namespace DustInTheWind.Lisimba.WinForms.Services
 {
     class BirthdaysInfo
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
         private DateTime startDate;
         private DateTime endDate;
 
-        public BirthdaysInfo(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem)
+        public BirthdaysInfo(AddressBooks addressBooks, WindowSystem windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
         }
 
@@ -54,7 +54,7 @@ namespace DustInTheWind.Lisimba.WinForms.Services
 
         private IEnumerable<Contact> RetrieveContacts()
         {
-            return openedAddressBooks.Current.AddressBook.GetBirthdays(startDate, endDate)
+            return addressBooks.Current.AddressBook.GetBirthdays(startDate, endDate)
                 .ToList();
         }
     }

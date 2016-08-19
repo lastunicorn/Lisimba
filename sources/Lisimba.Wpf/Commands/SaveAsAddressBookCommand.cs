@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
 {
     internal class SaveAsAddressBookCommand : CommandBase
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
         private readonly Gates gates;
 
@@ -36,30 +36,30 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             get { return LocalizedResources.SaveAsAddressBookOperationDescription; }
         }
 
-        public SaveAsAddressBookCommand(OpenedAddressBooks openedAddressBooks, WindowSystem windowSystem,
+        public SaveAsAddressBookCommand(AddressBooks addressBooks, WindowSystem windowSystem,
             FileLocationProvider fileLocationProvider, Gates gates)
             : base(windowSystem)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
             if (gates == null) throw new ArgumentNullException("gates");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.fileLocationProvider = fileLocationProvider;
             this.gates = gates;
 
-            openedAddressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
-            IsEnabled = openedAddressBooks.Current != null;
+            addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+            IsEnabled = addressBooks.Current != null;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)
         {
-            IsEnabled = openedAddressBooks.Current != null;
+            IsEnabled = addressBooks.Current != null;
         }
 
         protected override void DoExecute(object parameter)
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 throw new LisimbaException(LocalizedResources.NoAddessBookOpenedError);
 
             string fileName = null;
@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                     return;
             }
 
-            openedAddressBooks.Current.SaveAddressBook(fileName);
+            addressBooks.Current.SaveAddressBook(fileName);
         }
 
         private string AskForFileToSave(FileGate fileGate)

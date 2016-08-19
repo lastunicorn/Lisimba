@@ -25,15 +25,15 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 {
     internal class UpdateFlow : IFlow
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
 
-        public UpdateFlow(OpenedAddressBooks openedAddressBooks, EnhancedConsole console)
+        public UpdateFlow(AddressBooks addressBooks, EnhancedConsole console)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (console == null) throw new ArgumentNullException("console");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.console = console;
         }
 
@@ -79,9 +79,9 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         private void UpdateAddressBookName(string newAddressBookName)
         {
-            if (openedAddressBooks.Current != null)
+            if (addressBooks.Current != null)
             {
-                openedAddressBooks.Current.AddressBook.Name = newAddressBookName;
+                addressBooks.Current.AddressBook.Name = newAddressBookName;
                 console.WriteLineSuccess(Resources.AddressBookChangedSuccess);
             }
             else

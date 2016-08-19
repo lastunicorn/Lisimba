@@ -23,17 +23,17 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     internal class PrompterTextProvider : IPrompterTextProvider
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
 
-        public PrompterTextProvider(OpenedAddressBooks openedAddressBooks)
+        public PrompterTextProvider(AddressBooks addressBooks)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
-            this.openedAddressBooks = openedAddressBooks;
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            this.addressBooks = addressBooks;
         }
 
         public ConsoleTemplate BuildTemplate()
         {
-            string templateFileName = openedAddressBooks.Current == null
+            string templateFileName = addressBooks.Current == null
                 ? ViewTemplates.GetFullFileName("Prompter.default.t")
                 : ViewTemplates.GetFullFileName("Prompter.addressbook.t");
 
@@ -48,14 +48,14 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
 
         private string GetAddressBookName()
         {
-            return openedAddressBooks.Current == null
+            return addressBooks.Current == null
                 ? null
-                : openedAddressBooks.Current.AddressBook.Name;
+                : addressBooks.Current.AddressBook.Name;
         }
 
         private string GetModificationMarker()
         {
-            bool isModified = openedAddressBooks.Current != null && openedAddressBooks.Current.Status == AddressBookStatus.Modified;
+            bool isModified = addressBooks.Current != null && addressBooks.Current.Status == AddressBookStatus.Modified;
             return isModified ? "*" : string.Empty;
         }
     }

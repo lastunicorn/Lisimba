@@ -29,32 +29,32 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
     internal class AddressBookSaveObserver : IObserver
     {
         private readonly EnhancedConsole console;
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly Gates gates;
 
-        public AddressBookSaveObserver(EnhancedConsole console, OpenedAddressBooks openedAddressBooks, Gates gates)
+        public AddressBookSaveObserver(EnhancedConsole console, AddressBooks addressBooks, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (gates == null) throw new ArgumentNullException("gates");
 
             this.console = console;
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.gates = gates;
         }
 
         public void Start()
         {
-            openedAddressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
-            openedAddressBooks.GateNeeded += HandleOpenedAddressBooksGateNeeded;
-            openedAddressBooks.AddressBookSaved += HandleAddressBookSaved;
+            addressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
+            addressBooks.GateNeeded += HandleAddressBooksGateNeeded;
+            addressBooks.AddressBookSaved += HandleAddressBookSaved;
         }
 
         public void Stop()
         {
-            openedAddressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
-            openedAddressBooks.GateNeeded -= HandleOpenedAddressBooksGateNeeded;
-            openedAddressBooks.AddressBookSaved -= HandleAddressBookSaved;
+            addressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
+            addressBooks.GateNeeded -= HandleAddressBooksGateNeeded;
+            addressBooks.AddressBookSaved -= HandleAddressBookSaved;
         }
 
         private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
@@ -73,7 +73,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
             return console.ReadLine();
         }
 
-        private void HandleOpenedAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
+        private void HandleAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
         {
             IGate newGate = AskForNewGate();
 
@@ -119,8 +119,8 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
 
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
-            string addressBookName = openedAddressBooks.Current.GetFriendlyName();
-            string addressBookLocation = openedAddressBooks.Current.Location;
+            string addressBookName = addressBooks.Current.GetFriendlyName();
+            string addressBookLocation = addressBooks.Current.Location;
             string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
 
             console.WriteLineSuccess(text);

@@ -27,20 +27,20 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 {
     internal class AddressBookOpenObserver : IObserver
     {
-        private readonly OpenedAddressBooks openedAddressBooks;
+        private readonly AddressBooks addressBooks;
         private readonly ApplicationStatus applicationStatus;
         private readonly WindowSystem windowSystem;
         private readonly BirthdaysInfo birthdaysInfo;
 
-        public AddressBookOpenObserver(OpenedAddressBooks openedAddressBooks, ApplicationStatus applicationStatus,
+        public AddressBookOpenObserver(AddressBooks addressBooks, ApplicationStatus applicationStatus,
             WindowSystem windowSystem, BirthdaysInfo birthdaysInfo)
         {
-            if (openedAddressBooks == null) throw new ArgumentNullException("openedAddressBooks");
+            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
-            this.openedAddressBooks = openedAddressBooks;
+            this.addressBooks = addressBooks;
             this.applicationStatus = applicationStatus;
             this.windowSystem = windowSystem;
             this.birthdaysInfo = birthdaysInfo;
@@ -48,12 +48,12 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         public void Start()
         {
-            openedAddressBooks.AddressBookOpened += HandleAddressBookOpened;
+            addressBooks.AddressBookOpened += HandleAddressBookOpened;
         }
 
         public void Stop()
         {
-            openedAddressBooks.AddressBookOpened -= HandleAddressBookOpened;
+            addressBooks.AddressBookOpened -= HandleAddressBookOpened;
         }
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
@@ -65,16 +65,16 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         private void DisplayOpenSuccessMessage()
         {
-            if (openedAddressBooks.Current == null)
+            if (addressBooks.Current == null)
                 return;
 
-            if (openedAddressBooks.Current.Status == AddressBookStatus.New)
+            if (addressBooks.Current.Status == AddressBookStatus.New)
             {
                 applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
             }
             else
             {
-                int contactsCount = openedAddressBooks.Current.AddressBook.Contacts.Count;
+                int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
                 applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
             }
         }

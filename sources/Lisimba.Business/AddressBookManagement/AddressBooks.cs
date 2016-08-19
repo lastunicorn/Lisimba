@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
     /// <summary>
     /// Contains and manages the opened address books.
     /// </summary>
-    public class OpenedAddressBooks
+    public class AddressBooks
     {
         private readonly RecentFiles recentFiles;
         private readonly Gates gates;
@@ -92,7 +92,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
         }
 
-        public OpenedAddressBooks(RecentFiles recentFiles, Gates gates)
+        public AddressBooks(RecentFiles recentFiles, Gates gates)
         {
             if (recentFiles == null) throw new ArgumentNullException("recentFiles");
             if (gates == null) throw new ArgumentNullException("gates");
