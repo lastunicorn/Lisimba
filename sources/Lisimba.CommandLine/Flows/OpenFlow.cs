@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             string fileName = parameters[0];
             IGate gate = GetGateFromCommand(parameters);
 
-            addressBooks.OpenAddressBook(fileName, gate);
+            addressBooks.OpenAddressBook(gate, fileName);
         }
 
         private IGate GetGateFromCommand(IList<string> parameters)
@@ -84,7 +84,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             IGate gate = GetGate(addressBookLocationInfo);
 
-            addressBooks.OpenAddressBook(addressBookLocationInfo.FileName, gate);
+            addressBooks.OpenAddressBook(gate, addressBookLocationInfo.FileName);
         }
 
         private IGate GetGate(AddressBookLocationInfo addressBookLocationInfo)

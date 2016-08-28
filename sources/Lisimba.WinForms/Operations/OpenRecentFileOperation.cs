@@ -50,7 +50,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
                 return;
 
             IGate gate = gates.GetGate(file.GateId);
-            addressBooks.OpenAddressBook(file.FileName, gate);
+            addressBooks.OpenAddressBook(gate, file.FileName);
         }
     }
 }

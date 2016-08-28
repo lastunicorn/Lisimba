@@ -143,19 +143,18 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             OnAddressBookOpened(new AddressBookOpenedEventArgs(result));
         }
 
-        public void OpenAddressBook(string fileName, IGate gate)
+        public void OpenAddressBook(IGate gate, string connectionString = null)
         {
-            if (fileName == null) throw new ArgumentNullException("fileName");
             if (gate == null) throw new ArgumentNullException("gate");
 
             bool allowToContinue = CloseCurrentAddressBook();
             if (!allowToContinue)
                 return;
 
-            AddressBook addressBook = (gate as FileGate).Load(fileName);
-            Current = new AddressBookShell(addressBook, gate, fileName);
+            AddressBook addressBook = gate.Load(connectionString);
+            Current = new AddressBookShell(addressBook, gate, connectionString);
 
-            AddFileToRecentFileList(fileName, gate);
+            AddFileToRecentFileList(connectionString, gate);
 
             AddressBookOpenResult result = new AddressBookOpenResult
             {
@@ -166,9 +165,12 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             OnAddressBookOpened(new AddressBookOpenedEventArgs(result));
         }
 
-        private void AddFileToRecentFileList(string fileName, IGate gate)
+        private void AddFileToRecentFileList(string connectionString, IGate gate)
         {
-            string fileFullPath = Path.GetFullPath(fileName);
+            string fileFullPath = connectionString == null
+                ? gate.Name
+                : gate is FileGate ? Path.GetFullPath(connectionString) : string.Empty;
+
             recentFiles.AddRecentFile(fileFullPath, gate);
         }
 

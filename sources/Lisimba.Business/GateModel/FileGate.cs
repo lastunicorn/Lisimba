@@ -30,9 +30,11 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             warnings = new List<Exception>();
         }
 
-        public AddressBook Load(string fileName)
+        public override AddressBook Load(string connectionString)
         {
             warnings.Clear();
+
+            string fileName = connectionString;
 
             if (!File.Exists(fileName))
             {
@@ -58,9 +60,11 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             }
         }
 
-        public void Save(AddressBook addressBook, string fileName)
+        public override void Save(AddressBook addressBook, string connectionString)
         {
             warnings.Clear();
+
+            string fileName = connectionString;
 
             try
             {
@@ -80,7 +84,7 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             }
         }
 
-        public override AddressBook Load(Stream stream)
+        public AddressBook Load(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException("stream");
 
@@ -100,7 +104,7 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             }
         }
 
-        public override void Save(AddressBook addressBook, Stream stream)
+        public void Save(AddressBook addressBook, Stream stream)
         {
             if (addressBook == null) throw new ArgumentNullException("addressBook");
             if (stream == null) throw new ArgumentNullException("stream");

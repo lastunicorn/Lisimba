@@ -49,6 +49,16 @@ namespace DustInTheWind.Lisimba.Gating
             get { return Resources.yahoo_icon; }
         }
 
+        public override bool CanLoad
+        {
+            get { return true; }
+        }
+
+        public override bool CanSave
+        {
+            get { return true; }
+        }
+
         public override IEnumerable<FileType> SupportedFileTypes
         {
             get

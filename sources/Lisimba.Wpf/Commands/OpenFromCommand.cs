@@ -69,7 +69,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
                     return;
             }
 
-            addressBooks.OpenAddressBook(fileName, gate);
+            addressBooks.OpenAddressBook(gate, fileName);
         }
 
         private string AskForFileToOpen(FileGate fileGate)

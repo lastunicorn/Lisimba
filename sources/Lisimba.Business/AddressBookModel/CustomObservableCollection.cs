@@ -64,12 +64,12 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             OnItemChanged(new ItemChangedEventArgs<T>(sender as T));
         }
 
-        public void AddRange(IList items)
+        public void AddRange(IEnumerable<T> items)
         {
             if (items == null)
                 throw new ArgumentNullException("items");
 
-            if (items.Count == 0)
+            if (!items.Any())
                 return;
 
             foreach (T item in items)
@@ -83,7 +83,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items));
         }
 
-        public void CopyFrom(IList items)
+        public void CopyFrom(IEnumerable<T> items)
         {
             Clear();
             AddRange(items);

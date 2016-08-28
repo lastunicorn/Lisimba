@@ -31,7 +31,6 @@ namespace DustInTheWind.Lisimba.Business.GateModel
         {
             icon16 = new Bitmap(16, 16);
         }
-
         public IReadOnlyList<Exception> Warnings { get; private set; }
 
         public string Id
@@ -54,6 +53,16 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             get { return icon16; }
         }
 
+        public bool CanLoad
+        {
+            get { return false; }
+        }
+
+        public bool CanSave
+        {
+            get { return false; }
+        }
+
         public EmptyGate()
         {
             Warnings = new Exception[0];
@@ -69,12 +78,12 @@ namespace DustInTheWind.Lisimba.Business.GateModel
             throw new LisimbaException(Resources.EmptyGate_SaveError);
         }
 
-        public AddressBook Load(Stream stream)
+        public AddressBook Load(string connectionString)
         {
             throw new LisimbaException(Resources.EmptyGate_LoadError);
         }
 
-        public void Save(AddressBook addressBook, Stream stream)
+        public void Save(AddressBook addressBook, string connectionString)
         {
             throw new LisimbaException(Resources.EmptyGate_SaveError);
         }

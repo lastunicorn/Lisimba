@@ -62,6 +62,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
             RedoCommand = availableCommands.GetCommand<RedoCommand>();
 
             ExportMenuItems = gates
+                .Where(x => x.CanSave)
                 .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,
@@ -72,6 +73,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.MainWindow.ViewModels
                 .ToList();
 
             OpenFromMenuItems = gates
+                .Where(x => x.CanLoad)
                 .Select(x => new CustomMenuItem
                 {
                     Text = x.Name,

@@ -47,6 +47,16 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             get { return Resources.lisimba_icon; }
         }
 
+        public override bool CanLoad
+        {
+            get { return true; }
+        }
+
+        public override bool CanSave
+        {
+            get { return true; }
+        }
+
         public override IEnumerable<FileType> SupportedFileTypes
         {
             get

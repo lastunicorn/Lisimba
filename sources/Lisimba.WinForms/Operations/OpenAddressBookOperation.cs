@@ -58,7 +58,7 @@ namespace DustInTheWind.Lisimba.WinForms.Operations
                     return;
             }
 
-            addressBooks.OpenAddressBook(fileName, gates.DefaultGate);
+            addressBooks.OpenAddressBook(gates.DefaultGate, fileName);
         }
     }
 }

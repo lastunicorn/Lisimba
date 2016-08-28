@@ -31,12 +31,15 @@ namespace DustInTheWind.Lisimba.Business.GateModel
         public abstract string Description { get; }
         public abstract Image Icon16 { get; }
 
+        public abstract bool CanSave { get; }
+        public abstract bool CanLoad { get; }
+
         public IReadOnlyList<Exception> Warnings
         {
             get { return warnings; }
         }
 
-        public abstract AddressBook Load(Stream stream);
-        public abstract void Save(AddressBook addressBook, Stream stream);
+        public abstract AddressBook Load(string connectionString);
+        public abstract void Save(AddressBook addressBook, string connectionString);
     }
 }

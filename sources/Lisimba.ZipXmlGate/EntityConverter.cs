@@ -47,7 +47,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
                     LastName = contact.Name.LastName,
                     Nickname = contact.Name.Nickname
                 },
-                Picture = ToByteArray(contact.Picture.Image),
+                Picture = contact.Picture == null ? null : ToByteArray(contact.Picture.Image),
                 Birthday = new DateEntity
                 {
                     Day = contact.Birthday.Day,

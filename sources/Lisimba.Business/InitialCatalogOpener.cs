@@ -64,7 +64,7 @@ namespace DustInTheWind.Lisimba.Business
                 }
 
                 IGate gate = gates.GetGate(fileNameToOpenAtLoad.GateId);
-                addressBooks.OpenAddressBook(fileNameToOpenAtLoad.FileName, gate);
+                addressBooks.OpenAddressBook(gate, fileNameToOpenAtLoad.FileName);
             }
         }
 

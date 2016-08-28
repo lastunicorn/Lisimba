@@ -14,27 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
-namespace DustInTheWind.Lisimba.Business.GateModel
+namespace DustInTheWind.Lisimba.RandomUserGate
 {
-    public interface IGate
+    internal class RandomUserName
     {
-        string Id { get; }
-        string Name { get; }
-        string Description { get; }
-        Image Icon16 { get; }
-
-        bool CanLoad { get; }
-        bool CanSave { get; }
-
-        IReadOnlyList<Exception> Warnings { get; }
-
-        AddressBook Load(string connectionString);
-        void Save(AddressBook addressBook, string connectionString);
+        public string Title { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
     }
 }

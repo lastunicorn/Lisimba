@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,27 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
-namespace DustInTheWind.Lisimba.Business.GateModel
+namespace DustInTheWind.Lisimba.RandomUserGate
 {
-    public interface IGate
+    internal class RandomUserLocation
     {
-        string Id { get; }
-        string Name { get; }
-        string Description { get; }
-        Image Icon16 { get; }
-
-        bool CanLoad { get; }
-        bool CanSave { get; }
-
-        IReadOnlyList<Exception> Warnings { get; }
-
-        AddressBook Load(string connectionString);
-        void Save(AddressBook addressBook, string connectionString);
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string PostCode { get; set; }
     }
 }
