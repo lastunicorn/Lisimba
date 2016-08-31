@@ -24,7 +24,7 @@ using DustInTheWind.Lisimba.Wpf.Properties;
 
 namespace DustInTheWind.Lisimba.Wpf.Commands
 {
-    internal class ExportAddressBookCommand : CommandBase
+    internal class SaveToCommand : CommandBase
     {
         private readonly AddressBooks addressBooks;
         private readonly FileLocationProvider fileLocationProvider;
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Wpf.Commands
             get { return LocalizedResources.ExportOperationDescription; }
         }
 
-        public ExportAddressBookCommand(WindowSystem windowSystem, AddressBooks addressBooks, FileLocationProvider fileLocationProvider)
+        public SaveToCommand(WindowSystem windowSystem, AddressBooks addressBooks, FileLocationProvider fileLocationProvider)
             : base(windowSystem)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");

@@ -7,7 +7,7 @@
 
     <!-- A list with all the plug-ins to be copied localy. -->
     <ItemGroup>
-        <GateFiles Include="$(SolutionDir)\Publish\ZipXmlGate\*.*" />
+        <GateFiles Include="$(SolutionDir)\Publish\LisimbaGate\*.*" />
         <GateFiles Include="$(SolutionDir)\Publish\YahooCsvGate\*.*" />
     </ItemGroup>
 

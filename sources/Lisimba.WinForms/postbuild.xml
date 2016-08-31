@@ -6,7 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <GateFiles Include="$(SolutionDir)\Publish\ZipXmlGate\*.*" />
+        <GateFiles Include="$(SolutionDir)\Publish\LisimbaGate\*.*" />
         <GateFiles Include="$(SolutionDir)\Publish\YahooCsvGate\*.*" />
     </ItemGroup>
 

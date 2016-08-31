@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
+namespace DustInTheWind.Lisimba.LisimbaGate.Entities
 {
     [Serializable]
     [XmlRoot("Book")]

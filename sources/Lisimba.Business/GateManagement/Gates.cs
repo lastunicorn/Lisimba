@@ -90,9 +90,26 @@ namespace DustInTheWind.Lisimba.Business.GateManagement
             try
             {
                 foreach (IGate gate in gateProvider.GetAllGates())
-                    gates.Add(gate.Id, gate);
+                {
+                    try
+                    {
+                        gates.Add(gate.Id, gate);
+                    }
+                    catch (Exception ex)
+                    {
+                        warnings.Add(ex);
+                    }
+                }
 
-                SetDefaultGate(config.DefaultGateName);
+                try
+                {
+                    SetDefaultGate(config.DefaultGateName);
+                }
+                catch (Exception ex)
+                {
+                    warnings.Add(ex);
+                    SetEmptyGate();
+                }
             }
             catch (Exception ex)
             {

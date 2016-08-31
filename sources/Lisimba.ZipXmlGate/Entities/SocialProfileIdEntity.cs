@@ -17,7 +17,7 @@
 using System;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
+namespace DustInTheWind.Lisimba.LisimbaGate.Entities
 {
     /// <summary>
     /// Class containing information about a social profile id.

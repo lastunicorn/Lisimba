@@ -6,15 +6,15 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <GateFiles Include="DustInTheWind.Lisimba.ZipXmlGate.dll" />
+        <GateFiles Include="DustInTheWind.Lisimba.LisimbaGate.dll" />
         <GateFiles Include="ICSharpCode.SharpZipLib.dll" />
     </ItemGroup>
 
     <Target Name="Default" DependsOnTargets="Publish;CleanUp"></Target>
 
     <Target Name="Publish">
-        <RemoveDir Directories="$(SolutionDir)\Publish\ZipXmlGate"/>
-        <Copy SourceFiles="@(GateFiles)" DestinationFolder="$(SolutionDir)\Publish\ZipXmlGate" />
+        <RemoveDir Directories="$(SolutionDir)\Publish\LisimbaGate"/>
+        <Copy SourceFiles="@(GateFiles)" DestinationFolder="$(SolutionDir)\Publish\LisimbaGate" />
     </Target>
 
     <Target Name="CleanUp">

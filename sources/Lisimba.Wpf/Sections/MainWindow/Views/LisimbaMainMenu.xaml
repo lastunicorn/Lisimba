@@ -44,6 +44,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </MenuItem.Icon>
             </MenuItem>
 
+            <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}">
+                <MenuItem.Icon>
+                    <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource SaveIcon}"/>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
+
+            <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
+
+            <Separator />
+
             <MenuItem
                 Header="Open _From"
                 ItemsSource="{Binding OpenFromMenuItems}"
@@ -62,21 +74,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
 
-            <MenuItem Header="_Save" Command="{Binding SaveAddressBookCommand}">
-                <MenuItem.Icon>
-                    <wpf:AutoGreyableImage Width="16" Height="16" Source="{StaticResource SaveIcon}"/>
-                </MenuItem.Icon>
-            </MenuItem>
-
-            <MenuItem Header="Save _As..." Command="{Binding SaveAsAddressBookCommand}" />
-
-            <MenuItem Header="_Close" Command="{Binding CloseAddressBookCommand}" />
-
-            <Separator />
-
             <MenuItem
-                Header="_Export"
-                ItemsSource="{Binding ExportMenuItems}"
+                Header="Save _To"
+                ItemsSource="{Binding SaveToMenuItems}"
                 DisplayMemberPath="Text">
 
                 <MenuItem.Resources>
@@ -91,6 +91,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     </Style>
                 </MenuItem.ItemContainerStyle>
             </MenuItem>
+
+            <Separator />
 
             <MenuItem Header="_Import..." Command="{Binding ImportCommand}" />
 

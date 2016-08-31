@@ -7,8 +7,8 @@
     <ProjectGuid>{652744F3-B7FA-43AD-80A9-6EFC86537817}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DustInTheWind.Lisimba.ZipXmlGate</RootNamespace>
-    <AssemblyName>DustInTheWind.Lisimba.ZipXmlGate</AssemblyName>
+    <RootNamespace>DustInTheWind.Lisimba.LisimbaGate</RootNamespace>
+    <AssemblyName>DustInTheWind.Lisimba.LisimbaGate</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -65,8 +65,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Saver.cs" />
-    <Compile Include="ZipXmlGate.cs" />
-    <Compile Include="ZipXmlGateEncoder.cs" />
+    <Compile Include="LisimbaGate.cs" />
+    <Compile Include="LisimbaGateEncoder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

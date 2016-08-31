@@ -19,9 +19,9 @@ using System.Collections.Generic;
 using System.IO;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate
+namespace DustInTheWind.Lisimba.LisimbaGate
 {
-    internal class ZipXmlGateEncoder : IGateEncoder
+    internal class LisimbaGateEncoder : IGateEncoder
     {
         private readonly List<Exception> warnings;
 
@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             get { return warnings; }
         }
 
-        public ZipXmlGateEncoder()
+        public LisimbaGateEncoder()
         {
             warnings = new List<Exception>();
         }

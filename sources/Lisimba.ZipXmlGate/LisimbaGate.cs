@@ -19,27 +19,27 @@ using System.Drawing;
 using System.IO;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateModel;
-using DustInTheWind.Lisimba.ZipXmlGate.Properties;
+using DustInTheWind.Lisimba.LisimbaGate.Properties;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate
+namespace DustInTheWind.Lisimba.LisimbaGate
 {
-    public class ZipXmlGate : FileGate
+    public class LisimbaGate : FileGate
     {
-        private readonly ZipXmlGateEncoder gateEncoder;
+        private readonly LisimbaGateEncoder gateEncoder;
 
         public override string Id
         {
-            get { return "ZipXmlGate"; }
+            get { return "LisimbaGate"; }
         }
 
         public override string Name
         {
-            get { return "Zipped Xml Gate"; }
+            get { return "Lisimba Gate"; }
         }
 
         public override string Description
         {
-            get { return "A Gate that knows to save and load address books from a xml file that is zipped."; }
+            get { return "A Gate that knows to save and load address books from an xml file that is zipped."; }
         }
 
         public override Image Icon16
@@ -68,9 +68,9 @@ namespace DustInTheWind.Lisimba.ZipXmlGate
             }
         }
 
-        public ZipXmlGate()
+        public LisimbaGate()
         {
-            gateEncoder = new ZipXmlGateEncoder();
+            gateEncoder = new LisimbaGateEncoder();
         }
 
         public override AddressBook DoLoad(Stream stream)

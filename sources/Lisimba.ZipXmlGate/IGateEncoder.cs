@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.IO;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate
+namespace DustInTheWind.Lisimba.LisimbaGate
 {
     internal interface IGateEncoder
     {

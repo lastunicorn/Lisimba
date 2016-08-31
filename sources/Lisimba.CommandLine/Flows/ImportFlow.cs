@@ -55,7 +55,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (parameters.Count == 0)
                 throw new LisimbaException("Specify the address book to import from.");
 
-            IGate gate = gates.GetGate("ZipXmlGate");
+            IGate gate = gates.GetGate("LisimbaGate");
             AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
 
             AddressBook currentaddressBook = addressBooks.Current.AddressBook;

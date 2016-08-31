@@ -17,7 +17,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate
+namespace DustInTheWind.Lisimba.LisimbaGate
 {
     internal static class EnumerableExtensions
     {

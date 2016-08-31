@@ -22,10 +22,10 @@ using System.Xml;
 using System.Xml.Serialization;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.ZipXmlGate.Entities;
+using DustInTheWind.Lisimba.LisimbaGate.Entities;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate
+namespace DustInTheWind.Lisimba.LisimbaGate
 {
     internal class Saver
     {

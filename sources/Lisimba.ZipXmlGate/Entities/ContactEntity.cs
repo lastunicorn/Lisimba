@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Xml.Serialization;
 
-namespace DustInTheWind.Lisimba.ZipXmlGate.Entities
+namespace DustInTheWind.Lisimba.LisimbaGate.Entities
 {
     [Serializable]
     [XmlRoot("Contact")]
