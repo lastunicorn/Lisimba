@@ -16,11 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.RandomUserGate.Properties;
@@ -30,6 +30,8 @@ namespace DustInTheWind.Lisimba.RandomUserGate
 {
     public class RandomUserGate : GateBase
     {
+        private static readonly HttpClient HttpClient = new HttpClient();
+
         public override string Id
         {
             get { return "RandomUserGate"; }
@@ -74,21 +76,24 @@ namespace DustInTheWind.Lisimba.RandomUserGate
             using (StreamReader streamReader = new StreamReader(responseStream))
             using (JsonReader jsonReader = new JsonTextReader(streamReader))
             {
-                Stopwatch sw = Stopwatch.StartNew();
                 JsonSerializer serializer = new JsonSerializer();
 
                 RandomUserResponse randomUserResponse = serializer.Deserialize<RandomUserResponse>(jsonReader);
 
-                long millis1 = sw.ElapsedMilliseconds;
                 AddressBook addressBook = new AddressBook();
 
-                IEnumerable<Contact> contacts = randomUserResponse.Results
-                    .Select(CreateContact);
+                List<Contact> contacts = new List<Contact>();
 
-                long millis2 = sw.ElapsedMilliseconds;
+                Parallel.ForEach(randomUserResponse.Results, x =>
+                {
+                    Contact contact = CreateContact(x);
+
+                    lock (contacts)
+                        contacts.Add(contact);
+                });
+
                 addressBook.Contacts.AddRange(contacts);
 
-                long millis3 = sw.ElapsedMilliseconds;
                 return addressBook;
             }
         }
@@ -103,29 +108,46 @@ namespace DustInTheWind.Lisimba.RandomUserGate
                     LastName = randomUserResult.Name.Last
                 },
                 Birthday = new Date(DateTime.Parse(randomUserResult.Dob)),
-                Picture = new Picture { Image = RetrievePicture(randomUserResult.Picture.Large) }
+                Picture = new Picture { Image = RetrievePictureOld(randomUserResult.Picture.Large) }
             };
 
-            contact.Items.Add(new Email { Address = randomUserResult.Email });
-            contact.Items.Add(new PostalAddress
+            List<ContactItem> items = new List<ContactItem>
             {
-                Street = randomUserResult.Location.Street,
-                City = randomUserResult.Location.City,
-                State = randomUserResult.Location.State,
-                PostalCode = randomUserResult.Location.PostCode
-            });
-            contact.Items.Add(new Phone { Number = randomUserResult.Phone });
-            contact.Items.Add(new Phone { Number = randomUserResult.Cell, Description = "cellphone"});
+                new Email {Address = randomUserResult.Email},
+                new PostalAddress
+                {
+                    Street = randomUserResult.Location.Street,
+                    City = randomUserResult.Location.City,
+                    State = randomUserResult.Location.State,
+                    PostalCode = randomUserResult.Location.PostCode
+                },
+                new Phone {Number = randomUserResult.Phone},
+                new Phone {Number = randomUserResult.Cell, Description = "cellphone"}
+            };
+
+            contact.Items.AddRange(items);
 
             return contact;
         }
 
-        private static Image RetrievePicture(string url)
+        private static Image RetrievePictureOld(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             using (WebResponse response = request.GetResponse())
-            using (Stream responseStream = response.GetResponseStream())
+            {
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    Image image = Image.FromStream(responseStream);
+
+                    return image;
+                }
+            }
+        }
+
+        private static async Task<Image> RetrievePicture(string url)
+        {
+            using (Stream responseStream = await HttpClient.GetStreamAsync(url))
             {
                 return Image.FromStream(responseStream);
             }
