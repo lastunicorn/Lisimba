@@ -17,21 +17,14 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.RandomUserGate.Properties;
-using Newtonsoft.Json;
 
 namespace DustInTheWind.Lisimba.RandomUserGate
 {
     public class RandomUserGate : GateBase
     {
-        private static readonly HttpClient HttpClient = new HttpClient();
-
         public override string Id
         {
             get { return "RandomUserGate"; }
@@ -44,7 +37,7 @@ namespace DustInTheWind.Lisimba.RandomUserGate
 
         public override string Description
         {
-            get { return "Randomly generates a number of contacts."; }
+            get { return "Randomly generates a number of contacts using a free web service."; }
         }
 
         public override Image Icon16
@@ -69,88 +62,12 @@ namespace DustInTheWind.Lisimba.RandomUserGate
 
         public override AddressBook Load(string connectionString)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://randomuser.me/api?results=100");
+            AddressBook addressBook = new AddressBook();
 
-            using (WebResponse response = request.GetResponse())
-            using (Stream responseStream = response.GetResponseStream())
-            using (StreamReader streamReader = new StreamReader(responseStream))
-            using (JsonReader jsonReader = new JsonTextReader(streamReader))
-            {
-                JsonSerializer serializer = new JsonSerializer();
+            List<Contact> contacts = RandomUserProvider.RetrieveUsers(100);
+            addressBook.Contacts.AddRange(contacts);
 
-                RandomUserResponse randomUserResponse = serializer.Deserialize<RandomUserResponse>(jsonReader);
-
-                AddressBook addressBook = new AddressBook();
-
-                List<Contact> contacts = new List<Contact>();
-
-                Parallel.ForEach(randomUserResponse.Results, x =>
-                {
-                    Contact contact = CreateContact(x);
-
-                    lock (contacts)
-                        contacts.Add(contact);
-                });
-
-                addressBook.Contacts.AddRange(contacts);
-
-                return addressBook;
-            }
-        }
-
-        private static Contact CreateContact(RandomUserResult randomUserResult)
-        {
-            Contact contact = new Contact
-            {
-                Name = new PersonName
-                {
-                    FirstName = randomUserResult.Name.First,
-                    LastName = randomUserResult.Name.Last
-                },
-                Birthday = new Date(DateTime.Parse(randomUserResult.Dob)),
-                Picture = new Picture { Image = RetrievePictureOld(randomUserResult.Picture.Large) }
-            };
-
-            List<ContactItem> items = new List<ContactItem>
-            {
-                new Email {Address = randomUserResult.Email},
-                new PostalAddress
-                {
-                    Street = randomUserResult.Location.Street,
-                    City = randomUserResult.Location.City,
-                    State = randomUserResult.Location.State,
-                    PostalCode = randomUserResult.Location.PostCode
-                },
-                new Phone {Number = randomUserResult.Phone},
-                new Phone {Number = randomUserResult.Cell, Description = "cellphone"}
-            };
-
-            contact.Items.AddRange(items);
-
-            return contact;
-        }
-
-        private static Image RetrievePictureOld(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-
-            using (WebResponse response = request.GetResponse())
-            {
-                using (Stream responseStream = response.GetResponseStream())
-                {
-                    Image image = Image.FromStream(responseStream);
-
-                    return image;
-                }
-            }
-        }
-
-        private static async Task<Image> RetrievePicture(string url)
-        {
-            using (Stream responseStream = await HttpClient.GetStreamAsync(url))
-            {
-                return Image.FromStream(responseStream);
-            }
+            return addressBook;
         }
     }
 }

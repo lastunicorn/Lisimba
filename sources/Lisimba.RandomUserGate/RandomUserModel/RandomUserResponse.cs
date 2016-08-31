@@ -14,12 +14,11 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.RandomUserGate
+namespace DustInTheWind.Lisimba.RandomUserGate.RandomUserModel
 {
-    internal class RandomUserPicture
+    internal class RandomUserResponse
     {
-        public string Large { get; set; }
-        public string Medium { get; set; }
-        public string Thumbnail { get; set; }
+        public RandomUserResult[] Results { get; set; }
+        public RandomUserInfo Info { get; set; }
     }
 }

@@ -52,12 +52,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="RandomUserGate.cs" />
-    <Compile Include="RandomUserInfo.cs" />
-    <Compile Include="RandomUserLocation.cs" />
-    <Compile Include="RandomUserName.cs" />
-    <Compile Include="RandomUserPicture.cs" />
-    <Compile Include="RandomUserResponse.cs" />
-    <Compile Include="RandomUserResult.cs" />
+    <Compile Include="RandomUserModel\RandomUserInfo.cs" />
+    <Compile Include="RandomUserModel\RandomUserLocation.cs" />
+    <Compile Include="RandomUserModel\RandomUserName.cs" />
+    <Compile Include="RandomUserModel\RandomUserPicture.cs" />
+    <Compile Include="RandomUserProvider.cs" />
+    <Compile Include="RandomUserModel\RandomUserResponse.cs" />
+    <Compile Include="RandomUserModel\RandomUserResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lisimba.Business\Lisimba.Business.csproj">

@@ -1,4 +1,4 @@
-// Lisimba
+﻿// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.RandomUserGate
+namespace DustInTheWind.Lisimba.RandomUserGate.RandomUserModel
 {
-    internal class RandomUserName
+    internal class RandomUserInfo
     {
-        public string Title { get; set; }
-        public string First { get; set; }
-        public string Last { get; set; }
+        public string Seed { get; set; }
+        public int Results { get; set; }
+        public int Page { get; set; }
+        public string Version { get; set; }
     }
 }
