@@ -28,6 +28,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         private CustomObservableCollection<Contact> originalContactsCollection;
         private ListCollectionView contacts;
         private Contact selectedContact;
+        private string logs;
 
         public ListCollectionView Contacts
         {
@@ -49,13 +50,36 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             }
         }
 
-        public ImportViewModel(AddressBooks addressBooks)
+        public string Logs
+        {
+            get { return logs; }
+            private set
+            {
+                logs = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
+
+        public ImportViewModel(AddressBooks addressBooks, OpenAddressBookCommand openAddressBookCommand)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (openAddressBookCommand == null) throw new ArgumentNullException("openAddressBookCommand");
 
             this.addressBooks = addressBooks;
 
+            SetContacts(addressBooks.Current.AddressBook.Contacts);
+
             addressBooks.AddressBookChanged += HandleCurrentAddressBookChanged;
+
+            OpenAddressBookCommand = openAddressBookCommand;
+            openAddressBookCommand.ImportFinished += HandleImportFinished;
+        }
+
+        private void HandleImportFinished(object sender, EventArgs eventArgs)
+        {
+            Logs = OpenAddressBookCommand.Result;
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)

@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
     <Compile Include="Sections\OtherWindows\ViewModels\ImportViewModel.cs" />
+    <Compile Include="Sections\OtherWindows\ViewModels\OpenAddressBookCommand.cs" />
     <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>

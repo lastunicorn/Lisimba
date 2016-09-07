@@ -24,20 +24,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         xmlns:viewModels="clr-namespace:DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels"
         mc:Ignorable="d"
         Title="ImportWindow"
-        Height="300"
-        Width="300"
+        Height="600"
+        Width="800"
         x:ClassModifier="internal"
         WindowStartupLocation="CenterOwner"
         d:DataContext="{d:DesignInstance viewModels:ImportViewModel}">
 
     <Grid>
 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Current Address Book"/>
+
         <ListBox
+            Grid.Row="1"
             Grid.Column="0"
             ItemsSource="{Binding Contacts}"
             SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
@@ -51,6 +63,30 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             </ListBox.ItemTemplate>
 
         </ListBox>
+
+        <GridSplitter
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            Width="8"
+            ResizeDirection="Columns"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ResizeBehavior="PreviousAndNext"/>
+
+        <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            Content="Open..."
+            Command="{Binding OpenAddressBookCommand}"/>
+
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="2"
+            IsReadOnly="True"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            Text="{Binding Logs, Mode=OneWay}"/>
 
     </Grid>
 
