@@ -61,7 +61,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows
                 if (fileName != null)
                 {
                     Image image = Image.FromFile(fileName);
-                    image = ResizeImage(image, 128, 128);
+
+                    if (image.Width > 128 || image.Height > 128)
+                        image = ResizeImage(image, 128, 128);
+
                     Contact.Picture = new Picture(image);
                 }
             }
