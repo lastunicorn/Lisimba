@@ -34,7 +34,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
 
         public IEnumerable<Tuple<string, IFlow>> GetNewFlows()
         {
-            yield return new Tuple<string, IFlow>("help", unityContainer.Resolve<HelpFlow>());
             yield return new Tuple<string, IFlow>("new", unityContainer.Resolve<NewFlow>());
             yield return new Tuple<string, IFlow>("update", unityContainer.Resolve<UpdateFlow>());
             yield return new Tuple<string, IFlow>("open", unityContainer.Resolve<OpenFlow>());
@@ -51,6 +50,9 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             yield return new Tuple<string, IFlow>("exit", unityContainer.Resolve<ExitFlow>());
             yield return new Tuple<string, IFlow>("bye", unityContainer.Resolve<ExitFlow>());
             yield return new Tuple<string, IFlow>("goodbye", unityContainer.Resolve<ExitFlow>());
+            yield return new Tuple<string, IFlow>("help", unityContainer.Resolve<HelpFlow>());
+            yield return new Tuple<string, IFlow>("version", unityContainer.Resolve<VersionFlow>());
+            yield return new Tuple<string, IFlow>("ver", unityContainer.Resolve<VersionFlow>());
             yield return new Tuple<string, IFlow>("", unityContainer.Resolve<EmptyFlow>());
         }
 

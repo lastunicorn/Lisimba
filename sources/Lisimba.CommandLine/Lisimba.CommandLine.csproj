@@ -50,6 +50,7 @@
     <Compile Include="Flows\HelpFlow.cs" />
     <Compile Include="Flows\ImportFlow.cs" />
     <Compile Include="Flows\LangFlow.cs" />
+    <Compile Include="Flows\VersionFlow.cs" />
     <Compile Include="Observers\AddressBookSaveObserver.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
     <Compile Include="Setup\ObserverProvider.cs" />

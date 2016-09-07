@@ -22,7 +22,6 @@ using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.Importing;
