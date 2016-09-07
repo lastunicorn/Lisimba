@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         private readonly AddContactItemClickCommand addContactItemClickCommand;
         //private List<ContactItemSetViewModel> contactItems;
         private List<object> contactItems;
-        private Date birthday;
+        private BirthdayViewModel birthdayViewModel;
         private bool isInitializationMode;
         private bool canAddItems;
 
@@ -139,12 +139,12 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             }
         }
 
-        public Date Birthday
+        public BirthdayViewModel BirthdayViewModel
         {
-            get { return birthday; }
+            get { return birthdayViewModel; }
             set
             {
-                birthday = value;
+                birthdayViewModel = value;
                 OnPropertyChanged();
             }
         }
@@ -152,7 +152,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         public ImageClickCommand ImageEditCommand { get; private set; }
         public BirthdayEditCommand BirthdayEditCommand { get; private set; }
 
-        public ContactEditorViewModel(AddressBooks addressBooks, ZodiacSignViewModel zodiacSignViewModel,
+        public ContactEditorViewModel(AddressBooks addressBooks, ZodiacSignViewModel zodiacSignViewModel, BirthdayViewModel birthdayViewModel,
             ImageClickCommand imageEditCommand, BirthdayEditCommand birthdayEditCommand, AddContactItemClickCommand addContactItemClickCommand)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
@@ -163,6 +163,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
             this.addressBooks = addressBooks;
             this.zodiacSignViewModel = zodiacSignViewModel;
+            this.birthdayViewModel = birthdayViewModel;
             this.addContactItemClickCommand = addContactItemClickCommand;
 
             ImageEditCommand = imageEditCommand;
@@ -215,7 +216,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 {
                     Name = null;
                     Picture = Resources.no_user_128.ToBitmapSource();
-                    Birthday = null;
+                    BirthdayViewModel.Date = null;
                     zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
                     ContactItems = null;
                     Notes = string.Empty;
@@ -233,7 +234,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     else
                         Picture = Resources.no_user_128.ToBitmapSource();
 
-                    Birthday = currentContact.Birthday;
+                    BirthdayViewModel.Date = currentContact.Birthday;
                     zodiacSignViewModel.ZodiacSign = currentContact.ZodiacSign;
 
                     Dictionary<Type, Type> viewModelTypes = new Dictionary<Type, Type>

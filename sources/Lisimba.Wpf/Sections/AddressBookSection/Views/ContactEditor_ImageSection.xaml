@@ -60,7 +60,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
         </Button>
 
-        <views:BirthdayViewer Date="{Binding Birthday, Mode=TwoWay}"/>
+        <views:BirthdayViewer2
+            DataContext="{Binding BirthdayViewModel}"
+            Margin="4"/>
 
         <views:ZodiacSignView DataContext="{Binding ZodiacSignViewModel}" />
 

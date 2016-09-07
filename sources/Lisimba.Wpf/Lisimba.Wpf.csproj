@@ -88,8 +88,12 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Sections\AddressBookSection\NameParser.cs" />
     <Compile Include="Sections\AddressBookSection\PersonNameConverter.cs" />
+    <Compile Include="Sections\AddressBookSection\ViewModels\BirthdayViewModel.cs" />
     <Compile Include="Sections\AddressBookSection\ViewModels\DateViewModel.cs" />
     <Compile Include="Sections\AddressBookSection\ViewModels\PhoneViewModel.cs" />
+    <Compile Include="Sections\AddressBookSection\Views\BirthdayViewer2.xaml.cs">
+      <DependentUpon>BirthdayViewer2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sections\AddressBookSection\Views\DateViewer.xaml.cs">
       <DependentUpon>DateViewer.xaml</DependentUpon>
     </Compile>
@@ -250,6 +254,10 @@
     <Compile Include="UserInterface.cs" />
     <Compile Include="ViewModelBase.cs" />
     <Compile Include="WindowSystem.cs" />
+    <Page Include="Sections\AddressBookSection\Views\BirthdayViewer2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Sections\AddressBookSection\Views\DateViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
