@@ -43,8 +43,13 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 if (date != null)
                 {
                     year = date.Year;
+                    OnPropertyChanged("Year");
                     month = date.Month;
+                    OnPropertyChanged("Month");
                     day = date.Day;
+                    OnPropertyChanged("Day");
+                    description = date.Description;
+                    OnPropertyChanged("Description");
 
                     date.Changed += HandleDateChanged;
                 }
