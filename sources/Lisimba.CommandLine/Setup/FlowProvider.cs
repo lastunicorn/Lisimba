@@ -34,6 +34,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
 
         public IEnumerable<Tuple<string, IFlow>> GetNewFlows()
         {
+            yield return new Tuple<string, IFlow>("help", unityContainer.Resolve<HelpFlow>());
             yield return new Tuple<string, IFlow>("new", unityContainer.Resolve<NewFlow>());
             yield return new Tuple<string, IFlow>("update", unityContainer.Resolve<UpdateFlow>());
             yield return new Tuple<string, IFlow>("open", unityContainer.Resolve<OpenFlow>());
