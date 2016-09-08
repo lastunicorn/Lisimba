@@ -16,26 +16,34 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
-using DustInTheWind.ConsoleCommon;
+using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.CommandLine.Properties;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.CommandLine.Observers
+namespace DustInTheWind.Lisimba.WinForms.Workers
 {
-    internal class AddressBookOpenObserver : IObserver
+    internal class AddressBookOpenWorker : IWorker
     {
-        private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
+        private readonly ApplicationStatus applicationStatus;
+        private readonly WindowSystem windowSystem;
+        private readonly BirthdaysInfo birthdaysInfo;
 
-        public AddressBookOpenObserver(EnhancedConsole console, AddressBooks addressBooks)
+        public AddressBookOpenWorker(AddressBooks addressBooks, ApplicationStatus applicationStatus,
+            WindowSystem windowSystem, BirthdaysInfo birthdaysInfo)
         {
-            if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
+            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+            if (birthdaysInfo == null) throw new ArgumentNullException("birthdaysInfo");
 
-            this.console = console;
             this.addressBooks = addressBooks;
+            this.applicationStatus = applicationStatus;
+            this.windowSystem = windowSystem;
+            this.birthdaysInfo = birthdaysInfo;
         }
 
         public void Start()
@@ -52,49 +60,31 @@ namespace DustInTheWind.Lisimba.CommandLine.Observers
         {
             DisplayOpenSuccessMessage();
             DisplayWarnings(e.Result.Warnings);
+            birthdaysInfo.Show();
         }
 
         private void DisplayOpenSuccessMessage()
         {
-            if (addressBooks.Current != null)
+            if (addressBooks.Current == null)
+                return;
+
+            if (addressBooks.Current.Status == AddressBookStatus.New)
             {
-                if (addressBooks.Current.Status == AddressBookStatus.New)
-                {
-                    string addressBookName = addressBooks.Current.GetFriendlyName();
-                    string message = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
-
-                    console.WriteLineSuccess(message);
-                }
-                else
-                {
-                    string addressBookFileName = addressBooks.Current.Location;
-                    int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
-                    string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
-
-                    console.WriteLineSuccess(message);
-                }
+                applicationStatus.StatusText = LocalizedResources.NewAddressBook_SuccessStatusText;
             }
             else
             {
-                console.WriteLineError(Resources.OpenAddressBookUnknownError);
+                int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
+                applicationStatus.StatusText = string.Format(Resources.OpenAddressBook_SuccessStatusText, contactsCount);
             }
         }
 
         private void DisplayWarnings(IEnumerable<Exception> warnings)
         {
-            if (warnings == null)
+            if (warnings == null || !warnings.Any())
                 return;
 
-            StringBuilder sb = new StringBuilder();
-
-            foreach (Exception warning in warnings)
-            {
-                sb.AppendLine(warning.Message);
-                sb.AppendLine();
-            }
-
-            if (sb.Length > 0)
-                console.WriteLineWarning(sb.ToString());
+            windowSystem.DisplayWarning(warnings);
         }
     }
 }

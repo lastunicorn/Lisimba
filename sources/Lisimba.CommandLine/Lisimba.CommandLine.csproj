@@ -51,9 +51,9 @@
     <Compile Include="Flows\ImportFlow.cs" />
     <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Flows\VersionFlow.cs" />
-    <Compile Include="Observers\AddressBookSaveObserver.cs" />
+    <Compile Include="Workers\AddressBookSaveWorker.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
-    <Compile Include="Setup\ObserverProvider.cs" />
+    <Compile Include="Setup\WorkerProvider.cs" />
     <Compile Include="Business\UserInterface.cs" />
     <Compile Include="Business\Welcomer.cs" />
     <Compile Include="Flows\CloseFlow.cs" />
@@ -67,8 +67,8 @@
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Observers\AddressBookCloseObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenObserver.cs" />
+    <Compile Include="Workers\AddressBookCloseWorker.cs" />
+    <Compile Include="Workers\AddressBookOpenWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />

@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -16,33 +16,41 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.Wpf.Properties;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
+using DustInTheWind.WinFormsCommon;
 
-namespace DustInTheWind.Lisimba.Wpf.Observers
+namespace DustInTheWind.Lisimba.WinForms.Workers
 {
-    internal class AddressBookCloseObserver : IObserver
+    internal class AddressBookCloseWorker : IWorker
     {
         private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
+        private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookCloseObserver(AddressBooks addressBooks, WindowSystem windowSystem)
+        public AddressBookCloseWorker(AddressBooks addressBooks, WindowSystem windowSystem,
+            ApplicationStatus applicationStatus)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
+            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
             this.addressBooks = addressBooks;
             this.windowSystem = windowSystem;
+            this.applicationStatus = applicationStatus;
         }
 
         public void Start()
         {
             addressBooks.AddressBookClosing += HandleAddressBookClosing;
+            addressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         public void Stop()
         {
             addressBooks.AddressBookClosing -= HandleAddressBookClosing;
+            addressBooks.AddressBookClosed -= HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
@@ -68,6 +76,11 @@ namespace DustInTheWind.Lisimba.Wpf.Observers
             string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
 
             return windowSystem.DisplayYesNoCancelQuestion(text, title);
+        }
+
+        private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
+        {
+            applicationStatus.StatusText = LocalizedResources.AddressBookClosedSuccessStatus;
         }
     }
 }

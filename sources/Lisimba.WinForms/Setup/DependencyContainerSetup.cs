@@ -19,7 +19,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
@@ -41,13 +41,13 @@ namespace DustInTheWind.Lisimba.WinForms.Setup
             unityContainer.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<Gates>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<Workers>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<WindowSystem>(new ContainerControlledLifetimeManager());
 
             unityContainer.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
-            unityContainer.RegisterType<IObserverProvider, ObserverProvider>();
+            unityContainer.RegisterType<IWorkerProvider, WorkerProvider>();
             unityContainer.RegisterType<IOperationProvider, OperationProvider>();
             unityContainer.RegisterType<IWindowSystem, WindowSystem>();
             unityContainer.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());

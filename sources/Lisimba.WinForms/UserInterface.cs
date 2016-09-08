@@ -18,7 +18,7 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.Config;
-using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.WinForms.Services;
 
 namespace DustInTheWind.Lisimba.WinForms
@@ -26,18 +26,18 @@ namespace DustInTheWind.Lisimba.WinForms
     internal class UserInterface : IUserInterface
     {
         private readonly WindowSystem windowSystem;
-        private readonly ActiveObservers activeObservers;
+        private readonly Workers workers;
         private readonly ApplicationConfiguration config;
         private bool runAsTray;
 
-        public UserInterface(WindowSystem windowSystem, ActiveObservers activeObservers, ApplicationConfiguration config)
+        public UserInterface(WindowSystem windowSystem, Workers workers, ApplicationConfiguration config)
         {
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
-            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
+            if (workers == null) throw new ArgumentNullException("workers");
             if (config == null) throw new ArgumentNullException("config");
 
             this.windowSystem = windowSystem;
-            this.activeObservers = activeObservers;
+            this.workers = workers;
             this.config = config;
         }
 
@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.WinForms
         private void RunAsWindowApp()
         {
             windowSystem.CreateMainWindow();
-            activeObservers.Start();
+            workers.Start();
 
             runAsTray = false;
         }
@@ -62,7 +62,7 @@ namespace DustInTheWind.Lisimba.WinForms
             windowSystem.ShowTrayIcon();
             windowSystem.CreateMainWindow();
             windowSystem.DisplayMainWindow();
-            activeObservers.Start();
+            workers.Start();
 
             runAsTray = true;
         }

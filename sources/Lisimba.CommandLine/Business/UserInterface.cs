@@ -17,24 +17,24 @@
 using System;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.Business;
-using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Business.WorkerModel;
 
 namespace DustInTheWind.Lisimba.CommandLine.Business
 {
     internal class UserInterface : IUserInterface
     {
         private readonly Prompter prompter;
-        private readonly ActiveObservers activeObservers;
+        private readonly Lisimba.Business.WorkerModel.Workers workers;
         private readonly Welcomer welcomer;
 
-        public UserInterface(Prompter prompter, ActiveObservers activeObservers, Welcomer welcomer)
+        public UserInterface(Prompter prompter, Lisimba.Business.WorkerModel.Workers workers, Welcomer welcomer)
         {
             if (prompter == null) throw new ArgumentNullException("prompter");
-            if (activeObservers == null) throw new ArgumentNullException("activeObservers");
+            if (workers == null) throw new ArgumentNullException("workers");
             if (welcomer == null) throw new ArgumentNullException("welcomer");
 
             this.prompter = prompter;
-            this.activeObservers = activeObservers;
+            this.workers = workers;
             this.welcomer = welcomer;
         }
 
@@ -42,7 +42,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         {
             welcomer.SayWelcome();
 
-            activeObservers.Start();
+            workers.Start();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Business
         public void Exit()
         {
             prompter.Stop();
-            activeObservers.Stop();
+            workers.Stop();
 
             welcomer.SayGoodBye();
         }

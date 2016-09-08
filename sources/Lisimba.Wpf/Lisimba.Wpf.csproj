@@ -231,8 +231,8 @@
     </Compile>
     <Compile Include="Sections\AddressBookSection\ViewModels\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
-    <Compile Include="Observers\AddressBookCloseObserver.cs" />
-    <Compile Include="Observers\AddressBookOpenObserver.cs" />
+    <Compile Include="Workers\AddressBookCloseWorker.cs" />
+    <Compile Include="Workers\AddressBookOpenWorker.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -242,7 +242,7 @@
     <Compile Include="Operations\AvailableCommands.cs" />
     <Compile Include="Operations\ICommandProvider.cs" />
     <Compile Include="Setup\CommandProvider.cs" />
-    <Compile Include="Setup\ObserverProvider.cs" />
+    <Compile Include="Setup\WorkerProvider.cs" />
     <Compile Include="Sections\TraySection\TrayIcon.cs">
       <SubType>Component</SubType>
     </Compile>

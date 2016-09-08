@@ -1,4 +1,4 @@
-﻿// Lisimba
+// Lisimba
 // Copyright (C) 2007-2016 Dust in the Wind
 // 
 // This program is free software: you can redistribute it and/or modify
@@ -15,19 +15,20 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.WinForms.Properties;
+using DustInTheWind.Lisimba.WinForms.Services;
 
-namespace DustInTheWind.Lisimba.Wpf.Observers
+namespace DustInTheWind.Lisimba.WinForms.Workers
 {
-    internal class AddressBookOpenObserver : IObserver
+    internal class ContactDeleteWorker : IWorker
     {
         private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
-        public AddressBookOpenObserver(AddressBooks addressBooks, WindowSystem windowSystem)
+        public ContactDeleteWorker(AddressBooks addressBooks, WindowSystem windowSystem)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
@@ -38,25 +39,29 @@ namespace DustInTheWind.Lisimba.Wpf.Observers
 
         public void Start()
         {
-            addressBooks.AddressBookOpened += HandleAddressBookOpened;
+            addressBooks.ContactDeleting += HandleContactDeleting;
         }
 
         public void Stop()
         {
-            addressBooks.AddressBookOpened -= HandleAddressBookOpened;
+            addressBooks.ContactDeleting -= HandleContactDeleting;
         }
 
-        private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
+        private void HandleContactDeleting(object sender, ContactDeletingEventArgs e)
         {
-            DisplayWarnings(e.Result.Warnings);
+            if (!e.Cancel)
+            {
+                bool allowToDelete = ConfirmDeleteContact(e.ContactToDelete);
+                e.Cancel = !allowToDelete;
+            }
         }
 
-        private void DisplayWarnings(IEnumerable<Exception> warnings)
+        private bool ConfirmDeleteContact(Contact contactToDelete)
         {
-            if (warnings == null || !warnings.Any())
-                return;
+            string text = string.Format(LocalizedResources.ContactDelete_ConfirametionQuestion, contactToDelete.Name);
+            string title = LocalizedResources.ContactDelete_ConfirmationTitle;
 
-            windowSystem.DisplayWarning(warnings);
+            return windowSystem.DisplayYesNoExclamation(text, title);
         }
     }
 }

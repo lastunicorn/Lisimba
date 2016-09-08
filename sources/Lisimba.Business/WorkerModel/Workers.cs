@@ -17,39 +17,39 @@
 using System;
 using System.Collections.Generic;
 
-namespace DustInTheWind.Lisimba.Business.ObservingModel
+namespace DustInTheWind.Lisimba.Business.WorkerModel
 {
-    public class ActiveObservers
+    public class Workers
     {
-        private readonly IObserverProvider observerProvider;
-        private List<IObserver> observers;
+        private readonly IWorkerProvider workerProvider;
+        private List<IWorker> workers;
 
-        public ActiveObservers(IObserverProvider observerProvider)
+        public Workers(IWorkerProvider workerProvider)
         {
-            if (observerProvider == null) throw new ArgumentNullException("observerProvider");
+            if (workerProvider == null) throw new ArgumentNullException("workerProvider");
 
-            this.observerProvider = observerProvider;
+            this.workerProvider = workerProvider;
         }
 
         public void Start()
         {
-            if (observers == null)
+            if (workers == null)
             {
-                IEnumerable<IObserver> newObservers = observerProvider.GetNewObservers();
-                observers = new List<IObserver>(newObservers);
+                IEnumerable<IWorker> newWorkers = workerProvider.GetNewWorkers();
+                workers = new List<IWorker>(newWorkers);
             }
 
-            foreach (IObserver observer in observers)
-                observer.Start();
+            foreach (IWorker worker in workers)
+                worker.Start();
         }
 
         public void Stop()
         {
-            if (observers == null)
+            if (workers == null)
                 return;
 
-            foreach (IObserver observer in observers)
-                observer.Stop();
+            foreach (IWorker worker in workers)
+                worker.Stop();
         }
     }
 }

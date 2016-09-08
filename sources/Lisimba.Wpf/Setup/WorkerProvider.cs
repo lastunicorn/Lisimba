@@ -14,12 +14,28 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.Wpf.Workers;
+using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Business.ObservingModel
+namespace DustInTheWind.Lisimba.Wpf.Setup
 {
-    public interface IObserverProvider
+    internal class WorkerProvider : IWorkerProvider
     {
-        IEnumerable<IObserver> GetNewObservers();
+        private readonly IUnityContainer unityContainer;
+
+        public WorkerProvider(IUnityContainer unityContainer)
+        {
+            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
+            this.unityContainer = unityContainer;
+        }
+
+        public IEnumerable<IWorker> GetNewWorkers()
+        {
+            yield return unityContainer.Resolve<AddressBookOpenWorker>();
+            yield return unityContainer.Resolve<AddressBookCloseWorker>();
+        }
     }
 }

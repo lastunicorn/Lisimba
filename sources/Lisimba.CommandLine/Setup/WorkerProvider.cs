@@ -16,26 +16,27 @@
 
 using System;
 using System.Collections.Generic;
-using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.Wpf.Observers;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.CommandLine.Workers;
 using Microsoft.Practices.Unity;
 
-namespace DustInTheWind.Lisimba.Wpf.Setup
+namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
-    internal class ObserverProvider : IObserverProvider
+    internal class WorkerProvider : IWorkerProvider
     {
         private readonly IUnityContainer unityContainer;
 
-        public ObserverProvider(IUnityContainer unityContainer)
+        public WorkerProvider(IUnityContainer unityContainer)
         {
             if (unityContainer == null) throw new ArgumentNullException("unityContainer");
             this.unityContainer = unityContainer;
         }
 
-        public IEnumerable<IObserver> GetNewObservers()
+        public IEnumerable<IWorker> GetNewWorkers()
         {
-            yield return unityContainer.Resolve<AddressBookOpenObserver>();
-            yield return unityContainer.Resolve<AddressBookCloseObserver>();
+            yield return unityContainer.Resolve<AddressBookOpenWorker>();
+            yield return unityContainer.Resolve<AddressBookSaveWorker>();
+            yield return unityContainer.Resolve<AddressBookCloseWorker>();
         }
     }
 }

@@ -15,30 +15,25 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.Lisimba.WinForms.Services;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Observers
+namespace DustInTheWind.Lisimba.CommandLine.Workers
 {
-    internal class AddressBookCloseObserver : IObserver
+    internal class AddressBookCloseWorker : IWorker
     {
+        private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
-        private readonly WindowSystem windowSystem;
-        private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookCloseObserver(AddressBooks addressBooks, WindowSystem windowSystem,
-            ApplicationStatus applicationStatus)
+        public AddressBookCloseWorker(EnhancedConsole console, AddressBooks addressBooks)
         {
+            if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (windowSystem == null) throw new ArgumentNullException("windowSystem");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
+            this.console = console;
             this.addressBooks = addressBooks;
-            this.windowSystem = windowSystem;
-            this.applicationStatus = applicationStatus;
         }
 
         public void Start()
@@ -57,7 +52,7 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
         {
             if (e.AddressBook.Status == AddressBookStatus.Modified)
             {
-                bool? needToSave = AskToSaveAddressBook();
+                bool? needToSave = console.AskYesNoCancelQuestion(Resources.AskToSaveAddressBook);
 
                 if (needToSave == null)
                     e.Cancel = true;
@@ -70,17 +65,12 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
             }
         }
 
-        private bool? AskToSaveAddressBook()
-        {
-            string text = LocalizedResources.EnsureAddressBookIsSaved_Question;
-            string title = LocalizedResources.EnsureAddressBookIsSaved_Title;
-
-            return windowSystem.DisplayYesNoCancelQuestion(text, title);
-        }
-
         private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
         {
-            applicationStatus.StatusText = LocalizedResources.AddressBookClosedSuccessStatus;
+            string addressBookName = e.AddressBookShell.GetFriendlyName();
+            string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
+
+            console.WriteLineSuccess(text);
         }
     }
 }

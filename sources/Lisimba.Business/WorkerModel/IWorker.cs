@@ -14,9 +14,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Business.ObservingModel
+namespace DustInTheWind.Lisimba.Business.WorkerModel
 {
-    public interface IObserver
+    public interface IWorker
     {
         void Start();
         void Stop();

@@ -15,36 +15,32 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
-using DustInTheWind.Lisimba.Business;
+using System.Collections.Generic;
+using System.Linq;
+using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
-using DustInTheWind.Lisimba.Business.ObservingModel;
-using DustInTheWind.Lisimba.WinForms.LocationProviders;
-using DustInTheWind.Lisimba.WinForms.Properties;
-using DustInTheWind.WinFormsCommon;
+using DustInTheWind.Lisimba.Business.WorkerModel;
+using DustInTheWind.Lisimba.CommandLine.Properties;
 
-namespace DustInTheWind.Lisimba.WinForms.Observers
+namespace DustInTheWind.Lisimba.CommandLine.Workers
 {
-    internal class AddressBookSaveObserver : IObserver
+    internal class AddressBookSaveWorker : IWorker
     {
+        private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
-        private readonly FileLocationProvider fileLocationProvider;
         private readonly Gates gates;
-        private readonly ApplicationStatus applicationStatus;
 
-        public AddressBookSaveObserver(AddressBooks addressBooks, FileLocationProvider fileLocationProvider,
-            Gates gates, ApplicationStatus applicationStatus)
+        public AddressBookSaveWorker(EnhancedConsole console, AddressBooks addressBooks, Gates gates)
         {
+            if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (fileLocationProvider == null) throw new ArgumentNullException("fileLocationProvider");
             if (gates == null) throw new ArgumentNullException("gates");
-            if (applicationStatus == null) throw new ArgumentNullException("applicationStatus");
 
+            this.console = console;
             this.addressBooks = addressBooks;
-            this.fileLocationProvider = fileLocationProvider;
             this.gates = gates;
-            this.applicationStatus = applicationStatus;
         }
 
         public void Start()
@@ -63,7 +59,7 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
 
         private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
         {
-            string newLocation = fileLocationProvider.AskToSave();
+            string newLocation = AskForNewLocation();
 
             if (string.IsNullOrEmpty(newLocation))
                 e.Cancel = true;
@@ -71,12 +67,15 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
                 e.NewLocation = newLocation;
         }
 
+        public string AskForNewLocation()
+        {
+            console.WriteNormal(Resources.AskForNewLocation);
+            return console.ReadLine();
+        }
+
         private void HandleAddressBooksGateNeeded(object sender, GateNeededEventArgs e)
         {
-            if (gates.DefaultGate == null)
-                throw new LisimbaException(LocalizedResources.NoDefaultGateExists);
-
-            IGate newGate = gates.DefaultGate;
+            IGate newGate = AskForNewGate();
 
             if (newGate == null)
                 e.Cancel = true;
@@ -84,10 +83,47 @@ namespace DustInTheWind.Lisimba.WinForms.Observers
                 e.Gate = newGate;
         }
 
+        private IGate AskForNewGate()
+        {
+            console.WriteLineNormal(Resources.GateListTitle);
+
+            List<IGate> gates = this.gates.GetAllGates().ToList();
+
+            DisplayGates(gates);
+
+            int? selectedIndex = ReadSelectedGateIndex();
+
+            if (selectedIndex == null || selectedIndex < 0 || selectedIndex > gates.Count - 1)
+                return null;
+
+            return gates[selectedIndex.Value];
+        }
+
+        private int? ReadSelectedGateIndex()
+        {
+            console.WriteNormal(Resources.AskForNewGate);
+            string userValue = console.ReadLine();
+
+            int selectedIndex;
+
+            return int.TryParse(userValue, out selectedIndex)
+                ? selectedIndex - 1
+                : (int?)null;
+        }
+
+        private void DisplayGates(IReadOnlyList<IGate> gates)
+        {
+            for (int i = 0; i < gates.Count; i++)
+                console.WriteLineNormal(string.Format("{0} - {1}", i + 1, gates[i].Name));
+        }
+
         private void HandleAddressBookSaved(object sender, EventArgs e)
         {
-            int contactCount = addressBooks.Current.AddressBook.Contacts.Count;
-            applicationStatus.StatusText = string.Format(Resources.AddressBookSaved_StatusText, contactCount);
+            string addressBookName = addressBooks.Current.GetFriendlyName();
+            string addressBookLocation = addressBooks.Current.Location;
+            string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
+
+            console.WriteLineSuccess(text);
         }
     }
 }

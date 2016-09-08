@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.ArgumentsManagement;
 using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
-using DustInTheWind.Lisimba.Business.ObservingModel;
+using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.CommandLine.Business;
 using Microsoft.Practices.Unity;
 
@@ -39,12 +39,12 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
             container.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationConfiguration>(new ContainerControlledLifetimeManager());
             container.RegisterType<Gates>(new ContainerControlledLifetimeManager());
-            container.RegisterType<ActiveObservers>(new ContainerControlledLifetimeManager());
+            container.RegisterType<Lisimba.Business.WorkerModel.Workers>(new ContainerControlledLifetimeManager());
             container.RegisterType<ApplicationFlows>(new ContainerControlledLifetimeManager());
 
             container.RegisterType<IApplicationConfiguration, ApplicationConfiguration>();
             container.RegisterType<IFlowProvider, FlowProvider>();
-            container.RegisterType<IObserverProvider, ObserverProvider>();
+            container.RegisterType<IWorkerProvider, WorkerProvider>();
             container.RegisterType<IPrompterTextProvider, PrompterTextProvider>();
             container.RegisterType<IUserInterface, UserInterface>(new ContainerControlledLifetimeManager());
 

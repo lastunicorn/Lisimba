@@ -111,9 +111,9 @@
     <Compile Include="IUserInterface.cs" />
     <Compile Include="IZodiacSignProvider.cs" />
     <Compile Include="LisimbaWindowTitle.cs" />
-    <Compile Include="ObservingModel\ActiveObservers.cs" />
-    <Compile Include="ObservingModel\IObserver.cs" />
-    <Compile Include="ObservingModel\IObserverProvider.cs" />
+    <Compile Include="WorkerModel\Workers.cs" />
+    <Compile Include="WorkerModel\IWorker.cs" />
+    <Compile Include="WorkerModel\IWorkerProvider.cs" />
     <Compile Include="Properties\ZodiacResources.Designer.cs">
       <DependentUpon>ZodiacResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
