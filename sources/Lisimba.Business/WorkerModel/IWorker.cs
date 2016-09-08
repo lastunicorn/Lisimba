@@ -16,6 +16,11 @@
 
 namespace DustInTheWind.Lisimba.Business.WorkerModel
 {
+    /// <summary>
+    /// A worker is a peace of code that runs continously until is stopped.
+    /// It may be an observer that subscvribes itself to an event and does something when the event is triggered.
+    /// It may also be a loop that processes some data from a queue.
+    /// </summary>
     public interface IWorker
     {
         void Start();

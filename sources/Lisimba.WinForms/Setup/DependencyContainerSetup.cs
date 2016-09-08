@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.WinForms.Setup
             unityContainer.RegisterType<AddressBooks>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<Gates>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<AvailableOperations>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<Workers>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<Business.WorkerModel.Workers>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<ApplicationStatus>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<RecentFiles>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<WindowSystem>(new ContainerControlledLifetimeManager());

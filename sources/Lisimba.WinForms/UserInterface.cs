@@ -18,7 +18,6 @@ using System;
 using System.Windows.Forms;
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.Config;
-using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.WinForms.Services;
 
 namespace DustInTheWind.Lisimba.WinForms
@@ -26,11 +25,11 @@ namespace DustInTheWind.Lisimba.WinForms
     internal class UserInterface : IUserInterface
     {
         private readonly WindowSystem windowSystem;
-        private readonly Workers workers;
+        private readonly Business.WorkerModel.Workers workers;
         private readonly ApplicationConfiguration config;
         private bool runAsTray;
 
-        public UserInterface(WindowSystem windowSystem, Workers workers, ApplicationConfiguration config)
+        public UserInterface(WindowSystem windowSystem, Business.WorkerModel.Workers workers, ApplicationConfiguration config)
         {
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");
             if (workers == null) throw new ArgumentNullException("workers");

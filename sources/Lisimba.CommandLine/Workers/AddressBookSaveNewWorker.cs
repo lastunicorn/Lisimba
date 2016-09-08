@@ -26,13 +26,16 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Workers
 {
-    internal class AddressBookSaveWorker : IWorker
+    /// <summary>
+    /// This worker provides a location and gate when a address book that does not have them needs to be saved.
+    /// </summary>
+    internal class AddressBookSaveNewWorker : IWorker
     {
         private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
         private readonly Gates gates;
 
-        public AddressBookSaveWorker(EnhancedConsole console, AddressBooks addressBooks, Gates gates)
+        public AddressBookSaveNewWorker(EnhancedConsole console, AddressBooks addressBooks, Gates gates)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
@@ -67,7 +70,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
                 e.NewLocation = newLocation;
         }
 
-        public string AskForNewLocation()
+        private string AskForNewLocation()
         {
             console.WriteNormal(Resources.AskForNewLocation);
             return console.ReadLine();

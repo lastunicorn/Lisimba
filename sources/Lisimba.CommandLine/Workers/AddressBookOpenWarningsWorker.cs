@@ -20,16 +20,18 @@ using System.Text;
 using DustInTheWind.ConsoleCommon;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.WorkerModel;
-using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Workers
 {
-    internal class AddressBookOpenWorker : IWorker
+    /// <summary>
+    /// When a address book is opened, it displays the warnings to the user.
+    /// </summary>
+    internal class AddressBookOpenWarningsWorker : IWorker
     {
         private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
 
-        public AddressBookOpenWorker(EnhancedConsole console, AddressBooks addressBooks)
+        public AddressBookOpenWarningsWorker(EnhancedConsole console, AddressBooks addressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
@@ -50,38 +52,8 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
 
         private void HandleAddressBookOpened(object sender, AddressBookOpenedEventArgs e)
         {
-            DisplayOpenSuccessMessage();
-            DisplayWarnings(e.Result.Warnings);
-        }
+            IEnumerable<Exception> warnings = e.Result.Warnings;
 
-        private void DisplayOpenSuccessMessage()
-        {
-            if (addressBooks.Current != null)
-            {
-                if (addressBooks.Current.Status == AddressBookStatus.New)
-                {
-                    string addressBookName = addressBooks.Current.GetFriendlyName();
-                    string message = string.Format(Resources.NewAddressBookCreatedSuccess, addressBookName);
-
-                    console.WriteLineSuccess(message);
-                }
-                else
-                {
-                    string addressBookFileName = addressBooks.Current.Location;
-                    int contactsCount = addressBooks.Current.AddressBook.Contacts.Count;
-                    string message = string.Format(Resources.AddressBookOpenSuccess, contactsCount, addressBookFileName);
-
-                    console.WriteLineSuccess(message);
-                }
-            }
-            else
-            {
-                console.WriteLineError(Resources.OpenAddressBookUnknownError);
-            }
-        }
-
-        private void DisplayWarnings(IEnumerable<Exception> warnings)
-        {
             if (warnings == null)
                 return;
 

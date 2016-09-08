@@ -51,7 +51,8 @@
     <Compile Include="Flows\ImportFlow.cs" />
     <Compile Include="Flows\LangFlow.cs" />
     <Compile Include="Flows\VersionFlow.cs" />
-    <Compile Include="Workers\AddressBookSaveWorker.cs" />
+    <Compile Include="Workers\AddressBookCloseSuccessWorker.cs" />
+    <Compile Include="Workers\AddressBookSaveNewWorker.cs" />
     <Compile Include="Setup\FlowProvider.cs" />
     <Compile Include="Setup\WorkerProvider.cs" />
     <Compile Include="Business\UserInterface.cs" />
@@ -67,8 +68,8 @@
     <Compile Include="Flows\ExitFlow.cs" />
     <Compile Include="Flows\OpenFlow.cs" />
     <Compile Include="Flows\NextBirthdaysFlow.cs" />
-    <Compile Include="Workers\AddressBookCloseWorker.cs" />
-    <Compile Include="Workers\AddressBookOpenWorker.cs" />
+    <Compile Include="Workers\AddressBookCloseGuardWorker.cs" />
+    <Compile Include="Workers\AddressBookOpenSuccessWorker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Flows\ShowFlow.cs" />
@@ -77,6 +78,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Workers\AddressBookOpenWarningsWorker.cs" />
+    <Compile Include="Workers\AddressBookSaveSuccessWorker.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.ro.resx" />

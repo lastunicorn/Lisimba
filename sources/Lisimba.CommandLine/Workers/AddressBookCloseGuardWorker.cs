@@ -22,12 +22,15 @@ using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Workers
 {
-    internal class AddressBookCloseWorker : IWorker
+    /// <summary>
+    /// This worker asks the user if he wants to save the address book when it is closed.
+    /// </summary>
+    internal class AddressBookCloseGuardWorker : IWorker
     {
         private readonly EnhancedConsole console;
         private readonly AddressBooks addressBooks;
 
-        public AddressBookCloseWorker(EnhancedConsole console, AddressBooks addressBooks)
+        public AddressBookCloseGuardWorker(EnhancedConsole console, AddressBooks addressBooks)
         {
             if (console == null) throw new ArgumentNullException("console");
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
@@ -39,13 +42,11 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
         public void Start()
         {
             addressBooks.AddressBookClosing += HandleAddressBookClosing;
-            addressBooks.AddressBookClosed += HandleAddressBookClosed;
         }
 
         public void Stop()
         {
             addressBooks.AddressBookClosing -= HandleAddressBookClosing;
-            addressBooks.AddressBookClosed -= HandleAddressBookClosed;
         }
 
         private void HandleAddressBookClosing(object sender, AddressBookClosingEventArgs e)
@@ -63,14 +64,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
             {
                 e.SaveAddressBook = false;
             }
-        }
-
-        private void HandleAddressBookClosed(object sender, AddressBookClosedEventArgs e)
-        {
-            string addressBookName = e.AddressBookShell.GetFriendlyName();
-            string text = string.Format(Resources.AddressBookClosedSuccess, addressBookName);
-
-            console.WriteLineSuccess(text);
         }
     }
 }
