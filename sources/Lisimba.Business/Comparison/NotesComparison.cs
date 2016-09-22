@@ -27,12 +27,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         protected override bool LeftHasValue()
         {
-            return !string.IsNullOrEmpty(ItemLeft.Notes);
+            return ItemLeft != null && !string.IsNullOrEmpty(ItemLeft.Notes);
         }
 
         protected override bool RightHasValue()
         {
-            return !string.IsNullOrEmpty(ItemRight.Notes);
+            return ItemRight != null && !string.IsNullOrEmpty(ItemRight.Notes);
         }
 
         protected override bool ValuesAreEqual()

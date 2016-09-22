@@ -142,8 +142,10 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (displayDetails)
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
-                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
-                    console.WriteLineNormal(text);
+                    console.WriteLineNormal("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
+
+                    foreach (IItemComparison itemComparison in contactComparison.Comparisons)
+                        console.WriteLineNormal("    - {3} - [{0}] <-> [{1}] - {2}", itemComparison.ItemLeft, itemComparison.ItemRight, itemComparison.Equality, itemComparison.GetType().Name);
                 }
         }
 

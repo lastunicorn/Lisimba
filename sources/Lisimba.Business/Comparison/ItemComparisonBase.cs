@@ -18,8 +18,8 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 {
     public abstract class ItemComparisonBase<T> : IItemComparison<T>
     {
-        public T ItemLeft { get; set; }
-        public T ItemRight { get; set; }
+        public T ItemLeft { get; private set; }
+        public T ItemRight { get; private set; }
 
         object IItemComparison.ItemLeft
         {

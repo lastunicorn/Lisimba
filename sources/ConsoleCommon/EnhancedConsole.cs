@@ -41,9 +41,21 @@ namespace DustInTheWind.ConsoleCommon
             Write(text, NormalColor);
         }
 
+        public void WriteNormal(string text, params object[] args)
+        {
+            string formattedText = string.Format(text, args);
+            Write(formattedText, NormalColor);
+        }
+
         public void WriteLineNormal(string text)
         {
             WriteLine(text, NormalColor);
+        }
+
+        public void WriteLineNormal(string text, params object[] args)
+        {
+            string formattedText = string.Format(text, args);
+            WriteLine(formattedText, NormalColor);
         }
 
         public void WriteSuccess(string text)
