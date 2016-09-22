@@ -232,7 +232,7 @@
     <Compile Include="Sections\AddressBookSection\ViewModels\ZodiacSignViewModel.cs" />
     <Compile Include="NativeMethods.cs" />
     <Compile Include="Workers\AddressBookCloseWorker.cs" />
-    <Compile Include="Workers\AddressBookOpenWorker.cs" />
+    <Compile Include="Workers\AddressBookOpenWarningsWorker.cs" />
     <Compile Include="Setup\DependencyContainerSetup.cs" />
     <Compile Include="Properties\LocalizedResources.Designer.cs">
       <AutoGen>True</AutoGen>

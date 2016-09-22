@@ -22,12 +22,12 @@ using DustInTheWind.Lisimba.Business.WorkerModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Workers
 {
-    internal class AddressBookOpenWorker : IWorker
+    internal class AddressBookOpenWarningsWorker : IWorker
     {
         private readonly AddressBooks addressBooks;
         private readonly WindowSystem windowSystem;
 
-        public AddressBookOpenWorker(AddressBooks addressBooks, WindowSystem windowSystem)
+        public AddressBookOpenWarningsWorker(AddressBooks addressBooks, WindowSystem windowSystem)
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (windowSystem == null) throw new ArgumentNullException("windowSystem");

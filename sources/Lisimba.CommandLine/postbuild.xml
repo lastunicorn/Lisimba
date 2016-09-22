@@ -9,6 +9,7 @@
     <ItemGroup>
         <GateFiles Include="$(SolutionDir)\Publish\LisimbaGate\*.*" />
         <GateFiles Include="$(SolutionDir)\Publish\YahooCsvGate\*.*" />
+        <GateFiles Include="$(SolutionDir)\Publish\RandomUserGate\*.*" />
     </ItemGroup>
 
     <!-- The main target. -->

@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
 
         public IEnumerable<IWorker> GetNewWorkers()
         {
-            yield return unityContainer.Resolve<AddressBookOpenWorker>();
+            yield return unityContainer.Resolve<AddressBookOpenWarningsWorker>();
             yield return unityContainer.Resolve<AddressBookCloseWorker>();
         }
     }

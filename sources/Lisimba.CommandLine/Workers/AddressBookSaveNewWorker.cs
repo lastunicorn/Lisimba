@@ -50,14 +50,12 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
         {
             addressBooks.NewLocationNeeded += HandleAddressBooksNewLocationNeeded;
             addressBooks.GateNeeded += HandleAddressBooksGateNeeded;
-            addressBooks.AddressBookSaved += HandleAddressBookSaved;
         }
 
         public void Stop()
         {
             addressBooks.NewLocationNeeded -= HandleAddressBooksNewLocationNeeded;
             addressBooks.GateNeeded -= HandleAddressBooksGateNeeded;
-            addressBooks.AddressBookSaved -= HandleAddressBookSaved;
         }
 
         private void HandleAddressBooksNewLocationNeeded(object sender, NewLocationNeededEventArgs e)
@@ -118,15 +116,6 @@ namespace DustInTheWind.Lisimba.CommandLine.Workers
         {
             for (int i = 0; i < gates.Count; i++)
                 console.WriteLineNormal(string.Format("{0} - {1}", i + 1, gates[i].Name));
-        }
-
-        private void HandleAddressBookSaved(object sender, EventArgs e)
-        {
-            string addressBookName = addressBooks.Current.GetFriendlyName();
-            string addressBookLocation = addressBooks.Current.Location;
-            string text = string.Format(Resources.SaveAddressBookSuccess, addressBookName, addressBookLocation);
-
-            console.WriteLineSuccess(text);
         }
     }
 }
