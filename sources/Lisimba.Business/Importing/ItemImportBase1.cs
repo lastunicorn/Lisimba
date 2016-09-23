@@ -14,16 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+using DustInTheWind.Lisimba.Business.Comparison;
+
+namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public interface IItemComparison
+    public abstract class ItemImportBase<T> : ItemImportBase<T, T>
+        where T : class
     {
-        object ItemLeft { get; }
-        object ItemRight { get; }
-
-        object ValueLeft { get; }
-        object ValueRight { get; }
-
-        ItemEquality Equality { get; }
+        protected ItemImportBase(IItemComparison<T, T> itemComparison)
+            : base(itemComparison)
+        {
+        }
     }
 }

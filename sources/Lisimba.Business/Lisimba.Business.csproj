@@ -75,7 +75,8 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="Comparison\EmailComparison.cs" />
-    <Compile Include="Comparison\IItemComparison1.cs" />
+    <Compile Include="Comparison\IItemComparison2.cs" />
+    <Compile Include="Comparison\ItemComparisonBase2.cs" />
     <Compile Include="Comparison\ObjectComparison.cs" />
     <Compile Include="Comparison\PersonNameComparison.cs" />
     <Compile Include="Comparison\DateComparison.cs" />
@@ -83,7 +84,7 @@
     <Compile Include="Comparison\ContactComparison.cs" />
     <Compile Include="Comparison\IItemComparison.cs" />
     <Compile Include="Comparison\ItemComparisonFactory.cs" />
-    <Compile Include="Comparison\ItemComparisonBase.cs" />
+    <Compile Include="Comparison\ItemComparisonBase1.cs" />
     <Compile Include="Comparison\ItemEquality.cs" />
     <Compile Include="Comparison\NotesComparison.cs" />
     <Compile Include="Comparison\PhoneComparison.cs" />
@@ -104,8 +105,9 @@
     <Compile Include="Importing\EmailImport.cs" />
     <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
+    <Compile Include="Importing\ItemImportBase1.cs" />
     <Compile Include="Importing\ObjectImport.cs" />
-    <Compile Include="Importing\ItemImportBase.cs" />
+    <Compile Include="Importing\ItemImportBase2.cs" />
     <Compile Include="Importing\ItemImportFactory.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />

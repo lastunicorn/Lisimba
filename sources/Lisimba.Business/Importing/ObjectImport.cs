@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public class ObjectImport : ItemImportBase<object>
     {
-        public ObjectImport(IItemComparison<object> itemComparison)
+        public ObjectImport(IItemComparison<object, object> itemComparison)
             : base(itemComparison)
         {
         }

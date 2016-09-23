@@ -16,10 +16,10 @@
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public abstract class ItemComparisonBase<T> : IItemComparison<T>
+    public abstract class ItemComparisonBase<TItem, TValue> : IItemComparison<TItem, TValue>
     {
-        public T ItemLeft { get; private set; }
-        public T ItemRight { get; private set; }
+        public TItem ItemLeft { get; private set; }
+        public TItem ItemRight { get; private set; }
 
         object IItemComparison.ItemLeft
         {
@@ -31,9 +31,23 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             get { return ItemRight; }
         }
 
+        public abstract TValue ValueLeft { get; }
+
+        public abstract TValue ValueRight { get; }
+
+        object IItemComparison.ValueLeft
+        {
+            get { return ValueLeft; }
+        }
+
+        object IItemComparison.ValueRight
+        {
+            get { return ValueRight; }
+        }
+
         public ItemEquality Equality { get; private set; }
 
-        protected ItemComparisonBase(T itemLeft, T itemRight)
+        protected ItemComparisonBase(TItem itemLeft, TItem itemRight)
         {
             ItemLeft = itemLeft;
             ItemRight = itemRight;

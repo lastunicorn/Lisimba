@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public abstract class ItemImportBase<T> : IItemImport
+    public abstract class ItemImportBase<T, U> : IItemImport
         where T : class
     {
         public T Source { get; protected set; }
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
         public ImportType ImportType { get; protected set; }
 
-        protected ItemImportBase(IItemComparison<T> itemComparison)
+        protected ItemImportBase(IItemComparison<T, U> itemComparison)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 

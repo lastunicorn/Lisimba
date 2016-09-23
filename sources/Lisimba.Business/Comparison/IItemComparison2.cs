@@ -16,9 +16,12 @@
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
-    public interface IItemComparison<out T> : IItemComparison
+    public interface IItemComparison<out T, out U> : IItemComparison
     {
         new T ItemLeft { get; }
         new T ItemRight { get; }
+
+        new U ValueLeft { get; }
+        new U ValueRight { get; }
     }
 }
