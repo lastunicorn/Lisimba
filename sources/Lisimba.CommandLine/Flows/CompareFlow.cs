@@ -25,6 +25,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
+using DustInTheWind.Lisimba.CommandLine.FlowOptions;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows
@@ -34,6 +35,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
         private readonly AddressBooks addressBooks;
         private readonly EnhancedConsole console;
         private readonly Gates gates;
+        private CompareFlowOptions options;
 
         public CompareFlow(AddressBooks addressBooks, EnhancedConsole console, Gates gates)
         {
@@ -48,51 +50,36 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
         public void Execute(IList<string> parameters)
         {
+            if (parameters == null) throw new ArgumentNullException("parameters");
+
             if (addressBooks.Current == null)
                 throw new LisimbaException(Resources.NoAddessBookOpenedError);
 
-            if (parameters.Count == 0)
-                throw new LisimbaException("Specify the address book to compare to.");
+            options = new CompareFlowOptions(parameters);
 
             IGate gate = gates.GetGate("LisimbaGate");
-            AddressBook addressBook = (gate as FileGate).Load(parameters[0]);
+            AddressBook addressBook = (gate as FileGate).Load(options.AddressBookLocation);
 
             AddressBook currentaddressBook = addressBooks.Current.AddressBook;
 
             AddressBookComparison addressBookComparison = new AddressBookComparison(currentaddressBook, addressBook);
             addressBookComparison.Compare();
 
-            bool displayDetails = parameters.Count >= 2 && (parameters[1] == "-d" || parameters[1] == "--details");
-
-            DisplayResult(addressBookComparison, displayDetails);
+            DisplayResult(addressBookComparison);
         }
 
-        private void DisplayResult(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplayResult(AddressBookComparison addressBookComparison)
         {
-            DisplayIdenticalContacts(addressBookComparison, displayDetails);
+            if (!options.DisplayOnlyDiff)
+                DisplayIdenticalContacts(addressBookComparison);
 
-            if (displayDetails)
-                console.WriteLine();
-
-            DisplayContactsOnlyInLeft(addressBookComparison, displayDetails);
-
-            if (displayDetails)
-                console.WriteLine();
-
-            DisplayContactsOnlyInRight(addressBookComparison, displayDetails);
-
-            if (displayDetails)
-                console.WriteLine();
-
-            DisplaySimilarContacts(addressBookComparison, displayDetails);
-
-            if (displayDetails)
-                console.WriteLine();
-
-            DisplayDifferentContacts(addressBookComparison, displayDetails);
+            DisplayContactsOnlyInLeft(addressBookComparison);
+            DisplayContactsOnlyInRight(addressBookComparison);
+            DisplaySimilarContacts(addressBookComparison);
+            DisplayDifferentContacts(addressBookComparison);
         }
 
-        private void DisplayIdenticalContacts(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplayIdenticalContacts(AddressBookComparison addressBookComparison)
         {
             List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Equal)
@@ -100,12 +87,16 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             console.WriteLineEmphasize("Identical: " + contactComparisons.Count);
 
-            if (displayDetails)
+            if (options.DisplayDetails)
+            {
                 foreach (ContactComparison contactComparison in contactComparisons)
                     console.WriteLineNormal(contactComparison.ItemLeft.ToString());
+
+                console.WriteLine();
+            }
         }
 
-        private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplayContactsOnlyInLeft(AddressBookComparison addressBookComparison)
         {
             List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.LeftExists)
@@ -113,12 +104,16 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             console.WriteLineEmphasize("Unique in left: " + contactComparisons.Count);
 
-            if (displayDetails)
+            if (options.DisplayDetails)
+            {
                 foreach (ContactComparison contactComparison in contactComparisons)
                     console.WriteLineNormal(contactComparison.ItemLeft.ToString());
+
+                console.WriteLine();
+            }
         }
 
-        private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplayContactsOnlyInRight(AddressBookComparison addressBookComparison)
         {
             List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.RightExists)
@@ -126,12 +121,16 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             console.WriteLineEmphasize("Unique in right: " + contactComparisons.Count);
 
-            if (displayDetails)
+            if (options.DisplayDetails)
+            {
                 foreach (ContactComparison comparisonResult in contactComparisons)
                     console.WriteLineNormal(comparisonResult.ItemRight.ToString());
+
+                console.WriteLine();
+            }
         }
 
-        private void DisplaySimilarContacts(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplaySimilarContacts(AddressBookComparison addressBookComparison)
         {
             List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Similar)
@@ -139,17 +138,31 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             console.WriteLineEmphasize("Similar: " + contactComparisons.Count);
 
-            if (displayDetails)
+            if (options.DisplayDetails)
+            {
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
                     console.WriteLineNormal("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
 
                     foreach (IItemComparison itemComparison in contactComparison.Comparisons)
+                    {
+                        if (options.DisplayOnlyDiff)
+                        {
+                            bool itemsAreEqual = itemComparison.Equality == ItemEquality.Equal || itemComparison.Equality == ItemEquality.BothEmpty;
+
+                            if (itemsAreEqual)
+                                continue;
+                        }
+
                         console.WriteLineNormal("    - {3} - [{0}] <-> [{1}] - {2}", itemComparison.ValueLeft, itemComparison.ValueRight, itemComparison.Equality, itemComparison.GetType().Name);
+                    }
                 }
+
+                console.WriteLine();
+            }
         }
 
-        private void DisplayDifferentContacts(AddressBookComparison addressBookComparison, bool displayDetails)
+        private void DisplayDifferentContacts(AddressBookComparison addressBookComparison)
         {
             List<ContactComparison> contactComparisons = addressBookComparison.Comparisons
                 .Where(x => x.Equality == ItemEquality.Different)
@@ -157,12 +170,16 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
 
             console.WriteLineEmphasize("Different: " + contactComparisons.Count);
 
-            if (displayDetails)
+            if (options.DisplayDetails)
+            {
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
                     string text = string.Format("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
                     console.WriteLineNormal(text);
                 }
+
+                console.WriteLine();
+            }
         }
     }
 }
