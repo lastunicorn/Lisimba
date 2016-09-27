@@ -16,6 +16,11 @@
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
+    /// <summary>
+    /// A comparison between two items of type <see cref="TItem"/>.
+    /// The comparison is performed on some properties of the items.
+    /// The type of the properties is <see cref="TValue"/>.
+    /// </summary>
     public abstract class ItemComparisonBase<TItem, TValue> : IItemComparison<TItem, TValue>
     {
         public TItem ItemLeft { get; private set; }

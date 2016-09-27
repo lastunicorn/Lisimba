@@ -16,6 +16,9 @@
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
+    /// <summary>
+    /// A comparison between two items of type <see cref="T"/>. The comparison is performed on the items themselves.
+    /// </summary>
     public abstract class ItemComparisonBase<T> : ItemComparisonBase<T, T>
     {
         protected ItemComparisonBase(T itemLeft, T itemRight)
