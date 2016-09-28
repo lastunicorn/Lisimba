@@ -102,6 +102,8 @@
     <Compile Include="Comparison\Comparers\AddressBookComparison.cs" />
     <Compile Include="Importing\Importers\AddressBookImporter.cs" />
     <Compile Include="Importing\Importers\ContactImport.cs" />
+    <Compile Include="Importing\Importers\WebSiteImport.cs" />
+    <Compile Include="Importing\Importers\PhoneImport.cs" />
     <Compile Include="Importing\Importers\EmailImport.cs" />
     <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />

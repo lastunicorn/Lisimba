@@ -20,15 +20,24 @@ using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class EmailImport : ItemImportBase<Contact, Email>
+    public class WebSiteImport : ItemImportBase<Contact, WebSite>
     {
         public override bool CanMerge
         {
-            get { return false; }
+            get
+            {
+                if (SourceValue.Address != null && DestinationValue.Address != null)
+                    return false;
+
+                if (SourceValue.Description != null && DestinationValue.Description != null)
+                    return false;
+
+                return true;
+            }
         }
 
-        public EmailImport(EmailComparison emailComparison)
-            : base(emailComparison)
+        public WebSiteImport(WebSiteComparison webSiteComparison)
+            : base(webSiteComparison)
         {
         }
 
@@ -62,12 +71,12 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             if (!simulate)
                 DestinationParent.Items.Add(SourceValue);
 
-            sb.AppendLine(string.Format("Added email: {0}", SourceValue));
+            sb.AppendLine(string.Format("Added web site: {0}", SourceValue));
         }
 
         private void Merge(StringBuilder sb, bool simulate)
         {
-            sb.AppendLine(string.Format("Merging email '{0}' and '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Merging web site '{0}' and '{1}'.", DestinationValue, SourceValue));
 
             if (!simulate)
             {
@@ -87,7 +96,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 DestinationParent.Items.Add(SourceValue);
             }
 
-            sb.AppendLine(string.Format("Replaced email '{0}' with '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Replaced phone '{0}' with '{1}'.", DestinationValue, SourceValue));
         }
     }
 }

@@ -21,6 +21,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
         Ignore,
         AddAsNew,
         Merge,
-        Replace
+        Replace,
+        Conflict
     }
 }

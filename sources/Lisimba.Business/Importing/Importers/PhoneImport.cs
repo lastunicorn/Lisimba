@@ -20,15 +20,15 @@ using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class EmailImport : ItemImportBase<Contact, Email>
+    public class PhoneImport : ItemImportBase<Contact, Phone>
     {
         public override bool CanMerge
         {
             get { return false; }
         }
 
-        public EmailImport(EmailComparison emailComparison)
-            : base(emailComparison)
+        public PhoneImport(PhoneComparison phoneComparison)
+            : base(phoneComparison)
         {
         }
 
@@ -62,17 +62,17 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             if (!simulate)
                 DestinationParent.Items.Add(SourceValue);
 
-            sb.AppendLine(string.Format("Added email: {0}", SourceValue));
+            sb.AppendLine(string.Format("Added phone: {0}", SourceValue));
         }
 
         private void Merge(StringBuilder sb, bool simulate)
         {
-            sb.AppendLine(string.Format("Merging email '{0}' and '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Merging phones '{0}' and '{1}'.", DestinationValue, SourceValue));
 
             if (!simulate)
             {
-                if (!string.IsNullOrEmpty(SourceValue.Address))
-                    DestinationValue.Address = SourceValue.Address;
+                if (!string.IsNullOrEmpty(SourceValue.Number))
+                    DestinationValue.Number = SourceValue.Number;
 
                 if (!string.IsNullOrEmpty(SourceValue.Description))
                     DestinationValue.Description = SourceValue.Description;
@@ -87,7 +87,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 DestinationParent.Items.Add(SourceValue);
             }
 
-            sb.AppendLine(string.Format("Replaced email '{0}' with '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Replaced phone '{0}' with '{1}'.", DestinationValue, SourceValue));
         }
     }
 }

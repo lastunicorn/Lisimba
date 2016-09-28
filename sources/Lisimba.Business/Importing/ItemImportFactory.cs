@@ -32,6 +32,9 @@ namespace DustInTheWind.Lisimba.Business.Importing
             if (type == typeof(EmailComparison))
                 return new EmailImport(itemComparison as EmailComparison);
 
+            if (type == typeof(PhoneComparison))
+                return new PhoneImport(itemComparison as PhoneComparison);
+
             return ObjectImport.Empty();
 
 

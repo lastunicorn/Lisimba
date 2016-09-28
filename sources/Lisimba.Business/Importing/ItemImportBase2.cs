@@ -51,6 +51,8 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
         public ImportType ImportType { get; protected set; }
 
+        public abstract bool CanMerge { get; }
+
         protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
@@ -82,7 +84,10 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     SourceValue = itemComparison.ValueRight;
                     DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;
-                    ImportType = ImportType.Merge;
+                    if(CanMerge)
+                        ImportType = ImportType.Merge;
+                    else
+                        ImportType = ImportType.Conflict;
                     break;
 
                 default:
