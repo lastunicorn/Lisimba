@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,54 +39,15 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
             foreach (IItemImport importRule in ItemImports)
             {
-                switch (importRule.ImportType)
+                try
                 {
-                    case ImportType.Ignore:
-                        break;
-
-                    case ImportType.AddAsNew:
-                        AddAsNew(importRule, sb, simulate);
-                        break;
-
-                    case ImportType.Merge:
-                        Merge(importRule, sb, simulate);
-                        break;
-
-                    case ImportType.Replace:
-                        Replace(importRule, sb, simulate);
-                        break;
-
-                    default:
-                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                        break;
+                    importRule.Execute(sb, simulate);
+                }
+                catch (Exception ex)
+                {
+                    sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
                 }
             }
-        }
-
-        private void AddAsNew(IItemImport importRule, StringBuilder sb, bool simulate)
-        {
-            if (!simulate)
-                DestinationValue.Items.Add((ContactItem)importRule.SourceValue);
-
-            sb.AppendLine(string.Format("Added item: {0}", importRule.SourceValue));
-        }
-
-        private static void Merge(IItemImport importRule, StringBuilder sb, bool simulate)
-        {
-            sb.AppendLine(string.Format("Merging items '{0}' and '{1}'.", importRule.DestinationValue, importRule.SourceValue));
-
-            importRule.Execute(sb, simulate);
-        }
-
-        private void Replace(IItemImport importRule, StringBuilder sb, bool simulate)
-        {
-            if (!simulate)
-            {
-                DestinationValue.Items.Remove((ContactItem)importRule.DestinationValue);
-                DestinationValue.Items.Add((ContactItem)importRule.SourceValue);
-            }
-
-            sb.AppendLine(string.Format("Replaced item '{0}' with '{1}'.", importRule.DestinationValue, importRule.SourceValue));
         }
     }
 }
