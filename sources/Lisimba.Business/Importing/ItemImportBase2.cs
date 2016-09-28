@@ -20,25 +20,38 @@ using DustInTheWind.Lisimba.Business.Comparison;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public abstract class ItemImportBase<T, U> : IItemImport
-        where T : class
+    public abstract class ItemImportBase<TParent, TValue> : IItemImport
+        where TParent : class
     {
-        public T Source { get; protected set; }
-        public T Destination { get; protected set; }
+        public TParent SourceParent { get; protected set; }
+        public TParent DestinationParent { get; protected set; }
 
-        object IItemImport.Source
+        public TValue SourceValue { get; protected set; }
+        public TValue DestinationValue { get; protected set; }
+
+        object IItemImport.SourceParent
         {
-            get { return Source; }
+            get { return SourceParent; }
         }
 
-        object IItemImport.Destination
+        object IItemImport.DestinationParent
         {
-            get { return Destination; }
+            get { return DestinationParent; }
+        }
+
+        object IItemImport.SourceValue
+        {
+            get { return SourceValue; }
+        }
+
+        object IItemImport.DestinationValue
+        {
+            get { return DestinationValue; }
         }
 
         public ImportType ImportType { get; protected set; }
 
-        protected ItemImportBase(IItemComparison<T, U> itemComparison)
+        protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
@@ -51,19 +64,24 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ItemEquality.RightExists:
-                    Source = itemComparison.ItemRight;
+                    SourceParent = itemComparison.ParentRight;
+                    SourceValue = itemComparison.ValueRight;
                     ImportType = ImportType.AddAsNew;
                     break;
 
                 case ItemEquality.Different:
-                    Source = itemComparison.ItemRight;
-                    Destination = itemComparison.ItemLeft;
+                    SourceParent = itemComparison.ParentRight;
+                    SourceValue = itemComparison.ValueRight;
+                    DestinationParent = itemComparison.ParentLeft;
+                    DestinationValue = itemComparison.ValueLeft;
                     ImportType = ImportType.Replace;
                     break;
 
                 case ItemEquality.Similar:
-                    Source = itemComparison.ItemRight;
-                    Destination = itemComparison.ItemLeft;
+                    SourceParent = itemComparison.ParentRight;
+                    SourceValue = itemComparison.ValueRight;
+                    DestinationParent = itemComparison.ParentLeft;
+                    DestinationValue = itemComparison.ValueLeft;
                     ImportType = ImportType.Merge;
                     break;
 
@@ -72,6 +90,6 @@ namespace DustInTheWind.Lisimba.Business.Importing
             }
         }
 
-        public abstract void Merge(StringBuilder sb, bool simulate);
+        public abstract void Execute(StringBuilder sb, bool simulate);
     }
 }

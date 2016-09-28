@@ -14,26 +14,35 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison;
 
-namespace DustInTheWind.Lisimba.Business.Importing
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class EmailImport : ItemImportBase<Email>
+    public class CategoryComparison : ItemComparisonBase<Contact, string>
     {
-        public EmailImport(EmailComparison emailComparison)
-            : base(emailComparison)
+        public CategoryComparison(Contact contactLeft, string categoryLeft, Contact contactRight, string categoryRight)
+            : base(contactLeft, categoryLeft, contactRight, categoryRight)
         {
         }
 
-        public override void Merge(StringBuilder sb, bool simulate)
+        protected override bool LeftHasValue()
         {
-            if (!string.IsNullOrEmpty(Source.Address))
-                Destination.Address = Source.Address;
+            return !string.IsNullOrEmpty(ValueLeft);
+        }
 
-            if (!string.IsNullOrEmpty(Source.Description))
-                Destination.Description = Source.Description;
+        protected override bool RightHasValue()
+        {
+            return !string.IsNullOrEmpty(ValueRight);
+        }
+
+        protected override bool ValuesAreEqual()
+        {
+            return ValueLeft == ValueRight;
+        }
+
+        protected override bool ValuesAreSimilar()
+        {
+            return ValueLeft == ValueRight;
         }
     }
 }

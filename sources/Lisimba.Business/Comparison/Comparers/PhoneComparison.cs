@@ -16,33 +16,23 @@
 
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class PhoneComparison : ItemComparisonBase<Phone>
+    public class PhoneComparison : ItemComparisonBase<Contact, Phone>
     {
-        public PhoneComparison(Phone phoneLeft, Phone phoneRight)
-            : base(phoneLeft, phoneRight)
+        public PhoneComparison(Contact contactLeft, Phone phoneLeft, Contact contactRight, Phone phoneRight)
+            : base(contactLeft, phoneLeft, contactRight, phoneRight)
         {
-        }
-
-        protected override bool LeftHasValue()
-        {
-            return ItemLeft != null;
-        }
-
-        protected override bool RightHasValue()
-        {
-            return ItemRight != null;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return Phone.Equals(ItemLeft, ItemRight);
+            return Phone.Equals(ValueLeft, ValueRight);
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return ItemLeft.Number == ItemRight.Number;
+            return ValueLeft.Number == ValueRight.Number;
         }
     }
 }

@@ -17,6 +17,7 @@
 using System;
 using System.Drawing;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {

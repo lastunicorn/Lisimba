@@ -17,23 +17,13 @@
 using System;
 using System.Reflection;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class ObjectComparison : ItemComparisonBase<object>
+    public class ObjectComparison : ItemComparisonBase<object, object>
     {
-        public ObjectComparison(object itemLeft, object itemRight)
-            : base(itemLeft, itemRight)
+        public ObjectComparison(object parentLeft, object valueLeft, object parentRight, object valueRight)
+            : base(parentLeft, valueLeft, parentRight, valueRight)
         {
-        }
-
-        protected override bool LeftHasValue()
-        {
-            return ItemLeft != null;
-        }
-
-        protected override bool RightHasValue()
-        {
-            return ItemRight != null;
         }
 
         protected override bool ValuesAreEqual()
@@ -48,17 +38,17 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         private bool AreEqual()
         {
-            if (ItemLeft.GetType() != ItemRight.GetType())
+            if (ValueLeft.GetType() != ValueRight.GetType())
                 return false;
 
-            Type t = ItemLeft.GetType();
+            Type t = ValueLeft.GetType();
             MethodInfo methodInfo = t.GetMethod("Equals");
 
-            if (ReferenceEquals(ItemLeft, ItemRight))
+            if (ReferenceEquals(ValueLeft, ValueRight))
                 return true;
 
             if (methodInfo.GetParameters().Length == 2 && methodInfo.ReturnParameter != null && methodInfo.ReturnParameter.ParameterType == typeof(bool))
-                return (bool)methodInfo.Invoke(null, new[] { ItemLeft, ItemRight });
+                return (bool)methodInfo.Invoke(null, new[] { ValueLeft, ValueRight });
 
             return false;
         }

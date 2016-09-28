@@ -16,6 +16,7 @@
 
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Business.Comparison
@@ -29,7 +30,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactRight);
+            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactLeft.Category, contactRight, contactRight.Category);
 
             Assert.That(categoryComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -40,7 +41,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Category = "value" };
             Contact contactRight = new Contact();
 
-            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactRight);
+            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactLeft.Category, contactRight, contactRight.Category);
 
             Assert.That(categoryComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -51,7 +52,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact { Category = "value" };
 
-            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactRight);
+            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactLeft.Category, contactRight, contactRight.Category);
 
             Assert.That(categoryComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -62,7 +63,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Category = "value1" };
             Contact contactRight = new Contact { Category = "value2" };
 
-            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactRight);
+            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactLeft.Category, contactRight, contactRight.Category);
 
             Assert.That(categoryComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -73,7 +74,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Category = "same value" };
             Contact contactRight = new Contact { Category = "same value" };
 
-            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactRight);
+            CategoryComparison categoryComparison = new CategoryComparison(contactLeft, contactLeft.Category, contactRight, contactRight.Category);
 
             Assert.That(categoryComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }

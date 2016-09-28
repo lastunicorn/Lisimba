@@ -14,31 +14,33 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
+
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
     /// <summary>
-    /// A comparison between two items of type <see cref="TItem"/>.
+    /// A comparison between two items of type <see cref="TParent"/>.
     /// The comparison is performed on some properties of the items.
     /// The type of the properties is <see cref="TValue"/>.
     /// </summary>
-    public abstract class ItemComparisonBase<TItem, TValue> : IItemComparison<TItem, TValue>
+    public abstract class ItemComparisonBase<TParent, TValue> : IItemComparison<TParent, TValue>
     {
-        public TItem ItemLeft { get; private set; }
-        public TItem ItemRight { get; private set; }
+        public TParent ParentLeft { get; private set; }
+        public TParent ParentRight { get; private set; }
 
-        object IItemComparison.ItemLeft
+        object IItemComparison.ParentLeft
         {
-            get { return ItemLeft; }
+            get { return ParentLeft; }
         }
 
-        object IItemComparison.ItemRight
+        object IItemComparison.ParentRight
         {
-            get { return ItemRight; }
+            get { return ParentRight; }
         }
 
-        public abstract TValue ValueLeft { get; }
+        public TValue ValueLeft { get; private set; }
 
-        public abstract TValue ValueRight { get; }
+        public TValue ValueRight { get; private set; }
 
         object IItemComparison.ValueLeft
         {
@@ -52,10 +54,13 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         public ItemEquality Equality { get; private set; }
 
-        protected ItemComparisonBase(TItem itemLeft, TItem itemRight)
+        protected ItemComparisonBase(TParent parentLeft, TValue valueLeft, TParent parentRight, TValue valueRight)
         {
-            ItemLeft = itemLeft;
-            ItemRight = itemRight;
+            ParentLeft = parentLeft;
+            ParentRight = parentRight;
+
+            ValueLeft = valueLeft;
+            ValueRight = valueRight;
 
             Compare();
         }
@@ -89,8 +94,16 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 Equality = ItemEquality.Different;
         }
 
-        protected abstract bool LeftHasValue();
-        protected abstract bool RightHasValue();
+        protected virtual bool LeftHasValue()
+        {
+            return ValueLeft != null;
+        }
+
+        protected virtual bool RightHasValue()
+        {
+            return ValueRight != null;
+        }
+
         protected abstract bool ValuesAreEqual();
         protected abstract bool ValuesAreSimilar();
 

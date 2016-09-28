@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
@@ -32,9 +33,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
-            Assert.That(contactComparison.ItemRight, Is.SameAs(contactRight));
+            Assert.That(contactComparison.ValueLeft, Is.SameAs(contactLeft));
         }
 
         [Test]
@@ -43,15 +44,15 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
-            Assert.That(contactComparison.ItemLeft, Is.SameAs(contactLeft));
+            Assert.That(contactComparison.ValueRight, Is.SameAs(contactRight));
         }
 
         [Test]
         public void Equality_is_RightExists_if_contactLeft_is_null()
         {
-            ContactComparison contactComparison = new ContactComparison(null, new Contact());
+            ContactComparison contactComparison = new ContactComparison(null, null, null, new Contact());
 
             Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -59,7 +60,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         [Test]
         public void Equality_is_LeftExists_if_contactRight_is_null()
         {
-            ContactComparison contactComparison = new ContactComparison(new Contact(), null);
+            ContactComparison contactComparison = new ContactComparison(null, new Contact(), null, null);
 
             Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -67,7 +68,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         [Test]
         public void Equality_is_BothEmpty_if_both_contactLeft_and_contactRight_are_null()
         {
-            ContactComparison contactComparison = new ContactComparison(null, null);
+            ContactComparison contactComparison = new ContactComparison(null, null, null, null);
 
             Assert.That(contactComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -78,7 +79,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contact1 = new Contact();
             Contact contact2 = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contact1, contact2);
+            ContactComparison contactComparison = new ContactComparison(null, contact1, null, contact2);
 
             AssertContainsType(contactComparison.Comparisons, typeof(DateComparison));
         }
@@ -89,7 +90,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
             AssertContainsType(contactComparison.Comparisons, typeof(CategoryComparison));
         }
@@ -100,7 +101,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
             AssertContainsType(contactComparison.Comparisons, typeof(NotesComparison));
         }
@@ -111,7 +112,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
             AssertContainsType(contactComparison.Comparisons, typeof(PersonNameComparison));
         }
@@ -122,7 +123,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
             AssertContainsType(contactComparison.Comparisons, typeof(PictureComparison));
         }
@@ -133,7 +134,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
+            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
 
             AssertDoesNotContainType(contactComparison.Comparisons, typeof(ItemComparisonFactory));
         }

@@ -17,6 +17,7 @@
 using System;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
@@ -37,7 +38,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             };
         }
 
-        public static IItemComparison Create(ContactItem itemLeft, ContactItem itemRight)
+        public static IItemComparison Create(Contact contactLeft, ContactItem itemLeft, Contact contactRight, ContactItem itemRight)
         {
             if (itemLeft == null && itemRight == null)
                 throw new ArgumentNullException("itemRight");
@@ -46,16 +47,16 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             Type typeRight = itemRight == null ? null : itemRight.GetType();
 
             if (typeLeft != null && itemRight != null && typeLeft != typeRight)
-                return new ObjectComparison(itemLeft, itemRight);
+                return new ObjectComparison(contactLeft, itemLeft, contactRight, itemRight);
 
             Type itemsType = typeLeft ?? typeRight;
 
             if (!comparisonTypes.ContainsKey(itemsType))
-                return new ObjectComparison(itemLeft, itemRight);
+                return new ObjectComparison(contactLeft, itemLeft, contactRight, itemRight);
 
             Type typeComparison = comparisonTypes[itemsType];
 
-            return Activator.CreateInstance(typeComparison, itemLeft, itemRight) as IItemComparison;
+            return Activator.CreateInstance(typeComparison, contactLeft, itemLeft, contactRight, itemRight) as IItemComparison;
         }
     }
 }

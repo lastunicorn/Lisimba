@@ -18,11 +18,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
-namespace DustInTheWind.Lisimba.Business.Importing
+namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class ContactImport : ItemImportBase<Contact>
+    public class ContactImport : ItemImportBase<AddressBook, Contact>
     {
         public List<IItemImport> ItemImports { get; private set; }
 
@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 .ToList();
         }
 
-        public override void Merge(StringBuilder sb, bool simulate)
+        public override void Execute(StringBuilder sb, bool simulate)
         {
             foreach (IItemImport importRule in ItemImports)
             {
@@ -56,7 +56,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     default:
-                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.Destination, importRule.Source, importRule.ImportType));
+                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
                         break;
                 }
             }
@@ -65,27 +65,27 @@ namespace DustInTheWind.Lisimba.Business.Importing
         private void AddAsNew(IItemImport importRule, StringBuilder sb, bool simulate)
         {
             if (!simulate)
-                Destination.Items.Add((ContactItem)importRule.Source);
+                DestinationValue.Items.Add((ContactItem)importRule.SourceValue);
 
-            sb.AppendLine(string.Format("Added item: {0}", importRule.Source));
+            sb.AppendLine(string.Format("Added item: {0}", importRule.SourceValue));
         }
 
         private static void Merge(IItemImport importRule, StringBuilder sb, bool simulate)
         {
-            sb.AppendLine(string.Format("Merging items '{0}' and '{1}'.", importRule.Destination, importRule.Source));
+            sb.AppendLine(string.Format("Merging items '{0}' and '{1}'.", importRule.DestinationValue, importRule.SourceValue));
 
-            importRule.Merge(sb, simulate);
+            importRule.Execute(sb, simulate);
         }
 
         private void Replace(IItemImport importRule, StringBuilder sb, bool simulate)
         {
             if (!simulate)
             {
-                Destination.Items.Remove((ContactItem)importRule.Destination);
-                Destination.Items.Add((ContactItem)importRule.Source);
+                DestinationValue.Items.Remove((ContactItem)importRule.DestinationValue);
+                DestinationValue.Items.Add((ContactItem)importRule.SourceValue);
             }
 
-            sb.AppendLine(string.Format("Replaced item '{0}' with '{1}'.", importRule.Destination, importRule.Source));
+            sb.AppendLine(string.Format("Replaced item '{0}' with '{1}'.", importRule.DestinationValue, importRule.SourceValue));
         }
     }
 }

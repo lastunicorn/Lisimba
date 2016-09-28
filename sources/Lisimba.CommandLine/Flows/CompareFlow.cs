@@ -23,6 +23,7 @@ using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.CommandLine.FlowOptions;
@@ -90,7 +91,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (options.DisplayDetails)
             {
                 foreach (ContactComparison contactComparison in contactComparisons)
-                    console.WriteLineNormal(contactComparison.ItemLeft.ToString());
+                    console.WriteLineNormal(contactComparison.ValueLeft.ToString());
 
                 console.WriteLine();
             }
@@ -107,7 +108,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (options.DisplayDetails)
             {
                 foreach (ContactComparison contactComparison in contactComparisons)
-                    console.WriteLineNormal(contactComparison.ItemLeft.ToString());
+                    console.WriteLineNormal(contactComparison.ValueLeft.ToString());
 
                 console.WriteLine();
             }
@@ -124,7 +125,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             if (options.DisplayDetails)
             {
                 foreach (ContactComparison comparisonResult in contactComparisons)
-                    console.WriteLineNormal(comparisonResult.ItemRight.ToString());
+                    console.WriteLineNormal(comparisonResult.ValueRight.ToString());
 
                 console.WriteLine();
             }
@@ -142,7 +143,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             {
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
-                    console.WriteLineNormal("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
+                    console.WriteLineNormal("[{0}] <-> [{1}]", contactComparison.ValueLeft, contactComparison.ValueRight);
 
                     foreach (IItemComparison itemComparison in contactComparison.Comparisons)
                     {
@@ -174,7 +175,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Flows
             {
                 foreach (ContactComparison contactComparison in contactComparisons)
                 {
-                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ItemLeft, contactComparison.ItemRight);
+                    string text = string.Format("[{0}] <-> [{1}]", contactComparison.ValueLeft, contactComparison.ValueRight);
                     console.WriteLineNormal(text);
                 }
 

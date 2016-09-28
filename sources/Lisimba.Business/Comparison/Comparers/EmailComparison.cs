@@ -16,43 +16,33 @@
 
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class CategoryComparison : ItemComparisonBase<Contact, string>
+    public class EmailComparison : ItemComparisonBase<Contact, Email>
     {
-        public CategoryComparison(Contact contactLeft, Contact contactRight)
-            : base(contactLeft, contactRight)
+        public EmailComparison(Contact contactLeft, Email emailLeft, Contact contactRight, Email emailRight)
+            : base(contactLeft, emailLeft, contactRight, emailRight)
         {
-        }
-
-        public override string ValueLeft
-        {
-            get { return ItemLeft.Category; }
-        }
-
-        public override string ValueRight
-        {
-            get { return ItemRight.Category; }
         }
 
         protected override bool LeftHasValue()
         {
-            return ItemLeft != null && !string.IsNullOrEmpty(ItemLeft.Category);
+            return ValueLeft != null && !ValueLeft.IsEmpty;
         }
 
         protected override bool RightHasValue()
         {
-            return ItemRight != null && !string.IsNullOrEmpty(ItemRight.Category);
+            return ValueRight != null && !ValueRight.IsEmpty;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return ItemLeft.Category == ItemRight.Category;
+            return Email.Equals(ValueLeft, ValueRight);
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return ItemLeft.Category == ItemRight.Category;
+            return ValueLeft.Address == ValueRight.Address;
         }
     }
 }

@@ -16,6 +16,8 @@
 
 using System;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
+using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {

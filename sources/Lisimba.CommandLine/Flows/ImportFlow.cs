@@ -25,6 +25,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.GateModel;
 using DustInTheWind.Lisimba.Business.Importing;
+using DustInTheWind.Lisimba.Business.Importing.Importers;
 using DustInTheWind.Lisimba.CommandLine.Properties;
 
 namespace DustInTheWind.Lisimba.CommandLine.Flows

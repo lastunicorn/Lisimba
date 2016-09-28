@@ -18,6 +18,7 @@ using System;
 using System.Drawing;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Business.Comparison
@@ -30,7 +31,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
         [Test]
         public void both_pictures_are_empty()
         {
-            PictureComparison pictureComparison = new PictureComparison(null, null);
+            PictureComparison pictureComparison = new PictureComparison(null, null, null, null);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -41,7 +42,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Picture pictureLeft = GetRandomPicture();
             Picture pictureRight = null;
 
-            PictureComparison pictureComparison = new PictureComparison(pictureLeft, pictureRight);
+            PictureComparison pictureComparison = new PictureComparison(null, pictureLeft, null, pictureRight);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -53,7 +54,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Picture pictureLeft = null;
             Picture pictureRight = GetRandomPicture();
 
-            PictureComparison pictureComparison = new PictureComparison(pictureLeft, pictureRight);
+            PictureComparison pictureComparison = new PictureComparison(null, pictureLeft, null, pictureRight);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -64,7 +65,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Picture pictureLeft = GetRandomPicture();
             Picture pictureRight = GetRandomPicture();
 
-            PictureComparison pictureComparison = new PictureComparison(pictureLeft, pictureRight);
+            PictureComparison pictureComparison = new PictureComparison(null, pictureLeft, null, pictureRight);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -76,7 +77,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Picture pictureLeft = picture;
             Picture pictureRight = picture;
 
-            PictureComparison pictureComparison = new PictureComparison(pictureLeft, pictureRight);
+            PictureComparison pictureComparison = new PictureComparison(null, pictureLeft, null, pictureRight);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -87,7 +88,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Picture pictureLeft = GetRandomPicture();
             Picture pictureRight = pictureLeft.Clone() as Picture;
 
-            PictureComparison pictureComparison = new PictureComparison(pictureLeft, pictureRight);
+            PictureComparison pictureComparison = new PictureComparison(null, pictureLeft, null, pictureRight);
 
             Assert.That(pictureComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }

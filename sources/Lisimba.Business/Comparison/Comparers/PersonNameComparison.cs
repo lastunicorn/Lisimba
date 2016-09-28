@@ -17,28 +17,28 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class PersonNameComparison : ItemComparisonBase<PersonName>
+    public class PersonNameComparison : ItemComparisonBase<Contact, PersonName>
     {
-        public PersonNameComparison(PersonName personNameLeft, PersonName personNameRight)
-            : base(personNameLeft, personNameRight)
+        public PersonNameComparison(Contact contactLeft, PersonName personNameLeft, Contact contactRight, PersonName personNameRight)
+            : base(contactLeft, personNameLeft, contactRight, personNameRight)
         {
         }
 
         protected override bool LeftHasValue()
         {
-            return ItemLeft != null && !ItemLeft.IsEmpty;
+            return ValueLeft != null && !ValueLeft.IsEmpty;
         }
 
         protected override bool RightHasValue()
         {
-            return ItemRight != null && !ItemRight.IsEmpty;
+            return ValueRight != null && !ValueRight.IsEmpty;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return PersonName.Equals(ItemLeft, ItemRight);
+            return PersonName.Equals(ValueLeft, ValueRight);
         }
 
         protected override bool ValuesAreSimilar()
@@ -49,10 +49,10 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
             ItemEquality[] itemEqualitys =
             {
-                CompareNamePart(ItemLeft.FirstName, ItemRight.FirstName),
-                CompareNamePart(ItemLeft.MiddleName, ItemRight.MiddleName),
-                CompareNamePart(ItemLeft.LastName, ItemRight.LastName),
-                CompareNamePart(ItemLeft.Nickname, ItemRight.Nickname)
+                CompareNamePart(ValueLeft.FirstName, ValueRight.FirstName),
+                CompareNamePart(ValueLeft.MiddleName, ValueRight.MiddleName),
+                CompareNamePart(ValueLeft.LastName, ValueRight.LastName),
+                CompareNamePart(ValueLeft.Nickname, ValueRight.Nickname)
             };
 
             if (itemEqualitys.All(x => x != ItemEquality.Equal))

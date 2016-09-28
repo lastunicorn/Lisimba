@@ -16,33 +16,35 @@
 
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class WebSiteComparison : ItemComparisonBase<WebSite>
+    public class DateComparison : ItemComparisonBase<Contact, Date>
     {
-        public WebSiteComparison(WebSite webSiteLeft, WebSite webSiteRight)
-            : base(webSiteLeft, webSiteRight)
+        public DateComparison(Contact contactLeft, Date dateLeft, Contact contactRight, Date dateRight)
+            : base(contactLeft, dateLeft, contactRight, dateRight)
         {
         }
 
         protected override bool LeftHasValue()
         {
-            return ItemLeft != null;
+            return ValueLeft != null && !ValueLeft.IsEmpty;
         }
 
         protected override bool RightHasValue()
         {
-            return ItemRight != null;
+            return ValueRight != null && !ValueRight.IsEmpty;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return WebSite.Equals(ItemLeft, ItemRight);
+            return Date.Equals(ValueLeft, ValueRight);
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return ItemLeft.Address == ItemRight.Address;
+            return (ValueLeft.Year == 0 || ValueRight.Year == 0 || ValueLeft.Year == ValueRight.Year) &&
+                (ValueLeft.Month == 0 || ValueRight.Month == 0 || ValueLeft.Month == ValueRight.Month) &&
+                (ValueLeft.Day == 0 || ValueRight.Day == 0 || ValueLeft.Day == ValueRight.Day);
         }
     }
 }

@@ -19,33 +19,23 @@ using System.Linq;
 using System.Security.Cryptography;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class PictureComparison : ItemComparisonBase<Picture>
+    public class PictureComparison : ItemComparisonBase<Contact, Picture>
     {
-        public PictureComparison(Picture pictureLeft, Picture pictureRight)
-            : base(pictureLeft, pictureRight)
+        public PictureComparison(Contact contactLeft, Picture pictureLeft, Contact contactRight, Picture pictureRight)
+            : base(contactLeft, pictureLeft, contactRight, pictureRight)
         {
-        }
-
-        protected override bool LeftHasValue()
-        {
-            return ItemLeft != null;
-        }
-
-        protected override bool RightHasValue()
-        {
-            return ItemRight != null;
         }
 
         protected override bool ValuesAreEqual()
         {
-            return Picture.Equals(ItemLeft, ItemRight);
+            return Picture.Equals(ValueLeft, ValueRight);
         }
 
         protected override bool ValuesAreSimilar()
         {
-            return AreEquals(ItemLeft.Image, ItemRight.Image);
+            return AreEquals(ValueLeft.Image, ValueRight.Image);
         }
 
         public static bool AreEquals(Image image1, Image image2)

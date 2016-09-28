@@ -18,9 +18,9 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class ContactComparison : ItemComparisonBase<Contact>
+    public class ContactComparison : ItemComparisonBase<AddressBook, Contact>
     {
         private PersonNameComparison personNameComparison;
         private NotesComparison notesComparison;
@@ -29,9 +29,9 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private PictureComparison pictureComparison;
 
         public List<IItemComparison> Comparisons { get; private set; }
-        
-        public ContactComparison(Contact contactLeft, Contact contactRight)
-            : base(contactLeft, contactRight)
+
+        public ContactComparison(AddressBook addressBookLeft, Contact contactLeft, AddressBook addressBookRight, Contact contactRight)
+            : base(addressBookLeft, contactLeft, addressBookRight, contactRight)
         {
         }
 
@@ -43,16 +43,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                 Comparisons.Clear();
         }
 
-        protected override bool LeftHasValue()
-        {
-            return ItemLeft != null;
-        }
-
-        protected override bool RightHasValue()
-        {
-            return ItemRight != null;
-        }
-
         protected override void PrepareToCompareNotEmptyValues()
         {
             CompareAllItems();
@@ -60,42 +50,42 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         private void CompareAllItems()
         {
-            personNameComparison = new PersonNameComparison(ItemLeft.Name, ItemRight.Name);
+            personNameComparison = new PersonNameComparison(ValueLeft, ValueLeft.Name, ValueRight, ValueRight.Name);
             Comparisons.Add(personNameComparison);
 
-            notesComparison = new NotesComparison(ItemLeft, ItemRight);
+            notesComparison = new NotesComparison(ValueLeft, ValueLeft.Notes, ValueRight, ValueRight.Notes);
             Comparisons.Add(notesComparison);
 
-            birthdayComparison = new DateComparison(ItemLeft.Birthday, ItemRight.Birthday);
+            birthdayComparison = new DateComparison(ValueLeft, ValueLeft.Birthday, ValueRight, ValueRight.Birthday);
             Comparisons.Add(birthdayComparison);
 
-            categoryComparison = new CategoryComparison(ItemLeft, ItemRight);
+            categoryComparison = new CategoryComparison(ValueLeft, ValueLeft.Category, ValueRight, ValueRight.Category);
             Comparisons.Add(categoryComparison);
 
-            pictureComparison = new PictureComparison(ItemLeft.Picture, ItemRight.Picture);
+            pictureComparison = new PictureComparison(ValueLeft, ValueLeft.Picture, ValueRight, ValueRight.Picture);
             Comparisons.Add(pictureComparison);
 
-            List<ContactItem> contactRightItems = ItemRight.Items.ToList();
+            List<ContactItem> contactRightItems = ValueRight.Items.ToList();
 
-            foreach (ContactItem itemLeft in ItemLeft.Items)
+            foreach (ContactItem itemLeft in ValueLeft.Items)
             {
                 IItemComparison comparison = contactRightItems
-                    .Select(x => ItemComparisonFactory.Create(itemLeft, x))
+                    .Select(x => ItemComparisonFactory.Create(ValueLeft, itemLeft, ValueRight, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
 
                 if (comparison != null)
                 {
                     Comparisons.Add(comparison);
-                    contactRightItems.Remove(comparison.ItemRight as ContactItem);
+                    contactRightItems.Remove(comparison.ValueRight as ContactItem);
                 }
                 else
                 {
-                    Comparisons.Add(ItemComparisonFactory.Create(itemLeft, null));
+                    Comparisons.Add(ItemComparisonFactory.Create(ValueLeft, itemLeft, ValueRight, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Comparisons.Add(ItemComparisonFactory.Create(null, itemRight));
+                Comparisons.Add(ItemComparisonFactory.Create(ValueLeft, null, ValueRight, itemRight));
         }
 
         protected override bool ValuesAreEqual()

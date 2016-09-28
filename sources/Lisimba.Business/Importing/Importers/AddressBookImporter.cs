@@ -20,9 +20,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
-namespace DustInTheWind.Lisimba.Business.Importing
+namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class AddressBookImporter
     {
@@ -101,7 +101,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                         break;
 
                     default:
-                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.Destination, importRule.Source, importRule.ImportType));
+                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
                         break;
                 }
             }
@@ -112,27 +112,27 @@ namespace DustInTheWind.Lisimba.Business.Importing
         private void AddAsNew(ContactImport importRule, bool simulate, StringBuilder sb)
         {
             if (!simulate)
-                addressBookDestination.Contacts.Add(importRule.Source);
+                addressBookDestination.Contacts.Add(importRule.SourceValue);
 
-            sb.AppendLine(string.Format("Added contact: {0}.", importRule.Source));
+            sb.AppendLine(string.Format("Added contact: {0}.", importRule.SourceValue));
         }
 
         private static void Merge(ContactImport importRule, bool simulate, StringBuilder sb)
         {
-            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.Destination, importRule.Source));
+            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.DestinationValue, importRule.SourceValue));
 
-            importRule.Merge(sb, simulate);
+            importRule.Execute(sb, simulate);
         }
 
         private void Replace(ContactImport importRule, bool simulate, StringBuilder sb)
         {
             if (!simulate)
             {
-                addressBookDestination.Contacts.Remove(importRule.Destination);
-                addressBookDestination.Contacts.Add(importRule.Source);
+                addressBookDestination.Contacts.Remove(importRule.DestinationValue);
+                addressBookDestination.Contacts.Add(importRule.SourceValue);
             }
 
-            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.Destination, importRule.Source));
+            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.DestinationValue, importRule.SourceValue));
         }
     }
 }

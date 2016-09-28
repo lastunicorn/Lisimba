@@ -24,12 +24,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         /// <summary>
         /// Gets the left side item that is part of the comparison.
         /// </summary>
-        new T ItemLeft { get; }
+        new T ParentLeft { get; }
 
         /// <summary>
         /// Gets the right side item that is part of the comparison.
         /// </summary>
-        new T ItemRight { get; }
+        new T ParentRight { get; }
 
         /// <summary>
         /// Gets the value from the left side item that is actually compared.

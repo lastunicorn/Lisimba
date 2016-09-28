@@ -14,35 +14,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.AddressBookModel;
+using System.Text;
+using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class SocialProfileIdComparison : ItemComparisonBase<SocialProfileId>
+    public class ObjectImport : ItemImportBase<object, object>
     {
-        public SocialProfileIdComparison(SocialProfileId socialProfileIdLeft, SocialProfileId socialProfileIdRight)
-            : base(socialProfileIdLeft, socialProfileIdRight)
+        public ObjectImport(IItemComparison<object, object> itemComparison)
+            : base(itemComparison)
         {
         }
 
-        protected override bool LeftHasValue()
+        public override void Execute(StringBuilder sb, bool simulate)
         {
-            return ItemLeft != null;
         }
 
-        protected override bool RightHasValue()
+        public static ObjectImport Empty()
         {
-            return ItemRight != null;
-        }
-
-        protected override bool ValuesAreEqual()
-        {
-            return SocialProfileId.Equals(ItemLeft, ItemRight);
-        }
-
-        protected override bool ValuesAreSimilar()
-        {
-            return ItemLeft.Id == ItemRight.Id;
+            return new ObjectImport(new ObjectComparison(null, null, null, null));
         }
     }
 }

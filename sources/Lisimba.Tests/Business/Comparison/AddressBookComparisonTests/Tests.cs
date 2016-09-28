@@ -17,6 +17,7 @@
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using NUnit.Framework;
 
 namespace DustInTheWind.Lisimba.Tests.Business.Comparison.AddressBookComparisonTests

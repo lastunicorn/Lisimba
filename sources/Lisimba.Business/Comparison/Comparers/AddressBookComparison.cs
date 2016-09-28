@@ -19,7 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Comparison
+namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
     public class AddressBookComparison
     {
@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         private readonly AddressBook addressBookRight;
 
         public List<ContactComparison> Comparisons { get; private set; }
-        
+
         public bool AreEqual
         {
             get { return Comparisons.All(x => x.Equality == ItemEquality.Equal); }
@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
             foreach (Contact contactLeft in addressBookLeft.Contacts)
             {
                 ContactComparison comparison = addressBookRightContacts
-                    .Select(x => new ContactComparison(contactLeft, x))
+                    .Select(x => new ContactComparison(addressBookLeft, contactLeft, addressBookRight, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal || x.Equality == ItemEquality.Similar);
 
                 if (comparison != null)
@@ -78,18 +78,18 @@ namespace DustInTheWind.Lisimba.Business.Comparison
                     Comparisons.Add(comparison);
 
                     // If identical contact found in right address book, remove it.
-                    addressBookRightContacts.Remove(comparison.ItemRight);
+                    addressBookRightContacts.Remove(comparison.ValueRight);
                 }
                 else
                 {
-                    Comparisons.Add(new ContactComparison(contactLeft, null));
+                    Comparisons.Add(new ContactComparison(addressBookLeft, contactLeft, addressBookRight, null));
                 }
             }
 
             // Create items for the remaining contacts in the right address book.
 
             foreach (Contact contactRight in addressBookRightContacts)
-                Comparisons.Add(new ContactComparison(null, contactRight));
+                Comparisons.Add(new ContactComparison(addressBookLeft, null, addressBookRight, contactRight));
         }
     }
 }

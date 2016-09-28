@@ -21,6 +21,7 @@ using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.Importing;
+using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {
