@@ -32,7 +32,15 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
         }
 
-        public override void Execute(StringBuilder sb, bool simulate)
+        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        {
+        }
+
+        protected override void Merge(StringBuilder sb, bool simulate)
+        {
+        }
+
+        protected override void Replace(StringBuilder sb, bool simulate)
         {
         }
 
