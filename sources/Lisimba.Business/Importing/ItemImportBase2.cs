@@ -23,21 +23,8 @@ namespace DustInTheWind.Lisimba.Business.Importing
     public abstract class ItemImportBase<TParent, TValue> : IItemImport
         where TParent : class
     {
-        public TParent SourceParent { get; protected set; }
-        public TParent DestinationParent { get; protected set; }
-
-        public TValue SourceValue { get; protected set; }
-        public TValue DestinationValue { get; protected set; }
-
-        object IItemImport.SourceParent
-        {
-            get { return SourceParent; }
-        }
-
-        object IItemImport.DestinationParent
-        {
-            get { return DestinationParent; }
-        }
+        protected TValue SourceValue { get; set; }
+        protected TValue DestinationValue { get; set; }
 
         object IItemImport.SourceValue
         {
@@ -49,7 +36,9 @@ namespace DustInTheWind.Lisimba.Business.Importing
             get { return DestinationValue; }
         }
 
-        public ImportType ImportType { get; protected set; }
+        protected TParent DestinationParent { get; set; }
+
+        public ImportType ImportType { get; private set; }
 
         public abstract bool CanMerge { get; }
 
@@ -66,13 +55,11 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ItemEquality.RightExists:
-                    SourceParent = itemComparison.ParentRight;
                     SourceValue = itemComparison.ValueRight;
                     ImportType = ImportType.AddAsNew;
                     break;
 
                 case ItemEquality.Different:
-                    SourceParent = itemComparison.ParentRight;
                     SourceValue = itemComparison.ValueRight;
                     DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;
@@ -80,7 +67,6 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ItemEquality.Similar:
-                    SourceParent = itemComparison.ParentRight;
                     SourceValue = itemComparison.ValueRight;
                     DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;

@@ -23,9 +23,6 @@ namespace DustInTheWind.Lisimba.Business.Importing
         object SourceValue { get; }
         object DestinationValue { get; }
         
-        object SourceParent { get; }
-        object DestinationParent { get; }
-
         ImportType ImportType { get; }
 
         void Execute(StringBuilder sb, bool simulate);
