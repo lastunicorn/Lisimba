@@ -84,10 +84,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     SourceValue = itemComparison.ValueRight;
                     DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;
-                    if(CanMerge)
-                        ImportType = ImportType.Merge;
-                    else
-                        ImportType = ImportType.Conflict;
+                    ImportType = CanMerge ? ImportType.Merge : ImportType.Conflict;
                     break;
 
                 default:
@@ -95,6 +92,37 @@ namespace DustInTheWind.Lisimba.Business.Importing
             }
         }
 
-        public abstract void Execute(StringBuilder sb, bool simulate);
+        public void Execute(StringBuilder sb, bool simulate)
+        {
+            switch (ImportType)
+            {
+                case ImportType.Ignore:
+                    break;
+
+                case ImportType.AddAsNew:
+                    AddAsNew(sb, simulate);
+                    break;
+
+                case ImportType.Merge:
+                    Merge(sb, simulate);
+                    break;
+
+                case ImportType.Replace:
+                    Replace(sb, simulate);
+                    break;
+
+                case ImportType.Conflict:
+                    string message1 = string.Format("Cannot import, conflicts exists. Import rule for dest: '{0}'; source: '{1}'; import type: {2}.", DestinationValue, SourceValue, ImportType);
+                    throw new LisimbaException(message1);
+
+                default:
+                    string message = string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", DestinationValue, SourceValue, ImportType);
+                    throw new LisimbaException(message);
+            }
+        }
+
+        protected abstract void AddAsNew(StringBuilder sb, bool simulate);
+        protected abstract void Merge(StringBuilder sb, bool simulate);
+        protected abstract void Replace(StringBuilder sb, bool simulate);
     }
 }

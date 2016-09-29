@@ -41,32 +41,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
         }
 
-        public override void Execute(StringBuilder sb, bool simulate)
-        {
-            switch (ImportType)
-            {
-                case ImportType.Ignore:
-                    break;
-
-                case ImportType.AddAsNew:
-                    AddAsNew(sb, simulate);
-                    break;
-
-                case ImportType.Merge:
-                    Merge(sb, simulate);
-                    break;
-
-                case ImportType.Replace:
-                    Replace(sb, simulate);
-                    break;
-
-                default:
-                    string message = string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", DestinationValue, SourceValue, ImportType);
-                    throw new LisimbaException(message);
-            }
-        }
-
-        private void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew(StringBuilder sb, bool simulate)
         {
             if (!simulate)
                 DestinationParent.Items.Add(SourceValue);
@@ -74,7 +49,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             sb.AppendLine(string.Format("Added web site: {0}", SourceValue));
         }
 
-        private void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge(StringBuilder sb, bool simulate)
         {
             sb.AppendLine(string.Format("Merging web site '{0}' and '{1}'.", DestinationValue, SourceValue));
 
@@ -88,7 +63,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             }
         }
 
-        private void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace(StringBuilder sb, bool simulate)
         {
             if (!simulate)
             {

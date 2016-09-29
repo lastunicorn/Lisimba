@@ -14,54 +14,39 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class ContactImport : ItemImportBase<AddressBook, Contact>
+    public class DateImport : ItemImportBase<Contact, Date>
     {
-        public List<IItemImport> ItemImports { get; private set; }
-
         public override bool CanMerge
         {
             get { return false; }
         }
 
-        public ContactImport(ContactComparison contactComparison)
-            : base(contactComparison)
+        public DateImport(DateComparison dateComparison)
+            : base(dateComparison)
         {
-            ItemImports = contactComparison.Comparisons
-                .Select(ItemImportFactory.Create)
-                .ToList();
         }
 
         protected override void AddAsNew(StringBuilder sb, bool simulate)
         {
             if (!simulate)
-                DestinationParent.Contacts.Add(SourceValue);
+                DestinationParent.Items.Add(SourceValue);
 
-            sb.AppendLine(string.Format("Added contact: {0}.", SourceValue));
+            sb.AppendLine(string.Format("Added date: {0}", SourceValue));
         }
 
         protected override void Merge(StringBuilder sb, bool simulate)
         {
-            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Merging date '{0}' and '{1}'.", DestinationValue, SourceValue));
 
-            foreach (IItemImport importRule in ItemImports)
+            if (!simulate)
             {
-                try
-                {
-                    importRule.Execute(sb, simulate);
-                }
-                catch (Exception ex)
-                {
-                    sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                }
+                // todo: implement merge.
             }
         }
 
@@ -69,11 +54,11 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
             if (!simulate)
             {
-                DestinationParent.Contacts.Remove(DestinationValue);
-                DestinationParent.Contacts.Add(SourceValue);
+                DestinationParent.Items.Remove(DestinationValue);
+                DestinationParent.Items.Add(SourceValue);
             }
 
-            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", DestinationValue, SourceValue));
+            sb.AppendLine(string.Format("Replaced date '{0}' with '{1}'.", DestinationValue, SourceValue));
         }
     }
 }

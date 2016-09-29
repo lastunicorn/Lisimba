@@ -40,8 +40,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison
 
         public static IItemComparison Create(Contact contactLeft, ContactItem itemLeft, Contact contactRight, ContactItem itemRight)
         {
-            if (itemLeft == null && itemRight == null)
-                throw new ArgumentNullException("itemRight");
+            if (itemLeft == null && itemRight == null) throw new ArgumentNullException("itemRight");
 
             Type typeLeft = itemLeft == null ? null : itemLeft.GetType();
             Type typeRight = itemRight == null ? null : itemRight.GetType();

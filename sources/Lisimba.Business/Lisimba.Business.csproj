@@ -102,6 +102,9 @@
     <Compile Include="Comparison\Comparers\AddressBookComparison.cs" />
     <Compile Include="Importing\Importers\AddressBookImporter.cs" />
     <Compile Include="Importing\Importers\ContactImport.cs" />
+    <Compile Include="Importing\Importers\DateImport.cs" />
+    <Compile Include="Importing\Importers\SocialProfileIdImport.cs" />
+    <Compile Include="Importing\Importers\PostalAddressImport.cs" />
     <Compile Include="Importing\Importers\WebSiteImport.cs" />
     <Compile Include="Importing\Importers\PhoneImport.cs" />
     <Compile Include="Importing\Importers\EmailImport.cs" />

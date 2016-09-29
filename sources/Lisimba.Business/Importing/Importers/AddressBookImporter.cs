@@ -82,57 +82,9 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             StringBuilder sb = new StringBuilder();
 
             foreach (ContactImport importRule in importRules)
-            {
-                switch (importRule.ImportType)
-                {
-                    case ImportType.Ignore:
-                        break;
-
-                    case ImportType.AddAsNew:
-                        AddAsNew(importRule, simulate, sb);
-                        break;
-
-                    case ImportType.Merge:
-                        Merge(importRule, simulate, sb);
-                        break;
-
-                    case ImportType.Replace:
-                        Replace(importRule, simulate, sb);
-                        break;
-
-                    default:
-                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                        break;
-                }
-            }
+                importRule.Execute(sb, simulate);
 
             return sb;
-        }
-
-        private void AddAsNew(ContactImport importRule, bool simulate, StringBuilder sb)
-        {
-            if (!simulate)
-                addressBookDestination.Contacts.Add(importRule.SourceValue);
-
-            sb.AppendLine(string.Format("Added contact: {0}.", importRule.SourceValue));
-        }
-
-        private static void Merge(ContactImport importRule, bool simulate, StringBuilder sb)
-        {
-            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", importRule.DestinationValue, importRule.SourceValue));
-
-            importRule.Execute(sb, simulate);
-        }
-
-        private void Replace(ContactImport importRule, bool simulate, StringBuilder sb)
-        {
-            if (!simulate)
-            {
-                addressBookDestination.Contacts.Remove(importRule.DestinationValue);
-                addressBookDestination.Contacts.Add(importRule.SourceValue);
-            }
-
-            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", importRule.DestinationValue, importRule.SourceValue));
         }
     }
 }

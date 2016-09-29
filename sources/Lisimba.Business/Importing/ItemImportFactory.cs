@@ -15,76 +15,52 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public class ItemImportFactory
+    public static class ItemImportFactory
     {
+        private static readonly Dictionary<Type, Type> importerTypes;
+
+        static ItemImportFactory()
+        {
+            importerTypes = new Dictionary<Type, Type>
+            {
+                { typeof(PhoneComparison), typeof(PhoneImport) },
+                { typeof(EmailComparison), typeof(EmailImport) },
+                { typeof(WebSiteComparison), typeof(WebSiteImport) },
+                { typeof(PostalAddressComparison), typeof(PostalAddressImport) },
+                { typeof(DateComparison), typeof(DateImport) },
+                { typeof(SocialProfileIdComparison), typeof(SocialProfileIdImport) }
+            };
+        }
         public static IItemImport Create(IItemComparison itemComparison)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
-            Type type = itemComparison.GetType();
+            Type comparisonType = itemComparison.GetType();
 
-            if (type == typeof(EmailComparison))
-                return new EmailImport(itemComparison as EmailComparison);
+            if (!importerTypes.ContainsKey(comparisonType))
+                return ObjectImport.Empty();
 
-            if (type == typeof(PhoneComparison))
-                return new PhoneImport(itemComparison as PhoneComparison);
+            Type importerType = importerTypes[comparisonType];
 
-            return ObjectImport.Empty();
+            return Activator.CreateInstance(importerType, itemComparison) as IItemImport;
 
+            //if (type == typeof(EmailComparison))
+            //    return new EmailImport(itemComparison as EmailComparison);
 
+            //if (type == typeof(PhoneComparison))
+            //    return new PhoneImport(itemComparison as PhoneComparison);
 
+            //if (type == typeof(WebSiteComparison))
+            //    return new WebSiteImport(itemComparison as WebSiteComparison);
 
-
-
-
-            //switch (itemComparison.Equality)
-            //{
-            //    case ItemEquality.BothEmpty:
-            //    case ItemEquality.LeftExists:
-            //    case ItemEquality.Equal:
-            //        return new ItemImport
-            //        {
-            //            Source = null,
-            //            Destination = null,
-            //            ImportType = ImportType.Ignore
-            //        };
-
-            //    case ItemEquality.RightExists:
-            //    case ItemEquality.Different:
-            //        return new ItemImport
-            //        {
-            //            Source = itemComparison.ItemRight,
-            //            Destination = null,
-            //            ImportType = ImportType.AddAsNew
-            //        };
-
-            //    case ItemEquality.Similar:
-            //        Type type = itemComparison.ItemLeft.GetType();
-
-            //        if (type == typeof(Email))
-            //            return new ItemImport
-            //            {
-            //                Source = itemComparison.ItemRight,
-            //                Destination = null,
-            //                ImportType = ImportType.AddAsNew
-            //            };
-
-            //        return new ItemImport
-            //        {
-            //            Source = null,
-            //            Destination = null,
-            //            ImportType = ImportType.Ignore
-            //        };
-
-            //    default:
-            //        throw new LisimbaException("Invalid comparison item.");
-            //}
+            //return ObjectImport.Empty();
         }
     }
 }
