@@ -31,11 +31,19 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             : base(emailComparison)
         {
         }
+        
+        public EmailImport(Contact destinationParent, Email destinationValue, Email sourceValue, ImportType importType)
+        {
+            SourceValue = sourceValue;
+            DestinationValue = destinationValue;
+            DestinationParent = destinationParent;
+            ImportType = importType;
+        }
 
         protected override void AddAsNew(StringBuilder sb, bool simulate)
         {
             if (!simulate)
-                DestinationParent.Items.Add(SourceValue);
+                DestinationParent.Items.Add(SourceValue.Clone());
 
             sb.AppendLine(string.Format("Added email: {0}", SourceValue));
         }
@@ -59,7 +67,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             if (!simulate)
             {
                 DestinationParent.Items.Remove(DestinationValue);
-                DestinationParent.Items.Add(SourceValue);
+                DestinationParent.Items.Add(SourceValue.Clone());
             }
 
             sb.AppendLine(string.Format("Replaced email '{0}' with '{1}'.", DestinationValue, SourceValue));

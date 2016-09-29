@@ -38,9 +38,13 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
         protected TParent DestinationParent { get; set; }
 
-        public ImportType ImportType { get; private set; }
+        public ImportType ImportType { get; protected set; }
 
         public abstract bool CanMerge { get; }
+
+        protected ItemImportBase()
+        {
+        }
 
         protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
         {
@@ -61,15 +65,15 @@ namespace DustInTheWind.Lisimba.Business.Importing
 
                 case ItemEquality.Different:
                     SourceValue = itemComparison.ValueRight;
-                    DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;
+                    DestinationParent = itemComparison.ParentLeft;
                     ImportType = ImportType.Replace;
                     break;
 
                 case ItemEquality.Similar:
                     SourceValue = itemComparison.ValueRight;
-                    DestinationParent = itemComparison.ParentLeft;
                     DestinationValue = itemComparison.ValueLeft;
+                    DestinationParent = itemComparison.ParentLeft;
                     ImportType = CanMerge ? ImportType.Merge : ImportType.Conflict;
                     break;
 

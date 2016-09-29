@@ -65,6 +65,7 @@
     <Compile Include="Business\Comparison\EmailComparisonTests.cs" />
     <Compile Include="Business\Comparison\PersonNameComparisonTests.cs" />
     <Compile Include="Business\Comparison\DateComparisonTests.cs" />
+    <Compile Include="Business\Importing\Importers\EmailImportTests.cs" />
     <Compile Include="CommandLine\RealStringTests.cs" />
     <Compile Include="CommandLine\CommandParserTests.cs" />
     <Compile Include="Business\Comparison\AddressBookComparisonTests\ConstructorTests.cs" />
