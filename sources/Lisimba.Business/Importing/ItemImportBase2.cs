@@ -23,8 +23,6 @@ using DustInTheWind.Lisimba.Business.Importing.Importers;
 namespace DustInTheWind.Lisimba.Business.Importing
 {
     public abstract class ItemImportBase<TParent, TValue> : IItemImport
-        where TParent : class
-        where TValue : class
     {
         protected abstract string Name { get; }
 

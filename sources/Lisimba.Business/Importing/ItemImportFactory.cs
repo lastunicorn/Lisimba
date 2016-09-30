@@ -35,7 +35,8 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 { typeof(WebSiteComparison), typeof(WebSiteImport) },
                 { typeof(PostalAddressComparison), typeof(PostalAddressImport) },
                 { typeof(DateComparison), typeof(DateImport) },
-                { typeof(SocialProfileIdComparison), typeof(SocialProfileIdImport) }
+                { typeof(SocialProfileIdComparison), typeof(SocialProfileIdImport) },
+                { typeof(NotesComparison), typeof(NotesImport) }
             };
         }
         public static IItemImport Create(IItemComparison itemComparison)

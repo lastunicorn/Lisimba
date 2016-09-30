@@ -103,6 +103,7 @@
     <Compile Include="Importing\Importers\AddressBookImporter.cs" />
     <Compile Include="Importing\Importers\ContactImport.cs" />
     <Compile Include="Importing\Importers\DateImport.cs" />
+    <Compile Include="Importing\Importers\NotesImport.cs" />
     <Compile Include="Importing\Importers\MergeConflictException.cs" />
     <Compile Include="Importing\Importers\SocialProfileIdImport.cs" />
     <Compile Include="Importing\Importers\PostalAddressImport.cs" />

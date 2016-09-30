@@ -45,6 +45,15 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 DestinationParent.Items.Add(SourceValue.Clone());
         }
 
+        protected override void Replace()
+        {
+            if (DestinationValue != null)
+                DestinationParent.Items.Remove(DestinationValue);
+
+            if (SourceValue != null)
+                DestinationParent.Items.Add(SourceValue.Clone());
+        }
+
         protected override void Merge()
         {
             if (MergedValue == null)
@@ -97,7 +106,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             }
 
             if (MergedValue.Address != SourceValue.Address)
-                throw new MergeConflictException();
+                throw new MergeConflictException(this);
         }
 
         private void MergeDescriptionIntoMergedValue()
@@ -112,16 +121,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             }
 
             if (MergedValue.Description != SourceValue.Description)
-                throw new MergeConflictException();
-        }
-
-        protected override void Replace()
-        {
-            if (DestinationValue != null)
-                DestinationParent.Items.Remove(DestinationValue);
-
-            if (SourceValue != null)
-                DestinationParent.Items.Add(SourceValue.Clone());
+                throw new MergeConflictException(this);
         }
     }
 }
