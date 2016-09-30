@@ -22,20 +22,25 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class ObjectImport : ItemImportBase<object, object>
     {
+        protected override string Name
+        {
+            get { return "Object"; }
+        }
+
         public ObjectImport(IItemComparison<object, object> itemComparison)
             : base(itemComparison)
         {
         }
 
-        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew()
         {
         }
 
-        protected override void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge()
         {
         }
 
-        protected override void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace()
         {
         }
 

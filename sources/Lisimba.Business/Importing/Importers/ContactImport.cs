@@ -14,10 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
@@ -25,7 +22,10 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class ContactImport : ItemImportBase<AddressBook, Contact>
     {
-        public List<IItemImport> ItemImports { get; private set; }
+        protected override string Name
+        {
+            get { return "Contact"; }
+        }
 
         public ContactImport(ContactComparison contactComparison)
             : base(contactComparison)
@@ -35,40 +35,19 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 .ToList();
         }
 
-        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew()
         {
-            if (!simulate)
-                DestinationParent.Contacts.Add(SourceValue);
-
-            sb.AppendLine(string.Format("Added contact: {0}.", SourceValue));
+            DestinationParent.Contacts.Add(SourceValue);
         }
 
-        protected override void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge()
         {
-            sb.AppendLine(string.Format("Merging contacts '{0}' and '{1}'.", DestinationValue, SourceValue));
-
-            foreach (IItemImport importRule in ItemImports)
-            {
-                try
-                {
-                    importRule.Execute(sb, simulate);
-                }
-                catch (Exception ex)
-                {
-                    sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                }
-            }
         }
 
-        protected override void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace()
         {
-            if (!simulate)
-            {
-                DestinationParent.Contacts.Remove(DestinationValue);
-                DestinationParent.Contacts.Add(SourceValue);
-            }
-
-            sb.AppendLine(string.Format("Replaced contact '{0}' with '{1}'.", DestinationValue, SourceValue));
+            DestinationParent.Contacts.Remove(DestinationValue);
+            DestinationParent.Contacts.Add(SourceValue);
         }
     }
 }

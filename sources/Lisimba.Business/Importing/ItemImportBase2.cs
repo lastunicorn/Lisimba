@@ -15,8 +15,10 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 using System.Text;
 using DustInTheWind.Lisimba.Business.Comparison;
+using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
@@ -24,9 +26,13 @@ namespace DustInTheWind.Lisimba.Business.Importing
         where TParent : class
         where TValue : class
     {
-        protected TValue SourceValue { get; set; }
-        protected TValue DestinationValue { get; set; }
-        protected TParent DestinationParent { get; set; }
+        protected abstract string Name { get; }
+
+        protected List<IItemImport> ItemImports { get; set; }
+
+        public TValue SourceValue { get; set; }
+        public TValue DestinationValue { get; set; }
+        public TParent DestinationParent { get; set; }
         public ImportType ImportType { get; set; }
         public TValue MergedValue { get; set; }
 
@@ -102,15 +108,15 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ImportType.AddAsNew:
-                    AddAsNew(sb, simulate);
+                    ExecuteAddAsNew(sb, simulate);
                     break;
 
                 case ImportType.Merge:
-                    Merge(sb, simulate);
+                    ExecuteMerge(sb, simulate);
                     break;
 
                 case ImportType.Replace:
-                    Replace(sb, simulate);
+                    ExecuteReplace(sb, simulate);
                     break;
 
                 default:
@@ -119,8 +125,52 @@ namespace DustInTheWind.Lisimba.Business.Importing
             }
         }
 
-        protected abstract void AddAsNew(StringBuilder sb, bool simulate);
-        protected abstract void Merge(StringBuilder sb, bool simulate);
-        protected abstract void Replace(StringBuilder sb, bool simulate);
+        private void ExecuteAddAsNew(StringBuilder sb, bool simulate)
+        {
+            if (!simulate)
+                AddAsNew();
+
+            sb.AppendLine(string.Format("Added {0}: {1}", Name, SourceValue));
+        }
+
+        private void ExecuteMerge(StringBuilder sb, bool simulate)
+        {
+            sb.AppendLine(string.Format("Merging {0} '{1}' and '{2}'.", Name, DestinationValue, SourceValue));
+
+            if (!simulate)
+                Merge();
+
+            if (ItemImports != null)
+            {
+                foreach (IItemImport importRule in ItemImports)
+                {
+                    try
+                    {
+                        importRule.Execute(sb, simulate);
+                    }
+                    catch (MergeConflictException)
+                    {
+                        sb.AppendLine(string.Format("Merge conflict. dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
+                    }
+                    catch
+                    {
+                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
+                        throw;
+                    }
+                }
+            }
+        }
+
+        private void ExecuteReplace(StringBuilder sb, bool simulate)
+        {
+            if (!simulate)
+                Replace();
+
+            sb.AppendLine(string.Format("Replaced {0} '{1}' with '{2}'.", Name, DestinationValue, SourceValue));
+        }
+
+        protected abstract void AddAsNew();
+        protected abstract void Merge();
+        protected abstract void Replace();
     }
 }

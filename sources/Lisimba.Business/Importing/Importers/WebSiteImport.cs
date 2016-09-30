@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
@@ -22,42 +21,34 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class WebSiteImport : ItemImportBase<Contact, WebSite>
     {
+        protected override string Name
+        {
+            get { return "Web Site"; }
+        }
+
         public WebSiteImport(WebSiteComparison webSiteComparison)
             : base(webSiteComparison)
         {
         }
 
-        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew()
         {
-            if (!simulate)
-                DestinationParent.Items.Add(SourceValue);
-
-            sb.AppendLine(string.Format("Added web site: {0}", SourceValue));
+            DestinationParent.Items.Add(SourceValue);
         }
 
-        protected override void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge()
         {
-            sb.AppendLine(string.Format("Merging web site '{0}' and '{1}'.", DestinationValue, SourceValue));
+            if (!string.IsNullOrEmpty(SourceValue.Address))
+                DestinationValue.Address = SourceValue.Address;
 
-            if (!simulate)
-            {
-                if (!string.IsNullOrEmpty(SourceValue.Address))
-                    DestinationValue.Address = SourceValue.Address;
-
-                if (!string.IsNullOrEmpty(SourceValue.Description))
-                    DestinationValue.Description = SourceValue.Description;
-            }
+            if (!string.IsNullOrEmpty(SourceValue.Description))
+                DestinationValue.Description = SourceValue.Description;
         }
 
-        protected override void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace()
         {
-            if (!simulate)
-            {
-                DestinationParent.Items.Remove(DestinationValue);
-                DestinationParent.Items.Add(SourceValue);
-            }
-
-            sb.AppendLine(string.Format("Replaced phone '{0}' with '{1}'.", DestinationValue, SourceValue));
+            DestinationParent.Items.Remove(DestinationValue);
+            DestinationParent.Items.Add(SourceValue);
         }
     }
 }

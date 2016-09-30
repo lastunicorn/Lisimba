@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
@@ -22,6 +21,11 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class EmailImport : ItemImportBase<Contact, Email>
     {
+        protected override string Name
+        {
+            get { return "Email"; }
+        }
+
         public EmailImport(EmailComparison emailComparison)
             : base(emailComparison)
         {
@@ -35,32 +39,22 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             ImportType = importType;
         }
 
-        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew()
         {
-            if (!simulate)
-            {
-                if (SourceValue != null)
-                    DestinationParent.Items.Add(SourceValue.Clone());
-            }
-
-            sb.AppendLine(string.Format("Added email: {0}", SourceValue));
+            if (SourceValue != null)
+                DestinationParent.Items.Add(SourceValue.Clone());
         }
 
-        protected override void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge()
         {
-            sb.AppendLine(string.Format("Merging email '{0}' and '{1}'.", DestinationValue, SourceValue));
+            if (MergedValue == null)
+                BuildMergedValue();
 
-            if (!simulate)
-            {
-                if (MergedValue == null)
-                    BuildMergedValue();
+            if (DestinationValue != null)
+                DestinationParent.Items.Remove(DestinationValue);
 
-                if (DestinationValue != null)
-                    DestinationParent.Items.Remove(DestinationValue);
-
-                if (MergedValue != null)
-                    DestinationParent.Items.Add(MergedValue.Clone());
-            }
+            if (MergedValue != null)
+                DestinationParent.Items.Add(MergedValue.Clone());
         }
 
         private void BuildMergedValue()
@@ -81,8 +75,8 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
             try
             {
-                MergeAddress();
-                MergeDescription();
+                MergeAddressIntoMergedValue();
+                MergeDescriptionIntoMergedValue();
             }
             catch
             {
@@ -91,7 +85,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             }
         }
 
-        private void MergeAddress()
+        private void MergeAddressIntoMergedValue()
         {
             if (SourceValue.Address == null)
                 return;
@@ -106,7 +100,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 throw new MergeConflictException();
         }
 
-        private void MergeDescription()
+        private void MergeDescriptionIntoMergedValue()
         {
             if (SourceValue.Description == null)
                 return;
@@ -121,18 +115,13 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
                 throw new MergeConflictException();
         }
 
-        protected override void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace()
         {
-            if (!simulate)
-            {
-                if (DestinationValue != null)
-                    DestinationParent.Items.Remove(DestinationValue);
+            if (DestinationValue != null)
+                DestinationParent.Items.Remove(DestinationValue);
 
-                if (SourceValue != null)
-                    DestinationParent.Items.Add(SourceValue.Clone());
-            }
-
-            sb.AppendLine(string.Format("Replaced email '{0}' with '{1}'.", DestinationValue, SourceValue));
+            if (SourceValue != null)
+                DestinationParent.Items.Add(SourceValue.Clone());
         }
     }
 }

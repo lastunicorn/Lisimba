@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
@@ -22,38 +21,30 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class DateImport : ItemImportBase<Contact, Date>
     {
+        protected override string Name
+        {
+            get { return "Date"; }
+        }
+
         public DateImport(DateComparison dateComparison)
             : base(dateComparison)
         {
         }
 
-        protected override void AddAsNew(StringBuilder sb, bool simulate)
+        protected override void AddAsNew()
         {
-            if (!simulate)
-                DestinationParent.Items.Add(SourceValue);
-
-            sb.AppendLine(string.Format("Added date: {0}", SourceValue));
+            DestinationParent.Items.Add(SourceValue);
         }
 
-        protected override void Merge(StringBuilder sb, bool simulate)
+        protected override void Merge()
         {
-            sb.AppendLine(string.Format("Merging date '{0}' and '{1}'.", DestinationValue, SourceValue));
-
-            if (!simulate)
-            {
-                // todo: implement merge.
-            }
+            // todo: implement merge.
         }
 
-        protected override void Replace(StringBuilder sb, bool simulate)
+        protected override void Replace()
         {
-            if (!simulate)
-            {
-                DestinationParent.Items.Remove(DestinationValue);
-                DestinationParent.Items.Add(SourceValue);
-            }
-
-            sb.AppendLine(string.Format("Replaced date '{0}' with '{1}'.", DestinationValue, SourceValue));
+            DestinationParent.Items.Remove(DestinationValue);
+            DestinationParent.Items.Add(SourceValue);
         }
     }
 }
