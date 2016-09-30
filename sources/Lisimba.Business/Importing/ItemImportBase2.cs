@@ -22,25 +22,37 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public abstract class ItemImportBase<TParent, TValue> : IItemImport
         where TParent : class
+        where TValue : class
     {
         protected TValue SourceValue { get; set; }
         protected TValue DestinationValue { get; set; }
+        protected TParent DestinationParent { get; set; }
+        public ImportType ImportType { get; set; }
+        public TValue MergedValue { get; set; }
 
         object IItemImport.SourceValue
         {
             get { return SourceValue; }
+            set { SourceValue = (TValue)value; }
         }
 
         object IItemImport.DestinationValue
         {
             get { return DestinationValue; }
+            set { DestinationValue = (TValue)value; }
         }
 
-        protected TParent DestinationParent { get; set; }
+        object IItemImport.DestinationParent
+        {
+            get { return DestinationParent; }
+            set { DestinationParent = (TParent)value; }
+        }
 
-        public ImportType ImportType { get; protected set; }
-
-        public abstract bool CanMerge { get; }
+        object IItemImport.MergedValue
+        {
+            get { return MergedValue; }
+            set { MergedValue = (TValue)value; }
+        }
 
         protected ItemImportBase()
         {
@@ -74,7 +86,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     SourceValue = itemComparison.ValueRight;
                     DestinationValue = itemComparison.ValueLeft;
                     DestinationParent = itemComparison.ParentLeft;
-                    ImportType = CanMerge ? ImportType.Merge : ImportType.Conflict;
+                    ImportType = ImportType.Merge;
                     break;
 
                 default:
@@ -100,10 +112,6 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 case ImportType.Replace:
                     Replace(sb, simulate);
                     break;
-
-                case ImportType.Conflict:
-                    string message1 = string.Format("Cannot import, conflicts exists. Import rule for dest: '{0}'; source: '{1}'; import type: {2}.", DestinationValue, SourceValue, ImportType);
-                    throw new LisimbaException(message1);
 
                 default:
                     string message = string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", DestinationValue, SourceValue, ImportType);

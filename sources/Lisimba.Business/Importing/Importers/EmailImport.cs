@@ -22,16 +22,11 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class EmailImport : ItemImportBase<Contact, Email>
     {
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public EmailImport(EmailComparison emailComparison)
             : base(emailComparison)
         {
         }
-        
+
         public EmailImport(Contact destinationParent, Email destinationValue, Email sourceValue, ImportType importType)
         {
             SourceValue = sourceValue;
@@ -43,7 +38,10 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         protected override void AddAsNew(StringBuilder sb, bool simulate)
         {
             if (!simulate)
-                DestinationParent.Items.Add(SourceValue.Clone());
+            {
+                if (SourceValue != null)
+                    DestinationParent.Items.Add(SourceValue.Clone());
+            }
 
             sb.AppendLine(string.Format("Added email: {0}", SourceValue));
         }
@@ -54,20 +52,84 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
             if (!simulate)
             {
-                if (!string.IsNullOrEmpty(SourceValue.Address))
-                    DestinationValue.Address = SourceValue.Address;
+                if (MergedValue == null)
+                    BuildMergedValue();
 
-                if (!string.IsNullOrEmpty(SourceValue.Description))
-                    DestinationValue.Description = SourceValue.Description;
+                if (DestinationValue != null)
+                    DestinationParent.Items.Remove(DestinationValue);
+
+                if (MergedValue != null)
+                    DestinationParent.Items.Add(MergedValue.Clone());
             }
+        }
+
+        private void BuildMergedValue()
+        {
+            if (DestinationValue == null)
+            {
+                MergedValue = SourceValue;
+                return;
+            }
+
+            if (SourceValue == null)
+            {
+                MergedValue = DestinationValue;
+                return;
+            }
+
+            MergedValue = DestinationValue.Clone() as Email;
+
+            try
+            {
+                MergeAddress();
+                MergeDescription();
+            }
+            catch
+            {
+                MergedValue = null;
+                throw;
+            }
+        }
+
+        private void MergeAddress()
+        {
+            if (SourceValue.Address == null)
+                return;
+
+            if (string.IsNullOrEmpty(MergedValue.Address))
+            {
+                MergedValue.Address = SourceValue.Address;
+                return;
+            }
+
+            if (MergedValue.Address != SourceValue.Address)
+                throw new MergeConflictException();
+        }
+
+        private void MergeDescription()
+        {
+            if (SourceValue.Description == null)
+                return;
+
+            if (string.IsNullOrEmpty(MergedValue.Description))
+            {
+                MergedValue.Description = SourceValue.Description;
+                return;
+            }
+
+            if (MergedValue.Description != SourceValue.Description)
+                throw new MergeConflictException();
         }
 
         protected override void Replace(StringBuilder sb, bool simulate)
         {
             if (!simulate)
             {
-                DestinationParent.Items.Remove(DestinationValue);
-                DestinationParent.Items.Add(SourceValue.Clone());
+                if (DestinationValue != null)
+                    DestinationParent.Items.Remove(DestinationValue);
+
+                if (SourceValue != null)
+                    DestinationParent.Items.Add(SourceValue.Clone());
             }
 
             sb.AppendLine(string.Format("Replaced email '{0}' with '{1}'.", DestinationValue, SourceValue));

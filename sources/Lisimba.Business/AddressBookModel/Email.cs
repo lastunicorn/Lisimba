@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Text;
 
 namespace DustInTheWind.Lisimba.Business.AddressBookModel
 {
@@ -133,6 +134,9 @@ namespace DustInTheWind.Lisimba.Business.AddressBookModel
 
         public override string ToString()
         {
+            if (description == null)
+                return address;
+
             return address + (description.Length > 0 ? (" - " + description) : string.Empty);
         }
     }

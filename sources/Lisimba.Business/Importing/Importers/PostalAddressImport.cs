@@ -22,11 +22,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class PostalAddressImport : ItemImportBase<Contact, PostalAddress>
     {
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public PostalAddressImport(PostalAddressComparison postalAddressComparison)
             : base(postalAddressComparison)
         {

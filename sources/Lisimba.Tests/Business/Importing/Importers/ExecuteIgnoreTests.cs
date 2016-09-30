@@ -23,7 +23,7 @@ using NUnit.Framework;
 namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
 {
     [TestFixture]
-    public class EmailImportTests
+    public class ExecuteIgnoreTests
     {
         private Contact contactLeft;
         private Contact contactRight;
@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         }
 
         [Test]
-        public void importing_Email_Ignore_does_nothing()
+        public void does_nothing_if_all_values_are_provided()
         {
             Email emailLeftClone = emailLeft.Clone() as Email;
 
@@ -57,28 +57,47 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         }
 
         [Test]
-        public void importing_Email_Replace_replaces_the_Email_in_left_Contact_with_a_copy_of_right_Email()
+        public void does_nothing_if_sourceValue_is_not_provided()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Replace);
+            Email emailLeftClone = emailLeft.Clone() as Email;
+
+            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, null, ImportType.Ignore);
 
             emailImport.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
-            Assert.That(contactLeft.Items[0], Is.EqualTo(emailRight));
-            Assert.That(contactLeft.Items[0], Is.Not.SameAs(emailRight));
+            Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
+            Assert.That(contactLeft.Items[0], Is.EqualTo(emailLeftClone));
         }
 
         [Test]
-        public void importing_Email_AddAsNew_adds_a_copy_of_the_Email_in_left_Contact()
+        public void does_nothing_if_destinationValue_is_not_provided()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.AddAsNew);
+            Email emailLeftClone = emailLeft.Clone() as Email;
+
+            EmailImport emailImport = new EmailImport(contactLeft, null, emailRight, ImportType.Ignore);
 
             emailImport.Execute(new StringBuilder(), false);
 
-            Assert.That(contactLeft.Items.Count, Is.EqualTo(2));
+            Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
-            Assert.That(contactLeft.Items[1], Is.EqualTo(emailRight));
-            Assert.That(contactLeft.Items[1], Is.Not.SameAs(emailRight));
+            Assert.That(contactLeft.Items[0], Is.EqualTo(emailLeftClone));
+        }
+
+        [Test]
+        public void does_nothing_if_destinationContact_is_not_provided()
+        {
+            EmailImport emailImport = new EmailImport(null, emailLeft, emailRight, ImportType.Ignore);
+
+            emailImport.Execute(new StringBuilder(), false);
+        }
+
+        [Test]
+        public void does_nothing_if_no_values_are_provided()
+        {
+            EmailImport emailImport = new EmailImport(null, null, null, ImportType.Ignore);
+
+            emailImport.Execute(new StringBuilder(), false);
         }
     }
 }

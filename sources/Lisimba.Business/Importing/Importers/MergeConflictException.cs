@@ -14,13 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-namespace DustInTheWind.Lisimba.Business.Importing
+using System;
+using System.Runtime.Serialization;
+
+namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public enum ImportType
+    public class MergeConflictException : Exception
     {
-        Ignore,
-        AddAsNew,
-        Merge,
-        Replace
+        public MergeConflictException()
+            : base("The merge cannot be performed automatically. Conflicts exists.")
+        {
+        }
+
+        public MergeConflictException(string message)
+            : base(message)
+        {
+        }
+
+        public MergeConflictException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+        protected MergeConflictException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
     }
 }

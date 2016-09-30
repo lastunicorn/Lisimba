@@ -22,11 +22,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class SocialProfileIdImport : ItemImportBase<Contact, SocialProfileId>
     {
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public SocialProfileIdImport(SocialProfileIdComparison socialProfileIdComparison)
             : base(socialProfileIdComparison)
         {

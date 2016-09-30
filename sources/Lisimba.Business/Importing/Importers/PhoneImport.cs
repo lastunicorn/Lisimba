@@ -22,11 +22,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class PhoneImport : ItemImportBase<Contact, Phone>
     {
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public PhoneImport(PhoneComparison phoneComparison)
             : base(phoneComparison)
         {

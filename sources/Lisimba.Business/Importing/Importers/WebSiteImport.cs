@@ -22,20 +22,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class WebSiteImport : ItemImportBase<Contact, WebSite>
     {
-        public override bool CanMerge
-        {
-            get
-            {
-                if (SourceValue.Address != null && DestinationValue.Address != null)
-                    return false;
-
-                if (SourceValue.Description != null && DestinationValue.Description != null)
-                    return false;
-
-                return true;
-            }
-        }
-
         public WebSiteImport(WebSiteComparison webSiteComparison)
             : base(webSiteComparison)
         {

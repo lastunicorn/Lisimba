@@ -22,11 +22,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
     public class ObjectImport : ItemImportBase<object, object>
     {
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public ObjectImport(IItemComparison<object, object> itemComparison)
             : base(itemComparison)
         {

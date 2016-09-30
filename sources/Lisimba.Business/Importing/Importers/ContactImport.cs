@@ -27,11 +27,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
     {
         public List<IItemImport> ItemImports { get; private set; }
 
-        public override bool CanMerge
-        {
-            get { return false; }
-        }
-
         public ContactImport(ContactComparison contactComparison)
             : base(contactComparison)
         {

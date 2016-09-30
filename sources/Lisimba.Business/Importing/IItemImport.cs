@@ -20,10 +20,12 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public interface IItemImport
     {
-        object SourceValue { get; }
-        object DestinationValue { get; }
-        
-        ImportType ImportType { get; }
+        object SourceValue { get; set; }
+        object DestinationValue { get; set; }
+        object DestinationParent { get; set; }
+        object MergedValue { get; set; }
+
+        ImportType ImportType { get; set; }
 
         void Execute(StringBuilder sb, bool simulate);
     }
