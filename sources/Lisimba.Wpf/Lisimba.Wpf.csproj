@@ -125,6 +125,7 @@
       <DependentUpon>WebSiteViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sections\OtherWindows\ViewModels\AboutViewModel.cs" />
+    <Compile Include="Sections\OtherWindows\ViewModels\ImportGridItem.cs" />
     <Compile Include="Sections\OtherWindows\ViewModels\ImportViewModel.cs" />
     <Compile Include="Sections\OtherWindows\ViewModels\OpenAddressBookCommand.cs" />
     <Compile Include="Sections\OtherWindows\Views\AboutWindow.xaml.cs">

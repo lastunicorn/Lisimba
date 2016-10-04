@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
             {
                 IItemComparison comparison = contactRightItems
                     .Select(x => ItemComparisonFactory.Create(ValueLeft, itemLeft, ValueRight, x))
-                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal);
+                    .FirstOrDefault(x => x.Equality == ItemEquality.Equal || x.Equality == ItemEquality.Similar);
 
                 if (comparison != null)
                 {

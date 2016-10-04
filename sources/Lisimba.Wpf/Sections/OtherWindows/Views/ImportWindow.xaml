@@ -30,25 +30,65 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         WindowStartupLocation="CenterOwner"
         d:DataContext="{d:DesignInstance viewModels:ImportViewModel}">
 
-    <Grid>
+    <DockPanel>
+        <DataGrid
+            DockPanel.Dock="Bottom"
+            Height="300"
+            ItemsSource="{Binding Items}"
+            AutoGenerateColumns="False">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Left" IsReadOnly="True" Binding="{Binding LeftValue}"></DataGridTextColumn>
+                <DataGridTextColumn Header="ImportType" IsReadOnly="True" Binding="{Binding ImportType}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Right" IsReadOnly="True" Binding="{Binding RightValue}"></DataGridTextColumn>
+            </DataGrid.Columns>
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsContact}" Value="true">
+                            <Setter Property="Background" Value="LightGray"></Setter>
+                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
 
-        <TextBlock
+            <!--<DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <DataGrid
+                        ItemsSource="{Binding ItemImports}">
+
+                        --><!--<DataGrid.Columns>
+                            <DataGridTextColumn Header="Left" IsReadOnly="True" Binding="{Binding DestinationValue}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="ImportType" IsReadOnly="True" Binding="{Binding ImportType}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Right" IsReadOnly="True" Binding="{Binding SourceValue}"></DataGridTextColumn>
+                        </DataGrid.Columns>--><!--
+                    </DataGrid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>-->
+
+        </DataGrid>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
             Grid.Row="0"
             Grid.Column="0"
             Text="Current Address Book"/>
 
-        <ListBox
+            <ListBox
             Grid.Row="1"
             Grid.Column="0"
             ItemsSource="{Binding Contacts}"
@@ -56,15 +96,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             Background="WhiteSmoke"
             BorderThickness="0">
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock Margin="0,4" Text="{Binding Name}" />
-                </DataTemplate>
-            </ListBox.ItemTemplate>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Margin="0,4" Text="{Binding Name}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
 
-        </ListBox>
+            </ListBox>
 
-        <GridSplitter
+            <GridSplitter
             Grid.Row="0"
             Grid.Column="1"
             Grid.RowSpan="2"
@@ -74,13 +114,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             VerticalAlignment="Stretch"
             ResizeBehavior="PreviousAndNext"/>
 
-        <Button
+            <Button
             Grid.Row="0"
             Grid.Column="2"
             Content="Open..."
             Command="{Binding OpenAddressBookCommand}"/>
 
-        <TextBox
+            <TextBox
             Grid.Row="1"
             Grid.Column="2"
             IsReadOnly="True"
@@ -88,6 +128,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
             VerticalScrollBarVisibility="Auto"
             Text="{Binding Logs, Mode=OneWay}"/>
 
-    </Grid>
+        </Grid>
+
+    </DockPanel>
 
 </Window>

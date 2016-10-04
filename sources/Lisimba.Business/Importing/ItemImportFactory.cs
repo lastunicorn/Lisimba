@@ -39,18 +39,54 @@ namespace DustInTheWind.Lisimba.Business.Importing
                 { typeof(NotesComparison), typeof(NotesImport) }
             };
         }
+
         public static IItemImport Create(IItemComparison itemComparison)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
             Type comparisonType = itemComparison.GetType();
 
+            IItemImport itemImport;
+
             if (!importerTypes.ContainsKey(comparisonType))
-                return ObjectImport.Empty();
+            {
+                itemImport = ObjectImport.Empty();
+            }
+            else
+            {
+                Type importerType = importerTypes[comparisonType];
+                itemImport = (IItemImport)Activator.CreateInstance(importerType);
+            }
 
-            Type importerType = importerTypes[comparisonType];
+            itemImport.SourceValue = itemComparison.ValueRight;
+            itemImport.DestinationValue = itemComparison.ValueLeft;
+            itemImport.DestinationParent = itemComparison.ParentLeft;
 
-            return Activator.CreateInstance(importerType, itemComparison) as IItemImport;
+            switch (itemComparison.Equality)
+            {
+                case ItemEquality.BothEmpty:
+                case ItemEquality.LeftExists:
+                case ItemEquality.Equal:
+                    itemImport.ImportType = ImportType.Ignore;
+                    break;
+
+                case ItemEquality.RightExists:
+                    itemImport.ImportType = ImportType.AddAsNew;
+                    break;
+
+                case ItemEquality.Different:
+                    itemImport.ImportType = ImportType.Replace;
+                    break;
+
+                case ItemEquality.Similar:
+                    itemImport.ImportType = ImportType.Merge;
+                    break;
+
+                default:
+                    throw new LisimbaException("Invalid comparison item.");
+            }
+
+            return itemImport;
 
             //if (type == typeof(EmailComparison))
             //    return new EmailImport(itemComparison as EmailComparison);

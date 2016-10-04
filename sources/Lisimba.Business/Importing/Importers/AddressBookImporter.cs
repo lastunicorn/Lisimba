@@ -16,7 +16,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
@@ -28,8 +27,13 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
     {
         private readonly AddressBook addressBookDestination;
         private readonly AddressBook addressBookSource;
-        private readonly Collection<ContactImport> importRules;
+        private readonly List<ContactImport> importRules;
         private bool isAnalysed;
+
+        public IReadOnlyList<ContactImport> ImportRules
+        {
+            get { return importRules.AsReadOnly(); }
+        }
 
         public AddressBookImporter(AddressBook addressBookDestination, AddressBook addressBookSource)
         {
@@ -39,7 +43,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             this.addressBookDestination = addressBookDestination;
             this.addressBookSource = addressBookSource;
 
-            importRules = new Collection<ContactImport>();
+            importRules = new List<ContactImport>();
 
             addressBookDestination.Changed += HandleAddressBookBaseChanged;
             addressBookSource.Changed += HandleAddressBookSourceChanged;

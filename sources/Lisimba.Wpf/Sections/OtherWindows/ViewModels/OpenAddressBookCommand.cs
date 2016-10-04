@@ -30,6 +30,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         private readonly WindowSystem windowSystem;
         private readonly Gates gates;
         private readonly AddressBooks addressBooks;
+        public AddressBookImporter AddressBookImporter { get; private set; }
 
         public string Result { get; private set; }
 
@@ -62,10 +63,10 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 
             AddressBook currentaddressBook = addressBooks.Current.AddressBook;
 
-            AddressBookImporter addressBookImporter = new AddressBookImporter(currentaddressBook, addressBook);
-            addressBookImporter.Analyse();
+            AddressBookImporter = new AddressBookImporter(currentaddressBook, addressBook);
+            AddressBookImporter.Analyse();
 
-            StringBuilder sb = addressBookImporter.PerformImport(true);
+            StringBuilder sb = AddressBookImporter.PerformImport(true);
 
             Result = sb.ToString();
             OnImportFinished();

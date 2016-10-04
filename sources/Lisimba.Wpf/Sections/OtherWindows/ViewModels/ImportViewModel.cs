@@ -15,9 +15,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
+using DustInTheWind.Lisimba.Business.Importing;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {
@@ -29,6 +32,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         private ListCollectionView contacts;
         private Contact selectedContact;
         private string logs;
+        private List<ImportGridItem> items;
 
         public ListCollectionView Contacts
         {
@@ -60,6 +64,16 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             }
         }
 
+        public List<ImportGridItem> Items
+        {
+            get { return items; }
+            set
+            {
+                items = value;
+                OnPropertyChanged();
+            }
+        }
+
         public OpenAddressBookCommand OpenAddressBookCommand { get; private set; }
 
         public ImportViewModel(AddressBooks addressBooks, OpenAddressBookCommand openAddressBookCommand)
@@ -80,6 +94,14 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         private void HandleImportFinished(object sender, EventArgs eventArgs)
         {
             Logs = OpenAddressBookCommand.Result;
+            Items = OpenAddressBookCommand.AddressBookImporter.ImportRules
+                .SelectMany(x =>
+                {
+                    List<ImportGridItem> list = new List<ImportGridItem> { new ImportGridItem(x) };
+                    list.AddRange(x.ItemImports.Select(y => new ImportGridItem(y)));
+                    return list;
+                })
+                .ToList();
         }
 
         private void HandleCurrentAddressBookChanged(object sender, AddressBookChangedEventArgs e)

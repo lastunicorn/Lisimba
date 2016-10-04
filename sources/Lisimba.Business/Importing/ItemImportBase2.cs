@@ -26,7 +26,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
     {
         protected abstract string Name { get; }
 
-        protected List<IItemImport> ItemImports { get; set; }
+        public List<IItemImport> ItemImports { get; protected set; }
 
         public TValue SourceValue { get; set; }
         public TValue DestinationValue { get; set; }
@@ -66,6 +66,10 @@ namespace DustInTheWind.Lisimba.Business.Importing
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
+            SourceValue = itemComparison.ValueRight;
+            DestinationValue = itemComparison.ValueLeft;
+            DestinationParent = itemComparison.ParentLeft;
+
             switch (itemComparison.Equality)
             {
                 case ItemEquality.BothEmpty:
@@ -75,21 +79,14 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ItemEquality.RightExists:
-                    SourceValue = itemComparison.ValueRight;
                     ImportType = ImportType.AddAsNew;
                     break;
 
                 case ItemEquality.Different:
-                    SourceValue = itemComparison.ValueRight;
-                    DestinationValue = itemComparison.ValueLeft;
-                    DestinationParent = itemComparison.ParentLeft;
                     ImportType = ImportType.Replace;
                     break;
 
                 case ItemEquality.Similar:
-                    SourceValue = itemComparison.ValueRight;
-                    DestinationValue = itemComparison.ValueLeft;
-                    DestinationParent = itemComparison.ParentLeft;
                     ImportType = ImportType.Merge;
                     break;
 

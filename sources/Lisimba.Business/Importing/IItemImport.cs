@@ -14,12 +14,15 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
 using System.Text;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
     public interface IItemImport
     {
+        List<IItemImport> ItemImports { get; }
+
         object SourceValue { get; set; }
         object DestinationValue { get; set; }
         object DestinationParent { get; set; }

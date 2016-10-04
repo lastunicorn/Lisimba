@@ -15,7 +15,6 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
@@ -24,11 +23,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         protected override string Name
         {
             get { return "Web Site"; }
-        }
-
-        public WebSiteImport(WebSiteComparison webSiteComparison)
-            : base(webSiteComparison)
-        {
         }
 
         protected override void AddAsNew()
