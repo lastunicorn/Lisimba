@@ -28,8 +28,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
         private CategoryComparison categoryComparison;
         private PictureComparison pictureComparison;
 
-        public List<IItemComparison> Comparisons { get; private set; }
-
         public ContactComparison(AddressBook addressBookLeft, Contact contactLeft, AddressBook addressBookRight, Contact contactRight)
             : base(addressBookLeft, contactLeft, addressBookRight, contactRight)
         {

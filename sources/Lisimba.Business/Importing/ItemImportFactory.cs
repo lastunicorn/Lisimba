@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using DustInTheWind.Lisimba.Business.Importing.Importers;
@@ -24,12 +25,13 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public static class ItemImportFactory
     {
-        private static readonly Dictionary<Type, Type> importerTypes;
+        private static readonly Dictionary<Type, Type> ImporterTypes;
 
         static ItemImportFactory()
         {
-            importerTypes = new Dictionary<Type, Type>
+            ImporterTypes = new Dictionary<Type, Type>
             {
+                { typeof(ContactComparison), typeof(ContactImport) },
                 { typeof(PhoneComparison), typeof(PhoneImport) },
                 { typeof(EmailComparison), typeof(EmailImport) },
                 { typeof(WebSiteComparison), typeof(WebSiteImport) },
@@ -45,59 +47,51 @@ namespace DustInTheWind.Lisimba.Business.Importing
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
             Type comparisonType = itemComparison.GetType();
-
-            IItemImport itemImport;
-
-            if (!importerTypes.ContainsKey(comparisonType))
-            {
-                itemImport = ObjectImport.Empty();
-            }
-            else
-            {
-                Type importerType = importerTypes[comparisonType];
-                itemImport = (IItemImport)Activator.CreateInstance(importerType);
-            }
+            IItemImport itemImport = CreateEmptyItemImport(comparisonType);
 
             itemImport.SourceValue = itemComparison.ValueRight;
             itemImport.DestinationValue = itemComparison.ValueLeft;
             itemImport.DestinationParent = itemComparison.ParentLeft;
+            itemImport.ImportType = DecideImportType(itemComparison.Equality);
 
-            switch (itemComparison.Equality)
+            if (itemComparison.Comparisons != null)
+                itemImport.ItemImports = itemComparison.Comparisons
+                    .Select(Create)
+                    .ToList();
+
+            return itemImport;
+        }
+
+        private static IItemImport CreateEmptyItemImport(Type comparisonType)
+        {
+            if (!ImporterTypes.ContainsKey(comparisonType))
+                return new ObjectImport();
+
+            Type importerType = ImporterTypes[comparisonType];
+            return (IItemImport)Activator.CreateInstance(importerType);
+        }
+
+        private static ImportType DecideImportType(ItemEquality itemEquality)
+        {
+            switch (itemEquality)
             {
                 case ItemEquality.BothEmpty:
                 case ItemEquality.LeftExists:
                 case ItemEquality.Equal:
-                    itemImport.ImportType = ImportType.Ignore;
-                    break;
+                    return ImportType.Ignore;
 
                 case ItemEquality.RightExists:
-                    itemImport.ImportType = ImportType.AddAsNew;
-                    break;
+                    return ImportType.AddAsNew;
 
                 case ItemEquality.Different:
-                    itemImport.ImportType = ImportType.Replace;
-                    break;
+                    return ImportType.Replace;
 
                 case ItemEquality.Similar:
-                    itemImport.ImportType = ImportType.Merge;
-                    break;
+                    return ImportType.Merge;
 
                 default:
                     throw new LisimbaException("Invalid comparison item.");
             }
-
-            return itemImport;
-
-            //if (type == typeof(EmailComparison))
-            //    return new EmailImport(itemComparison as EmailComparison);
-
-            //if (type == typeof(PhoneComparison))
-            //    return new PhoneImport(itemComparison as PhoneComparison);
-
-            //if (type == typeof(WebSiteComparison))
-            //    return new WebSiteImport(itemComparison as WebSiteComparison);
-
-            //return ObjectImport.Empty();
         }
     }
 }

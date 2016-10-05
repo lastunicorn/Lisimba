@@ -15,6 +15,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 using System;
+using System.Collections.Generic;
 
 namespace DustInTheWind.Lisimba.Business.Comparison
 {
@@ -53,6 +54,8 @@ namespace DustInTheWind.Lisimba.Business.Comparison
         }
 
         public ItemEquality Equality { get; private set; }
+
+        public List<IItemComparison> Comparisons { get; protected set; }
 
         protected ItemComparisonBase(TParent parentLeft, TValue valueLeft, TParent parentRight, TValue valueRight)
         {

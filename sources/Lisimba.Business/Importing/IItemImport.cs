@@ -21,7 +21,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
 {
     public interface IItemImport
     {
-        List<IItemImport> ItemImports { get; }
+        List<IItemImport> ItemImports { get; set; }
 
         object SourceValue { get; set; }
         object DestinationValue { get; set; }

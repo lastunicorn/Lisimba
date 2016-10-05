@@ -25,12 +25,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
             get { return "Object"; }
         }
-
-        public ObjectImport(IItemComparison<object, object> itemComparison)
-            : base(itemComparison)
-        {
-        }
-
+        
         protected override void AddAsNew()
         {
         }
@@ -41,11 +36,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
         protected override void Replace()
         {
-        }
-
-        public static ObjectImport Empty()
-        {
-            return new ObjectImport(new ObjectComparison(null, null, null, null));
         }
     }
 }

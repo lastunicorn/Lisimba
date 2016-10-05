@@ -14,10 +14,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
 using System.Collections.Generic;
 using System.Text;
-using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
@@ -26,7 +24,7 @@ namespace DustInTheWind.Lisimba.Business.Importing
     {
         protected abstract string Name { get; }
 
-        public List<IItemImport> ItemImports { get; protected set; }
+        public List<IItemImport> ItemImports { get; set; }
 
         public TValue SourceValue { get; set; }
         public TValue DestinationValue { get; set; }
@@ -58,42 +56,42 @@ namespace DustInTheWind.Lisimba.Business.Importing
             set { MergedValue = (TValue)value; }
         }
 
-        protected ItemImportBase()
-        {
-        }
+        //protected ItemImportBase()
+        //{
+        //}
 
-        protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
-        {
-            if (itemComparison == null) throw new ArgumentNullException("itemComparison");
+        //protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
+        //{
+        //    if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
-            SourceValue = itemComparison.ValueRight;
-            DestinationValue = itemComparison.ValueLeft;
-            DestinationParent = itemComparison.ParentLeft;
+        //    SourceValue = itemComparison.ValueRight;
+        //    DestinationValue = itemComparison.ValueLeft;
+        //    DestinationParent = itemComparison.ParentLeft;
 
-            switch (itemComparison.Equality)
-            {
-                case ItemEquality.BothEmpty:
-                case ItemEquality.LeftExists:
-                case ItemEquality.Equal:
-                    ImportType = ImportType.Ignore;
-                    break;
+        //    switch (itemComparison.Equality)
+        //    {
+        //        case ItemEquality.BothEmpty:
+        //        case ItemEquality.LeftExists:
+        //        case ItemEquality.Equal:
+        //            ImportType = ImportType.Ignore;
+        //            break;
 
-                case ItemEquality.RightExists:
-                    ImportType = ImportType.AddAsNew;
-                    break;
+        //        case ItemEquality.RightExists:
+        //            ImportType = ImportType.AddAsNew;
+        //            break;
 
-                case ItemEquality.Different:
-                    ImportType = ImportType.Replace;
-                    break;
+        //        case ItemEquality.Different:
+        //            ImportType = ImportType.Replace;
+        //            break;
 
-                case ItemEquality.Similar:
-                    ImportType = ImportType.Merge;
-                    break;
+        //        case ItemEquality.Similar:
+        //            ImportType = ImportType.Merge;
+        //            break;
 
-                default:
-                    throw new LisimbaException("Invalid comparison item.");
-            }
-        }
+        //        default:
+        //            throw new LisimbaException("Invalid comparison item.");
+        //    }
+        //}
 
         public void Execute(StringBuilder sb, bool simulate)
         {
