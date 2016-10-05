@@ -31,9 +31,50 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         d:DataContext="{d:DesignInstance viewModels:ImportViewModel}">
 
     <DockPanel>
-        <DataGrid
+
+        <Grid DockPanel.Dock="Top">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="Current Address Book"/>
+
+            <GridSplitter
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="8"
+            ResizeDirection="Columns"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ResizeBehavior="PreviousAndNext"/>
+
+            <Button
+            Grid.Row="0"
+            Grid.Column="2"
+            Content="Open..."
+            Command="{Binding OpenAddressBookCommand}"/>
+
+        </Grid>
+
+        <TextBox
             DockPanel.Dock="Bottom"
-            Height="300"
+            IsReadOnly="True"
+            Height="200"
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto"
+            Text="{Binding Logs, Mode=OneWay}"/>
+
+        <DataGrid
             ItemsSource="{Binding Items}"
             AutoGenerateColumns="False">
 
@@ -59,77 +100,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                     <DataGrid
                         ItemsSource="{Binding ItemImports}">
 
-                        --><!--<DataGrid.Columns>
+                        -->
+            <!--<DataGrid.Columns>
                             <DataGridTextColumn Header="Left" IsReadOnly="True" Binding="{Binding DestinationValue}"></DataGridTextColumn>
                             <DataGridTextColumn Header="ImportType" IsReadOnly="True" Binding="{Binding ImportType}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Right" IsReadOnly="True" Binding="{Binding SourceValue}"></DataGridTextColumn>
-                        </DataGrid.Columns>--><!--
+                        </DataGrid.Columns>-->
+            <!--
                     </DataGrid>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>-->
 
         </DataGrid>
-
-        <Grid>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
-
-            <TextBlock
-            Grid.Row="0"
-            Grid.Column="0"
-            Text="Current Address Book"/>
-
-            <ListBox
-            Grid.Row="1"
-            Grid.Column="0"
-            ItemsSource="{Binding Contacts}"
-            SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
-            Background="WhiteSmoke"
-            BorderThickness="0">
-
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Margin="0,4" Text="{Binding Name}" />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-
-            </ListBox>
-
-            <GridSplitter
-            Grid.Row="0"
-            Grid.Column="1"
-            Grid.RowSpan="2"
-            Width="8"
-            ResizeDirection="Columns"
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            ResizeBehavior="PreviousAndNext"/>
-
-            <Button
-            Grid.Row="0"
-            Grid.Column="2"
-            Content="Open..."
-            Command="{Binding OpenAddressBookCommand}"/>
-
-            <TextBox
-            Grid.Row="1"
-            Grid.Column="2"
-            IsReadOnly="True"
-            HorizontalScrollBarVisibility="Auto"
-            VerticalScrollBarVisibility="Auto"
-            Text="{Binding Logs, Mode=OneWay}"/>
-
-        </Grid>
-
+        
     </DockPanel>
 
 </Window>

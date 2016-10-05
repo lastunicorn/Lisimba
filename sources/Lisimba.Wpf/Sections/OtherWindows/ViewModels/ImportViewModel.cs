@@ -17,42 +17,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Importing;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {
     internal class ImportViewModel : ViewModelBase
     {
-        private readonly AddressBooks addressBooks;
-
         private CustomObservableCollection<Contact> originalContactsCollection;
-        private ListCollectionView contacts;
-        private Contact selectedContact;
         private string logs;
         private List<ImportGridItem> items;
-
-        public ListCollectionView Contacts
-        {
-            get { return contacts; }
-            private set
-            {
-                contacts = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public Contact SelectedContact
-        {
-            get { return selectedContact; }
-            set
-            {
-                selectedContact = value;
-                OnPropertyChanged();
-            }
-        }
 
         public string Logs
         {
@@ -80,8 +54,6 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         {
             if (addressBooks == null) throw new ArgumentNullException("addressBooks");
             if (openAddressBookCommand == null) throw new ArgumentNullException("openAddressBookCommand");
-
-            this.addressBooks = addressBooks;
 
             SetContacts(addressBooks.Current.AddressBook.Contacts);
 
@@ -117,21 +89,17 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             if (originalContactsCollection != null)
                 originalContactsCollection.ItemChanged -= ContactsItemChanged;
 
-            Contacts = null;
             originalContactsCollection = null;
         }
 
         private void SetContacts(CustomObservableCollection<Contact> contactCollection)
         {
-            Contacts = (ListCollectionView)CollectionViewSource.GetDefaultView(contactCollection);
-
             originalContactsCollection = contactCollection;
             originalContactsCollection.ItemChanged += ContactsItemChanged;
         }
 
         private void ContactsItemChanged(object sender, ItemChangedEventArgs<Contact> itemChangedEventArgs)
         {
-            contacts.Refresh();
         }
     }
 }
