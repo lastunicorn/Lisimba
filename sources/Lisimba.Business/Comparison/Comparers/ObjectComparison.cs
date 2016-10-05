@@ -19,10 +19,10 @@ using System.Reflection;
 
 namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class ObjectComparison : ItemComparisonBase<object, object>
+    public class ObjectComparison : ItemComparisonBase<object>
     {
-        public ObjectComparison(object parentLeft, object valueLeft, object parentRight, object valueRight)
-            : base(parentLeft, valueLeft, parentRight, valueRight)
+        public ObjectComparison(object valueLeft,  object valueRight)
+            : base(valueLeft, valueRight)
         {
         }
 

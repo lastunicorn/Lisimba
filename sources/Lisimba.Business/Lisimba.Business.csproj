@@ -75,8 +75,8 @@
     <Compile Include="ArgumentsManagement\CommandLineArguments.cs" />
     <Compile Include="ArgumentsManagement\ProgramArguments.cs" />
     <Compile Include="Comparison\Comparers\EmailComparison.cs" />
-    <Compile Include="Comparison\IItemComparison2.cs" />
-    <Compile Include="Comparison\ItemComparisonBase2.cs" />
+    <Compile Include="Comparison\IItemComparison1.cs" />
+    <Compile Include="Comparison\ItemComparisonBase1.cs" />
     <Compile Include="Comparison\Comparers\ObjectComparison.cs" />
     <Compile Include="Comparison\Comparers\PersonNameComparison.cs" />
     <Compile Include="Comparison\Comparers\DateComparison.cs" />
@@ -84,7 +84,6 @@
     <Compile Include="Comparison\Comparers\ContactComparison.cs" />
     <Compile Include="Comparison\IItemComparison.cs" />
     <Compile Include="Comparison\ItemComparisonFactory.cs" />
-    <Compile Include="Comparison\ItemComparisonBase1.cs" />
     <Compile Include="Comparison\ItemEquality.cs" />
     <Compile Include="Comparison\Comparers\NotesComparison.cs" />
     <Compile Include="Comparison\Comparers\PhoneComparison.cs" />

@@ -70,7 +70,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
             foreach (Contact contactLeft in addressBookLeft.Contacts)
             {
                 ContactComparison comparison = addressBookRightContacts
-                    .Select(x => new ContactComparison(addressBookLeft, contactLeft, addressBookRight, x))
+                    .Select(x => new ContactComparison(contactLeft, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal || x.Equality == ItemEquality.Similar);
 
                 if (comparison != null)
@@ -82,14 +82,14 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
                 }
                 else
                 {
-                    Comparisons.Add(new ContactComparison(addressBookLeft, contactLeft, addressBookRight, null));
+                    Comparisons.Add(new ContactComparison(contactLeft, null));
                 }
             }
 
             // Create items for the remaining contacts in the right address book.
 
             foreach (Contact contactRight in addressBookRightContacts)
-                Comparisons.Add(new ContactComparison(addressBookLeft, null, addressBookRight, contactRight));
+                Comparisons.Add(new ContactComparison(null, contactRight));
         }
     }
 }

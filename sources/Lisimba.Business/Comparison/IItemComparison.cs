@@ -24,16 +24,6 @@ namespace DustInTheWind.Lisimba.Business.Comparison
     public interface IItemComparison
     {
         /// <summary>
-        /// Gets the left side item that is part of the comparison.
-        /// </summary>
-        object ParentLeft { get; }
-
-        /// <summary>
-        /// Gets the right side item that is part of the comparison.
-        /// </summary>
-        object ParentRight { get; }
-
-        /// <summary>
         /// Gets the value from the left side item that is actually compared.
         /// It may be the item itself or just a property of the item.
         /// </summary>

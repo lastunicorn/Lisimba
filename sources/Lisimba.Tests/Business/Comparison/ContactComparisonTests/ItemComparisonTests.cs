@@ -34,7 +34,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             contactLeft.Items.Add(emailLeft);
             Contact contactRight = new Contact();
 
-            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
@@ -51,7 +51,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc" };
             contactRight.Items.Add(emailRight);
 
-            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
@@ -64,13 +64,13 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
         public void both_contains_one_Email_but_different()
         {
             Contact contactLeft = new Contact();
-            Email emailLeft = new Email { Address = "aaa@bbb.ccc", Description = "desc 1" };
+            Email emailLeft = new Email { Address = "aaa1@bbb.ccc", Description = "desc 1" };
             contactLeft.Items.Add(emailLeft);
             Contact contactRight = new Contact();
-            Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc 2" };
+            Email emailRight = new Email { Address = "aaa2@bbb.ccc", Description = "desc 2" };
             contactRight.Items.Add(emailRight);
 
-            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(2));
@@ -88,7 +88,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             Email emailRight = new Email { Address = "aaa@bbb.ccc", Description = "desc" };
             contactRight.Items.Add(emailRight);
 
-            ContactComparison contactComparison = new ContactComparison(null, contactLeft, null, contactRight);
+            ContactComparison contactComparison = new ContactComparison(contactLeft, contactRight);
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));

@@ -56,43 +56,6 @@ namespace DustInTheWind.Lisimba.Business.Importing
             set { MergedValue = (TValue)value; }
         }
 
-        //protected ItemImportBase()
-        //{
-        //}
-
-        //protected ItemImportBase(IItemComparison<TParent, TValue> itemComparison)
-        //{
-        //    if (itemComparison == null) throw new ArgumentNullException("itemComparison");
-
-        //    SourceValue = itemComparison.ValueRight;
-        //    DestinationValue = itemComparison.ValueLeft;
-        //    DestinationParent = itemComparison.ParentLeft;
-
-        //    switch (itemComparison.Equality)
-        //    {
-        //        case ItemEquality.BothEmpty:
-        //        case ItemEquality.LeftExists:
-        //        case ItemEquality.Equal:
-        //            ImportType = ImportType.Ignore;
-        //            break;
-
-        //        case ItemEquality.RightExists:
-        //            ImportType = ImportType.AddAsNew;
-        //            break;
-
-        //        case ItemEquality.Different:
-        //            ImportType = ImportType.Replace;
-        //            break;
-
-        //        case ItemEquality.Similar:
-        //            ImportType = ImportType.Merge;
-        //            break;
-
-        //        default:
-        //            throw new LisimbaException("Invalid comparison item.");
-        //    }
-        //}
-
         public void Execute(StringBuilder sb, bool simulate)
         {
             switch (ImportType)

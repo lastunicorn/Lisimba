@@ -19,28 +19,18 @@ namespace DustInTheWind.Lisimba.Business.Comparison
     /// <summary>
     /// Represents a comparison between two items.
     /// </summary>
-    public interface IItemComparison<out T, out U> : IItemComparison
+    public interface IItemComparison<out T> : IItemComparison
     {
-        /// <summary>
-        /// Gets the left side item that is part of the comparison.
-        /// </summary>
-        new T ParentLeft { get; }
-
-        /// <summary>
-        /// Gets the right side item that is part of the comparison.
-        /// </summary>
-        new T ParentRight { get; }
-
         /// <summary>
         /// Gets the value from the left side item that is actually compared.
         /// It may be the item itself or just a property of the item.
         /// </summary>
-        new U ValueLeft { get; }
+        new T ValueLeft { get; }
 
         /// <summary>
         /// Gets the value from the right side item that is actually compared.
         /// It may be the item itself or just a property of the item.
         /// </summary>
-        new U ValueRight { get; }
+        new T ValueRight { get; }
     }
 }

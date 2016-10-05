@@ -20,7 +20,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class ContactComparison : ItemComparisonBase<AddressBook, Contact>
+    public class ContactComparison : ItemComparisonBase<Contact>
     {
         private PersonNameComparison personNameComparison;
         private NotesComparison notesComparison;
@@ -28,8 +28,8 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
         private CategoryComparison categoryComparison;
         private PictureComparison pictureComparison;
 
-        public ContactComparison(AddressBook addressBookLeft, Contact contactLeft, AddressBook addressBookRight, Contact contactRight)
-            : base(addressBookLeft, contactLeft, addressBookRight, contactRight)
+        public ContactComparison(Contact contactLeft, Contact contactRight)
+            : base(contactLeft, contactRight)
         {
         }
 
@@ -48,19 +48,19 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 
         private void CompareAllItems()
         {
-            personNameComparison = new PersonNameComparison(ValueLeft, ValueLeft.Name, ValueRight, ValueRight.Name);
+            personNameComparison = new PersonNameComparison(ValueLeft.Name, ValueRight.Name);
             Comparisons.Add(personNameComparison);
 
-            notesComparison = new NotesComparison(ValueLeft, ValueLeft.Notes, ValueRight, ValueRight.Notes);
+            notesComparison = new NotesComparison(ValueLeft.Notes, ValueRight.Notes);
             Comparisons.Add(notesComparison);
 
-            birthdayComparison = new DateComparison(ValueLeft, ValueLeft.Birthday, ValueRight, ValueRight.Birthday);
+            birthdayComparison = new DateComparison(ValueLeft.Birthday, ValueRight.Birthday);
             Comparisons.Add(birthdayComparison);
 
-            categoryComparison = new CategoryComparison(ValueLeft, ValueLeft.Category, ValueRight, ValueRight.Category);
+            categoryComparison = new CategoryComparison(ValueLeft.Category, ValueRight.Category);
             Comparisons.Add(categoryComparison);
 
-            pictureComparison = new PictureComparison(ValueLeft, ValueLeft.Picture, ValueRight, ValueRight.Picture);
+            pictureComparison = new PictureComparison(ValueLeft.Picture, ValueRight.Picture);
             Comparisons.Add(pictureComparison);
 
             List<ContactItem> contactRightItems = ValueRight.Items.ToList();
@@ -68,7 +68,7 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
             foreach (ContactItem itemLeft in ValueLeft.Items)
             {
                 IItemComparison comparison = contactRightItems
-                    .Select(x => ItemComparisonFactory.Create(ValueLeft, itemLeft, ValueRight, x))
+                    .Select(x => ItemComparisonFactory.Create(itemLeft, x))
                     .FirstOrDefault(x => x.Equality == ItemEquality.Equal || x.Equality == ItemEquality.Similar);
 
                 if (comparison != null)
@@ -78,12 +78,12 @@ namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
                 }
                 else
                 {
-                    Comparisons.Add(ItemComparisonFactory.Create(ValueLeft, itemLeft, ValueRight, null));
+                    Comparisons.Add(ItemComparisonFactory.Create(itemLeft, null));
                 }
             }
 
             foreach (ContactItem itemRight in contactRightItems)
-                Comparisons.Add(ItemComparisonFactory.Create(ValueLeft, null, ValueRight, itemRight));
+                Comparisons.Add(ItemComparisonFactory.Create(null, itemRight));
         }
 
         protected override bool ValuesAreEqual()

@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
         [Test]
         public void Equality_is_BothEmpty_if_both_emails_are_null()
         {
-            EmailComparison emailComparison = new EmailComparison(null, null, null, null);
+            EmailComparison emailComparison = new EmailComparison(null, null);
 
             Assert.That(emailComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = new Email();
             Email emailRight = new Email();
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = new Email("aaa@bbb.ccc", "desc");
             Email emailRight = null;
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = null;
             Email emailRight = new Email("aaa@bbb.ccc", "desc");
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = new Email("aaa1@bbb.ccc", "desc");
             Email emailRight = new Email("aaa2@bbb.ccc", "desc");
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -82,7 +82,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = new Email("aaa@bbb.ccc", "desc");
             Email emailRight = new Email("aaa@bbb.ccc", "desc");
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Email emailLeft = email;
             Email emailRight = email;
 
-            EmailComparison emailsComparison = new EmailComparison(null, emailLeft, null, emailRight);
+            EmailComparison emailsComparison = new EmailComparison(emailLeft, emailRight);
 
             Assert.That(emailsComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }

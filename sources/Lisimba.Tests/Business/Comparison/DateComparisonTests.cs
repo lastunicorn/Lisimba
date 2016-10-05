@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
         [Test]
         public void Equality_is_BothEmpty_if_both_birthdays_are_null()
         {
-            DateComparison dateComparison = new DateComparison(null, null, null, null);
+            DateComparison dateComparison = new DateComparison(null, null);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = new Date();
             Date dateRight = new Date();
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = new Date(13, 03, 2000);
             Date dateRight = null;
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = null;
             Date dateRight = new Date(13, 03, 2000);
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = new Date(14, 04, 4000);
             Date dateRight = new Date(13, 03, 2000);
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -82,7 +82,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = new Date(13, 03, 2000);
             Date dateRight = new Date(13, 03, 2000);
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -94,7 +94,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Date dateLeft = birthday;
             Date dateRight = birthday;
 
-            DateComparison dateComparison = new DateComparison(null, dateLeft, null, dateRight);
+            DateComparison dateComparison = new DateComparison(dateLeft, dateRight);
 
             Assert.That(dateComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }

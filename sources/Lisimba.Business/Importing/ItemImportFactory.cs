@@ -42,27 +42,27 @@ namespace DustInTheWind.Lisimba.Business.Importing
             };
         }
 
-        public static IItemImport Create(IItemComparison itemComparison)
+        public static IItemImport Create(IItemComparison itemComparison, object destinationParent)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
             Type comparisonType = itemComparison.GetType();
-            IItemImport itemImport = CreateEmptyItemImport(comparisonType);
+            IItemImport itemImport = InstantiateItemImport(comparisonType);
 
             itemImport.SourceValue = itemComparison.ValueRight;
             itemImport.DestinationValue = itemComparison.ValueLeft;
-            itemImport.DestinationParent = itemComparison.ParentLeft;
+            itemImport.DestinationParent = destinationParent;
             itemImport.ImportType = DecideImportType(itemComparison.Equality);
 
             if (itemComparison.Comparisons != null)
                 itemImport.ItemImports = itemComparison.Comparisons
-                    .Select(Create)
+                    .Select(x => Create(x, itemComparison.ValueLeft))
                     .ToList();
 
             return itemImport;
         }
 
-        private static IItemImport CreateEmptyItemImport(Type comparisonType)
+        private static IItemImport InstantiateItemImport(Type comparisonType)
         {
             if (!ImporterTypes.ContainsKey(comparisonType))
                 return new ObjectImport();

@@ -21,10 +21,10 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class PictureComparison : ItemComparisonBase<Contact, Picture>
+    public class PictureComparison : ItemComparisonBase<Picture>
     {
-        public PictureComparison(Contact contactLeft, Picture pictureLeft, Contact contactRight, Picture pictureRight)
-            : base(contactLeft, pictureLeft, contactRight, pictureRight)
+        public PictureComparison(Picture pictureLeft, Picture pictureRight)
+            : base(pictureLeft, pictureRight)
         {
         }
 

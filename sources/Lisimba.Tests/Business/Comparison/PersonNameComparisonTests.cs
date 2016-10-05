@@ -27,7 +27,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
         [Test]
         public void Equality_is_BothEmpty_if_both_names_are_null()
         {
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, null, null, null);
+            PersonNameComparison personNameComparison = new PersonNameComparison(null, null);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -38,7 +38,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName();
             PersonName personNameRight = new PersonName();
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { FirstName = "first name 1" };
             PersonName personNameRight = new PersonName { FirstName = "first name 2" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -60,7 +60,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { FirstName = "first name" };
             PersonName personNameRight = new PersonName { FirstName = "first name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -71,7 +71,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { MiddleName = "middle name 1" };
             PersonName personNameRight = new PersonName { MiddleName = "middle name 2" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -82,7 +82,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { MiddleName = "middle name" };
             PersonName personNameRight = new PersonName { MiddleName = "middle name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -93,7 +93,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { LastName = "last name 1" };
             PersonName personNameRight = new PersonName { LastName = "last name 2" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -104,7 +104,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { LastName = "last name" };
             PersonName personNameRight = new PersonName { LastName = "last name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -115,7 +115,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { Nickname = "nickname 1" };
             PersonName personNameRight = new PersonName { Nickname = "nickname 2" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -126,7 +126,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { Nickname = "nickname" };
             PersonName personNameRight = new PersonName { Nickname = "nickname" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }
@@ -137,7 +137,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { FirstName = "first name", MiddleName = "middle name" };
             PersonName personNameRight = new PersonName { FirstName = "first name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Similar));
         }
@@ -148,7 +148,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { FirstName = "first name", LastName = "last name" };
             PersonName personNameRight = new PersonName { FirstName = "first name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Similar));
         }
@@ -159,7 +159,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             PersonName personNameLeft = new PersonName { FirstName = "first name", Nickname = "nickname" };
             PersonName personNameRight = new PersonName { FirstName = "first name" };
 
-            PersonNameComparison personNameComparison = new PersonNameComparison(null, personNameLeft, null, personNameRight);
+            PersonNameComparison personNameComparison = new PersonNameComparison(personNameLeft, personNameRight);
 
             Assert.That(personNameComparison.Equality, Is.EqualTo(ItemEquality.Similar));
         }

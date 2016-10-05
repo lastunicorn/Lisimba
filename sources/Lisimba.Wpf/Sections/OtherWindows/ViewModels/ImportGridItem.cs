@@ -26,6 +26,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
         public bool IsContact { get; private set; }
         public object LeftValue { get; set; }
         public object RightValue { get; set; }
+        public bool HasMergedValue { get; set; }
         public ImportType ImportType { get; set; }
 
         public ImportGridItem(IItemImport itemImport)
@@ -37,6 +38,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
             LeftValue = itemImport.DestinationValue;
             RightValue = itemImport.SourceValue;
             ImportType = itemImport.ImportType;
+            HasMergedValue = itemImport.MergedValue != null;
         }
     }
 }

@@ -18,10 +18,10 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class WebSiteComparison : ItemComparisonBase<Contact, WebSite>
+    public class WebSiteComparison : ItemComparisonBase<WebSite>
     {
-        public WebSiteComparison(Contact contactLeft, WebSite webSiteLeft, Contact contactRight, WebSite webSiteRight)
-            : base(contactLeft, webSiteLeft, contactRight, webSiteRight)
+        public WebSiteComparison(WebSite webSiteLeft, WebSite webSiteRight)
+            : base(webSiteLeft, webSiteRight)
         {
         }
 

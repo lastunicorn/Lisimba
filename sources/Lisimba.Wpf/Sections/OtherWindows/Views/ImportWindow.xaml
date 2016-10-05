@@ -82,6 +82,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 <DataGridTextColumn Header="Left" IsReadOnly="True" Binding="{Binding LeftValue}"></DataGridTextColumn>
                 <DataGridTextColumn Header="ImportType" IsReadOnly="True" Binding="{Binding ImportType}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Right" IsReadOnly="True" Binding="{Binding RightValue}"></DataGridTextColumn>
+                <DataGridCheckBoxColumn Header="Right" IsReadOnly="True" Binding="{Binding HasMergedValue}"></DataGridCheckBoxColumn>
             </DataGrid.Columns>
 
             <DataGrid.RowStyle>

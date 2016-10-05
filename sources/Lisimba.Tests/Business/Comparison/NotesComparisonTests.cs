@@ -30,7 +30,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact();
 
-            NotesComparison notesComparison = new NotesComparison(contactLeft, contactLeft.Notes, contactRight, contactRight.Notes);
+            NotesComparison notesComparison = new NotesComparison(contactLeft.Notes, contactRight.Notes);
 
             Assert.That(notesComparison.Equality, Is.EqualTo(ItemEquality.BothEmpty));
         }
@@ -41,7 +41,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Notes = "note" };
             Contact contactRight = new Contact();
 
-            NotesComparison notesComparison = new NotesComparison(contactLeft, contactLeft.Notes, contactRight, contactRight.Notes);
+            NotesComparison notesComparison = new NotesComparison(contactLeft.Notes, contactRight.Notes);
 
             Assert.That(notesComparison.Equality, Is.EqualTo(ItemEquality.LeftExists));
         }
@@ -52,7 +52,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact();
             Contact contactRight = new Contact { Notes = "note" };
 
-            NotesComparison notesComparison = new NotesComparison(contactLeft, contactLeft.Notes, contactRight, contactRight.Notes);
+            NotesComparison notesComparison = new NotesComparison(contactLeft.Notes, contactRight.Notes);
 
             Assert.That(notesComparison.Equality, Is.EqualTo(ItemEquality.RightExists));
         }
@@ -63,7 +63,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Notes = "note1" };
             Contact contactRight = new Contact { Notes = "note2" };
 
-            NotesComparison notesComparison = new NotesComparison(contactLeft, contactLeft.Notes, contactRight, contactRight.Notes);
+            NotesComparison notesComparison = new NotesComparison(contactLeft.Notes, contactRight.Notes);
 
             Assert.That(notesComparison.Equality, Is.EqualTo(ItemEquality.Different));
         }
@@ -74,7 +74,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison
             Contact contactLeft = new Contact { Notes = "note" };
             Contact contactRight = new Contact { Notes = "note" };
 
-            NotesComparison notesComparison = new NotesComparison(contactLeft, contactLeft.Notes, contactRight, contactRight.Notes);
+            NotesComparison notesComparison = new NotesComparison(contactLeft.Notes, contactRight.Notes);
 
             Assert.That(notesComparison.Equality, Is.EqualTo(ItemEquality.Equal));
         }

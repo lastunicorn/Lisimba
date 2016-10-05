@@ -45,16 +45,16 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
             importRules = new List<ContactImport>();
 
-            addressBookDestination.Changed += HandleAddressBookBaseChanged;
+            addressBookDestination.Changed += HandleAddressBookDestinationChanged;
             addressBookSource.Changed += HandleAddressBookSourceChanged;
         }
 
-        private void HandleAddressBookBaseChanged(object sender, EventArgs eventArgs)
+        private void HandleAddressBookDestinationChanged(object sender, EventArgs e)
         {
             isAnalysed = false;
         }
 
-        private void HandleAddressBookSourceChanged(object sender, EventArgs eventArgs)
+        private void HandleAddressBookSourceChanged(object sender, EventArgs e)
         {
             isAnalysed = false;
         }
@@ -63,20 +63,31 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
             isAnalysed = false;
 
-            importRules.Clear();
+            AddressBookComparison addressBookComparison = CompareAddressBooks();
+            RecreateImportRules(addressBookComparison);
 
+            isAnalysed = true;
+        }
+
+        private AddressBookComparison CompareAddressBooks()
+        {
             AddressBookComparison addressBookComparison = new AddressBookComparison(addressBookDestination, addressBookSource);
             addressBookComparison.Compare();
 
+            return addressBookComparison;
+        }
+
+        private void RecreateImportRules(AddressBookComparison addressBookComparison)
+        {
+            importRules.Clear();
+
             IEnumerable<ContactImport> rules = addressBookComparison.Comparisons
-                .Select(ItemImportFactory.Create)
+                .Select(x => ItemImportFactory.Create(x, addressBookDestination))
                 .Cast<ContactImport>()
                 .Where(x => x.ImportType != ImportType.Ignore);
 
             foreach (ContactImport importRule in rules)
                 importRules.Add(importRule);
-
-            isAnalysed = true;
         }
 
         public StringBuilder PerformImport(bool simulate = false)

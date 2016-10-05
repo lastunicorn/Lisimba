@@ -14,14 +14,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
 namespace DustInTheWind.Lisimba.Business.Comparison.Comparers
 {
-    public class NotesComparison : ItemComparisonBase<Contact, string>
+    public class NotesComparison : ItemComparisonBase<string>
     {
-        public NotesComparison(Contact contactLeft, string valLeft, Contact contactRight, string valueRight)
-            : base(contactLeft, valLeft, contactRight, valueRight)
+        public NotesComparison(string valueLeft, string valueRight)
+            : base(valueLeft, valueRight)
         {
         }
 

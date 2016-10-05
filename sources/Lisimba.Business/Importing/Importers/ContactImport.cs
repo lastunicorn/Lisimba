@@ -14,11 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System;
-using System.Linq;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
-using DustInTheWind.Lisimba.Business.Comparison;
-using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
@@ -28,43 +24,6 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         {
             get { return "Contact"; }
         }
-
-        //public ContactImport(ContactComparison contactComparison)
-        //{
-        //    if (contactComparison == null) throw new ArgumentNullException("contactComparison");
-
-        //    SourceValue = contactComparison.ValueRight;
-        //    DestinationValue = contactComparison.ValueLeft;
-        //    DestinationParent = contactComparison.ParentLeft;
-        //    ImportType = DecideImportType(contactComparison.Equality);
-
-        //    ItemImports = contactComparison.Comparisons
-        //        .Select(ItemImportFactory.Create)
-        //        .ToList();
-        //}
-
-        //private static ImportType DecideImportType(ItemEquality itemEquality)
-        //{
-        //    switch (itemEquality)
-        //    {
-        //        case ItemEquality.BothEmpty:
-        //        case ItemEquality.LeftExists:
-        //        case ItemEquality.Equal:
-        //            return ImportType.Ignore;
-
-        //        case ItemEquality.RightExists:
-        //            return ImportType.AddAsNew;
-
-        //        case ItemEquality.Different:
-        //            return ImportType.Replace;
-
-        //        case ItemEquality.Similar:
-        //            return ImportType.Merge;
-
-        //        default:
-        //            throw new LisimbaException("Invalid comparison item.");
-        //    }
-        //}
 
         protected override void AddAsNew()
         {
