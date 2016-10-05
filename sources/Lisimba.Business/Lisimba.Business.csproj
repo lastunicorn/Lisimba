@@ -111,9 +111,8 @@
     <Compile Include="Importing\Importers\EmailImport.cs" />
     <Compile Include="Importing\IItemImport.cs" />
     <Compile Include="Importing\ImportType.cs" />
-    <Compile Include="Importing\ItemImportBase1.cs" />
     <Compile Include="Importing\Importers\ObjectImport.cs" />
-    <Compile Include="Importing\ItemImportBase2.cs" />
+    <Compile Include="Importing\ItemImportBase1.cs" />
     <Compile Include="Importing\ItemImportFactory.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
