@@ -22,23 +22,23 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.OtherWindows.ViewModels
 {
     internal class ImportGridItem
     {
-        public IItemImport UnderlyingItem { get; private set; }
+        public IImporter UnderlyingItem { get; private set; }
         public bool IsContact { get; private set; }
         public object LeftValue { get; set; }
         public object RightValue { get; set; }
         public bool HasMergedValue { get; set; }
         public ImportType ImportType { get; set; }
 
-        public ImportGridItem(IItemImport itemImport)
+        public ImportGridItem(IImporter importer)
         {
-            if (itemImport == null) throw new ArgumentNullException("itemImport");
+            if (importer == null) throw new ArgumentNullException("importer");
             
-            UnderlyingItem = itemImport;
-            IsContact = itemImport is ContactImport;
-            LeftValue = itemImport.DestinationValue;
-            RightValue = itemImport.SourceValue;
-            ImportType = itemImport.ImportType;
-            HasMergedValue = itemImport.MergedValue != null;
+            UnderlyingItem = importer;
+            IsContact = importer is ContactImporter;
+            LeftValue = importer.DestinationValue;
+            RightValue = importer.SourceValue;
+            ImportType = importer.ImportType;
+            HasMergedValue = importer.MergedValue != null;
         }
     }
 }

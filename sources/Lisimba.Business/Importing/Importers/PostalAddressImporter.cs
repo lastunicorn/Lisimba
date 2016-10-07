@@ -14,22 +14,31 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
-using System.Text;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
-namespace DustInTheWind.Lisimba.Business.Importing
+namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public interface IItemImport
+    public class PostalAddressImporter : ImporterBase<Contact, PostalAddress>
     {
-        List<IItemImport> ItemImports { get; set; }
+        protected override string Name
+        {
+            get { return "Postal Address"; }
+        }
 
-        object SourceValue { get; set; }
-        object DestinationValue { get; set; }
-        object DestinationParent { get; set; }
-        object MergedValue { get; set; }
+        protected override void AddAsNew()
+        {
+            DestinationParent.Items.Add(SourceValue);
+        }
 
-        ImportType ImportType { get; set; }
+        protected override void Merge()
+        {
+            // todo: implement merge.
+        }
 
-        void Execute(StringBuilder sb, bool simulate);
+        protected override void Replace()
+        {
+            DestinationParent.Items.Remove(DestinationValue);
+            DestinationParent.Items.Add(SourceValue);
+        }
     }
 }

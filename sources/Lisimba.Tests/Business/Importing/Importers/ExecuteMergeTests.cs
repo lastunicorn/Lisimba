@@ -33,11 +33,11 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("right@bbb.ccc", "desc right");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
             Email emailMerged = new Email();
-            emailImport.MergedValue = emailMerged;
+            emailImporter.MergedValue = emailMerged;
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(emailMerged));
@@ -51,9 +51,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("address1@email.com", "desc1");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(new Email { Address = "address1@email.com", Description = "desc1" }));
@@ -68,9 +68,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("address1@email.com", "desc1");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(new Email { Address = "address1@email.com", Description = "desc1" }));
@@ -85,9 +85,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("address1@email.com", "desc1");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(new Email { Address = "address1@email.com", Description = "desc1" }));
@@ -102,9 +102,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("address1@email.com", "desc1");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(new Email { Address = "address1@email.com", Description = "desc1" }));
@@ -120,9 +120,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailLeft = contactLeft.Items.First() as Email;
             Contact contactRight = CreateContactWithOneEmail("address1@email.com", "desc1");
             Email emailRight = contactRight.Items.First() as Email;
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Merge);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
         }
 
         private static Contact CreateContactWithOneEmail(string emailAddress, string description)

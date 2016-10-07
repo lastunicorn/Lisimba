@@ -14,12 +14,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Collections.Generic;
+using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class ContactImport : ItemImportBase<AddressBook, Contact>
+    public class ContactImporter : ImporterBase<AddressBook, Contact>
     {
+        public List<IImporter> ItemImports { get; set; }
+
         protected override string Name
         {
             get { return "Contact"; }
@@ -28,6 +32,31 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
         protected override void AddAsNew()
         {
             DestinationParent.Contacts.Add(SourceValue);
+        }
+
+        protected override void Merge(StringBuilder sb, bool simulate)
+        {
+            sb.AppendLine(string.Format("Merging {0} '{1}' and '{2}'.", Name, DestinationValue, SourceValue));
+
+            if (ItemImports == null)
+                return;
+
+            foreach (IImporter importRule in ItemImports)
+            {
+                try
+                {
+                    importRule.Execute(sb, simulate);
+                }
+                catch (MergeConflictException)
+                {
+                    sb.AppendLine(string.Format("Merge conflict. dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
+                }
+                catch
+                {
+                    sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
+                    throw;
+                }
+            }
         }
 
         protected override void Merge()

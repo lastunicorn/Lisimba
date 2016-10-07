@@ -27,12 +27,12 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
     {
         private readonly AddressBook addressBookDestination;
         private readonly AddressBook addressBookSource;
-        private readonly List<ContactImport> importRules;
+        private readonly List<ContactImporter> contactImporters;
         private bool isAnalysed;
 
-        public IReadOnlyList<ContactImport> ImportRules
+        public IReadOnlyList<ContactImporter> ImportRules
         {
-            get { return importRules.AsReadOnly(); }
+            get { return contactImporters.AsReadOnly(); }
         }
 
         public AddressBookImporter(AddressBook addressBookDestination, AddressBook addressBookSource)
@@ -43,7 +43,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
             this.addressBookDestination = addressBookDestination;
             this.addressBookSource = addressBookSource;
 
-            importRules = new List<ContactImport>();
+            contactImporters = new List<ContactImporter>();
 
             addressBookDestination.Changed += HandleAddressBookDestinationChanged;
             addressBookSource.Changed += HandleAddressBookSourceChanged;
@@ -79,15 +79,14 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
         private void RecreateImportRules(AddressBookComparison addressBookComparison)
         {
-            importRules.Clear();
+            contactImporters.Clear();
 
-            IEnumerable<ContactImport> rules = addressBookComparison.Comparisons
-                .Select(x => ItemImportFactory.Create(x, addressBookDestination))
-                .Cast<ContactImport>()
+            IEnumerable<ContactImporter> rules = addressBookComparison.Comparisons
+                .Select(x => ImporterFactory.Create(x, addressBookDestination))
                 .Where(x => x.ImportType != ImportType.Ignore);
 
-            foreach (ContactImport importRule in rules)
-                importRules.Add(importRule);
+            foreach (ContactImporter importRule in rules)
+                contactImporters.Add(importRule);
         }
 
         public StringBuilder PerformImport(bool simulate = false)
@@ -97,7 +96,7 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
 
             StringBuilder sb = new StringBuilder();
 
-            foreach (ContactImport importRule in importRules)
+            foreach (ContactImporter importRule in contactImporters)
                 importRule.Execute(sb, simulate);
 
             return sb;

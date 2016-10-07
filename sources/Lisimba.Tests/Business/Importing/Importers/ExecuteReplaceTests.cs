@@ -45,9 +45,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         [Test]
         public void replaces_the_Email_in_left_Contact_with_a_copy_of_right_Email()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Replace);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Replace);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(emailRight));
@@ -57,9 +57,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         [Test]
         public void removes_destinationValue_if_sourceValue_is_null()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, null, ImportType.Replace);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, null, ImportType.Replace);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(0));
         }
@@ -68,9 +68,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         public void adds_sourceValue_to_destinationParent_if_destinationValue_is_null()
         {
             Contact contactLeft = new Contact();
-            EmailImport emailImport = new EmailImport(contactLeft, null, emailRight, ImportType.Replace);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, null, emailRight, ImportType.Replace);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.EqualTo(emailRight));

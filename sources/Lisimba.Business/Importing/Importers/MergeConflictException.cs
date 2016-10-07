@@ -23,20 +23,20 @@ namespace DustInTheWind.Lisimba.Business.Importing.Importers
     {
         private const string DefaultMessage = "The merge cannot be performed automatically. Conflicts exists.";
 
-        private readonly IItemImport itemImport;
+        private readonly IImporter importer;
 
-        public MergeConflictException(IItemImport itemImport)
+        public MergeConflictException(IImporter importer)
             : base(DefaultMessage)
         {
-            if (itemImport == null) throw new ArgumentNullException("itemImport");
-            this.itemImport = itemImport;
+            if (importer == null) throw new ArgumentNullException("importer");
+            this.importer = importer;
         }
 
-        public MergeConflictException(IItemImport itemImport, Exception innerException)
+        public MergeConflictException(IImporter importer, Exception innerException)
             : base(DefaultMessage, innerException)
         {
-            if (itemImport == null) throw new ArgumentNullException("itemImport");
-            this.itemImport = itemImport;
+            if (importer == null) throw new ArgumentNullException("importer");
+            this.importer = importer;
         }
 
         protected MergeConflictException(SerializationInfo info, StreamingContext context)

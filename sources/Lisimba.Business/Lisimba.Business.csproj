@@ -100,20 +100,20 @@
     <Compile Include="GateModel\IncorrectEggVersionException.cs" />
     <Compile Include="Comparison\Comparers\AddressBookComparison.cs" />
     <Compile Include="Importing\Importers\AddressBookImporter.cs" />
-    <Compile Include="Importing\Importers\ContactImport.cs" />
-    <Compile Include="Importing\Importers\DateImport.cs" />
-    <Compile Include="Importing\Importers\NotesImport.cs" />
+    <Compile Include="Importing\Importers\ContactImporter.cs" />
+    <Compile Include="Importing\Importers\DateImporter.cs" />
+    <Compile Include="Importing\Importers\NotesImporter.cs" />
     <Compile Include="Importing\Importers\MergeConflictException.cs" />
-    <Compile Include="Importing\Importers\SocialProfileIdImport.cs" />
-    <Compile Include="Importing\Importers\PostalAddressImport.cs" />
-    <Compile Include="Importing\Importers\WebSiteImport.cs" />
-    <Compile Include="Importing\Importers\PhoneImport.cs" />
-    <Compile Include="Importing\Importers\EmailImport.cs" />
-    <Compile Include="Importing\IItemImport.cs" />
+    <Compile Include="Importing\Importers\SocialProfileIdImporter.cs" />
+    <Compile Include="Importing\Importers\PostalAddressImporter.cs" />
+    <Compile Include="Importing\Importers\WebSiteImporter.cs" />
+    <Compile Include="Importing\Importers\PhoneImporter.cs" />
+    <Compile Include="Importing\Importers\EmailImporter.cs" />
+    <Compile Include="Importing\IImporter.cs" />
     <Compile Include="Importing\ImportType.cs" />
-    <Compile Include="Importing\Importers\ObjectImport.cs" />
-    <Compile Include="Importing\ItemImportBase1.cs" />
-    <Compile Include="Importing\ItemImportFactory.cs" />
+    <Compile Include="Importing\Importers\ObjectImporter.cs" />
+    <Compile Include="Importing\ImporterBase2.cs" />
+    <Compile Include="Importing\ImporterFactory.cs" />
     <Compile Include="InitialCatalogOpener.cs" />
     <Compile Include="IUserInterface.cs" />
     <Compile Include="IZodiacSignProvider.cs" />
@@ -179,7 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Comparison\ClassDiagram1.cd" />
-    <None Include="Importing\ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

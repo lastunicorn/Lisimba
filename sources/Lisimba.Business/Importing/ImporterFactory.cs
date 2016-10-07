@@ -17,58 +17,73 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 using DustInTheWind.Lisimba.Business.Comparison;
 using DustInTheWind.Lisimba.Business.Comparison.Comparers;
 using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public static class ItemImportFactory
+    public static class ImporterFactory
     {
         private static readonly Dictionary<Type, Type> ImporterTypes;
 
-        static ItemImportFactory()
+        static ImporterFactory()
         {
             ImporterTypes = new Dictionary<Type, Type>
             {
-                { typeof(ContactComparison), typeof(ContactImport) },
-                { typeof(PhoneComparison), typeof(PhoneImport) },
-                { typeof(EmailComparison), typeof(EmailImport) },
-                { typeof(WebSiteComparison), typeof(WebSiteImport) },
-                { typeof(PostalAddressComparison), typeof(PostalAddressImport) },
-                { typeof(DateComparison), typeof(DateImport) },
-                { typeof(SocialProfileIdComparison), typeof(SocialProfileIdImport) },
-                { typeof(NotesComparison), typeof(NotesImport) }
+                { typeof(PhoneComparison), typeof(PhoneImporter) },
+                { typeof(EmailComparison), typeof(EmailImporter) },
+                { typeof(WebSiteComparison), typeof(WebSiteImporter) },
+                { typeof(PostalAddressComparison), typeof(PostalAddressImporter) },
+                { typeof(DateComparison), typeof(DateImporter) },
+                { typeof(SocialProfileIdComparison), typeof(SocialProfileIdImporter) },
+                { typeof(NotesComparison), typeof(NotesImporter) }
             };
         }
 
-        public static IItemImport Create(IItemComparison itemComparison, object destinationParent)
+        public static ContactImporter Create(ContactComparison contactComparison, AddressBook destinationAddressBook)
+        {
+            if (contactComparison == null) throw new ArgumentNullException("contactComparison");
+
+            ContactImporter importer = new ContactImporter
+            {
+                SourceValue = contactComparison.ValueRight,
+                DestinationValue = contactComparison.ValueLeft,
+                DestinationParent = destinationAddressBook,
+                ImportType = DecideImportType(contactComparison.Equality)
+            };
+            
+            if (contactComparison.Comparisons != null)
+                importer.ItemImports = contactComparison.Comparisons
+                    .Select(x => Create(x, contactComparison.ValueLeft))
+                    .ToList();
+
+            return importer;
+        }
+
+        private static IImporter Create(IItemComparison itemComparison, object destinationParent)
         {
             if (itemComparison == null) throw new ArgumentNullException("itemComparison");
 
             Type comparisonType = itemComparison.GetType();
-            IItemImport itemImport = InstantiateItemImport(comparisonType);
+            IImporter importer = InstantiateItemImport(comparisonType);
 
-            itemImport.SourceValue = itemComparison.ValueRight;
-            itemImport.DestinationValue = itemComparison.ValueLeft;
-            itemImport.DestinationParent = destinationParent;
-            itemImport.ImportType = DecideImportType(itemComparison.Equality);
+            importer.SourceValue = itemComparison.ValueRight;
+            importer.DestinationValue = itemComparison.ValueLeft;
+            importer.DestinationParent = destinationParent;
+            importer.ImportType = DecideImportType(itemComparison.Equality);
 
-            if (itemComparison.Comparisons != null)
-                itemImport.ItemImports = itemComparison.Comparisons
-                    .Select(x => Create(x, itemComparison.ValueLeft))
-                    .ToList();
-
-            return itemImport;
+            return importer;
         }
 
-        private static IItemImport InstantiateItemImport(Type comparisonType)
+        private static IImporter InstantiateItemImport(Type comparisonType)
         {
             if (!ImporterTypes.ContainsKey(comparisonType))
-                return new ObjectImport();
+                return new ObjectImporter();
 
             Type importerType = ImporterTypes[comparisonType];
-            return (IItemImport)Activator.CreateInstance(importerType);
+            return (IImporter)Activator.CreateInstance(importerType);
         }
 
         private static ImportType DecideImportType(ItemEquality itemEquality)

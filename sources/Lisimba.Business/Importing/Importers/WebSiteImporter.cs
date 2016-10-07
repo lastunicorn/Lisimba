@@ -14,28 +14,35 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.Comparison;
-using DustInTheWind.Lisimba.Business.Comparison.Comparers;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class ObjectImport : ItemImportBase<object, object>
+    public class WebSiteImporter : ImporterBase<Contact, WebSite>
     {
         protected override string Name
         {
-            get { return "Object"; }
+            get { return "Web Site"; }
         }
-        
+
         protected override void AddAsNew()
         {
+            DestinationParent.Items.Add(SourceValue);
         }
 
         protected override void Merge()
         {
+            if (!string.IsNullOrEmpty(SourceValue.Address))
+                DestinationValue.Address = SourceValue.Address;
+
+            if (!string.IsNullOrEmpty(SourceValue.Description))
+                DestinationValue.Description = SourceValue.Description;
         }
 
         protected override void Replace()
         {
+            DestinationParent.Items.Remove(DestinationValue);
+            DestinationParent.Items.Add(SourceValue);
         }
     }
 }

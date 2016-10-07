@@ -45,9 +45,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         [Test]
         public void adds_a_copy_of_the_Email_in_left_Contact()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.AddAsNew);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.AddAsNew);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(2));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
@@ -58,9 +58,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         [Test]
         public void does_nothing_if_sourceValue_is_null()
         {
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, null, ImportType.AddAsNew);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, null, ImportType.AddAsNew);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));

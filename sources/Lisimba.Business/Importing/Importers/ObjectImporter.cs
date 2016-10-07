@@ -14,31 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using DustInTheWind.Lisimba.Business.AddressBookModel;
-
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class DateImport : ItemImportBase<Contact, Date>
+    public class ObjectImporter : ImporterBase<object, object>
     {
         protected override string Name
         {
-            get { return "Date"; }
+            get { return "Object"; }
         }
-
+        
         protected override void AddAsNew()
         {
-            DestinationParent.Items.Add(SourceValue);
         }
 
         protected override void Merge()
         {
-            // todo: implement merge.
         }
 
         protected override void Replace()
         {
-            DestinationParent.Items.Remove(DestinationValue);
-            DestinationParent.Items.Add(SourceValue);
         }
     }
 }

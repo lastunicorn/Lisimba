@@ -18,7 +18,7 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class PhoneImport : ItemImportBase<Contact, Phone>
+    public class PhoneImporter : ImporterBase<Contact, Phone>
     {
         protected override string Name
         {

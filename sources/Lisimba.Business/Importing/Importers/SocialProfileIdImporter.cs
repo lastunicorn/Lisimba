@@ -18,11 +18,11 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class PostalAddressImport : ItemImportBase<Contact, PostalAddress>
+    public class SocialProfileIdImporter : ImporterBase<Contact, SocialProfileId>
     {
         protected override string Name
         {
-            get { return "Postal Address"; }
+            get { return "Social Profile Id"; }
         }
 
         protected override void AddAsNew()

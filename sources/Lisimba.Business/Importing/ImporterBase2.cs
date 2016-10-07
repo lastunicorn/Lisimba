@@ -14,17 +14,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-using System.Collections.Generic;
 using System.Text;
-using DustInTheWind.Lisimba.Business.Importing.Importers;
 
 namespace DustInTheWind.Lisimba.Business.Importing
 {
-    public abstract class ItemImportBase<TParent, TValue> : IItemImport
+    public abstract class ImporterBase<TParent, TValue> : IImporter
     {
         protected abstract string Name { get; }
-
-        public List<IItemImport> ItemImports { get; set; }
 
         public TValue SourceValue { get; set; }
         public TValue DestinationValue { get; set; }
@@ -32,25 +28,25 @@ namespace DustInTheWind.Lisimba.Business.Importing
         public ImportType ImportType { get; set; }
         public TValue MergedValue { get; set; }
 
-        object IItemImport.SourceValue
+        object IImporter.SourceValue
         {
             get { return SourceValue; }
             set { SourceValue = (TValue)value; }
         }
 
-        object IItemImport.DestinationValue
+        object IImporter.DestinationValue
         {
             get { return DestinationValue; }
             set { DestinationValue = (TValue)value; }
         }
 
-        object IItemImport.DestinationParent
+        object IImporter.DestinationParent
         {
             get { return DestinationParent; }
             set { DestinationParent = (TParent)value; }
         }
 
-        object IItemImport.MergedValue
+        object IImporter.MergedValue
         {
             get { return MergedValue; }
             set { MergedValue = (TValue)value; }
@@ -64,15 +60,15 @@ namespace DustInTheWind.Lisimba.Business.Importing
                     break;
 
                 case ImportType.AddAsNew:
-                    ExecuteAddAsNew(sb, simulate);
+                    AddAsNew(sb, simulate);
                     break;
 
                 case ImportType.Merge:
-                    ExecuteMerge(sb, simulate);
+                    Merge(sb, simulate);
                     break;
 
                 case ImportType.Replace:
-                    ExecuteReplace(sb, simulate);
+                    Replace(sb, simulate);
                     break;
 
                 default:
@@ -81,48 +77,28 @@ namespace DustInTheWind.Lisimba.Business.Importing
             }
         }
 
-        private void ExecuteAddAsNew(StringBuilder sb, bool simulate)
+        protected virtual void AddAsNew(StringBuilder sb, bool simulate)
         {
+            sb.AppendLine(string.Format("Adding {0}: {1}", Name, SourceValue));
+
             if (!simulate)
                 AddAsNew();
-
-            sb.AppendLine(string.Format("Added {0}: {1}", Name, SourceValue));
         }
 
-        private void ExecuteMerge(StringBuilder sb, bool simulate)
+        protected virtual void Merge(StringBuilder sb, bool simulate)
         {
             sb.AppendLine(string.Format("Merging {0} '{1}' and '{2}'.", Name, DestinationValue, SourceValue));
 
             if (!simulate)
                 Merge();
-
-            if (ItemImports != null)
-            {
-                foreach (IItemImport importRule in ItemImports)
-                {
-                    try
-                    {
-                        importRule.Execute(sb, simulate);
-                    }
-                    catch (MergeConflictException)
-                    {
-                        sb.AppendLine(string.Format("Merge conflict. dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                    }
-                    catch
-                    {
-                        sb.AppendLine(string.Format("Invalid import rule for dest: '{0}'; source: '{1}'; import type: {2}.", importRule.DestinationValue, importRule.SourceValue, importRule.ImportType));
-                        throw;
-                    }
-                }
-            }
         }
 
-        private void ExecuteReplace(StringBuilder sb, bool simulate)
+        protected virtual void Replace(StringBuilder sb, bool simulate)
         {
+            sb.AppendLine(string.Format("Replacing {0} '{1}' with '{2}'.", Name, DestinationValue, SourceValue));
+
             if (!simulate)
                 Replace();
-
-            sb.AppendLine(string.Format("Replaced {0} '{1}' with '{2}'.", Name, DestinationValue, SourceValue));
         }
 
         protected abstract void AddAsNew();

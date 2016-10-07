@@ -18,23 +18,11 @@ using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Business.Importing.Importers
 {
-    public class NotesImport : ItemImportBase<Contact, string>
+    public class NotesImporter : ImporterBase<Contact, string>
     {
         protected override string Name
         {
             get { return "Note"; }
-        }
-
-        public NotesImport()
-        {
-        }
-
-        public NotesImport(Contact destinationParent, string destinationValue, string sourceValue, ImportType importType)
-        {
-            SourceValue = sourceValue;
-            DestinationValue = destinationValue;
-            DestinationParent = destinationParent;
-            ImportType = importType;
         }
 
         protected override void AddAsNew()

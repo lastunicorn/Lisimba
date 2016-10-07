@@ -47,9 +47,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         {
             Email emailLeftClone = emailLeft.Clone() as Email;
 
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, emailRight, ImportType.Ignore);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Ignore);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
@@ -61,9 +61,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         {
             Email emailLeftClone = emailLeft.Clone() as Email;
 
-            EmailImport emailImport = new EmailImport(contactLeft, emailLeft, null, ImportType.Ignore);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, null, ImportType.Ignore);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
@@ -75,9 +75,9 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         {
             Email emailLeftClone = emailLeft.Clone() as Email;
 
-            EmailImport emailImport = new EmailImport(contactLeft, null, emailRight, ImportType.Ignore);
+            EmailImporter emailImporter = new EmailImporter(contactLeft, null, emailRight, ImportType.Ignore);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
 
             Assert.That(contactLeft.Items.Count, Is.EqualTo(1));
             Assert.That(contactLeft.Items[0], Is.SameAs(emailLeft));
@@ -87,17 +87,17 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         [Test]
         public void does_nothing_if_destinationContact_is_not_provided()
         {
-            EmailImport emailImport = new EmailImport(null, emailLeft, emailRight, ImportType.Ignore);
+            EmailImporter emailImporter = new EmailImporter(null, emailLeft, emailRight, ImportType.Ignore);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
         }
 
         [Test]
         public void does_nothing_if_no_values_are_provided()
         {
-            EmailImport emailImport = new EmailImport(null, null, null, ImportType.Ignore);
+            EmailImporter emailImporter = new EmailImporter(null, null, null, ImportType.Ignore);
 
-            emailImport.Execute(new StringBuilder(), false);
+            emailImporter.Execute(new StringBuilder(), false);
         }
     }
 }
