@@ -70,12 +70,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </DockPanel>
 
         <ListBox
+            Name="ContactsListBox"
             ItemsSource="{Binding Contacts}"
             SelectedItem="{Binding SelectedContact, Mode=TwoWay}"
             Background="WhiteSmoke"
             BorderThickness="0"
             SelectionChanged="Selector_OnSelectionChanged">
-
+            
+            <ListBox.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="DarkRed" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="WhiteSmoke" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Red" />
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}" Color="Black" />
+            </ListBox.Resources>
+            
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Margin="0,4" Text="{Binding Name}" />

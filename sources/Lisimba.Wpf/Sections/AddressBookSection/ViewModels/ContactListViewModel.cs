@@ -18,6 +18,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Data;
 using DustInTheWind.Lisimba.Business.AddressBookManagement;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
@@ -55,6 +56,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             {
                 selectedContact = value;
                 addressBooks.CurrentContact = value;
+
                 OnPropertyChanged();
             }
         }

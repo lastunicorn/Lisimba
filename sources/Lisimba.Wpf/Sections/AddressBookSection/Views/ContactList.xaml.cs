@@ -16,6 +16,7 @@
 
 using System;
 using System.Windows.Controls;
+using DustInTheWind.Lisimba.Business.AddressBookModel;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
 {
@@ -24,6 +25,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
     /// </summary>
     public partial class ContactList : UserControl
     {
+        private Contact lastSelectedContact;
+
         public ContactList()
         {
             InitializeComponent();
@@ -31,16 +34,45 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
 
         private void Selector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // When a new contact is selected, scroll the contact into view.
+
             ListBox listBox = sender as ListBox;
-            
-            if (listBox != null && listBox.SelectedItem != null)
+
+            if (listBox == null)
+                return;
+
+            if (lastSelectedContact != null)
+                lastSelectedContact.Changed -= HandleLastSelectedContactChanged;
+
+            if (listBox.SelectedItem != null)
             {
+                lastSelectedContact = listBox.SelectedItem as Contact;
+
+                if (lastSelectedContact != null)
+                    lastSelectedContact.Changed += HandleLastSelectedContactChanged;
+
                 listBox.Dispatcher.BeginInvoke((Action)(() =>
                 {
                     listBox.UpdateLayout();
 
                     if (listBox.SelectedItem != null)
                         listBox.ScrollIntoView(listBox.SelectedItem);
+                }));
+            }
+        }
+
+        private void HandleLastSelectedContactChanged(object sender, EventArgs e)
+        {
+            // When the currently selected contact is modified, scroll the contact into view.
+
+            if (ContactsListBox.SelectedItem != null)
+            {
+                ContactsListBox.Dispatcher.BeginInvoke((Action)(() =>
+                {
+                    ContactsListBox.UpdateLayout();
+
+                    if (ContactsListBox.SelectedItem != null)
+                        ContactsListBox.ScrollIntoView(ContactsListBox.SelectedItem);
                 }));
             }
         }
