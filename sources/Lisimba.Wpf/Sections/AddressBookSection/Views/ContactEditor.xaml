@@ -38,13 +38,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
         </Grid.RowDefinitions>
 
         <TextBox
+            Name="TextBoxName"
             Grid.Row="0"
             Grid.Column="0"
             FontSize="30"
             Margin="5"
             BorderThickness="0"     
-            Text="{Binding Name, Mode=TwoWay}">
-            
+            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            GotFocus="TextBoxName_OnGotFocus"
+            LostFocus="TextBoxName_OnLostFocus">
+
             <TextBox.Style>
                 <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                     <Style.Triggers>
@@ -61,6 +64,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                 </Style>
             </TextBox.Style>
         </TextBox>
+
+        <Popup
+            Name="Popup1"
+            PlacementTarget="{Binding ElementName=TextBoxName}"
+            Placement="Bottom"
+            IsOpen="False">
+
+            <TextBlock Background="Yellow" Text="{Binding PopupText}"/>
+
+        </Popup>
 
         <DockPanel Grid.Row="1" Grid.Column="0">
             <views:ContactEditor_ImageSection DockPanel.Dock="Left"/>

@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System.Windows;
 using System.Windows.Controls;
 
 namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
@@ -26,6 +27,16 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.Views
         public ContactEditor()
         {
             InitializeComponent();
+        }
+
+        private void TextBoxName_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            Popup1.IsOpen = true;
+        }
+
+        private void TextBoxName_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            Popup1.IsOpen = false;
         }
     }
 }

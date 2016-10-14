@@ -47,7 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Effect">
                                             <Setter.Value>
-                                                <DropShadowEffect Direction="250" ShadowDepth="0" Opacity="0.7"/>
+                                                <DropShadowEffect Direction="250" ShadowDepth="0" Opacity="0.7" Color="#F47023"/>
                                             </Setter.Value>
                                         </Setter>
                                     </Trigger>

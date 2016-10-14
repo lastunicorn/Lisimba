@@ -114,9 +114,9 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
         private static List<string> CreateMonths()
         {
-            List<string> values = new List<string> { "-- Month --" };
+            List<string> values = new List<string> { "--" };
 
-            IEnumerable<string> monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.MonthNames
+            IEnumerable<string> monthNames = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.AbbreviatedMonthNames
                 .Where(x => x != string.Empty);
 
             values.AddRange(monthNames);
@@ -126,7 +126,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
 
         private static List<string> CreateDays()
         {
-            List<string> values = new List<string> { "-- Day --" };
+            List<string> values = new List<string> { "--" };
 
             for (int i = 1; i < 32; i++)
                 values.Add(i.ToString());

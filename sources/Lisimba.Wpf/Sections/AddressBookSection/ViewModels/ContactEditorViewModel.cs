@@ -41,6 +41,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
         private BirthdayViewModel birthdayViewModel;
         private bool isInitializationMode;
         private bool canAddItems;
+        private string popupText;
 
         public string Name
         {
@@ -57,6 +58,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     if (!nameParser.Success)
                         throw new Exception();
 
+                    SetPopupText(nameParser.Result);
+
                     IAction action = new UpdateContactItemAction(addressBooks.CurrentContact.Name, nameParser.Result);
 
                     if (addressBooks.Current.ActionQueue != null)
@@ -64,6 +67,16 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     else
                         action.Do();
                 }
+            }
+        }
+
+        public string PopupText
+        {
+            get { return popupText; }
+            set
+            {
+                popupText = value;
+                OnPropertyChanged();
             }
         }
 
@@ -215,6 +228,7 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                 if (addressBooks.CurrentContact == null)
                 {
                     Name = null;
+                    PopupText = string.Empty;
                     Picture = Resources.no_user_128.ToBitmapSource();
                     BirthdayViewModel.Date = null;
                     zodiacSignViewModel.ZodiacSign = ZodiacSign.NotSpecified;
@@ -228,6 +242,8 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
                     Contact currentContact = addressBooks.CurrentContact;
 
                     Name = currentContact.Name.ToString();
+
+                    SetPopupText(currentContact.Name);
 
                     if (currentContact.Picture != null && currentContact.Picture.Image != null)
                         Picture = currentContact.Picture.Image.ToBitmapSource() ?? Resources.no_user_128.ToBitmapSource();
@@ -263,6 +279,11 @@ namespace DustInTheWind.Lisimba.Wpf.Sections.AddressBookSection.ViewModels
             {
                 isInitializationMode = false;
             }
+        }
+
+        private void SetPopupText(PersonName personName)
+        {
+            PopupText = string.Format("First: {0} - Middle: {1} - Last: {2} - Nick: {3}", personName.FirstName, personName.MiddleName, personName.LastName, personName.Nickname);
         }
 
         private static ImageSource GetIconForItemType(Type type)
