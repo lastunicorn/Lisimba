@@ -74,8 +74,8 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(2));
-            Assert.True(itemComparisons.Any(x => x.ValueLeft == emailLeft && x.ValueRight == null && x.Equality == ItemEquality.LeftExists));
-            Assert.True(itemComparisons.Any(x => x.ValueLeft == null && x.ValueRight == emailRight && x.Equality == ItemEquality.RightExists));
+            Assert.That(itemComparisons.Any(x => x.ValueLeft == emailLeft && x.ValueRight == null && x.Equality == ItemEquality.LeftExists));
+            Assert.That(itemComparisons.Any(x => x.ValueLeft == null && x.ValueRight == emailRight && x.Equality == ItemEquality.RightExists));
         }
 
         [Test]
@@ -92,7 +92,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
 
             List<EmailComparison> itemComparisons = contactComparison.Comparisons.OfType<EmailComparison>().ToList();
             Assert.That(itemComparisons.Count, Is.EqualTo(1));
-            Assert.True(itemComparisons.Any(x => x.ValueLeft == emailLeft && x.ValueRight == emailRight && x.Equality == ItemEquality.Equal));
+            Assert.That(itemComparisons.Any(x => x.ValueLeft == emailLeft && x.ValueRight == emailRight && x.Equality == ItemEquality.Equal));
         }
     }
 }

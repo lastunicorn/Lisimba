@@ -144,7 +144,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             bool containsType = differences.Any(itemComparison => itemComparison.GetType() == type);
 
             if (!containsType)
-                Assert.Fail("The list does not contain the comparison of type {0}.", type.FullName);
+                Assert.Fail($"The list does not contain the comparison of type {type.FullName}.");
         }
 
         private static void AssertDoesNotContainType(IEnumerable<IItemComparison> differences, Type type)
@@ -152,7 +152,7 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.ContactComparisonTests
             bool containsType = differences.Any(itemComparison => itemComparison.GetType() == type);
 
             if (containsType)
-                Assert.Fail("The list does contain at least one comparison of type {0}.", type.FullName);
+                Assert.Fail($"The list does contain at least one comparison of type {type.FullName}.");
         }
     }
 }

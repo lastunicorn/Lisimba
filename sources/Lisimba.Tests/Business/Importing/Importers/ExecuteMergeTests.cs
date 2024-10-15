@@ -14,6 +14,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+using System;
 using System.Linq;
 using System.Text;
 using DustInTheWind.Lisimba.Business.AddressBookModel;
@@ -113,7 +114,6 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
         }
 
         [Test]
-        [ExpectedException(typeof(MergeConflictException))]
         public void throws_if_conflicts_exist()
         {
             Contact contactLeft = CreateContactWithOneEmail("address1@email.com", "desc2");
@@ -122,7 +122,10 @@ namespace DustInTheWind.Lisimba.Tests.Business.Importing.Importers
             Email emailRight = contactRight.Items.First() as Email;
             EmailImporter emailImporter = new EmailImporter(contactLeft, emailLeft, emailRight, ImportType.Merge);
 
-            emailImporter.Execute(new StringBuilder(), false);
+            Assert.Throws<MergeConflictException>(() =>
+            {
+                emailImporter.Execute(new StringBuilder(), false);
+            });
         }
 
         private static Contact CreateContactWithOneEmail(string emailAddress, string description)

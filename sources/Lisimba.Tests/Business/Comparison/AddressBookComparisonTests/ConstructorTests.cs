@@ -36,19 +36,25 @@ namespace DustInTheWind.Lisimba.Tests.Business.Comparison.AddressBookComparisonT
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook1_is_null()
         {
             AddressBookComparison addressBookComparison = new AddressBookComparison(null, addressBook2);
-            addressBookComparison.Compare();
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                addressBookComparison.Compare();
+            });
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void throws_if_addressBook2_is_null()
         {
             AddressBookComparison addressBookComparison = new AddressBookComparison(addressBook1, null);
-            addressBookComparison.Compare();
+
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                addressBookComparison.Compare();
+            });
         }
     }
 }
