@@ -31,13 +31,13 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
     {
         private AddressBookStatus status;
 
-        public AddressBook AddressBook { get; private set; }
+        public AddressBook AddressBook { get; }
         public IGate Gate { get; private set; }
         public string Location { get; private set; }
 
         public AddressBookStatus Status
         {
-            get { return status; }
+            get => status;
             private set
             {
                 status = value;
@@ -45,7 +45,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
             }
         }
 
-        public ActionQueue ActionQueue { get; private set; }
+        public ActionQueue ActionQueue { get; }
 
         public event EventHandler Saved;
         public event EventHandler StatusChanged;
@@ -53,21 +53,9 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
         public event EventHandler<NewLocationNeededEventArgs> NewLocationNeeded;
         public event EventHandler<GateNeededEventArgs> GateNeeded;
 
-        public AddressBookShell(AddressBook addressBook)
-            : this(addressBook, null, null)
+        public AddressBookShell(AddressBook addressBook, IGate gate = null, string location = null)
         {
-        }
-
-        public AddressBookShell(AddressBook addressBook, IGate gate)
-            : this(addressBook, gate, null)
-        {
-        }
-
-        public AddressBookShell(AddressBook addressBook, IGate gate, string location)
-        {
-            if (addressBook == null) throw new ArgumentNullException("addressBook");
-
-            AddressBook = addressBook;
+            AddressBook = addressBook ?? throw new ArgumentNullException(nameof(addressBook));
             Gate = gate;
             Location = location;
 
@@ -109,15 +97,15 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public bool SaveAddressBook(string newLocation)
         {
-            if (newLocation == null) throw new ArgumentNullException("newLocation");
+            if (newLocation == null) throw new ArgumentNullException(nameof(newLocation));
 
             return SaveInternal(newLocation, Gate);
         }
 
         public bool SaveAddressBook(string newLocation, IGate gate)
         {
-            if (newLocation == null) throw new ArgumentNullException("newLocation");
-            if (gate == null) throw new ArgumentNullException("gate");
+            if (newLocation == null) throw new ArgumentNullException(nameof(newLocation));
+            if (gate == null) throw new ArgumentNullException(nameof(gate));
 
             return SaveInternal(newLocation, gate);
         }
@@ -170,8 +158,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public void Export(string location, IGate gate)
         {
-            if (location == null) throw new ArgumentNullException("location");
-            if (gate == null) throw new ArgumentNullException("gate");
+            if (location == null) throw new ArgumentNullException(nameof(location));
+            if (gate == null) throw new ArgumentNullException(nameof(gate));
 
             (gate as FileGate).Save(AddressBook, location);
         }
@@ -184,7 +172,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public void AddContact(Contact contact)
         {
-            if (contact == null) throw new ArgumentNullException("contact");
+            if (contact == null) throw new ArgumentNullException(nameof(contact));
 
             IAction action = new AddContactAction(AddressBook, contact);
             ActionQueue.Do(action);
@@ -192,7 +180,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public void DeleteContact(Contact contact)
         {
-            if (contact == null) throw new ArgumentNullException("contact");
+            if (contact == null) throw new ArgumentNullException(nameof(contact));
 
             IAction action = new DeleteContactAction(AddressBook, contact);
             ActionQueue.Do(action);
@@ -200,34 +188,22 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         protected virtual void OnSaved()
         {
-            EventHandler handler = Saved;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            Saved?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnStatusChanged()
         {
-            EventHandler handler = StatusChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            StatusChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
         {
-            EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
-
-            if (handler != null)
-                handler(this, e);
+            NewLocationNeeded?.Invoke(this, e);
         }
 
         protected virtual void OnGateNeeded(GateNeededEventArgs e)
         {
-            EventHandler<GateNeededEventArgs> handler = GateNeeded;
-
-            if (handler != null)
-                handler(this, e);
+            GateNeeded?.Invoke(this, e);
         }
     }
 }

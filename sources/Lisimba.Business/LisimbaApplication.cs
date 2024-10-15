@@ -61,15 +61,10 @@ namespace DustInTheWind.Lisimba.Business
         public LisimbaApplication(InitialCatalogOpener initialCatalogOpener, AddressBooks addressBooks,
             IUserInterface userInterface, ProgramArguments programArguments)
         {
-            if (initialCatalogOpener == null) throw new ArgumentNullException("initialCatalogOpener");
-            if (addressBooks == null) throw new ArgumentNullException("addressBooks");
-            if (userInterface == null) throw new ArgumentNullException("userInterface");
-            if (programArguments == null) throw new ArgumentNullException("programArguments");
-
-            this.initialCatalogOpener = initialCatalogOpener;
-            this.addressBooks = addressBooks;
-            this.userInterface = userInterface;
-            this.programArguments = programArguments;
+            this.initialCatalogOpener = initialCatalogOpener ?? throw new ArgumentNullException(nameof(initialCatalogOpener));
+            this.addressBooks = addressBooks ?? throw new ArgumentNullException(nameof(addressBooks));
+            this.userInterface = userInterface ?? throw new ArgumentNullException(nameof(userInterface));
+            this.programArguments = programArguments ?? throw new ArgumentNullException(nameof(programArguments));
         }
 
         public void Run(string[] args)
@@ -115,34 +110,22 @@ namespace DustInTheWind.Lisimba.Business
 
         protected virtual void OnStarted()
         {
-            EventHandler handler = Started;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            Started?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnEnding(CancelEventArgs e)
         {
-            EventHandler<CancelEventArgs> handler = Ending;
-
-            if (handler != null)
-                handler(this, e);
+            Ending?.Invoke(this, e);
         }
 
         protected virtual void OnEndCanceled()
         {
-            EventHandler handler = EndCanceled;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            EndCanceled?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnEnded()
         {
-            EventHandler handler = Ended;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            Ended?.Invoke(this, EventArgs.Empty);
         }
     }
 }

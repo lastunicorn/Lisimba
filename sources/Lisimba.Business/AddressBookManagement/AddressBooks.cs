@@ -49,7 +49,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public AddressBookShell Current
         {
-            get { return current; }
+            get => current;
             private set
             {
                 if (current == value)
@@ -80,7 +80,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public Contact CurrentContact
         {
-            get { return currentContact; }
+            get => currentContact;
             set
             {
                 if (ReferenceEquals(currentContact, value))
@@ -94,11 +94,8 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public AddressBooks(RecentFiles recentFiles, Gates gates)
         {
-            if (recentFiles == null) throw new ArgumentNullException("recentFiles");
-            if (gates == null) throw new ArgumentNullException("gates");
-
-            this.recentFiles = recentFiles;
-            this.gates = gates;
+            this.recentFiles = recentFiles ?? throw new ArgumentNullException(nameof(recentFiles));
+            this.gates = gates ?? throw new ArgumentNullException(nameof(gates));
         }
 
         private void HandleGateNeeded(object sender, GateNeededEventArgs e)
@@ -145,7 +142,7 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         public void OpenAddressBook(IGate gate, string connectionString = null)
         {
-            if (gate == null) throw new ArgumentNullException("gate");
+            if (gate == null) throw new ArgumentNullException(nameof(gate));
 
             bool allowToContinue = CloseCurrentAddressBook();
             if (!allowToContinue)
@@ -250,82 +247,52 @@ namespace DustInTheWind.Lisimba.Business.AddressBookManagement
 
         protected virtual void OnAddressBookChanged(AddressBookChangedEventArgs e)
         {
-            EventHandler<AddressBookChangedEventArgs> handler = AddressBookChanged;
-
-            if (handler != null)
-                handler(this, e);
+            AddressBookChanged?.Invoke(this, e);
         }
 
         protected virtual void OnAddressBookSaved(EventArgs e)
         {
-            EventHandler handler = AddressBookSaved;
-
-            if (handler != null)
-                handler(this, e);
+            AddressBookSaved?.Invoke(this, e);
         }
 
         protected virtual void OnContactChanging()
         {
-            EventHandler handler = ContactChanging;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            ContactChanging?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnContactChanged()
         {
-            EventHandler handler = ContactChanged;
-
-            if (handler != null)
-                handler(this, EventArgs.Empty);
+            ContactChanged?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnContactDeleting(ContactDeletingEventArgs e)
         {
-            EventHandler<ContactDeletingEventArgs> handler = ContactDeleting;
-
-            if (handler != null)
-                handler(this, e);
+            ContactDeleting?.Invoke(this, e);
         }
 
         protected virtual void OnAddressBookClosing(AddressBookClosingEventArgs e)
         {
-            EventHandler<AddressBookClosingEventArgs> handler = AddressBookClosing;
-
-            if (handler != null)
-                handler(this, e);
+            AddressBookClosing?.Invoke(this, e);
         }
 
         protected virtual void OnAddressBookClosed(AddressBookClosedEventArgs e)
         {
-            EventHandler<AddressBookClosedEventArgs> handler = AddressBookClosed;
-
-            if (handler != null)
-                handler(this, e);
+            AddressBookClosed?.Invoke(this, e);
         }
 
         protected virtual void OnAddressBookOpened(AddressBookOpenedEventArgs e)
         {
-            EventHandler<AddressBookOpenedEventArgs> handler = AddressBookOpened;
-
-            if (handler != null)
-                handler(this, e);
+            AddressBookOpened?.Invoke(this, e);
         }
 
         protected virtual void OnNewLocationNeeded(NewLocationNeededEventArgs e)
         {
-            EventHandler<NewLocationNeededEventArgs> handler = NewLocationNeeded;
-
-            if (handler != null)
-                handler(this, e);
+            NewLocationNeeded?.Invoke(this, e);
         }
 
         protected virtual void OnGateNeeded(GateNeededEventArgs e)
         {
-            EventHandler<GateNeededEventArgs> handler = GateNeeded;
-
-            if (handler != null)
-                handler(this, e);
+            GateNeeded?.Invoke(this, e);
         }
 
         #endregion
