@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.ConsoleCommon.ConsoleCommandHandling;
 using DustInTheWind.Lisimba.CommandLine.Flows;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup
 {
@@ -28,8 +28,7 @@ namespace DustInTheWind.Lisimba.CommandLine.Setup
 
         public FlowProvider(IUnityContainer unityContainer)
         {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-            this.unityContainer = unityContainer;
+            this.unityContainer = unityContainer ?? throw new ArgumentNullException(nameof(unityContainer));
         }
 
         public IEnumerable<Tuple<string, IFlow>> GetNewFlows()

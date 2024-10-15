@@ -55,6 +55,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Images\zodiac\mic_varsator.gif" />
     <None Include="Images\zodiac\mic_taur.gif" />
     <None Include="Images\zodiac\mic_scorpion.gif" />

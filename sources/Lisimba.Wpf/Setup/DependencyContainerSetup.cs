@@ -23,7 +23,8 @@ using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.Wpf.Operations;
 using DustInTheWind.Lisimba.ZodiacSigns;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace DustInTheWind.Lisimba.Wpf.Setup
 {

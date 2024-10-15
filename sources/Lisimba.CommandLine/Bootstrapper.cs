@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.CommandLine.Setup;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace DustInTheWind.Lisimba.CommandLine
 {

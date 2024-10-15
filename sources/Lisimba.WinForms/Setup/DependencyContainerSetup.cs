@@ -24,7 +24,8 @@ using DustInTheWind.Lisimba.Business.RecentFilesManagement;
 using DustInTheWind.Lisimba.WinForms.Services;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace DustInTheWind.Lisimba.WinForms.Setup
 {

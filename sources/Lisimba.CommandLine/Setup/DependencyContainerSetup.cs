@@ -22,7 +22,8 @@ using DustInTheWind.Lisimba.Business.Config;
 using DustInTheWind.Lisimba.Business.GateManagement;
 using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.CommandLine.Business;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace DustInTheWind.Lisimba.CommandLine.Setup
 {

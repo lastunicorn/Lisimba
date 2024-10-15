@@ -19,7 +19,8 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using DustInTheWind.WinFormsCommon;
 using DustInTheWind.WinFormsCommon.Operations;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Resolution;
 
 namespace DustInTheWind.Lisimba.WinForms.Services
 {
@@ -29,8 +30,7 @@ namespace DustInTheWind.Lisimba.WinForms.Services
 
         public UiFactory(IUnityContainer unityContainer)
         {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-            this.unityContainer = unityContainer;
+            this.unityContainer = unityContainer ?? throw new ArgumentNullException(nameof(unityContainer));
         }
 
         public T CreateForm<T>()
@@ -48,7 +48,7 @@ namespace DustInTheWind.Lisimba.WinForms.Services
         public TViewModel CreateNewViewModel<TViewModel>(IOperation operation)
             where TViewModel : ViewModelBase
         {
-            if (operation == null) throw new ArgumentNullException("operation");
+            if (operation == null) throw new ArgumentNullException(nameof(operation));
 
             ResolverOverride resolverOverride = new DependencyOverride(typeof(IOperation), operation);
             return unityContainer.Resolve<TViewModel>(resolverOverride);

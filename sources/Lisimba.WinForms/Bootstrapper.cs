@@ -16,7 +16,7 @@
 
 using DustInTheWind.Lisimba.Business;
 using DustInTheWind.Lisimba.WinForms.Setup;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace DustInTheWind.Lisimba.WinForms
 {

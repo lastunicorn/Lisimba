@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using DustInTheWind.Lisimba.Business.WorkerModel;
 using DustInTheWind.Lisimba.Wpf.Workers;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace DustInTheWind.Lisimba.Wpf.Setup
 {
@@ -28,8 +28,7 @@ namespace DustInTheWind.Lisimba.Wpf.Setup
 
         public WorkerProvider(IUnityContainer unityContainer)
         {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-            this.unityContainer = unityContainer;
+            this.unityContainer = unityContainer ?? throw new ArgumentNullException(nameof(unityContainer));
         }
 
         public IEnumerable<IWorker> GetNewWorkers()

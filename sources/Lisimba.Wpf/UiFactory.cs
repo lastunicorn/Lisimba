@@ -17,7 +17,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace DustInTheWind.Lisimba.Wpf
 {
@@ -27,8 +27,7 @@ namespace DustInTheWind.Lisimba.Wpf
 
         public UiFactory(IUnityContainer unityContainer)
         {
-            if (unityContainer == null) throw new ArgumentNullException("unityContainer");
-            this.unityContainer = unityContainer;
+            this.unityContainer = unityContainer ?? throw new ArgumentNullException(nameof(unityContainer));
         }
 
         public T CreateWindow<T>()
